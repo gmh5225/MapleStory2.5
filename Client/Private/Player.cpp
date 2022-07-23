@@ -34,27 +34,27 @@ void CPlayer::Tick(_float fTimeDelta)
 {
 	if (GetKeyState(VK_UP) & 0x8000)
 	{
-		m_pAnimator->Play_Ani(fTimeDelta);
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Move_U"), 0.05f, CAnimator::STATE_LOOF);
 	}
 
 	if (GetKeyState(VK_DOWN) & 0x8000)
 	{
-		m_pTransformCom->Go_Backward(fTimeDelta);
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Move_D"), 0.05f, CAnimator::STATE_LOOF);
 	}
 
 	if (GetKeyState(VK_LEFT) & 0x8000)
 	{
-		m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta * -1.f);
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Move_L"), 0.05f, CAnimator::STATE_LOOF);
 	}
 
 	if (GetKeyState(VK_RIGHT) & 0x8000)
 	{
-		m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta);
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Move_R"), 0.05f, CAnimator::STATE_LOOF);
 	}
 
 	if (GetKeyState('Z') & 0x8000)
 	{
-		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Move_RU"), 0.05f, CAnimator::STATE_ONCE);
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_RU"), 0.05f, CAnimator::STATE_ONCE);
 	}
 	
 }
@@ -62,20 +62,11 @@ void CPlayer::Tick(_float fTimeDelta)
 void CPlayer::LateTick(_float fTimeDelta)
 {
 	
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-
-	//if (m_pAnimator->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-	//	m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player"), 0.05f, CAnimator::STATE_LOOF);
-	if (m_pAnimator->Get_AniInfo().m_eMode == CAnimator::STATE_ONCEEND)
-	m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Idle_RU"), 0.05f, CAnimator::STATE_LOOF);
-
-
+	if (m_pAnimator->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Idle_RU"), 0.05f, CAnimator::STATE_LOOF);
 
 	
- 	if (FAILED(m_pAnimator->Play_Ani(1.f * fTimeDelta)))
-		return;
-
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }
 
 HRESULT CPlayer::Render()
@@ -87,6 +78,10 @@ HRESULT CPlayer::Render()
 	//if (FAILED(m_pAnimator->Bind_Texture(TEXT("Prototype_Component_Texture_Player"))))
 	//	return E_FAIL;
 
+	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
+
+	if (FAILED(m_pAnimator->Play_Ani(1.f * fDF)))
+		return E_FAIL;
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
@@ -145,7 +140,12 @@ HRESULT CPlayer::SetUp_Components()
 	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_RU"), nullptr);
 	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_RU"), nullptr);
 	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_RU"), nullptr);
-	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_RU"), nullptr);
+
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_U"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_D"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_L"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_R"), nullptr);
+	
 	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_LU"), nullptr);
 	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_LD"), nullptr);
 

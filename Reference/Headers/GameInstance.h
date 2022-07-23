@@ -6,6 +6,8 @@
 #include "Level_Manager.h"
 #include "Object_Manager.h"
 #include "Component_Manager.h"
+#include "Map_Manager.h"
+#include "VIBuffer_Cube.h"
 
 /* 클라이언트로 보여주기위한 가장 대표적인 클래스이다. */
 /* 각종 매니져클래스들의 주요함수를 클라로 보여준다.  */
@@ -54,6 +56,10 @@ public: /* For.Input_Device */
 	_char Get_DIMKeyState(DIMK eMouseKeyID);
 	_long Get_DIMMoveState(DIMM eMouseMoveID);
 
+
+public: /* For.Map_Manager */
+	list<CMap_Manager::CUBEDATA>* ReadMap(const _tchar* pMapTag);
+
 private:
 	CGraphic_Device*				m_pGraphic_Device = nullptr;
 	CInput_Device*					m_pInput_Device = nullptr;
@@ -61,6 +67,7 @@ private:
 	CObject_Manager*				m_pObject_Manager = nullptr;
 	CComponent_Manager*				m_pComponent_Manager = nullptr;
 	CTimer_Manager*					m_pTimer_Manager = nullptr;
+	CMap_Manager*					m_pMap_Manager = nullptr;
 
 
 public:

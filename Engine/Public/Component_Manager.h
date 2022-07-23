@@ -6,6 +6,7 @@
 #include "VIBuffer_Rect.h"
 #include "VIBuffer_Terrain.h"
 #include "Animator.h"
+#include "VIBuffer_Voxel.h"
 
 BEGIN(Engine)
 

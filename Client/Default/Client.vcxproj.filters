@@ -40,6 +40,12 @@
     <Filter Include="02.GameObject\Camera">
       <UniqueIdentifier>{06c63064-d248-45d2-bb32-c642c92886c9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Cube">
+      <UniqueIdentifier>{56234d9b-3d8f-4299-a4fc-024345305160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Wood">
+      <UniqueIdentifier>{c8d36d46-76ed-46a6-9699-37c6abacc648}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -87,6 +93,12 @@
     <ClInclude Include="..\Public\Client_Defines.h">
       <Filter>90.Default</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Cube.h">
+      <Filter>02.GameObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Wood.h">
+      <Filter>02.GameObject\Wood</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -124,6 +136,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\Terrain.cpp">
       <Filter>02.GameObject\Terrain</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Cube.cpp">
+      <Filter>02.GameObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Wood.cpp">
+      <Filter>02.GameObject\Wood</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

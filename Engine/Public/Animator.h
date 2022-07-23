@@ -13,8 +13,11 @@ public:
 	typedef struct tagAniInfo
 	{
 		const _tchar* pAnimationTag;
-		_float fDelay;
-		STATE m_eMode;
+		const _tchar* pPreAnimationTag = nullptr;
+
+		_float fDelay = 0.f;
+		STATE eMode;
+
 	}ANIINFO;
 
 private:
@@ -36,7 +39,7 @@ public:
 
 public:
 	ANIINFO Get_AniInfo() { return m_AniInfo; }
-	void Set_AniInfo(const _tchar* pAnimationTag, _float fDelay, STATE eMode) { m_AniInfo.pAnimationTag = pAnimationTag, m_AniInfo.fDelay = fDelay, m_AniInfo.m_eMode = eMode; }
+	void Set_AniInfo(const _tchar* pAnimationTag, _float fDelay, STATE eMode);
 
 public:
 	static CAnimator* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
