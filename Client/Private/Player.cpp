@@ -23,7 +23,7 @@ HRESULT CPlayer::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(10.f, 0.5f, 10.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.5f, 0.f));
 	
 	m_pTransformCom->Rotation(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), 45.f);
 
@@ -51,6 +51,11 @@ void CPlayer::Tick(_float fTimeDelta)
 	{
 		m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), fTimeDelta);
 	}
+
+	if (GetKeyState('Z') & 0x8000)
+	{
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Move_RU"), 0.05f, CAnimator::STATE_ONCE);
+	}
 	
 }
 
@@ -60,10 +65,10 @@ void CPlayer::LateTick(_float fTimeDelta)
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
-	if (m_pAnimator->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player"), 0.05f, CAnimator::STATE_LOOF);
-
-	m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player"), 0.05f, CAnimator::STATE_ONCE);
+	//if (m_pAnimator->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+	//	m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player"), 0.05f, CAnimator::STATE_LOOF);
+	if (m_pAnimator->Get_AniInfo().m_eMode == CAnimator::STATE_ONCEEND)
+	m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Idle_RU"), 0.05f, CAnimator::STATE_LOOF);
 
 
 
@@ -137,8 +142,12 @@ HRESULT CPlayer::SetUp_Components()
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Animator"), TEXT("Com_Animator"), (CComponent**)&m_pAnimator)))
 		return E_FAIL;
 
-	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player"),nullptr);
-
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_RU"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_RU"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_RU"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_RU"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_LU"), nullptr);
+	m_pAnimator->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_LD"), nullptr);
 
 
 	/* For.Com_Transform */

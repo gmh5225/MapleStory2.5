@@ -31,8 +31,8 @@ public:
 	HRESULT Create_Texture(_uint iLevelIndex, const _tchar * pPrototypeTag, void * pArg);
 	HRESULT Bind_Texture(_uint iCount);
 	HRESULT Play_Loof(_float fTimeDelta);
-	bool Play_Once(_float fTimeDelta);
-	bool Play_Ani(_float fTimeDelta);
+	HRESULT Play_Once(_float fTimeDelta);
+	HRESULT Play_Ani(_float fTimeDelta);
 
 public:
 	ANIINFO Get_AniInfo() { return m_AniInfo; }

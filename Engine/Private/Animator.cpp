@@ -90,11 +90,11 @@ HRESULT CAnimator::Play_Once(_float fTimeDelta)
 
 		if (m_iAnimCount >= pTex->Get_Size())
 		{
-			m_iAnimCount = pTex->Get_Size() - 1;
+			m_iAnimCount = 0;
 			m_AniInfo.m_eMode = STATE_ONCEEND;
 		}
-
 		m_fAnimPerTime = 0.f;
+		
 	}
 
 	return Bind_Texture(m_iAnimCount);

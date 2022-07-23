@@ -37,6 +37,9 @@ public:
 	HRESULT Loading_ForGamePlayLevel();
 
 private:
+	HRESULT Load_Player_Texture();
+
+private:
 	LPDIRECT3DDEVICE9	m_pGraphic_Device = nullptr;
 
 private:
