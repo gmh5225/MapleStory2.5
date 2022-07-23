@@ -42,9 +42,9 @@ HRESULT CAnimator::Create_Texture(_uint iLevelIndex, const _tchar * pPrototypeTa
 	return S_OK;
 }
 
-HRESULT CAnimator::Bind_Texture(const _tchar * pTexTag, _uint iCount)
+HRESULT CAnimator::Bind_Texture(_uint iCount)
 {
-	CTexture* pTexture = Find_Component(pTexTag);
+	CTexture* pTexture = Find_Component();
 
 	if (nullptr == pTexture)
 		return E_FAIL;
@@ -54,15 +54,15 @@ HRESULT CAnimator::Bind_Texture(const _tchar * pTexTag, _uint iCount)
 	return S_OK;
 }
 
-HRESULT CAnimator::Play_Loof(const _tchar * pTexTag, _float delay, _float fTimeDelta)
+HRESULT CAnimator::Play_Loof(_float fTimeDelta)
 {
-	CTexture* pTex = Find_Component(pTexTag);
+	CTexture* pTex = Find_Component();
 	if (pTex == nullptr)
 		return E_FAIL;
 
 	m_fAnimPerTime += fTimeDelta;
 
-	if (delay < m_fAnimPerTime)
+	if (m_AniInfo.fDelay < m_fAnimPerTime)
 	{
 		++m_iAnimCount;
 
@@ -71,8 +71,51 @@ HRESULT CAnimator::Play_Loof(const _tchar * pTexTag, _float delay, _float fTimeD
 
 		m_fAnimPerTime = 0.f;
 	}
+	
+	return Bind_Texture(m_iAnimCount);
 
-	Bind_Texture(pTexTag, m_iAnimCount);
+}
+
+HRESULT CAnimator::Play_Once(_float fTimeDelta)
+{
+	CTexture* pTex = Find_Component();
+	if (pTex == nullptr)
+		return E_FAIL;
+
+	m_fAnimPerTime += fTimeDelta;
+
+	if (m_AniInfo.fDelay < m_fAnimPerTime)
+	{
+		++m_iAnimCount;
+
+		if (m_iAnimCount >= pTex->Get_Size())
+		{
+			m_iAnimCount = pTex->Get_Size() - 1;
+			m_AniInfo.m_eMode = STATE_ONCEEND;
+		}
+
+		m_fAnimPerTime = 0.f;
+	}
+
+	return Bind_Texture(m_iAnimCount);
+}
+
+HRESULT CAnimator::Play_Ani(_float fTimeDelta)
+{
+	switch (m_AniInfo.m_eMode)
+	{
+	case Engine::CAnimator::STATE_LOOF:
+		Play_Loof(fTimeDelta);
+		break;
+
+	case Engine::CAnimator::STATE_ONCE:
+		Play_Once(fTimeDelta);
+		break;
+
+	default:
+		break;
+	}
+
 	return S_OK;
 }
 
@@ -102,9 +145,9 @@ CAnimator * CAnimator::Clone(void * pAvg)
 	return pInstance;
 }
 
-CTexture* CAnimator::Find_Component(const _tchar * pComponentTag)
+CTexture* CAnimator::Find_Component()
 {
-	auto	iter = find_if(m_AniTexture.begin(), m_AniTexture.end(), CTag_Finder(pComponentTag));
+	auto	iter = find_if(m_AniTexture.begin(), m_AniTexture.end(), CTag_Finder(m_AniInfo.pAnimationTag));
 
 	if (iter == m_AniTexture.end())
 		return nullptr;

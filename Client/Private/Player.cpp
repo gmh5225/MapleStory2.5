@@ -34,7 +34,7 @@ void CPlayer::Tick(_float fTimeDelta)
 {
 	if (GetKeyState(VK_UP) & 0x8000)
 	{
-		m_pTransformCom->Go_Straight(fTimeDelta);
+		m_pAnimator->Play_Ani(fTimeDelta);
 	}
 
 	if (GetKeyState(VK_DOWN) & 0x8000)
@@ -60,7 +60,15 @@ void CPlayer::LateTick(_float fTimeDelta)
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
- 	if (FAILED(m_pAnimator->Play_Loof(TEXT("Prototype_Component_Texture_Player"), 0.1f, 1.f * fTimeDelta)))
+	if (m_pAnimator->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+		m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player"), 0.05f, CAnimator::STATE_LOOF);
+
+	m_pAnimator->Set_AniInfo(TEXT("Prototype_Component_Texture_Player"), 0.05f, CAnimator::STATE_ONCE);
+
+
+
+	
+ 	if (FAILED(m_pAnimator->Play_Ani(1.f * fTimeDelta)))
 		return;
 
 }
