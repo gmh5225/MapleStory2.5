@@ -8,6 +8,9 @@
 #include "Cube.h"
 #include "Wood.h"
 #include "OrangeMushroom.h"
+#include "AngelRay_Attack.h"
+#include "AngelRay_Effect.h"
+#include "AngelRay_Hit.h"
 
 
 
@@ -125,6 +128,17 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		COrangeMushroom::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Attack"),
+		CAngelRay_Attack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Effect"),
+		CAngelRay_Effect::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Hit"),
+		CAngelRay_Hit::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 
 
@@ -144,6 +158,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	/* For.Prototype_Component_Texture_Player */
 	Load_Player_Texture();
+
+	/* For.Prototype_Component_Texture_Player_Skill */
+	Load_Player_Skill_Texture();
 
 	/* For.Prototype_Component_Texture_Monster */
 	Load_Monster_Texture();
@@ -328,6 +345,30 @@ HRESULT CLoader::Load_Player_Texture()
 
 
 	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_Player_Skill_Texture()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+	// Attack
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_AngelRay_Attack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Attack%d"), 8))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_AngelRay_Effect"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Effect%d"), 13))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_AngelRay_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Hit%d"), 6))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
 
 	return S_OK;
 }
