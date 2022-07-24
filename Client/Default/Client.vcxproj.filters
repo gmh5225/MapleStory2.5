@@ -123,11 +123,11 @@
     <ClInclude Include="..\Public\AngelRay_Attack.h">
       <Filter>02.GameObject\Skill\AngelRay\Attack</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\AngelRay_Hit.h">
-      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\AngelRay_Effect.h">
       <Filter>02.GameObject\Skill\AngelRay\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\AngelRay_Hit.h">
+      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -176,11 +176,11 @@
     <ClCompile Include="..\Private\AngelRay_Attack.cpp">
       <Filter>02.GameObject\Skill\AngelRay\Attack</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\AngelRay_Hit.cpp">
-      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\AngelRay_Effect.cpp">
       <Filter>02.GameObject\Skill\AngelRay\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\AngelRay_Hit.cpp">
+      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
