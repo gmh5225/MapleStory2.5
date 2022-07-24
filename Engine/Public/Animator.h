@@ -36,6 +36,7 @@ public:
 	HRESULT Play_Loof(_float fTimeDelta);
 	HRESULT Play_Once(_float fTimeDelta);
 	HRESULT Play_Ani(_float fTimeDelta);
+	const _uint Get_AnimCount() { return m_iAnimCount; }
 
 public:
 	ANIINFO Get_AniInfo() { return m_AniInfo; }
