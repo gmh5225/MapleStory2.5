@@ -65,7 +65,7 @@
       <Filter>05.Timer\Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Transform.h">
-      <Filter>04.Component\Texture\Transform</Filter>
+      <Filter>04.Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\VIBuffer.h">
       <Filter>04.Component\VIBuffer</Filter>
@@ -76,11 +76,23 @@
     <ClInclude Include="..\Public\VIBuffer_Terrain.h">
       <Filter>04.Component\VIBuffer\Terrain</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Component_Manager.h">
+      <Filter>04.Component\Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Map_Manager.h">
+      <Filter>06.Map</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Cube.h">
+      <Filter>04.Component\VIBuffer\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_Voxel.h">
+      <Filter>04.Component\VIBuffer\Voxel</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\Animator.h">
       <Filter>04.Component\Texture\Animator</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Component_Manager.h">
-      <Filter>04.Component\Manager</Filter>
+    <ClInclude Include="..\Public\Collider.h">
+      <Filter>04.Component\Collider</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -130,7 +142,7 @@
       <Filter>05.Timer\Manager</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Transform.cpp">
-      <Filter>04.Component\Texture\Transform</Filter>
+      <Filter>04.Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\VIBuffer.cpp">
       <Filter>04.Component\VIBuffer</Filter>
@@ -141,11 +153,23 @@
     <ClCompile Include="..\Private\VIBuffer_Terrain.cpp">
       <Filter>04.Component\VIBuffer\Terrain</Filter>
     </ClCompile>
+    <ClCompile Include="..\Private\Component_Manager.cpp">
+      <Filter>04.Component\Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Map_Manager.cpp">
+      <Filter>06.Map</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Cube.cpp">
+      <Filter>04.Component\VIBuffer\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_Voxel.cpp">
+      <Filter>04.Component\VIBuffer\Voxel</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\Animator.cpp">
       <Filter>04.Component\Texture\Animator</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Component_Manager.cpp">
-      <Filter>04.Component\Manager</Filter>
+    <ClCompile Include="..\Private\Collider.cpp">
+      <Filter>04.Component\Collider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -218,8 +242,20 @@
     <Filter Include="04.Component\Texture\Animator">
       <UniqueIdentifier>{0869a668-1737-4c4a-b0c2-2f6d13d5c29d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.Component\Texture\Transform">
+    <Filter Include="06.Map">
+      <UniqueIdentifier>{345e0c19-696b-47fb-b2e1-c3b29d55a71d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\VIBuffer\Cube">
+      <UniqueIdentifier>{c0ee9ea4-d26d-4a87-8b4f-ffb16ca8b3f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\VIBuffer\Voxel">
+      <UniqueIdentifier>{cd7a9931-ee8a-4041-8053-4ab61166aabe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\Transform">
       <UniqueIdentifier>{55ed7f8b-4c8d-420d-a7dd-d412ba015290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\Collider">
+      <UniqueIdentifier>{58e0b564-fed5-413e-8037-a4325eaaacd7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

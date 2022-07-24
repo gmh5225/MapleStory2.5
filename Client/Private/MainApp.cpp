@@ -50,6 +50,9 @@ void CMainApp::Tick(_float fTimeDelta)
 #endif // _DEBUG
 
 	m_pGameInstance->Tick_Engine(fTimeDelta);
+
+	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_MONSTER);
+	m_pCollider->End_Collsion();
 }
 
 HRESULT CMainApp::Render()
@@ -131,10 +134,19 @@ HRESULT CMainApp::Ready_Prototype_Component()
 		m_pRenderer = CRenderer::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	/* For.Prototype_Component_Collider */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Collider"),
+		m_pCollider = CCollider::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	/* For.Prototype_Component_VIBuffer_Rect */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"),
 		CVIBuffer_Rect::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	/*if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Cube"),
+		CVIBuffer_Cube::Create(m_pGraphic_Device))))
+		return E_FAIL;*/
 
 	/* For.Prototype_Component_Transform */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Transform"),
@@ -175,6 +187,7 @@ void CMainApp::Free()
 {
 	Safe_Release(m_pGraphic_Device);
 	Safe_Release(m_pRenderer);
+	Safe_Release(m_pCollider);
 	Safe_Release(m_pGameInstance);
 
 	CGameInstance::Release_Engine();

@@ -54,6 +54,25 @@ HRESULT CAnimator::Bind_Texture(_uint iCount)
 	return S_OK;
 }
 
+void CAnimator::Set_AniInfo(const _tchar* pAnimationTag, _float fDelay, STATE eMode)
+{
+	m_AniInfo.pPreAnimationTag = m_AniInfo.pAnimationTag;
+	m_AniInfo.pAnimationTag = pAnimationTag;
+	
+	m_AniInfo.fDelay = fDelay;
+
+	m_AniInfo.eMode = eMode;
+
+	if (m_AniInfo.pPreAnimationTag != m_AniInfo.pAnimationTag)
+	{
+		m_iAnimCount = 0;
+		m_fAnimPerTime = 0.f;
+	}
+}
+
+
+
+
 HRESULT CAnimator::Play_Loof(_float fTimeDelta)
 {
 	CTexture* pTex = Find_Component();
@@ -91,24 +110,31 @@ HRESULT CAnimator::Play_Once(_float fTimeDelta)
 		if (m_iAnimCount >= pTex->Get_Size())
 		{
 			m_iAnimCount = 0;
-			m_AniInfo.m_eMode = STATE_ONCEEND;
+			m_AniInfo.eMode = STATE_ONCEEND;
 		}
+
 		m_fAnimPerTime = 0.f;
-		
 	}
 
 	return Bind_Texture(m_iAnimCount);
 }
 
+
+
+
+
+
 HRESULT CAnimator::Play_Ani(_float fTimeDelta)
 {
-	switch (m_AniInfo.m_eMode)
+	// if(m_AniInfo.eCurMode != m_AniInfo.ePreMode)
+
+	switch (m_AniInfo.eMode)
 	{
-	case Engine::CAnimator::STATE_LOOF:
+	case CAnimator::STATE_LOOF:
 		Play_Loof(fTimeDelta);
 		break;
 
-	case Engine::CAnimator::STATE_ONCE:
+	case CAnimator::STATE_ONCE:
 		Play_Once(fTimeDelta);
 		break;
 
@@ -118,6 +144,11 @@ HRESULT CAnimator::Play_Ani(_float fTimeDelta)
 
 	return S_OK;
 }
+
+
+
+
+
 
 CAnimator * CAnimator::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

@@ -28,17 +28,29 @@
     <Filter Include="02.GameObject\BackGround">
       <UniqueIdentifier>{b0996a4b-fc18-4aaa-8e8d-a67100e3c78d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Player">
-      <UniqueIdentifier>{1706e6cf-71bc-4be8-b54a-d3fe1f635c81}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Monster">
-      <UniqueIdentifier>{befeacc2-5ae3-46d9-9ea6-3acf1eeb6f2f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Terrain">
-      <UniqueIdentifier>{a6086fd9-5a21-49c1-8de9-b20316e03365}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\Camera">
       <UniqueIdentifier>{06c63064-d248-45d2-bb32-c642c92886c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Cube">
+      <UniqueIdentifier>{56234d9b-3d8f-4299-a4fc-024345305160}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature">
+      <UniqueIdentifier>{113baaa9-6dad-4d30-90be-31542dcb15db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.MoDel">
+      <UniqueIdentifier>{a08430b2-81f3-475d-be09-1bee6cde32c6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.MoDel\Wood">
+      <UniqueIdentifier>{c8d36d46-76ed-46a6-9699-37c6abacc648}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Player">
+      <UniqueIdentifier>{1706e6cf-71bc-4be8-b54a-d3fe1f635c81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster">
+      <UniqueIdentifier>{befeacc2-5ae3-46d9-9ea6-3acf1eeb6f2f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\OrangeMushroom">
+      <UniqueIdentifier>{47f7fd98-bbd9-4818-bc33-ba3728fdc141}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -75,17 +87,23 @@
     <ClInclude Include="..\Public\MainApp.h">
       <Filter>00.MainApp</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Monster.h">
-      <Filter>02.GameObject\Monster</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Player.h">
-      <Filter>02.GameObject\Player</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Terrain.h">
-      <Filter>02.GameObject\Terrain</Filter>
+      <Filter>02.GameObject\Creature\Player</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Client_Defines.h">
       <Filter>90.Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Cube.h">
+      <Filter>02.GameObject\Cube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Wood.h">
+      <Filter>03.MoDel\Wood</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Creature.h">
+      <Filter>02.GameObject\Creature</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\OrangeMushroom.h">
+      <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -116,14 +134,20 @@
     <ClCompile Include="..\Private\MainApp.cpp">
       <Filter>00.MainApp</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Monster.cpp">
-      <Filter>02.GameObject\Monster</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Player.cpp">
-      <Filter>02.GameObject\Player</Filter>
+      <Filter>02.GameObject\Creature\Player</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Terrain.cpp">
-      <Filter>02.GameObject\Terrain</Filter>
+    <ClCompile Include="..\Private\Cube.cpp">
+      <Filter>02.GameObject\Cube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Wood.cpp">
+      <Filter>03.MoDel\Wood</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Creature.cpp">
+      <Filter>02.GameObject\Creature</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\OrangeMushroom.cpp">
+      <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

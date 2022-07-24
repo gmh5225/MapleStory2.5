@@ -26,52 +26,63 @@ HRESULT CCamera_Free::Initialize(void * pArg)
 	if (FAILED(__super::Initialize(pArg)))
 		return E_FAIL;
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3{ 0.f,0.5f,-2.f });
 
 	return S_OK;
 }
 
 void CCamera_Free::Tick(_float fTimeDelta)
 {
-	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (pGameInstance->Get_DIKState(DIK_W) & 0x80)
-	{
-		m_pTransformCom->Go_Straight(fTimeDelta);
-	}
+	// 카메라 위치 조정
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+	_float3 vCamPos{ vPlayerPos.x, vPlayerPos.y + 2.5f + 1.8f, vPlayerPos.z - 3.2f - 1.8f };
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vCamPos);
 
-	if (pGameInstance->Get_DIKState(DIK_S) & 0x80)
-	{
-		m_pTransformCom->Go_Backward(fTimeDelta);
-	}
+	// 플레이어를 바라본다
+	m_pTransformCom->LookAt(vPlayerPos);
 
-	if (pGameInstance->Get_DIKState(DIK_A) & 0x80)
-	{
-		m_pTransformCom->Go_Left(fTimeDelta);
-	}
-
-	if (pGameInstance->Get_DIKState(DIK_D) & 0x80)
-	{
-		m_pTransformCom->Go_Right(fTimeDelta);
-	}
-
-	_long	MouseMove = 0;
-
-	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_X))
-	{
-		m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), MouseMove * fTimeDelta * 0.05f);		
-	}
-
-	if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_Y))
-	{
-		m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), MouseMove * fTimeDelta * 0.05f);
-	}
-
-	
+	// 플레이어 카메라 룩 고정
+	_float3 vCamLook = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
+	pPlayerTransform->Set_State(CTransform::STATE_LOOK, vCamLook);
 
 	Safe_Release(pGameInstance);
 
+	//if (pGameInstance->Get_DIKState(DIK_W) & 0x80)
+	//{
+	//	m_pTransformCom->Go_Straight(fTimeDelta);
+	//}
+
+	//if (pGameInstance->Get_DIKState(DIK_S) & 0x80)
+	//{
+	//	m_pTransformCom->Go_Backward(fTimeDelta);
+	//}
+
+	//if (pGameInstance->Get_DIKState(DIK_A) & 0x80)
+	//{
+	//	m_pTransformCom->Go_Left(fTimeDelta);
+	//}
+
+	//if (pGameInstance->Get_DIKState(DIK_D) & 0x80)
+	//{
+	//	m_pTransformCom->Go_Right(fTimeDelta);
+	//}
+
+	//_long	MouseMove = 0;
+
+	//if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_X))
+	//{
+	//	m_pTransformCom->Turn(_float3(0.f, 1.f, 0.f), MouseMove * fTimeDelta * 0.05f);		
+	//}
+
+	//if (MouseMove = pGameInstance->Get_DIMMoveState(DIMM_Y))
+	//{
+	//	m_pTransformCom->Turn(m_pTransformCom->Get_State(CTransform::STATE_RIGHT), MouseMove * fTimeDelta * 0.05f);
+	//}
+
+	
 	__super::Tick(fTimeDelta);
 
 

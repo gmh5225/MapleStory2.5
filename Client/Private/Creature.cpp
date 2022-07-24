@@ -1,0 +1,203 @@
+#include "stdafx.h"
+#include "..\Public\Creature.h"
+
+#include "GameInstance.h"
+
+CCreature::CCreature(LPDIRECT3DDEVICE9 pGraphic_Device)
+	: CGameObject(pGraphic_Device)
+	, m_eCurState(STATE_IDLE)
+{
+}
+CCreature::CCreature(const CCreature & rhs)
+	: CGameObject(rhs)
+	, m_eCurState(STATE_IDLE)
+{
+}
+
+
+
+
+HRESULT CCreature::Initialize_Prototype()
+{
+	return S_OK;
+}
+HRESULT CCreature::Initialize(void * pArg)
+{
+	if (FAILED(SetUp_Components()))
+		return E_FAIL;
+
+
+	return S_OK;
+}
+
+
+
+
+HRESULT CCreature::SetUp_Components()
+{
+	/* For.Com_Renderer */
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
+		return E_FAIL;
+
+	/* For.Com_VIBuffer */
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+		return E_FAIL;
+
+	/* For.Com_Texture */
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Animator"), TEXT("Com_Animator"), (CComponent**)&m_pAnimatorCom)))
+		return E_FAIL;
+
+	/* For.Com_Collider */
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"), TEXT("Com_Collider"), (CComponent**)&m_pColliderCom)))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+
+
+
+void CCreature::Tick(_float fTimeDelta)
+{
+
+	switch (m_eCurState)
+	{
+	case Client::CCreature::STATE_IDLE:
+		break;
+	case Client::CCreature::STATE_MOVE:
+		break;
+	case Client::CCreature::STATE_JUMP:
+		break;
+	case Client::CCreature::STATE_ATTACK:
+		break;
+	}
+	
+}
+void CCreature::LateTick(_float fTimeDelta)
+{
+	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+		SetState(STATE_IDLE, m_eDir);
+
+	
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+}
+HRESULT CCreature::Render()
+{
+
+	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
+		return E_FAIL;	
+
+	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
+	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
+		return E_FAIL;
+
+	if (FAILED(Set_RenderState()))
+		return E_FAIL;
+
+	m_pVIBufferCom->Render();
+
+	if (FAILED(Reset_RenderState()))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+
+
+
+void CCreature::SetState(STATE eState, DIR eDir)
+{
+	if (m_eCurState == eState && m_eDir == eDir)
+		return;
+	
+	m_eCurState = eState;
+	m_eDir = eDir;
+	SetAni();
+}
+void CCreature::SetAni()
+{
+	switch (m_eCurState)
+	{
+	case CCreature::STATE_IDLE:
+		break;
+	case CCreature::STATE_MOVE:
+		break;
+	case CCreature::STATE_JUMP:
+		break;
+	case CCreature::STATE_ATTACK:
+		break;
+	}
+}
+
+
+
+HRESULT CCreature::Set_RenderState()
+{
+	if (nullptr == m_pGraphic_Device)
+		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);	
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 150);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+
+	return S_OK;
+}
+HRESULT CCreature::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	return S_OK;
+}
+
+
+
+
+
+
+CCreature * CCreature::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+{
+	CCreature*		pInstance = new CCreature(pGraphic_Device);
+
+	if (FAILED(pInstance->Initialize_Prototype()))
+	{
+		MSG_BOX(TEXT("Failed To Created : CCreature"));
+		Safe_Release(pInstance);
+	}
+
+	return pInstance;
+}
+CGameObject * CCreature::Clone(void* pArg)
+{
+	CCreature*		pInstance = new CCreature(*this);
+
+	if (FAILED(pInstance->Initialize(pArg)))
+	{
+		MSG_BOX(TEXT("Failed To Cloned : CCreature"));
+		Safe_Release(pInstance);
+	}
+
+	return pInstance;
+}
+
+
+
+
+
+
+void CCreature::Free()
+{
+	__super::Free();
+
+	Safe_Release(m_pAnimatorCom);
+	Safe_Release(m_pTransformCom);
+	Safe_Release(m_pColliderCom);
+	Safe_Release(m_pTextureCom);
+	Safe_Release(m_pVIBufferCom);
+	Safe_Release(m_pRendererCom);
+}
+

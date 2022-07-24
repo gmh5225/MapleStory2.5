@@ -12,11 +12,18 @@ protected:
 	virtual ~CGameObject() = default;
 
 public:
+	class CComponent* Get_ComponentPtr(const _tchar* pComponentTag);
+	_float Get_ColRad() { return m_fColRad; }
+
+public:
 	virtual HRESULT Initialize_Prototype();
 	virtual HRESULT Initialize(void* pArg);
 	virtual void Tick(_float fTimeDelta);
 	virtual void LateTick(_float fTimeDelta);
 	virtual HRESULT Render();
+
+public:
+	virtual void Collision(CGameObject* pOther) {};
 
 protected:
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
@@ -24,6 +31,8 @@ protected:
 protected: /* 객체에게 추가된 컴포넌트들을 키로 분류하여 보관한다. */
 	map<const _tchar*, class CComponent*>			m_Components;
 	typedef map<const _tchar*, class CComponent*>	COMPONENTS;
+
+	_float m_fColRad;
 
 protected:
 	HRESULT Add_Component(_uint iLevelIndex, const _tchar* pPrototypeTag, const _tchar* pComponentTag, class CComponent** ppOut, void* pArg = nullptr);

@@ -1,16 +1,15 @@
 #pragma once
 
-#include "Client_Defines.h"
 #include "Creature.h"
 
 BEGIN(Client)
 
-class CPlayer final : public CCreature
+class COrangeMushroom final : public CCreature
 {
 private:
-	CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CPlayer(const CPlayer& rhs);
-	virtual ~CPlayer() = default;
+	COrangeMushroom(LPDIRECT3DDEVICE9 pGraphic_Device);
+	COrangeMushroom(const COrangeMushroom& rhs);
+	virtual ~COrangeMushroom() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -21,19 +20,27 @@ public:
 
 	virtual void Collision(CGameObject* pOther) override;
 
+private:
+	void Tick_Idle(_float fTimeDelta);
+	void Tick_Move(_float fTimeDelta);
+	void Tick_Hit(_float fTimeDelta);
+
 public:
-	void GetKeyInput(_float fTimeDelta);
+	void SetState(STATE eState, DIR eDir);
+
+public:
 	virtual void SetAni() override;
 
-protected:
-	virtual HRESULT Set_RenderState() override;
-	virtual HRESULT Reset_RenderState() override;
+
+private:
+	STATE m_eCurState;
+	DIR m_eDir;
 
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static COrangeMushroom* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

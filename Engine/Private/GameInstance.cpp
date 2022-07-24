@@ -9,13 +9,16 @@ CGameInstance::CGameInstance()
 	, m_pObject_Manager(CObject_Manager::Get_Instance())
 	, m_pComponent_Manager(CComponent_Manager::Get_Instance())
 	, m_pTimer_Manager(CTimer_Manager::Get_Instance())
+	, m_pMap_Manager(CMap_Manager::Get_Instance())
 {
+	Safe_AddRef(m_pMap_Manager);
 	Safe_AddRef(m_pTimer_Manager);
 	Safe_AddRef(m_pComponent_Manager);
 	Safe_AddRef(m_pObject_Manager);
 	Safe_AddRef(m_pLevel_Manager);
 	Safe_AddRef(m_pInput_Device);
 	Safe_AddRef(m_pGraphic_Device);
+
 }
 
 
@@ -39,6 +42,10 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInst, cons
 		return E_FAIL;
 
 	if (FAILED(m_pComponent_Manager->Reserve_Container(iNumLevels)))
+		return E_FAIL;
+
+	//맵데이터로드
+	if (FAILED(m_pMap_Manager->LoadMapData()))
 		return E_FAIL;
 
 	return S_OK;
@@ -118,6 +125,14 @@ HRESULT CGameInstance::Add_GameObjectToLayer(const _tchar * pPrototypeTag, _uint
 	return m_pObject_Manager->Add_GameObjectToLayer(pPrototypeTag, iLevelIndex, pLayerTag, pArg);
 }
 
+CComponent* CGameInstance::Get_ComponentPtr(_uint iLevelIndex, const _tchar * pLayerTag, const _tchar * pComponentTag, _uint iLayerIndex)
+{
+	if (nullptr == m_pObject_Manager)
+		return nullptr;
+
+	return m_pObject_Manager->Get_ComponentPtr(iLevelIndex, pLayerTag, pComponentTag, iLayerIndex);
+}
+
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const _tchar * pPrototypeTag, CComponent * pPrototype)
 {
 	if (nullptr == m_pComponent_Manager)
@@ -180,11 +195,21 @@ _long CGameInstance::Get_DIMMoveState(DIMM eMouseMoveID)
 	return m_pInput_Device->Get_DIMMoveState(eMouseMoveID);
 }
 
+list<CMap_Manager::CUBEDATA>* CGameInstance::ReadMap(const _tchar * pMapTag)
+{
+	if (nullptr == m_pMap_Manager)
+		return nullptr;
+
+	return m_pMap_Manager->ReadMap(pMapTag);
+}
+
 void CGameInstance::Release_Engine()
 {
 	CGameInstance::Get_Instance()->Destroy_Instance();
 
 	CComponent_Manager::Get_Instance()->Destroy_Instance();
+
+	CMap_Manager::Get_Instance()->Destroy_Instance();
 
 	CObject_Manager::Get_Instance()->Destroy_Instance();
 
@@ -200,6 +225,7 @@ void CGameInstance::Release_Engine()
 void CGameInstance::Free()
 {
 	Safe_Release(m_pTimer_Manager);
+	Safe_Release(m_pMap_Manager);
 	Safe_Release(m_pComponent_Manager);
 	Safe_Release(m_pObject_Manager);
 	Safe_Release(m_pLevel_Manager);

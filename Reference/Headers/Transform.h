@@ -28,6 +28,7 @@ public:
 		return *(_float3*)&m_WorldMatrix.m[eState][0];
 	}
 
+	void Set_Scaled(_float fScale);
 	_float3 Get_Scaled() const;
 
 	_float4x4 Get_WorldMatrixInverse() {
@@ -51,6 +52,15 @@ public:
 	void Go_Backward(_float fTimeDelta);
 	void Go_Right(_float fTimeDelta);
 	void Go_Left(_float fTimeDelta);
+
+	void Go_U(_float fTimeDelta);
+	void Go_D(_float fTimeDelta);
+	void Go_L(_float fTimeDelta);
+	void Go_R(_float fTimeDelta);
+	void Go_LU(_float fTimeDelta);
+	void Go_RU(_float fTimeDelta);
+	void Go_LD(_float fTimeDelta);
+	void Go_RD(_float fTimeDelta);
 
 	void Rotation(_float3 vAxis, _float fRadian);
 	void Turn(_float3 vAxis, _float fTimeDelta);

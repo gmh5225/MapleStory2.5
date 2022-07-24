@@ -4,14 +4,26 @@
 
 CGameObject::CGameObject(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
+	, m_fColRad(0.f)
 {
 	Safe_AddRef(m_pGraphic_Device);
 }
 
 CGameObject::CGameObject(const CGameObject & rhs)
 	: m_pGraphic_Device(rhs.m_pGraphic_Device)
+	, m_fColRad(0.f)
 {
 	Safe_AddRef(m_pGraphic_Device);
+}
+
+CComponent * CGameObject::Get_ComponentPtr(const _tchar * pComponentTag)
+{
+	CComponent*		pComponent = Find_Component(pComponentTag);
+
+	if (nullptr == pComponent)
+		return nullptr;
+
+	return pComponent;
 }
 
 HRESULT CGameObject::Initialize_Prototype()

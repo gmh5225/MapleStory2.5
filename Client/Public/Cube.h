@@ -6,17 +6,25 @@
 BEGIN(Engine)
 class CTexture;
 class CRenderer;
-class CVIBuffer_Terrain;
+class CTransform;
+class CVIBuffer_Cube;
 END
+
 
 BEGIN(Client)
 
-class CTerrain final : public CGameObject
+class CCube final : public CGameObject
 {
+public:
+	typedef struct tagCubeDesc
+	{
+		_float3	vPos;
+		const _tchar* pTextureTag;
+	}CUBEDESC;
 private:
-	CTerrain(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CTerrain(const CTerrain& rhs);
-	virtual ~CTerrain() = default;
+	CCube(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CCube(const CCube& rhs);
+	virtual ~CCube() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -28,13 +36,20 @@ public:
 private:
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
-	CVIBuffer_Terrain*		m_pVIBufferCom = nullptr;
+	CTransform*				m_pTransformCom = nullptr;
+	CVIBuffer_Cube*			m_pVIBufferCom = nullptr;
 
+private:
+	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);
+
+private:
+	HRESULT Set_RenderState();
+	HRESULT Reset_RenderState();
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CTerrain* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CCube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };
