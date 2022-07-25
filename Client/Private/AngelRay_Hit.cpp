@@ -29,7 +29,7 @@ HRESULT CAngelRay_Hit::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_fColRad = 0.1f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.4f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 2.4f, 1.f));
 	m_pTransformCom->Set_Scaled(3.f);
 	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(1.f, 0.f, 0.f));
 	//m_pTransformCom->Rotation(_float3{ 0.f,1.f,0.f }, 70.f);
@@ -89,15 +89,12 @@ void CAngelRay_Hit::LateTick(_float fTimeDelta)
 		SetState(STATE_IDLE, m_eDir);*/
 
 	if(m_bRender)
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	
 	
 	if (m_pAnimatorCom->Get_AnimCount() == 5)
 		m_bRender = false;
 		
-	
-
-	
 }
 HRESULT CAngelRay_Hit::Render()
 {
@@ -204,8 +201,30 @@ CGameObject * CAngelRay_Hit::Clone(void* pArg)
 
 void CAngelRay_Hit::Collision(CGameObject * pOther)
 {
-	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
-	m_pTransformCom->Go_Left(fDF);
+	
+}
+
+HRESULT CAngelRay_Hit::Set_RenderState()
+{
+	if (nullptr == m_pGraphic_Device)
+		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 1);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	return S_OK;
+}
+
+HRESULT CAngelRay_Hit::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);	
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	return S_OK;
 }
 
 

@@ -89,7 +89,7 @@ void CAngelRay_Attack::LateTick(_float fTimeDelta)
 		SetState(STATE_IDLE, m_eDir);*/
 
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
 }
 HRESULT CAngelRay_Attack::Render()
@@ -211,21 +211,19 @@ HRESULT CAngelRay_Attack::Set_RenderState()
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
+	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 240);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 1);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-	//m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
-
-	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
-
 	return S_OK;
 }
 
 HRESULT CAngelRay_Attack::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
 	return S_OK;
