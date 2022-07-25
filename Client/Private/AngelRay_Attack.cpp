@@ -62,7 +62,7 @@ HRESULT CAngelRay_Attack::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 8.f;
+	TransformDesc.fSpeedPerSec = 10.f;
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
@@ -259,15 +259,15 @@ CGameObject * CAngelRay_Attack::Clone(void* pArg)
 
 void CAngelRay_Attack::Collision(CGameObject * pOther)
 {
-	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
-	m_pTransformCom->Go_Left(fDF);
+	if (pOther->Get_Tag() == "Tag_Monster" && pOther->Get_Tag() != "Tag_Player")
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
 
-	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"));
-	Safe_Release(pGameInstance);
-
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"));
+		Safe_Release(pGameInstance);
+		
+	}
 }
 
 HRESULT CAngelRay_Attack::Set_RenderState()

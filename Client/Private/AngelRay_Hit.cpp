@@ -29,7 +29,7 @@ HRESULT CAngelRay_Hit::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_fColRad = 0.1f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 2.4f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.f, 0.4f, -1.f));
 	m_pTransformCom->Set_Scaled(3.f);
 	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(1.f, 0.f, 0.f));
 	//m_pTransformCom->Rotation(_float3{ 0.f,1.f,0.f }, 70.f);
