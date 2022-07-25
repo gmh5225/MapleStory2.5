@@ -31,7 +31,7 @@ private:
 
 public:
 	void SetState(STATE eState, DIR eDir);
-
+	void SetDirection();
 public:
 	virtual void SetAni() override;
 
@@ -41,6 +41,7 @@ private:
 	DIR m_eDir;
 	_bool m_bCreate;
 	_bool m_bRender;
+	CTransform* m_pTarget;
 
 private:
 	HRESULT SetUp_Components();

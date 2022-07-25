@@ -26,7 +26,6 @@ HRESULT CCreature::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-
 	return S_OK;
 }
 

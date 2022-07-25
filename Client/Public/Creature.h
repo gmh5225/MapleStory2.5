@@ -40,7 +40,7 @@ public:
 public:
 	virtual void SetAni();
 	void Set_Billboard();
-
+	
 protected:
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;

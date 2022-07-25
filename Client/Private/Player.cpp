@@ -381,7 +381,8 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"));
+		
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &m_eDir);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}

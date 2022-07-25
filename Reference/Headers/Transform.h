@@ -67,6 +67,7 @@ public:
 	void Go_RD(_float fTimeDelta);
 
 	void Rotation(_float3 vAxis, _float fRadian);
+	void RotationTwo(_float3 vAxis, _float fRadian, _float3 vAxis2, _float fRadian2);
 	void Turn(_float3 vAxis, _float fTimeDelta);
 	void LookAt(_float3 vTargetPos);
 	void LookAtForLandObject(_float3 vTargetPos);
