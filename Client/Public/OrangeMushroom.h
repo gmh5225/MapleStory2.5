@@ -36,6 +36,8 @@ private:
 	STATE m_eCurState;
 	DIR m_eDir;
 
+	CGameObject* m_pTarget;
+
 private:
 	HRESULT SetUp_Components();
 

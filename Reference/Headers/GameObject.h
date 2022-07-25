@@ -14,6 +14,7 @@ protected:
 public:
 	class CComponent* Get_ComponentPtr(const _tchar* pComponentTag);
 	_float Get_ColRad() { return m_fColRad; }
+	string Get_Tag() { return m_sTag; }
 
 public:
 	virtual HRESULT Initialize_Prototype();
@@ -33,6 +34,7 @@ protected: /* 객체에게 추가된 컴포넌트들을 키로 분류하여 보관한다. */
 	typedef map<const _tchar*, class CComponent*>	COMPONENTS;
 
 	_float m_fColRad;
+	string m_sTag;
 
 protected:
 	HRESULT Add_Component(_uint iLevelIndex, const _tchar* pPrototypeTag, const _tchar* pComponentTag, class CComponent** ppOut, void* pArg = nullptr);

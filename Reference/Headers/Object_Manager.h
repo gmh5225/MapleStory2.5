@@ -16,6 +16,7 @@ private:
 
 public:
 	class CComponent* Get_ComponentPtr(_uint iLevelIndex, const _tchar* pLayerTag, const _tchar* pComponentTag, _uint iLayerIndex);
+	class CGameObject* Get_ObjectPtr(_uint iLevelIndex, const _tchar* pLayerTag, _uint iLayerIndex);
 
 
 public:

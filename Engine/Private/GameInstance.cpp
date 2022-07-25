@@ -133,6 +133,14 @@ CComponent* CGameInstance::Get_ComponentPtr(_uint iLevelIndex, const _tchar * pL
 	return m_pObject_Manager->Get_ComponentPtr(iLevelIndex, pLayerTag, pComponentTag, iLayerIndex);
 }
 
+CGameObject* CGameInstance::Get_ObjectPtr(_uint iLevelIndex, const _tchar * pLayerTag, _uint iLayerIndex)
+{
+	if (nullptr == m_pObject_Manager)
+		return nullptr;
+
+	return m_pObject_Manager->Get_ObjectPtr(iLevelIndex, pLayerTag, iLayerIndex);
+}
+
 HRESULT CGameInstance::Add_Prototype(_uint iLevelIndex, const _tchar * pPrototypeTag, CComponent * pPrototype)
 {
 	if (nullptr == m_pComponent_Manager)

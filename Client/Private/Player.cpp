@@ -28,8 +28,10 @@ HRESULT CPlayer::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+	m_sTag = "Tag_Player";
+
 	m_fColRad = 0.5f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.5f, 0.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.6f, 0.f));
 	m_pTransformCom->Set_Scaled(2.4f);
 
 	SetState(STATE_IDLE, DIR_D);
@@ -434,7 +436,10 @@ CGameObject * CPlayer::Clone(void* pArg)
 
 void CPlayer::Collision(CGameObject * pOther)
 {
+	if (pOther->Get_Tag() == "Tag_Monster")
+	{
 
+	}
 }
 
 

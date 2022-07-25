@@ -28,11 +28,15 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+	m_sTag = "Tag_Monster";
+
 	m_fColRad = 0.1f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 0.4f, 0.f));
 	m_pTransformCom->Set_Scaled(1.1f);
 
 	SetState(STATE_IDLE, DIR_END);
+
+
 
 	return S_OK;
 }
@@ -202,5 +206,6 @@ void COrangeMushroom::Collision(CGameObject * pOther)
 void COrangeMushroom::Free()
 {
 	__super::Free();
+
 }
 

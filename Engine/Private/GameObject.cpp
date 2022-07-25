@@ -5,6 +5,7 @@
 CGameObject::CGameObject(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
 	, m_fColRad(0.f)
+	, m_sTag("")
 {
 	Safe_AddRef(m_pGraphic_Device);
 }
@@ -12,6 +13,7 @@ CGameObject::CGameObject(LPDIRECT3DDEVICE9 pGraphic_Device)
 CGameObject::CGameObject(const CGameObject & rhs)
 	: m_pGraphic_Device(rhs.m_pGraphic_Device)
 	, m_fColRad(0.f)
+	, m_sTag("")
 {
 	Safe_AddRef(m_pGraphic_Device);
 }
