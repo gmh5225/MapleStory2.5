@@ -29,7 +29,7 @@ HRESULT CAngelRay_Effect::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_fColRad = 0.1f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.4f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 2.4f, 1.f));
 	m_pTransformCom->Set_Scaled(5.f);
 	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(1.f, 0.f, 0.f));
 	//m_pTransformCom->Rotation(_float3{ 0.f,1.f,0.f }, 70.f);
@@ -102,7 +102,10 @@ void CAngelRay_Effect::LateTick(_float fTimeDelta)
 	}
 
 	if (m_pAnimatorCom->Get_AnimCount() == 12)
+	{
 		m_bRender = false;
+		Free();
+	}
 		
 	
 
@@ -214,6 +217,31 @@ CGameObject * CAngelRay_Effect::Clone(void* pArg)
 void CAngelRay_Effect::Collision(CGameObject * pOther)
 {
 
+}
+
+HRESULT CAngelRay_Effect::Set_RenderState()
+{
+	if (nullptr == m_pGraphic_Device)
+		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 100);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	//m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+
+	return S_OK;
+}
+
+HRESULT CAngelRay_Effect::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	return S_OK;
 }
 
 

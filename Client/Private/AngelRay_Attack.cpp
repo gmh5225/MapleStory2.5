@@ -206,6 +206,31 @@ void CAngelRay_Attack::Collision(CGameObject * pOther)
 
 }
 
+HRESULT CAngelRay_Attack::Set_RenderState()
+{
+	if (nullptr == m_pGraphic_Device)
+		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 240);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	//m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_ALWAYS);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+
+	return S_OK;
+}
+
+HRESULT CAngelRay_Attack::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	return S_OK;
+}
+
 
 
 
