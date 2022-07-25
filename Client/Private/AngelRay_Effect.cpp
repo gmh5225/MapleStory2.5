@@ -139,7 +139,7 @@ void CAngelRay_Effect::LateTick(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Attack"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"));
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Attack"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"),&m_eDir);
 		m_bCreate = true;
 		Safe_Release(pGameInstance);
 	}
@@ -206,13 +206,13 @@ void CAngelRay_Effect::SetDirection()
 		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 0.f, _float3(1.f, 0.f, 0.f), 90.f);
 		break;
 	case Client::CCreature::DIR_R:
-		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 180.f, _float3(1.f, 0.f, 0.f), 90.f);
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 180.f, _float3(-1.f, 0.f, 0.f), 90.f);
 		break;
 	case Client::CCreature::DIR_U:
 		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 90.f, _float3(0.f, 0.f, 1.f), 90.f);
 		break;
 	case Client::CCreature::DIR_D:
-		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 270.f, _float3(0.f, 0.f, 1.f), 90.f);
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 270.f, _float3(0.f, 0.f, -1.f), 90.f);
 		break;
 	case Client::CCreature::DIR_LU:
 		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 45.f, _float3(-1.f, 0.f, 1.f), 90.f);

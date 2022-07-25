@@ -31,6 +31,8 @@ private:
 
 public:
 	void SetState(STATE eState, DIR eDir);
+	void SetDirection();
+	void MoveAttack(_float fTimeDelta);
 
 public:
 	virtual void SetAni() override;

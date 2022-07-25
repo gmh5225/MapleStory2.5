@@ -27,15 +27,23 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
+	CGameInstance* pInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pInstance);
+	CTransform* pTransform = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pTransform->Get_State(CTransform::STATE_POSITION)+_float3(0.f,-0.1f,0.f));
 
+	Safe_Release(pInstance);
 	m_fColRad = 0.1f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.5f, 0.4f, 1.f));
+	
 	m_pTransformCom->Set_Scaled(1.5f);
+	m_pTransformCom->Set_ScaledX(3.f);
 	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(1.f, 0.f, 0.f));
 	//m_pTransformCom->Rotation(_float3{ 0.f,1.f,0.f }, 70.f);
 	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
 	//SetState(STATE_IDLE, DIR_END);
+	memcpy(&m_eDir, pArg, sizeof(DIR));
+	SetDirection();
 
 	return S_OK;
 }
@@ -54,7 +62,7 @@ HRESULT CAngelRay_Attack::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 4.f;
+	TransformDesc.fSpeedPerSec = 8.f;
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
@@ -68,19 +76,7 @@ HRESULT CAngelRay_Attack::SetUp_Components()
 
 void CAngelRay_Attack::Tick(_float fTimeDelta)
 {
-	m_pTransformCom->Go_L(fTimeDelta);
-	/*switch (m_eCurState)
-	{
-	case Client::CAngelRay_Attack::STATE_IDLE:
-		Tick_Idle(fTimeDelta);
-		break;
-	case Client::CAngelRay_Attack::STATE_MOVE:
-		Tick_Move(fTimeDelta);
-		break;
-	case Client::CAngelRay_Attack::STATE_HIT:
-		Tick_Hit(fTimeDelta);
-		break;
-	}*/
+	MoveAttack(fTimeDelta);
 
 }
 void CAngelRay_Attack::LateTick(_float fTimeDelta)
@@ -139,6 +135,74 @@ void CAngelRay_Attack::SetState(STATE eState, DIR eDir)
 	m_eCurState = eState;
 	m_eDir = eDir;
 	SetAni();*/
+}
+void CAngelRay_Attack::SetDirection()
+{
+	switch (m_eDir)
+	{
+	case Client::CCreature::DIR_L:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 0.f, _float3(1.f, 0.f, 0.f), 90.f);
+		break;
+	case Client::CCreature::DIR_R:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 180.f, _float3(-1.f, 0.f, 0.f), 90.f);
+		break;
+	case Client::CCreature::DIR_U:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 90.f, _float3(0.f, 0.f, -1.f), 90.f);
+		break;
+	case Client::CCreature::DIR_D:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 270.f, _float3(0.f, 0.f, 1.f), 90.f);
+		break;
+	case Client::CCreature::DIR_LU:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 45.f, _float3(1.f, 0.f, -1.f), 90.f);
+		break;
+	case Client::CCreature::DIR_RU:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 135.f, _float3(-1.f, 0.f, -1.f), 90.f);
+		break;
+	case Client::CCreature::DIR_LD:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), -45.f, _float3(1.f, 0.f, 1.f), 90.f);
+		break;
+	case Client::CCreature::DIR_RD:
+		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 225.f, _float3(-1.f, 0.f, 1.f), 90.f);
+		break;
+	case Client::CCreature::DIR_END:
+		break;
+	default:
+		break;
+	}
+}
+void CAngelRay_Attack::MoveAttack(_float fTimeDelta)
+{
+	switch (m_eDir)
+	{
+	case Client::CCreature::DIR_L:
+		m_pTransformCom->Go_L(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_R:
+		m_pTransformCom->Go_R(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_U:
+		m_pTransformCom->Go_U(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_D:
+		m_pTransformCom->Go_D(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_LU:
+		m_pTransformCom->Go_LU(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_RU:
+		m_pTransformCom->Go_RU(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_LD:
+		m_pTransformCom->Go_LD(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_RD:
+		m_pTransformCom->Go_RD(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_END:
+		break;
+	default:
+		break;
+	}
 }
 void CAngelRay_Attack::SetAni()
 {

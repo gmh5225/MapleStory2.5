@@ -29,6 +29,7 @@ public:
 	}
 
 	void Set_Scaled(_float fScale);
+	void Set_ScaledX(_float fScale);
 	_float3 Get_Scaled() const;
 
 	_float4x4 Get_WorldMatrixInverse() {

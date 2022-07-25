@@ -27,6 +27,13 @@ void CTransform::Set_Scaled(_float fScale)
 	Set_State(CTransform::STATE_LOOK, fL);
 }
 
+void CTransform::Set_ScaledX(_float fScale)
+{
+	_float3 fR = Get_State(CTransform::STATE_RIGHT);
+	fR *= fScale;
+	Set_State(CTransform::STATE_RIGHT, fR);
+}
+
 _float3 CTransform::Get_Scaled() const
 {
 	return _float3(D3DXVec3Length(&Get_State(CTransform::STATE_RIGHT)), 
