@@ -32,7 +32,7 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 	m_fColRad = 0.5f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.6f, 0.f));
-	m_pTransformCom->Set_Scaled(2.4f);
+	m_pTransformCom->Set_Scaled(2.0f);
 
 	SetState(STATE_IDLE, DIR_D);
 	
@@ -146,6 +146,8 @@ HRESULT CPlayer::Render()
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
+
+
 
 	return S_OK;
 }
@@ -389,6 +391,7 @@ HRESULT CPlayer::Set_RenderState()
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
+	Set_Billboard();
 
 	return S_OK;
 }
@@ -397,6 +400,8 @@ HRESULT CPlayer::Reset_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_vLookTemp);
 
 	return S_OK;
 }

@@ -129,6 +129,24 @@ void CCreature::SetAni()
 	}
 }
 
+void CCreature::Set_Billboard()
+{
+	m_vLookTemp = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
+
+	_float4x4		ViewMatrix;
+
+	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
+
+	/* 카메라의 월드행렬이다. */
+	D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
+
+	_float3 fScale = m_pTransformCom->Get_Scaled();
+
+	m_pTransformCom->Set_State(CTransform::STATE_RIGHT, (*(_float3*)&ViewMatrix.m[0][0]) * fScale.x);
+	m_pTransformCom->Set_State(CTransform::STATE_UP, (*(_float3*)&ViewMatrix.m[1][0]) * fScale.y);
+	m_pTransformCom->Set_State(CTransform::STATE_LOOK, (*(_float3*)&ViewMatrix.m[2][0]) * fScale.z);
+}
+
 
 
 HRESULT CCreature::Set_RenderState()
@@ -142,6 +160,7 @@ HRESULT CCreature::Set_RenderState()
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
+	Set_Billboard();
 
 	return S_OK;
 }
@@ -150,6 +169,8 @@ HRESULT CCreature::Reset_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_vLookTemp);
 
 	return S_OK;
 }

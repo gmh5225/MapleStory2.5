@@ -39,6 +39,7 @@ public:
 
 public:
 	virtual void SetAni();
+	void Set_Billboard();
 
 protected:
 	CTexture*				m_pTextureCom = nullptr;
@@ -49,6 +50,7 @@ protected:
 	CCollider*				m_pColliderCom = nullptr;
 
 protected:
+	_float3 m_vLookTemp;
 	STATE m_eCurState;
 	DIR m_eDir;
 

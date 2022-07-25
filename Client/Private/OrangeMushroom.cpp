@@ -55,7 +55,7 @@ HRESULT COrangeMushroom::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 4.f;
+	TransformDesc.fSpeedPerSec = 0.5f;
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
@@ -83,12 +83,28 @@ void COrangeMushroom::Tick(_float fTimeDelta)
 		break;
 	}
 
+	m_pTransformCom->Go_Backward(fTimeDelta);
+
 }
 void COrangeMushroom::LateTick(_float fTimeDelta)
 {
-	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_IDLE, m_eDir);
+	// 피킹 예제
+	{
+		//if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+		//	SetState(STATE_IDLE, m_eDir);
 
+
+		//_float3			vPickPos;
+
+		//if (GetKeyState(VK_LBUTTON) & 0x8000)
+		//{
+		//	if (m_pVIBufferCom->Picking(m_pTransformCom, &vPickPos))
+		//	{
+		//		int a = 10;
+		//	}
+		//}
+	}
+	
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
@@ -110,6 +126,8 @@ HRESULT COrangeMushroom::Render()
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
+
+	
 
 	return S_OK;
 }

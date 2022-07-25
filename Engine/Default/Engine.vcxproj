@@ -177,6 +177,7 @@
     <ClInclude Include="..\Public\Level_Manager.h" />
     <ClInclude Include="..\Public\Map_Manager.h" />
     <ClInclude Include="..\Public\Object_Manager.h" />
+    <ClInclude Include="..\public\Picking.h" />
     <ClInclude Include="..\Public\Renderer.h" />
     <ClInclude Include="..\Public\Texture.h" />
     <ClInclude Include="..\Public\Timer.h" />
@@ -204,6 +205,7 @@
     <ClCompile Include="..\Private\Level_Manager.cpp" />
     <ClCompile Include="..\Private\Map_Manager.cpp" />
     <ClCompile Include="..\Private\Object_Manager.cpp" />
+    <ClCompile Include="..\private\Picking.cpp" />
     <ClCompile Include="..\Private\Renderer.cpp" />
     <ClCompile Include="..\Private\Texture.cpp" />
     <ClCompile Include="..\Private\Timer.cpp" />

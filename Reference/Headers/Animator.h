@@ -33,13 +33,16 @@ public:
 public:
 	HRESULT Create_Texture(_uint iLevelIndex, const _tchar * pPrototypeTag, void * pArg);
 	HRESULT Bind_Texture(_uint iCount);
+	HRESULT Play_Ani(_float fTimeDelta);
+
+public:
 	HRESULT Play_Loof(_float fTimeDelta);
 	HRESULT Play_Once(_float fTimeDelta);
-	HRESULT Play_Ani(_float fTimeDelta);
-	const _uint Get_AnimCount() { return m_iAnimCount; }
 
 public:
 	ANIINFO Get_AniInfo() { return m_AniInfo; }
+	_uint Get_AnimCount() { return m_iAnimCount; }
+
 	void Set_AniInfo(const _tchar* pAnimationTag, _float fDelay, STATE eMode);
 
 public:

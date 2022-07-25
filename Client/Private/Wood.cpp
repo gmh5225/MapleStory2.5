@@ -47,6 +47,7 @@ HRESULT CWood::Render()
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;	
 	
+	m_pGraphic_Device->SetTexture(0, nullptr);
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
