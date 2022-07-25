@@ -52,6 +52,21 @@
     <Filter Include="02.GameObject\Creature\Monster\OrangeMushroom">
       <UniqueIdentifier>{47f7fd98-bbd9-4818-bc33-ba3728fdc141}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill">
+      <UniqueIdentifier>{151537b9-6f0f-4d0c-9bcb-eb3034f7018f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\AngelRay">
+      <UniqueIdentifier>{bbde3b1b-fd6f-43bd-bd68-e1c24d11d510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\AngelRay\Effect">
+      <UniqueIdentifier>{48779021-1b11-4fc2-bf31-cdf8e4bc7a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\AngelRay\Attack">
+      <UniqueIdentifier>{ec04dc65-5da1-4319-9b7b-929e95132e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\AngelRay\Hit">
+      <UniqueIdentifier>{0667ff32-e47e-4583-b832-2e3805d863c0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -105,6 +120,15 @@
     <ClInclude Include="..\Public\OrangeMushroom.h">
       <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\AngelRay_Attack.h">
+      <Filter>02.GameObject\Skill\AngelRay\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\AngelRay_Effect.h">
+      <Filter>02.GameObject\Skill\AngelRay\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\AngelRay_Hit.h">
+      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -148,6 +172,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\OrangeMushroom.cpp">
       <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\AngelRay_Attack.cpp">
+      <Filter>02.GameObject\Skill\AngelRay\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\AngelRay_Effect.cpp">
+      <Filter>02.GameObject\Skill\AngelRay\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\AngelRay_Hit.cpp">
+      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

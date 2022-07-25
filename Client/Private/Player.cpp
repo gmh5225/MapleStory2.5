@@ -375,6 +375,16 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 	{
 		SetState(STATE_JUMP, m_eDir);
 	}
+
+	if (GetKeyState('A') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"));
+		SetState(STATE_ATTACK, m_eDir);
+		Safe_Release(pGameInstance);
+	}
 }
 
 
