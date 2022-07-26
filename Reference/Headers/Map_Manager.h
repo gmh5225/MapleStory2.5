@@ -12,10 +12,10 @@ class CMap_Manager final : public CBase
 	DECLARE_SINGLETON(CMap_Manager)
 
 public:
-	typedef struct tagCubeData
+	typedef struct tagCubeDATA
 	{
 		_float3	vPos;
-		const _tchar* pTextureTag;
+		_int	iIndex;
 	}CUBEDATA;
 
 private:
@@ -23,9 +23,10 @@ private:
 	virtual ~CMap_Manager() = default;
 
 public:
-	HRESULT LoadMapData();
+	HRESULT LoadMapData(HWND hWnd);
 	list<CUBEDATA>* ReadMap(const _tchar* pMapTag);
 
+	void LoadData(HWND hWnd);
 
 private:
 	list<CUBEDATA>* Find_Map(const _tchar* pMapTag);
@@ -35,6 +36,7 @@ private: /* 원형 Map들을 보관할 커넽이너ㅣ */
 	map<const _tchar*, list<CUBEDATA>>			m_MapPrototypes;
 	typedef map<const _tchar*, list<CUBEDATA>>	MAPDATA;
 
+	list<CMap_Manager::CUBEDATA> m_TempList;
 
 public:
 	virtual void Free() override;

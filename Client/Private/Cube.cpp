@@ -55,10 +55,13 @@ HRESULT CCube::Render()
 	if (FAILED(m_pTextureCom->Bind_Texture(0)))
 		return E_FAIL;
 
+
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
 
-	m_pVIBufferCom->Render();
+
+		m_pVIBufferCom->Render();
+
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
@@ -92,7 +95,7 @@ HRESULT CCube::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 	
 

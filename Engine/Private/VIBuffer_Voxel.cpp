@@ -55,13 +55,13 @@ HRESULT CVIBuffer_Voxel::Initialize_Prototype(vector<tagVertexColor>* pVoxelData
 
 
 
-	m_iIndexSizeofPrimitive = sizeof(FACEINDICES16);
-	m_eIndexFormat = D3DFMT_INDEX16;
+	m_iIndexSizeofPrimitive = sizeof(FACEINDICES32);
+	m_eIndexFormat = D3DFMT_INDEX32;
 
 	if (FAILED(__super::Create_IndexBuffer()))
 		return E_FAIL;
 
-	FACEINDICES16*		pIndices = nullptr;
+	FACEINDICES32*		pIndices = nullptr;
 
 	m_pIB->Lock(0, 0, (void**)&pIndices, 0);
 
