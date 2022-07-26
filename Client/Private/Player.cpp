@@ -3,6 +3,7 @@
 #include "AngelRay_Effect.h"
 #include "SolunaSlashEffectA.h"
 #include "SolunaSlashEffectB.h"
+#include "CrossTheStyx.h"
 #include "GameInstance.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -419,19 +420,6 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		SetState(STATE_JUMP, m_eDir);
 	}
 
-	if (GetKeyState('A') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
-		CAngelRay_Effect::ANGELEFFECTDESC AngelDECS;
-		AngelDECS.eDir = m_eDir;
-		
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &AngelDECS);
-		SetState(STATE_ATTACK, m_eDir);
-		Safe_Release(pGameInstance);
-	}
-
 	if (GetKeyState('C') & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -445,6 +433,34 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		SetState(STATE_DASH, m_eDir);
 		Safe_Release(pGameInstance);
 	}
+
+	if (GetKeyState('A') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CAngelRay_Effect::ANGELEFFECTDESC AngelDECS;
+		AngelDECS.eDir = m_eDir;
+		
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &AngelDECS);
+		SetState(STATE_ATTACK, m_eDir);
+		Safe_Release(pGameInstance);
+	}
+
+	if (GetKeyState('S') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CCrossTheStyx::CROSSTHESTYXDESC CrossDECS;
+		CrossDECS.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CrossTheStyx"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &CrossDECS);
+		SetState(STATE_ATTACK, m_eDir);
+		Safe_Release(pGameInstance);
+	}
+
+	
 }
 
 

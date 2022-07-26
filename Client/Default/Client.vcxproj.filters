@@ -88,6 +88,12 @@
     <Filter Include="02.GameObject\Skill\Dash\SolunaSlash\EffectB">
       <UniqueIdentifier>{796623a3-ad84-4945-b309-ad03f397c6be}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill\CloseAttack">
+      <UniqueIdentifier>{7b7eff4e-7fff-4015-a7a6-f0a016d6e639}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\CloseAttack\CrossTheStyx">
+      <UniqueIdentifier>{bf8a3285-e967-4d45-95f4-1775a8353f6c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -162,6 +168,9 @@
     <ClInclude Include="..\Public\SolunaSlashEffectB.h">
       <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectB</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\CrossTheStyx.h">
+      <Filter>02.GameObject\Skill\CloseAttack\CrossTheStyx</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -226,6 +235,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\SolunaSlashEffectB.cpp">
       <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectB</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CrossTheStyx.cpp">
+      <Filter>02.GameObject\Skill\CloseAttack\CrossTheStyx</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

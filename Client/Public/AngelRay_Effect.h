@@ -47,7 +47,6 @@ private:
 	STATE m_eCurState;
 	DIR m_eDir;
 	_bool m_bCreate;
-	_bool m_bRender;
 	CTransform* m_pTarget;
 	ANGELEFFECTDESC m_Desc;
 private:

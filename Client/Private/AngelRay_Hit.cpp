@@ -8,7 +8,7 @@ CAngelRay_Hit::CAngelRay_Hit(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 }
 CAngelRay_Hit::CAngelRay_Hit(const CAngelRay_Hit & rhs)
-	: CCreature(rhs),m_bCreate(false),m_bRender(true)
+	: CCreature(rhs)
 {
 }
 
@@ -71,12 +71,12 @@ void CAngelRay_Hit::Tick(_float fTimeDelta)
 void CAngelRay_Hit::LateTick(_float fTimeDelta)
 {
 
-	if(m_bRender)
+
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	
 	if (m_pAnimatorCom->Get_AnimCount() == 5)
-		m_bRender = false;
+		Set_Dead();
 		
 }
 HRESULT CAngelRay_Hit::Render()

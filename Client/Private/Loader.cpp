@@ -15,6 +15,7 @@
 #include "Slime.h"
 #include "SolunaSlashEffectA.h"
 #include "SolunaSlashEffectB.h"
+#include "CrossTheStyx.h"
 
 
 
@@ -157,6 +158,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CSolunaSlashEffectB::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CrossTheStyx"),
+		CCrossTheStyx::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 
 
@@ -402,6 +406,10 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SolunaSlash_EffectB"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Dash/SolunaSlash/Edit/SolunaSlashB%d.png"), 8))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_CrossTheStyx"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/CrossTheStyx/Edit/CrossTheStyx%d.png"), 10))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
