@@ -32,7 +32,7 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 
 	m_fColRad = 0.9f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(2.f, 0.4f, -2.f));
-	m_pTransformCom->Set_Scaled(1.1f);
+	m_pTransformCom->Set_Scaled(1.3f);
 
 	SetState(STATE_IDLE, DIR_END);
 
@@ -188,6 +188,13 @@ void COrangeMushroom::SetAni()
 
 
 
+void COrangeMushroom::Damaged(CGameObject * pOther)
+{
+	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
+
+	SetState(STATE_HIT, DIR_END);
+}
+
 
 
 COrangeMushroom * COrangeMushroom::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -220,9 +227,7 @@ CGameObject * COrangeMushroom::Clone(void* pArg)
 
 void COrangeMushroom::Collision(CGameObject * pOther)
 {
-	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
 
-	SetState(STATE_HIT, DIR_END);
 }
 
 

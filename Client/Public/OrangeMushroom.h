@@ -31,7 +31,7 @@ public:
 
 public:
 	virtual void SetAni() override;
-
+	virtual void Damaged(CGameObject* pOther) override;
 
 private:
 	STATE m_eCurState;

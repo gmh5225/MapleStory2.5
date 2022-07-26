@@ -12,9 +12,11 @@ HRESULT CMap_Manager::LoadMapData(HWND hWnd)
 {
 	LoadData(hWnd);
 
+
 	// 1. y축 45도 회전 행렬을 구한다.
 	_float4x4 RotationMatrix;
-	D3DXMatrixRotationAxis(&RotationMatrix, &_float3{0.f, 1.f, 0.f}, 45.f);
+	D3DXMatrixIdentity(&RotationMatrix);
+	D3DXMatrixRotationAxis(&RotationMatrix, &_float3{0.f, 1.f, 0.f}, D3DXToRadian(45.f));
 	
 	// 2. 각 큐브 포스에 회전행렬을 곱하고 다시 대입해 준다.
 	for (auto& CubeData : m_TempList)
@@ -22,6 +24,7 @@ HRESULT CMap_Manager::LoadMapData(HWND hWnd)
 		_float3 temp;
 		D3DXVec3TransformCoord(&temp, &CubeData.vPos, &RotationMatrix);
 		CubeData.vPos = temp;
+		CubeData.vPos.y += 10.f;
 	}
 
 	m_MapPrototypes.emplace(TEXT("Map_Henesys"), m_TempList);
@@ -80,12 +83,13 @@ void CMap_Manager::LoadData(HWND hWnd)
 		if (0 == dwByte)	// 더이상 읽을 데이터가 없을 경우
 			break;
 
-		m_TempList.push_back(*(new CMap_Manager::CUBEDATA(tInfo)));
+		m_TempList.push_back(CMap_Manager::CUBEDATA(tInfo));
 	}
 
 
 	// 3. 파일 소멸
 	CloseHandle(hFile);
+
 }
 
 

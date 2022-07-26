@@ -30,7 +30,7 @@ HRESULT CRedSnail::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 
-	m_fColRad = 0.1f;
+	m_fColRad = 0.5f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(4.f, 0.2f, 0.f));
 	m_pTransformCom->Set_Scaled(1.1f);
 
@@ -179,6 +179,13 @@ void CRedSnail::SetAni()
 	}
 }
 
+void CRedSnail::Damaged(CGameObject * pOther)
+{
+	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
+
+	SetState(STATE_HIT, DIR_END);
+}
+
 
 
 
@@ -214,9 +221,6 @@ CGameObject * CRedSnail::Clone(void* pArg)
 
 void CRedSnail::Collision(CGameObject * pOther)
 {
-	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
-
-	SetState(STATE_HIT, DIR_END);
 
 }
 

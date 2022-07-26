@@ -6,6 +6,7 @@ CGameObject::CGameObject(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
 	, m_fColRad(0.f)
 	, m_sTag("")
+	, m_bDead(false)
 {
 	Safe_AddRef(m_pGraphic_Device);
 }
@@ -14,6 +15,7 @@ CGameObject::CGameObject(const CGameObject & rhs)
 	: m_pGraphic_Device(rhs.m_pGraphic_Device)
 	, m_fColRad(0.f)
 	, m_sTag("")
+	, m_bDead(false)
 {
 	Safe_AddRef(m_pGraphic_Device);
 }
@@ -73,6 +75,21 @@ HRESULT CGameObject::Add_Component(_uint iLevelIndex, const _tchar * pPrototypeT
 
 	return S_OK;
 }
+
+HRESULT CGameObject::Compute_CamDistance(_float3 vWorldPos)
+{
+	_float4x4		ViewMatrix;
+
+	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
+	D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
+
+	_float3		vDir = *(_float3*)&ViewMatrix.m[3][0] - vWorldPos;
+
+	m_fCamDistance = D3DXVec3Length(&vDir);
+
+	return S_OK;
+}
+
 
 CComponent * CGameObject::Find_Component(const _tchar * pComponentTag)
 {

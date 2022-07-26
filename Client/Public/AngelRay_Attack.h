@@ -46,8 +46,9 @@ public:
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
-	_bool m_bHit;
 	ANGELATTACKDESC m_Desc;
+
+	list<CGameObject*> m_pOther;
 
 private:
 	HRESULT SetUp_Components();

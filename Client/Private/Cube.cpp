@@ -27,11 +27,11 @@ HRESULT CCube::Initialize(void * pArg)
 	if (nullptr == pArg)
 		return E_FAIL;
 
-	CMap_Manager::CUBEDATA* pData = (CMap_Manager::CUBEDATA*)pArg;
+	m_pData = (CMap_Manager::CUBEDATA*)pArg;
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pData->vPos);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pData->vPos);
 
-	m_pTransformCom->Rotation(_float3{ 0.f, 0.1f, 0.f }, 45.f);
+	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
 	return S_OK;
 }
@@ -52,7 +52,7 @@ HRESULT CCube::Render()
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;	
 	
-	if (FAILED(m_pTextureCom->Bind_Texture(0)))
+	if (FAILED(m_pTextureCom->Bind_Texture(m_pData->iIndex)))
 		return E_FAIL;
 
 
@@ -95,6 +95,7 @@ HRESULT CCube::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
+
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 	

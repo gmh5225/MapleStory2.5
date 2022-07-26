@@ -27,8 +27,8 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
 		return E_FAIL;
 
-	//if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -97,6 +97,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const _tchar * pLayerTag)
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 

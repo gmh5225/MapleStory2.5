@@ -34,7 +34,6 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 
 	Safe_Release(pInstance);
 	m_fColRad = 0.1f;
-	m_bHit = false;
 
 	m_pTransformCom->Set_Scaled(1.1f);
 	m_pTransformCom->Set_ScaledX(3.f);
@@ -83,6 +82,7 @@ void CAngelRay_Attack::Tick(_float fTimeDelta)
 void CAngelRay_Attack::LateTick(_float fTimeDelta)
 {
 
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
@@ -238,9 +238,20 @@ CGameObject * CAngelRay_Attack::Clone(void* pArg)
 
 void CAngelRay_Attack::Collision(CGameObject * pOther)
 {
-	if(!m_bHit)
 	if (pOther->Get_Tag() == "Tag_Monster")
 	{
+
+		if (1 < m_pOther.size())
+			return;
+
+		for (auto& TempOther : m_pOther)
+		{
+			if (TempOther == pOther)
+				return;
+		}
+
+
+
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
@@ -251,8 +262,13 @@ void CAngelRay_Attack::Collision(CGameObject * pOther)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"), &AngelDesc);
 		Safe_Release(pGameInstance);
 
-		m_bHit = true;
 		
+		m_pOther.push_back(pOther);
+		// Safe_AddRef(pOther);
+
+		pOther->Damaged(this);
+
+		Set_Dead();
 	}
 }
 
@@ -261,20 +277,21 @@ HRESULT CAngelRay_Attack::Set_RenderState()
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 1);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	return S_OK;
 }
 
 HRESULT CAngelRay_Attack::Reset_RenderState()
 {
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
 	return S_OK;

@@ -13,8 +13,14 @@ protected:
 
 public:
 	class CComponent* Get_ComponentPtr(const _tchar* pComponentTag);
+	_float Get_CamDistance() const { return m_fCamDistance; }
+
 	_float Get_ColRad() { return m_fColRad; }
 	string Get_Tag() { return m_sTag; }
+
+	_bool Get_Dead() { return m_bDead; }
+	void Set_Dead() { m_bDead = true; }
+
 
 public:
 	virtual HRESULT Initialize_Prototype();
@@ -26,6 +32,8 @@ public:
 public:
 	virtual void Collision(CGameObject* pOther) {};
 
+	virtual void Damaged(CGameObject* pOther) {};
+
 protected:
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
 
@@ -33,11 +41,16 @@ protected: /* 객체에게 추가된 컴포넌트들을 키로 분류하여 보관한다. */
 	map<const _tchar*, class CComponent*>			m_Components;
 	typedef map<const _tchar*, class CComponent*>	COMPONENTS;
 
-	_float m_fColRad;
-	string m_sTag;
+protected:
+	_float				m_fColRad;
+	string				m_sTag;
+	_float				m_fCamDistance = 0.f;
+	_bool				m_bDead;
+
 
 protected:
 	HRESULT Add_Component(_uint iLevelIndex, const _tchar* pPrototypeTag, const _tchar* pComponentTag, class CComponent** ppOut, void* pArg = nullptr);
+	HRESULT Compute_CamDistance(_float3 vWorldPos);
 
 private:
 	class CComponent* Find_Component(const _tchar* pComponentTag);

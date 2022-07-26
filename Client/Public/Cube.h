@@ -2,6 +2,7 @@
 
 #include "Client_Defines.h"
 #include "GameObject.h"
+#include "Map_Manager.h"
 
 BEGIN(Engine)
 class CTexture;
@@ -41,6 +42,7 @@ private:
 
 private:
 	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);
+	CMap_Manager::CUBEDATA* m_pData;
 
 private:
 	HRESULT Set_RenderState();

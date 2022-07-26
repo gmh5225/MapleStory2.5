@@ -40,6 +40,8 @@ public:
 public:
 	virtual void SetAni();
 	void Set_Billboard();
+
+	virtual void Damaged(CGameObject* pOther) override {};
 	
 protected:
 	CTexture*				m_pTextureCom = nullptr;

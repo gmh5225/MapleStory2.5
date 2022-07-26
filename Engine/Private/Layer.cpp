@@ -43,11 +43,25 @@ HRESULT CLayer::Initialize()
 
 void CLayer::Tick(_float fTimeDelta)
 {
-	for (auto& pGameObject : m_GameObjects)
+
+	for (list<class CGameObject*>::iterator iter = m_GameObjects.begin(); iter != m_GameObjects.end();)
 	{
-		if (nullptr != pGameObject)
-			pGameObject->Tick(fTimeDelta);
+		if (nullptr != *iter)
+			(*iter)->Tick(fTimeDelta);
+
+		if ((*iter)->Get_Dead())
+		{
+			Safe_Release(*iter);
+			iter = m_GameObjects.erase(iter);
+			
+		}
+		else
+		{
+			++iter;
+		}
 	}
+
+
 }
 
 void CLayer::LateTick(_float fTimeDelta)

@@ -30,9 +30,9 @@ HRESULT CSlime::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 
-	m_fColRad = 0.1f;
+	m_fColRad = 0.3f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(3.f, 0.5f, 0.f));
-	m_pTransformCom->Set_Scaled(1.1f);
+	m_pTransformCom->Set_Scaled(1.3f);
 
 	SetState(STATE_IDLE, DIR_END);
 
@@ -180,6 +180,13 @@ void CSlime::SetAni()
 	}
 }
 
+void CSlime::Damaged(CGameObject * pOther)
+{
+	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
+
+	SetState(STATE_HIT, DIR_END);
+}
+
 
 
 
@@ -215,9 +222,6 @@ CGameObject * CSlime::Clone(void* pArg)
 
 void CSlime::Collision(CGameObject * pOther)
 {
-	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
-
-	SetState(STATE_HIT, DIR_END);
 
 }
 
