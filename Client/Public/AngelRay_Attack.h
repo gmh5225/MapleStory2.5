@@ -37,6 +37,7 @@ private:
 public:
 	void SetState(STATE eState, DIR eDir);
 	void SetDirection();
+	void SetPosition(DIR eDir);
 	void MoveAttack(_float fTimeDelta);
 
 public:
