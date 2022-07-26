@@ -67,6 +67,12 @@
     <Filter Include="02.GameObject\Skill\AngelRay\Hit">
       <UniqueIdentifier>{0667ff32-e47e-4583-b832-2e3805d863c0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\RedSnail">
+      <UniqueIdentifier>{4039bbfd-f0e3-402f-9c78-d3391d1eb30e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\Sllime">
+      <UniqueIdentifier>{062b7ebc-7395-4881-8756-36ce36cf9645}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -129,6 +135,12 @@
     <ClInclude Include="..\Public\AngelRay_Hit.h">
       <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\RedSnail.h">
+      <Filter>02.GameObject\Creature\Monster\RedSnail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Slime.h">
+      <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -181,6 +193,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\AngelRay_Hit.cpp">
       <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RedSnail.cpp">
+      <Filter>02.GameObject\Creature\Monster\RedSnail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Slime.cpp">
+      <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

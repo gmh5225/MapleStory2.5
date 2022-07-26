@@ -4,12 +4,12 @@
 
 BEGIN(Client)
 
-class COrangeMushroom final : public CCreature
+class CRedSnail final : public CCreature
 {
 private:
-	COrangeMushroom(LPDIRECT3DDEVICE9 pGraphic_Device);
-	COrangeMushroom(const COrangeMushroom& rhs);
-	virtual ~COrangeMushroom() = default;
+	CRedSnail(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CRedSnail(const CRedSnail& rhs);
+	virtual ~CRedSnail() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -34,16 +34,17 @@ public:
 
 
 private:
+	HRESULT SetUp_Components();
+
+private:
 	STATE m_eCurState;
 	DIR m_eDir;
 
 	CGameObject* m_pTarget;
 
-private:
-	HRESULT SetUp_Components();
 
 public:
-	static COrangeMushroom* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CRedSnail* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

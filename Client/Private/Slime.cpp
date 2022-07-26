@@ -1,13 +1,13 @@
 #include "stdafx.h"
-#include "..\Public\OrangeMushroom.h"
+#include "..\Public\Slime.h"
 
 #include "GameInstance.h"
 
-COrangeMushroom::COrangeMushroom(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSlime::CSlime(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-COrangeMushroom::COrangeMushroom(const COrangeMushroom & rhs)
+CSlime::CSlime(const CSlime & rhs)
 	: CCreature(rhs)
 {
 }
@@ -15,13 +15,13 @@ COrangeMushroom::COrangeMushroom(const COrangeMushroom & rhs)
 
 
 
-HRESULT COrangeMushroom::Initialize_Prototype()
+HRESULT CSlime::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT COrangeMushroom::Initialize(void * pArg)
+HRESULT CSlime::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
@@ -30,8 +30,8 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 
-	m_fColRad = 0.9f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(2.f, 0.4f, -2.f));
+	m_fColRad = 0.1f;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(3.f, 0.5f, 0.f));
 	m_pTransformCom->Set_Scaled(1.1f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -44,12 +44,12 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 
 
 
-HRESULT COrangeMushroom::SetUp_Components()
+HRESULT CSlime::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Move"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_Idle"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_Move"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_Hit"), nullptr);
 	}
 
 
@@ -57,7 +57,7 @@ HRESULT COrangeMushroom::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 1.f;
+	TransformDesc.fSpeedPerSec = 1.2f;
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
@@ -69,27 +69,27 @@ HRESULT COrangeMushroom::SetUp_Components()
 
 
 
-void COrangeMushroom::Tick(_float fTimeDelta)
+void CSlime::Tick(_float fTimeDelta)
 {
 
 	switch (m_eCurState)
 	{
-	case Client::COrangeMushroom::STATE_IDLE:
+	case Client::CSlime::STATE_IDLE:
 		Tick_Idle(fTimeDelta);
 		break;
-	case Client::COrangeMushroom::STATE_MOVE:
+	case Client::CSlime::STATE_MOVE:
 		Tick_Move(fTimeDelta);
 		break;
-	case Client::COrangeMushroom::STATE_HIT:
+	case Client::CSlime::STATE_HIT:
 		Tick_Hit(fTimeDelta);
 		break;
-	case Client::COrangeMushroom::STATE_CHASE:
+	case Client::CSlime::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
 	}
 
 }
-void COrangeMushroom::LateTick(_float fTimeDelta)
+void CSlime::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
@@ -99,9 +99,8 @@ void COrangeMushroom::LateTick(_float fTimeDelta)
 
 	Set_Billboard();
 }
-HRESULT COrangeMushroom::Render()
+HRESULT CSlime::Render()
 {
-
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
@@ -117,8 +116,6 @@ HRESULT COrangeMushroom::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
-	
-
 	return S_OK;
 }
 
@@ -126,18 +123,17 @@ HRESULT COrangeMushroom::Render()
 
 
 
-void COrangeMushroom::Tick_Idle(_float fTimeDelta)
+void CSlime::Tick_Idle(_float fTimeDelta)
 {
+}
+void CSlime::Tick_Move(_float fTimeDelta)
+{
+}
+void CSlime::Tick_Hit(_float fTimeDelta)
+{
+}
 
-}
-void COrangeMushroom::Tick_Move(_float fTimeDelta)
-{
-}
-void COrangeMushroom::Tick_Hit(_float fTimeDelta)
-{
-}
-
-void COrangeMushroom::Tick_Chase(_float fTimeDelta)
+void CSlime::Tick_Chase(_float fTimeDelta)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -154,8 +150,7 @@ void COrangeMushroom::Tick_Chase(_float fTimeDelta)
 
 
 
-
-void COrangeMushroom::SetState(STATE eState, DIR eDir)
+void CSlime::SetState(STATE eState, DIR eDir)
 {
 	if (m_eCurState == eState && m_eDir == eDir)
 		return;
@@ -164,23 +159,23 @@ void COrangeMushroom::SetState(STATE eState, DIR eDir)
 	m_eDir = eDir;
 	SetAni();
 }
-void COrangeMushroom::SetAni()
+void CSlime::SetAni()
 {
 	switch (m_eCurState)
 	{
-	case COrangeMushroom::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), 1.f, CAnimator::STATE_LOOF);
+	case CSlime::STATE_IDLE:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_Idle"), 0.3f, CAnimator::STATE_LOOF);
 	break;
-	case COrangeMushroom::STATE_MOVE:
+	case CSlime::STATE_MOVE:
 	{
 
 	}
 	break;
-	case COrangeMushroom::STATE_HIT:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Hit"), 0.5f, CAnimator::STATE_ONCE);
+	case CSlime::STATE_HIT:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_Hit"), 0.5f, CAnimator::STATE_ONCE);
 	break;
-	case COrangeMushroom::STATE_CHASE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Move"), 0.3f, CAnimator::STATE_LOOF);
+	case CSlime::STATE_CHASE:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_Move"), 0.2f, CAnimator::STATE_LOOF);
 		break;
 	}
 }
@@ -190,25 +185,25 @@ void COrangeMushroom::SetAni()
 
 
 
-COrangeMushroom * COrangeMushroom::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSlime * CSlime::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	COrangeMushroom*		pInstance = new COrangeMushroom(pGraphic_Device);
+	CSlime*		pInstance = new CSlime(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : COrangeMushroom"));
+		MSG_BOX(TEXT("Failed To Created : CSlime"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * COrangeMushroom::Clone(void* pArg)
+CGameObject * CSlime::Clone(void* pArg)
 {
-	COrangeMushroom*		pInstance = new COrangeMushroom(*this);
+	CSlime*		pInstance = new CSlime(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : COrangeMushroom"));
+		MSG_BOX(TEXT("Failed To Cloned : CSlime"));
 		Safe_Release(pInstance);
 	}
 
@@ -218,17 +213,18 @@ CGameObject * COrangeMushroom::Clone(void* pArg)
 
 
 
-void COrangeMushroom::Collision(CGameObject * pOther)
+void CSlime::Collision(CGameObject * pOther)
 {
 	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
 
 	SetState(STATE_HIT, DIR_END);
+
 }
 
 
 
 
-void COrangeMushroom::Free()
+void CSlime::Free()
 {
 	__super::Free();
 
