@@ -50,7 +50,7 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInst, cons
 		return E_FAIL;
 
 	//맵데이터로드
-	if (FAILED(m_pMap_Manager->LoadMapData()))
+	if (FAILED(m_pMap_Manager->LoadMapData(GraphicDesc.hWnd)))
 		return E_FAIL;
 
 	return S_OK;

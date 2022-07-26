@@ -104,7 +104,7 @@ void CAngelRay_Effect::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AnimCount() == 12)
 	{
 		m_bRender = false;
-		Free();
+		// Free();
 	}
 		
 	

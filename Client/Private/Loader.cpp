@@ -162,6 +162,10 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	/* For.Prototype_Component_Texture_Monster */
 	Load_Monster_Texture();
 
+	/* For.Prototype_Component_Texture_Cube */
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/Cube/Tile%d.dds"), 29))))
+		return E_FAIL;
 
 
 
@@ -203,6 +207,13 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, -1.f }, D3DCOLOR_XRGB(0, 255, 0) });
 	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, 1.f }, D3DCOLOR_XRGB(0, 255, 0) });
 	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 4.f, 0.f }, D3DCOLOR_XRGB(0, 255, 0) });
+	//for (_int i = 0; i < 400; i++)
+	//{
+	//	for (_int j = 0; j < 400; j++)
+	//	{
+	//		tempTest.push_back(tagVertexColor{ _float3{ (_float)j, 0.f, (_float)i }, D3DCOLOR_XRGB(111, 79, 40) });
+	//	}
+	//}
 
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Tree"),
