@@ -31,12 +31,8 @@ HRESULT CAngelRay_Hit::Initialize(void * pArg)
 	m_fColRad = 0.1f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.f, 0.4f, -1.f));
 	m_pTransformCom->Set_Scaled(3.f);
-	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(1.f, 0.f, 0.f));
-	//m_pTransformCom->Rotation(_float3{ 0.f,1.f,0.f }, 70.f);
-	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Hit"), 0.08f, CAnimator::STATE_LOOF);
-	//SetState(STATE_IDLE, DIR_END);
-
+	
 	return S_OK;
 }
 
@@ -68,25 +64,10 @@ HRESULT CAngelRay_Hit::SetUp_Components()
 
 void CAngelRay_Hit::Tick(_float fTimeDelta)
 {
-	//m_pTransformCom->Go_L(fTimeDelta);
-	/*switch (m_eCurState)
-	{
-	case Client::CAngelRay_Hit::STATE_IDLE:
-		Tick_Idle(fTimeDelta);
-		break;
-	case Client::CAngelRay_Hit::STATE_MOVE:
-		Tick_Move(fTimeDelta);
-		break;
-	case Client::CAngelRay_Hit::STATE_HIT:
-		Tick_Hit(fTimeDelta);
-		break;
-	}*/
 
 }
 void CAngelRay_Hit::LateTick(_float fTimeDelta)
 {
-	/*if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_IDLE, m_eDir);*/
 
 	if(m_bRender)
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
@@ -139,31 +120,11 @@ void CAngelRay_Hit::Tick_Hit(_float fTimeDelta)
 
 void CAngelRay_Hit::SetState(STATE eState, DIR eDir)
 {
-	/*if (m_eCurState == eState && m_eDir == eDir)
-		return;
 
-	m_eCurState = eState;
-	m_eDir = eDir;
-	SetAni();*/
 }
 void CAngelRay_Hit::SetAni()
 {
-	/*switch (m_eCurState)
-	{
-	case CAngelRay_Hit::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
-		break;
-	case CAngelRay_Hit::STATE_MOVE:
-	{
-
-	}
-	break;
-	case CAngelRay_Hit::STATE_HIT:
-	{
-
-	}
-	break;
-	}*/
+	
 }
 
 

@@ -37,11 +37,10 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 	
 	m_pTransformCom->Set_Scaled(1.1f);
 	m_pTransformCom->Set_ScaledX(3.f);
-	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(1.f, 0.f, 0.f));
-	//m_pTransformCom->Rotation(_float3{ 0.f,1.f,0.f }, 70.f);
+
 	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
-	//SetState(STATE_IDLE, DIR_END);
+	
 	memcpy(&m_eDir, pArg, sizeof(DIR));
 	SetDirection();
 
@@ -81,8 +80,6 @@ void CAngelRay_Attack::Tick(_float fTimeDelta)
 }
 void CAngelRay_Attack::LateTick(_float fTimeDelta)
 {
-	/*if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_IDLE, m_eDir);*/
 
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
@@ -129,12 +126,7 @@ void CAngelRay_Attack::Tick_Hit(_float fTimeDelta)
 
 void CAngelRay_Attack::SetState(STATE eState, DIR eDir)
 {
-	/*if (m_eCurState == eState && m_eDir == eDir)
-		return;
-
-	m_eCurState = eState;
-	m_eDir = eDir;
-	SetAni();*/
+	
 }
 void CAngelRay_Attack::SetDirection()
 {
@@ -206,22 +198,7 @@ void CAngelRay_Attack::MoveAttack(_float fTimeDelta)
 }
 void CAngelRay_Attack::SetAni()
 {
-	/*switch (m_eCurState)
-	{
-	case CAngelRay_Attack::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
-		break;
-	case CAngelRay_Attack::STATE_MOVE:
-	{
-
-	}
-	break;
-	case CAngelRay_Attack::STATE_HIT:
-	{
-
-	}
-	break;
-	}*/
+	
 }
 
 

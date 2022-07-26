@@ -41,40 +41,6 @@ HRESULT CAngelRay_Effect::Initialize(void * pArg)
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Effect"), 0.08f, CAnimator::STATE_LOOF);
 	memcpy(&m_eDir, pArg, sizeof(DIR));
 	SetDirection();
-	//SetState(STATE_IDLE, DIR_END);
-	//m_pTransformCom->Rotation(_float3(0.f, 1.f, 0.f), 45.f);
-	/*m_pTransformCom->Rotation(_float3(0.f, 1.f, 0.f), 45.f);
-	*/
-	/*m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(0.f,0.f,1.f)*5.f);
-	m_pTransformCom->Set_State(CTransform::STATE_UP, _float3(0.f, 1.f, 0.f)*5.f);
-	m_pTransformCom->Set_State(CTransform::STATE_RIGHT, _float3(1.f, 0.f, 0.f)*5.f);*/
-	//m_pTransformCom->Rotation(_float3(0.f, 1.f, 0.f), 180.f);
-
-	
-
-
-
-
-
-
-
-	/*_float3		vScale = m_pTransformCom->Get_Scaled();
-
-	_float3		vRight = _float3(1.f, 0.f, 0.f) * 5.f;
-	_float3		vUp = _float3(0.f, 1.f, 0.f) * 5.f;
-	_float3		vLook = _float3(0.f, 0.f, 1.f) * 5.f;
-
-	_float4x4	RotationMatrix;
-	_float test = D3DXToRadian(180.f);
-	D3DXMatrixRotationAxis(&RotationMatrix, &vUp, test);
-
-	D3DXVec3TransformNormal(&vRight, &vRight, &RotationMatrix);
-	D3DXVec3TransformNormal(&vUp, &vUp, &RotationMatrix);
-	D3DXVec3TransformNormal(&vLook, &vLook, &RotationMatrix);
-
-	m_pTransformCom->Set_State(CTransform::STATE_RIGHT, vRight);
-	m_pTransformCom->Set_State(CTransform::STATE_UP, vUp);
-	m_pTransformCom->Set_State(CTransform::STATE_LOOK, vLook);*/
 
 	return S_OK;
 }
@@ -108,28 +74,11 @@ HRESULT CAngelRay_Effect::SetUp_Components()
 void CAngelRay_Effect::Tick(_float fTimeDelta)
 {
 
-	
-
-	/*m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(-1.f,0.f,1.f)*5.f);
-	m_pTransformCom->Set_State(CTransform::STATE_UP, _float3(1.f, 1.f, 0.f)*5.f);
-	m_pTransformCom->Set_State(CTransform::STATE_RIGHT, _float3(-1.f, 0.f, 1.f)*5.f);*/
-
-	
-
-	/*m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_pTarget->Get_State(CTransform::STATE_LOOK)*10.f);
-	m_pTransformCom->Set_State(CTransform::STATE_UP, m_pTarget->Get_State(CTransform::STATE_UP)*10.f);
-	m_pTransformCom->Set_State(CTransform::STATE_RIGHT, m_pTarget->Get_State(CTransform::STATE_RIGHT)*10.f);*/
-	//m_pTransformCom->LookAt(m_pTarget->Get_State(CTransform::STATE_POSITION));
-	//m_pTransformCom->Rotation(_float3(0.f, 1.f, 0.f), 45.f);
-	//m_pTransformCom->Rotation(, 90.f);
-
 
 
 }
 void CAngelRay_Effect::LateTick(_float fTimeDelta)
 {
-	/*if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_IDLE, m_eDir);*/
 
 	if(m_bRender)
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
@@ -190,12 +139,7 @@ void CAngelRay_Effect::Tick_Hit(_float fTimeDelta)
 
 void CAngelRay_Effect::SetState(STATE eState, DIR eDir)
 {
-	/*if (m_eCurState == eState && m_eDir == eDir)
-		return;
 
-	m_eCurState = eState;
-	m_eDir = eDir;
-	SetAni();*/
 }
 void CAngelRay_Effect::SetDirection()
 {
@@ -231,49 +175,12 @@ void CAngelRay_Effect::SetDirection()
 	default:
 		break;
 	}
-	//U
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 90.f, _float3(0.f, 0.f, 1.f), 90.f);
-
-	//D
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 270.f, _float3(0.f, 0.f, 1.f), 90.f);
-
-	//L
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 0.f, _float3(1.f, 0.f, 0.f), 90.f);
-
-	//R
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 180.f, _float3(1.f, 0.f, 0.f), 90.f);
-
-	//RU
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 135.f, _float3(1.f, 0.f, 1.f), 90.f);
-
-	//RD
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 225.f, _float3(1.f, 0.f, -1.f), 90.f);
-
-	//LU
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 45.f, _float3(-1.f, 0.f, 1.f), 90.f);
-
-	//LD
-	//m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), -45.f, _float3(-1.f, 0.f, -1.f), 90.f);
+	
 
 }
 void CAngelRay_Effect::SetAni()
 {
-	/*switch (m_eCurState)
-	{
-	case CAngelRay_Effect::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
-		break;
-	case CAngelRay_Effect::STATE_MOVE:
-	{
-
-	}
-	break;
-	case CAngelRay_Effect::STATE_HIT:
-	{
-
-	}
-	break;
-	}*/
+	
 }
 
 
@@ -338,7 +245,6 @@ HRESULT CAngelRay_Effect::Reset_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_vLookTemp);
 	return S_OK;
 }
 
