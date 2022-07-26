@@ -6,6 +6,11 @@ BEGIN(Client)
 
 class CAngelRay_Attack final : public CCreature
 {
+public:
+	typedef struct tagAngleRay_AttackDESC
+	{
+		DIR eDir;
+	}ANGELATTACKDESC;
 private:
 	CAngelRay_Attack(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CAngelRay_Attack(const CAngelRay_Attack& rhs);
@@ -41,6 +46,8 @@ public:
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
+	_bool m_bHit;
+	ANGELATTACKDESC m_Desc;
 
 private:
 	HRESULT SetUp_Components();

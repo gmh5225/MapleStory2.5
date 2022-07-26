@@ -146,7 +146,7 @@ HRESULT CPlayer::Render()
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
-
+	
 
 
 	return S_OK;
@@ -381,8 +381,10 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
+		CAngelRay_Effect::ANGELEFFECTDESC AngelDECS;
+		AngelDECS.eDir = m_eDir;
 		
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &m_eDir);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &AngelDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}

@@ -6,6 +6,12 @@ BEGIN(Client)
 
 class CAngelRay_Effect final : public CCreature
 {
+public:
+	typedef struct tagAngleRay_EffectDESC
+	{
+		DIR eDir;
+	}ANGELEFFECTDESC;
+	
 private:
 	CAngelRay_Effect(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CAngelRay_Effect(const CAngelRay_Effect& rhs);
@@ -42,7 +48,7 @@ private:
 	_bool m_bCreate;
 	_bool m_bRender;
 	CTransform* m_pTarget;
-
+	ANGELEFFECTDESC m_Desc;
 private:
 	HRESULT SetUp_Components();
 

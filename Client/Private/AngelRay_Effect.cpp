@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Public\AngelRay_Effect.h"
-
+#include "AngelRay_Attack.h"
 #include "GameInstance.h"
 
 CAngelRay_Effect::CAngelRay_Effect(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -39,7 +39,8 @@ HRESULT CAngelRay_Effect::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(5.f);
 	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Effect"), 0.08f, CAnimator::STATE_LOOF);
-	memcpy(&m_eDir, pArg, sizeof(DIR));
+	memcpy(&m_Desc, pArg, sizeof(ANGELEFFECTDESC));
+	m_eDir = m_Desc.eDir;
 	SetDirection();
 
 	return S_OK;
@@ -88,7 +89,10 @@ void CAngelRay_Effect::LateTick(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Attack"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"),&m_eDir);
+		CAngelRay_Attack::ANGELATTACKDESC AngelDesc;
+		AngelDesc.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Attack"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"),&AngelDesc);
 		m_bCreate = true;
 		Safe_Release(pGameInstance);
 	}

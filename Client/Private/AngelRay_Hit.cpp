@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Public\AngelRay_Hit.h"
-
+#include "AngelRay_Attack.h"
 #include "GameInstance.h"
 
 CAngelRay_Hit::CAngelRay_Hit(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -28,8 +28,10 @@ HRESULT CAngelRay_Hit::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+	memcpy(&m_Desc, pArg, sizeof(ANGELHITDESC));
+
 	m_fColRad = 0.1f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.f, 0.4f, -1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos);
 	m_pTransformCom->Set_Scaled(3.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Hit"), 0.08f, CAnimator::STATE_LOOF);
 	
@@ -194,5 +196,6 @@ HRESULT CAngelRay_Hit::Reset_RenderState()
 void CAngelRay_Hit::Free()
 {
 	__super::Free();
+	
 }
 

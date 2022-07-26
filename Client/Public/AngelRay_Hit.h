@@ -6,6 +6,12 @@ BEGIN(Client)
 
 class CAngelRay_Hit final : public CCreature
 {
+public:
+	typedef struct tagAngleRay_HitDESC
+	{
+		_float3 vPos;
+	}ANGELHITDESC;
+
 private:
 	CAngelRay_Hit(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CAngelRay_Hit(const CAngelRay_Hit& rhs);
@@ -41,6 +47,7 @@ private:
 	DIR m_eDir;
 	_bool m_bCreate;
 	_bool m_bRender;
+	ANGELHITDESC m_Desc;
 
 private:
 	HRESULT SetUp_Components();

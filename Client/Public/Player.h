@@ -2,6 +2,7 @@
 
 #include "Client_Defines.h"
 #include "Creature.h"
+#include "AngelRay_Effect.h"
 
 BEGIN(Client)
 

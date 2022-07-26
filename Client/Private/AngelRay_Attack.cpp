@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Public\AngelRay_Attack.h"
-
+#include "AngelRay_Hit.h"
 #include "GameInstance.h"
 
 CAngelRay_Attack::CAngelRay_Attack(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -34,14 +34,16 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 
 	Safe_Release(pInstance);
 	m_fColRad = 0.1f;
-	
+	m_bHit = false;
+
 	m_pTransformCom->Set_Scaled(1.1f);
 	m_pTransformCom->Set_ScaledX(3.f);
 
 	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
 	
-	memcpy(&m_eDir, pArg, sizeof(DIR));
+	memcpy(&m_Desc, pArg, sizeof(ANGELATTACKDESC));
+	m_eDir = m_Desc.eDir;
 	SetDirection();
 
 	return S_OK;
@@ -236,13 +238,20 @@ CGameObject * CAngelRay_Attack::Clone(void* pArg)
 
 void CAngelRay_Attack::Collision(CGameObject * pOther)
 {
+	if(!m_bHit)
 	if (pOther->Get_Tag() == "Tag_Monster")
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"));
+		CAngelRay_Hit::ANGELHITDESC AngelDesc;
+		CTransform* pTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
+		AngelDesc.vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"), &AngelDesc);
 		Safe_Release(pGameInstance);
+
+		m_bHit = true;
 		
 	}
 }
