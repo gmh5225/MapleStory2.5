@@ -74,6 +74,8 @@ public:
 	void LookAtForLandObject(_float3 vTargetPos);
 	void Chase(_float3 vTargetPos, _float fTimeDelta);
 
+	void Set_TransformDesc(TRANSFORMDESC Desc) { m_TransformDesc = Desc; }
+
 public:
 
 

@@ -2,7 +2,6 @@
 
 #include "Client_Defines.h"
 #include "Creature.h"
-#include "AngelRay_Effect.h"
 
 BEGIN(Client)
 
@@ -26,6 +25,8 @@ public:
 	void GetKeyInput(_float fTimeDelta);
 	virtual void SetAni() override;
 
+private:
+	void Dash(_float fTimeDelta);
 protected:
 	virtual HRESULT Set_RenderState() override;
 	virtual HRESULT Reset_RenderState() override;

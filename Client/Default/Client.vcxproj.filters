@@ -55,23 +55,38 @@
     <Filter Include="02.GameObject\Skill">
       <UniqueIdentifier>{151537b9-6f0f-4d0c-9bcb-eb3034f7018f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Skill\AngelRay">
-      <UniqueIdentifier>{bbde3b1b-fd6f-43bd-bd68-e1c24d11d510}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\AngelRay\Effect">
-      <UniqueIdentifier>{48779021-1b11-4fc2-bf31-cdf8e4bc7a0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\AngelRay\Attack">
-      <UniqueIdentifier>{ec04dc65-5da1-4319-9b7b-929e95132e9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\AngelRay\Hit">
-      <UniqueIdentifier>{0667ff32-e47e-4583-b832-2e3805d863c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\Creature\Monster\RedSnail">
       <UniqueIdentifier>{4039bbfd-f0e3-402f-9c78-d3391d1eb30e}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\Sllime">
       <UniqueIdentifier>{062b7ebc-7395-4881-8756-36ce36cf9645}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\RangeAttack">
+      <UniqueIdentifier>{90197637-a33b-45e3-83a7-c6a284b8b593}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\RangeAttack\AngelRay">
+      <UniqueIdentifier>{bbde3b1b-fd6f-43bd-bd68-e1c24d11d510}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\RangeAttack\AngelRay\Effect">
+      <UniqueIdentifier>{48779021-1b11-4fc2-bf31-cdf8e4bc7a0f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\RangeAttack\AngelRay\Attack">
+      <UniqueIdentifier>{ec04dc65-5da1-4319-9b7b-929e95132e9c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\RangeAttack\AngelRay\Hit">
+      <UniqueIdentifier>{0667ff32-e47e-4583-b832-2e3805d863c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Dash">
+      <UniqueIdentifier>{4ab2090d-8f1c-4f58-9b13-8fc8f5a21ae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Dash\SolunaSlash">
+      <UniqueIdentifier>{27d0394f-bd5a-41db-91a3-feacf968a66d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Dash\SolunaSlash\EffectA">
+      <UniqueIdentifier>{24a6cbf4-4631-4d16-ad48-88539c860231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Dash\SolunaSlash\EffectB">
+      <UniqueIdentifier>{796623a3-ad84-4945-b309-ad03f397c6be}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -127,19 +142,25 @@
       <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\AngelRay_Attack.h">
-      <Filter>02.GameObject\Skill\AngelRay\Attack</Filter>
+      <Filter>02.GameObject\Skill\RangeAttack\AngelRay\Attack</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\AngelRay_Effect.h">
-      <Filter>02.GameObject\Skill\AngelRay\Effect</Filter>
+      <Filter>02.GameObject\Skill\RangeAttack\AngelRay\Effect</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\AngelRay_Hit.h">
-      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
+      <Filter>02.GameObject\Skill\RangeAttack\AngelRay\Hit</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\RedSnail.h">
       <Filter>02.GameObject\Creature\Monster\RedSnail</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Slime.h">
       <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SolunaSlashEffectA.h">
+      <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SolunaSlashEffectB.h">
+      <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectB</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -186,19 +207,25 @@
       <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\AngelRay_Attack.cpp">
-      <Filter>02.GameObject\Skill\AngelRay\Attack</Filter>
+      <Filter>02.GameObject\Skill\RangeAttack\AngelRay\Attack</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\AngelRay_Effect.cpp">
-      <Filter>02.GameObject\Skill\AngelRay\Effect</Filter>
+      <Filter>02.GameObject\Skill\RangeAttack\AngelRay\Effect</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\AngelRay_Hit.cpp">
-      <Filter>02.GameObject\Skill\AngelRay\Hit</Filter>
+      <Filter>02.GameObject\Skill\RangeAttack\AngelRay\Hit</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\RedSnail.cpp">
       <Filter>02.GameObject\Creature\Monster\RedSnail</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Slime.cpp">
       <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SolunaSlashEffectA.cpp">
+      <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SolunaSlashEffectB.cpp">
+      <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectB</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

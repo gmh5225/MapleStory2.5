@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "..\Public\Player.h"
-
+#include "AngelRay_Effect.h"
+#include "SolunaSlashEffectA.h"
+#include "SolunaSlashEffectB.h"
 #include "GameInstance.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -104,18 +106,29 @@ HRESULT CPlayer::SetUp_Components()
 
 void CPlayer::Tick(_float fTimeDelta)
 {
-
+	
 	switch (m_eCurState)
 	{
 	case Client::CPlayer::STATE_IDLE:
 		GetKeyInput(fTimeDelta);
+		CTransform::TRANSFORMDESC IdleDesc;
+		IdleDesc.fSpeedPerSec = 4.f;
+		IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
+		m_pTransformCom->Set_TransformDesc(IdleDesc);
 		break;
 	case Client::CPlayer::STATE_MOVE:
 		GetKeyInput(fTimeDelta);
 		break;
 	case Client::CPlayer::STATE_JUMP:
 		break;
-	case Client::CPlayer::STATE_ATTACK:
+	case Client::CPlayer::STATE_ATTACK:		
+		break;
+	case Client::CPlayer::STATE_DASH:		
+		CTransform::TRANSFORMDESC DashDesc;
+		DashDesc.fSpeedPerSec = 30.f;
+		DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
+		m_pTransformCom->Set_TransformDesc(DashDesc);
+		Dash(fTimeDelta);
 		break;
 	}
 	
@@ -124,7 +137,6 @@ void CPlayer::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_IDLE, m_eDir);
-
 	
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER, this);
@@ -283,6 +295,37 @@ void CPlayer::SetAni()
 			break;
 		}
 	}
+
+	case CPlayer::STATE_DASH:
+	{
+		switch (m_eDir)
+		{
+		case Client::CPlayer::DIR_L:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_L"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		case Client::CPlayer::DIR_R:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_R"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		case Client::CPlayer::DIR_U:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_U"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		case Client::CPlayer::DIR_D:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_D"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		case Client::CPlayer::DIR_LU:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_LU"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		case Client::CPlayer::DIR_RU:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_RU"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		case Client::CPlayer::DIR_LD:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_LD"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		case Client::CPlayer::DIR_RD:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_RD"), 0.01f, CAnimator::STATE_ONCE);
+			break;
+		}
+	}
 		break;
 	}
 }
@@ -388,10 +431,56 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}
+
+	if (GetKeyState('C') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
+		SolunaDECS.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SolunaDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SolunaDECS);
+		SetState(STATE_DASH, m_eDir);
+		Safe_Release(pGameInstance);
+	}
 }
 
 
 
+
+
+void CPlayer::Dash(_float fTimeDelta)
+{
+	switch (m_eDir)
+		{
+		case Client::CPlayer::DIR_L:
+			m_pTransformCom->Go_L(fTimeDelta);
+			break;
+		case Client::CPlayer::DIR_R:
+			m_pTransformCom->Go_R(fTimeDelta);
+			break;
+		case Client::CPlayer::DIR_U:
+			m_pTransformCom->Go_U(fTimeDelta);
+			break;
+		case Client::CPlayer::DIR_D:
+			m_pTransformCom->Go_D(fTimeDelta);
+			break;
+		case Client::CPlayer::DIR_LU:
+			m_pTransformCom->Go_LU(fTimeDelta);
+			break;
+		case Client::CPlayer::DIR_RU:
+			m_pTransformCom->Go_RU(fTimeDelta);
+			break;
+		case Client::CPlayer::DIR_LD:
+			m_pTransformCom->Go_LD(fTimeDelta);
+			break;
+		case Client::CPlayer::DIR_RD:
+			m_pTransformCom->Go_RD(fTimeDelta);
+			break;
+		}
+}
 
 HRESULT CPlayer::Set_RenderState()
 {
