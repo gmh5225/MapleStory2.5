@@ -27,12 +27,7 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
-	CGameInstance* pInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pInstance);
-	CTransform* pTransform = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pTransform->Get_State(CTransform::STATE_POSITION)+_float3(0.f,-0.1f,0.f));
 
-	Safe_Release(pInstance);
 	m_fColRad = 0.1f;
 	
 	m_pTransformCom->Set_Scaled(1.1f);
@@ -43,6 +38,7 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 	
 	memcpy(&m_eDir, pArg, sizeof(DIR));
 	SetDirection();
+	SetPosition(m_eDir);
 
 	return S_OK;
 }
@@ -157,6 +153,58 @@ void CAngelRay_Attack::SetDirection()
 		m_pTransformCom->RotationTwo(_float3(0.f, 1.f, 0.f), 225.f, _float3(-1.f, 0.f, 1.f), 90.f);
 		break;
 	case Client::CCreature::DIR_END:
+		break;
+	default:
+		break;
+	}
+}
+void CAngelRay_Attack::SetPosition(DIR eDir)
+{
+	CGameInstance* pInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pInstance);
+
+	CTransform* m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+	Safe_Release(pInstance);
+
+	Safe_Release(pInstance);
+	_float3 vPosFix;
+	switch (eDir)
+	{
+	case Client::CCreature::DIR_L:
+		vPosFix = { -1.f,-0.01f,0.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_R:
+		vPosFix = { 1.f,-0.01f,0.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_U:
+		vPosFix = { 0.f,-0.01f,1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_D:
+		vPosFix = { 0.f,-0.01f,-0.5f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_LU:
+		vPosFix = { -1.f,-0.01f,1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_RU:
+		vPosFix = { 1.f,-0.01f,1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_LD:
+		vPosFix = { -1.f,-0.3f,-0.5f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_RD:
+		vPosFix = { 1.f,-0.01f,-1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_END:
+
 		break;
 	default:
 		break;

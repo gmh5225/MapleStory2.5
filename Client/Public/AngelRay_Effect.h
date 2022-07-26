@@ -32,6 +32,7 @@ private:
 public:
 	void SetState(STATE eState, DIR eDir);
 	void SetDirection();
+	void SetPosition(DIR eDir);
 public:
 	virtual void SetAni() override;
 

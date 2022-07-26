@@ -35,12 +35,14 @@ HRESULT CAngelRay_Effect::Initialize(void * pArg)
 	Safe_Release(pInstance);
 
 	m_fColRad = 0.1f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION));
+	
 	m_pTransformCom->Set_Scaled(5.f);
 	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Effect"), 0.08f, CAnimator::STATE_LOOF);
 	memcpy(&m_eDir, pArg, sizeof(DIR));
 	SetDirection();
+	SetPosition(m_eDir);
+	
 
 	return S_OK;
 }
@@ -83,6 +85,7 @@ void CAngelRay_Effect::LateTick(_float fTimeDelta)
 	if(m_bRender)
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	
+
 	if (m_pAnimatorCom->Get_AnimCount() == 6 && m_bCreate == false)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -97,6 +100,7 @@ void CAngelRay_Effect::LateTick(_float fTimeDelta)
 	{
 		m_bRender = false;
 	}
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	
 }
 HRESULT CAngelRay_Effect::Render()
@@ -178,6 +182,50 @@ void CAngelRay_Effect::SetDirection()
 	
 
 }
+void CAngelRay_Effect::SetPosition(DIR eDir)
+{
+	_float3 vPosFix;
+	switch (eDir)
+	{
+	case Client::CCreature::DIR_L:
+		vPosFix = { -1.f,0.f,0.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION)+vPosFix);
+		break;
+	case Client::CCreature::DIR_R:
+		vPosFix = { 1.f,0.f,0.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_U:
+		vPosFix = { 0.f,0.f,1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_D:
+		vPosFix = { 0.f,0.f,-1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_LU:
+		vPosFix = { -1.f,0.f,1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_RU:
+		vPosFix = { 1.f,0.f,1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_LD:
+		vPosFix = { -1.f,0.f,-1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_RD:
+		vPosFix = { 1.f,0.f,-1.f };
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
+		break;
+	case Client::CCreature::DIR_END:
+		
+		break;
+	default:
+		break;
+	}
+}
 void CAngelRay_Effect::SetAni()
 {
 	
@@ -226,12 +274,12 @@ HRESULT CAngelRay_Effect::Set_RenderState()
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 1);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
+
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	
 
@@ -242,9 +290,9 @@ HRESULT CAngelRay_Effect::Set_RenderState()
 HRESULT CAngelRay_Effect::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
 	return S_OK;
 }
 
