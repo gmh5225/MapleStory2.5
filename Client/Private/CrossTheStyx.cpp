@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "..\Public\CrossTheStyx.h"
-#include "AngelRay_Attack.h"
 #include "GameInstance.h"
 
 CCrossTheStyx::CCrossTheStyx(LPDIRECT3DDEVICE9 pGraphic_Device)

@@ -177,6 +177,8 @@
     <ClInclude Include="..\Public\Slime.h" />
     <ClInclude Include="..\Public\SolunaSlashEffectA.h" />
     <ClInclude Include="..\Public\SolunaSlashEffectB.h" />
+    <ClInclude Include="..\Public\SunCross.h" />
+    <ClInclude Include="..\Public\SunCrossHit.h" />
     <ClInclude Include="..\Public\Wood.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Resource.h" />
@@ -203,6 +205,8 @@
     <ClCompile Include="..\Private\Slime.cpp" />
     <ClCompile Include="..\Private\SolunaSlashEffectA.cpp" />
     <ClCompile Include="..\Private\SolunaSlashEffectB.cpp" />
+    <ClCompile Include="..\Private\SunCross.cpp" />
+    <ClCompile Include="..\Private\SunCrossHit.cpp" />
     <ClCompile Include="..\Private\Wood.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">

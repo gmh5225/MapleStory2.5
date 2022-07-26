@@ -4,6 +4,7 @@
 #include "SolunaSlashEffectA.h"
 #include "SolunaSlashEffectB.h"
 #include "CrossTheStyx.h"
+#include "SunCross.h"
 #include "GameInstance.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -452,10 +453,23 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		CCrossTheStyx::CROSSTHESTYXDESC CrossDECS;
-		CrossDECS.eDir = m_eDir;
+		CCrossTheStyx::CROSSTHESTYXDESC CrossTheStyxDESC;
+		CrossTheStyxDESC.eDir = m_eDir;
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CrossTheStyx"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &CrossDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CrossTheStyx"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &CrossTheStyxDESC);
+		SetState(STATE_ATTACK, m_eDir);
+		Safe_Release(pGameInstance);
+	}
+
+	if (GetKeyState('D') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSunCross::SUNCROSSDESC SunCrossDECS;
+		SunCrossDECS.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SunCrossDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}

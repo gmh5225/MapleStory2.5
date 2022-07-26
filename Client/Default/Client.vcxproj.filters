@@ -94,6 +94,15 @@
     <Filter Include="02.GameObject\Skill\CloseAttack\CrossTheStyx">
       <UniqueIdentifier>{bf8a3285-e967-4d45-95f4-1775a8353f6c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill\CloseAttack\SunCross">
+      <UniqueIdentifier>{928452d5-7aef-4245-8d31-25a455a0b47d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\CloseAttack\SunCross\Attack">
+      <UniqueIdentifier>{52a9c8b2-3774-45ea-9a1f-1accfae3f78f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\CloseAttack\SunCross\Hit">
+      <UniqueIdentifier>{5b20f897-4c17-4ef0-ac2d-e934d5870be7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -171,6 +180,12 @@
     <ClInclude Include="..\Public\CrossTheStyx.h">
       <Filter>02.GameObject\Skill\CloseAttack\CrossTheStyx</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\SunCross.h">
+      <Filter>02.GameObject\Skill\CloseAttack\SunCross\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SunCrossHit.h">
+      <Filter>02.GameObject\Skill\CloseAttack\SunCross\Hit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -238,6 +253,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\CrossTheStyx.cpp">
       <Filter>02.GameObject\Skill\CloseAttack\CrossTheStyx</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SunCross.cpp">
+      <Filter>02.GameObject\Skill\CloseAttack\SunCross\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SunCrossHit.cpp">
+      <Filter>02.GameObject\Skill\CloseAttack\SunCross\Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
