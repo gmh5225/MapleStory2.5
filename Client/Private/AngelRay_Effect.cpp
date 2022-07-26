@@ -326,7 +326,7 @@ HRESULT CAngelRay_Effect::Set_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 1);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	//Set_Billboard();
+	
 
 	return S_OK;
 

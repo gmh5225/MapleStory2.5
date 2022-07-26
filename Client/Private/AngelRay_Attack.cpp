@@ -35,7 +35,7 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 	Safe_Release(pInstance);
 	m_fColRad = 0.1f;
 	
-	m_pTransformCom->Set_Scaled(1.5f);
+	m_pTransformCom->Set_Scaled(1.1f);
 	m_pTransformCom->Set_ScaledX(3.f);
 	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, _float3(1.f, 0.f, 0.f));
 	//m_pTransformCom->Rotation(_float3{ 0.f,1.f,0.f }, 70.f);
@@ -86,7 +86,7 @@ void CAngelRay_Attack::LateTick(_float fTimeDelta)
 
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
+	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 }
 HRESULT CAngelRay_Attack::Render()
 {
@@ -259,7 +259,7 @@ CGameObject * CAngelRay_Attack::Clone(void* pArg)
 
 void CAngelRay_Attack::Collision(CGameObject * pOther)
 {
-	if (pOther->Get_Tag() == "Tag_Monster" && pOther->Get_Tag() != "Tag_Player")
+	if (pOther->Get_Tag() == "Tag_Monster")
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
@@ -281,6 +281,7 @@ HRESULT CAngelRay_Attack::Set_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 1);
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
 	return S_OK;
 }
 
