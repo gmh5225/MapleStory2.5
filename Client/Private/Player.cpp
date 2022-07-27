@@ -5,6 +5,7 @@
 #include "SolunaSlashEffectB.h"
 #include "CrossTheStyx.h"
 #include "SunCross.h"
+#include "SunderBreakAttack.h"
 #include "GameInstance.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -473,6 +474,19 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		SunCrossDECS.eDir = m_eDir;
 
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SunCrossDECS);
+		SetState(STATE_ATTACK, m_eDir);
+		Safe_Release(pGameInstance);
+	}
+
+	if (GetKeyState('F') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSunderBreakAttack::SUNDERBREAKATTACKDESC SunderAttackDECS;
+		SunderAttackDECS.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunderBreak_Attack"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SunderAttackDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}

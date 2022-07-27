@@ -78,7 +78,7 @@
     </Filter>
     <Filter Include="04.UI">
       <UniqueIdentifier>{87528349-c508-46f1-8571-4886f9e24565}</UniqueIdentifier>
-         </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Skill\RangeAttack">
       <UniqueIdentifier>{90197637-a33b-45e3-83a7-c6a284b8b593}</UniqueIdentifier>
     </Filter>
@@ -120,12 +120,18 @@
     </Filter>
     <Filter Include="02.GameObject\Skill\CloseAttack\SunCross\Hit">
       <UniqueIdentifier>{5b20f897-4c17-4ef0-ac2d-e934d5870be7}</UniqueIdentifier>
-          </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Monster\RibbonPig">
       <UniqueIdentifier>{6267fe8c-6b8a-4eca-9af8-39040682607b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Creature\Npc">
       <UniqueIdentifier>{8f214ff5-1c18-4057-b474-2d32a59d3b86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\RangeAttack\SunderBreak">
+      <UniqueIdentifier>{d2fa19f8-bc65-441b-b605-d91a031dc115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\RangeAttack\SunderBreak\Attack">
+      <UniqueIdentifier>{33f88ffb-87c1-4919-a49d-98493400cd3b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -209,7 +215,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\UI.h">
       <Filter>04.UI</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\SolunaSlashEffectA.h">
       <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectA</Filter>
     </ClInclude>
@@ -224,12 +230,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\SunCrossHit.h">
       <Filter>02.GameObject\Skill\CloseAttack\SunCross\Hit</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\RibbonPig.h">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\ElderStan.h">
       <Filter>02.GameObject\Creature\Npc</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SunderBreakAttack.h">
+      <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -304,7 +313,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\UI.cpp">
       <Filter>04.UI</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\SolunaSlashEffectA.cpp">
       <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectA</Filter>
     </ClCompile>
@@ -319,12 +328,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\SunCrossHit.cpp">
       <Filter>02.GameObject\Skill\CloseAttack\SunCross\Hit</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\RibbonPig.cpp">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\ElderStan.cpp">
       <Filter>02.GameObject\Creature\Npc</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SunderBreakAttack.cpp">
+      <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
