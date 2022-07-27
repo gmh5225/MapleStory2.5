@@ -36,15 +36,14 @@ HRESULT CSolunaSlashEffectA::Initialize(void * pArg)
 
 	m_fColRad = 0.1f;
 
-	m_pTransformCom->Set_Scaled(4.f);
-	m_pTransformCom->Set_ScaledX(1.5f);
+	m_pTransformCom->Set_Scaled(_float3(6.f, 3.5f, 5.f));
 
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SolunaSlash_EffectA"), 0.08f, CAnimator::STATE_LOOF);
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SolunaSlash_EffectA"), 0.05f, CAnimator::STATE_LOOF);
 	memcpy(&m_Desc, pArg, sizeof(SOLUNAEFFECTADESC));
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
-
+	m_fYDistance = 0.01f;
 
 	return S_OK;
 }
@@ -84,13 +83,13 @@ void CSolunaSlashEffectA::Tick(_float fTimeDelta)
 void CSolunaSlashEffectA::LateTick(_float fTimeDelta)
 {
 
-	if (m_bRender)
-		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+
+		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 
 
 	if (m_pAnimatorCom->Get_AnimCount() == 7)
 	{
-		m_bRender = false;
+		Set_Dead();
 	}
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 

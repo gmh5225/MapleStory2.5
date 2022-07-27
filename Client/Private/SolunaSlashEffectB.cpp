@@ -44,6 +44,7 @@ HRESULT CSolunaSlashEffectB::Initialize(void * pArg)
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
+	m_fYDistance = -0.01f;
 
 
 	return S_OK;
@@ -84,13 +85,13 @@ void CSolunaSlashEffectB::Tick(_float fTimeDelta)
 void CSolunaSlashEffectB::LateTick(_float fTimeDelta)
 {
 
-	if (m_bRender)
-		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+
+		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 
 
 	if (m_pAnimatorCom->Get_AnimCount() == 7)
 	{
-		m_bRender = false;
+		Set_Dead();
 	}
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
