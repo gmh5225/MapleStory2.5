@@ -14,6 +14,7 @@
 #include "RedSnail.h"
 #include "Slime.h"
 #include "RibbonPig.h"
+#include "ElderStan.h"
 
 
 
@@ -140,6 +141,10 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CRibbonPig::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ElderStan"),
+		CElderStan::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Attack"),
 		CAngelRay_Attack::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -177,6 +182,10 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	/* For.Prototype_Component_Texture_Monster */
 
 	Load_Monster_Texture();
+
+	/* For.Prototype_Component_Texture_Npc */
+
+	Load_Npc_Texture();
 
 	/* For.Prototype_Component_Texture_Cube */
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"),
@@ -483,6 +492,21 @@ HRESULT CLoader::Load_Monster_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_MoveR"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_MoveR%d.png"), 3))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_Npc_Texture()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_ElderStan_Idle"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/ElderStan/ElderStan%d.png"), 3))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);

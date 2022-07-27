@@ -28,9 +28,9 @@ HRESULT CElderStan::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	m_sTag = "Tag_Monster";
+	m_sTag = "Tag_Npc";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(4.f, 0.2f, 0.f));
+	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(4.f, 0.3f, 0.f));
 	m_pTransformCom->Set_Scaled(1.1f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -46,11 +46,8 @@ HRESULT CElderStan::Initialize(void * pArg)
 HRESULT CElderStan::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Idle"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_ElderStan_Idle"), nullptr);
 
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_IdleR"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_HitR"), nullptr);
 	}
 
 
@@ -154,43 +151,21 @@ void CElderStan::SetAni()
 	switch (m_eCurState)
 	{
 	case CElderStan::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Idle"), 0.3f, CAnimator::STATE_LOOF);
-	break;
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ElderStan_Idle"), 0.3f, CAnimator::STATE_LOOF);
+		break;
 	case CElderStan::STATE_MOVE:
 	{
-
 	}
 	break;
 	case CElderStan::STATE_HIT:
-		if(m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_HitR"), 0.5f, CAnimator::STATE_ONCE);
-		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Hit"), 0.5f, CAnimator::STATE_ONCE);
 		break;
 	case CElderStan::STATE_CHASE:
-		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_IdleR"), 1.f, CAnimator::STATE_LOOF);
-		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Idle"), 1.f, CAnimator::STATE_LOOF);
 		break;
 	}
 }
 
 void CElderStan::Damaged(CGameObject * pOther)
 {
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-
-	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
-
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
-		SetState(STATE_HIT, DIR_R);
-	else
-		SetState(STATE_HIT, DIR_L);
-
-	Safe_Release(pGameInstance);
 }
 
 
@@ -204,7 +179,7 @@ CElderStan * CElderStan::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CRedSnail"));
+		MSG_BOX(TEXT("Failed To Created : CElderStan"));
 		Safe_Release(pInstance);
 	}
 
@@ -216,7 +191,7 @@ CGameObject * CElderStan::Clone(void* pArg)
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CRedSnail"));
+		MSG_BOX(TEXT("Failed To Cloned : CElderStan"));
 		Safe_Release(pInstance);
 	}
 
