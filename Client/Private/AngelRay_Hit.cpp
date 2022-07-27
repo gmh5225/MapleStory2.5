@@ -44,7 +44,7 @@ HRESULT CAngelRay_Hit::Initialize(void * pArg)
 	//m_pTransformCom->Get_State(CTransform::STATE_POSITION).y
 	Set_Billboard();
 	_float3 vCLook = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
-	_float3 vPo = m_Desc.vPos - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.15f;
+	_float3 vPo = m_Desc.vPos - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.25f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPo);
 	return S_OK;
 }
@@ -82,7 +82,7 @@ void CAngelRay_Hit::Tick(_float fTimeDelta)
 void CAngelRay_Hit::LateTick(_float fTimeDelta)
 {
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	
 	if (m_pAnimatorCom->Get_AnimCount() == 5)

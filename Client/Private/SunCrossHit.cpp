@@ -86,7 +86,7 @@ void CSunCrossHit::LateTick(_float fTimeDelta)
 {
 
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 	if (m_pAnimatorCom->Get_AnimCount() == 4)

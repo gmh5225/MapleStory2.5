@@ -176,7 +176,7 @@ void CCrossTheStyx::SetPosition(DIR eDir)
 	switch (eDir)
 	{
 	case Client::CCreature::DIR_L:
-		vPosFix = { -1.4f,0.f,1.3f };
+		vPosFix = { -1.4f,0.f,0.8f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_R:
