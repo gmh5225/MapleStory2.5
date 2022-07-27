@@ -4,18 +4,18 @@
 
 BEGIN(Client)
 
-class CAngelRay_Hit final : public CCreature
+class CCrossTheStyx final : public CCreature
 {
 public:
-	typedef struct tagAngleRay_HitDESC
+	typedef struct tagCrossTheStyxDESC
 	{
-		_float3 vPos;
-	}ANGELHITDESC;
+		DIR eDir;
+	}CROSSTHESTYXDESC;
 
 private:
-	CAngelRay_Hit(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CAngelRay_Hit(const CAngelRay_Hit& rhs);
-	virtual ~CAngelRay_Hit() = default;
+	CCrossTheStyx(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CCrossTheStyx(const CCrossTheStyx& rhs);
+	virtual ~CCrossTheStyx() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -37,7 +37,8 @@ private:
 
 public:
 	void SetState(STATE eState, DIR eDir);
-
+	void SetDirection();
+	void SetPosition(DIR eDir);
 public:
 	virtual void SetAni() override;
 
@@ -45,13 +46,14 @@ public:
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
-	ANGELHITDESC m_Desc;
-
+	_bool m_bCreate;
+	CTransform* m_pTarget;
+	CROSSTHESTYXDESC m_Desc;
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CAngelRay_Hit* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CCrossTheStyx* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

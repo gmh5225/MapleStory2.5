@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "..\Public\AngelRay_Hit.h"
+#include "..\Public\SunCrossHit.h"
 #include "GameInstance.h"
 
-CAngelRay_Hit::CAngelRay_Hit(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSunCrossHit::CSunCrossHit(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CAngelRay_Hit::CAngelRay_Hit(const CAngelRay_Hit & rhs)
+CSunCrossHit::CSunCrossHit(const CSunCrossHit & rhs)
 	: CCreature(rhs)
 {
 }
@@ -14,36 +14,36 @@ CAngelRay_Hit::CAngelRay_Hit(const CAngelRay_Hit & rhs)
 
 
 
-HRESULT CAngelRay_Hit::Initialize_Prototype()
+HRESULT CSunCrossHit::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CAngelRay_Hit::Initialize(void * pArg)
+HRESULT CSunCrossHit::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	memcpy(&m_Desc, pArg, sizeof(ANGELHITDESC));
+	memcpy(&m_Desc, pArg, sizeof(SUNCROSSHITDESC));
 
 	m_fColRad = 0.1f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos);
 	m_pTransformCom->Set_Scaled(3.f);
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Hit"), 0.08f, CAnimator::STATE_LOOF);
-	
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SunCross_Hit"), 0.08f, CAnimator::STATE_LOOF);
+
 	return S_OK;
 }
 
 
 
 
-HRESULT CAngelRay_Hit::SetUp_Components()
+HRESULT CSunCrossHit::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_AngelRay_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCross_Hit"), nullptr);
 	}
 
 
@@ -63,22 +63,22 @@ HRESULT CAngelRay_Hit::SetUp_Components()
 
 
 
-void CAngelRay_Hit::Tick(_float fTimeDelta)
+void CSunCrossHit::Tick(_float fTimeDelta)
 {
 
 }
-void CAngelRay_Hit::LateTick(_float fTimeDelta)
+void CSunCrossHit::LateTick(_float fTimeDelta)
 {
 
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
-	
-	if (m_pAnimatorCom->Get_AnimCount() == 5)
+
+	if (m_pAnimatorCom->Get_AnimCount() == 4)
 		Set_Dead();
-		
+
 }
-HRESULT CAngelRay_Hit::Render()
+HRESULT CSunCrossHit::Render()
 {
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
@@ -105,53 +105,53 @@ HRESULT CAngelRay_Hit::Render()
 
 
 
-void CAngelRay_Hit::Tick_Idle(_float fTimeDelta)
+void CSunCrossHit::Tick_Idle(_float fTimeDelta)
 {
 
 }
-void CAngelRay_Hit::Tick_Move(_float fTimeDelta)
+void CSunCrossHit::Tick_Move(_float fTimeDelta)
 {
 }
-void CAngelRay_Hit::Tick_Hit(_float fTimeDelta)
+void CSunCrossHit::Tick_Hit(_float fTimeDelta)
 {
-}
-
-
-
-
-void CAngelRay_Hit::SetState(STATE eState, DIR eDir)
-{
-
-}
-void CAngelRay_Hit::SetAni()
-{
-	
 }
 
 
 
 
-
-
-CAngelRay_Hit * CAngelRay_Hit::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+void CSunCrossHit::SetState(STATE eState, DIR eDir)
 {
-	CAngelRay_Hit*		pInstance = new CAngelRay_Hit(pGraphic_Device);
+
+}
+void CSunCrossHit::SetAni()
+{
+
+}
+
+
+
+
+
+
+CSunCrossHit * CSunCrossHit::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+{
+	CSunCrossHit*		pInstance = new CSunCrossHit(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CAngelRay_Hit"));
+		MSG_BOX(TEXT("Failed To Created : CSunCrossHit"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CAngelRay_Hit::Clone(void* pArg)
+CGameObject * CSunCrossHit::Clone(void* pArg)
 {
-	CAngelRay_Hit*		pInstance = new CAngelRay_Hit(*this);
+	CSunCrossHit*		pInstance = new CSunCrossHit(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CAngelRay_Hit"));
+		MSG_BOX(TEXT("Failed To Cloned : CSunCrossHit"));
 		Safe_Release(pInstance);
 	}
 
@@ -161,12 +161,12 @@ CGameObject * CAngelRay_Hit::Clone(void* pArg)
 
 
 
-void CAngelRay_Hit::Collision(CGameObject * pOther)
+void CSunCrossHit::Collision(CGameObject * pOther)
 {
-	
+
 }
 
-HRESULT CAngelRay_Hit::Set_RenderState()
+HRESULT CSunCrossHit::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -181,7 +181,7 @@ HRESULT CAngelRay_Hit::Set_RenderState()
 	return S_OK;
 }
 
-HRESULT CAngelRay_Hit::Reset_RenderState()
+HRESULT CSunCrossHit::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
@@ -193,9 +193,9 @@ HRESULT CAngelRay_Hit::Reset_RenderState()
 
 
 
-void CAngelRay_Hit::Free()
+void CSunCrossHit::Free()
 {
 	__super::Free();
-	
+
 }
 

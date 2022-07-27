@@ -1,27 +1,27 @@
 #include "stdafx.h"
-#include "..\Public\AngelRay_Effect.h"
-#include "AngelRay_Attack.h"
+#include "..\Public\SunCross.h"
+#include "SunCrossHit.h"
 #include "GameInstance.h"
 
-CAngelRay_Effect::CAngelRay_Effect(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSunCross::CSunCross(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CAngelRay_Effect::CAngelRay_Effect(const CAngelRay_Effect & rhs)
-	: CCreature(rhs),m_bCreate(false)
+CSunCross::CSunCross(const CSunCross & rhs)
+	: CCreature(rhs), m_bCreate(false)
 {
 }
 
 
 
 
-HRESULT CAngelRay_Effect::Initialize_Prototype()
+HRESULT CSunCross::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CAngelRay_Effect::Initialize(void * pArg)
+HRESULT CSunCross::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
@@ -34,16 +34,17 @@ HRESULT CAngelRay_Effect::Initialize(void * pArg)
 
 	Safe_Release(pInstance);
 
-	m_fColRad = 0.1f;
-	
-	m_pTransformCom->Set_Scaled(5.f);
-	
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Effect"), 0.08f, CAnimator::STATE_LOOF);
-	memcpy(&m_Desc, pArg, sizeof(ANGELEFFECTDESC));
+	m_fColRad = 0.5f;
+
+	m_pTransformCom->Set_Scaled(4.f);
+	m_pTransformCom->Set_ScaledX(1.5f);
+
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SunCross"), 0.08f, CAnimator::STATE_LOOF);
+	memcpy(&m_Desc, pArg, sizeof(SUNCROSSDESC));
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
-	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
+
 
 	return S_OK;
 }
@@ -51,10 +52,10 @@ HRESULT CAngelRay_Effect::Initialize(void * pArg)
 
 
 
-HRESULT CAngelRay_Effect::SetUp_Components()
+HRESULT CSunCross::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_AngelRay_Effect"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCross"), nullptr);
 	}
 
 
@@ -74,38 +75,25 @@ HRESULT CAngelRay_Effect::SetUp_Components()
 
 
 
-void CAngelRay_Effect::Tick(_float fTimeDelta)
+void CSunCross::Tick(_float fTimeDelta)
 {
 	SetPosition(m_eDir);
-	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 }
-void CAngelRay_Effect::LateTick(_float fTimeDelta)
+void CSunCross::LateTick(_float fTimeDelta)
 {
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
-	
-	if (m_pAnimatorCom->Get_AnimCount() == 6 && m_bCreate == false)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 
-		CAngelRay_Attack::ANGELATTACKDESC AngelDesc;
-		AngelDesc.eDir = m_eDir;
-
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Attack"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"),&AngelDesc);
-		m_bCreate = true;
-		Safe_Release(pGameInstance);
-	}
-
-	if (m_pAnimatorCom->Get_AnimCount() == 12)
+	if (m_pAnimatorCom->Get_AnimCount() == 4)
 	{
 		Set_Dead();
 	}
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 
-	
 }
-HRESULT CAngelRay_Effect::Render()
+HRESULT CSunCross::Render()
 {
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
@@ -129,27 +117,27 @@ HRESULT CAngelRay_Effect::Render()
 }
 
 
-void CAngelRay_Effect::Tick_Idle(_float fTimeDelta)
+void CSunCross::Tick_Idle(_float fTimeDelta)
 {
 
 }
-void CAngelRay_Effect::Tick_Move(_float fTimeDelta)
+void CSunCross::Tick_Move(_float fTimeDelta)
 {
 }
-void CAngelRay_Effect::Tick_Hit(_float fTimeDelta)
+void CSunCross::Tick_Hit(_float fTimeDelta)
 {
 }
 
 
 
 
-void CAngelRay_Effect::SetState(STATE eState, DIR eDir)
+void CSunCross::SetState(STATE eState, DIR eDir)
 {
 
 }
-void CAngelRay_Effect::SetDirection()
+void CSunCross::SetDirection()
 {
-	
+
 	switch (m_eDir)
 	{
 	case Client::CCreature::DIR_L:
@@ -181,17 +169,17 @@ void CAngelRay_Effect::SetDirection()
 	default:
 		break;
 	}
-	
+
 
 }
-void CAngelRay_Effect::SetPosition(DIR eDir)
+void CSunCross::SetPosition(DIR eDir)
 {
 	_float3 vPosFix;
 	switch (eDir)
 	{
 	case Client::CCreature::DIR_L:
 		vPosFix = { -1.f,0.f,0.f };
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION)+vPosFix);
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_R:
 		vPosFix = { 1.f,0.f,0.f };
@@ -222,15 +210,15 @@ void CAngelRay_Effect::SetPosition(DIR eDir)
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_END:
-		
+
 		break;
 	default:
 		break;
 	}
 }
-void CAngelRay_Effect::SetAni()
+void CSunCross::SetAni()
 {
-	
+
 }
 
 
@@ -238,25 +226,25 @@ void CAngelRay_Effect::SetAni()
 
 
 
-CAngelRay_Effect * CAngelRay_Effect::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSunCross * CSunCross::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CAngelRay_Effect*		pInstance = new CAngelRay_Effect(pGraphic_Device);
+	CSunCross*		pInstance = new CSunCross(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CAngelRay_Effect"));
+		MSG_BOX(TEXT("Failed To Created : CSunCross"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CAngelRay_Effect::Clone(void* pArg)
+CGameObject * CSunCross::Clone(void* pArg)
 {
-	CAngelRay_Effect*		pInstance = new CAngelRay_Effect(*this);
+	CSunCross*		pInstance = new CSunCross(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CAngelRay_Effect"));
+		MSG_BOX(TEXT("Failed To Cloned : CSunCross"));
 		Safe_Release(pInstance);
 	}
 
@@ -266,12 +254,39 @@ CGameObject * CAngelRay_Effect::Clone(void* pArg)
 
 
 
-void CAngelRay_Effect::Collision(CGameObject * pOther)
+void CSunCross::Collision(CGameObject * pOther)
 {
+	if (pOther->Get_Tag() == "Tag_Monster")
+	{
 
+		if (5 < m_pOther.size())
+			return;
+
+		for (auto& TempOther : m_pOther)
+		{
+			if (TempOther == pOther)
+				return;
+		}
+
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSunCrossHit::SUNCROSSHITDESC SunCrossHitDesc;
+		CTransform* pTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
+		SunCrossHitDesc.vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"), &SunCrossHitDesc);
+		Safe_Release(pGameInstance);
+
+		m_pOther.push_back(pOther);
+
+		pOther->Damaged(this);
+
+		//Set_Dead();
+	}
 }
 
-HRESULT CAngelRay_Effect::Set_RenderState()
+HRESULT CSunCross::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -283,13 +298,13 @@ HRESULT CAngelRay_Effect::Set_RenderState()
 
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-	
+
 
 	return S_OK;
 
 }
 
-HRESULT CAngelRay_Effect::Reset_RenderState()
+HRESULT CSunCross::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
@@ -301,7 +316,7 @@ HRESULT CAngelRay_Effect::Reset_RenderState()
 
 
 
-void CAngelRay_Effect::Free()
+void CSunCross::Free()
 {
 	__super::Free();
 }

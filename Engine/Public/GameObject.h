@@ -14,6 +14,7 @@ protected:
 public:
 	class CComponent* Get_ComponentPtr(const _tchar* pComponentTag);
 	_float Get_CamDistance() const { return m_fCamDistance; }
+	_float Get_YDistance() const { return m_fYDistance; }
 
 	_float Get_ColRad() { return m_fColRad; }
 	string Get_Tag() { return m_sTag; }
@@ -45,6 +46,7 @@ protected:
 	_float				m_fColRad;
 	string				m_sTag;
 	_float				m_fCamDistance = 0.f;
+	_float				m_fYDistance;
 	_bool				m_bDead;
 
 

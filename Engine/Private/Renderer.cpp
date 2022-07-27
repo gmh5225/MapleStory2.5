@@ -41,6 +41,14 @@ HRESULT CRenderer::Draw()
 			});
 		}
 
+		if (i == RENDER_MOVEALPHABLEND)
+		{
+			m_RenderObjects[i].sort([](CGameObject* pSour, CGameObject* pDest)
+			{
+				return pSour->Get_YDistance() < pDest->Get_YDistance();
+			});
+		}
+
 		for (auto& pRenderObject : m_RenderObjects[i])
 		{
 			if (nullptr != pRenderObject)

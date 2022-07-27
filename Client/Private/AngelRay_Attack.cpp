@@ -34,13 +34,14 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 	m_pTransformCom->Set_ScaledX(3.f);
 
 	
+
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
 	
 	memcpy(&m_Desc, pArg, sizeof(ANGELATTACKDESC));
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
-
+	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 	return S_OK;
 }
 
@@ -72,15 +73,15 @@ HRESULT CAngelRay_Attack::SetUp_Components()
 
 void CAngelRay_Attack::Tick(_float fTimeDelta)
 {
+	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 	MoveAttack(fTimeDelta);
 
 }
 void CAngelRay_Attack::LateTick(_float fTimeDelta)
 {
 
-	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 }
 HRESULT CAngelRay_Attack::Render()
@@ -297,8 +298,6 @@ void CAngelRay_Attack::Collision(CGameObject * pOther)
 			if (TempOther == pOther)
 				return;
 		}
-
-
 
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);

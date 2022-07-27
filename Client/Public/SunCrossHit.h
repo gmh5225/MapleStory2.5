@@ -4,18 +4,18 @@
 
 BEGIN(Client)
 
-class CAngelRay_Hit final : public CCreature
+class CSunCrossHit final : public CCreature
 {
 public:
-	typedef struct tagAngleRay_HitDESC
+	typedef struct tagSunCross_HitDESC
 	{
 		_float3 vPos;
-	}ANGELHITDESC;
+	}SUNCROSSHITDESC;
 
 private:
-	CAngelRay_Hit(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CAngelRay_Hit(const CAngelRay_Hit& rhs);
-	virtual ~CAngelRay_Hit() = default;
+	CSunCrossHit(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CSunCrossHit(const CSunCrossHit& rhs);
+	virtual ~CSunCrossHit() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -45,13 +45,13 @@ public:
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
-	ANGELHITDESC m_Desc;
+	SUNCROSSHITDESC m_Desc;
 
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CAngelRay_Hit* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CSunCrossHit* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

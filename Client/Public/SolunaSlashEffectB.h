@@ -4,18 +4,18 @@
 
 BEGIN(Client)
 
-class CAngelRay_Hit final : public CCreature
+class CSolunaSlashEffectB final : public CCreature
 {
 public:
-	typedef struct tagAngleRay_HitDESC
+	typedef struct tagSolunaEffectBDESC
 	{
-		_float3 vPos;
-	}ANGELHITDESC;
+		DIR eDir;
+	}SOLUNAEFFECTBDESC;
 
 private:
-	CAngelRay_Hit(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CAngelRay_Hit(const CAngelRay_Hit& rhs);
-	virtual ~CAngelRay_Hit() = default;
+	CSolunaSlashEffectB(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CSolunaSlashEffectB(const CSolunaSlashEffectB& rhs);
+	virtual ~CSolunaSlashEffectB() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -37,7 +37,8 @@ private:
 
 public:
 	void SetState(STATE eState, DIR eDir);
-
+	void SetDirection();
+	void SetPosition(DIR eDir);
 public:
 	virtual void SetAni() override;
 
@@ -45,13 +46,14 @@ public:
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
-	ANGELHITDESC m_Desc;
-
+	_bool m_bRender;
+	CTransform* m_pTarget;
+	SOLUNAEFFECTBDESC m_Desc;
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CAngelRay_Hit* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CSolunaSlashEffectB* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

@@ -79,6 +79,7 @@ public:
 	void Chase(_float3 vTargetPos, _float fTimeDelta);
 
 	void CulRUByLook(_float3 vLook);
+	void Set_TransformDesc(TRANSFORMDESC Desc) { m_TransformDesc = Desc; }
 
 public:
 
