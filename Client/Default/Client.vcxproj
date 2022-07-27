@@ -173,6 +173,7 @@
     <ClInclude Include="..\Public\OrangeMushroom.h" />
     <ClInclude Include="..\Public\Player.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
+    <ClInclude Include="..\Public\RibbonPig.h" />
     <ClInclude Include="..\Public\Slime.h" />
     <ClInclude Include="..\Public\Wood.h" />
     <ClInclude Include="Client.h" />
@@ -196,6 +197,7 @@
     <ClCompile Include="..\Private\OrangeMushroom.cpp" />
     <ClCompile Include="..\Private\Player.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
+    <ClCompile Include="..\Private\RibbonPig.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
     <ClCompile Include="..\Private\Wood.cpp" />
     <ClCompile Include="Client.cpp" />

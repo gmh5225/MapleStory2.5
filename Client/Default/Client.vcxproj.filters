@@ -73,6 +73,9 @@
     <Filter Include="02.GameObject\Creature\Monster\Sllime">
       <UniqueIdentifier>{062b7ebc-7395-4881-8756-36ce36cf9645}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\RibbonPig">
+      <UniqueIdentifier>{6267fe8c-6b8a-4eca-9af8-39040682607b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -141,6 +144,9 @@
     <ClInclude Include="..\Public\Slime.h">
       <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\RibbonPig.h">
+      <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -199,6 +205,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Slime.cpp">
       <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RibbonPig.cpp">
+      <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
