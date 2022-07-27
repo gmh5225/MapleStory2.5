@@ -40,6 +40,7 @@ private:
 	HRESULT Load_Player_Texture();
 	HRESULT Load_Player_Skill_Texture();
 	HRESULT Load_Monster_Texture();
+	HRESULT Load_Npc_Texture();
 
 private:
 	LPDIRECT3DDEVICE9	m_pGraphic_Device = nullptr;

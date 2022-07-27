@@ -167,6 +167,7 @@
     <ClInclude Include="..\Public\CrossTheStyx.h" />
     <ClInclude Include="..\Public\Cube.h" />
     <ClInclude Include="..\Public\InvenManager.h" />
+    <ClInclude Include="..\Public\ElderStan.h" />
     <ClInclude Include="..\Public\Level_GamePlay.h" />
     <ClInclude Include="..\Public\Level_Loading.h" />
     <ClInclude Include="..\Public\Level_Logo.h" />
@@ -177,6 +178,7 @@
     <ClInclude Include="..\Public\QuestManager.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
     <ClInclude Include="..\Public\SkillManager.h" />
+    <ClInclude Include="..\Public\RibbonPig.h" />
     <ClInclude Include="..\Public\Slime.h" />
     <ClInclude Include="..\Public\UI.h" />
     <ClInclude Include="..\Public\UIManager.h" />
@@ -200,6 +202,7 @@
     <ClCompile Include="..\Private\CrossTheStyx.cpp" />
     <ClCompile Include="..\Private\Cube.cpp" />
     <ClCompile Include="..\Private\InvenManager.cpp" />
+    <ClCompile Include="..\Private\ElderStan.cpp" />
     <ClCompile Include="..\Private\Level_GamePlay.cpp" />
     <ClCompile Include="..\Private\Level_Loading.cpp" />
     <ClCompile Include="..\Private\Level_Logo.cpp" />
@@ -210,6 +213,7 @@
     <ClCompile Include="..\Private\QuestManager.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
     <ClCompile Include="..\Private\SkillManager.cpp" />
+    <ClCompile Include="..\Private\RibbonPig.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
     <ClCompile Include="..\Private\UI.cpp" />
     <ClCompile Include="..\Private\UIManager.cpp" />

@@ -49,6 +49,9 @@ HRESULT CRedSnail::SetUp_Components()
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Idle"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Hit"), nullptr);
+
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_IdleR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_HitR"), nullptr);
 	}
 
 
@@ -141,6 +144,10 @@ void CRedSnail::Tick_Chase(_float fTimeDelta)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+		SetState(STATE_CHASE, DIR_R);
+	else
+		SetState(STATE_CHASE, DIR_L);
 
 	m_pTransformCom->Chase(vPlayerPos, fTimeDelta);
 
@@ -171,19 +178,36 @@ void CRedSnail::SetAni()
 	}
 	break;
 	case CRedSnail::STATE_HIT:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Hit"), 0.5f, CAnimator::STATE_ONCE);
-	break;
+		if(m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_HitR"), 0.5f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Hit"), 0.5f, CAnimator::STATE_ONCE);
+		break;
 	case CRedSnail::STATE_CHASE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Idle"), 1.f, CAnimator::STATE_LOOF);
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_IdleR"), 1.f, CAnimator::STATE_LOOF);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Idle"), 1.f, CAnimator::STATE_LOOF);
 		break;
 	}
 }
 
 void CRedSnail::Damaged(CGameObject * pOther)
 {
-	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
 
-	SetState(STATE_HIT, DIR_END);
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+		SetState(STATE_HIT, DIR_R);
+	else
+		SetState(STATE_HIT, DIR_L);
+
+	Safe_Release(pGameInstance);
+
 }
 
 
