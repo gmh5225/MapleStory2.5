@@ -29,11 +29,23 @@ HRESULT CAngelRay_Hit::Initialize(void * pArg)
 
 	memcpy(&m_Desc, pArg, sizeof(ANGELHITDESC));
 
+	/*_float4x4		ViewMatrix;
+
+	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
+	D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
+	_float3 vLookCamera = (*(_float3*)&ViewMatrix.m[0][0]) - m_Desc.vPos;
+	D3DXVec3Normalize(&vLookCamera, &vLookCamera);
+	+vLookCamera*-0.1f*/
 	m_fColRad = 0.1f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos);
 	m_pTransformCom->Set_Scaled(3.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Hit"), 0.08f, CAnimator::STATE_LOOF);
-	
+	m_fYDistance = 10.f;
+	//m_pTransformCom->Get_State(CTransform::STATE_POSITION).y
+	Set_Billboard();
+	_float3 vCLook = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
+	_float3 vPo = m_Desc.vPos - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.15f;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPo);
 	return S_OK;
 }
 
@@ -65,17 +77,18 @@ HRESULT CAngelRay_Hit::SetUp_Components()
 
 void CAngelRay_Hit::Tick(_float fTimeDelta)
 {
-
+	
 }
 void CAngelRay_Hit::LateTick(_float fTimeDelta)
 {
 
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	
 	if (m_pAnimatorCom->Get_AnimCount() == 5)
 		Set_Dead();
+
+	Set_Billboard();
 		
 }
 HRESULT CAngelRay_Hit::Render()
@@ -90,6 +103,7 @@ HRESULT CAngelRay_Hit::Render()
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
+	//m_pTextureCom->Bind_Texture();
 
 	m_pVIBufferCom->Render();
 
@@ -175,18 +189,16 @@ HRESULT CAngelRay_Hit::Set_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
-
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 	return S_OK;
 }
 
 HRESULT CAngelRay_Hit::Reset_RenderState()
 {
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);	
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
+	m_pTransformCom->Set_Scaled(m_vScaleTemp);
+	m_pTransformCom->CulRUByLook(m_vLookTemp);
 	return S_OK;
 }
 

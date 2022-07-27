@@ -77,7 +77,7 @@ HRESULT CAngelRay_Effect::SetUp_Components()
 void CAngelRay_Effect::Tick(_float fTimeDelta)
 {
 	SetPosition(m_eDir);
-	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
+	
 
 }
 void CAngelRay_Effect::LateTick(_float fTimeDelta)

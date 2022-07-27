@@ -32,9 +32,6 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 
 	m_pTransformCom->Set_Scaled(1.1f);
 	m_pTransformCom->Set_ScaledX(3.f);
-
-	
-
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_AngelRay_Attack"), 1.f, CAnimator::STATE_LOOF);
 	
 	memcpy(&m_Desc, pArg, sizeof(ANGELATTACKDESC));

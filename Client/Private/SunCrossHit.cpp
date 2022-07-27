@@ -31,12 +31,27 @@ HRESULT CSunCrossHit::Initialize(void * pArg)
 
 	m_fColRad = 0.1f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos);
-	m_pTransformCom->Set_Scaled(3.f);
+	m_pTransformCom->Set_Scaled(2.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SunCross_Hit"), 0.08f, CAnimator::STATE_LOOF);
+	m_fYDistance = 11.f;
 
+	Set_Billboard();
+	_float3 vTest = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	_float3 vPo = vTest - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.4f;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPo);
 	return S_OK;
-}
 
+	/*
+	_float4x4 ViewMatrix;
+	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
+	D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
+	_float3 vCPos = (*(_float3*)&ViewMatrix.m[3][0]);	
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	_float3 vCLook = vCPos - vPos;
+	D3DXVec3Normalize(&vCLook, &vCLook);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos + vCLook*5.f);
+	*/
+}
 
 
 
@@ -71,11 +86,14 @@ void CSunCrossHit::LateTick(_float fTimeDelta)
 {
 
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 	if (m_pAnimatorCom->Get_AnimCount() == 4)
 		Set_Dead();
+
+	Set_Billboard();
+
 
 }
 HRESULT CSunCrossHit::Render()
@@ -186,7 +204,8 @@ HRESULT CSunCrossHit::Reset_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
+	m_pTransformCom->Set_Scaled(m_vScaleTemp);
+	m_pTransformCom->CulRUByLook(m_vLookTemp);
 	return S_OK;
 }
 

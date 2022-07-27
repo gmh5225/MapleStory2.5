@@ -12,9 +12,6 @@ COrangeMushroom::COrangeMushroom(const COrangeMushroom & rhs)
 {
 }
 
-
-
-
 HRESULT COrangeMushroom::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();

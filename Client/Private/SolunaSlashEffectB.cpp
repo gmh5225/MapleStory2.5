@@ -44,7 +44,7 @@ HRESULT CSolunaSlashEffectB::Initialize(void * pArg)
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
-	m_fYDistance = -0.01f;
+	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 
 	return S_OK;

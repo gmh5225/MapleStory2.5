@@ -44,7 +44,7 @@ HRESULT CSunCross::Initialize(void * pArg)
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
-
+	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 	return S_OK;
 }
@@ -83,7 +83,7 @@ void CSunCross::Tick(_float fTimeDelta)
 void CSunCross::LateTick(_float fTimeDelta)
 {
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 
 	if (m_pAnimatorCom->Get_AnimCount() == 4)
 	{

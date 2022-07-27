@@ -30,7 +30,7 @@ HRESULT CSlime::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 
-	m_fColRad = 0.3f;
+	m_fColRad = 0.9f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(3.f, 0.5f, 0.f));
 	m_pTransformCom->Set_Scaled(1.3f);
 
