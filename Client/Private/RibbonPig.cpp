@@ -191,9 +191,9 @@ void CRibbonPig::SetAni()
 	break;
 	case CRibbonPig::STATE_CHASE:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_MoveR"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_MoveR"), 0.2f, CAnimator::STATE_LOOF);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Move"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Move"), 0.2f, CAnimator::STATE_LOOF);
 		break;
 	}
 }

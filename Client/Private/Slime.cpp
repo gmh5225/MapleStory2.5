@@ -153,6 +153,7 @@ void CSlime::Tick_Chase(_float fTimeDelta)
 	m_pTransformCom->Chase(vPlayerPos, fTimeDelta);
 
 	Safe_Release(pGameInstance);
+
 }
 
 

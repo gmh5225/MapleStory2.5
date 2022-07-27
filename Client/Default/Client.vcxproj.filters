@@ -76,6 +76,9 @@
     <Filter Include="02.GameObject\Creature\Monster\RibbonPig">
       <UniqueIdentifier>{6267fe8c-6b8a-4eca-9af8-39040682607b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Creature\Npc">
+      <UniqueIdentifier>{8f214ff5-1c18-4057-b474-2d32a59d3b86}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -147,6 +150,9 @@
     <ClInclude Include="..\Public\RibbonPig.h">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\ElderStan.h">
+      <Filter>02.GameObject\Creature\Npc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -208,6 +214,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\RibbonPig.cpp">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ElderStan.cpp">
+      <Filter>02.GameObject\Creature\Npc</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
