@@ -73,6 +73,24 @@
     <Filter Include="02.GameObject\Creature\Monster\Sllime">
       <UniqueIdentifier>{062b7ebc-7395-4881-8756-36ce36cf9645}</UniqueIdentifier>
     </Filter>
+    <Filter Include="89.Manager">
+      <UniqueIdentifier>{1949e62f-62c0-414e-af4f-77049647f4e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\UIManager">
+      <UniqueIdentifier>{5b41fc78-ac6d-464b-af53-3f525724f51f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\InvenManager">
+      <UniqueIdentifier>{bbdf15f4-e02e-43e8-9c3f-65d8c5fe2337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\SkillManager">
+      <UniqueIdentifier>{0422b7a2-7fd9-4475-b471-7495c6ff9170}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\QuestManager">
+      <UniqueIdentifier>{0e30f1bd-c04a-4f47-b6da-6d83a0841f54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI">
+      <UniqueIdentifier>{87528349-c508-46f1-8571-4886f9e24565}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -141,6 +159,21 @@
     <ClInclude Include="..\Public\Slime.h">
       <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\UIManager.h">
+      <Filter>89.Manager\UIManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillManager.h">
+      <Filter>89.Manager\SkillManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\QuestManager.h">
+      <Filter>89.Manager\QuestManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\InvenManager.h">
+      <Filter>89.Manager\InvenManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\UI.h">
+      <Filter>04.UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -199,6 +232,21 @@
     </ClCompile>
     <ClCompile Include="..\Private\Slime.cpp">
       <Filter>02.GameObject\Creature\Monster\Sllime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\UIManager.cpp">
+      <Filter>89.Manager\UIManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillManager.cpp">
+      <Filter>89.Manager\SkillManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuestManager.cpp">
+      <Filter>89.Manager\QuestManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\InvenManager.cpp">
+      <Filter>89.Manager\InvenManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\UI.cpp">
+      <Filter>04.UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

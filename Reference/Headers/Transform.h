@@ -28,6 +28,7 @@ public:
 		return *(_float3*)&m_WorldMatrix.m[eState][0];
 	}
 
+	void Set_Scaled(_float3 vScale);
 	void Set_Scaled(_float fScale);
 	void Set_ScaledX(_float fScale);
 	_float3 Get_Scaled() const;
@@ -70,9 +71,14 @@ public:
 	void Rotation(_float3 vAxis, _float fRadian);
 	void RotationTwo(_float3 vAxis, _float fRadian, _float3 vAxis2, _float fRadian2);
 	void Turn(_float3 vAxis, _float fTimeDelta);
+
+	void RotationSpot(_float3 vAxisPos, _float3 vDisVec, _float fAngle);
+
 	void LookAt(_float3 vTargetPos);
 	void LookAtForLandObject(_float3 vTargetPos);
 	void Chase(_float3 vTargetPos, _float fTimeDelta);
+
+	void CulRUByLook(_float3 vLook);
 
 public:
 

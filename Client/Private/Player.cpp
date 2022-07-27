@@ -131,6 +131,7 @@ void CPlayer::LateTick(_float fTimeDelta)
 }
 HRESULT CPlayer::Render()
 {
+	Set_Billboard();
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;	
@@ -288,6 +289,8 @@ void CPlayer::SetAni()
 }
 void CPlayer::GetKeyInput(_float fTimeDelta)
 {
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
 	if (GetKeyState(VK_UP) & 0x8000)
 	{
 		if (GetKeyState(VK_RIGHT) & 0x8000)
@@ -404,8 +407,6 @@ HRESULT CPlayer::Set_RenderState()
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
-	Set_Billboard();
-
 	return S_OK;
 }
 HRESULT CPlayer::Reset_RenderState()
@@ -414,7 +415,8 @@ HRESULT CPlayer::Reset_RenderState()
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
-	m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_vLookTemp);
+	m_pTransformCom->CulRUByLook(m_vLookTemp);
+	//m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_vLookTemp);
 
 	return S_OK;
 }

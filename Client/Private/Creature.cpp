@@ -82,6 +82,7 @@ void CCreature::LateTick(_float fTimeDelta)
 }
 HRESULT CCreature::Render()
 {
+	Set_Billboard();
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;	
@@ -136,7 +137,7 @@ void CCreature::Set_Billboard()
 
 	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
 
-	/* 카메라의 월드행렬이다. */
+	/* 카메라의 월드행렬이다. */ 
 	D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
 
 	_float3 fScale = m_pTransformCom->Get_Scaled();
@@ -158,8 +159,6 @@ HRESULT CCreature::Set_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
-	Set_Billboard();
 
 	return S_OK;
 }
