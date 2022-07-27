@@ -39,7 +39,8 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 	
 	memcpy(&m_Desc, pArg, sizeof(ANGELATTACKDESC));
 	m_eDir = m_Desc.eDir;
-	SetDirection();
+
+	
 	SetPosition(m_eDir);
 	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 	return S_OK;
@@ -73,7 +74,7 @@ HRESULT CAngelRay_Attack::SetUp_Components()
 
 void CAngelRay_Attack::Tick(_float fTimeDelta)
 {
-	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
+
 	MoveAttack(fTimeDelta);
 
 }
@@ -83,6 +84,7 @@ void CAngelRay_Attack::LateTick(_float fTimeDelta)
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
+	SetDirection();
 }
 HRESULT CAngelRay_Attack::Render()
 {
@@ -328,7 +330,6 @@ HRESULT CAngelRay_Attack::Set_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
