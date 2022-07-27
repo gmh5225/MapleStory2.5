@@ -132,6 +132,7 @@ void CCreature::SetAni()
 void CCreature::Set_Billboard()
 {
 	m_vLookTemp = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
+	m_vScaleTemp = m_pTransformCom->Get_Scaled();
 
 	_float4x4		ViewMatrix;
 
@@ -168,7 +169,8 @@ HRESULT CCreature::Reset_RenderState()
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
-	m_pTransformCom->Set_State(CTransform::STATE_LOOK, m_vLookTemp);
+	m_pTransformCom->Set_Scaled(m_vScaleTemp);
+	m_pTransformCom->CulRUByLook(m_vLookTemp);
 
 	return S_OK;
 }

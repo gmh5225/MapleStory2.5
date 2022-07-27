@@ -53,6 +53,7 @@ protected:
 
 protected:
 	_float3 m_vLookTemp;
+	_float3 m_vScaleTemp;
 	STATE m_eCurState;
 	DIR m_eDir;
 

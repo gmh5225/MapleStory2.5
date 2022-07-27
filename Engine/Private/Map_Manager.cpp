@@ -13,14 +13,15 @@ HRESULT CMap_Manager::LoadMapData(HWND hWnd)
 	LoadData(hWnd);
 
 
-	//// 1. y축 45도 회전 행렬을 구한다.
-	//_float4x4 RotationMatrix;
-	//D3DXMatrixIdentity(&RotationMatrix);
-	//D3DXMatrixRotationAxis(&RotationMatrix, &_float3{0.f, 1.f, 0.f}, D3DXToRadian(45.f));
+	// 1. y축 45도 회전 행렬을 구한다.
+	_float4x4 RotationMatrix;
+	D3DXMatrixIdentity(&RotationMatrix);
+	D3DXMatrixRotationAxis(&RotationMatrix, &_float3{0.f, 1.f, 0.f}, D3DXToRadian(45.f));
 	
 	// 2. 각 큐브 포스에 회전행렬을 곱하고 다시 대입해 준다.
 	for (auto& CubeData : m_TempList)
 	{
+		D3DXVec3TransformCoord(&CubeData.vPos, &CubeData.vPos, &RotationMatrix);
 		CubeData.vPos.y += 10.f;
 	}
 
