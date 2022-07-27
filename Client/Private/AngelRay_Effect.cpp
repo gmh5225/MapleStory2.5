@@ -43,7 +43,7 @@ HRESULT CAngelRay_Effect::Initialize(void * pArg)
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
-	
+	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 	return S_OK;
 }
@@ -102,7 +102,7 @@ void CAngelRay_Effect::LateTick(_float fTimeDelta)
 	{
 		Set_Dead();
 	}
-	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+
 	
 }
 HRESULT CAngelRay_Effect::Render()
