@@ -38,16 +38,9 @@ void CCamera_Free::Tick(_float fTimeDelta)
 	// 카메라 위치 조정
 	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
-	_float3 vCamPos{ vPlayerPos.x, vPlayerPos.y + 2.5f + 1.8f, vPlayerPos.z - 3.2f - 1.8f };
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vCamPos);
 
-	// 플레이어를 바라본다
-	m_pTransformCom->LookAt(vPlayerPos);
-
-	// 플레이어 카메라 룩 고정
-	_float3 vCamLook = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
-	pPlayerTransform->Set_State(CTransform::STATE_LOOK, vCamLook);
-
+	m_pTransformCom->RotationSpot(vPlayerPos, _float3{ 0.f, 4.f, -4.f }, 45.f);
+	
 	Safe_Release(pGameInstance);
 
 	//if (pGameInstance->Get_DIKState(DIK_W) & 0x80)

@@ -31,7 +31,7 @@ HRESULT CCube::Initialize(void * pArg)
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pData->vPos);
 
-	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
+	// m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
 	return S_OK;
 }

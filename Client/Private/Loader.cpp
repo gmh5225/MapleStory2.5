@@ -13,7 +13,7 @@
 #include "AngelRay_Hit.h"
 #include "RedSnail.h"
 #include "Slime.h"
-
+#include "UI.h"
 
 
 
@@ -147,6 +147,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		CAngelRay_Hit::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_UI"),
+		CUI::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 
 

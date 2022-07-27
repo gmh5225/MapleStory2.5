@@ -12,6 +12,18 @@ CTransform::CTransform(const CTransform & rhs)
 
 }
 
+void CTransform::Set_Scaled(_float3 vScale)
+{
+	_float3		vRight = Get_State(CTransform::STATE_RIGHT);
+	_float3		vUp = Get_State(CTransform::STATE_UP);
+	_float3		vLook = Get_State(CTransform::STATE_LOOK);
+
+	Set_State(CTransform::STATE_RIGHT, *D3DXVec3Normalize(&vRight, &vRight) * vScale.x);
+	Set_State(CTransform::STATE_UP, *D3DXVec3Normalize(&vUp, &vUp) * vScale.y);
+	Set_State(CTransform::STATE_LOOK, *D3DXVec3Normalize(&vLook, &vLook) * vScale.z);
+
+}
+
 void CTransform::Set_Scaled(_float fScale)
 {
 	_float3 fR = Get_State(CTransform::STATE_RIGHT);
@@ -113,67 +125,7 @@ void CTransform::Go_Left(_float fTimeDelta)
 
 void CTransform::Go_U(_float fTimeDelta)
 {
-	_float3 vTempPos = Get_State(STATE_LOOK);
-
-	_float3		vPosition = Get_State(STATE_POSITION);
-	_float3		vLook = _float3(0.f, 0.f, 1.f);
-
-	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
-
-	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vTempPos);
-}
-void CTransform::Go_D(_float fTimeDelta)
-{
-	_float3 vTempPos = Get_State(STATE_LOOK);
-
-	_float3		vPosition = Get_State(STATE_POSITION);
-	_float3		vLook = _float3(0.f, 0.f, -1.f);
-
-	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
-
-	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vTempPos);
-}
-void CTransform::Go_L(_float fTimeDelta)
-{
-	_float3 vTempPos = Get_State(STATE_LOOK);
-
-	_float3		vPosition = Get_State(STATE_POSITION);
-	_float3		vLook = _float3(-1.f, 0.f, 0.f);
-
-	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
-
-	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vLook);
-}
-void CTransform::Go_R(_float fTimeDelta)
-{
-	_float3 vTempPos = Get_State(STATE_LOOK);
-
-	_float3		vPosition = Get_State(STATE_POSITION);
-	_float3		vLook = _float3(1.f, 0.f, 0.f);
-
-	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
-
-	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vLook);
-}
-void CTransform::Go_LU(_float fTimeDelta)
-{
-	_float3 vTempPos = Get_State(STATE_LOOK);
-
-	_float3		vPosition = Get_State(STATE_POSITION);
-	_float3		vLook = _float3(-1.f, 0.f, 1.f);
-
-	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
-
-	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vLook);
-}
-void CTransform::Go_RU(_float fTimeDelta)
-{
-	_float3 vTempPos = Get_State(STATE_LOOK);
+	// _float3 vTempPos = Get_State(STATE_LOOK);
 
 	_float3		vPosition = Get_State(STATE_POSITION);
 	_float3		vLook = _float3(1.f, 0.f, 1.f);
@@ -181,9 +133,9 @@ void CTransform::Go_RU(_float fTimeDelta)
 	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
 
 	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vTempPos);
+	CulRUByLook(vLook);
 }
-void CTransform::Go_LD(_float fTimeDelta)
+void CTransform::Go_D(_float fTimeDelta)
 {
 	_float3 vTempPos = Get_State(STATE_LOOK);
 
@@ -193,9 +145,21 @@ void CTransform::Go_LD(_float fTimeDelta)
 	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
 
 	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vTempPos);
+	CulRUByLook(vLook);
 }
-void CTransform::Go_RD(_float fTimeDelta)
+void CTransform::Go_L(_float fTimeDelta)
+{
+	_float3 vTempPos = Get_State(STATE_LOOK);
+
+	_float3		vPosition = Get_State(STATE_POSITION);
+	_float3		vLook = _float3(-1.f, 0.f, 1.f);
+
+	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+	CulRUByLook(vLook);
+}
+void CTransform::Go_R(_float fTimeDelta)
 {
 	_float3 vTempPos = Get_State(STATE_LOOK);
 
@@ -205,7 +169,55 @@ void CTransform::Go_RD(_float fTimeDelta)
 	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
 
 	Set_State(CTransform::STATE_POSITION, vPosition);
-	Set_State(CTransform::STATE_LOOK, vTempPos);
+	CulRUByLook(vLook);
+}
+void CTransform::Go_LU(_float fTimeDelta)
+{
+	_float3 vTempPos = Get_State(STATE_LOOK);
+
+	_float3		vPosition = Get_State(STATE_POSITION);
+	_float3		vLook = _float3(0.f, 0.f, 1.f);
+
+	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+	CulRUByLook(vLook);
+}
+void CTransform::Go_RU(_float fTimeDelta)
+{
+	_float3 vTempPos = Get_State(STATE_LOOK);
+
+	_float3		vPosition = Get_State(STATE_POSITION);
+	_float3		vLook = _float3(1.f, 0.f, 0.f);
+
+	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+	CulRUByLook(vLook);
+}
+void CTransform::Go_LD(_float fTimeDelta)
+{
+	_float3 vTempPos = Get_State(STATE_LOOK);
+
+	_float3		vPosition = Get_State(STATE_POSITION);
+	_float3		vLook = _float3(-1.f, 0.f, 0.f);
+
+	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+	CulRUByLook(vLook);
+}
+void CTransform::Go_RD(_float fTimeDelta)
+{
+	_float3 vTempPos = Get_State(STATE_LOOK);
+
+	_float3		vPosition = Get_State(STATE_POSITION);
+	_float3		vLook = _float3(0.f, 0.f, -1.f);
+
+	vPosition += *D3DXVec3Normalize(&vLook, &vLook) * m_TransformDesc.fSpeedPerSec * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+	CulRUByLook(vLook);
 }
 
 
@@ -292,6 +304,25 @@ void CTransform::Turn(_float3 vAxis, _float fTimeDelta)
 	Set_State(CTransform::STATE_LOOK, vLook);
 }
 
+void CTransform::RotationSpot(_float3 vAxisPos, _float3 vDisVec, _float fAngle)
+{
+	// 1. 플레이어 0 기준 카메라 위치
+
+
+	// 2. 회전행렬을 만들어 곱한다
+	_float4x4	RotationMatrix;
+
+	D3DXMatrixRotationAxis(&RotationMatrix, &_float3{ 0.f, 1.f, 0.f }, D3DXToRadian(fAngle));
+	D3DXVec3TransformCoord(&vDisVec, &vDisVec, &RotationMatrix);
+
+	// 3. 포스를 플레이어 포스에 더한다.
+	_float3 fDestPos = vAxisPos + vDisVec;
+
+	Set_State(STATE_POSITION, fDestPos);
+	LookAt(vAxisPos);
+}
+
+
 void CTransform::LookAt(_float3 vTargetPos)
 {
 	_float3		vScale = Get_Scaled();
@@ -335,6 +366,20 @@ void CTransform::Chase(_float3 vTargetPos, _float fTimeDelta)
 	LookAt(vTargetPos);
 
 	Go_Straight(fTimeDelta);
+}
+
+void CTransform::CulRUByLook(_float3 vLook)
+{
+	_float3		vScale = Get_Scaled();
+
+	_float3 vPosition = Get_State(CTransform::STATE_POSITION);
+
+	_float3 vRight = *D3DXVec3Cross(&vRight, &_float3(0.f, 1.f, 0.f), &vLook);
+	_float3 vUp = *D3DXVec3Cross(&vUp, &vLook, &vRight);
+
+	Set_State(CTransform::STATE_RIGHT, *D3DXVec3Normalize(&vRight, &vRight) * vScale.x);
+	Set_State(CTransform::STATE_UP, *D3DXVec3Normalize(&vUp, &vUp) * vScale.y);
+	Set_State(CTransform::STATE_LOOK, *D3DXVec3Normalize(&vLook, &vLook) * vScale.z);
 }
 
 CTransform * CTransform::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
