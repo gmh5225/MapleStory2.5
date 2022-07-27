@@ -72,6 +72,7 @@ HRESULT CAngelRay_Attack::SetUp_Components()
 
 void CAngelRay_Attack::Tick(_float fTimeDelta)
 {
+	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 	MoveAttack(fTimeDelta);
 
 }
@@ -80,7 +81,7 @@ void CAngelRay_Attack::LateTick(_float fTimeDelta)
 
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 }
 HRESULT CAngelRay_Attack::Render()
