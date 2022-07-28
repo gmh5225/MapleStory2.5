@@ -602,7 +602,7 @@ HRESULT CLoader::Load_Item_Texture()
 	Safe_AddRef(pGameInstance);
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedPortion"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Item/RedProtion%d.png"), 2))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Item/RedPortion%d.png"), 2))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
