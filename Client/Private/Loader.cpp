@@ -84,11 +84,6 @@ HRESULT CLoader::Loading_ForLogoLevel()
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */
 
-	/* For.Prototype_Component_Texture_Default */
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_LOGO, TEXT("Prototype_Component_Texture_Default"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Default%d.jpg"), 2))))
-		return E_FAIL;
-
 
 	lstrcpy(m_szLoadingText, TEXT("모델을 로딩중입니다. "));	
 	/* 모델를 로드한다. */
@@ -202,15 +197,6 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */
-	/* For.Prototype_Component_Texture_Terrain */
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Terrain"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Terrain/Grass_%d.tga"), 2))))
-		return E_FAIL;
-
-	/* For.Prototype_Component_Texture_Sky */
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/SkyBox/Grass_%d.dds"), 1))))
-		return E_FAIL;
 
 	/* For.Prototype_Component_Texture_Player */
 	Load_Player_Texture();
