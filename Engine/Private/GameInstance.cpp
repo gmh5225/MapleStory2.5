@@ -165,7 +165,7 @@ CComponent * CGameInstance::Clone_Component(_uint iLevelIndex, const _tchar * pP
 _float CGameInstance::Get_TimeDelta(const _tchar * pTimerTag)
 {
 	if (nullptr == m_pTimer_Manager)
-		return E_FAIL;
+		return -999999.f;
 	return m_pTimer_Manager->Get_TimeDelta(pTimerTag);
 }
 
@@ -230,6 +230,30 @@ _bool CGameInstance::Key_Pressing(_uchar eKeyID)
 		return 0;
 
 	return m_pInput_Device->Key_Pressing(eKeyID);
+}
+
+_bool CGameInstance::Mouse_Down(DIMK eMouseKeyID)
+{
+	if (nullptr == m_pInput_Device)
+		return 0;
+
+	return m_pInput_Device->Mouse_Down(eMouseKeyID);
+}
+
+_bool CGameInstance::Mouse_Up(DIMK eMouseKeyID)
+{
+	if (nullptr == m_pInput_Device)
+		return 0;
+
+	return m_pInput_Device->Mouse_Up(eMouseKeyID);
+}
+
+_bool CGameInstance::Mouse_Pressing(DIMK eMouseKeyID)
+{
+	if (nullptr == m_pInput_Device)
+		return 0;
+
+	return m_pInput_Device->Mouse_Pressing(eMouseKeyID);
 }
 
 list<CMap_Manager::CUBEDATA>* CGameInstance::ReadMap(const _tchar * pMapTag)

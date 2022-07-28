@@ -36,12 +36,24 @@ public:
 	HRESULT Loading_ForLogoLevel();
 	HRESULT Loading_ForGamePlayLevel();
 
+//객체원형 로딩함수
+private:
+	HRESULT Load_Player_Object();
+	HRESULT Load_PlayerSkill_Object();
+	HRESULT Load_Monster_Object();
+	HRESULT Load_Npc_Object();
+	HRESULT Load_UI_Object();
+	HRESULT Load_Model_Object();
+	HRESULT Load_Item_Object();
+
+//텍스처 로딩함수
 private:
 	HRESULT Load_Player_Texture();
 	HRESULT Load_Player_Skill_Texture();
 	HRESULT Load_Monster_Texture();
 	HRESULT Load_Npc_Texture();
 	HRESULT Load_UI_Texture();
+	HRESULT Load_Model_Texture();
 	HRESULT Load_Item_Texture();
 
 private:

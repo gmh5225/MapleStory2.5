@@ -132,15 +132,36 @@
     </Filter>
     <Filter Include="02.GameObject\Skill\RangeAttack\SunderBreak\Attack">
       <UniqueIdentifier>{33f88ffb-87c1-4919-a49d-98493400cd3b}</UniqueIdentifier>
-       </Filter>
-    <Filter Include="04.UI\01.Bulb">
-      <UniqueIdentifier>{ee369dd0-4eed-44df-b7c7-c1a4378415ab}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Item">
       <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Item\RedPortion">
       <UniqueIdentifier>{ebff119c-82f0-44d7-8dd6-9ebee650be9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\01.PlayerUI">
+      <UniqueIdentifier>{951933e2-f95a-4ab8-a599-623d35845055}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\02.NPCUI">
+      <UniqueIdentifier>{9c1320cb-cdd9-4885-8735-6dfad26eb078}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\02.NPCUI\02.Bulb">
+      <UniqueIdentifier>{ee369dd0-4eed-44df-b7c7-c1a4378415ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI">
+      <UniqueIdentifier>{864f40f1-996f-4490-8ba1-7cb217985bf8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\01.PlayerUI\SkillFrame">
+      <UniqueIdentifier>{f7a05931-264d-4c83-947e-3ca66fc1e6eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\01.PlayerUI\SkillFrame\SkillUpBtn">
+      <UniqueIdentifier>{2d7c744a-1300-419d-845e-5221fb94a363}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\01.PlayerUI\SkillFrame\SkillFrameBtn">
+      <UniqueIdentifier>{c572817d-c5ce-49f7-9849-5c52354ca85a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\99.UI">
+      <UniqueIdentifier>{4783165b-bdd4-485f-888a-2ee35492ca7a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +243,6 @@
     <ClInclude Include="..\Public\InvenManager.h">
       <Filter>89.Manager\InvenManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\UI.h">
-      <Filter>04.UI</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\SolunaSlashEffectA.h">
       <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectA</Filter>
     </ClInclude>
@@ -248,12 +266,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\SunderBreakAttack.h">
       <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
-       </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Bulb.h">
-      <Filter>04.UI\01.Bulb</Filter>
-        </ClInclude>
+      <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
+    </ClInclude>
     <ClInclude Include="..\Public\RedPortion.h">
       <Filter>02.GameObject\Item\RedPortion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillFrame.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\UI.h">
+      <Filter>04.UI\99.UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -326,9 +350,6 @@
     <ClCompile Include="..\Private\InvenManager.cpp">
       <Filter>89.Manager\InvenManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\UI.cpp">
-      <Filter>04.UI</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\SolunaSlashEffectA.cpp">
       <Filter>02.GameObject\Skill\Dash\SolunaSlash\EffectA</Filter>
     </ClCompile>
@@ -352,12 +373,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\SunderBreakAttack.cpp">
       <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Bulb.cpp">
-      <Filter>04.UI\01.Bulb</Filter>
-          </ClCompile>
+      <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
+    </ClCompile>
     <ClCompile Include="..\Private\RedPortion.cpp">
       <Filter>02.GameObject\Item\RedPortion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillFrame.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\UI.cpp">
+      <Filter>04.UI\99.UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

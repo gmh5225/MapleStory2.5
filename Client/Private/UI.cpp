@@ -2,6 +2,7 @@
 #include "..\Public\UI.h"
 #include "GameInstance.h"
 
+
 CUI::CUI(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
@@ -12,6 +13,8 @@ CUI::CUI(const CUI & rhs)
 	: CGameObject(rhs)
 {
 }
+
+
 
 HRESULT CUI::Initialize_Prototype()
 {
@@ -25,64 +28,24 @@ HRESULT CUI::Initialize(void * pArg)
 
 	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
 
-	m_UIInfo.fSizeX = 100.0f;
-	m_UIInfo.fSizeY = 100.0f;
-	m_UIInfo.fX = 50.0f;
-	m_UIInfo.fY = 50.0f;
+	//memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
+	SetRect(&m_RectUI, int(m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f), int(m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f), int(m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f), int(m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f));
 	m_bRender = true;
-
+	m_iTexturenum = 0;
+	m_eCollision = TYPE_NO;
+	D3DXMatrixIdentity(&m_ViewMatrix);
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
-
-	
-	
-
 
 	return S_OK;
 }
 
 void CUI::Tick(_float fTimeDelta)
 {
-
-	//if (GetKeyState('K') & 0x8000)
-	//{
-	//	if(GetKeyState('K') & 0x0001)
-	//		m_bRender = !m_bRender;
-	//}
-	/*if (GetAsyncKeyState('K') & 0x8000)
-	{
-		if(!GetAsyncKeyState('K') & 0x8000)
-			m_bRender = !m_bRender;
-	}*/
-
-	CGameInstance* pInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pInstance);
-
-	if (pInstance->Key_Down(DIK_K))
-		m_bRender = !m_bRender;
-		
-	Safe_Release(pInstance);
-
-	POINT		ptMouse;
-	GetCursorPos(&ptMouse);
-
-	ScreenToClient(g_hWnd, &ptMouse);
-
-	RECT		rcUI;
-	SetRect(&rcUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
-
-
-	/*if (PtInRect(&rcUI, ptMouse))
-	{
-		MouseCollision();
-	}*/
 }
 
 void CUI::LateTick(_float fTimeDelta)
 {
-	
-	if(m_bRender)
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
 
 HRESULT CUI::Render()
@@ -91,15 +54,20 @@ HRESULT CUI::Render()
 	_float4x4		Matrix;
 	D3DXMatrixIdentity(&Matrix);
 
-	if (FAILED(m_pTextureCom->Bind_Texture(0)))
+	if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
 		return E_FAIL;
 
-	//m_pGraphic_Device->SetTransform(D3DTS_WORLD, &Matrix);
 	m_pTransformCom->Bind_WorldMatrix();
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &Matrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
+	if (FAILED(Set_RenderState()))
+		return E_FAIL;
+
 	m_pVIBufferCom->Render();
+
+	if (FAILED(Reset_RenderState()))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -115,46 +83,90 @@ HRESULT CUI::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Transform */
-	CTransform::TRANSFORMDESC		TransformDesc;
-	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
-
-	TransformDesc.fSpeedPerSec = 5.f;
-	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
-
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
-		return E_FAIL;
-
-	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom)))
 		return E_FAIL;
 
 	return S_OK;
 }
 
-void CUI::MouseCollision()
+HRESULT CUI::Set_RenderState()
 {
+	if (nullptr == m_pGraphic_Device)
+		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 150);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	return S_OK;
 }
 
-CUI * CUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+HRESULT CUI::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	return S_OK;
+}
+
+void CUI::Check_Collision(DIMK m_eMouseKey)
+{
+	POINT		ptMouse;
+	GetCursorPos(&ptMouse);
+	ScreenToClient(g_hWnd, &ptMouse);
+	CGameInstance* pInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pInstance);
+
+	if (PtInRect(&m_RectUI, ptMouse))
+	{
+		if (pInstance->Mouse_Down(m_eMouseKey))
+		{
+			m_eCollision = TYPE_DOWN;
+			return;
+		}
+		else if (pInstance->Mouse_Up(m_eMouseKey))
+		{
+			m_eCollision = TYPE_UP;
+			return;
+		}
+		else if (pInstance->Mouse_Pressing(m_eMouseKey))
+		{
+			m_eCollision = TYPE_PRESSING;
+			return;
+		}
+		else
+		{
+			m_eCollision = TYPE_ON;
+			return;
+		}
+	}
+	else
+	{
+		m_eCollision = TYPE_NO;
+		return;
+	}
+}
+
+CUI* CUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 	CUI*		pInstance = new CUI(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CUI"));
+		MSG_BOX(TEXT("Failed To Created : CCreature"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CUI::Clone(void* pArg)
+CGameObject* CUI::Clone(void * pArg)
 {
 	CUI*		pInstance = new CUI(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Created : CUI"));
+		MSG_BOX(TEXT("Failed To Cloned : CUI"));
 		Safe_Release(pInstance);
 	}
 
@@ -170,4 +182,3 @@ void CUI::Free()
 	Safe_Release(m_pVIBufferCom);
 	Safe_Release(m_pRendererCom);
 }
-

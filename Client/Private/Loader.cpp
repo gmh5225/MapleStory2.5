@@ -24,6 +24,7 @@
 #include "SunderBreakAttack.h"
 #include "Bulb.h"
 #include "RedPortion.h"
+#include "SkillFrame.h"
 
 
 
@@ -101,104 +102,17 @@ HRESULT CLoader::Loading_ForLogoLevel()
 
 HRESULT CLoader::Loading_ForGamePlayLevel()
 {
-	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-
 
 	lstrcpy(m_szLoadingText, TEXT("객체원형을 로딩중입니다. "));
 
-	/* 객체원형 로드한다. */
-	/* For.Prototype_GameObject_Player*/
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Player"),
-		CPlayer::Create(m_pGraphic_Device))))
-		return E_FAIL;
 
-	/* For.Prototype_GameObject_Camera_Free */
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Camera_Free"),
-		CCamera_Free::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Cube"),
-		CCube::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
-		CWood::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_OrangeMushroom"),
-		COrangeMushroom::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedSnail"),
-		CRedSnail::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Slime"),
-		CSlime::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RibbonPig"),
-		CRibbonPig::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ElderStan"),
-		CElderStan::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Attack"),
-		CAngelRay_Attack::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Effect"),
-		CAngelRay_Effect::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Hit"),
-		CAngelRay_Hit::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_UI"),
-		CUI::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bulb"),
-		CBulb::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SolunaSlash_EffectA"),
-		CSolunaSlashEffectA::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SolunaSlash_EffectB"),
-		CSolunaSlashEffectB::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CrossTheStyx"),
-		CCrossTheStyx::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunCross"),
-		CSunCross::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunCross_Hit"),
-		CSunCrossHit::Create(m_pGraphic_Device))))
-		return E_FAIL;
-	//item prototype
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedPortion"),
-		CRedPortion::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunderBreak_Attack"),
-		CSunderBreakAttack::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-
-
+	Load_Player_Object();
+	Load_Monster_Object();
+	Load_Npc_Object();
+	Load_PlayerSkill_Object();
+	Load_UI_Object();
+	Load_Model_Object();
+	Load_Item_Object();
 
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
 	/* 텍스쳐를 로드한다. */
@@ -218,29 +132,24 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	Load_Npc_Texture();
 
 	/* For.Prototype_Component_Texture_Item */
+	Load_UI_Texture();
+
+	Load_Model_Texture();
 
 	Load_Item_Texture();
 
 	/* For.Prototype_Component_Texture_Cube */
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/Cube/Tile%d.dds"), 29))))
-		return E_FAIL;
 
 
+
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
 
 	lstrcpy(m_szLoadingText, TEXT("컴포넌트를 로딩중입니다. "));
-
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Animator"),
 		CAnimator::Create(m_pGraphic_Device))))
 		return E_FAIL;
-
-
-
-
-
-
-
 
 
 	lstrcpy(m_szLoadingText, TEXT("모델을 로딩중입니다. "));
@@ -280,11 +189,6 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 		return E_FAIL;
 
 
-
-
-
-
-
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니ㅏㄷ.  "));
 
 	Safe_Release(pGameInstance);
@@ -292,6 +196,174 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	m_isFinished = true;
 
 	return S_OK;
+}
+
+HRESULT CLoader::Load_Player_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+	/* For.Prototype_GameObject_Player*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Player"),
+		CPlayer::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	/* For.Prototype_GameObject_Camera_Free */
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Camera_Free"),
+		CCamera_Free::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+	return S_OK;
+}
+
+HRESULT CLoader::Load_Monster_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+
+	/* For.Prototype_GameObject_Monster*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_OrangeMushroom"),
+		COrangeMushroom::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedSnail"),
+		CRedSnail::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Slime"),
+		CSlime::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RibbonPig"),
+		CRibbonPig::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_Npc_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+
+	/* For.Prototype_GameObject_Npc*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ElderStan"),
+		CElderStan::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_PlayerSkill_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+
+	/* For.Prototype_GameObject_PlayerSkill*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Attack"),
+		CAngelRay_Attack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Effect"),
+		CAngelRay_Effect::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Hit"),
+		CAngelRay_Hit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SolunaSlash_EffectA"),
+		CSolunaSlashEffectA::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SolunaSlash_EffectB"),
+		CSolunaSlashEffectB::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CrossTheStyx"),
+		CCrossTheStyx::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunCross"),
+		CSunCross::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunCross_Hit"),
+		CSunCrossHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunderBreak_Attack"),
+		CSunderBreakAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_UI_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+
+	/* For.Prototype_GameObject_UI*/
+	if(FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SkillFrame"),
+		CSkillFrame::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bulb"),
+		CBulb::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_Model_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+
+	/* For.Prototype_GameObject_Model*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Cube"),
+		CCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
+		CWood::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_Item_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+
+	/* For.Prototype_GameObject_Item*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedPortion"),
+		CRedPortion::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+
 }
 
 
@@ -552,13 +624,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_MoveR%d.png"), 3))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Start"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/QuestStart/QuestIcon%d.png"), 5))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_End"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/QuestEnd/QuestIcon%d.png"), 7))))
-		return E_FAIL;
+	
 
 	Safe_Release(pGameInstance);
 
@@ -586,13 +652,39 @@ HRESULT CLoader::Load_UI_Texture()
 
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/QuestStart/QuestIcon%d.png"), 1))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Start"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/QuestStart/QuestIcon%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_End"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/QuestEnd/QuestIcon%d.png"), 8))))
+		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/SkillFrame/SkillFrame%d.png"),0))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 
 	return S_OK;
+}
+
+HRESULT CLoader::Load_Model_Texture()
+{
+
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/Cube/Tile%d.dds"), 29))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+	
 }
 
 HRESULT CLoader::Load_Item_Texture()

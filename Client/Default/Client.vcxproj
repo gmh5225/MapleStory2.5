@@ -179,6 +179,7 @@
     <ClInclude Include="..\Public\QuestManager.h" />
     <ClInclude Include="..\Public\RedPortion.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
+    <ClInclude Include="..\Public\SkillFrame.h" />
     <ClInclude Include="..\Public\SkillManager.h" />
     <ClInclude Include="..\Public\RibbonPig.h" />
     <ClInclude Include="..\Public\Slime.h" />
@@ -217,6 +218,7 @@
     <ClCompile Include="..\Private\QuestManager.cpp" />
     <ClCompile Include="..\Private\RedPortion.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
+    <ClCompile Include="..\Private\SkillFrame.cpp" />
     <ClCompile Include="..\Private\SkillManager.cpp" />
     <ClCompile Include="..\Private\RibbonPig.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
