@@ -197,7 +197,6 @@ HRESULT CAngelRay_Hit::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);	
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	m_pTransformCom->Set_Scaled(m_vScaleTemp);
 	m_pTransformCom->CulRUByLook(m_vLookTemp);
 	return S_OK;
 }

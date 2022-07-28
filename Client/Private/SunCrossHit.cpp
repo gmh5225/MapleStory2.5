@@ -92,11 +92,12 @@ void CSunCrossHit::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AnimCount() == 4)
 		Set_Dead();
 
-	Set_Billboard();
 
 }
 HRESULT CSunCrossHit::Render()
 {
+
+	Set_Billboard();
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
@@ -203,7 +204,6 @@ HRESULT CSunCrossHit::Reset_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-	m_pTransformCom->Set_Scaled(m_vScaleTemp);
 	m_pTransformCom->CulRUByLook(m_vLookTemp);
 	return S_OK;
 }
