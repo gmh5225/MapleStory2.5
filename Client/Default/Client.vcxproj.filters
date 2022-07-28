@@ -135,6 +135,12 @@
        </Filter>
     <Filter Include="04.UI\01.Bulb">
       <UniqueIdentifier>{ee369dd0-4eed-44df-b7c7-c1a4378415ab}</UniqueIdentifier>
+        </Filter>
+    <Filter Include="02.GameObject\Item">
+      <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Item\RedPortion">
+      <UniqueIdentifier>{ebff119c-82f0-44d7-8dd6-9ebee650be9d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -245,6 +251,9 @@
        </ClInclude>
     <ClInclude Include="..\Public\Bulb.h">
       <Filter>04.UI\01.Bulb</Filter>
+        </ClInclude>
+    <ClInclude Include="..\Public\RedPortion.h">
+      <Filter>02.GameObject\Item\RedPortion</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +355,9 @@
         </ClCompile>
     <ClCompile Include="..\Private\Bulb.cpp">
       <Filter>04.UI\01.Bulb</Filter>
+          </ClCompile>
+    <ClCompile Include="..\Private\RedPortion.cpp">
+      <Filter>02.GameObject\Item\RedPortion</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
