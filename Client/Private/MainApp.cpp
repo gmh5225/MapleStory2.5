@@ -51,8 +51,8 @@ void CMainApp::Tick(_float fTimeDelta)
 
 	m_pGameInstance->Tick_Engine(fTimeDelta);
 
-	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_MONSTER);
-	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER);
+	m_pCollider->Check_AABBCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_MONSTER);
+	// m_pCollider->Check_SphereCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER);
 	m_pCollider->End_Collsion();
 }
 
@@ -140,6 +140,11 @@ HRESULT CMainApp::Ready_Prototype_Component()
 	/* For.Prototype_Component_Collider */
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Collider"),
 		m_pCollider = CCollider::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	/* For.Prototype_Component_BoxCollider */
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"),
+		CBoxCollider::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	/* For.Prototype_Component_VIBuffer_Rect */

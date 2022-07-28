@@ -46,6 +46,9 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 
 HRESULT COrangeMushroom::SetUp_Components()
 {
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"))))
+		return E_FAIL;
+
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Move"), nullptr);
@@ -97,13 +100,19 @@ void COrangeMushroom::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
 
+
+	__super::BoxColCom_Tick(m_pTransformCom);
+
+
+
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
 
-	Set_Billboard();
+	
 }
 HRESULT COrangeMushroom::Render()
 {
+	Set_Billboard();
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;

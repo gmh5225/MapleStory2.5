@@ -58,6 +58,9 @@ HRESULT CPlayer::SetUp_Components()
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
 		return E_FAIL;
 
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"))))
+		return E_FAIL;
+	
 
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_U"), nullptr);
@@ -122,12 +125,15 @@ void CPlayer::Tick(_float fTimeDelta)
 		GetKeyInput(fTimeDelta);
 		break;
 	case Client::CPlayer::STATE_JUMP:
+		GetJumpKeyInput(fTimeDelta);
+		// GetKeyInput(fTimeDelta);
+		Jump(fTimeDelta);
 		break;
 	case Client::CPlayer::STATE_ATTACK:		
 		break;
 	case Client::CPlayer::STATE_DASH:		
 		CTransform::TRANSFORMDESC DashDesc;
-		DashDesc.fSpeedPerSec = 30.f;
+		DashDesc.fSpeedPerSec = 50.f;
 		DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
 		m_pTransformCom->Set_TransformDesc(DashDesc);
 		Dash(fTimeDelta);
@@ -137,9 +143,27 @@ void CPlayer::Tick(_float fTimeDelta)
 }
 void CPlayer::LateTick(_float fTimeDelta)
 {
-	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_IDLE, m_eDir);
+	SetOnceEndAni();
 	
+
+
+
+
+	_float3 pos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	
+	if(0.5f > pos.y)
+	{
+		pos.y = 0.5f;
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, pos);
+		SetState(STATE_IDLE, m_eDir);
+	}
+
+
+
+
+	__super::BoxColCom_Tick(m_pTransformCom);
+
+
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER, this);
 }
@@ -170,7 +194,47 @@ HRESULT CPlayer::Render()
 
 
 
+void CPlayer::SetState(STATE eState, DIR eDir)
+{
+	if (m_eCurState == eState && m_eDir == eDir)
+		return;
 
+	m_eCurState = eState;
+	m_eDir = eDir;
+	SetAni();
+
+	if (m_eCurState == STATE_JUMP)
+	{
+		m_pTransformCom->Set_Vel(8.0f);
+	}
+}
+void CPlayer::SetOnceEndAni()
+{
+	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+	{
+		switch (m_eCurState)
+		{
+		case Client::CCreature::STATE_IDLE:
+			break;
+		case Client::CCreature::STATE_MOVE:
+			break;
+		case Client::CCreature::STATE_JUMP:
+			break;
+		case Client::CCreature::STATE_ATTACK:
+			SetState(STATE_IDLE, m_eDir);
+			break;
+		case Client::CCreature::STATE_DASH:
+			SetState(STATE_IDLE, m_eDir);
+			break;
+		case Client::CCreature::STATE_HIT:
+			break;
+		case Client::CCreature::STATE_CHASE:
+			break;
+		case Client::CCreature::STATE_DIE:
+			break;
+		}
+	}
+}
 void CPlayer::SetAni()
 {
 	switch (m_eCurState)
@@ -480,6 +544,85 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 	
 }
 
+void CPlayer::GetJumpKeyInput(_float fTimeDelta)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	if (GetKeyState(VK_UP) & 0x8000)
+	{
+		if (GetKeyState(VK_RIGHT) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_RU);
+			m_pTransformCom->Go_RU(fTimeDelta);
+		}
+		else if (GetKeyState(VK_LEFT) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_LU);
+			m_pTransformCom->Go_LU(fTimeDelta);
+		}
+		else
+		{
+			//SetState(STATE_JUMP, DIR_U);
+			m_pTransformCom->Go_U(fTimeDelta);
+		}
+	}
+	else if (GetKeyState(VK_DOWN) & 0x8000)
+	{
+		if (GetKeyState(VK_RIGHT) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_RD);
+			m_pTransformCom->Go_RD(fTimeDelta);
+		}
+		else if (GetKeyState(VK_LEFT) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_LD);
+			m_pTransformCom->Go_LD(fTimeDelta);
+		}
+		else
+		{
+			//SetState(STATE_JUMP, DIR_D);
+			m_pTransformCom->Go_D(fTimeDelta);
+		}
+	}
+	else if (GetKeyState(VK_LEFT) & 0x8000)
+	{
+		if (GetKeyState(VK_UP) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_LU);
+			m_pTransformCom->Go_LU(fTimeDelta);
+
+		}
+		else if (GetKeyState(VK_DOWN) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_LD);
+			m_pTransformCom->Go_LD(fTimeDelta);
+		}
+		else
+		{
+			//SetState(STATE_JUMP, DIR_L);
+			m_pTransformCom->Go_L(fTimeDelta);
+		}
+	}
+	else if (GetKeyState(VK_RIGHT) & 0x8000)
+	{
+		if (GetKeyState(VK_UP) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_RU);
+			m_pTransformCom->Go_RU(fTimeDelta);
+		}
+		else if (GetKeyState(VK_DOWN) & 0x8000)
+		{
+			//SetState(STATE_JUMP, DIR_RD);
+			m_pTransformCom->Go_RD(fTimeDelta);
+		}
+		else
+		{
+			//SetState(STATE_JUMP, DIR_R);
+			m_pTransformCom->Go_R(fTimeDelta);
+		}
+	}
+}
+
 
 
 
@@ -515,6 +658,11 @@ void CPlayer::Dash(_float fTimeDelta)
 		}
 }
 
+void CPlayer::Jump(_float fTimeDelta)
+{
+	m_pTransformCom->Go_Y(fTimeDelta);
+}
+
 HRESULT CPlayer::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
@@ -534,7 +682,6 @@ HRESULT CPlayer::Reset_RenderState()
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
-	m_pTransformCom->Set_Scaled(m_vScaleTemp);
 	m_pTransformCom->CulRUByLook(m_vLookTemp);
 
 	return S_OK;

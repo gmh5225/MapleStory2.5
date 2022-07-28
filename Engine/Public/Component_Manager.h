@@ -8,6 +8,7 @@
 #include "Animator.h"
 #include "VIBuffer_Voxel.h"
 #include "Collider.h"
+#include "BoxCollider.h"
 
 BEGIN(Engine)
 

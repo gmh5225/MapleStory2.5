@@ -23,10 +23,16 @@ public:
 
 public:
 	void GetKeyInput(_float fTimeDelta);
+	void GetJumpKeyInput(_float fTimeDelta);
 	virtual void SetAni() override;
+	virtual void SetState(STATE eState, DIR eDir);
+
+	void SetOnceEndAni();
 
 private:
 	void Dash(_float fTimeDelta);
+	void Jump(_float fTimeDelta);
+
 protected:
 	virtual HRESULT Set_RenderState() override;
 	virtual HRESULT Reset_RenderState() override;

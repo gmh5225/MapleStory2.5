@@ -46,6 +46,8 @@ public:
 		memcpy(&m_WorldMatrix.m[eState][0], &State, sizeof(_float3));		
 	}
 
+	void Set_Vel(_float fVel) { m_fVel = fVel; m_fTimeAcc = 0.f; }
+
 public:
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize(void* pArg) override;
@@ -68,6 +70,8 @@ public:
 	void Go_LD(_float fTimeDelta);
 	void Go_RD(_float fTimeDelta);
 
+	void Go_Y(_float fTimeDelta);
+
 	void Rotation(_float3 vAxis, _float fRadian);
 	void RotationTwo(_float3 vAxis, _float fRadian, _float3 vAxis2, _float fRadian2);
 	void Turn(_float3 vAxis, _float fTimeDelta);
@@ -83,12 +87,16 @@ public:
 
 public:
 
-
-
+	
+	
 
 private:
 	_float4x4			m_WorldMatrix;
 	TRANSFORMDESC		m_TransformDesc;
+
+	_float				m_fVel = 0.f;
+	_float				m_fTimeAcc = 0.f;
+	
 
 public:
 	static CTransform* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
