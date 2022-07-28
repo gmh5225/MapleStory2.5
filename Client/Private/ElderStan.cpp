@@ -89,13 +89,13 @@ void CElderStan::Tick(_float fTimeDelta)
 }
 void CElderStan::LateTick(_float fTimeDelta)
 {
+	Set_Billboard();
+
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
-
-	Set_Billboard();
+	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_NPC, this);
 }
 HRESULT CElderStan::Render()
 {
@@ -158,6 +158,7 @@ void CElderStan::SetAni()
 	}
 	break;
 	case CElderStan::STATE_HIT:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_Hit"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	case CElderStan::STATE_CHASE:
 		break;
@@ -166,6 +167,17 @@ void CElderStan::SetAni()
 
 void CElderStan::Damaged(CGameObject * pOther)
 {
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+	Safe_Release(pGameInstance);
+
+	
+	SetState(STATE_HIT,DIR_END);
 }
 
 
@@ -203,7 +215,6 @@ CGameObject * CElderStan::Clone(void* pArg)
 
 void CElderStan::Collision(CGameObject * pOther)
 {
-
 }
 
 

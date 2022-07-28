@@ -1,16 +1,15 @@
 #pragma once
 
 #include "Creature.h"
-#include "Bulb.h"
 
 BEGIN(Client)
 
-class CElderStan final : public CCreature
+class CBulb final : public CCreature
 {
 private:
-	CElderStan(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CElderStan(const CElderStan& rhs);
-	virtual ~CElderStan() = default;
+	CBulb(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CBulb(const CBulb& rhs);
+	virtual ~CBulb() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -20,6 +19,7 @@ public:
 	virtual HRESULT Render() override;
 
 	virtual void Collision(CGameObject* pOther) override;
+
 
 private:
 	void Tick_Idle(_float fTimeDelta);
@@ -45,9 +45,11 @@ private:
 
 
 public:
-	static CElderStan* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CBulb* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
+
 };
 
 END

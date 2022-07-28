@@ -132,6 +132,9 @@
     </Filter>
     <Filter Include="02.GameObject\Skill\RangeAttack\SunderBreak\Attack">
       <UniqueIdentifier>{33f88ffb-87c1-4919-a49d-98493400cd3b}</UniqueIdentifier>
+       </Filter>
+    <Filter Include="04.UI\01.Bulb">
+      <UniqueIdentifier>{ee369dd0-4eed-44df-b7c7-c1a4378415ab}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -239,6 +242,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\SunderBreakAttack.h">
       <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
+       </ClInclude>
+    <ClInclude Include="..\Public\Bulb.h">
+      <Filter>04.UI\01.Bulb</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -337,6 +343,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\SunderBreakAttack.cpp">
       <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
+        </ClCompile>
+    <ClCompile Include="..\Private\Bulb.cpp">
+      <Filter>04.UI\01.Bulb</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
