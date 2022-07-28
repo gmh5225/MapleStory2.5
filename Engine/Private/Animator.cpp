@@ -105,7 +105,8 @@ HRESULT CAnimator::Play_Once(_float fTimeDelta)
 
 	if (m_AniInfo.fDelay < m_fAnimPerTime)
 	{
-		++m_iAnimCount;
+		if (m_AniInfo.eMode != STATE_ONCEEND)
+			++m_iAnimCount;
 
 		if (m_iAnimCount >= pTex->Get_Size())
 		{
@@ -135,6 +136,10 @@ HRESULT CAnimator::Play_Ani(_float fTimeDelta)
 		break;
 
 	case CAnimator::STATE_ONCE:
+		Play_Once(fTimeDelta);
+		break;
+
+	case CAnimator::STATE_ONCEEND:
 		Play_Once(fTimeDelta);
 		break;
 

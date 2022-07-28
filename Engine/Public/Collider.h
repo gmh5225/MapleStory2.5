@@ -26,10 +26,13 @@ public:
 public:
 	HRESULT Add_CollsionGroup(COLLSIONGROUP eCollsionGroup, class CGameObject* pGameObject);
 	HRESULT Check_SphereCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
+	HRESULT Check_AABBCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
+
 	HRESULT End_Collsion();
 
 public:
 	_bool Check_Sphere(CGameObject* pObj_L, CGameObject* pObj_R);
+	_bool Check_AABB(CGameObject* pObj_L, CGameObject* pObj_R);
 
 private:
 	list<class CGameObject*>				m_CollisionObjects[COLLSION_END];

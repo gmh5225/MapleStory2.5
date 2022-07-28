@@ -76,6 +76,22 @@ HRESULT CGameObject::Add_Component(_uint iLevelIndex, const _tchar * pPrototypeT
 	return S_OK;
 }
 
+HRESULT CGameObject::Add_BoxColComponent(_uint iLevelIndex, const _tchar * pPrototypeTag, void * pArg)
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CBoxCollider*			pComponent = (CBoxCollider*)(pGameInstance->Clone_Component(iLevelIndex, pPrototypeTag, pArg));
+	if (nullptr == pComponent)
+		return E_FAIL;
+
+	m_BoxColliders.push_back(pComponent);
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
 HRESULT CGameObject::Compute_CamDistance(_float3 vWorldPos)
 {
 	_float4x4		ViewMatrix;
@@ -88,6 +104,15 @@ HRESULT CGameObject::Compute_CamDistance(_float3 vWorldPos)
 	m_fCamDistance = D3DXVec3Length(&vDir);
 
 	return S_OK;
+}
+
+void CGameObject::BoxColCom_Tick(CTransform* pTrans)
+{
+	if (m_BoxColliders.empty())
+		return;
+
+	for (auto& pBoxColCom : m_BoxColliders)
+		pBoxColCom->Tick(pTrans);
 }
 
 
@@ -105,8 +130,11 @@ void CGameObject::Free()
 {
 	for (auto& Pair : m_Components)
 		Safe_Release(Pair.second);
-
 	m_Components.clear();
+
+	for (auto& Com : m_BoxColliders)
+		Safe_Release(Com);
+	m_BoxColliders.clear();
 
 	Safe_Release(m_pGraphic_Device);
 }

@@ -221,6 +221,22 @@ void CTransform::Go_RD(_float fTimeDelta)
 }
 
 
+void CTransform::Go_Y(_float fTimeDelta)
+{
+	_float3		vPosition = Get_State(STATE_POSITION);
+	_float3		vUp = Get_State(STATE_UP);
+
+	m_fTimeAcc += fTimeDelta;
+
+	m_fVel -= m_fTimeAcc;
+
+	vPosition += *D3DXVec3Normalize(&vUp, &vUp) * m_fVel * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+	// CulRUByLook(vLook);
+}
+
+
 
 
 

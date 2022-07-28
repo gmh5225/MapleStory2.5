@@ -97,6 +97,9 @@
     <ClInclude Include="..\public\Picking.h">
       <Filter>07.Picking</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\BoxCollider.h">
+      <Filter>04.Component\BoxCollider</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\GameInstance.cpp">
@@ -176,6 +179,9 @@
     </ClCompile>
     <ClCompile Include="..\private\Picking.cpp">
       <Filter>07.Picking</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BoxCollider.cpp">
+      <Filter>04.Component\BoxCollider</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -265,6 +271,9 @@
     </Filter>
     <Filter Include="07.Picking">
       <UniqueIdentifier>{e4795a3c-1623-475c-8608-ebdeb88ae5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\BoxCollider">
+      <UniqueIdentifier>{d6ffbe77-8ddf-4f7e-ad30-05f32e60d810}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

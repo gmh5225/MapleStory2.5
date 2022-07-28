@@ -17,7 +17,7 @@ BEGIN(Client)
 class CCreature : public CGameObject
 {
 public:
-	enum STATE { STATE_IDLE, STATE_MOVE, STATE_JUMP, STATE_ATTACK, STATE_DASH,STATE_HIT, STATE_CHASE, STATE_DIE, STATE_END };
+	enum STATE { STATE_IDLE, STATE_MOVE, STATE_JUMP, STATE_ATTACK, STATE_DASH, STATE_HIT, STATE_CHASE, STATE_DIE, STATE_END };
 	enum DIR { DIR_L, DIR_R, DIR_U, DIR_D, DIR_LU, DIR_RU, DIR_LD, DIR_RD, DIR_END };
 
 protected:
@@ -35,7 +35,7 @@ public:
 	virtual void Collision(CGameObject* pOther) override {};
 
 public:
-	void SetState(STATE eState, DIR eDir);
+	virtual void SetState(STATE eState, DIR eDir);
 
 public:
 	virtual void SetAni();
@@ -53,7 +53,6 @@ protected:
 
 protected:
 	_float3 m_vLookTemp;
-	_float3 m_vScaleTemp;
 	STATE m_eCurState;
 	DIR m_eDir;
 
