@@ -21,6 +21,7 @@
 #include "SunCrossHit.h"
 #include "RibbonPig.h"
 #include "ElderStan.h"
+#include "RedPortion.h"
 
 
 
@@ -186,6 +187,10 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunCross_Hit"),
 		CSunCrossHit::Create(m_pGraphic_Device))))
 		return E_FAIL;
+	//item prototype
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedPortion"),
+		CRedPortion::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 
 
@@ -215,6 +220,10 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	/* For.Prototype_Component_Texture_Npc */
 
 	Load_Npc_Texture();
+
+	/* For.Prototype_Component_Texture_Item */
+
+	Load_Item_Texture();
 
 	/* For.Prototype_Component_Texture_Cube */
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"),
@@ -556,6 +565,21 @@ HRESULT CLoader::Load_Npc_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_ElderStan_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/ElderStan/ElderStan%d.png"), 3))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLoader::Load_Item_Texture()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedPortion"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Item/RedProtion%d.png"), 2))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
