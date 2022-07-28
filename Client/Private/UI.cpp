@@ -29,6 +29,7 @@ HRESULT CUI::Initialize(void * pArg)
 	m_UIInfo.fSizeY = 100.0f;
 	m_UIInfo.fX = 50.0f;
 	m_UIInfo.fY = 50.0f;
+	m_bRender = true;
 
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
@@ -42,6 +43,10 @@ HRESULT CUI::Initialize(void * pArg)
 
 void CUI::Tick(_float fTimeDelta)
 {
+
+	if (GetKeyState('K') & 0x8000)
+		m_bRender = !m_bRender;
+
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);
 
@@ -60,7 +65,7 @@ void CUI::Tick(_float fTimeDelta)
 void CUI::LateTick(_float fTimeDelta)
 {
 	
-
+	if(m_bRender)
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
 

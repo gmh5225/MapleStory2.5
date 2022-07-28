@@ -181,11 +181,11 @@ void CSunderBreakAttack::SetPosition(DIR eDir)
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_R:
-		vPosFix = { 1.f,-0.01f,0.f };
+		vPosFix = { 1.f,-1.f,0.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_U:
-		vPosFix = { 0.f,-0.01f,1.f };
+		vPosFix = { 0.f,-1.f,1.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_D:
@@ -317,7 +317,7 @@ void CSunderBreakAttack::Collision(CGameObject * pOther)
 
 		pOther->Damaged(this);
 
-		Set_Dead();
+		//Set_Dead();
 	}
 }
 
@@ -341,7 +341,7 @@ HRESULT CSunderBreakAttack::Reset_RenderState()
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
+	//m_pTransformCom->CulRUByLook(m_vLookTemp);
 	return S_OK;
 }
 

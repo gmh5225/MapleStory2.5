@@ -45,7 +45,7 @@ private:
 	HRESULT SetUp_Components();
 private:
 	void MouseCollision();
-
+	_bool m_bRender;
 public:
 	static CUI* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
