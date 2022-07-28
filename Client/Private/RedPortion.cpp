@@ -22,22 +22,20 @@ HRESULT CRedPortion::Initialize_Prototype()
 HRESULT CRedPortion::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
-
+	
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
-
-	m_fColRad = 0.1f;
-
-	//몬스터 pos 넣어주기
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	CTransform* pMonsterTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Monster"), TEXT("Com_Transform"), 0);
-
-	_float3 vMonsterPos = pMonsterTransform->Get_State(CTransform::STATE_POSITION);
-
+	m_sTag = "Tag_Item";
 	
 	memcpy(&m_Desc, pArg, sizeof(REDPORTIONDESC));
+	m_Desc.iNum = 0;
+	m_fColRad = 0.1f;
+
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION,m_Desc.vPos);
+	
+	m_pTransformCom->Set_Scaled(0.3f);
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedPortion"), 0.08f, CAnimator::STATE_ONCE);
+
 	m_eDir = DIR_END;
 
 	
@@ -68,16 +66,18 @@ void CRedPortion::Tick(_float fTimeDelta)
 {
 	//몬스터에 생성돼서 터지는 모양
 	//플레이어가 줍는 모양
+	
 }
 void CRedPortion::LateTick(_float fTimeDelta)
 {
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
+	m_pColliderCom->Add_CollsionGroup(CCollider::COLLISION_ITEM, this);
 	SetDirection();
 }
 
 HRESULT CRedPortion::Render()
 {
+	Set_Billboard();
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
@@ -85,6 +85,7 @@ HRESULT CRedPortion::Render()
 	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
 	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
 		return E_FAIL;
+
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
@@ -266,7 +267,7 @@ HRESULT CRedPortion::Set_RenderState()
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
-	//m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
 	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);

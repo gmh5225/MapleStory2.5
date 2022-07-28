@@ -22,7 +22,7 @@ HRESULT CBackGround::Initialize(void * pArg)
 {
 	if (nullptr != pArg)
 	{
-		// memcpy(&m_BackDesc, pArg, sizeof(BACKDESC));
+		//memcpy(&m_BackDesc, pArg, sizeof(BACKDESC));
 		m_BackDesc = *(BACKDESC*)pArg;
 	}
 
@@ -67,8 +67,6 @@ HRESULT CBackGround::Render()
 
 HRESULT CBackGround::SetUp_Components()
 {
-	/* 1. 내일 이거 수정해라. */
-	/* 2. 월드행렬을ㅇ 관리하는 CTransform 제ㅈ닥. */
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
 		return E_FAIL;
