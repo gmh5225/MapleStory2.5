@@ -71,15 +71,15 @@ HRESULT CSunderBreakAttack::SetUp_Components()
 void CSunderBreakAttack::Tick(_float fTimeDelta)
 {
 
-
+	
 }
 void CSunderBreakAttack::LateTick(_float fTimeDelta)
 {
 
 	Set_Billboard();
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
-
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	if (m_pAnimatorCom->Get_AnimCount() == 14)
 	{
 		Set_Dead();

@@ -94,7 +94,6 @@ void CSunCrossHit::LateTick(_float fTimeDelta)
 
 	Set_Billboard();
 
-
 }
 HRESULT CSunCrossHit::Render()
 {
