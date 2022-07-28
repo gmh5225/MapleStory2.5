@@ -536,7 +536,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 		CSunCross::SUNCROSSDESC SunCrossDECS;
 		SunCrossDECS.eDir = m_eDir;
-
+			
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SunCrossDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);

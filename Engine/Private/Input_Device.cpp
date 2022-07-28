@@ -100,7 +100,7 @@ void CInput_Device::Update()
 {
 	memcpy(&m_preKeyState, &m_byKeyState, sizeof(_char)*256);
 	m_pKeyboard->GetDeviceState(256, m_byKeyState);
-
+	memcpy(&m_PreMouseState, &m_MouseState, sizeof(DIMOUSESTATE));
 	m_pMouse->GetDeviceState(sizeof(DIMOUSESTATE), &m_MouseState);
 }
 

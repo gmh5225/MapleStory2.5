@@ -22,14 +22,29 @@ HRESULT CSkillFrame::Initialize_Prototype()
 
 HRESULT CSkillFrame::Initialize(void * pArg)
 {
-	__super::Initialize(pArg);
+	//__super::Initialize(pArg);
 	
-	m_UIInfo.fSizeX = 100.f;
-	m_UIInfo.fSizeY = 100.f;
-	m_UIInfo.fX = 50.f;
-	m_UIInfo.fY = 50.f;
+	if (FAILED(SetUp_Components()))
+		return E_FAIL;
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	//memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
+	m_UIInfo = *(UIINFO*)pArg;
+
+	m_UIInfo.fSizeX = 350.f;
+	m_UIInfo.fSizeY = 350.f;
+	m_UIInfo.fX = 900.f;
+	m_UIInfo.fY = 300.f;
+	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
+
+	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
+	m_bRender = true;
+	m_iTexturenum = 0;
+	m_eCollision = TYPE_NO;
+	D3DXMatrixIdentity(&m_ViewMatrix);
+	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
+
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	return S_OK;
@@ -39,9 +54,16 @@ void CSkillFrame::Tick(_float fTimeDelta)
 {
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
-
+	Check_Collision(DIMK_LBUTTON);
 	if (pInstance->Key_Down(DIK_K))
 		m_bRender = !m_bRender;
+
+	if (pInstance->Mouse_Up(DIMK_LBUTTON))
+	{
+		int a = 5;
+	}
+
+
 
 	Safe_Release(pInstance);
 }
@@ -61,18 +83,12 @@ HRESULT CSkillFrame::Render()
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &m_ViewMatrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
-	if (FAILED(Set_RenderState()))
-		return E_FAIL;
-
 	m_pVIBufferCom->Render();
-
-	if (FAILED(Reset_RenderState()))
-		return E_FAIL;
 
 	return S_OK;
 }
 
-CUI * CSkillFrame::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSkillFrame* CSkillFrame::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 	CSkillFrame*		pInstance = new CSkillFrame(pGraphic_Device);
 
@@ -101,4 +117,9 @@ CGameObject * CSkillFrame::Clone(void * pArg)
 void CSkillFrame::Free()
 {
 	__super::Free();
+
+	Safe_Release(m_pTransformCom);
+	Safe_Release(m_pTextureCom);
+	Safe_Release(m_pVIBufferCom);
+	Safe_Release(m_pRendererCom);
 }

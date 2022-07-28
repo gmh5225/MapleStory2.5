@@ -18,7 +18,7 @@ public:
 	virtual HRESULT Render() override;
 
 public:
-	static CUI* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CSkillFrame* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

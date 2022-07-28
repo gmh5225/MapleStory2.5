@@ -23,19 +23,9 @@ HRESULT CUI::Initialize_Prototype()
 
 HRESULT CUI::Initialize(void * pArg)
 {
+
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
-
-	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
-
-	//memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
-	SetRect(&m_RectUI, int(m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f), int(m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f), int(m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f), int(m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f));
-	m_bRender = true;
-	m_iTexturenum = 0;
-	m_eCollision = TYPE_NO;
-	D3DXMatrixIdentity(&m_ViewMatrix);
-	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 	return S_OK;
 }
@@ -50,24 +40,6 @@ void CUI::LateTick(_float fTimeDelta)
 
 HRESULT CUI::Render()
 {
-
-	_float4x4		Matrix;
-	D3DXMatrixIdentity(&Matrix);
-
-	if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
-		return E_FAIL;
-
-	m_pTransformCom->Bind_WorldMatrix();
-	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &Matrix);
-	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
-
-	if (FAILED(Set_RenderState()))
-		return E_FAIL;
-
-	m_pVIBufferCom->Render();
-
-	if (FAILED(Reset_RenderState()))
-		return E_FAIL;
 
 	return S_OK;
 }

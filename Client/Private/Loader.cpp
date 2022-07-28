@@ -662,7 +662,7 @@ HRESULT CLoader::Load_UI_Texture()
 
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/SkillFrame/SkillFrame%d.png"),0))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/SkillFrame/SkillFrame.png")))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
