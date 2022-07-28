@@ -44,8 +44,24 @@ HRESULT CUI::Initialize(void * pArg)
 void CUI::Tick(_float fTimeDelta)
 {
 
-	if (GetKeyState('K') & 0x8000)
+	//if (GetKeyState('K') & 0x8000)
+	//{
+	//	if(GetKeyState('K') & 0x0001)
+	//		m_bRender = !m_bRender;
+	//}
+	/*if (GetAsyncKeyState('K') & 0x8000)
+	{
+		if(!GetAsyncKeyState('K') & 0x8000)
+			m_bRender = !m_bRender;
+	}*/
+
+	CGameInstance* pInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pInstance);
+
+	if (pInstance->Key_Down(DIK_K))
 		m_bRender = !m_bRender;
+		
+	Safe_Release(pInstance);
 
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);

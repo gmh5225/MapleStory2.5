@@ -6,6 +6,36 @@ CInput_Device::CInput_Device()
 {
 }
 
+_bool CInput_Device::Key_Down(_uchar eKeyID)
+{
+	if (m_preKeyState[eKeyID] != m_byKeyState[eKeyID])
+	{
+		if (m_byKeyState[eKeyID] & 0x80)
+			return true;
+	}
+	return false;
+}
+
+_bool CInput_Device::Key_Up(_uchar eKeyID)
+{
+	if (m_preKeyState[eKeyID] != m_byKeyState[eKeyID])
+	{
+		if (m_preKeyState[eKeyID] & 0x80)
+			return true;
+	}
+	return false;
+}
+
+_bool CInput_Device::Key_Pressing(_uchar eKeyID)
+{
+	if (m_preKeyState[eKeyID] == m_byKeyState[eKeyID])
+	{
+		if (m_preKeyState[eKeyID] & 0x80)
+			return true;
+	}
+	return false;
+}
+
 HRESULT CInput_Device::Initialize(HINSTANCE hInstance, HWND hWnd)
 {
 	/* m_pInputSDK */
@@ -38,6 +68,7 @@ HRESULT CInput_Device::Initialize(HINSTANCE hInstance, HWND hWnd)
 
 void CInput_Device::Update()
 {
+	memcpy(&m_preKeyState, &m_byKeyState, sizeof(_char)*256);
 	m_pKeyboard->GetDeviceState(256, m_byKeyState);
 
 	m_pMouse->GetDeviceState(sizeof(DIMOUSESTATE), &m_MouseState);

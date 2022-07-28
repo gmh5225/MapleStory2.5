@@ -24,7 +24,9 @@ public:
 		return ((_long*)&m_MouseState)[eMouseMoveID];
 	}
 
-
+	_bool Key_Down(_uchar eKeyID);
+	_bool Key_Up(_uchar eKeyID);
+	_bool Key_Pressing(_uchar eKeyID);
 
 
 
@@ -39,6 +41,7 @@ private:
 
 private:	
 	_char				m_byKeyState[256] = { 0 };
+	_char				m_preKeyState[256] = { 0 };
 	DIMOUSESTATE		m_MouseState;
 
 public:

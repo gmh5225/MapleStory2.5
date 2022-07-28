@@ -208,6 +208,30 @@ _long CGameInstance::Get_DIMMoveState(DIMM eMouseMoveID)
 	return m_pInput_Device->Get_DIMMoveState(eMouseMoveID);
 }
 
+_bool CGameInstance::Key_Down(_uchar eKeyID)
+{
+	if (nullptr == m_pInput_Device)
+		return 0;
+
+	return m_pInput_Device->Key_Down(eKeyID);
+}
+
+_bool CGameInstance::Key_Up(_uchar eKeyID)
+{
+	if (nullptr == m_pInput_Device)
+		return 0;
+
+	return m_pInput_Device->Key_Up(eKeyID);
+}
+
+_bool CGameInstance::Key_Pressing(_uchar eKeyID)
+{
+	if (nullptr == m_pInput_Device)
+		return 0;
+
+	return m_pInput_Device->Key_Pressing(eKeyID);
+}
+
 list<CMap_Manager::CUBEDATA>* CGameInstance::ReadMap(const _tchar * pMapTag)
 {
 	if (nullptr == m_pMap_Manager)

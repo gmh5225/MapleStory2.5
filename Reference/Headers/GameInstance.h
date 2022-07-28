@@ -59,6 +59,9 @@ public: /* For.Input_Device */
 	_char Get_DIKState(_uchar eKeyID);
 	_char Get_DIMKeyState(DIMK eMouseKeyID);
 	_long Get_DIMMoveState(DIMM eMouseMoveID);
+	_bool Key_Down(_uchar eKeyID);
+	_bool Key_Up(_uchar eKeyID);
+	_bool Key_Pressing(_uchar eKeyID);
 
 
 public: /* For.Map_Manager */
