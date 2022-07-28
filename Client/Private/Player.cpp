@@ -36,7 +36,7 @@ HRESULT CPlayer::Initialize(void * pArg)
 	m_sTag = "Tag_Player";
 
 	m_fColRad = 0.5f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.6f, 0.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 2.f, 0.f));
 	m_pTransformCom->Set_Scaled(2.0f);
 
 	SetState(STATE_IDLE, DIR_D);
@@ -59,7 +59,12 @@ HRESULT CPlayer::SetUp_Components()
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
 		return E_FAIL;
 
-	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"))))
+
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 0.5f, 1.f, 0.5f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;
 	
 
@@ -134,7 +139,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		break;
 	case Client::CPlayer::STATE_DASH:		
 		CTransform::TRANSFORMDESC DashDesc;
-		DashDesc.fSpeedPerSec = 50.f;
+		DashDesc.fSpeedPerSec = 30.f;
 		DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
 		m_pTransformCom->Set_TransformDesc(DashDesc);
 		Dash(fTimeDelta);
@@ -146,21 +151,10 @@ void CPlayer::LateTick(_float fTimeDelta)
 {
 	SetOnceEndAni();
 	
+	m_pTransformCom->Go_Y(fTimeDelta);
 
-
-
-
-	_float3 pos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	
-	if(0.5f > pos.y)
-	{
-		pos.y = 0.5f;
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, pos);
-		SetState(STATE_IDLE, m_eDir);
-	}
-
-
-
+	_float3 d = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	int i = 0;
 
 	__super::BoxColCom_Tick(m_pTransformCom);
 
@@ -187,7 +181,8 @@ HRESULT CPlayer::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 	
-
+	__super::BoxColCom_Render(m_pTransformCom);
+	
 
 	return S_OK;
 }
@@ -206,7 +201,7 @@ void CPlayer::SetState(STATE eState, DIR eDir)
 
 	if (m_eCurState == STATE_JUMP)
 	{
-		m_pTransformCom->Set_Vel(8.0f);
+		m_pTransformCom->Set_Vel(5.0f);
 	}
 }
 void CPlayer::SetOnceEndAni()
@@ -674,7 +669,7 @@ void CPlayer::Dash(_float fTimeDelta)
 
 void CPlayer::Jump(_float fTimeDelta)
 {
-	m_pTransformCom->Go_Y(fTimeDelta);
+	// m_pTransformCom->Go_Y(fTimeDelta);
 }
 
 HRESULT CPlayer::Set_RenderState()
@@ -736,9 +731,13 @@ CGameObject * CPlayer::Clone(void* pArg)
 
 void CPlayer::Collision(CGameObject * pOther)
 {
-	if (pOther->Get_Tag() == "Tag_Monster")
+	if (pOther->Get_Tag() == "Tag_Cube")
 	{
-
+		if (m_eCurState == STATE_JUMP)
+		{
+			SetState(STATE_IDLE, m_eDir);
+		}
+		//m_pTransformCom->Set_Vel(0.f);
 	}
 }
 

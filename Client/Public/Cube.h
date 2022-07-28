@@ -5,6 +5,7 @@
 #include "Map_Manager.h"
 
 BEGIN(Engine)
+class CCollider;
 class CTexture;
 class CRenderer;
 class CTransform;
@@ -39,6 +40,7 @@ private:
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
 	CVIBuffer_Cube*			m_pVIBufferCom = nullptr;
+	CCollider*				m_pColliderCom = nullptr;
 
 private:
 	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);

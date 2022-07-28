@@ -31,15 +31,20 @@ public:
 	virtual HRESULT Initialize(void* pArg) override;
 
 	void Tick(class CTransform* pTrans);
+	void Render(CTransform* pTrans);
 
 	
 private:
 	_float3		m_vMax;
 	_float3		m_vMin;
-	_float3		m_vPivot;
 
 	_float3		m_vWorldMax;
 	_float3		m_vWorldMin;
+
+	BOXCOLCOMEDESC m_Desc;
+
+	LPDIRECT3DVERTEXBUFFER9	m_pVB = nullptr;
+	LPDIRECT3DINDEXBUFFER9	m_pIB = nullptr;
 
 public:
 	static CBoxCollider* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

@@ -13,6 +13,15 @@ HRESULT CMap_Manager::LoadMapData(HWND hWnd)
 	LoadData(hWnd);
 
 
+	//for (_int i = -10; i < 10; i++)
+	//{
+	//	for (_int j = -10; j < 10; j++)
+	//	{
+	//		CUBEDATA d = { _float3(i, -0.5f, j), 0 };
+	//		m_TempList.push_back(d);
+	//	}
+	//}
+
 	// 1. y축 45도 회전 행렬을 구한다.
 	_float4x4 RotationMatrix;
 	D3DXMatrixIdentity(&RotationMatrix);

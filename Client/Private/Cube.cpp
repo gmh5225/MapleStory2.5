@@ -27,6 +27,8 @@ HRESULT CCube::Initialize(void * pArg)
 	if (nullptr == pArg)
 		return E_FAIL;
 
+	m_sTag = "Tag_Cube";
+
 	m_pData = (CMap_Manager::CUBEDATA*)pArg;
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pData->vPos);
@@ -43,8 +45,13 @@ void CCube::Tick(_float fTimeDelta)
 
 void CCube::LateTick(_float fTimeDelta)
 {
+	__super::BoxColCom_Tick(m_pTransformCom); 
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_BLOCK, this);
+
+	_float3 d = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	int i = 0;
 }
 
 HRESULT CCube::Render()
@@ -65,6 +72,8 @@ HRESULT CCube::Render()
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
+
+	__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }
@@ -97,6 +106,20 @@ HRESULT CCube::SetUp_Components()
 	/* For.Com_Texture */
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+		return E_FAIL;
+
+
+
+
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 1.0f, 1.0f, 1.0f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
+		return E_FAIL;
+
+	/* For.Com_Collider */
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"), TEXT("Com_Collider"), (CComponent**)&m_pColliderCom)))
 		return E_FAIL;
 	
 
@@ -143,6 +166,7 @@ void CCube::Free()
 {
 	__super::Free();
 
+	Safe_Release(m_pColliderCom);
 	Safe_Release(m_pTransformCom);
 	Safe_Release(m_pTextureCom);
 	Safe_Release(m_pVIBufferCom);

@@ -116,6 +116,7 @@ _bool CCollider::Check_AABB(CGameObject * pObj_L, CGameObject * pObj_R)
 	if (pBoxColComs_L->empty() || pBoxColComs_R->empty())
 		return false;
 
+
 	for (auto& pBoxCol_L : *pBoxColComs_L)
 	{
 		for (auto& pBoxCol_R : *pBoxColComs_R)
@@ -128,6 +129,7 @@ _bool CCollider::Check_AABB(CGameObject * pObj_L, CGameObject * pObj_R)
 
 			_float fMax = 0.f;
 			_float fMin = 0.f;
+			_float3 fColDis = { -1.f, -1.f, -1.f };
 			// 1.제일 큰 x와 x를 비교해서 작은 녀석을 구한다.
 			if (vMax_L.x < vMax_R.x)
 				fMin = vMax_L.x;
@@ -143,7 +145,7 @@ _bool CCollider::Check_AABB(CGameObject * pObj_L, CGameObject * pObj_R)
 			// 3.작은 녀석보다 큰 녀석이 크면 겹쳤다.
 			if (fMin < fMax)
 				continue;
-
+			fColDis.x = fMin - fMax;
 
 
 			// 1.제일 큰 x와 x를 비교해서 작은 녀석을 구한다.
@@ -162,6 +164,7 @@ _bool CCollider::Check_AABB(CGameObject * pObj_L, CGameObject * pObj_R)
 			if (fMin < fMax)
 				continue;
 
+			fColDis.y = fMin - fMax;
 
 
 
@@ -181,15 +184,76 @@ _bool CCollider::Check_AABB(CGameObject * pObj_L, CGameObject * pObj_R)
 			if (fMin < fMax)
 				continue;
 
+			fColDis.z = fMin - fMax;
+
+
+
+			// ===============================================
+			// 큐브, 플레이어 위치를 비교해서 밀어낸다
+
+
+			CTransform* vTran_L = (CTransform*)(pObj_L->Find_Component(TEXT("Com_Transform")));
+			CTransform* vTran_R = (CTransform*)(pObj_R->Find_Component(TEXT("Com_Transform")));
+			_float3 vPos_L = vTran_L->Get_State(CTransform::STATE_POSITION);
+			_float3 vPos_R = vTran_R->Get_State(CTransform::STATE_POSITION);
+
+
+			if (fColDis.x < fColDis.z)
+			{
+				// 좌
+				if (vPos_L.x < vPos_R.x)
+				{
+					_float3 disPos = { vPos_L.x - fColDis.x , vPos_L.y, vPos_L.z };
+					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+				}
+
+				// 우
+				else if (vPos_L.x > vPos_R.x)
+				{
+					_float3 disPos = { vPos_L.x + fColDis.x , vPos_L.y, vPos_L.z };
+					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+				}
+			}
+			else
+			{
+				// 앞
+				if (vPos_L.z < vPos_R.z)
+				{
+					_float3 disPos = { vPos_L.x, vPos_L.y , vPos_L.z - fColDis.z  };
+					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+				}
+
+				// 뒤
+				else if (vPos_L.z > vPos_R.z)
+				{
+					_float3 disPos = { vPos_L.x, vPos_L.y, vPos_L.z + fColDis.z };
+					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+				}
+			}
+
+
+
+
+
+			// 상
+			if (fColDis.x > fColDis.y)
+			{
+				if (vPos_L.y > vPos_R.y + 0.5f)
+				{
+					_float3 disPos = { vPos_L.x, vPos_L.y + fColDis.y, vPos_L.z };
+					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+					vTran_L->Set_Vel(0.f);
+				}
+
+				// 2. 하
+			}
 
 			return true;
-
 		}
+
+		return false;
 	}
-
-	return false;
 }
-
 
 
 CCollider * CCollider::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -214,12 +278,12 @@ void CCollider::Free()
 {
 	__super::Free();
 
-	for (auto& List : m_CollisionObjects)
+	for (int i = 0; i < COLLSION_END; ++i)
 	{
-		for (auto& pGameObject : List)
+		for (auto& pGameObject : m_CollisionObjects[i])
 		{
 			Safe_Release(pGameObject);
 		}
-		List.clear();
-	}	
+		m_CollisionObjects[i].clear();
+	}
 }
