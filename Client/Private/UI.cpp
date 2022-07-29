@@ -24,8 +24,19 @@ HRESULT CUI::Initialize_Prototype()
 HRESULT CUI::Initialize(void * pArg)
 {
 
-	if (FAILED(SetUp_Components()))
-		return E_FAIL;
+	/*if (FAILED(SetUp_Components()))
+		return E_FAIL;*/
+
+	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
+
+	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
+	m_bRender = true;
+	m_iTexturenum = 0;
+	m_eCollision = TYPE_NO;
+	D3DXMatrixIdentity(&m_ViewMatrix);
+
+	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 	return S_OK;
 }

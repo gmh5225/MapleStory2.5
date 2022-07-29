@@ -22,27 +22,22 @@ HRESULT CSkillFrame::Initialize_Prototype()
 
 HRESULT CSkillFrame::Initialize(void * pArg)
 {
-	//__super::Initialize(pArg);
-	
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+	//m_UIInfo = *(UIINFO*)pArg;
 	//memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
-	m_UIInfo = *(UIINFO*)pArg;
 
 	m_UIInfo.fSizeX = 350.f;
 	m_UIInfo.fSizeY = 350.f;
 	m_UIInfo.fX = 900.f;
 	m_UIInfo.fY = 300.f;
-	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
 
-	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
-	m_bRender = true;
-	m_iTexturenum = 0;
-	m_eCollision = TYPE_NO;
-	D3DXMatrixIdentity(&m_ViewMatrix);
-	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
+	__super::Initialize(pArg);
+	
+	//memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
+	//m_UIInfo = *(UIINFO*)pArg;
+
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
@@ -54,7 +49,7 @@ void CSkillFrame::Tick(_float fTimeDelta)
 {
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
-	Check_Collision(DIMK_LBUTTON);
+	
 	if (pInstance->Key_Down(DIK_K))
 		m_bRender = !m_bRender;
 
@@ -72,6 +67,7 @@ void CSkillFrame::LateTick(_float fTimeDelta)
 {
 	if (m_bRender)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+
 }
 
 HRESULT CSkillFrame::Render()
