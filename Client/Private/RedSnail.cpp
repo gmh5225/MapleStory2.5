@@ -2,6 +2,7 @@
 #include "..\Public\RedSnail.h"
 
 #include "GameInstance.h"
+#include "QuestManager.h"
 
 CRedSnail::CRedSnail(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -205,6 +206,7 @@ void CRedSnail::Damaged(CGameObject * pOther)
 		SetState(STATE_HIT, DIR_R);
 	else
 		SetState(STATE_HIT, DIR_L);
+
 
 	Safe_Release(pGameInstance);
 

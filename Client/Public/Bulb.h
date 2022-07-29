@@ -49,7 +49,8 @@ public:
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-
+private:
+	_uint m_iQuestState;
 };
 
 END

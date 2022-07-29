@@ -2,6 +2,7 @@
 #include "..\Public\Slime.h"
 
 #include "GameInstance.h"
+#include "QuestManager.h"
 
 CSlime::CSlime(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -209,6 +210,11 @@ void CSlime::Damaged(CGameObject * pOther)
 		SetState(STATE_HIT, DIR_L);
 
 	Safe_Release(pGameInstance);
+
+	m_bDead = true;
+
+	// 슬라임이 죽으면 슬라임 카운트 증가
+	CQuestManager::Get_Instance()->Hunting(TEXT("Slime"));
 }
 
 

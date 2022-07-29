@@ -2,9 +2,11 @@
 #include "..\Public\Bulb.h"
 
 #include "GameInstance.h"
+#include "QuestManager.h"
 
 CBulb::CBulb(LPDIRECT3DDEVICE9 pGraphic_Device)
-	: CCreature(pGraphic_Device)
+	: CCreature(pGraphic_Device),
+	  m_iQuestState(0)
 {
 }
 CBulb::CBulb(const CBulb & rhs)
@@ -33,9 +35,11 @@ HRESULT CBulb::Initialize(void * pArg)
 	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(4.0f, 1.1f, 0.3f));
 	m_pTransformCom->Set_Scaled(0.8f);
 
+	// 퀘스트 false 초기화 및 퀘스트 시작으로 초기화
+	CQuestManager::Get_Instance()->Check_End_Quest();
+	CQuestManager::Get_Instance()->QuestStart();
+
 	SetState(STATE_IDLE, DIR_END);
-
-
 
 	return S_OK;
 }
@@ -48,8 +52,9 @@ HRESULT CBulb::SetUp_Components()
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Start"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_End"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Progress"), nullptr);
+		
 	}
-
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -69,24 +74,8 @@ HRESULT CBulb::SetUp_Components()
 
 void CBulb::Tick(_float fTimeDelta)
 {
-
-	switch (m_eCurState)
-	{
-	case Client::CBulb::STATE_IDLE:
-		Tick_Idle(fTimeDelta);
-		break;
-	case Client::CBulb::STATE_MOVE:
-		Tick_Move(fTimeDelta);
-		break;
-	case Client::CBulb::STATE_HIT:
-		Tick_Hit(fTimeDelta);
-		break;
-	case Client::CBulb::STATE_CHASE:
-		Tick_Chase(fTimeDelta);
-		break;
-	}
-
 }
+
 void CBulb::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
@@ -99,6 +88,7 @@ void CBulb::LateTick(_float fTimeDelta)
 }
 HRESULT CBulb::Render()
 {
+	SetAni();
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
@@ -151,17 +141,19 @@ void CBulb::SetState(STATE eState, DIR eDir)
 }
 void CBulb::SetAni()
 {
-	switch (m_eCurState)
+	m_iQuestState = CQuestManager::Get_Instance()->Set_QuestState();
+	switch (m_iQuestState)
 	{
-	case CBulb::STATE_IDLE:
+	case CQuestManager::QUEST_PREPARE:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_Start"), 0.3f, CAnimator::STATE_LOOF);
 		break;
-	case CBulb::STATE_MOVE:
+	case CQuestManager::QUEST_PROGRESS:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_Progress"), 0.3f, CAnimator::STATE_LOOF);
 		break;
-	case CBulb::STATE_HIT:
+	case CQuestManager::QUEST_CLEAR:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_End"), 0.3f, CAnimator::STATE_LOOF);
 		break;
-	case CBulb::STATE_CHASE:
+	case CQuestManager::QUEST_END:
 		break;
 	}
 }
@@ -205,7 +197,9 @@ CGameObject * CBulb::Clone(void* pArg)
 
 void CBulb::Collision(CGameObject * pOther)
 {
-	SetState(STATE_HIT, DIR_END);
+	// 충돌한 상태로 q를 누르면 퀘스트 시작 채팅을 띄움
+	if ((GetKeyState(VK_SPACE) & 0x8000))
+		CQuestManager::Get_Instance()->Check_Start_Quest();
 }
 
 

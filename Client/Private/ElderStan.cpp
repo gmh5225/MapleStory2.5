@@ -3,6 +3,7 @@
 
 #include "GameInstance.h"
 
+
 CElderStan::CElderStan(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -158,7 +159,6 @@ void CElderStan::SetAni()
 	}
 	break;
 	case CElderStan::STATE_HIT:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_Hit"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	case CElderStan::STATE_CHASE:
 		break;
@@ -174,10 +174,12 @@ void CElderStan::Damaged(CGameObject * pOther)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	Safe_Release(pGameInstance);
-
 	
 	SetState(STATE_HIT,DIR_END);
+
+
+
+	Safe_Release(pGameInstance);
 }
 
 
