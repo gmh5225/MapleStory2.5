@@ -233,14 +233,22 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
+	CUI::UIINFO SkillFrameiInfo;
+	SkillFrameiInfo.fSizeX = 450.f;
+	SkillFrameiInfo.fSizeY = 450.f;
+	SkillFrameiInfo.fX = 300.f;
+	SkillFrameiInfo.fY = 300.f;
 
-	CUI::UIINFO uiInfo;
-	uiInfo.fSizeX = 300.f;
-	uiInfo.fSizeY = 300.f;
-	uiInfo.fX = 300.f;
-	uiInfo.fY = 300.f;
+	CUI::UIINFO SkillUpBtnInfo;
+	SkillUpBtnInfo.fSizeX = 18.f;
+	SkillUpBtnInfo.fSizeY = 16.f;
+	SkillUpBtnInfo.fX = SkillFrameiInfo.fX - 20.f;
+	SkillUpBtnInfo.fY = SkillFrameiInfo.fY - 76.f;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_GAMEPLAY, pLayerTag), &uiInfo))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_GAMEPLAY, pLayerTag, &SkillFrameiInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo)))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bulb"), LEVEL_GAMEPLAY, pLayerTag)))

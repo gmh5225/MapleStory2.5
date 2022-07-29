@@ -2,13 +2,12 @@
 #include "UI.h"
 
 BEGIN(Client)
-
-class CSkillFrame final : public CUI
+class CSkillUpBtn final : public  CUI
 {
 private:
-	CSkillFrame(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSkillFrame(const CSkillFrame& rhs);
-	virtual ~CSkillFrame() = default;
+	CSkillUpBtn(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CSkillUpBtn(const CSkillUpBtn& rhs);
+	virtual ~CSkillUpBtn() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -18,12 +17,15 @@ public:
 	virtual HRESULT Render() override;
 
 public:
-	static CSkillFrame* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	void Change_Texture();
+
+public:
+	static CSkillUpBtn* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-	//LPD3DXFONT m_SkillFrameFont;
+private:
+	_uint m_iSkillPoint;
 };
-
 END
 

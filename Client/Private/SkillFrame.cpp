@@ -26,17 +26,14 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 		return E_FAIL;
 
 	//m_UIInfo = *(UIINFO*)pArg;
-	//memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
+	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
 
-	m_UIInfo.fSizeX = 350.f;
-	m_UIInfo.fSizeY = 350.f;
-	m_UIInfo.fX = 900.f;
-	m_UIInfo.fY = 300.f;
 
 	__super::Initialize(pArg);
 	
-	//memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
-	//m_UIInfo = *(UIINFO*)pArg;
+	/*D3DXCreateFont(m_pGraphic_Device, 20, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"µ¸¿òÃ¼", &m_SkillFrameFont);*/
 
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
@@ -80,6 +77,16 @@ HRESULT CSkillFrame::Render()
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
 	m_pVIBufferCom->Render();
+
+	/*char string[100];
+	RECT rt;
+
+	SetRect(&rt, 100, 200, 0, 0);
+	m_SkillFrameFont->DrawText(NULL, L"1", -1, &rt, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));*/
+
+	/*TCHAR mName[30];
+	wsprintf(mName, TEXT("ÃÖ´ëÄÞº¸ : %d"), int(UIIT->Get_MaxCombo()));
+	TextOut(g_whnd, 50, 30, mName, lstrlen(mName));*/
 
 	return S_OK;
 }

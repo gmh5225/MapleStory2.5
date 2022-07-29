@@ -185,6 +185,7 @@
     <ClInclude Include="..\Public\SkillFrame.h" />
     <ClInclude Include="..\Public\SkillManager.h" />
     <ClInclude Include="..\Public\RibbonPig.h" />
+    <ClInclude Include="..\Public\SkillUpBtn.h" />
     <ClInclude Include="..\Public\Slime.h" />
     <ClInclude Include="..\Public\SunderBreakAttack.h" />
     <ClInclude Include="..\Public\UI.h" />
@@ -227,6 +228,7 @@
     <ClCompile Include="..\Private\SkillFrame.cpp" />
     <ClCompile Include="..\Private\SkillManager.cpp" />
     <ClCompile Include="..\Private\RibbonPig.cpp" />
+    <ClCompile Include="..\Private\SkillUpBtn.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
     <ClCompile Include="..\Private\SunderBreakAttack.cpp" />
     <ClCompile Include="..\Private\UI.cpp" />

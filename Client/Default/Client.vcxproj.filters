@@ -165,16 +165,16 @@
     </Filter>
     <Filter Include="04.UI\99.UI">
       <UniqueIdentifier>{4783165b-bdd4-485f-888a-2ee35492ca7a}</UniqueIdentifier>
-          </Filter>
+    </Filter>
     <Filter Include="04.UI\02.Quest">
       <UniqueIdentifier>{78fca32e-9182-4029-a709-7505c766ec02}</UniqueIdentifier>
     </Filter>
     <Filter Include="04.UI\03.Dialog">
       <UniqueIdentifier>{6d6a7ff8-1be6-41e9-a155-1bd76b89de1e}</UniqueIdentifier>
-          </Filter>
+    </Filter>
     <Filter Include="03.MoDel\MushHouse">
       <UniqueIdentifier>{33c2b3e5-aecd-4978-8c4d-6ba0569ccc2c}</UniqueIdentifier>
-         </Filter>
+    </Filter>
     <Filter Include="04.UI\ItemInventory">
       <UniqueIdentifier>{e724cf80-6773-4807-93aa-3dc1814924df}</UniqueIdentifier>
     </Filter>
@@ -293,15 +293,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\UI.h">
       <Filter>04.UI\99.UI</Filter>
-         </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\QuestUI.h">
       <Filter>04.UI\02.Quest</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Chat.h">
       <Filter>04.UI\03.Dialog</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\MushHouse.h">
       <Filter>03.MoDel\MushHouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillUpBtn.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillUpBtn</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -409,15 +412,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\UI.cpp">
       <Filter>04.UI\99.UI</Filter>
-         </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\QuestUI.cpp">
       <Filter>04.UI\02.Quest</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Chat.cpp">
       <Filter>04.UI\03.Dialog</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\MushHouse.cpp">
       <Filter>03.MoDel\MushHouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillUpBtn.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillUpBtn</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
