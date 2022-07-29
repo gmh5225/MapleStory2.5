@@ -132,15 +132,18 @@
     </Filter>
     <Filter Include="02.GameObject\Skill\RangeAttack\SunderBreak\Attack">
       <UniqueIdentifier>{33f88ffb-87c1-4919-a49d-98493400cd3b}</UniqueIdentifier>
-       </Filter>
+    </Filter>
     <Filter Include="04.UI\01.Bulb">
       <UniqueIdentifier>{ee369dd0-4eed-44df-b7c7-c1a4378415ab}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Item">
       <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Item\RedPortion">
       <UniqueIdentifier>{ebff119c-82f0-44d7-8dd6-9ebee650be9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\ItemInventory">
+      <UniqueIdentifier>{e724cf80-6773-4807-93aa-3dc1814924df}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -248,10 +251,10 @@
     </ClInclude>
     <ClInclude Include="..\Public\SunderBreakAttack.h">
       <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
-       </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Bulb.h">
       <Filter>04.UI\01.Bulb</Filter>
-        </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\RedPortion.h">
       <Filter>02.GameObject\Item\RedPortion</Filter>
     </ClInclude>
@@ -352,10 +355,10 @@
     </ClCompile>
     <ClCompile Include="..\Private\SunderBreakAttack.cpp">
       <Filter>02.GameObject\Skill\RangeAttack\SunderBreak\Attack</Filter>
-        </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Bulb.cpp">
       <Filter>04.UI\01.Bulb</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\RedPortion.cpp">
       <Filter>02.GameObject\Item\RedPortion</Filter>
     </ClCompile>

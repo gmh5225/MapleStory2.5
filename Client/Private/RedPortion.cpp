@@ -29,25 +29,26 @@ HRESULT CRedPortion::Initialize(void * pArg)
 	
 	memcpy(&m_Desc, pArg, sizeof(REDPORTIONDESC));
 	m_Desc.iNum = 0;
+	m_Desc.eItemState = ITEM_APPEAR;
 	m_fColRad = 0.1f;
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION,m_Desc.vPos);
+	 m_pTransformCom->Set_State(CTransform::STATE_POSITION,m_Desc.vPos);
 	
 	m_pTransformCom->Set_Scaled(0.3f);
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedPortion"), 0.08f, CAnimator::STATE_ONCE);
 
 	m_eDir = DIR_END;
-
 	
+	a = 0;
+	bPlusY = true;
 	return S_OK;
 }
 
 HRESULT CRedPortion::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedPortion"), nullptr);
+		if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedPortion"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+			return E_FAIL;
 	}
-
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -62,14 +63,35 @@ HRESULT CRedPortion::SetUp_Components()
 	return S_OK;
 }
 
-void CRedPortion::Tick(_float fTimeDelta)
-{
-	//몬스터에 생성돼서 터지는 모양
-	//플레이어가 줍는 모양
+void CRedPortion::Tick(_float fTimeDelta)//틱은 1초에 60번 돈다
+{	//APPEAR 튕겨나간 후에 상태 IDEL 로 바꿔주기 
+	//IDLE
+	//PICKED
+		_float3 m_vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		if (a < 60 && bPlusY)//a가 60 보다 작고 true 면
+		{
+			m_vPos.y += 0.3f* fTimeDelta;	 //pos를 위로 올려준다
+			a++;//a를 1 올려준다.
+		}
+		else
+			bPlusY = false;
+
+		if (a > 0 && !bPlusY)//false가 돼서 여기로 들어온다
+		{
+			m_vPos.y -= 0.3f* fTimeDelta;
+			a--;
+		}
+		else
+			bPlusY = true;
+
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_vPos);
+	}
 	
-}
+	
+
 void CRedPortion::LateTick(_float fTimeDelta)
 {
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 	m_pColliderCom->Add_CollsionGroup(CCollider::COLLISION_ITEM, this);
 	SetDirection();
@@ -82,10 +104,8 @@ HRESULT CRedPortion::Render()
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
-	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
-	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
+	if (FAILED(m_pTextureCom->Bind_Texture(1)))
 		return E_FAIL;
-
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
@@ -230,10 +250,6 @@ void CRedPortion::SetPosition(DIR eDir)
 	}
 }
 
-void CRedPortion::SetAni()
-{
-	
-}
 
 CRedPortion * CRedPortion::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

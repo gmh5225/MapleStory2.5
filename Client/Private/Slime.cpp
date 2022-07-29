@@ -2,7 +2,8 @@
 #include "..\Public\Slime.h"
 
 #include "GameInstance.h"
-#include "RedPortion.h"
+
+#include "InvenManager.h"
 CSlime::CSlime(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -203,7 +204,6 @@ void CSlime::Damaged(CGameObject * pOther)
 	//je_test:redportion appearance
 	CRedPortion::REDPORTIONDESC RedPortionDesc;
 	RedPortionDesc.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-
 	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedPortion"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &RedPortionDesc);
 	//test_end
 	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
