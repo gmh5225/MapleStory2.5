@@ -59,8 +59,9 @@ protected:
 	
 	HRESULT Compute_CamDistance(_float3 vWorldPos);
 	void BoxColCom_Tick(class CTransform* pTrans);
+	void BoxColCom_Render(class CTransform* pTrans);
 
-private:
+public:
 	class CComponent* Find_Component(const _tchar* pComponentTag);
 
 public:

@@ -171,6 +171,9 @@
     </Filter>
     <Filter Include="04.UI\03.Dialog">
       <UniqueIdentifier>{6d6a7ff8-1be6-41e9-a155-1bd76b89de1e}</UniqueIdentifier>
+          </Filter>
+    <Filter Include="03.MoDel\MushHouse">
+      <UniqueIdentifier>{33c2b3e5-aecd-4978-8c4d-6ba0569ccc2c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -293,6 +296,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\Chat.h">
       <Filter>04.UI\03.Dialog</Filter>
+          </ClInclude>
+    <ClInclude Include="..\public\MushHouse.h">
+      <Filter>03.MoDel\MushHouse</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -406,6 +412,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Chat.cpp">
       <Filter>04.UI\03.Dialog</Filter>
+          </ClCompile>
+    <ClCompile Include="..\private\MushHouse.cpp">
+      <Filter>03.MoDel\MushHouse</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

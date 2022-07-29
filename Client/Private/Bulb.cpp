@@ -32,7 +32,7 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	m_sTag = "Tag_UI";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(4.0f, 1.1f, 0.3f));
+	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 1.1f, 0.3f));
 	m_pTransformCom->Set_Scaled(0.8f);
 
 	// 퀘스트 false 초기화 및 퀘스트 시작으로 초기화

@@ -2,10 +2,8 @@
 
 #include "Client_Defines.h"
 #include "GameObject.h"
-#include "Map_Manager.h"
 
 BEGIN(Engine)
-class CCollider;
 class CTexture;
 class CRenderer;
 class CTransform;
@@ -15,18 +13,12 @@ END
 
 BEGIN(Client)
 
-class CCube final : public CGameObject
+class CMushHouse final : public CGameObject
 {
-public:
-	typedef struct tagCubeDesc
-	{
-		_float3	vPos;
-		const _tchar* pTextureTag;
-	}CUBEDESC;
 private:
-	CCube(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CCube(const CCube& rhs);
-	virtual ~CCube() = default;
+	CMushHouse(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CMushHouse(const CMushHouse& rhs);
+	virtual ~CMushHouse() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -40,11 +32,9 @@ private:
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
 	CVIBuffer_Cube*			m_pVIBufferCom = nullptr;
-	CCollider*				m_pColliderCom = nullptr;
 
 private:
 	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);
-	CMap_Manager::CUBEDATA* m_pData;
 
 private:
 	HRESULT Set_RenderState();
@@ -53,7 +43,7 @@ private:
 	HRESULT SetUp_Components();
 
 public:
-	static CCube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CMushHouse* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

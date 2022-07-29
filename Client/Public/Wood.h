@@ -15,12 +15,6 @@ BEGIN(Client)
 
 class CWood final : public CGameObject
 {
-public:
-	typedef struct tagCubeDesc
-	{
-		_float3	vPos;
-		const _tchar* pTextureTag;
-	}CUBEDESC;
 private:
 	CWood(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CWood(const CWood& rhs);

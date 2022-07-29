@@ -115,6 +115,15 @@ void CGameObject::BoxColCom_Tick(CTransform* pTrans)
 		pBoxColCom->Tick(pTrans);
 }
 
+void CGameObject::BoxColCom_Render(CTransform * pTrans)
+{
+	if (m_BoxColliders.empty())
+		return;
+
+	for (auto& pBoxColCom : m_BoxColliders)
+		pBoxColCom->Render(pTrans);
+}
+
 
 CComponent * CGameObject::Find_Component(const _tchar * pComponentTag)
 {
