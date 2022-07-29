@@ -73,6 +73,9 @@ HRESULT CCollider::Check_SphereCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSION
 }
 HRESULT CCollider::Check_AABBCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R)
 {
+	if (m_CollisionObjects[eCollsionGroup_L].empty() || m_CollisionObjects[eCollsionGroup_R].empty())
+		return S_OK;
+
 	for (auto& pL_Object : m_CollisionObjects[eCollsionGroup_L])
 	{
 		for (auto& pR_Object : m_CollisionObjects[eCollsionGroup_R])

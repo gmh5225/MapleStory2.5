@@ -133,18 +133,13 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	Load_Npc_Texture();
 
 	/* For.Prototype_Component_Texture_Item */
-	Load_UI_Texture();
-
-	Load_Model_Texture();
-
 	Load_Item_Texture();
 
+	/* For.Prototype_Component_Texture_Model */
+	Load_Model_Texture();
+
 	/* For.Prototype_Component_Texture_UI */
-
 	Load_UI_Texture();
-
-	/* For.Prototype_Component_Texture_Cube */
-
 
 
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -345,9 +340,6 @@ HRESULT CLoader::Load_Model_Object()
 		CMushHouse::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
-		CWood::Create(m_pGraphic_Device))))
-		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 

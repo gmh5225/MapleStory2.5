@@ -86,7 +86,7 @@ HRESULT CMainApp::Render()
 		m_fTimeAcc = 0.f;
 	}
 
-	SetWindowText(g_hWnd, m_szFPS);
+	// SetWindowText(g_hWnd, m_szFPS);
 #endif // _DEBUG
 
 	
@@ -170,10 +170,10 @@ HRESULT CMainApp::Ready_Prototype_Component()
 
 
 
-	
+	/*
 	Safe_AddRef(m_pCollider);
 	Safe_AddRef(m_pRenderer);
-
+*/
 	return S_OK;
 }
 

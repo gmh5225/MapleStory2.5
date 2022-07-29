@@ -21,7 +21,7 @@ ClassName& operator=(const ClassName&) = delete;
 		NO_COPY(ClassName)								\
 public :												\
 	static ClassName* Get_Instance();					\
-	static unsigned long Destroy_Instance();				\
+	static unsigned long Destroy_Instance();			\
 private:												\
 	static ClassName* m_pInstance;
 

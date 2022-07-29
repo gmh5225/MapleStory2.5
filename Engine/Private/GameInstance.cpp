@@ -266,7 +266,9 @@ list<CMap_Manager::CUBEDATA>* CGameInstance::ReadMap(const _tchar * pMapTag)
 
 void CGameInstance::Release_Engine()
 {
-	CGameInstance::Get_Instance()->Destroy_Instance();
+	_int i = CGameInstance::Get_Instance()->Destroy_Instance();
+
+
 
 	CComponent_Manager::Get_Instance()->Destroy_Instance();
 

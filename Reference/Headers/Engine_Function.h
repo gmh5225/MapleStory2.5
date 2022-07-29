@@ -36,6 +36,7 @@ namespace Engine
 		return dwRefCnt;
 	}
 
+
 	template<typename T>
 	unsigned long Safe_Release(T& Temp)
 	{
