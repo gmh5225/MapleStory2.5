@@ -7,6 +7,7 @@
 #include "SunCross.h"
 #include "SunderBreakAttack.h"
 #include "GameInstance.h"
+#include "InvenManager.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -473,11 +474,11 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 	{
 		SetState(STATE_IDLE, m_eDir);
 	}
-
-	if (GetKeyState('Z') & 0x8000)
+	if (GetKeyState(VK_LCONTROL)&0X8000)
 	{
 		SetState(STATE_ATTACK, m_eDir);
 	}
+
 
 	if (GetKeyState('X') & 0x8000)
 	{
@@ -738,6 +739,18 @@ void CPlayer::Collision(CGameObject * pOther)
 			SetState(STATE_IDLE, m_eDir);
 		}
 		//m_pTransformCom->Set_Vel(0.f);
+	}
+	else if (pOther->Get_Tag() == "Tag_Item")
+	{
+
+	if (GetKeyState('Z') & 0x8000)
+	{
+		//메니저통해서 아이템 갯수 추가 
+		//CInvenManager* m_pInvenMgr = CInvenManager::Get_Instance();
+		//Safe_AddRef(m_pInvenMgr);
+		//m_pInvenMgr->AddItemNum();
+	}
+
 	}
 }
 

@@ -7,11 +7,14 @@ BEGIN(Client)
 class CRedPortion final : public CCreature
 {
 public:
+	enum ITEM{ ITEM_APPEAR, ITEM_IDLE, ITEM_PICKED, ITEM_END};
+public:
 	typedef struct tagRedPortionDESC
 	{
 		_float3 vPos;//몬스터위치받아오기
 		_int iNum; //갯수 넘겨줘야할것같아서
 		//DIR eDir;
+		ITEM eItemState;
 	}REDPORTIONDESC;
 private:
 	CRedPortion(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -36,19 +39,14 @@ public:
 	void Effect();
 	void SetDirection();
 	void SetPosition(DIR eDir);
-	
-
-public:
-	virtual void SetAni() override;
-
 
 private:
 	_int m_iNum;
 	DIR m_eDir;
 	REDPORTIONDESC m_Desc;
-
 	list<CGameObject*> m_pOther;
-
+	_int a;
+	_bool	bPlusY;
 private:
 	HRESULT SetUp_Components();
 
