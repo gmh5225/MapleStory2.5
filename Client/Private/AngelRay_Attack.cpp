@@ -169,7 +169,6 @@ void CAngelRay_Attack::SetPosition(DIR eDir)
 
 	Safe_Release(pInstance);
 
-	Safe_Release(pInstance);
 	_float3 vPosFix;
 	switch (eDir)
 	{

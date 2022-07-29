@@ -49,7 +49,7 @@ void CSkillFrame::Tick(_float fTimeDelta)
 {
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
-	
+	Check_Collision(DIMK_LBUTTON);
 	if (pInstance->Key_Down(DIK_K))
 		m_bRender = !m_bRender;
 
@@ -114,8 +114,4 @@ void CSkillFrame::Free()
 {
 	__super::Free();
 
-	Safe_Release(m_pTransformCom);
-	Safe_Release(m_pTextureCom);
-	Safe_Release(m_pVIBufferCom);
-	Safe_Release(m_pRendererCom);
 }

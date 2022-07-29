@@ -3,6 +3,10 @@
 
 #include "GameInstance.h"
 #include "Level_Loading.h"
+#include "QuestManager.h"
+#include "SkillManager.h"
+#include "UIManager.h"
+#include "InvenManager.h"
 
 using namespace Client;
 
@@ -167,7 +171,7 @@ HRESULT CMainApp::Ready_Prototype_Component()
 
 
 	
-
+	Safe_AddRef(m_pCollider);
 	Safe_AddRef(m_pRenderer);
 
 	return S_OK;
@@ -194,7 +198,12 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
-	Safe_Release(m_pGraphic_Device);
+	CQuestManager::Destroy_Instance();
+	CSkillManager::Destroy_Instance();
+	CUIManager::Destroy_Instance();
+	CInvenManager::Destroy_Instance();
+
+
 	Safe_Release(m_pRenderer);
 	Safe_Release(m_pCollider);
 	Safe_Release(m_pGameInstance);

@@ -105,29 +105,30 @@ void CUI::Check_Collision(DIMK m_eMouseKey)
 		if (pInstance->Mouse_Down(m_eMouseKey))
 		{
 			m_eCollision = TYPE_DOWN;
-			return;
+		
 		}
 		else if (pInstance->Mouse_Up(m_eMouseKey))
 		{
 			m_eCollision = TYPE_UP;
-			return;
+		
 		}
 		else if (pInstance->Mouse_Pressing(m_eMouseKey))
 		{
 			m_eCollision = TYPE_PRESSING;
-			return;
+		
 		}
 		else
 		{
 			m_eCollision = TYPE_ON;
-			return;
+			
 		}
 	}
 	else
 	{
 		m_eCollision = TYPE_NO;
-		return;
+		
 	}
+	Safe_Release(pInstance);
 }
 
 CUI* CUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

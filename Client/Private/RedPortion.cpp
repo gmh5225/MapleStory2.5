@@ -34,6 +34,7 @@ HRESULT CRedPortion::Initialize(void * pArg)
 
 	CTransform* pMonsterTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Monster"), TEXT("Com_Transform"), 0);
 
+	Safe_Release(pGameInstance);
 	_float3 vMonsterPos = pMonsterTransform->Get_State(CTransform::STATE_POSITION);
 
 	
@@ -185,7 +186,6 @@ void CRedPortion::SetPosition(DIR eDir)
 
 	Safe_Release(pInstance);
 
-	Safe_Release(pInstance);
 	_float3 vPosFix;
 	switch (eDir)
 	{
