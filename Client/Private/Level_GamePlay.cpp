@@ -101,7 +101,16 @@ HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const _tchar * pLayerTag)
 	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Terrain"), LEVEL_GAMEPLAY, pLayerTag)))
 	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag)))
+	CVIBuffer_Voxel::VOXELDESC VoxDesc;
+	VoxDesc.vPos = _float3{ 5.f, 5.f, 5.f };
+	VoxDesc.vScale = _float3{ 0.3f, 0.3f, 0.3f };
+	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
+	VoxDesc.fAngle = 35.f;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MushHouse"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
 		return E_FAIL;
 
 
@@ -157,7 +166,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(TEXT("Map_Henesys"));
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Herojho");
 
 	for (auto& Data : *pMapData)
 	{

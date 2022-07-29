@@ -16,6 +16,7 @@ public:
 	{
 		_float3	vPos;
 		_int	iIndex;
+		_int 	r, g, b;
 	}CUBEDATA;
 
 private:
@@ -27,6 +28,7 @@ public:
 	list<CUBEDATA>* ReadMap(const _tchar* pMapTag);
 
 	void LoadData(HWND hWnd);
+	void LoadModel(HWND hWnd);
 
 private:
 	list<CUBEDATA>* Find_Map(const _tchar* pMapTag);

@@ -1,31 +1,29 @@
 #include "stdafx.h"
-#include "..\Public\Wood.h"
+#include "..\Public\MushHouse.h"
 
 #include "GameInstance.h"
 
-CWood::CWood(LPDIRECT3DDEVICE9 pGraphic_Device)
+CMushHouse::CMushHouse(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
 }
 
-CWood::CWood(const CWood & rhs)
+CMushHouse::CMushHouse(const CMushHouse & rhs)
 	: CGameObject(rhs)
 {
 }
 
 
-HRESULT CWood::Initialize_Prototype()
+HRESULT CMushHouse::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CWood::Initialize(void * pArg)
+HRESULT CMushHouse::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
-		return E_FAIL;	
-
-	if (nullptr == pArg)
 		return E_FAIL;
+
 
 	CVIBuffer_Voxel::VOXELDESC* pVoxDesc = (CVIBuffer_Voxel::VOXELDESC*)pArg;
 
@@ -33,25 +31,26 @@ HRESULT CWood::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(pVoxDesc->vScale);
 	m_pTransformCom->Rotation(pVoxDesc->vRotationAix, pVoxDesc->fAngle);
 
+
 	return S_OK;
 }
 
-void CWood::Tick(_float fTimeDelta)
+void CMushHouse::Tick(_float fTimeDelta)
 {
-	
+
 }
 
-void CWood::LateTick(_float fTimeDelta)
+void CMushHouse::LateTick(_float fTimeDelta)
 {
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }
 
-HRESULT CWood::Render()
+HRESULT CMushHouse::Render()
 {
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
-		return E_FAIL;	
-	
+		return E_FAIL;
+
 	m_pGraphic_Device->SetTexture(0, nullptr);
 
 	if (FAILED(Set_RenderState()))
@@ -65,7 +64,7 @@ HRESULT CWood::Render()
 	return S_OK;
 }
 
-HRESULT CWood::Set_RenderState()
+HRESULT CMushHouse::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -75,23 +74,23 @@ HRESULT CWood::Set_RenderState()
 	return S_OK;
 }
 
-HRESULT CWood::Reset_RenderState()
+HRESULT CMushHouse::Reset_RenderState()
 {
 
 
 	return S_OK;
 }
 
-HRESULT CWood::SetUp_Components()
+HRESULT CMushHouse::SetUp_Components()
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Tree"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_MushHouse"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
-	
+
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -106,33 +105,33 @@ HRESULT CWood::SetUp_Components()
 	return S_OK;
 }
 
-CWood * CWood::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CMushHouse * CMushHouse::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CWood*		pInstance = new CWood(pGraphic_Device);
+	CMushHouse*		pInstance = new CMushHouse(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CWood"));
+		MSG_BOX(TEXT("Failed To Created : CMushHouse"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CWood::Clone(void* pArg)
+CGameObject * CMushHouse::Clone(void* pArg)
 {
-	CWood*		pInstance = new CWood(*this);
+	CMushHouse*		pInstance = new CMushHouse(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CWood"));
+		MSG_BOX(TEXT("Failed To Cloned : CMushHouse"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CWood::Free()
+void CMushHouse::Free()
 {
 	__super::Free();
 

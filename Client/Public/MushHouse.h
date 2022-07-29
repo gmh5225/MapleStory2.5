@@ -13,12 +13,12 @@ END
 
 BEGIN(Client)
 
-class CWood final : public CGameObject
+class CMushHouse final : public CGameObject
 {
 private:
-	CWood(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CWood(const CWood& rhs);
-	virtual ~CWood() = default;
+	CMushHouse(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CMushHouse(const CMushHouse& rhs);
+	virtual ~CMushHouse() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -43,7 +43,7 @@ private:
 	HRESULT SetUp_Components();
 
 public:
-	static CWood* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CMushHouse* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

@@ -1,5 +1,8 @@
 #include "..\Public\VIBuffer_Voxel.h"
 
+#include "GameInstance.h"
+#include "Map_Manager.h"
+
 CVIBuffer_Voxel::CVIBuffer_Voxel(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CVIBuffer(pGraphic_Device)
 {
@@ -10,13 +13,29 @@ CVIBuffer_Voxel::CVIBuffer_Voxel(const CVIBuffer_Voxel & rhs)
 {
 }
 
-HRESULT CVIBuffer_Voxel::Initialize_Prototype(vector<tagVertexColor>* pVoxelDatas)
+HRESULT CVIBuffer_Voxel::Initialize_Prototype(const _tchar* Tag)
 {
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(Tag);
+	list<tagVertexColor> VoxelDatas;
+
+	for (auto& Data : *pMapData)
+	{
+		tagVertexColor temp;
+		temp.vPosition = Data.vPos;
+		temp.dwColor = D3DCOLOR_XRGB(Data.r, Data.g, Data.b);
+		VoxelDatas.push_back(temp);
+	}
+
+	Safe_Release(pGameInstance);
+
 	m_iStride = sizeof(VTXCOL);
-	m_iNumVertices = 8 * pVoxelDatas->size();
+	m_iNumVertices = 8 * VoxelDatas.size();
 	m_dwFVF = D3DFVF_XYZ | D3DFVF_DIFFUSE;
 	m_ePrimitiveType = D3DPT_TRIANGLELIST;
-	m_iNumPrimitive = 16 * pVoxelDatas->size();
+	m_iNumPrimitive = 16 * VoxelDatas.size();
 
 	if (FAILED(__super::Create_VertexBuffer()))
 		return E_FAIL;
@@ -26,25 +45,25 @@ HRESULT CVIBuffer_Voxel::Initialize_Prototype(vector<tagVertexColor>* pVoxelData
 	m_pVB->Lock(0, /*m_iStride * m_iNumVertices*/0, (void**)&pVertices, 0);
 
 	_int iIndex = 0;
-	for (_int i = 0; i < pVoxelDatas->size(); i++)
+	for (auto& Data : VoxelDatas)
 	{
-		pVertices[iIndex].vPosition = _float3(-0.5f + (*pVoxelDatas)[i].vPosition.x, 0.5f + (*pVoxelDatas)[i].vPosition.y, -0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
-		pVertices[1 + iIndex].vPosition = _float3(0.5f + (*pVoxelDatas)[i].vPosition.x, 0.5f + (*pVoxelDatas)[i].vPosition.y, -0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[1 + iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
-		pVertices[2 + iIndex].vPosition = _float3(0.5f + (*pVoxelDatas)[i].vPosition.x, -0.5f + (*pVoxelDatas)[i].vPosition.y, -0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[2 + iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
-		pVertices[3 + iIndex].vPosition = _float3(-0.5f + (*pVoxelDatas)[i].vPosition.x, -0.5f + (*pVoxelDatas)[i].vPosition.y, -0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[3 + iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
+		pVertices[iIndex].vPosition = _float3(-0.5f + Data.vPosition.x, 0.5f + Data.vPosition.y, -0.5f + Data.vPosition.z);
+		pVertices[iIndex].dwColor = Data.dwColor;
+		pVertices[1 + iIndex].vPosition = _float3(0.5f + Data.vPosition.x, 0.5f + Data.vPosition.y, -0.5f + Data.vPosition.z);
+		pVertices[1 + iIndex].dwColor = Data.dwColor;
+		pVertices[2 + iIndex].vPosition = _float3(0.5f + Data.vPosition.x, -0.5f + Data.vPosition.y, -0.5f + Data.vPosition.z);
+		pVertices[2 + iIndex].dwColor = Data.dwColor;
+		pVertices[3 + iIndex].vPosition = _float3(-0.5f + Data.vPosition.x, -0.5f + Data.vPosition.y, -0.5f + Data.vPosition.z);
+		pVertices[3 + iIndex].dwColor = Data.dwColor;
 
-		pVertices[4 + iIndex].vPosition = _float3(-0.5f + (*pVoxelDatas)[i].vPosition.x, 0.5f + (*pVoxelDatas)[i].vPosition.y, 0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[4 + iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
-		pVertices[5 + iIndex].vPosition = _float3(0.5f + (*pVoxelDatas)[i].vPosition.x, 0.5f + (*pVoxelDatas)[i].vPosition.y, 0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[5 + iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
-		pVertices[6 + iIndex].vPosition = _float3(0.5f + (*pVoxelDatas)[i].vPosition.x, -0.5f + (*pVoxelDatas)[i].vPosition.y, 0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[6 + iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
-		pVertices[7 + iIndex].vPosition = _float3(-0.5f + (*pVoxelDatas)[i].vPosition.x, -0.5f + (*pVoxelDatas)[i].vPosition.y, 0.5f + (*pVoxelDatas)[i].vPosition.z);
-		pVertices[7 + iIndex].dwColor = (*pVoxelDatas)[i].dwColor;
+		pVertices[4 + iIndex].vPosition = _float3(-0.5f + Data.vPosition.x, 0.5f + Data.vPosition.y, 0.5f + Data.vPosition.z);
+		pVertices[4 + iIndex].dwColor = Data.dwColor;
+		pVertices[5 + iIndex].vPosition = _float3(0.5f + Data.vPosition.x, 0.5f + Data.vPosition.y, 0.5f + Data.vPosition.z);
+		pVertices[5 + iIndex].dwColor = Data.dwColor;
+		pVertices[6 + iIndex].vPosition = _float3(0.5f + Data.vPosition.x, -0.5f + Data.vPosition.y, 0.5f + Data.vPosition.z);
+		pVertices[6 + iIndex].dwColor = Data.dwColor;
+		pVertices[7 + iIndex].vPosition = _float3(-0.5f + Data.vPosition.x, -0.5f + Data.vPosition.y, 0.5f + Data.vPosition.z);
+		pVertices[7 + iIndex].dwColor = Data.dwColor;
 
 		iIndex += 8;
 	}
@@ -66,7 +85,7 @@ HRESULT CVIBuffer_Voxel::Initialize_Prototype(vector<tagVertexColor>* pVoxelData
 	m_pIB->Lock(0, 0, (void**)&pIndices, 0);
 
 	iIndex = 0;
-	for (_int i = 0; i < pVoxelDatas->size(); i++)
+	for (_int i = 0; i < VoxelDatas.size(); i++)
 	{
 
 		/* +x */
@@ -109,11 +128,11 @@ HRESULT CVIBuffer_Voxel::Initialize(void * pArg)
 	return S_OK;
 }
 
-CVIBuffer_Voxel * CVIBuffer_Voxel::Create(LPDIRECT3DDEVICE9 pGraphic_Device, vector<tagVertexColor>* pVoxelDatas)
+CVIBuffer_Voxel * CVIBuffer_Voxel::Create(LPDIRECT3DDEVICE9 pGraphic_Device, const _tchar* Tag)
 {
 	CVIBuffer_Voxel*			pInstance = new CVIBuffer_Voxel(pGraphic_Device);
 
-	if (FAILED(pInstance->Initialize_Prototype(pVoxelDatas)))
+	if (FAILED(pInstance->Initialize_Prototype(Tag)))
 	{
 		MSG_BOX(TEXT("Failed To Created : CVIBuffer_Cube"));
 		Safe_Release(pInstance);

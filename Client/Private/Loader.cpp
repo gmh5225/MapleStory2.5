@@ -24,7 +24,7 @@
 #include "SunderBreakAttack.h"
 #include "Bulb.h"
 #include "RedPortion.h"
-
+#include "MushHouse.h"
 
 
 
@@ -127,6 +127,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
 		CWood::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_MushHouse"),
+		CMushHouse::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_OrangeMushroom"),
@@ -255,30 +258,15 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 
 
-	vector<tagVertexColor> tempTest;
-	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 0.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
-	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 1.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
-	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 2.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
-	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, 0.f }, D3DCOLOR_XRGB(111, 79, 40) });
-
-	tempTest.push_back(tagVertexColor{ _float3{ 1.f, 3.f, 0.f }, D3DCOLOR_XRGB(0, 255, 0) });
-	tempTest.push_back(tagVertexColor{ _float3{ -1.f, 3.f, 0.f }, D3DCOLOR_XRGB(0, 255, 0) });
-	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, -1.f }, D3DCOLOR_XRGB(0, 255, 0) });
-	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 3.f, 1.f }, D3DCOLOR_XRGB(0, 255, 0) });
-	tempTest.push_back(tagVertexColor{ _float3{ 0.f, 4.f, 0.f }, D3DCOLOR_XRGB(0, 255, 0) });
-	//for (_int i = 0; i < 400; i++)
-	//{
-	//	for (_int j = 0; j < 400; j++)
-	//	{
-	//		tempTest.push_back(tagVertexColor{ _float3{ (_float)j, 0.f, (_float)i }, D3DCOLOR_XRGB(111, 79, 40) });
-	//	}
-	//}
 
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Tree"),
-		CVIBuffer_Voxel::Create(m_pGraphic_Device, &tempTest))))
+		CVIBuffer_Voxel::Create(m_pGraphic_Device, L"Wood"))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_MushHouse"),
+		CVIBuffer_Voxel::Create(m_pGraphic_Device, L"MushHouse"))))
+		return E_FAIL;
 
 
 

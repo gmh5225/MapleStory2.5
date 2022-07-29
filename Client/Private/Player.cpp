@@ -151,7 +151,7 @@ void CPlayer::LateTick(_float fTimeDelta)
 {
 	SetOnceEndAni();
 	
-	m_pTransformCom->Go_Y(fTimeDelta);
+	// m_pTransformCom->Go_Y(fTimeDelta);
 
 	_float3 d = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	int i = 0;
