@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "..\Public\Loader.h"
-
 #include "GameInstance.h"
 #include "Camera_Free.h"
 #include "BackGround.h"
@@ -25,6 +24,9 @@
 #include "Bulb.h"
 #include "RedPortion.h"
 #include "SkillFrame.h"
+#include "QuestUI.h"
+#include "Chat.h"
+
 
 
 
@@ -105,7 +107,6 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	lstrcpy(m_szLoadingText, TEXT("객체원형을 로딩중입니다. "));
 
-
 	Load_Player_Object();
 	Load_Monster_Object();
 	Load_Npc_Object();
@@ -137,6 +138,10 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	Load_Model_Texture();
 
 	Load_Item_Texture();
+
+	/* For.Prototype_Component_Texture_UI */
+
+	Load_UI_Texture();
 
 	/* For.Prototype_Component_Texture_Cube */
 
@@ -321,6 +326,14 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bulb"),
 		CBulb::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_QuestUI"),
+		CQuestUI::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Chat"),
+		CChat::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -624,8 +637,6 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_MoveR%d.png"), 3))))
 		return E_FAIL;
 
-	
-
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -653,17 +664,30 @@ HRESULT CLoader::Load_UI_Texture()
 	Safe_AddRef(pGameInstance);
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Start"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/QuestStart/QuestIcon%d.png"), 6))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/QuestStart/QuestIcon%d.png"), 6))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_End"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/QuestEnd/QuestIcon%d.png"), 8))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/QuestEnd/QuestIcon%d.png"), 8))))
 		return E_FAIL;
 
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/SkillFrame/SkillFrame.png")))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillFrame/SkillFrame.png")))))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Progress"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/QuestProgress/QuestIcon%d.png"), 4))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Quest"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/QuestWindow/Quest%d.png"), 4))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Chat"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/Dialog/Dialog%d.png"), 2))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 

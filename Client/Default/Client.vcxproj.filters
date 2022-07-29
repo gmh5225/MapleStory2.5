@@ -133,6 +133,9 @@
     <Filter Include="02.GameObject\Skill\RangeAttack\SunderBreak\Attack">
       <UniqueIdentifier>{33f88ffb-87c1-4919-a49d-98493400cd3b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.UI\01.Bulb">
+      <UniqueIdentifier>{ee369dd0-4eed-44df-b7c7-c1a4378415ab}</UniqueIdentifier>
+    </Filter>
     <Filter Include="02.GameObject\Item">
       <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
     </Filter>
@@ -162,6 +165,12 @@
     </Filter>
     <Filter Include="04.UI\99.UI">
       <UniqueIdentifier>{4783165b-bdd4-485f-888a-2ee35492ca7a}</UniqueIdentifier>
+          </Filter>
+    <Filter Include="04.UI\02.Quest">
+      <UniqueIdentifier>{78fca32e-9182-4029-a709-7505c766ec02}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog">
+      <UniqueIdentifier>{6d6a7ff8-1be6-41e9-a155-1bd76b89de1e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -278,6 +287,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\UI.h">
       <Filter>04.UI\99.UI</Filter>
+         </ClInclude>
+    <ClInclude Include="..\Public\QuestUI.h">
+      <Filter>04.UI\02.Quest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Chat.h">
+      <Filter>04.UI\03.Dialog</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -385,6 +400,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\UI.cpp">
       <Filter>04.UI\99.UI</Filter>
+         </ClCompile>
+    <ClCompile Include="..\Private\QuestUI.cpp">
+      <Filter>04.UI\02.Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Chat.cpp">
+      <Filter>04.UI\03.Dialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

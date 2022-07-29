@@ -55,7 +55,7 @@ void CSkillFrame::Tick(_float fTimeDelta)
 
 	if (pInstance->Mouse_Up(DIMK_LBUTTON))
 	{
-		int a = 5;
+	
 	}
 
 
