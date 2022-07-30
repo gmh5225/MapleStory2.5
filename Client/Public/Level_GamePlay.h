@@ -25,6 +25,10 @@ private:
 	HRESULT Ready_Layer_Map(const _tchar* pLayerTag);
 	HRESULT Ready_Layer_UI(const _tchar* pLayerTag);
 
+private:
+	HRESULT Ready_SkillFrameBtn(const _tchar* pLayerTag);
+	HRESULT Ready_SkillFrameIcon
+
 public:
 	static CLevel_GamePlay* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual void Free() override;

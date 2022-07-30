@@ -234,22 +234,18 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 
 	CUI::UIINFO SkillFrameiInfo;
-	SkillFrameiInfo.fSizeX = 450.f;
-	SkillFrameiInfo.fSizeY = 450.f;
+	SkillFrameiInfo.fSizeX = 318.f;
+	SkillFrameiInfo.fSizeY = 360.f;
 	SkillFrameiInfo.fX = 300.f;
 	SkillFrameiInfo.fY = 300.f;
 
-	CUI::UIINFO SkillUpBtnInfo;
-	SkillUpBtnInfo.fSizeX = 18.f;
-	SkillUpBtnInfo.fSizeY = 16.f;
-	SkillUpBtnInfo.fX = SkillFrameiInfo.fX - 20.f;
-	SkillUpBtnInfo.fY = SkillFrameiInfo.fY - 76.f;
+
+
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_GAMEPLAY, pLayerTag, &SkillFrameiInfo)))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo)))
-		return E_FAIL;
+	Ready_SkillFrameBtn(pLayerTag);
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bulb"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
@@ -262,6 +258,63 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 	Safe_Release(pGameInstance);
 
+
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_SkillFrameBtn(const _tchar * pLayerTag)
+{
+	//스킬Up Btn 간격 가로 144px 세로 40px
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CUI::UIINFO SkillUpBtnInfo1;
+	SkillUpBtnInfo1.fSizeX = 16.f;
+	SkillUpBtnInfo1.fSizeY = 14.f;
+	SkillUpBtnInfo1.fMoveX = -16.f;
+	SkillUpBtnInfo1.fMoveY = -60.f;
+
+	CUI::UIINFO SkillUpBtnInfo2;
+	SkillUpBtnInfo2.fSizeX = 16.f;
+	SkillUpBtnInfo2.fSizeY = 14.f;
+	SkillUpBtnInfo2.fMoveX = 128.f;
+	SkillUpBtnInfo2.fMoveY = -60.f;
+
+	CUI::UIINFO SkillUpBtnInfo3;
+	SkillUpBtnInfo3.fSizeX = 16.f;
+	SkillUpBtnInfo3.fSizeY = 14.f;
+	SkillUpBtnInfo3.fMoveX = -16.f;
+	SkillUpBtnInfo3.fMoveY = -20.f;
+
+	CUI::UIINFO SkillUpBtnInfo4;
+	SkillUpBtnInfo4.fSizeX = 16.f;
+	SkillUpBtnInfo4.fSizeY = 14.f;
+	SkillUpBtnInfo4.fMoveX = 128.f;
+	SkillUpBtnInfo4.fMoveY = -20.f;
+
+	CUI::UIINFO SkillUpBtnInfo5;
+	SkillUpBtnInfo5.fSizeX = 16.f;
+	SkillUpBtnInfo5.fSizeY = 14.f;
+	SkillUpBtnInfo5.fMoveX = -16.f;
+	SkillUpBtnInfo5.fMoveY = 20.f;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo1)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo2)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo3)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo4)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo5)))
+		return E_FAIL;
+
+
+	Safe_Release(pGameInstance);
 
 	return S_OK;
 }

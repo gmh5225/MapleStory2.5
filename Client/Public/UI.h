@@ -19,7 +19,7 @@ public:
 public:
 	typedef struct tagUIInfo
 	{
-		_float					fX, fY, fSizeX, fSizeY;
+		_float					fMoveX, fMoveY, fX, fY, fSizeX, fSizeY;
 	}UIINFO;
 protected:
 	CUI(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -32,6 +32,11 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
+
+public:
+	void Set_Level(_uint i) { m_iTexturenum = i; }
+	void Set_UIMovePos(UIINFO tUIInfo) { m_UIInfo.fX = tUIInfo.fX + m_UIInfo.fMoveX, m_UIInfo.fY = tUIInfo.fY + m_UIInfo.fMoveY; }
+	void Set_UIPos(UIINFO tUIInfo) { m_UIInfo.fX = tUIInfo.fX, m_UIInfo.fY = tUIInfo.fY; }
 
 protected:
 	CTexture*				m_pTextureCom = nullptr;

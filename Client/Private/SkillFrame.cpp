@@ -28,16 +28,20 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 	//m_UIInfo = *(UIINFO*)pArg;
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
 
+	m_pSkillManager = CSkillManager::Get_Instance();
+
+	m_pSkillManager->Set_pSkillFrame(this);
 
 	__super::Initialize(pArg);
 	
-	/*D3DXCreateFont(m_pGraphic_Device, 20, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
+	D3DXCreateFont(m_pGraphic_Device, 20, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"µ¸¿òÃ¼", &m_SkillFrameFont);*/
+		L"µ¸¿òÃ¼", &m_SkillFrameFont);
 
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
+
 
 	return S_OK;
 }
@@ -46,13 +50,14 @@ void CSkillFrame::Tick(_float fTimeDelta)
 {
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
+
 	Check_Collision(DIMK_LBUTTON);
 	if (pInstance->Key_Down(DIK_K))
 		m_bRender = !m_bRender;
 
 	if (pInstance->Mouse_Up(DIMK_LBUTTON))
 	{
-	
+		m_pSkillManager->Set_SkillPoint(1);
 	}
 
 
@@ -65,6 +70,10 @@ void CSkillFrame::LateTick(_float fTimeDelta)
 	if (m_bRender)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 
+	for (auto list : m_SkillFrameImage)
+	{
+		list->Set_UIMovePos(m_UIInfo);
+	}
 }
 
 HRESULT CSkillFrame::Render()
@@ -76,13 +85,28 @@ HRESULT CSkillFrame::Render()
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &m_ViewMatrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
+	Set_RenderState();
+
 	m_pVIBufferCom->Render();
 
-	/*char string[100];
-	RECT rt;
+	Reset_RenderState();
+	/*HDC a = GetDC(g_hWnd);
 
-	SetRect(&rt, 100, 200, 0, 0);
-	m_SkillFrameFont->DrawText(NULL, L"1", -1, &rt, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));*/
+	Rectangle(a, 100, 100, 500, 500);*/
+	
+	
+	
+	
+	wchar_t istr[32];
+	_itow_s(m_pSkillManager->Get_SkillPoint(), istr, 10);
+
+	RECT rt;
+	SetRect(&rt, 100, 300, 0, 0);
+	m_SkillFrameFont->DrawText(NULL,istr, -1, &rt, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
+	
+	RECT rt2;
+	SetRect(&rt2, 300, 300, 0, 0);
+	m_SkillFrameFont->DrawText(NULL, L"Test", -1, &rt2, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
 
 	/*TCHAR mName[30];
 	wsprintf(mName, TEXT("ÃÖ´ëÄÞº¸ : %d"), int(UIIT->Get_MaxCombo()));
@@ -90,6 +114,18 @@ HRESULT CSkillFrame::Render()
 
 	return S_OK;
 }
+
+HRESULT CSkillFrame::Add_SkillFrameImage(CUI * pSkillFrameImage)
+{
+	if (pSkillFrameImage == nullptr)
+		return E_FAIL;
+
+	m_SkillFrameImage.push_back(pSkillFrameImage);
+	return S_OK;
+}
+
+
+
 
 CSkillFrame* CSkillFrame::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

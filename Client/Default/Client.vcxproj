@@ -183,10 +183,12 @@
     <ClInclude Include="..\Public\RedPortion.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
+    <ClInclude Include="..\Public\SkillInfo.h" />
     <ClInclude Include="..\Public\SkillManager.h" />
     <ClInclude Include="..\Public\RibbonPig.h" />
     <ClInclude Include="..\Public\SkillUpBtn.h" />
     <ClInclude Include="..\Public\Slime.h" />
+    <ClInclude Include="..\Public\SunCrossIcon.h" />
     <ClInclude Include="..\Public\SunderBreakAttack.h" />
     <ClInclude Include="..\Public\UI.h" />
     <ClInclude Include="..\Public\UIManager.h" />
@@ -226,10 +228,12 @@
     <ClCompile Include="..\Private\RedPortion.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
+    <ClCompile Include="..\Private\SkillInfo.cpp" />
     <ClCompile Include="..\Private\SkillManager.cpp" />
     <ClCompile Include="..\Private\RibbonPig.cpp" />
     <ClCompile Include="..\Private\SkillUpBtn.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
+    <ClCompile Include="..\Private\SunCrossIcon.cpp" />
     <ClCompile Include="..\Private\SunderBreakAttack.cpp" />
     <ClCompile Include="..\Private\UI.cpp" />
     <ClCompile Include="..\Private\UIManager.cpp" />

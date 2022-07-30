@@ -1,4 +1,6 @@
 #pragma once
+#include "Client_Defines.h"
+#include "SkillManager.h"
 #include "UI.h"
 
 BEGIN(Client)
@@ -18,11 +20,19 @@ public:
 	virtual HRESULT Render() override;
 
 public:
+	HRESULT Add_SkillFrameImage(CUI* pSkillFrameImage);
+
+public:
 	static CSkillFrame* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-	//LPD3DXFONT m_SkillFrameFont;
+	LPD3DXFONT m_SkillFrameFont;
+
+private:
+	CSkillManager* m_pSkillManager;
+	list<CUI*> m_SkillFrameImage;
+	list<CUI*> m_BeginnerSkillIcon;
 };
 
 END
