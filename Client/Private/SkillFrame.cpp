@@ -38,6 +38,10 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
 		L"돋움체", &m_FrameFont);
 
+	D3DXCreateFont(m_pGraphic_Device, 18, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"돋움체", &m_GradeFont);
+
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
@@ -77,19 +81,9 @@ void CSkillFrame::LateTick(_float fTimeDelta)
 	{
 		list->Set_UIMovePos(m_UIInfo);
 	}
+	Set_Data();
 
-	if (m_pSkillManager->Get_SkillPoint() < 10)
-	{
-		m_iSkillPointDigit = 440;
-	}
-	else if (m_pSkillManager->Get_SkillPoint() < 100)
-	{
-		m_iSkillPointDigit = 430;
-	}
-	else
-	{
-		m_iSkillPointDigit = 420;
-	}
+	
 
 }
 
@@ -167,6 +161,10 @@ void CSkillFrame::RenderText()
 	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SunCrossLevel, 10);
 	
 
+	RECT Grade;
+	SetRect(&Grade, 265, 180, 0, 0);
+	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
 	RECT SkillPointrt;
 	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
 	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
@@ -175,10 +173,52 @@ void CSkillFrame::RenderText()
 	SetRect(&SuncrossName, 192, 215, 0, 0);
 	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 
-
 	RECT SuncrossLevel;
-	SetRect(&SuncrossName, 193, 233, 0, 0);
-	m_FrameFont->DrawText(NULL, SunCrossLevel, -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+	SetRect(&SuncrossLevel, 193, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, SunCrossLevel, -1, &SuncrossLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	
+}
+
+void CSkillFrame::Set_Data()
+{
+	if (m_pSkillManager->Get_SkillPoint() < 10)
+	{
+		m_iSkillPointDigit = 440;
+	}
+	else if (m_pSkillManager->Get_SkillPoint() < 100)
+	{
+		m_iSkillPointDigit = 430;
+	}
+	else
+	{
+		m_iSkillPointDigit = 420;
+	}
+
+	switch (m_pSkillManager->Get_SkillGrade())
+	{
+	case CSkillManager::GRADE_BEGENNER:
+		m_cGrade = L"0차 전직";
+		break;
+	case CSkillManager::GRADE_FIRST:
+		m_cGrade = L"1차 전직";
+		break;
+	case CSkillManager::GRADE_SECOND:
+		m_cGrade = L"2차 전직";
+		break;
+	case CSkillManager::GRADE_THIRD:
+		m_cGrade = L"3차 전직";
+		break;
+	case CSkillManager::GRADE_FOURTH:
+		m_cGrade = L"4차 전직";
+		break;
+	case CSkillManager::GRADE_FIFTH:
+		m_cGrade = L"5차 전직";
+		break;
+
+	default:
+		break;
+	}
 }
 
 void CSkillFrame::Free()

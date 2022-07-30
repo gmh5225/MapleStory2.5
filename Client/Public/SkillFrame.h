@@ -30,9 +30,12 @@ public:
 
 private:
 	void RenderText();
+	void Set_Data();
 private:
 	_uint m_iSkillPointDigit;
 	LPD3DXFONT m_FrameFont;
+	LPD3DXFONT m_GradeFont;
+	const wchar_t* m_cGrade;
 
 private:
 	CSkillManager* m_pSkillManager;

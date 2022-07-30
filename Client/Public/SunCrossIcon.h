@@ -26,6 +26,7 @@ public:
 
 private:
 	_uint m_iSkillPoint;
+	LPD3DXFONT m_NoticeFont;
 };
 END
 

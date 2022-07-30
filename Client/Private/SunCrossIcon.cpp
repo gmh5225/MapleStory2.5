@@ -36,6 +36,10 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
+	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"돋움체", &m_NoticeFont);
+
 	pSkillInstance->Add_SkillFrameImage(this);
 
 	return S_OK;
@@ -55,6 +59,7 @@ void CSunCrossIcon::Tick(_float fTimeDelta)
 	{
 
 	}
+	Check_Collision(DIMK_LBUTTON);
 
 	Safe_Release(pInstance);
 }
@@ -87,6 +92,15 @@ HRESULT CSunCrossIcon::Render()
 	m_pVIBufferCom->Render();
 
 	Reset_RenderState();
+
+
+	if (m_eCollision == TYPE_ON)
+	{
+		RECT SunCrossNotice;
+		SetRect(&SunCrossNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
+		m_NoticeFont->DrawText(NULL, L"스킬 설명 테스트\n타입 : 전방 공격\n대미지 : 20\n타격횟수 : 3\n소모 마나 : 50", -1, &SunCrossNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+	}
+
 	return S_OK;
 }
 
@@ -97,6 +111,8 @@ void CSunCrossIcon::Change_Texture()
 		m_iTexturenum = 0;
 	else
 		m_iTexturenum = 1;
+
+	
 	
 }
 
