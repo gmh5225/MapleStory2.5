@@ -379,7 +379,7 @@ void CTransform::LookAtForLandObject(_float3 vTargetPos)
 
 void CTransform::Chase(_float3 vTargetPos, _float fTimeDelta)
 {
-	LookAt(vTargetPos);
+	LookAtForLandObject(vTargetPos);
 
 	Go_Straight(fTimeDelta);
 }

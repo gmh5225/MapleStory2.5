@@ -50,6 +50,9 @@ public:
 	static CQuestUI* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
+private:
+	LPD3DXFONT m_pFont;
 };
 
 END

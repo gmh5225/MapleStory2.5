@@ -2,6 +2,7 @@
 #include "..\Public\OrangeMushroom.h"
 
 #include "GameInstance.h"
+#include "QuestManager.h"
 
 COrangeMushroom::COrangeMushroom(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -222,6 +223,9 @@ void COrangeMushroom::Damaged(CGameObject * pOther)
 		SetState(STATE_HIT, DIR_L);
 
 	Safe_Release(pGameInstance);
+
+	CQuestManager::Get_Instance()->Hunting(TEXT("OrangeMushroom"));
+	Set_Dead();
 
 }
 

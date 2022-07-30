@@ -8,6 +8,7 @@
 #include "UIManager.h"
 #include "InvenManager.h"
 
+
 using namespace Client;
 
 CMainApp::CMainApp()
@@ -59,6 +60,7 @@ void CMainApp::Tick(_float fTimeDelta)
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_UI, CCollider::COLLSION_PLAYER);
 	m_pCollider->End_Collsion();
+
 }
 
 HRESULT CMainApp::Render()
