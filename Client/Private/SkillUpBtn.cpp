@@ -2,6 +2,7 @@
 #include "..\Public\SkillUpBtn.h"
 #include "GameInstance.h"
 #include "SkillManager.h"
+#include "SunCrossInfo.h"
 
 
 CSkillUpBtn::CSkillUpBtn(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -118,7 +119,7 @@ void CSkillUpBtn::Change_Texture()
 		break;
 	case Client::CUI::TYPE_UP:
 		pSkillInstance->Set_SkillPoint(-1);
-
+		pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
 		break;
 	case Client::CUI::TYPE_PRESSING:
 		m_iTexturenum = 3;

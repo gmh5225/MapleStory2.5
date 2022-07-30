@@ -3,6 +3,9 @@
 
 #include "GameInstance.h"
 #include "Camera_Free.h"
+#include "SkillInfo.h"
+#include "SunCrossInfo.h"
+#include "SkillManager.h"
 #include "UI.h"
 
 
@@ -14,6 +17,9 @@ CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 HRESULT CLevel_GamePlay::Initialize()
 {
 	if (FAILED(__super::Initialize()))
+		return E_FAIL;
+
+	if (FAILED(Ready_SkillInfo()))
 		return E_FAIL;
 
  	if (FAILED(Ready_Layer_Map(TEXT("Layer_Map"))))
@@ -36,6 +42,7 @@ HRESULT CLevel_GamePlay::Initialize()
 
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 		return E_FAIL;
+
 
 
 	return S_OK;
@@ -245,6 +252,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 	Ready_SkillFrameBtn(pLayerTag);
 
+	Ready_SkillIcon(pLayerTag);
+
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bulb"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
@@ -311,6 +320,8 @@ HRESULT CLevel_GamePlay::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo5)))
 		return E_FAIL;
 
+	
+
 	CUI::UIINFO SkillGradeBtnInfo0;
 	SkillGradeBtnInfo0.fSizeX = 25.f;
 	SkillGradeBtnInfo0.fSizeY = 20.f;
@@ -367,6 +378,34 @@ HRESULT CLevel_GamePlay::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 
 	Safe_Release(pGameInstance);
 
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_SkillIcon(const _tchar * pLayerTag)
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CUI::UIINFO SunCrossInfo;
+	SunCrossInfo.fSizeX = 32.f;
+	SunCrossInfo.fSizeY = 32.f;
+	SunCrossInfo.fMoveX = -129.f;
+	SunCrossInfo.fMoveY = -69.f;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCrossIcon"), LEVEL_GAMEPLAY, pLayerTag, &SunCrossInfo)))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_SkillInfo()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	CSunCrossInfo* pSunCross = new CSunCrossInfo;
+	
+	pSkillInstance->Add_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER, pSunCross);
 	return S_OK;
 }
 

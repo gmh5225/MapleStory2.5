@@ -1,6 +1,7 @@
 #pragma once
 #include "Client_Defines.h"
 #include "SkillManager.h"
+#include "SkillInfo.h"
 #include "UI.h"
 
 BEGIN(Client)
@@ -27,12 +28,16 @@ public:
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-	LPD3DXFONT m_SkillPointFont;
+private:
+	void RenderText();
+private:
+	_uint m_iSkillPointDigit;
+	LPD3DXFONT m_FrameFont;
 
 private:
 	CSkillManager* m_pSkillManager;
 	list<CUI*> m_SkillFrameImage;
-	list<CUI*> m_BeginnerSkillIcon;
+
 };
 
 END

@@ -36,7 +36,7 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 	
 	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"µ¸¿òÃ¼", &m_SkillPointFont);
+		L"µ¸¿òÃ¼", &m_FrameFont);
 
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
@@ -77,6 +77,20 @@ void CSkillFrame::LateTick(_float fTimeDelta)
 	{
 		list->Set_UIMovePos(m_UIInfo);
 	}
+
+	if (m_pSkillManager->Get_SkillPoint() < 10)
+	{
+		m_iSkillPointDigit = 440;
+	}
+	else if (m_pSkillManager->Get_SkillPoint() < 100)
+	{
+		m_iSkillPointDigit = 430;
+	}
+	else
+	{
+		m_iSkillPointDigit = 420;
+	}
+
 }
 
 HRESULT CSkillFrame::Render()
@@ -93,27 +107,11 @@ HRESULT CSkillFrame::Render()
 	m_pVIBufferCom->Render();
 
 	Reset_RenderState();
-	/*HDC a = GetDC(g_hWnd);
-
-	Rectangle(a, 100, 100, 500, 500);*/
+	
+	RenderText();
 	
 	
 	
-	
-	wchar_t istr[32];
-	_itow_s(m_pSkillManager->Get_SkillPoint(), istr, 10);
-
-	RECT rt;
-	SetRect(&rt, 440, 150, 0, 0);
-	m_SkillPointFont->DrawText(NULL,istr, -1, &rt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
-	
-	RECT rt2;
-	SetRect(&rt2, 300, 300, 0, 0);
-	m_SkillPointFont->DrawText(NULL, L"Test", -1, &rt2, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
-
-	/*TCHAR mName[30];
-	wsprintf(mName, TEXT("ÃÖ´ëÄÞº¸ : %d"), int(UIIT->Get_MaxCombo()));
-	TextOut(g_whnd, 50, 30, mName, lstrlen(mName));*/
 
 	return S_OK;
 }
@@ -156,8 +154,37 @@ CGameObject * CSkillFrame::Clone(void * pArg)
 	return pInstance;
 }
 
+void CSkillFrame::RenderText()
+{
+
+
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	wchar_t SkillPoint[10];
+	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
+
+	wchar_t SunCrossLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SunCrossLevel, 10);
+	
+
+	RECT SkillPointrt;
+	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
+	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+
+	RECT SuncrossName;
+	SetRect(&SuncrossName, 192, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+
+	RECT SuncrossLevel;
+	SetRect(&SuncrossName, 193, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, SunCrossLevel, -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+}
+
 void CSkillFrame::Free()
 {
 	__super::Free();
 
 }
+
+

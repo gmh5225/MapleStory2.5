@@ -9,6 +9,7 @@ BEGIN(Client)
 
 class CSkillFrame;
 class CUI;
+class CSkillInfo;
 
 class CSkillManager final : CBase
 {
@@ -25,15 +26,19 @@ public:
 	
 	HRESULT Set_pSkillFrame(CSkillFrame* pSkillFrame);
 	HRESULT Add_SkillFrameImage(CUI* pSkillFrameImage);
-	
+	HRESULT Add_SkillInfo(const _tchar* pTag, SkillGrade eGrade, CSkillInfo* pSkillInfo);
+
 	const SkillGrade Get_SkillGrade() { return m_eSkillGrade; }
 	void Set_SkillGrade(SkillGrade eGrade) { m_eSkillGrade = eGrade; }
+
+	CSkillInfo* Get_SkillInfo(const _tchar* pSkillInfoTag, SkillGrade eGrade);
+	CSkillInfo* Find_SkillInfo(const _tchar* pSkillInfoTag, SkillGrade eGrade);
 
 private:
 	_uint m_iSkillPoint;
 	CSkillFrame* m_pSkillFrame;
 	SkillGrade m_eSkillGrade;
-
+	map<const _tchar*, CSkillInfo*> m_SkillInfo[GRADE_FIFTH];
 public:
 	virtual void Free() override;
 

@@ -202,6 +202,9 @@
     <Filter Include="04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn">
       <UniqueIdentifier>{c572817d-c5ce-49f7-9849-5c52354ca85a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="20.DATA\SkillInfo\CloseAttack\SunCross">
+      <UniqueIdentifier>{8896d3d2-2f1e-458f-881c-d34cd096b291}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -354,6 +357,9 @@
     <ClInclude Include="..\Public\SkillGradeBtn5.h">
       <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\SunCrossInfo.h">
+      <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -496,6 +502,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\SkillGradeBtn5.cpp">
       <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SunCrossInfo.cpp">
+      <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

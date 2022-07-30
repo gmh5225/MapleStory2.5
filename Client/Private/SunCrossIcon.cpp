@@ -2,6 +2,7 @@
 #include "..\Public\SunCrossIcon.h"
 #include "GameInstance.h"
 #include "SkillManager.h"
+#include "SunCrossInfo.h"
 
 
 CSunCrossIcon::CSunCrossIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -28,9 +29,8 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
 
-	m_iSkillPoint = 1;
 	__super::Initialize(pArg);
-
+	m_iTexturenum = 0;
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
@@ -49,7 +49,6 @@ void CSunCrossIcon::Tick(_float fTimeDelta)
 	if (pInstance->Key_Down(DIK_K))
 	{
 		m_bRender = !m_bRender;
-		m_iSkillPoint += 1;
 	}
 
 	if (pInstance->Mouse_Up(DIMK_LBUTTON))
@@ -57,23 +56,21 @@ void CSunCrossIcon::Tick(_float fTimeDelta)
 
 	}
 
-
 	Safe_Release(pInstance);
 }
 
 void CSunCrossIcon::LateTick(_float fTimeDelta)
 {
-	if (m_bRender)
-		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+	
 
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
-	if (m_iSkillPoint > 0)
-	{
-		Check_Collision(DIMK_LBUTTON);
-		Change_Texture();
-	}
+	Change_Texture();
+
+	if (m_bRender)
+		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+	
 }
 
 HRESULT CSunCrossIcon::Render()
@@ -95,28 +92,12 @@ HRESULT CSunCrossIcon::Render()
 
 void CSunCrossIcon::Change_Texture()
 {
-
-
-	switch (m_eCollision)
-	{
-	case Client::CUI::TYPE_NO:
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	if (pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER)->Get_SkillLevel() < 1)
+		m_iTexturenum = 0;
+	else
+		m_iTexturenum = 1;
 	
-		break;
-	case Client::CUI::TYPE_ON:
-		
-		break;
-	case Client::CUI::TYPE_DOWN:
-		break;
-	case Client::CUI::TYPE_UP:
-		break;
-	case Client::CUI::TYPE_PRESSING:
-	
-		break;
-	case Client::CUI::TYPE_END:
-		break;
-	default:
-		break;
-	}
 }
 
 CSunCrossIcon* CSunCrossIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

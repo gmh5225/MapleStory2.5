@@ -10,4 +10,5 @@ CSkillInfo::CSkillInfo()
 
 void CSkillInfo::Free()
 {
+	
 }

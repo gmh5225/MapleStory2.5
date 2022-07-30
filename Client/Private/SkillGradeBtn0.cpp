@@ -4,6 +4,7 @@
 #include "SkillManager.h"
 
 
+
 CSkillGradeBtn0::CSkillGradeBtn0(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
 {
@@ -65,9 +66,7 @@ void CSkillGradeBtn0::LateTick(_float fTimeDelta)
 	
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
-	
-
-	//if (m_bRender)
+	if (m_bRender)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 
 
@@ -102,7 +101,7 @@ void CSkillGradeBtn0::Change_Texture()
 	case Client::CUI::TYPE_ON:		
 		break;
 	case Client::CUI::TYPE_DOWN:
-		pSkillInstance->Set_SkillGrade(CSkillManager::GRADE_BEGENNER);
+		pSkillInstance->Set_SkillGrade(CSkillManager::GRADE_BEGENNER);		
 		break;
 	case Client::CUI::TYPE_UP:
 		break;
