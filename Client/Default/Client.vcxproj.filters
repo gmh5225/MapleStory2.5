@@ -112,9 +112,6 @@
     <Filter Include="04.UI\01.PlayerUI\SkillFrame\SkillUpBtn">
       <UniqueIdentifier>{2d7c744a-1300-419d-845e-5221fb94a363}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.UI\01.PlayerUI\SkillFrame\SkillFrameBtn">
-      <UniqueIdentifier>{c572817d-c5ce-49f7-9849-5c52354ca85a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.UI\99.UI">
       <UniqueIdentifier>{4783165b-bdd4-485f-888a-2ee35492ca7a}</UniqueIdentifier>
     </Filter>
@@ -201,6 +198,9 @@
     </Filter>
     <Filter Include="04.UI\05.Icon\SkillIcon\CloseAttack\SunCross">
       <UniqueIdentifier>{dce0f7bf-fecd-4111-b28d-66c34968fc37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn">
+      <UniqueIdentifier>{c572817d-c5ce-49f7-9849-5c52354ca85a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -333,7 +333,27 @@
     <ClInclude Include="..\Public\SkillInfo.h">
       <Filter>20.DATA\SkillInfo</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\SunCrossIcon.h" />
+    <ClInclude Include="..\Public\SkillGradeBtn0.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SunCrossIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\CloseAttack\SunCross</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillGradeBtn1.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillGradeBtn2.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillGradeBtn3.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillGradeBtn4.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillGradeBtn5.h">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -456,7 +476,27 @@
     <ClCompile Include="..\Private\SkillInfo.cpp">
       <Filter>20.DATA\SkillInfo</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\SunCrossIcon.cpp" />
+    <ClCompile Include="..\Private\SkillGradeBtn0.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SunCrossIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\CloseAttack\SunCross</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillGradeBtn1.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillGradeBtn2.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillGradeBtn3.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillGradeBtn4.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillGradeBtn5.cpp">
+      <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="Client.ico">

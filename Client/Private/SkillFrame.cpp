@@ -34,9 +34,9 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 
 	__super::Initialize(pArg);
 	
-	D3DXCreateFont(m_pGraphic_Device, 20, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
+	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"µ¸¿òÃ¼", &m_SkillFrameFont);
+		L"µ¸¿òÃ¼", &m_SkillPointFont);
 
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
@@ -55,9 +55,12 @@ void CSkillFrame::Tick(_float fTimeDelta)
 	if (pInstance->Key_Down(DIK_K))
 		m_bRender = !m_bRender;
 
+	if (pInstance->Key_Down(DIK_P))
+	m_pSkillManager->Set_SkillPoint(1);
+
 	if (pInstance->Mouse_Up(DIMK_LBUTTON))
 	{
-		m_pSkillManager->Set_SkillPoint(1);
+		
 	}
 
 
@@ -101,12 +104,12 @@ HRESULT CSkillFrame::Render()
 	_itow_s(m_pSkillManager->Get_SkillPoint(), istr, 10);
 
 	RECT rt;
-	SetRect(&rt, 100, 300, 0, 0);
-	m_SkillFrameFont->DrawText(NULL,istr, -1, &rt, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
+	SetRect(&rt, 440, 150, 0, 0);
+	m_SkillPointFont->DrawText(NULL,istr, -1, &rt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
 	
 	RECT rt2;
 	SetRect(&rt2, 300, 300, 0, 0);
-	m_SkillFrameFont->DrawText(NULL, L"Test", -1, &rt2, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
+	m_SkillPointFont->DrawText(NULL, L"Test", -1, &rt2, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 0.0f, 1.0f));
 
 	/*TCHAR mName[30];
 	wsprintf(mName, TEXT("ÃÖ´ëÄÞº¸ : %d"), int(UIIT->Get_MaxCombo()));

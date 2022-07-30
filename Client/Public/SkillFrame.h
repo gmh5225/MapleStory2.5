@@ -27,7 +27,7 @@ public:
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-	LPD3DXFONT m_SkillFrameFont;
+	LPD3DXFONT m_SkillPointFont;
 
 private:
 	CSkillManager* m_pSkillManager;

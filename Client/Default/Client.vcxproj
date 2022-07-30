@@ -183,6 +183,12 @@
     <ClInclude Include="..\Public\RedPortion.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
+    <ClInclude Include="..\Public\SkillGradeBtn0.h" />
+    <ClInclude Include="..\Public\SkillGradeBtn1.h" />
+    <ClInclude Include="..\Public\SkillGradeBtn2.h" />
+    <ClInclude Include="..\Public\SkillGradeBtn3.h" />
+    <ClInclude Include="..\Public\SkillGradeBtn4.h" />
+    <ClInclude Include="..\Public\SkillGradeBtn5.h" />
     <ClInclude Include="..\Public\SkillInfo.h" />
     <ClInclude Include="..\Public\SkillManager.h" />
     <ClInclude Include="..\Public\RibbonPig.h" />
@@ -228,6 +234,12 @@
     <ClCompile Include="..\Private\RedPortion.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
+    <ClCompile Include="..\Private\SkillGradeBtn0.cpp" />
+    <ClCompile Include="..\Private\SkillGradeBtn1.cpp" />
+    <ClCompile Include="..\Private\SkillGradeBtn2.cpp" />
+    <ClCompile Include="..\Private\SkillGradeBtn3.cpp" />
+    <ClCompile Include="..\Private\SkillGradeBtn4.cpp" />
+    <ClCompile Include="..\Private\SkillGradeBtn5.cpp" />
     <ClCompile Include="..\Private\SkillInfo.cpp" />
     <ClCompile Include="..\Private\SkillManager.cpp" />
     <ClCompile Include="..\Private\RibbonPig.cpp" />

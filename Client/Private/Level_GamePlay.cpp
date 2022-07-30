@@ -240,8 +240,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	SkillFrameiInfo.fY = 300.f;
 
 
-
-
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_GAMEPLAY, pLayerTag, &SkillFrameiInfo)))
 		return E_FAIL;
 
@@ -313,6 +311,59 @@ HRESULT CLevel_GamePlay::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo5)))
 		return E_FAIL;
 
+	CUI::UIINFO SkillGradeBtnInfo0;
+	SkillGradeBtnInfo0.fSizeX = 25.f;
+	SkillGradeBtnInfo0.fSizeY = 20.f;
+	SkillGradeBtnInfo0.fMoveX = -135.f;
+	SkillGradeBtnInfo0.fMoveY = -143.f;
+
+	CUI::UIINFO SkillGradeBtnInfo1;
+	SkillGradeBtnInfo1.fSizeX = 25.f;
+	SkillGradeBtnInfo1.fSizeY = 20.f;
+	SkillGradeBtnInfo1.fMoveX = -108.f;
+	SkillGradeBtnInfo1.fMoveY = -143.f;
+
+	CUI::UIINFO SkillGradeBtnInfo2;
+	SkillGradeBtnInfo2.fSizeX = 25.f;
+	SkillGradeBtnInfo2.fSizeY = 20.f;
+	SkillGradeBtnInfo2.fMoveX = -81.f;
+	SkillGradeBtnInfo2.fMoveY = -143.f;
+
+	CUI::UIINFO SkillGradeBtnInfo3;
+	SkillGradeBtnInfo3.fSizeX = 25.f;
+	SkillGradeBtnInfo3.fSizeY = 20.f;
+	SkillGradeBtnInfo3.fMoveX = -54.f;
+	SkillGradeBtnInfo3.fMoveY = -143.f;
+
+	CUI::UIINFO SkillGradeBtnInfo4;
+	SkillGradeBtnInfo4.fSizeX = 25.f;
+	SkillGradeBtnInfo4.fSizeY = 20.f;
+	SkillGradeBtnInfo4.fMoveX = -27.f;
+	SkillGradeBtnInfo4.fMoveY = -143.f;
+
+	CUI::UIINFO SkillGradeBtnInfo5;
+	SkillGradeBtnInfo5.fSizeX = 25.f;
+	SkillGradeBtnInfo5.fSizeY = 20.f;
+	SkillGradeBtnInfo5.fMoveX = 0.f;
+	SkillGradeBtnInfo5.fMoveY = -143.f;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillGradeBtn0"), LEVEL_GAMEPLAY, pLayerTag, &SkillGradeBtnInfo0)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillGradeBtn1"), LEVEL_GAMEPLAY, pLayerTag, &SkillGradeBtnInfo1)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillGradeBtn2"), LEVEL_GAMEPLAY, pLayerTag, &SkillGradeBtnInfo2)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillGradeBtn3"), LEVEL_GAMEPLAY, pLayerTag, &SkillGradeBtnInfo3)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillGradeBtn4"), LEVEL_GAMEPLAY, pLayerTag, &SkillGradeBtnInfo4)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillGradeBtn5"), LEVEL_GAMEPLAY, pLayerTag, &SkillGradeBtnInfo5)))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 
