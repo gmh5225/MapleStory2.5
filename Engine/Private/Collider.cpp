@@ -17,14 +17,34 @@ HRESULT CCollider::Initialize(void * pArg)
 	return S_OK;
 }
 
-
-
-HRESULT CCollider::Add_CollsionGroup(COLLSIONGROUP eCollsionGroup, CGameObject * pGameObject)
+HRESULT CCollider::Add_SphereCollsionGroup(COLLSIONGROUP eCollsionGroup, CGameObject * pGameObject)
 {
 	if (nullptr == pGameObject)
 		return E_FAIL;
 
-	m_CollisionObjects[eCollsionGroup].push_back(pGameObject);
+	m_SphereCollisionObjects[eCollsionGroup].push_back(pGameObject);
+
+	Safe_AddRef(pGameObject);
+
+	return S_OK;
+}
+HRESULT CCollider::Add_BoxCollsionGroup(COLLSIONGROUP eCollsionGroup, CGameObject * pGameObject)
+{
+	if (nullptr == pGameObject)
+		return E_FAIL;
+
+	m_BoxCollisionObjects[eCollsionGroup].push_back(pGameObject);
+
+	Safe_AddRef(pGameObject);
+
+	return S_OK;
+}
+HRESULT CCollider::Add_PushBoxCollsionGroup(COLLSIONGROUP eCollsionGroup, CGameObject * pGameObject)
+{
+	if (nullptr == pGameObject)
+		return E_FAIL;
+
+	m_PhshBoxCollisionObjects[eCollsionGroup].push_back(pGameObject);
 
 	Safe_AddRef(pGameObject);
 
@@ -32,16 +52,42 @@ HRESULT CCollider::Add_CollsionGroup(COLLSIONGROUP eCollsionGroup, CGameObject *
 }
 HRESULT CCollider::End_Collsion()
 {
+
+
 	for (_int i = 0; i < COLLSION_END; ++i)
 	{
-		for (auto& pObject : m_CollisionObjects[i])
+		for (auto& pObject : m_PhshBoxCollisionObjects[i])
 		{
 			if (nullptr != pObject)
 				Safe_Release(pObject);
 		}
 
-		m_CollisionObjects[i].clear();
+		m_PhshBoxCollisionObjects[i].clear();
 	}
+
+	for (_int i = 0; i < COLLSION_END; ++i)
+	{
+		for (auto& pObject : m_SphereCollisionObjects[i])
+		{
+			if (nullptr != pObject)
+				Safe_Release(pObject);
+		}
+
+		m_SphereCollisionObjects[i].clear();
+	}
+
+	for (_int i = 0; i < COLLSION_END; ++i)
+	{
+		for (auto& pObject : m_BoxCollisionObjects[i])
+		{
+			if (nullptr != pObject)
+				Safe_Release(pObject);
+		}
+
+		m_BoxCollisionObjects[i].clear();
+	}
+
+
 
 	return S_OK;
 }
@@ -50,15 +96,10 @@ HRESULT CCollider::End_Collsion()
 
 HRESULT CCollider::Check_SphereCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R)
 {
-	if (m_CollisionObjects[eCollsionGroup_L].empty() || m_CollisionObjects[eCollsionGroup_R].empty())
-	{
-		return S_OK;
-	}
 
-
-	for (auto& pL_Object : m_CollisionObjects[eCollsionGroup_L])
+	for (auto& pL_Object : m_SphereCollisionObjects[eCollsionGroup_L])
 	{
-		for (auto& pR_Object : m_CollisionObjects[eCollsionGroup_R])
+		for (auto& pR_Object : m_SphereCollisionObjects[eCollsionGroup_R])
 		{
 			// 충돌 검사
 			if (Check_Sphere(pL_Object, pR_Object))
@@ -71,17 +112,14 @@ HRESULT CCollider::Check_SphereCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSION
 
 	return S_OK;
 }
-HRESULT CCollider::Check_AABBCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R)
+HRESULT CCollider::Check_BoxCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R)
 {
-	if (m_CollisionObjects[eCollsionGroup_L].empty() || m_CollisionObjects[eCollsionGroup_R].empty())
-		return S_OK;
-
-	for (auto& pL_Object : m_CollisionObjects[eCollsionGroup_L])
+	for (auto& pL_Object : m_BoxCollisionObjects[eCollsionGroup_L])
 	{
-		for (auto& pR_Object : m_CollisionObjects[eCollsionGroup_R])
+		for (auto& pR_Object : m_BoxCollisionObjects[eCollsionGroup_R])
 		{
 			// 충돌 검사
-			if (Check_AABB(pL_Object, pR_Object))
+			if (Check_Box(pL_Object, pR_Object))
 			{
 				pL_Object->Collision(pR_Object);
 				pR_Object->Collision(pL_Object);
@@ -91,6 +129,27 @@ HRESULT CCollider::Check_AABBCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGR
 
 	return S_OK;
 }
+HRESULT CCollider::Check_PushBoxCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R)
+{
+	for (auto& pL_Object : m_PhshBoxCollisionObjects[eCollsionGroup_L])
+	{
+		pL_Object->Set_PushedX(false);
+		pL_Object->Set_PushedY(false);
+
+		for (auto& pR_Object : m_PhshBoxCollisionObjects[eCollsionGroup_R])
+		{
+			// 충돌 검사
+			if (Check_Box(pL_Object, pR_Object, true))
+			{
+				pL_Object->Collision(pR_Object);
+				pR_Object->Collision(pL_Object);
+			}
+		}
+	}
+
+	return S_OK;
+}
+
 
 
 
@@ -117,17 +176,14 @@ _bool CCollider::Check_Sphere(CGameObject * pObj_L, CGameObject * pObj_R)
 
 	return false;
 }
-_bool CCollider::Check_AABB(CGameObject * pObj_L, CGameObject * pObj_R)
+_bool CCollider::Check_Box(CGameObject * pObj_L, CGameObject * pObj_R, _bool bPush)
 {
 	list<CBoxCollider*>* pBoxColComs_L = pObj_L->Get_BoxColComList();
 	list<CBoxCollider*>* pBoxColComs_R = pObj_R->Get_BoxColComList();
 
-	if (pBoxColComs_L->empty() || pBoxColComs_R->empty())
-		return false;
-
-
 	for (auto& pBoxCol_L : *pBoxColComs_L)
 	{
+
 		for (auto& pBoxCol_R : *pBoxColComs_R)
 		{
 			_float3 vMax_L = pBoxCol_L->Get_WorldMax();
@@ -195,66 +251,69 @@ _bool CCollider::Check_AABB(CGameObject * pObj_L, CGameObject * pObj_R)
 
 			fColDis.z = fMin - fMax;
 
-
-
-			// ===============================================
-			// 큐브, 플레이어 위치를 비교해서 밀어낸다
-
-
-			CTransform* vTran_L = (CTransform*)(pObj_L->Find_Component(TEXT("Com_Transform")));
-			CTransform* vTran_R = (CTransform*)(pObj_R->Find_Component(TEXT("Com_Transform")));
-			_float3 vPos_L = vTran_L->Get_State(CTransform::STATE_POSITION);
-			_float3 vPos_R = vTran_R->Get_State(CTransform::STATE_POSITION);
-
-
-			if (fColDis.x < fColDis.z)
+			if (bPush)
 			{
-				// 좌
-				if (vPos_L.x < vPos_R.x)
+				CTransform* vTran_L = (CTransform*)(pObj_L->Find_Component(TEXT("Com_Transform")));
+				CTransform* vTran_R = (CTransform*)(pObj_R->Find_Component(TEXT("Com_Transform")));
+				_float3 vPos_L = vTran_L->Get_State(CTransform::STATE_POSITION);
+				_float3 vPos_R = vTran_R->Get_State(CTransform::STATE_POSITION);
+
+
+				_float fRad_R = pBoxCol_R->Get_MaxRad();
+
+				_float3 fDiferVec = vTran_L->Get_State(CTransform::STATE_POSITION) - vTran_R->Get_State(CTransform::STATE_POSITION);
+				D3DXVec3Normalize(&fDiferVec, &fDiferVec);
+				_float fDiferRadByL = D3DXVec3Dot(&fDiferVec, &_float3(0.f, 1.f, 0.f));
+
+
+				// 옆 충돌일 때
+				if (fRad_R > fDiferRadByL)
 				{
-					_float3 disPos = { vPos_L.x - fColDis.x , vPos_L.y, vPos_L.z };
-					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
-				}
+					if (fColDis.x < fColDis.z)
+					{
+						// 좌
+						if (vPos_L.x < vPos_R.x)
+						{
+							_float3 disPos = { vPos_L.x - fColDis.x - 0.05f , vPos_L.y, vPos_L.z };
+							vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+						}
 
-				// 우
-				else if (vPos_L.x > vPos_R.x)
+						// 우
+						else if (vPos_L.x > vPos_R.x)
+						{
+							_float3 disPos = { vPos_L.x + fColDis.x + 0.05f, vPos_L.y, vPos_L.z };
+							vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+						}
+					}
+					else
+					{
+						// 앞
+						if (vPos_L.z < vPos_R.z)
+						{
+							_float3 disPos = { vPos_L.x, vPos_L.y , vPos_L.z - fColDis.z -0.05f };
+							vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+						}
+
+						// 뒤
+						else if (vPos_L.z > vPos_R.z)
+						{
+							_float3 disPos = { vPos_L.x, vPos_L.y, vPos_L.z + fColDis.z + 0.05f };
+							vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+						}
+					}
+				}
+				if(fRad_R < fDiferRadByL && -0.1f > vTran_L->Get_Vel())
 				{
-					_float3 disPos = { vPos_L.x + fColDis.x , vPos_L.y, vPos_L.z };
-					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+					if (vPos_L.y > vPos_R.y + 0.5f && !pObj_L->Get_PushedY())
+					{
+						_float3 disPos = { vPos_L.x, vPos_L.y + fColDis.y, vPos_L.z };
+						vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
+						vTran_L->ReSet_Gravity();
+						pObj_L->Set_PushedY(true);
+					}
+
+					// 2. 하
 				}
-			}
-			else
-			{
-				// 앞
-				if (vPos_L.z < vPos_R.z)
-				{
-					_float3 disPos = { vPos_L.x, vPos_L.y , vPos_L.z - fColDis.z  };
-					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
-				}
-
-				// 뒤
-				else if (vPos_L.z > vPos_R.z)
-				{
-					_float3 disPos = { vPos_L.x, vPos_L.y, vPos_L.z + fColDis.z };
-					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
-				}
-			}
-
-
-
-
-
-			// 상
-			if (fColDis.x > fColDis.y)
-			{
-				if (vPos_L.y > vPos_R.y + 0.5f)
-				{
-					_float3 disPos = { vPos_L.x, vPos_L.y + fColDis.y, vPos_L.z };
-					vTran_L->Set_State(CTransform::STATE_POSITION, disPos);
-					vTran_L->Set_Vel(0.f);
-				}
-
-				// 2. 하
 			}
 
 			return true;
@@ -287,12 +346,5 @@ void CCollider::Free()
 {
 	__super::Free();
 
-	for (int i = 0; i < COLLSION_END; ++i)
-	{
-		for (auto& pGameObject : m_CollisionObjects[i])
-		{
-			Safe_Release(pGameObject);
-		}
-		m_CollisionObjects[i].clear();
-	}
+	End_Collsion();
 }

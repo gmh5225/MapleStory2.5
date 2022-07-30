@@ -46,6 +46,14 @@ HRESULT COrangeMushroom::SetUp_Components()
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"))))
 		return E_FAIL;
 
+
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 0.5f, 1.f, 0.5f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
+		return E_FAIL;
+
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_OrangeMushroom_Move"), nullptr);
@@ -98,14 +106,13 @@ void COrangeMushroom::LateTick(_float fTimeDelta)
 		SetState(STATE_CHASE, m_eDir);
 
 
+	m_pTransformCom->Go_Gravity(fTimeDelta);
 	__super::BoxColCom_Tick(m_pTransformCom);
-
-
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
 
-	
 }
 HRESULT COrangeMushroom::Render()
 {
@@ -148,6 +155,11 @@ void COrangeMushroom::Tick_Hit(_float fTimeDelta)
 
 void COrangeMushroom::Tick_Chase(_float fTimeDelta)
 {
+	if (GetKeyState('L') & 0x8000)
+	{
+		SetState(STATE_JUMP, m_eDir);
+	}
+
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
@@ -176,6 +188,13 @@ void COrangeMushroom::SetState(STATE eState, DIR eDir)
 	m_eCurState = eState;
 	m_eDir = eDir;
 	SetAni();
+
+	if (m_eCurState == STATE_JUMP)
+	{
+		// *중력 코드
+		// Y축 힘을 줍니다.
+		m_pTransformCom->Set_Vel(4.0f);
+	}
 }
 void COrangeMushroom::SetAni()
 {
@@ -257,7 +276,15 @@ CGameObject * COrangeMushroom::Clone(void* pArg)
 
 void COrangeMushroom::Collision(CGameObject * pOther)
 {
-
+	if (pOther->Get_Tag() == "Tag_Cube")
+	{
+		if (m_eCurState == STATE_JUMP)
+		{
+			if (Get_PushedY())
+				SetState(STATE_IDLE, m_eDir);
+		}
+		//m_pTransformCom->Set_Vel(0.f);
+	}
 }
 
 

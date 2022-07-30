@@ -27,7 +27,7 @@ private:
 	void Tick_Chase(_float fTimeDelta);
 
 public:
-	void SetState(STATE eState, DIR eDir);
+    virtual	void SetState(STATE eState, DIR eDir) override;
 
 public:
 	virtual void SetAni() override;

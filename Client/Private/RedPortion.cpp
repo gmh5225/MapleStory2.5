@@ -105,7 +105,7 @@ void CRedPortion::LateTick(_float fTimeDelta)
 {
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLISION_ITEM, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLISION_ITEM, this);
 	SetDirection();
 }
 

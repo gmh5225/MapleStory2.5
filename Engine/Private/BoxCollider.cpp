@@ -15,6 +15,15 @@ CBoxCollider::CBoxCollider(const CBoxCollider & rhs)
 
 }
 
+_float CBoxCollider::Get_MaxRad()
+{
+	_float3 fNomalMax;
+	D3DXVec3Normalize(&fNomalMax, &m_vMax);
+	_float fRad = D3DXVec3Dot(&fNomalMax, &_float3(0.f, 1.f, 0.f));
+
+	return fRad;
+}
+
 HRESULT CBoxCollider::Initialize_Prototype()
 {
 	m_vMax = { 0.5f, 0.5f, 0.5f };

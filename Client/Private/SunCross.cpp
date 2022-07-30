@@ -90,7 +90,7 @@ void CSunCross::LateTick(_float fTimeDelta)
 		Set_Dead();
 	}
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 
 }
 HRESULT CSunCross::Render()

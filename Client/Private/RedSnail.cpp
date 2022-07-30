@@ -47,6 +47,7 @@ HRESULT CRedSnail::Initialize(void * pArg)
 
 HRESULT CRedSnail::SetUp_Components()
 {
+
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Idle"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Hit"), nullptr);
@@ -98,7 +99,7 @@ void CRedSnail::LateTick(_float fTimeDelta)
 		SetState(STATE_CHASE, m_eDir);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	Set_Billboard();
 }

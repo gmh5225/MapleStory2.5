@@ -24,6 +24,13 @@ public:
 
 	list<class CBoxCollider*>* Get_BoxColComList() { return &m_BoxColliders; }
 
+
+	// For. PushBoxCollider
+	_bool Get_PushedX() { return m_bPushedX; }
+	_bool Get_PushedY() { return m_bPushedY; }
+	void Set_PushedX(_bool bPushedX) { m_bPushedX = bPushedX; }
+	void Set_PushedY(_bool bPushedY) { m_bPushedY = bPushedY; }
+
 public:
 	virtual HRESULT Initialize_Prototype();
 	virtual HRESULT Initialize(void* pArg);
@@ -51,6 +58,10 @@ protected:
 	_float				m_fYDistance;
 	_bool				m_bDead;
 
+
+
+	_bool				m_bPushedX = false;
+	_bool				m_bPushedY = false;
 
 protected:
 	HRESULT Add_Component(_uint iLevelIndex, const _tchar* pPrototypeTag, const _tchar* pComponentTag, class CComponent** ppOut, void* pArg = nullptr);
