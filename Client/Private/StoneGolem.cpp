@@ -211,6 +211,9 @@ void CStoneGolem::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
+
+	Set_Dead();
+
 }
 
 

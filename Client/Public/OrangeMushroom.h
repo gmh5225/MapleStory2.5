@@ -7,6 +7,9 @@ BEGIN(Client)
 class COrangeMushroom final : public CCreature
 {
 private:
+	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D , MOVE_END};
+
+
 	COrangeMushroom(LPDIRECT3DDEVICE9 pGraphic_Device);
 	COrangeMushroom(const COrangeMushroom& rhs);
 	virtual ~COrangeMushroom() = default;
@@ -38,6 +41,14 @@ private:
 	DIR m_eDir;
 
 	CGameObject* m_pTarget;
+
+	_uint m_iMove;
+	_float3 m_fEndPos;
+	_float3 m_fStartPos;
+	_bool m_bDir;
+	_float m_fDistance;
+
+	_uint m_iHp;
 
 private:
 	HRESULT SetUp_Components();

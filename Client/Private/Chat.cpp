@@ -2,6 +2,7 @@
 #include "..\Public\Chat.h"
 #include "GameInstance.h"
 #include "QuestManager.h"
+#include "SkillManager.h"
 
 CChat::CChat(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
@@ -105,6 +106,7 @@ HRESULT CChat::Render()
 			pInstance->QuestEnd();
 			pInstance->Check_End_Quest();
 			pInstance->Reset_Hunt();
+			CSkillManager::Get_Instance()->Set_SkillPoint(1);
 		}
 	}
 

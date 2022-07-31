@@ -9,6 +9,8 @@
 #include "Map_Manager.h"
 #include "VIBuffer_Cube.h"
 #include "Picking.h"
+#include <iostream>
+#include <random>
 
 /* 클라이언트로 보여주기위한 가장 대표적인 클래스이다. */
 /* 각종 매니져클래스들의 주요함수를 클라로 보여준다.  */
@@ -65,6 +67,10 @@ public: /* For.Input_Device */
 	_bool Mouse_Down(DIMK eMouseKeyID);
 	_bool Mouse_Up(DIMK eMouseKeyID);
 	_bool Mouse_Pressing(DIMK eMouseKeyID);
+
+
+public:
+	_uint Get_Random(_uint iStart, _uint iEnd);
 
 
 public: /* For.Map_Manager */
