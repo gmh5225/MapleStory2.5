@@ -244,6 +244,9 @@
     <Filter Include="04.UI\00.MainUI\HpBar\Mp">
       <UniqueIdentifier>{318ddd0b-4cd3-47ed-a690-b069e79a2fb7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.UI\00.MainUI\HpBar\Icon">
+      <UniqueIdentifier>{d44281ae-5eb5-4396-8cab-db91856191aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -369,9 +372,6 @@
     <ClInclude Include="..\Public\SkillUpBtn.h">
       <Filter>04.UI\01.PlayerUI\SkillFrame\SkillUpBtn</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\SkillInfo.h">
-      <Filter>20.DATA\SkillInfo</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\SkillGradeBtn0.h">
       <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
     </ClInclude>
@@ -422,6 +422,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\HpBarBase.h">
       <Filter>04.UI\00.MainUI\HpBar\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillInfo.h">
+      <Filter>20.DATA</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\HpBarIcon.h">
+      <Filter>04.UI\00.MainUI\HpBar\Icon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\HpBarHp.h">
+      <Filter>04.UI\00.MainUI\HpBar\Hp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\HpBarMp.h">
+      <Filter>04.UI\00.MainUI\HpBar\Mp</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -539,9 +551,6 @@
     <ClCompile Include="..\Private\SkillUpBtn.cpp">
       <Filter>04.UI\01.PlayerUI\SkillFrame\SkillUpBtn</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\SkillInfo.cpp">
-      <Filter>20.DATA\SkillInfo</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\SkillGradeBtn0.cpp">
       <Filter>04.UI\01.PlayerUI\SkillFrame\SkillGradeBtn</Filter>
     </ClCompile>
@@ -592,6 +601,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\HpBarBase.cpp">
       <Filter>04.UI\00.MainUI\HpBar\Base</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillInfo.cpp">
+      <Filter>20.DATA</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HpBarIcon.cpp">
+      <Filter>04.UI\00.MainUI\HpBar\Icon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HpBarHp.cpp">
+      <Filter>04.UI\00.MainUI\HpBar\Hp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HpBarMp.cpp">
+      <Filter>04.UI\00.MainUI\HpBar\Mp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

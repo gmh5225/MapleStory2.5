@@ -40,9 +40,9 @@
 #include "Maya.h"
 #include "MouseCursor.h"
 #include "HpBarBase.h"
-//#include "HpBarIcon.h"
-//#include "HpBarHp.h"
-//#include "HpBarMp.h"
+#include "HpBarIcon.h"
+#include "HpBarHp.h"
+#include "HpBarMp.h"
 
 
 
@@ -330,7 +330,7 @@ HRESULT CLoader::Load_UI_Object()
 		CHpBarBase::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
-	/*if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_HpBarIcon"),
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_HpBarIcon"),
 		CHpBarIcon::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
@@ -340,7 +340,7 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_HpBarMp"),
 		CHpBarMp::Create(m_pGraphic_Device))))
-		return E_FAIL;*/
+		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_MouseCursor"),
 		CMouseCursor::Create(m_pGraphic_Device))))
@@ -772,11 +772,11 @@ HRESULT CLoader::Load_UI_Texture()
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_HpBarHp"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Main/HpBar/Hp/HpBarHp%d.png"), 1))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Main/HpBar/Hp/HpBarHp%d.png"), 22))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_HpBarMp"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Main/HpBar/Mp/HpBarMp%d.png"), 1))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Main/HpBar/Mp/HpBarMp%d.png"), 22))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Start"),
