@@ -14,23 +14,31 @@ public:
 	virtual ~CQuestManager() = default;
 
 
-public:
-	void QuestPrepared() { m_iQuestState = QUEST_PROGRESS; }
-	void QuestProgressed() { m_iQuestState = QUEST_CLEAR; }
-	void QuestCleared() { m_iQuestState = QUEST_END; }
-	void QuestStart() { m_iQuestState = QUEST_PREPARE; }
+public:	//퀘스트의 상태를 변화시킴
+	void QuestPrepare() { m_iQuestState = QUEST_PREPARE; }
+	void QuestProgress() { m_iQuestState = QUEST_PROGRESS; }
+	void QuestClear() { m_iQuestState = QUEST_CLEAR; }
+	void QuestEnd() { m_iQuestState = QUEST_END; }
+	
+	//퀘스트의 상태를 리턴
 	_uint Set_QuestState() { return m_iQuestState; }
 
+	// 퀘스트의 시작과 끝을 리턴, 설정함
 	void Check_End_Quest() { m_bCheckQuest = false; }
 	void Check_Start_Quest() { m_bCheckQuest = true; }
 	bool Check_Quest() { return m_bCheckQuest; }
 
+	// 몬스터가 죽을때 인자로 몬스터의 이름을 넣고 호출시킴, 퀘스트의 클리어를 담당
 	void Hunting(const _tchar* MonsterName);
 
+
+	// 사냥한 몬스터 마릿수 리턴
 	_uint Set_Slime(){ return m_iHuntSlime; }
+	_uint Set_OrangeMushroom() { return m_iHuntOrangeMushroom; }
+
 
 	// 사냥한 모든 몬스터 초기화
-	void Reset_Hunt() { m_iHuntSlime = 0; }
+	void Reset_Hunt() { m_iHuntSlime = 0; m_iHuntOrangeMushroom = 0; }
 
 public:
 	virtual void Free() override;
@@ -46,6 +54,8 @@ private:
 	bool	m_bCheckQuest;
 
 	_uint	m_iHuntSlime;
+	_uint	m_iHuntOrangeMushroom;
+	_uint	m_iHuntRibbonPig;
 };
 
 END

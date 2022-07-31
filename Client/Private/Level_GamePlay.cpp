@@ -7,6 +7,7 @@
 #include "SunCrossInfo.h"
 #include "SkillManager.h"
 #include "UI.h"
+#include "QuestManager.h"
 
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -50,6 +51,8 @@ HRESULT CLevel_GamePlay::Initialize()
 
 void CLevel_GamePlay::Tick(_float fTimeDelta)
 {
+	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
+		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
 }
 
@@ -109,8 +112,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const _tchar * pLayerTag)
 
 	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Terrain"), LEVEL_GAMEPLAY, pLayerTag)))
 	//	return E_FAIL;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
 
 
 	CVIBuffer_Voxel::VOXELDESC VoxDesc;
@@ -185,15 +186,23 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_GAMEPLAY, pLayerTag)))
+			return E_FAIL;
+	
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RibbonPig"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
 
+	for (int i = 0; i < 12; ++i)
+	{
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+	}
 	
-	
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
 	Safe_Release(pGameInstance);
 
 

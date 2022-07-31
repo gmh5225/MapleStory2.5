@@ -204,6 +204,18 @@
     </Filter>
     <Filter Include="20.DATA\SkillInfo\CloseAttack\SunCross">
       <UniqueIdentifier>{8896d3d2-2f1e-458f-881c-d34cd096b291}</UniqueIdentifier>
+          </Filter>
+    <Filter Include="04.UI\02.Quest\04.MissionUI">
+      <UniqueIdentifier>{c212165a-a91c-4dce-850c-5b820efb644a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\02.Maya">
+      <UniqueIdentifier>{1ea4ae90-7338-4628-8a74-4d87ea78202e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\01.ElderStan">
+      <UniqueIdentifier>{d3b4189d-7c5f-4955-ad89-72dbc02338bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\StoneGolem">
+      <UniqueIdentifier>{087e3ce3-03d6-4892-bbf4-d02da350afcf}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -303,9 +315,6 @@
     <ClInclude Include="..\Public\RibbonPig.h">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\ElderStan.h">
-      <Filter>02.GameObject\Creature\Npc</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\SunderBreakAttack.h">
       <Filter>02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack</Filter>
     </ClInclude>
@@ -359,6 +368,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\SunCrossInfo.h">
       <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
+          </ClInclude>
+    <ClInclude Include="..\Public\MissionUI.h">
+      <Filter>04.UI\02.Quest\04.MissionUI</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ElderStan.h">
+      <Filter>02.GameObject\Creature\Npc\01.ElderStan</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Maya.h">
+      <Filter>02.GameObject\Creature\Npc\02.Maya</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\StoneGolem.h">
+      <Filter>02.GameObject\Creature\Monster\StoneGolem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -449,9 +470,6 @@
     <ClCompile Include="..\Private\RibbonPig.cpp">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\ElderStan.cpp">
-      <Filter>02.GameObject\Creature\Npc</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\SunderBreakAttack.cpp">
       <Filter>02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack</Filter>
     </ClCompile>
@@ -505,6 +523,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\SunCrossInfo.cpp">
       <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
+          </ClCompile>
+    <ClCompile Include="..\Private\MissionUI.cpp">
+      <Filter>04.UI\02.Quest\04.MissionUI</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Maya.cpp">
+      <Filter>02.GameObject\Creature\Npc\02.Maya</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ElderStan.cpp">
+      <Filter>02.GameObject\Creature\Npc\01.ElderStan</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\StoneGolem.cpp">
+      <Filter>02.GameObject\Creature\Monster\StoneGolem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

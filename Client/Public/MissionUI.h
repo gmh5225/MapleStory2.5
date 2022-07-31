@@ -6,23 +6,23 @@
 BEGIN(Engine)
 class CTexture;
 class CRenderer;
+class CTransform;
 class CVIBuffer_Rect;
 END
 
 BEGIN(Client)
 
-class CBackGround final : public CGameObject
+class CMissionUI final : public CGameObject
 {
 public:
-	typedef struct tagBackGroundDesc
+	typedef struct tagUIInfo
 	{
-		_uint		iSizeX;
-		_uint		iSizeY;
-	}BACKDESC;
+		_float					fX, fY, fSizeX, fSizeY;
+	}UIINFO;
 private:
-	CBackGround(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CBackGround(const CBackGround& rhs);
-	virtual ~CBackGround() = default;
+	CMissionUI(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CMissionUI(const CMissionUI& rhs);
+	virtual ~CMissionUI() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -32,19 +32,22 @@ public:
 	virtual HRESULT Render() override;
 
 private:
-	BACKDESC				m_BackDesc;
-
-private:
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
-	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
+	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
+
+private:
+	_float4x4				m_ProjMatrix;
+	UIINFO					m_UIInfo;
 
 private:
 	HRESULT SetUp_Components();
+private:
+	void MouseCollision();
 
 public:
-	static CBackGround* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CMissionUI* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

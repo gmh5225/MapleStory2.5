@@ -37,7 +37,7 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	// 퀘스트 false 초기화 및 퀘스트 시작으로 초기화
 	CQuestManager::Get_Instance()->Check_End_Quest();
-	CQuestManager::Get_Instance()->QuestStart();
+	CQuestManager::Get_Instance()->QuestPrepare();
 
 	SetState(STATE_IDLE, DIR_END);
 
@@ -53,7 +53,7 @@ HRESULT CBulb::SetUp_Components()
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Start"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_End"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_Progress"), nullptr);
-		
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Bulb_NoQuest"), nullptr);
 	}
 
 	/* For.Com_Transform */
@@ -154,6 +154,7 @@ void CBulb::SetAni()
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_End"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	case CQuestManager::QUEST_END:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_NoQuest"), 0.3f, CAnimator::STATE_ONCE);
 		break;
 	}
 }
@@ -197,7 +198,7 @@ CGameObject * CBulb::Clone(void* pArg)
 
 void CBulb::Collision(CGameObject * pOther)
 {
-	// 충돌한 상태로 q를 누르면 퀘스트 시작 채팅을 띄움
+	// 플레이어와 충돌한 상태로 q를 누르면 퀘스트 시작 채팅을 띄움
 	if ((GetKeyState(VK_SPACE) & 0x8000))
 		CQuestManager::Get_Instance()->Check_Start_Quest();
 }
