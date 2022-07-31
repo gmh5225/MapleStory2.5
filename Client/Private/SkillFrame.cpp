@@ -34,13 +34,13 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 
 	__super::Initialize(pArg);
 	
-	/*D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
 		L"µ¸¿òÃ¼", &m_FrameFont);
 
 	D3DXCreateFont(m_pGraphic_Device, 18, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"µ¸¿òÃ¼", &m_GradeFont);*/
+		L"µ¸¿òÃ¼", &m_GradeFont);
 
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
@@ -114,7 +114,7 @@ HRESULT CSkillFrame::Render()
 
 	Reset_RenderState();
 	
-	//RenderText();
+	RenderText();
 	
 	
 	

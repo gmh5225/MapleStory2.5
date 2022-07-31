@@ -259,6 +259,12 @@
     <Filter Include="04.UI\00.MainUI\ExpBar\ExpBar">
       <UniqueIdentifier>{de042f6b-460c-4edf-87ba-b29018160ed7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.UI\00.MainUI\MenuIcon">
+      <UniqueIdentifier>{f61a134b-b881-4441-a998-7893a9d5fdc1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\QuickSlot">
+      <UniqueIdentifier>{f94e8e2d-3a7a-49ac-961f-4f0fa534bb6d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -456,6 +462,12 @@
     <ClInclude Include="..\Public\ExpBar.h">
       <Filter>04.UI\00.MainUI\ExpBar\ExpBar</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\MenuIcon.h">
+      <Filter>04.UI\00.MainUI\MenuIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\QuickSlot.h">
+      <Filter>04.UI\00.MainUI\QuickSlot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -643,6 +655,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\ExpBar.cpp">
       <Filter>04.UI\00.MainUI\ExpBar\ExpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MenuIcon.cpp">
+      <Filter>04.UI\00.MainUI\MenuIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuickSlot.cpp">
+      <Filter>04.UI\00.MainUI\QuickSlot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

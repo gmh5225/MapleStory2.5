@@ -183,6 +183,7 @@
     <ClInclude Include="..\Public\Loader.h" />
     <ClInclude Include="..\Public\MainApp.h" />
     <ClInclude Include="..\Public\Maya.h" />
+    <ClInclude Include="..\Public\MenuIcon.h" />
     <ClInclude Include="..\Public\MissionUI.h" />
     <ClInclude Include="..\Public\MouseCursor.h" />
     <ClInclude Include="..\Public\MouseManager.h" />
@@ -191,6 +192,7 @@
     <ClInclude Include="..\Public\Player.h" />
     <ClInclude Include="..\Public\QuestManager.h" />
     <ClInclude Include="..\Public\QuestUI.h" />
+    <ClInclude Include="..\Public\QuickSlot.h" />
     <ClInclude Include="..\Public\RedPortion.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
@@ -249,6 +251,7 @@
     <ClCompile Include="..\Private\Loader.cpp" />
     <ClCompile Include="..\Private\MainApp.cpp" />
     <ClCompile Include="..\Private\Maya.cpp" />
+    <ClCompile Include="..\Private\MenuIcon.cpp" />
     <ClCompile Include="..\Private\MissionUI.cpp" />
     <ClCompile Include="..\Private\MouseCursor.cpp" />
     <ClCompile Include="..\Private\MouseManager.cpp" />
@@ -257,6 +260,7 @@
     <ClCompile Include="..\Private\Player.cpp" />
     <ClCompile Include="..\Private\QuestManager.cpp" />
     <ClCompile Include="..\Private\QuestUI.cpp" />
+    <ClCompile Include="..\Private\QuickSlot.cpp" />
     <ClCompile Include="..\Private\RedPortion.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />

@@ -1,56 +1,54 @@
 #include "stdafx.h"
-#include "..\Public\HpBarBase.h"
+#include "..\Public\MenuIcon.h"
 #include "GameInstance.h"
 
-
-
-CHpBarBase::CHpBarBase(LPDIRECT3DDEVICE9 pGraphic_Device)
+CMenuIcon::CMenuIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
 {
 }
 
-CHpBarBase::CHpBarBase(const CHpBarBase& rhs)
+CMenuIcon::CMenuIcon(const CMenuIcon& rhs)
 	: CUI(rhs)
 {
 }
 
 
-HRESULT CHpBarBase::Initialize_Prototype()
+HRESULT CMenuIcon::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 	return S_OK;
 }
 
-HRESULT CHpBarBase::Initialize(void * pArg)
+HRESULT CMenuIcon::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
-	
-	m_UIInfo.fSizeX = 150.f;
-	m_UIInfo.fSizeY = 150.f;
-	m_UIInfo.fX = g_iWinSizeX*0.5;
-	m_UIInfo.fY = 600.f;
+
+	m_UIInfo.fSizeX = 36.f;
+	m_UIInfo.fSizeY = 53.f;
+	m_UIInfo.fX = 1240.f;
+	m_UIInfo.fY = 650.f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 	__super::Initialize(pArg);
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_HpBarBase"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_MenuIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 
 	return S_OK;
 }
 
-void CHpBarBase::Tick(_float fTimeDelta)
+void CMenuIcon::Tick(_float fTimeDelta)
 {
 }
 
-void CHpBarBase::LateTick(_float fTimeDelta)
+void CMenuIcon::LateTick(_float fTimeDelta)
 {
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
 
-HRESULT CHpBarBase::Render()
+HRESULT CMenuIcon::Render()
 {
 	if (FAILED(m_pTextureCom->Bind_Texture(0)))
 		return E_FAIL;
@@ -68,33 +66,33 @@ HRESULT CHpBarBase::Render()
 }
 
 
-CHpBarBase* CHpBarBase::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CMenuIcon* CMenuIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CHpBarBase*		pInstance = new CHpBarBase(pGraphic_Device);
+	CMenuIcon*		pInstance = new CMenuIcon(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CHpBarBase"));
+		MSG_BOX(TEXT("Failed To Created : CMenuIcon"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CHpBarBase::Clone(void * pArg)
+CGameObject * CMenuIcon::Clone(void * pArg)
 {
-	CHpBarBase*		pInstance = new CHpBarBase(*this);
+	CMenuIcon*		pInstance = new CMenuIcon(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CHpBarBase"));
+		MSG_BOX(TEXT("Failed To Cloned : CMenuIcon"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CHpBarBase::Free()
+void CMenuIcon::Free()
 {
 	__super::Free();
 

@@ -29,6 +29,7 @@ private:
 	HRESULT Ready_SkillFrameBtn(const _tchar* pLayerTag);
 	HRESULT Ready_SkillIcon(const _tchar* pLayerTag);
 	HRESULT Ready_SkillInfo();
+	HRESULT Ready_QuickSlot(const _tchar* pLayerTag);
 
 public:
 	static CLevel_GamePlay* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
