@@ -80,7 +80,7 @@ void CAngelRay_Attack::LateTick(_float fTimeDelta)
 
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 	SetDirection();
 }
 HRESULT CAngelRay_Attack::Render()

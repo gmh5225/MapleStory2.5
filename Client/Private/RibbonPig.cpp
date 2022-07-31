@@ -31,7 +31,7 @@ HRESULT CRibbonPig::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 
 	m_fColRad = 0.9f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-4.f, -0.6f, -2.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, .0f, -2.f));
 	m_pTransformCom->Set_Scaled(1.1f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -46,6 +46,14 @@ HRESULT CRibbonPig::Initialize(void * pArg)
 
 HRESULT CRibbonPig::SetUp_Components()
 {
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 0.5f, 1.f, 0.5f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
+		return E_FAIL;
+
+
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_Idle"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_Move"), nullptr);
@@ -97,13 +105,17 @@ void CRibbonPig::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
 
-	Set_Billboard();
+	m_pTransformCom->Go_Gravity(fTimeDelta);
+	__super::BoxColCom_Tick(m_pTransformCom);
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
+
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }
 HRESULT CRibbonPig::Render()
 {
+	Set_Billboard();
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
@@ -142,6 +154,12 @@ void CRibbonPig::Tick_Hit(_float fTimeDelta)
 
 void CRibbonPig::Tick_Chase(_float fTimeDelta)
 {
+	if (GetKeyState('L') & 0x8000)
+	{
+		SetState(STATE_JUMP, m_eDir);
+	}
+
+
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
@@ -170,6 +188,13 @@ void CRibbonPig::SetState(STATE eState, DIR eDir)
 	m_eCurState = eState;
 	m_eDir = eDir;
 	SetAni();
+
+	if (m_eCurState == STATE_JUMP)
+	{
+		// *중력 코드
+		// Y축 힘을 줍니다.
+		m_pTransformCom->Set_Vel(5.0f);
+	}
 }
 void CRibbonPig::SetAni()
 {
@@ -250,6 +275,15 @@ CGameObject * CRibbonPig::Clone(void* pArg)
 
 void CRibbonPig::Collision(CGameObject * pOther)
 {
+	if (pOther->Get_Tag() == "Tag_Cube")
+	{
+		if (m_eCurState == STATE_JUMP)
+		{
+			if (Get_PushedY())
+				SetState(STATE_IDLE, m_eDir);
+		}
+		//m_pTransformCom->Set_Vel(0.f);
+	}
 }
 
 

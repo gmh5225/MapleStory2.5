@@ -33,6 +33,7 @@ public:
 	void Set_ScaledX(_float fScale);
 	_float3 Get_Scaled() const;
 
+
 	_float4x4 Get_WorldMatrixInverse() {
 		_float4x4		WorldMatrixInv;
 		return	*D3DXMatrixInverse(&WorldMatrixInv, nullptr, &m_WorldMatrix);
@@ -46,7 +47,11 @@ public:
 		memcpy(&m_WorldMatrix.m[eState][0], &State, sizeof(_float3));		
 	}
 
-	void Set_Vel(_float fVel) { m_fVel = fVel; m_fTimeAcc = 0.f; }
+
+	void Set_Vel(_float fVel) { m_fVel_Y = fVel; m_fTimeAcc = 0.f; }
+	_float Get_Vel() { return m_fVel_Y; }
+	void Set_Gravity(_float fGravity) { m_fGravity = fGravity; }
+	void ReSet_Gravity() { m_fVel_Y = 0.f; m_fTimeAcc = 0.f; }
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -70,7 +75,7 @@ public:
 	void Go_LD(_float fTimeDelta);
 	void Go_RD(_float fTimeDelta);
 
-	void Go_Y(_float fTimeDelta);
+	void Go_Gravity(_float fTimeDelta);
 
 	void Rotation(_float3 vAxis, _float fRadian);
 	void RotationTwo(_float3 vAxis, _float fRadian, _float3 vAxis2, _float fRadian2);
@@ -85,16 +90,13 @@ public:
 	void CulRUByLook(_float3 vLook);
 	void Set_TransformDesc(TRANSFORMDESC Desc) { m_TransformDesc = Desc; }
 
-public:
-
-	
-	
 
 private:
 	_float4x4			m_WorldMatrix;
 	TRANSFORMDESC		m_TransformDesc;
 
-	_float				m_fVel = 0.f;
+	_float				m_fVel_Y = 0.f;
+	_float				m_fGravity = 1.f;
 	_float				m_fTimeAcc = 0.f;
 	
 

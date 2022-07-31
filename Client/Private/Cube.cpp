@@ -47,11 +47,11 @@ void CCube::LateTick(_float fTimeDelta)
 {
 	__super::BoxColCom_Tick(m_pTransformCom); 
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_BLOCK, this);
 
-	_float3 d = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	int i = 0;
+
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_BLOCK, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+	
 }
 
 HRESULT CCube::Render()

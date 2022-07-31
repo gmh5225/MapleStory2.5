@@ -25,6 +25,9 @@ private:
 public:
 	_float3 Get_WorldMax() { return m_vWorldMax; }
 	_float3 Get_WorldMin() { return m_vWorldMin; }
+	BOXCOLCOMEDESC Get_Desc() { return m_Desc; }
+
+	_float Get_MaxRad();
 
 public:
 	virtual HRESULT Initialize_Prototype() override;

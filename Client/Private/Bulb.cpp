@@ -82,7 +82,7 @@ void CBulb::LateTick(_float fTimeDelta)
 		SetState(STATE_IDLE, m_eDir);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_UI, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_UI, this);
 
 	Set_Billboard();
 }

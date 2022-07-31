@@ -24,18 +24,23 @@ public:
 	virtual HRESULT Initialize_Prototype() override;
 	virtual HRESULT Initialize(void* pArg) override;
 public:
-	HRESULT Add_CollsionGroup(COLLSIONGROUP eCollsionGroup, class CGameObject* pGameObject);
+	HRESULT Add_SphereCollsionGroup(COLLSIONGROUP eCollsionGroup, class CGameObject* pGameObject);
+	HRESULT Add_BoxCollsionGroup(COLLSIONGROUP eCollsionGroup, class CGameObject* pGameObject);
+	HRESULT Add_PushBoxCollsionGroup(COLLSIONGROUP eCollsionGroup, class CGameObject* pGameObject);
 	HRESULT Check_SphereCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
-	HRESULT Check_AABBCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
+	HRESULT Check_BoxCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
+	HRESULT Check_PushBoxCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
 
 	HRESULT End_Collsion();
 
 public:
 	_bool Check_Sphere(CGameObject* pObj_L, CGameObject* pObj_R);
-	_bool Check_AABB(CGameObject* pObj_L, CGameObject* pObj_R);
+	_bool Check_Box(CGameObject* pObj_L, CGameObject* pObj_R, _bool bPush = false);
 
 private:
-	list<class CGameObject*>				m_CollisionObjects[COLLSION_END];
+	list<class CGameObject*>				m_SphereCollisionObjects[COLLSION_END];
+	list<class CGameObject*>				m_BoxCollisionObjects[COLLSION_END];
+	list<class CGameObject*>				m_PhshBoxCollisionObjects[COLLSION_END];
 	typedef list<class CGameObject*>		COLLSIONOBJECTS;
 
 public:

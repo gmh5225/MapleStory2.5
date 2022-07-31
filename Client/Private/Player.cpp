@@ -36,9 +36,20 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 	m_sTag = "Tag_Player";
 
-	m_fColRad = 0.5f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 2.f, 0.f));
+	// 원충돌 시 코드
+	// m_fColRad = 0.5f;
+
+
+
+
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, 2.f, 0.f));
 	m_pTransformCom->Set_Scaled(2.0f);
+
+
+	// *중력 코드
+	// 중력 값을 설정
+	m_pTransformCom->Set_Gravity(1.f);
+
 
 	SetState(STATE_IDLE, DIR_D);
 	
@@ -152,16 +163,16 @@ void CPlayer::LateTick(_float fTimeDelta)
 {
 	SetOnceEndAni();
 	
-	m_pTransformCom->Go_Y(fTimeDelta);
 
-	_float3 d = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	int i = 0;
+	// *중력 코드
+	// 중력 적용
+	m_pTransformCom->Go_Gravity(fTimeDelta);
 
 	__super::BoxColCom_Tick(m_pTransformCom);
 
-
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_PLAYER, this);
+	
 }
 HRESULT CPlayer::Render()
 {
@@ -202,6 +213,8 @@ void CPlayer::SetState(STATE eState, DIR eDir)
 
 	if (m_eCurState == STATE_JUMP)
 	{
+		// *중력 코드
+		// Y축 힘을 줍니다.
 		m_pTransformCom->Set_Vel(5.0f);
 	}
 }
@@ -393,6 +406,10 @@ void CPlayer::SetAni()
 		break;
 	}
 }
+
+
+
+
 void CPlayer::GetKeyInput(_float fTimeDelta)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
@@ -553,7 +570,6 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 	
 }
-
 void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
@@ -562,17 +578,14 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 	{
 		if (GetKeyState(VK_RIGHT) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_RU);
 			m_pTransformCom->Go_RU(fTimeDelta);
 		}
 		else if (GetKeyState(VK_LEFT) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_LU);
 			m_pTransformCom->Go_LU(fTimeDelta);
 		}
 		else
 		{
-			//SetState(STATE_JUMP, DIR_U);
 			m_pTransformCom->Go_U(fTimeDelta);
 		}
 	}
@@ -580,17 +593,14 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 	{
 		if (GetKeyState(VK_RIGHT) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_RD);
 			m_pTransformCom->Go_RD(fTimeDelta);
 		}
 		else if (GetKeyState(VK_LEFT) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_LD);
 			m_pTransformCom->Go_LD(fTimeDelta);
 		}
 		else
 		{
-			//SetState(STATE_JUMP, DIR_D);
 			m_pTransformCom->Go_D(fTimeDelta);
 		}
 	}
@@ -598,18 +608,15 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 	{
 		if (GetKeyState(VK_UP) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_LU);
 			m_pTransformCom->Go_LU(fTimeDelta);
 
 		}
 		else if (GetKeyState(VK_DOWN) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_LD);
 			m_pTransformCom->Go_LD(fTimeDelta);
 		}
 		else
 		{
-			//SetState(STATE_JUMP, DIR_L);
 			m_pTransformCom->Go_L(fTimeDelta);
 		}
 	}
@@ -617,20 +624,18 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 	{
 		if (GetKeyState(VK_UP) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_RU);
 			m_pTransformCom->Go_RU(fTimeDelta);
 		}
 		else if (GetKeyState(VK_DOWN) & 0x8000)
 		{
-			//SetState(STATE_JUMP, DIR_RD);
 			m_pTransformCom->Go_RD(fTimeDelta);
 		}
 		else
 		{
-			//SetState(STATE_JUMP, DIR_R);
 			m_pTransformCom->Go_R(fTimeDelta);
 		}
 	}
+
 }
 
 
@@ -667,10 +672,40 @@ void CPlayer::Dash(_float fTimeDelta)
 			break;
 		}
 }
-
 void CPlayer::Jump(_float fTimeDelta)
 {
-	// m_pTransformCom->Go_Y(fTimeDelta);
+	CTransform::TRANSFORMDESC IdleDesc;
+	IdleDesc.fSpeedPerSec = 2.f;
+	IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
+	m_pTransformCom->Set_TransformDesc(IdleDesc);
+
+	switch (m_eDir)
+	{
+	case Client::CCreature::DIR_L:
+		m_pTransformCom->Go_L(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_R:
+		m_pTransformCom->Go_R(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_U:
+		m_pTransformCom->Go_U(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_D:
+		m_pTransformCom->Go_D(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_LU:
+		m_pTransformCom->Go_LU(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_RU:
+		m_pTransformCom->Go_RU(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_LD:
+		m_pTransformCom->Go_LD(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_RD:
+		m_pTransformCom->Go_RD(fTimeDelta);
+		break;
+	}
 }
 
 HRESULT CPlayer::Set_RenderState()
@@ -736,20 +771,21 @@ void CPlayer::Collision(CGameObject * pOther)
 	{
 		if (m_eCurState == STATE_JUMP)
 		{
-			SetState(STATE_IDLE, m_eDir);
+			if(Get_PushedY())
+				SetState(STATE_IDLE, m_eDir);
 		}
 		//m_pTransformCom->Set_Vel(0.f);
 	}
 	else if (pOther->Get_Tag() == "Tag_Item")
 	{
 
-	if (GetKeyState('Z') & 0x8000)
-	{
-		//메니저통해서 아이템 갯수 추가 
-		//CInvenManager* m_pInvenMgr = CInvenManager::Get_Instance();
-		//Safe_AddRef(m_pInvenMgr);
-		//m_pInvenMgr->AddItemNum();
-	}
+		if (GetKeyState('Z') & 0x8000)
+		{
+			//메니저통해서 아이템 갯수 추가 
+			//CInvenManager* m_pInvenMgr = CInvenManager::Get_Instance();
+			//Safe_AddRef(m_pInvenMgr);
+			//m_pInvenMgr->AddItemNum();
+		}
 
 	}
 }

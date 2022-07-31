@@ -98,7 +98,7 @@ void CStoneGolem::LateTick(_float fTimeDelta)
 		SetState(STATE_CHASE, m_eDir);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_CollsionGroup(CCollider::COLLSION_MONSTER, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	Set_Billboard();
 }
