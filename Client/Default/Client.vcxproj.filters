@@ -247,6 +247,18 @@
     <Filter Include="04.UI\00.MainUI\HpBar\Icon">
       <UniqueIdentifier>{d44281ae-5eb5-4396-8cab-db91856191aa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.UI\00.MainUI\ExpBar">
+      <UniqueIdentifier>{a28e7d5f-15ce-4757-811a-de88a266fe68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\ExpBar\ExpBase">
+      <UniqueIdentifier>{ef397164-806e-4990-aecc-b8a555623099}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\ExpBar\ExpLine">
+      <UniqueIdentifier>{5eabbcb0-a58b-4177-82a1-df583ecbe9cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\ExpBar\ExpBar">
+      <UniqueIdentifier>{de042f6b-460c-4edf-87ba-b29018160ed7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -435,6 +447,15 @@
     <ClInclude Include="..\Public\HpBarMp.h">
       <Filter>04.UI\00.MainUI\HpBar\Mp</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\ExpLine.h">
+      <Filter>04.UI\00.MainUI\ExpBar\ExpLine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ExpBase.h">
+      <Filter>04.UI\00.MainUI\ExpBar\ExpBase</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ExpBar.h">
+      <Filter>04.UI\00.MainUI\ExpBar\ExpBar</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -613,6 +634,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\HpBarMp.cpp">
       <Filter>04.UI\00.MainUI\HpBar\Mp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ExpLine.cpp">
+      <Filter>04.UI\00.MainUI\ExpBar\ExpLine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ExpBase.cpp">
+      <Filter>04.UI\00.MainUI\ExpBar\ExpBase</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ExpBar.cpp">
+      <Filter>04.UI\00.MainUI\ExpBar\ExpBar</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -168,6 +168,9 @@
     <ClInclude Include="..\Public\CrossTheStyx.h" />
     <ClInclude Include="..\Public\Cube.h" />
     <ClInclude Include="..\Public\Chat.h" />
+    <ClInclude Include="..\Public\ExpBar.h" />
+    <ClInclude Include="..\Public\ExpBase.h" />
+    <ClInclude Include="..\Public\ExpLine.h" />
     <ClInclude Include="..\Public\HpBarBase.h" />
     <ClInclude Include="..\Public\HpBarHp.h" />
     <ClInclude Include="..\Public\HpBarIcon.h" />
@@ -231,6 +234,9 @@
     <ClCompile Include="..\Private\CrossTheStyx.cpp" />
     <ClCompile Include="..\Private\Cube.cpp" />
     <ClCompile Include="..\Private\Chat.cpp" />
+    <ClCompile Include="..\Private\ExpBar.cpp" />
+    <ClCompile Include="..\Private\ExpBase.cpp" />
+    <ClCompile Include="..\Private\ExpLine.cpp" />
     <ClCompile Include="..\Private\HpBarBase.cpp" />
     <ClCompile Include="..\Private\HpBarHp.cpp" />
     <ClCompile Include="..\Private\HpBarIcon.cpp" />
