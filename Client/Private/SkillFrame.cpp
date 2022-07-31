@@ -62,12 +62,19 @@ void CSkillFrame::Tick(_float fTimeDelta)
 	if (pInstance->Key_Down(DIK_P))
 	m_pSkillManager->Set_SkillPoint(1);
 
-	if (pInstance->Mouse_Up(DIMK_LBUTTON))
+	/*if (pInstance->Mouse_Pressing(DIMK_LBUTTON))
 	{
-		
-	}
+		POINT		ptMouse;
+		GetCursorPos(&ptMouse);
+		ScreenToClient(g_hWnd, &ptMouse);
+	
+		if (PtInRect(&m_RectUI, ptMouse))
+		{
+			m_UIInfo.fX = ptMouse.x;
+			m_UIInfo.fY = ptMouse.y+150;
+		}
 
-
+	}*/
 
 	Safe_Release(pInstance);
 }
@@ -82,6 +89,11 @@ void CSkillFrame::LateTick(_float fTimeDelta)
 		list->Set_UIMovePos(m_UIInfo);
 	}
 	Set_Data();
+
+	//SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
+
+	//m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
+
 
 	
 
@@ -150,8 +162,35 @@ CGameObject * CSkillFrame::Clone(void * pArg)
 
 void CSkillFrame::RenderText()
 {
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	switch (pSkillInstance->Get_SkillGrade())
+	{
+	case CSkillManager::GRADE_BEGENNER:
+		BegennerText();
+		break;
+	case CSkillManager::GRADE_FIRST:
+		FirstText();
+		break;
+	case CSkillManager::GRADE_SECOND:
+		SecondText();
+		break;
+	case CSkillManager::GRADE_THIRD:
+		ThirdText();
+		break;
+	case CSkillManager::GRADE_FOURTH:
+		FourthText();
+		break;
+	case CSkillManager::GRADE_FIFTH:
+		FifthText();
+		break;
+	default:
+		break;
+	}
+	
+}
 
-
+void CSkillFrame::BegennerText()
+{
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 
 	wchar_t SkillPoint[10];
@@ -159,10 +198,9 @@ void CSkillFrame::RenderText()
 
 	wchar_t SunCrossLevel[10];
 	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SunCrossLevel, 10);
-	
 
 	RECT Grade;
-	SetRect(&Grade, 265, 180, 0, 0);
+	SetRect(&Grade, 865, 180, 0, 0);
 	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
 
 	RECT SkillPointrt;
@@ -170,29 +208,129 @@ void CSkillFrame::RenderText()
 	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
 
 	RECT SuncrossName;
-	SetRect(&SuncrossName, 192, 215, 0, 0);
+	SetRect(&SuncrossName, 792, 215, 0, 0);
 	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 
 	RECT SuncrossLevel;
-	SetRect(&SuncrossLevel, 193, 233, 0, 0);
+	SetRect(&SuncrossLevel, 793, 233, 0, 0);
 	m_FrameFont->DrawText(NULL, SunCrossLevel, -1, &SuncrossLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+}
 
-	
+void CSkillFrame::FirstText()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	wchar_t SkillPoint[10];
+	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
+
+	wchar_t SunCrossGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SunCrossGetLevel, 10);
+
+	wchar_t SolunaSlashGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SolunaSlashGetLevel, 10);
+
+	RECT Grade;
+	SetRect(&Grade, 865, 180, 0, 0);
+	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+	RECT SkillPointrt;
+	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
+	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+
+	RECT SuncrossName;
+	SetRect(&SuncrossName, 792, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT SunCrossLevel;
+	SetRect(&SunCrossLevel, 793, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, SunCrossGetLevel, -1, &SunCrossLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT SolunaSlashName;
+	SetRect(&SolunaSlashName, 935, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SolunaSlashName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT SolunaSlashLevel;
+	SetRect(&SolunaSlashLevel, 936, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, SolunaSlashGetLevel, -1, &SolunaSlashLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+}
+
+void CSkillFrame::SecondText()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	wchar_t SkillPoint[10];
+	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
+
+	RECT Grade;
+	SetRect(&Grade, 865, 180, 0, 0);
+	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+	RECT SkillPointrt;
+	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
+	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+}
+
+void CSkillFrame::ThirdText()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	wchar_t SkillPoint[10];
+	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
+
+	RECT Grade;
+	SetRect(&Grade, 865, 180, 0, 0);
+	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+	RECT SkillPointrt;
+	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
+	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+}
+
+void CSkillFrame::FourthText()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	wchar_t SkillPoint[10];
+	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
+
+	RECT Grade;
+	SetRect(&Grade, 865, 180, 0, 0);
+	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+	RECT SkillPointrt;
+	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
+	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+}
+
+void CSkillFrame::FifthText()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	wchar_t SkillPoint[10];
+	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
+
+	RECT Grade;
+	SetRect(&Grade, 865, 180, 0, 0);
+	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+	RECT SkillPointrt;
+	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
+	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
 }
 
 void CSkillFrame::Set_Data()
 {
 	if (m_pSkillManager->Get_SkillPoint() < 10)
 	{
-		m_iSkillPointDigit = 440;
+		m_iSkillPointDigit = 1040;
 	}
 	else if (m_pSkillManager->Get_SkillPoint() < 100)
 	{
-		m_iSkillPointDigit = 430;
+		m_iSkillPointDigit = 1030;
 	}
 	else
 	{
-		m_iSkillPointDigit = 420;
+		m_iSkillPointDigit = 1020;
 	}
 
 	switch (m_pSkillManager->Get_SkillGrade())

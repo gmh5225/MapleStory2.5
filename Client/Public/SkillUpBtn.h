@@ -18,6 +18,14 @@ public:
 
 public:
 	void Change_Texture();
+	void Set_RenderGroup();
+	void SkillLevelUp();
+	void SkillLevelUp_Begenner();
+	void SkillLevelUp_First();
+	void SkillLevelUp_Second();
+	void SkillLevelUp_Third();
+	void SkillLevelUp_Fourth();
+	void SkillLevelUp_Fifth();
 
 public:
 	static CSkillUpBtn* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -26,6 +34,7 @@ public:
 
 private:
 	_uint m_iSkillPoint;
+	_uint m_iBtnNum;
 };
 END
 

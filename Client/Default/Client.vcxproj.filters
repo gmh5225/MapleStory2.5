@@ -85,9 +85,6 @@
     <Filter Include="02.GameObject\Creature\Npc">
       <UniqueIdentifier>{8f214ff5-1c18-4057-b474-2d32a59d3b86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.UI\01.Bulb">
-      <UniqueIdentifier>{ee369dd0-4eed-44df-b7c7-c1a4378415ab}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\Item">
       <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
     </Filter>
@@ -204,7 +201,7 @@
     </Filter>
     <Filter Include="20.DATA\SkillInfo\CloseAttack\SunCross">
       <UniqueIdentifier>{8896d3d2-2f1e-458f-881c-d34cd096b291}</UniqueIdentifier>
-          </Filter>
+    </Filter>
     <Filter Include="04.UI\02.Quest\04.MissionUI">
       <UniqueIdentifier>{c212165a-a91c-4dce-850c-5b820efb644a}</UniqueIdentifier>
     </Filter>
@@ -216,6 +213,36 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\StoneGolem">
       <UniqueIdentifier>{087e3ce3-03d6-4892-bbf4-d02da350afcf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\Dash">
+      <UniqueIdentifier>{f035f1b9-b539-406e-b2d0-0d1233e80d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\Dash\SolunaSlash">
+      <UniqueIdentifier>{d5d716cb-5dfb-499c-a9e5-9065b5548e39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\Dash">
+      <UniqueIdentifier>{258c6c99-11f5-492b-9183-cfd76829204c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\Dash\SolunaSlash">
+      <UniqueIdentifier>{f879b7dc-fcff-4aac-aa15-4d00c81fee80}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\06.Mouse">
+      <UniqueIdentifier>{0355bad6-3928-4378-8886-2234e79d623f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\MouseManager">
+      <UniqueIdentifier>{ce307312-bdac-4cae-a0ea-446ee5ebb502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\HpBar">
+      <UniqueIdentifier>{7095ad11-bb94-4edc-8e07-293ec4e85f13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\HpBar\Base">
+      <UniqueIdentifier>{a7820ab6-194a-41d6-b638-de87f9eaa8c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\HpBar\Hp">
+      <UniqueIdentifier>{bc3e6038-eb96-49f5-a1cd-f29e7339c337}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\HpBar\Mp">
+      <UniqueIdentifier>{318ddd0b-4cd3-47ed-a690-b069e79a2fb7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -368,7 +395,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\SunCrossInfo.h">
       <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\MissionUI.h">
       <Filter>04.UI\02.Quest\04.MissionUI</Filter>
     </ClInclude>
@@ -380,6 +407,21 @@
     </ClInclude>
     <ClInclude Include="..\Public\StoneGolem.h">
       <Filter>02.GameObject\Creature\Monster\StoneGolem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SolunaSlashIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\Dash\SolunaSlash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SolunaSlashInfo.h">
+      <Filter>20.DATA\SkillInfo\Dash\SolunaSlash</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MouseCursor.h">
+      <Filter>04.UI\06.Mouse</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MouseManager.h">
+      <Filter>89.Manager\MouseManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\HpBarBase.h">
+      <Filter>04.UI\00.MainUI\HpBar\Base</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -523,7 +565,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\SunCrossInfo.cpp">
       <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\MissionUI.cpp">
       <Filter>04.UI\02.Quest\04.MissionUI</Filter>
     </ClCompile>
@@ -535,6 +577,21 @@
     </ClCompile>
     <ClCompile Include="..\Private\StoneGolem.cpp">
       <Filter>02.GameObject\Creature\Monster\StoneGolem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SolunaSlashIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\Dash\SolunaSlash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SolunaSlashInfo.cpp">
+      <Filter>20.DATA\SkillInfo\Dash\SolunaSlash</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MouseCursor.cpp">
+      <Filter>04.UI\06.Mouse</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MouseManager.cpp">
+      <Filter>89.Manager\MouseManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\HpBarBase.cpp">
+      <Filter>04.UI\00.MainUI\HpBar\Base</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

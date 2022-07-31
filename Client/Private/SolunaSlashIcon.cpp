@@ -1,28 +1,28 @@
 #include "stdafx.h"
-#include "..\Public\SunCrossIcon.h"
+#include "..\Public\SolunaSlashIcon.h"
 #include "GameInstance.h"
 #include "SkillManager.h"
-#include "SunCrossInfo.h"
+#include "SolunaSlashInfo.h"
 
 
-CSunCrossIcon::CSunCrossIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSolunaSlashIcon::CSolunaSlashIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
 {
 }
 
-CSunCrossIcon::CSunCrossIcon(const CSunCrossIcon& rhs)
+CSolunaSlashIcon::CSolunaSlashIcon(const CSolunaSlashIcon& rhs)
 	: CUI(rhs)
 {
 }
 
 
-HRESULT CSunCrossIcon::Initialize_Prototype()
+HRESULT CSolunaSlashIcon::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 	return S_OK;
 }
 
-HRESULT CSunCrossIcon::Initialize(void * pArg)
+HRESULT CSolunaSlashIcon::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
@@ -33,7 +33,7 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 	m_iTexturenum = 0;
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SolunaSlashIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
@@ -45,7 +45,7 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 	return S_OK;
 }
 
-void CSunCrossIcon::Tick(_float fTimeDelta)
+void CSolunaSlashIcon::Tick(_float fTimeDelta)
 {
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
@@ -64,21 +64,21 @@ void CSunCrossIcon::Tick(_float fTimeDelta)
 	Safe_Release(pInstance);
 }
 
-void CSunCrossIcon::LateTick(_float fTimeDelta)
+void CSolunaSlashIcon::LateTick(_float fTimeDelta)
 {
-	
+
 
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 	Change_Texture();
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-	if (m_bRender&& pSkillInstance->Get_SkillGrade() <= CSkillManager::GRADE_FIRST)
+	if (m_bRender && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FIRST)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
-	
+
 }
 
-HRESULT CSunCrossIcon::Render()
+HRESULT CSolunaSlashIcon::Render()
 {
 	if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
 		return E_FAIL;
@@ -96,53 +96,53 @@ HRESULT CSunCrossIcon::Render()
 
 	if (m_eCollision == TYPE_ON)
 	{
-		RECT SunCrossNotice;
-		SetRect(&SunCrossNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
-		m_NoticeFont->DrawText(NULL, L"스킬 설명 테스트\n타입 : 전방 공격\n대미지 : 20\n타격횟수 : 3\n소모 마나 : 50", -1, &SunCrossNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+		RECT SolunaSlashNotice;
+		SetRect(&SolunaSlashNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
+		m_NoticeFont->DrawText(NULL, L"스킬 설명 테스트\n타입 : 대쉬\n 소모 마나 : 30\n이동 거리 : 300px", -1, &SolunaSlashNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
 	}
 
 	return S_OK;
 }
 
-void CSunCrossIcon::Change_Texture()
+void CSolunaSlashIcon::Change_Texture()
 {
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-	if (pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER)->Get_SkillLevel() < 1)
+	if (pSkillInstance->Get_SkillInfo(L"SolunaSlashInfo", CSkillManager::GRADE_BEGENNER)->Get_SkillLevel() < 1)
 		m_iTexturenum = 0;
 	else
 		m_iTexturenum = 1;
 
-	
-	
+
+
 }
 
-CSunCrossIcon* CSunCrossIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSolunaSlashIcon* CSolunaSlashIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CSunCrossIcon*		pInstance = new CSunCrossIcon(pGraphic_Device);
+	CSolunaSlashIcon*		pInstance = new CSolunaSlashIcon(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CSunCrossIcon"));
+		MSG_BOX(TEXT("Failed To Created : CSolunaSlashIcon"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CSunCrossIcon::Clone(void * pArg)
+CGameObject * CSolunaSlashIcon::Clone(void * pArg)
 {
-	CSunCrossIcon*		pInstance = new CSunCrossIcon(*this);
+	CSolunaSlashIcon*		pInstance = new CSolunaSlashIcon(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CSunCrossIcon"));
+		MSG_BOX(TEXT("Failed To Cloned : CSolunaSlashIcon"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CSunCrossIcon::Free()
+void CSolunaSlashIcon::Free()
 {
 	__super::Free();
 

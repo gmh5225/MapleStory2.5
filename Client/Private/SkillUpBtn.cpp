@@ -28,7 +28,7 @@ HRESULT CSkillUpBtn::Initialize(void * pArg)
 		return E_FAIL;
 
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
-
+	m_iBtnNum = m_UIInfo.iNum;
 	m_iSkillPoint = 0;
 	m_iTexturenum = 0;
 	__super::Initialize(pArg);
@@ -68,9 +68,8 @@ void CSkillUpBtn::Tick(_float fTimeDelta)
 
 void CSkillUpBtn::LateTick(_float fTimeDelta)
 {
-	if (m_bRender)
-		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
-
+	Set_RenderGroup();
+	
 
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
 	
@@ -118,8 +117,7 @@ void CSkillUpBtn::Change_Texture()
 	case Client::CUI::TYPE_DOWN:
 		break;
 	case Client::CUI::TYPE_UP:
-		pSkillInstance->Set_SkillPoint(-1);
-		pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		SkillLevelUp();
 		break;
 	case Client::CUI::TYPE_PRESSING:
 		m_iTexturenum = 3;
@@ -129,6 +127,128 @@ void CSkillUpBtn::Change_Texture()
 	default:
 		break;
 	}
+}
+
+void CSkillUpBtn::Set_RenderGroup()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	switch (pSkillInstance->Get_SkillGrade())
+	{
+	case CSkillManager::GRADE_BEGENNER:
+		if (m_bRender && m_iBtnNum < 2)
+			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+		break;
+	case CSkillManager::GRADE_FIRST:
+		if (m_bRender && m_iBtnNum < 3)
+			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+		break;
+	case CSkillManager::GRADE_SECOND:
+		if (m_bRender && m_iBtnNum < 4)
+			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+		break;
+	case CSkillManager::GRADE_THIRD:
+		if (m_bRender && m_iBtnNum < 5)
+			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+		break;
+	case CSkillManager::GRADE_FOURTH:
+		if (m_bRender && m_iBtnNum < 2)
+			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+		break;
+	case CSkillManager::GRADE_FIFTH:
+		if (m_bRender && m_iBtnNum < 3)
+			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+		break;
+
+	default:
+		break;
+	}
+	
+
+}
+
+void CSkillUpBtn::SkillLevelUp()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	switch (pSkillInstance->Get_SkillGrade())
+	{
+	case CSkillManager::GRADE_BEGENNER:
+		SkillLevelUp_Begenner();
+		break;
+	case CSkillManager::GRADE_FIRST:
+		SkillLevelUp_First();
+		break;
+	case CSkillManager::GRADE_SECOND:
+		SkillLevelUp_Second();
+		break;
+	case CSkillManager::GRADE_THIRD:
+		SkillLevelUp_Third();
+		break;
+	case CSkillManager::GRADE_FOURTH:
+		SkillLevelUp_Fourth();
+		break;
+	case CSkillManager::GRADE_FIFTH:
+		SkillLevelUp_Fifth();
+		break;
+
+	default:
+		break;
+	}
+
+}
+
+void CSkillUpBtn::SkillLevelUp_Begenner()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	switch (m_iBtnNum)
+	{
+	case 1:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		break;
+
+	default:
+		break;
+	}
+
+}
+
+void CSkillUpBtn::SkillLevelUp_First()
+{
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	switch (m_iBtnNum)
+	{
+	case 1:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		break;
+	case 2:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		break;
+
+	default:
+		break;
+	}
+
+		
+}
+
+void CSkillUpBtn::SkillLevelUp_Second()
+{
+}
+
+void CSkillUpBtn::SkillLevelUp_Third()
+{
+}
+
+void CSkillUpBtn::SkillLevelUp_Fourth()
+{
+}
+
+void CSkillUpBtn::SkillLevelUp_Fifth()
+{
 }
 
 CSkillUpBtn* CSkillUpBtn::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

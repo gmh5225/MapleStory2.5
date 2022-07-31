@@ -168,6 +168,7 @@
     <ClInclude Include="..\Public\CrossTheStyx.h" />
     <ClInclude Include="..\Public\Cube.h" />
     <ClInclude Include="..\Public\Chat.h" />
+    <ClInclude Include="..\Public\HpBarBase.h" />
     <ClInclude Include="..\Public\InvenManager.h" />
     <ClInclude Include="..\Public\ElderStan.h" />
     <ClInclude Include="..\Public\Level_GamePlay.h" />
@@ -177,6 +178,8 @@
     <ClInclude Include="..\Public\MainApp.h" />
     <ClInclude Include="..\Public\Maya.h" />
     <ClInclude Include="..\Public\MissionUI.h" />
+    <ClInclude Include="..\Public\MouseCursor.h" />
+    <ClInclude Include="..\Public\MouseManager.h" />
     <ClInclude Include="..\public\MushHouse.h" />
     <ClInclude Include="..\Public\OrangeMushroom.h" />
     <ClInclude Include="..\Public\Player.h" />
@@ -196,6 +199,8 @@
     <ClInclude Include="..\Public\RibbonPig.h" />
     <ClInclude Include="..\Public\SkillUpBtn.h" />
     <ClInclude Include="..\Public\Slime.h" />
+    <ClInclude Include="..\Public\SolunaSlashIcon.h" />
+    <ClInclude Include="..\Public\SolunaSlashInfo.h" />
     <ClInclude Include="..\Public\SunCrossIcon.h" />
     <ClInclude Include="..\Public\SunCrossInfo.h" />
     <ClInclude Include="..\Public\StoneGolem.h" />
@@ -223,6 +228,7 @@
     <ClCompile Include="..\Private\CrossTheStyx.cpp" />
     <ClCompile Include="..\Private\Cube.cpp" />
     <ClCompile Include="..\Private\Chat.cpp" />
+    <ClCompile Include="..\Private\HpBarBase.cpp" />
     <ClCompile Include="..\Private\InvenManager.cpp" />
     <ClCompile Include="..\Private\ElderStan.cpp" />
     <ClCompile Include="..\Private\Level_GamePlay.cpp" />
@@ -232,6 +238,8 @@
     <ClCompile Include="..\Private\MainApp.cpp" />
     <ClCompile Include="..\Private\Maya.cpp" />
     <ClCompile Include="..\Private\MissionUI.cpp" />
+    <ClCompile Include="..\Private\MouseCursor.cpp" />
+    <ClCompile Include="..\Private\MouseManager.cpp" />
     <ClCompile Include="..\private\MushHouse.cpp" />
     <ClCompile Include="..\Private\OrangeMushroom.cpp" />
     <ClCompile Include="..\Private\Player.cpp" />
@@ -251,6 +259,8 @@
     <ClCompile Include="..\Private\RibbonPig.cpp" />
     <ClCompile Include="..\Private\SkillUpBtn.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
+    <ClCompile Include="..\Private\SolunaSlashIcon.cpp" />
+    <ClCompile Include="..\Private\SolunaSlashInfo.cpp" />
     <ClCompile Include="..\Private\SunCrossIcon.cpp" />
     <ClCompile Include="..\Private\SunCrossInfo.cpp" />
     <ClCompile Include="..\Private\StoneGolem.cpp" />

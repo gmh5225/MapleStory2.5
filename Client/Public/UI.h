@@ -20,6 +20,7 @@ public:
 	typedef struct tagUIInfo
 	{
 		_float					fMoveX, fMoveY, fX, fY, fSizeX, fSizeY;
+		_uint iNum;
 	}UIINFO;
 protected:
 	CUI(LPDIRECT3DDEVICE9 pGraphic_Device);

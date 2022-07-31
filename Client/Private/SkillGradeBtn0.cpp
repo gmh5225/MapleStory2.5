@@ -28,6 +28,7 @@ HRESULT CSkillGradeBtn0::Initialize(void * pArg)
 		return E_FAIL;
 
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
+	
 	m_iTexturenum = 0;
 	__super::Initialize(pArg);
 

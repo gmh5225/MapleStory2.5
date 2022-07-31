@@ -30,6 +30,12 @@ public:
 
 private:
 	void RenderText();
+	void BegennerText();
+	void FirstText();
+	void SecondText();
+	void ThirdText();
+	void FourthText();
+	void FifthText();
 	void Set_Data();
 private:
 	_uint m_iSkillPointDigit;

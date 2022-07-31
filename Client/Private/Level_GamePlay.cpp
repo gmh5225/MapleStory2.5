@@ -5,6 +5,7 @@
 #include "Camera_Free.h"
 #include "SkillInfo.h"
 #include "SunCrossInfo.h"
+#include "SolunaSlashInfo.h"
 #include "SkillManager.h"
 #include "UI.h"
 #include "QuestManager.h"
@@ -32,8 +33,8 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
+		//return E_FAIL;
 
 	if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
 		return E_FAIL;
@@ -255,16 +256,14 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	CUI::UIINFO SkillFrameiInfo;
 	SkillFrameiInfo.fSizeX = 318.f;
 	SkillFrameiInfo.fSizeY = 360.f;
-	SkillFrameiInfo.fX = 300.f;
+	SkillFrameiInfo.fX = 900.f;
 	SkillFrameiInfo.fY = 300.f;
 
+	CUI::UIINFO MouseCursorInfo;
+	MouseCursorInfo.fSizeX = 24.f;
+	MouseCursorInfo.fSizeY = 28.f;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_GAMEPLAY, pLayerTag, &SkillFrameiInfo)))
-		return E_FAIL;
-
-	Ready_SkillFrameBtn(pLayerTag);
-
-	Ready_SkillIcon(pLayerTag);
+	
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bulb"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
@@ -273,6 +272,19 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chat"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_GAMEPLAY, pLayerTag, &SkillFrameiInfo)))
+		return E_FAIL;
+
+	Ready_SkillFrameBtn(pLayerTag);
+
+	Ready_SkillIcon(pLayerTag);
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_HpBarBase"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseCursor"), LEVEL_GAMEPLAY, pLayerTag, &MouseCursorInfo)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -292,30 +304,35 @@ HRESULT CLevel_GamePlay::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 	SkillUpBtnInfo1.fSizeY = 14.f;
 	SkillUpBtnInfo1.fMoveX = -16.f;
 	SkillUpBtnInfo1.fMoveY = -60.f;
+	SkillUpBtnInfo1.iNum = 1;
 
 	CUI::UIINFO SkillUpBtnInfo2;
 	SkillUpBtnInfo2.fSizeX = 16.f;
 	SkillUpBtnInfo2.fSizeY = 14.f;
 	SkillUpBtnInfo2.fMoveX = 128.f;
 	SkillUpBtnInfo2.fMoveY = -60.f;
+	SkillUpBtnInfo2.iNum = 2;
 
 	CUI::UIINFO SkillUpBtnInfo3;
 	SkillUpBtnInfo3.fSizeX = 16.f;
 	SkillUpBtnInfo3.fSizeY = 14.f;
 	SkillUpBtnInfo3.fMoveX = -16.f;
 	SkillUpBtnInfo3.fMoveY = -20.f;
+	SkillUpBtnInfo3.iNum = 3;
 
 	CUI::UIINFO SkillUpBtnInfo4;
 	SkillUpBtnInfo4.fSizeX = 16.f;
 	SkillUpBtnInfo4.fSizeY = 14.f;
 	SkillUpBtnInfo4.fMoveX = 128.f;
 	SkillUpBtnInfo4.fMoveY = -20.f;
+	SkillUpBtnInfo4.iNum = 4;
 
 	CUI::UIINFO SkillUpBtnInfo5;
 	SkillUpBtnInfo5.fSizeX = 16.f;
 	SkillUpBtnInfo5.fSizeY = 14.f;
 	SkillUpBtnInfo5.fMoveX = -16.f;
 	SkillUpBtnInfo5.fMoveY = 20.f;
+	SkillUpBtnInfo5.iNum = 5;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillUpBtn"), LEVEL_GAMEPLAY, pLayerTag, &SkillUpBtnInfo1)))
 		return E_FAIL;
@@ -404,7 +421,16 @@ HRESULT CLevel_GamePlay::Ready_SkillIcon(const _tchar * pLayerTag)
 	SunCrossInfo.fMoveX = -129.f;
 	SunCrossInfo.fMoveY = -69.f;
 
+	CUI::UIINFO SolunaSlashInfo;
+	SolunaSlashInfo.fSizeX = 32.f;
+	SolunaSlashInfo.fSizeY = 32.f;
+	SolunaSlashInfo.fMoveX = 15.f;
+	SolunaSlashInfo.fMoveY = -69.f;
+
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCrossIcon"), LEVEL_GAMEPLAY, pLayerTag, &SunCrossInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlashIcon"), LEVEL_GAMEPLAY, pLayerTag, &SolunaSlashInfo)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -416,9 +442,17 @@ HRESULT CLevel_GamePlay::Ready_SkillInfo()
 {
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 	CSunCrossInfo* pSunCross = new CSunCrossInfo;
+	CSolunaSlashInfo* pSolunaSlash = new CSolunaSlashInfo;
 	
-	pSkillInstance->Add_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER, pSunCross);
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER, pSunCross)))
+		return E_FAIL;
+	
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER, pSolunaSlash)))
+		return E_FAIL;
+
 	return S_OK;
+
+	
 }
 
 CLevel_GamePlay * CLevel_GamePlay::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
