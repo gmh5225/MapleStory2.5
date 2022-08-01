@@ -1,14 +1,13 @@
 #pragma once
 #include "UI.h"
-#include "SolunaSlashInfo.h"
 
 BEGIN(Client)
-class CSolunaSlashIcon final : public  CUI
+class CMouseSkillIcon final : public  CUI
 {
 private:
-	CSolunaSlashIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSolunaSlashIcon(const CSolunaSlashIcon& rhs);
-	virtual ~CSolunaSlashIcon() = default;
+	CMouseSkillIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CMouseSkillIcon(const CMouseSkillIcon& rhs);
+	virtual ~CMouseSkillIcon() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -19,16 +18,13 @@ public:
 
 public:
 	void Change_Texture();
+	_uint Get_IndexNum() { return m_iTexturenum; }
 
 public:
-	static CSolunaSlashIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CMouseSkillIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-private:
-	CSolunaSlashInfo* m_pSkillInfo;
-	_uint m_iSkillPoint;
-	LPD3DXFONT m_NoticeFont;
 };
 END
 

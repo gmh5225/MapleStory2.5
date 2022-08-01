@@ -265,6 +265,18 @@
     <Filter Include="04.UI\00.MainUI\QuickSlot">
       <UniqueIdentifier>{f94e8e2d-3a7a-49ac-961f-4f0fa534bb6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.UI\06.Mouse\MouseCursor">
+      <UniqueIdentifier>{58b5e812-71df-4286-8309-07cde33ee763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\06.Mouse\MouseSkillIcon">
+      <UniqueIdentifier>{7928b644-ab4c-453b-bf35-7ac952a0eefe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\QuickSlot\QuickSlotSkill">
+      <UniqueIdentifier>{6c3419f2-a87a-4bb1-8238-235cdfccb315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\QuickSlotManager">
+      <UniqueIdentifier>{fa4a107b-f993-4ea4-87e8-cd4866ce3628}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -432,9 +444,6 @@
     <ClInclude Include="..\Public\SolunaSlashInfo.h">
       <Filter>20.DATA\SkillInfo\Dash\SolunaSlash</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\MouseCursor.h">
-      <Filter>04.UI\06.Mouse</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\MouseManager.h">
       <Filter>89.Manager\MouseManager</Filter>
     </ClInclude>
@@ -467,6 +476,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\QuickSlot.h">
       <Filter>04.UI\00.MainUI\QuickSlot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MouseCursor.h">
+      <Filter>04.UI\06.Mouse\MouseCursor</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MouseSkillIcon.h">
+      <Filter>04.UI\06.Mouse\MouseSkillIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\QuickSlotManager.h">
+      <Filter>89.Manager\QuickSlotManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\QuickSlotSkill.h">
+      <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotSkill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -626,9 +647,6 @@
     <ClCompile Include="..\Private\SolunaSlashInfo.cpp">
       <Filter>20.DATA\SkillInfo\Dash\SolunaSlash</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\MouseCursor.cpp">
-      <Filter>04.UI\06.Mouse</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\MouseManager.cpp">
       <Filter>89.Manager\MouseManager</Filter>
     </ClCompile>
@@ -661,6 +679,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\QuickSlot.cpp">
       <Filter>04.UI\00.MainUI\QuickSlot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MouseCursor.cpp">
+      <Filter>04.UI\06.Mouse\MouseCursor</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MouseSkillIcon.cpp">
+      <Filter>04.UI\06.Mouse\MouseSkillIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuickSlotManager.cpp">
+      <Filter>89.Manager\QuickSlotManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuickSlotSkill.cpp">
+      <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

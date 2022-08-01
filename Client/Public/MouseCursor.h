@@ -18,8 +18,8 @@ public:
 
 public:
 	void Change_Texture();
-	/*virtual HRESULT Set_RenderState();
-	virtual HRESULT Reset_RenderState();*/
+	virtual HRESULT Set_RenderState();
+	virtual HRESULT Reset_RenderState();
 
 public:
 	static CMouseCursor* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

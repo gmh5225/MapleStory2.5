@@ -1,14 +1,13 @@
 #pragma once
 #include "UI.h"
-#include "SolunaSlashInfo.h"
 
 BEGIN(Client)
-class CSolunaSlashIcon final : public  CUI
+class CQuickSlotSkill final : public  CUI
 {
 private:
-	CSolunaSlashIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSolunaSlashIcon(const CSolunaSlashIcon& rhs);
-	virtual ~CSolunaSlashIcon() = default;
+	CQuickSlotSkill(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CQuickSlotSkill(const CQuickSlotSkill& rhs);
+	virtual ~CQuickSlotSkill() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -20,15 +19,14 @@ public:
 public:
 	void Change_Texture();
 
+private:
+	_uint m_iIndexNum;
+
 public:
-	static CSolunaSlashIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CQuickSlotSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-private:
-	CSolunaSlashInfo* m_pSkillInfo;
-	_uint m_iSkillPoint;
-	LPD3DXFONT m_NoticeFont;
 };
 END
 

@@ -35,7 +35,7 @@ public:
 	virtual HRESULT Render() override;
 
 public:
-	void Set_Level(_uint i) { m_iTexturenum = i; }
+	void Set_TextureNum(_uint i) { m_iTexturenum = i; }
 	void Set_UIMovePos(UIINFO tUIInfo) { m_UIInfo.fX = tUIInfo.fX + m_UIInfo.fMoveX, m_UIInfo.fY = tUIInfo.fY + m_UIInfo.fMoveY; }
 	void Set_UIPos(UIINFO tUIInfo) { m_UIInfo.fX = tUIInfo.fX, m_UIInfo.fY = tUIInfo.fY; }
 

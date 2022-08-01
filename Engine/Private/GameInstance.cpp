@@ -277,8 +277,6 @@ void CGameInstance::Release_Engine()
 {
 	_int i = CGameInstance::Get_Instance()->Destroy_Instance();
 
-
-
 	CComponent_Manager::Get_Instance()->Destroy_Instance();
 
 	CMap_Manager::Get_Instance()->Destroy_Instance();

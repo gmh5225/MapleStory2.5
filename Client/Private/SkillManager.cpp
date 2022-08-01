@@ -29,6 +29,7 @@ HRESULT CSkillManager::Add_SkillFrameImage(CUI* pSkillFrameImage)
 		return E_FAIL;
 
 	m_pSkillFrame->Add_SkillFrameImage(pSkillFrameImage);
+	//Safe_AddRef(pSkillFrameImage);
 
 	return S_OK;
 }
@@ -39,6 +40,7 @@ HRESULT CSkillManager::Add_SkillInfo(const _tchar* pTag, SkillGrade eGrade, CSki
 		return E_FAIL;
 
 	m_SkillInfo[eGrade].emplace(pTag, pSkillInfo);
+	
 	
 	return S_OK;
 }

@@ -39,6 +39,7 @@
 #include "SkillGradeBtn5.h"
 #include "Maya.h"
 #include "MouseCursor.h"
+#include "MouseSkillIcon.h"
 #include "HpBarBase.h"
 #include "HpBarIcon.h"
 #include "HpBarHp.h"
@@ -48,6 +49,7 @@
 #include "ExpLine.h"
 #include "MenuIcon.h"
 #include "QuickSlot.h"
+#include "QuickSlotSkill.h"
 
 
 
@@ -367,8 +369,16 @@ HRESULT CLoader::Load_UI_Object()
 		CQuickSlot::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_QuickSlotSkill"),
+		CQuickSlotSkill::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_MouseCursor"),
 		CMouseCursor::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_MouseSkillIcon"),
+		CMouseSkillIcon::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if(FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SkillFrame"),
@@ -422,9 +432,6 @@ HRESULT CLoader::Load_UI_Object()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Chat"),
 		CChat::Create(m_pGraphic_Device))))
 		return E_FAIL;
-
-
-
 
 	Safe_Release(pGameInstance);
 
@@ -786,6 +793,10 @@ HRESULT CLoader::Load_UI_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_MouseCursor"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/Cursor/Cursor%d.png"), 3))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_MouseSkillIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 2))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_HpBarBase"),

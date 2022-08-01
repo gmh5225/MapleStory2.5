@@ -1,5 +1,6 @@
 #pragma once
 #include "UI.h"
+#include "SunCrossInfo.h"
 
 BEGIN(Client)
 class CSunCrossIcon final : public  CUI
@@ -26,6 +27,7 @@ public:
 
 private:
 	_uint m_iSkillPoint;
+	CSunCrossInfo* m_pSkillInfo;
 	LPD3DXFONT m_NoticeFont;
 };
 END
