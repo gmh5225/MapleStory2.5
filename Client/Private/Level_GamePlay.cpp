@@ -184,6 +184,10 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+
+	CCreature::CRETUREDESC MonsterInfo;
+
+
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
@@ -197,7 +201,11 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 
 	for (int i = 0; i < 12; ++i)
 	{
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, pLayerTag)))
+		MonsterInfo.vPos = _float3{_float( i - 6), -0.6f, -2.f };
+		MonsterInfo.vScale = _float3{ 1.3f, 1.3f, 1.3f };
+		MonsterInfo.fColRad = 1.f;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, pLayerTag, &MonsterInfo)))
 		return E_FAIL;
 	}
 	

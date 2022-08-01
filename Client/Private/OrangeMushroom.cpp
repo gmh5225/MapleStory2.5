@@ -27,13 +27,45 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_sTag = "Tag_Monster";
+	m_iHp = 3;
 
-	m_fColRad = 0.9f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, -0.6f, -2.f));
-	m_pTransformCom->Set_Scaled(1.3f);
+	CCreature::CRETUREDESC* pMonsterDesc = (CCreature::CRETUREDESC*)pArg;
+	
 
-	SetState(STATE_IDLE, DIR_END);
+	m_fColRad = pMonsterDesc->fColRad;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->vPos);
+	m_pTransformCom->Set_Scaled(pMonsterDesc->vScale);
+	m_bDir = false;
 
+	m_fStartPos = pMonsterDesc->vPos;
+
+	// 랜덤으로 어느방향으로 움직일지와 거리를 생성한다
+	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 4);
+	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(2, 7));
+
+
+	switch (m_iMove)
+	{
+	case MOVE_R:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.x = m_fStartPos.x + m_fDistance;
+		break;
+	case MOVE_L:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.x = m_fStartPos.x - m_fDistance;
+		break;
+	case MOVE_U:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.z = m_fStartPos.z + m_fDistance;
+		break;
+	case MOVE_D:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.z = m_fStartPos.z - m_fDistance;
+		break;
+	case MOVE_END:
+		SetState(STATE_IDLE, DIR_END);
+		break;
+	}
 
 
 	return S_OK;
@@ -145,10 +177,105 @@ HRESULT COrangeMushroom::Render()
 
 void COrangeMushroom::Tick_Idle(_float fTimeDelta)
 {
+	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 1000);
+
+	switch (m_iMove)
+	{
+	case MOVE_R:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.x = m_fStartPos.x + m_fDistance;
+		break;
+	case MOVE_L:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.x = m_fStartPos.x - m_fDistance;
+		break;
+	case MOVE_U:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.z = m_fStartPos.z + m_fDistance;
+		break;
+	case MOVE_D:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.z = m_fStartPos.z - m_fDistance;
+		break;
+	}
 
 }
 void COrangeMushroom::Tick_Move(_float fTimeDelta)
 {
+	_float3 fPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+	if (m_iMove == MOVE_R)
+	{
+		if (m_fEndPos.x <= fPos.x)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.x > fPos.x)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_Right(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+		else
+		{
+			m_pTransformCom->Go_Left(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+	}
+	else if (m_iMove == MOVE_L)
+	{
+		if (m_fEndPos.x >= fPos.x)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.x < fPos.x)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_Left(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+		else
+		{
+			m_pTransformCom->Go_Right(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+	}
+	else if (m_iMove == MOVE_U)
+	{
+		if (m_fEndPos.z <= fPos.z)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.z > fPos.z)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_U(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+		else
+		{
+			m_pTransformCom->Go_D(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+	}
+	else if (m_iMove == MOVE_D)
+	{
+		if (m_fEndPos.z >= fPos.z)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.z < fPos.z)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_D(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+		else
+		{
+			m_pTransformCom->Go_U(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+	}
 }
 void COrangeMushroom::Tick_Hit(_float fTimeDelta)
 {
@@ -202,11 +329,14 @@ void COrangeMushroom::SetAni()
 	switch (m_eCurState)
 	{
 	case COrangeMushroom::STATE_IDLE:
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), 1.f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"), 0.5f, CAnimator::STATE_LOOF);
 	break;
 	case COrangeMushroom::STATE_MOVE:
 	{
-
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_MoveR"), 0.3f, CAnimator::STATE_LOOF);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Move"), 0.3f, CAnimator::STATE_LOOF);
 	}
 	break;
 	case COrangeMushroom::STATE_HIT:
@@ -243,9 +373,14 @@ void COrangeMushroom::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
-	CQuestManager::Get_Instance()->Hunting(TEXT("OrangeMushroom"));
-	//Set_Dead();
+	--m_iHp;
+	if (m_iHp == 0)
+	{
 
+		CQuestManager::Get_Instance()->Hunting(TEXT("OrangeMushroom"));
+		Set_Dead();
+	}
+	//
 }
 
 

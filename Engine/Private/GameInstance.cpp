@@ -256,6 +256,15 @@ _bool CGameInstance::Mouse_Pressing(DIMK eMouseKeyID)
 	return m_pInput_Device->Mouse_Pressing(eMouseKeyID);
 }
 
+_uint CGameInstance::Get_Random(_uint iStart, _uint iEnd)
+{
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_int_distribution<int> dis(iStart, iEnd);
+
+	return dis(gen);
+}
+
 list<CMap_Manager::CUBEDATA>* CGameInstance::ReadMap(const _tchar * pMapTag)
 {
 	if (nullptr == m_pMap_Manager)

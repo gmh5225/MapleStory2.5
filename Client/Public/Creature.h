@@ -20,6 +20,15 @@ public:
 	enum STATE { STATE_IDLE, STATE_MOVE, STATE_JUMP, STATE_ATTACK, STATE_DASH, STATE_HIT, STATE_CHASE, STATE_DIE, STATE_END };
 	enum DIR { DIR_L, DIR_R, DIR_U, DIR_D, DIR_LU, DIR_RU, DIR_LD, DIR_RD, DIR_END };
 
+	typedef struct tagCreatureDesc
+	{
+		_float3 vPos;
+		_float3 vScale;
+		_float3 vRotationAix;
+		_float  fAngle;
+		_float  fColRad;
+	}CRETUREDESC;
+
 protected:
 	CCreature(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CCreature(const CCreature& rhs);
