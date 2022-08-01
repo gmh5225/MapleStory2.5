@@ -27,6 +27,7 @@ public:
 		_float3 vRotationAix;
 		_float  fAngle;
 		_float  fColRad;
+		_uint	iNum;
 	}CRETUREDESC;
 
 protected:

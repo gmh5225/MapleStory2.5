@@ -45,6 +45,7 @@ private:
 	HRESULT Load_UI_Object();
 	HRESULT Load_Model_Object();
 	HRESULT Load_Item_Object();
+	HRESULT	Load_Spawner_Object();
 
 //텍스처 로딩함수
 private:
