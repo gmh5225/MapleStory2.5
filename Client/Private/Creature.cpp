@@ -131,6 +131,8 @@ void CCreature::SetAni()
 
 void CCreature::Set_Billboard()
 {
+	_float3 fScale = m_pTransformCom->Get_Scaled();
+
 	m_vLookTemp = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
 
 	_float4x4		ViewMatrix;
@@ -140,7 +142,6 @@ void CCreature::Set_Billboard()
 	/* 카메라의 월드행렬이다. */ 
 	D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
 
-	_float3 fScale = m_pTransformCom->Get_Scaled();
 
 	m_pTransformCom->Set_State(CTransform::STATE_RIGHT, (*(_float3*)&ViewMatrix.m[0][0]) * fScale.x);
 	m_pTransformCom->Set_State(CTransform::STATE_UP, (*(_float3*)&ViewMatrix.m[1][0]) * fScale.y);

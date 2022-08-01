@@ -34,13 +34,13 @@ private:
 	CVIBuffer_Cube*			m_pVIBufferCom = nullptr;
 
 private:
-	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);
+
 
 private:
 	HRESULT Set_RenderState();
 	HRESULT Reset_RenderState();
 private:
-	HRESULT SetUp_Components();
+	HRESULT SetUp_Components(_tchar* pName);
 
 public:
 	static CWood* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

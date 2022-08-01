@@ -9,10 +9,10 @@ class ENGINE_DLL CVIBuffer_Voxel final : public CVIBuffer
 public:
 	typedef struct tagVoxelDesc
 	{
+		_tchar cFileName[256] = {0};
 		_float3 vPos;
 		_float3 vScale;
 		_float3 vRotationAix;
-		_float  fAngle;
 	}VOXELDESC;
 
 private:
