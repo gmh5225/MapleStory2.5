@@ -8,12 +8,14 @@ CMouseManager::CMouseManager()
 {
 }
 
-HRESULT CMouseManager::Add_pMouseSkillIcon(CMouseSkillIcon * pMouseSkillIcon)
+HRESULT CMouseManager::Add_pMouseSkillIcon(CMouseSkillIcon* pMouseSkillIcon)
 {
 	if (pMouseSkillIcon == nullptr)
 		return E_FAIL;
 
 	m_pMouseSkillIcon = pMouseSkillIcon;
+
+	Safe_AddRef(pMouseSkillIcon);
 
 	return S_OK;
 }

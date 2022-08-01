@@ -35,7 +35,6 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 
 	m_pSkillInfo = (CSunCrossInfo*)pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER);
-	Safe_AddRef(m_pSkillInfo);
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
@@ -70,8 +69,6 @@ void CSunCrossIcon::Tick(_float fTimeDelta)
 
 void CSunCrossIcon::LateTick(_float fTimeDelta)
 {
-	
-
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
@@ -151,6 +148,5 @@ CGameObject * CSunCrossIcon::Clone(void * pArg)
 
 void CSunCrossIcon::Free()
 {
-	Safe_Release(m_pSkillInfo);
 	__super::Free();
 }

@@ -5,6 +5,7 @@
 #include "Level_Loading.h"
 #include "QuestManager.h"
 #include "SkillManager.h"
+#include "MouseManager.h"
 #include "UIManager.h"
 #include "InvenManager.h"
 
@@ -88,7 +89,7 @@ HRESULT CMainApp::Render()
 		m_fTimeAcc = 0.f;
 	}
 
-	 SetWindowText(g_hWnd, m_szFPS);
+	 //SetWindowText(g_hWnd, m_szFPS);
 #endif // _DEBUG
 
 	
@@ -201,9 +202,11 @@ CMainApp * CMainApp::Create()
 void CMainApp::Free()
 {
 	CQuestManager::Destroy_Instance();
+	CMouseManager::Destroy_Instance();
 	CSkillManager::Destroy_Instance();
 	CUIManager::Destroy_Instance();
 	CInvenManager::Destroy_Instance();
+	
 
 
 	Safe_Release(m_pRenderer);

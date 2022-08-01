@@ -1,5 +1,6 @@
 #pragma once
 #include "UI.h"
+#include "SolunaSlashInfo.h"
 
 BEGIN(Client)
 class CSolunaSlashIcon final : public  CUI
@@ -25,6 +26,7 @@ public:
 	virtual void Free() override;
 
 private:
+	CSolunaSlashInfo* m_pSkillInfo;
 	_uint m_iSkillPoint;
 	LPD3DXFONT m_NoticeFont;
 };

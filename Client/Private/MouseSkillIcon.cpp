@@ -29,6 +29,7 @@ HRESULT CMouseSkillIcon::Initialize(void * pArg)
 	m_UIInfo.fSizeX = 32.f;
 	m_UIInfo.fSizeY = 32.f;
 
+	m_bRender = false;
 	m_iTexturenum = 0;
 	__super::Initialize(pArg);
 
@@ -51,6 +52,7 @@ void CMouseSkillIcon::Tick(_float fTimeDelta)
 	m_UIInfo.fX = ptMouse.x ;
 	m_UIInfo.fY = ptMouse.y;
 
+	m_iTexturenum = 5;
 	Check_Collision(DIMK_LBUTTON);
 	Change_Texture();
 
@@ -61,6 +63,9 @@ void CMouseSkillIcon::LateTick(_float fTimeDelta)
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
+
+	if (m_iTexturenum > 3)
+		m_bRender = false;
 
 	if (m_bRender)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);

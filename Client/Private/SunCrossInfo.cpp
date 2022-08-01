@@ -13,6 +13,7 @@ void CSunCrossInfo::Initialize()
 	m_iSkillDamage = 0; 
 	m_iIndexNum = 0;
 	m_cSkillName = L"½ã Å©·Î½º";
+	int a = m_dwRefCnt;
 }
 
 void CSunCrossInfo::Free()

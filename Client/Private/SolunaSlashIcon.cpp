@@ -3,6 +3,7 @@
 #include "GameInstance.h"
 #include "SkillManager.h"
 #include "SolunaSlashInfo.h"
+#include "MouseManager.h"
 
 
 CSolunaSlashIcon::CSolunaSlashIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -32,6 +33,8 @@ HRESULT CSolunaSlashIcon::Initialize(void * pArg)
 	__super::Initialize(pArg);
 	m_iTexturenum = 0;
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	m_pSkillInfo = (CSolunaSlashInfo*)pSkillInstance->Get_SkillInfo(L"SolunaSlashInfo", CSkillManager::GRADE_BEGENNER);
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SolunaSlashIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
@@ -111,6 +114,10 @@ void CSolunaSlashIcon::Change_Texture()
 		m_iTexturenum = 0;
 	else
 		m_iTexturenum = 1;
+
+	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
+	if (m_eCollision == TYPE_DOWN)
+		pMouseInstance->Set_SkillIconIndex(L"SolunaSlashInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_IndexNum());
 
 
 
