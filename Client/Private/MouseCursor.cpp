@@ -26,7 +26,9 @@ HRESULT CMouseCursor::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
+	
+	m_UIInfo.fSizeX = 24.f;
+	m_UIInfo.fSizeY = 28.f;
 
 	m_iTexturenum = 0;
 	__super::Initialize(pArg);
@@ -104,30 +106,30 @@ void CMouseCursor::Change_Texture()
 
 }
 
-//HRESULT CMouseCursor::Set_RenderState()
-//{
-//	if (nullptr == m_pGraphic_Device)
-//		return E_FAIL;
-//
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 130);
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-//
-//
-//	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-//
-//
-//	return S_OK;
-//}
-//
-//HRESULT CMouseCursor::Reset_RenderState()
-//{
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-//
-//	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-//
-//	return S_OK;
-//}
+HRESULT CMouseCursor::Set_RenderState()
+{
+	if (nullptr == m_pGraphic_Device)
+		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 170);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
+
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+
+	return S_OK;
+}
+
+HRESULT CMouseCursor::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	return S_OK;
+}
 
 CMouseCursor* CMouseCursor::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

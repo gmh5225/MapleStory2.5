@@ -1,14 +1,13 @@
 #pragma once
 #include "UI.h"
-#include "SunCrossInfo.h"
 
 BEGIN(Client)
-class CSunCrossIcon final : public  CUI
+class CMouseSkillIcon final : public  CUI
 {
 private:
-	CSunCrossIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSunCrossIcon(const CSunCrossIcon& rhs);
-	virtual ~CSunCrossIcon() = default;
+	CMouseSkillIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CMouseSkillIcon(const CMouseSkillIcon& rhs);
+	virtual ~CMouseSkillIcon() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -21,14 +20,10 @@ public:
 	void Change_Texture();
 
 public:
-	static CSunCrossIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CMouseSkillIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
-private:
-	_uint m_iSkillPoint;
-	CSunCrossInfo* m_pSkillInfo;
-	LPD3DXFONT m_NoticeFont;
 };
 END
 

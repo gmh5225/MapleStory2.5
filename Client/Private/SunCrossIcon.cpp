@@ -3,6 +3,7 @@
 #include "GameInstance.h"
 #include "SkillManager.h"
 #include "SunCrossInfo.h"
+#include "MouseManager.h"
 
 
 CSunCrossIcon::CSunCrossIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -32,6 +33,9 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 	__super::Initialize(pArg);
 	m_iTexturenum = 0;
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	m_pSkillInfo = (CSunCrossInfo*)pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER);
+	Safe_AddRef(m_pSkillInfo);
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
@@ -112,6 +116,9 @@ void CSunCrossIcon::Change_Texture()
 	else
 		m_iTexturenum = 1;
 
+	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
+	if (m_eCollision == TYPE_DOWN)
+		pMouseInstance->Set_SkillIconIndex(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_IndexNum());
 	
 	
 }
@@ -144,6 +151,6 @@ CGameObject * CSunCrossIcon::Clone(void * pArg)
 
 void CSunCrossIcon::Free()
 {
+	Safe_Release(m_pSkillInfo);
 	__super::Free();
-
 }

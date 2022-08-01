@@ -24,9 +24,6 @@ HRESULT CUI::Initialize_Prototype()
 HRESULT CUI::Initialize(void * pArg)
 {
 
-	/*if (FAILED(SetUp_Components()))
-		return E_FAIL;*/
-
 	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
 
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
@@ -103,22 +100,24 @@ void CUI::Check_Collision(DIMK m_eMouseKey)
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);
 	ScreenToClient(g_hWnd, &ptMouse);
-	CGameInstance* pInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pInstance);
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
 
 	if (PtInRect(&m_RectUI, ptMouse))
 	{
-		if (pInstance->Mouse_Down(m_eMouseKey))
+		if (pGameInstance->Mouse_Down(m_eMouseKey))
 		{
 			m_eCollision = TYPE_DOWN;
+
 		
 		}
-		else if (pInstance->Mouse_Up(m_eMouseKey))
+		else if (pGameInstance->Mouse_Up(m_eMouseKey))
 		{
 			m_eCollision = TYPE_UP;
 		
 		}
-		else if (pInstance->Mouse_Pressing(m_eMouseKey))
+		else if (pGameInstance->Mouse_Pressing(m_eMouseKey))
 		{
 			m_eCollision = TYPE_PRESSING;
 		
@@ -134,7 +133,7 @@ void CUI::Check_Collision(DIMK m_eMouseKey)
 		m_eCollision = TYPE_NO;
 		
 	}
-	Safe_Release(pInstance);
+	Safe_Release(pGameInstance);
 }
 
 CUI* CUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
