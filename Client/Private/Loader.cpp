@@ -48,6 +48,7 @@
 #include "ExpLine.h"
 #include "MenuIcon.h"
 #include "QuickSlot.h"
+#include "Spawner.h"
 
 
 
@@ -135,6 +136,7 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	Load_UI_Object();
 	Load_Model_Object();
 	Load_Item_Object();
+	Load_Spawner_Object();
 
 
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
@@ -162,6 +164,8 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	/* For.Prototype_Component_Texture_UI */
 	Load_UI_Texture();
+
+	
 
 
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -475,6 +479,20 @@ HRESULT CLoader::Load_Item_Object()
 
 
 
+HRESULT CLoader::Load_Spawner_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	/* 객체원형 로드한다. */
+
+	/* For.Prototype_GameObject_Item*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Spawner"),
+		CSpawner::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+	return S_OK;
+}
 
 
 HRESULT CLoader::Load_Player_Texture()
@@ -927,6 +945,7 @@ HRESULT CLoader::Load_Item_Texture()
 	return S_OK;
 		
 }
+
 
 
 CLoader * CLoader::Create(LPDIRECT3DDEVICE9 pGraphic_Device, LEVEL eNextLevelID)

@@ -7,6 +7,7 @@
 #include "SkillManager.h"
 #include "UIManager.h"
 #include "InvenManager.h"
+#include "SpawnerManager.h"
 
 
 using namespace Client;
@@ -204,7 +205,7 @@ void CMainApp::Free()
 	CSkillManager::Destroy_Instance();
 	CUIManager::Destroy_Instance();
 	CInvenManager::Destroy_Instance();
-
+	CSpawnerManager::Destroy_Instance();
 
 	Safe_Release(m_pRenderer);
 	Safe_Release(m_pCollider);

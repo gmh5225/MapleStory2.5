@@ -49,6 +49,7 @@ private:
 	_float m_fDistance;
 
 	_uint m_iHp;
+	_int m_iIndexNum;
 
 private:
 	HRESULT SetUp_Components();

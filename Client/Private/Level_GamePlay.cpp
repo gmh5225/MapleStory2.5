@@ -9,6 +9,7 @@
 #include "SkillManager.h"
 #include "UI.h"
 #include "QuestManager.h"
+#include "SpawnerManager.h"
 #include "Maya.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -43,6 +44,9 @@ HRESULT CLevel_GamePlay::Initialize()
 		return E_FAIL;
 
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
+		return E_FAIL;
+
+	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
 
 
@@ -185,7 +189,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
-	CCreature::CRETUREDESC MonsterInfo;
 
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_GAMEPLAY, pLayerTag)))
@@ -199,15 +202,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	for (int i = 0; i < 12; ++i)
-	{
-		MonsterInfo.vPos = _float3{_float( i - 6), -0.6f, -2.f };
-		MonsterInfo.vScale = _float3{ 1.3f, 1.3f, 1.3f };
-		MonsterInfo.fColRad = 1.f;
-
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, pLayerTag, &MonsterInfo)))
-		return E_FAIL;
-	}
 	
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
@@ -319,6 +313,35 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
+
+
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
+{
+	CSpawner::SPAWNERINFO MonsterInfo;
+
+	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
+	MonsterInfo.MonsterPos = _float3{ -2.f , -0.6f, -2.f };
+	MonsterInfo.SpawnerNum = 0;
+	MonsterInfo.MonsterNum = 3;
+	MonsterInfo.MonsterColRad = 1.f;
+
+
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
+	MonsterInfo.MonsterPos = _float3{ -1.f , -0.6f, 3.f };
+	MonsterInfo.SpawnerNum = 1;
+	MonsterInfo.MonsterNum = 3;
+	MonsterInfo.MonsterColRad = 1.f;
+
+
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
 
 
 	return S_OK;

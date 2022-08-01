@@ -265,6 +265,12 @@
     <Filter Include="04.UI\00.MainUI\QuickSlot">
       <UniqueIdentifier>{f94e8e2d-3a7a-49ac-961f-4f0fa534bb6d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\05.Spawner">
+      <UniqueIdentifier>{9da1ed3c-e3bb-42d1-a842-0e0bb152ae75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\05.Spawner\SpawnerManager">
+      <UniqueIdentifier>{577010bb-2fb9-45b0-9378-2d84a77ba3a7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -468,6 +474,12 @@
     <ClInclude Include="..\Public\QuickSlot.h">
       <Filter>04.UI\00.MainUI\QuickSlot</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Spawner.h">
+      <Filter>02.GameObject\05.Spawner</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SpawnerManager.h">
+      <Filter>02.GameObject\05.Spawner\SpawnerManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -661,6 +673,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\QuickSlot.cpp">
       <Filter>04.UI\00.MainUI\QuickSlot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Spawner.cpp">
+      <Filter>02.GameObject\05.Spawner</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SpawnerManager.cpp">
+      <Filter>02.GameObject\05.Spawner\SpawnerManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,8 @@
 
 #include "GameInstance.h"
 #include "QuestManager.h"
+#include "Spawner.h"
+#include "SpawnerManager.h"
 
 COrangeMushroom::COrangeMushroom(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -23,21 +25,24 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
+	m_iIndexNum = -1;
+
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
 	m_sTag = "Tag_Monster";
 	m_iHp = 3;
 
-	CCreature::CRETUREDESC* pMonsterDesc = (CCreature::CRETUREDESC*)pArg;
-	
+	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
-	m_fColRad = pMonsterDesc->fColRad;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->vPos);
-	m_pTransformCom->Set_Scaled(pMonsterDesc->vScale);
+	m_iIndexNum = pMonsterDesc->SpawnerNum;
+
+	m_fColRad = pMonsterDesc->MonsterColRad;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->MonsterPos);
+	m_pTransformCom->Set_Scaled(1.f);
 	m_bDir = false;
 
-	m_fStartPos = pMonsterDesc->vPos;
+	m_fStartPos = pMonsterDesc->MonsterPos;
 
 	// 랜덤으로 어느방향으로 움직일지와 거리를 생성한다
 	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 4);
@@ -376,8 +381,8 @@ void COrangeMushroom::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp == 0)
 	{
-
 		CQuestManager::Get_Instance()->Hunting(TEXT("OrangeMushroom"));
+		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Set_Dead();
 	}
 	//

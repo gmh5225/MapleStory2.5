@@ -209,6 +209,8 @@
     <ClInclude Include="..\Public\Slime.h" />
     <ClInclude Include="..\Public\SolunaSlashIcon.h" />
     <ClInclude Include="..\Public\SolunaSlashInfo.h" />
+    <ClInclude Include="..\Public\Spawner.h" />
+    <ClInclude Include="..\Public\SpawnerManager.h" />
     <ClInclude Include="..\Public\SunCrossIcon.h" />
     <ClInclude Include="..\Public\SunCrossInfo.h" />
     <ClInclude Include="..\Public\StoneGolem.h" />
@@ -277,6 +279,8 @@
     <ClCompile Include="..\Private\Slime.cpp" />
     <ClCompile Include="..\Private\SolunaSlashIcon.cpp" />
     <ClCompile Include="..\Private\SolunaSlashInfo.cpp" />
+    <ClCompile Include="..\Private\Spawner.cpp" />
+    <ClCompile Include="..\Private\SpawnerManager.cpp" />
     <ClCompile Include="..\Private\SunCrossIcon.cpp" />
     <ClCompile Include="..\Private\SunCrossInfo.cpp" />
     <ClCompile Include="..\Private\StoneGolem.cpp" />
