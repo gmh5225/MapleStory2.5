@@ -3,6 +3,7 @@
 #include "GameInstance.h"
 #include "QuickSlotManager.h"
 #include "MouseManager.h"
+#include "SkillInfo.h"
 
 
 
@@ -30,16 +31,24 @@ HRESULT CQuickSlotSkill::Initialize(void * pArg)
 
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
 	m_iIndexNum = m_UIInfo.iNum;
-	m_iTexturenum = 0;
-	m_bRender = false;
+	
+	
 	__super::Initialize(pArg);
-
-	//CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	m_iTexturenum = 5;
+	m_eGrade = CSkillManager::GRADE_END;
+	m_pSkillInfoTag = nullptr;
+	m_pSkillNotice = nullptr;
+	m_bRender = false;
+	CQuickSlotManager* pQuickSlotInstance = CQuickSlotManager::Get_Instance();
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_MouseSkillIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
-	//pSkillInstance->Add_SkillFrameImage(this);
+	pQuickSlotInstance->Add_QuickSlotSkill(this);
+
+	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"µ¸¿òÃ¼", &m_NoticeFont);
 
 	return S_OK;
 }
@@ -69,6 +78,7 @@ HRESULT CQuickSlotSkill::Render()
 	if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
 		return E_FAIL;
 
+	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 	m_pTransformCom->Bind_WorldMatrix();
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &m_ViewMatrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
@@ -78,27 +88,52 @@ HRESULT CQuickSlotSkill::Render()
 	m_pVIBufferCom->Render();
 
 	Reset_RenderState();
+	if (m_eCollision == TYPE_ON)
+	{
+		RECT SunCrossNotice;
+		SetRect(&SunCrossNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
+		m_NoticeFont->DrawText(NULL, m_pSkillNotice, -1, &SunCrossNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+	}
 	return S_OK;
 }
 
 void CQuickSlotSkill::Change_Texture()
 {
-
-	//CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
+	CQuickSlotManager* pQuickSlotInstance = CQuickSlotManager::Get_Instance();
 
 	switch (m_eCollision)
 	{
 	case Client::CUI::TYPE_NO:
 		break;
 	case Client::CUI::TYPE_ON:
+
 		break;
 	case Client::CUI::TYPE_DOWN:
+		pMouseInstance->Set_SkillIconIndex(m_pSkillInfoTag, m_eGrade, m_iTexturenum, m_pSkillNotice, m_iIndexNum);
 		break;
-	case Client::CUI::TYPE_UP:
-		m_iTexturenum = pMouseInstance->Get_SkillIconIndex();
+	case Client::CUI::TYPE_UP:	
+		if (!pQuickSlotInstance->Check_Texture(pMouseInstance->Get_SkillIconTextnum()))
+		{
+			m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();
+			m_eGrade = pMouseInstance->Get_Grade();
+			m_iTexturenum = pMouseInstance->Get_SkillIconTextnum();
+			m_pSkillNotice = pMouseInstance->Get_SkillNotice();
+			m_bRender = true;
+			break;
+		}
+		else
+		{
+			pQuickSlotInstance->Change_Slot(pMouseInstance->Get_Indexnum(), this);			
+			m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();
+			m_eGrade = pMouseInstance->Get_Grade();
+			m_iTexturenum = pMouseInstance->Get_SkillIconTextnum();
+			m_pSkillNotice = pMouseInstance->Get_SkillNotice();
+			m_bRender = true;
+			
+		}
+
 		
-		break;
 	case Client::CUI::TYPE_PRESSING:
 		break;
 	case Client::CUI::TYPE_END:

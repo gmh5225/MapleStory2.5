@@ -18,7 +18,7 @@ public:
 
 public:
 	void Change_Texture();
-	_uint Get_IndexNum() { return m_iTexturenum; }
+	_uint Get_TextNum() { return m_iTexturenum; }
 
 public:
 	static CMouseSkillIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

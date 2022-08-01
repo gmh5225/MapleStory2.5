@@ -99,7 +99,7 @@ HRESULT CSunCrossIcon::Render()
 	{
 		RECT SunCrossNotice;
 		SetRect(&SunCrossNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
-		m_NoticeFont->DrawText(NULL, L"스킬 설명 테스트\n타입 : 전방 공격\n대미지 : 20\n타격횟수 : 3\n소모 마나 : 50", -1, &SunCrossNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+		m_NoticeFont->DrawText(NULL, m_pSkillInfo->Get_SkillNotice(), -1, &SunCrossNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
 	}
 
 	return S_OK;
@@ -115,7 +115,7 @@ void CSunCrossIcon::Change_Texture()
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0)
-		pMouseInstance->Set_SkillIconIndex(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_IndexNum());
+		pMouseInstance->Set_SkillIconIndex(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 	
 	
 }

@@ -7,7 +7,7 @@ BEGIN(Client)
 
 class CMouseSkillIcon;
 class CUI;
-
+class CSkillInfo;
 
 class CMouseManager final : public CBase
 {
@@ -19,13 +19,20 @@ public:
 
 public:
 	HRESULT Add_pMouseSkillIcon(CMouseSkillIcon* pMouseSkillIcon);
-	void Set_SkillIconIndex(const _tchar* pSkillInfoTag, CSkillManager::SkillGrade eGrade , _uint iIndex);
-	_uint Get_SkillIconIndex();
+	void Set_SkillIconIndex(const _tchar* pSkillInfoTag, CSkillManager::SkillGrade eGrade , _uint iText, const wchar_t* pNotice, _uint iIndex = 99);
+	_uint Get_SkillIconTextnum();
+	const _tchar* Get_SkillInfoTag() { return m_pSkillInfoTag; }
+	CSkillManager::SkillGrade Get_Grade() { return m_eGrade; }
+	CSkillInfo* Get_SkillInfo();
+	_uint Get_Indexnum() { return m_iIndexNum; }
+	const wchar_t* Get_SkillNotice() { return m_cSkillNotice; }
 
 private:
 	CMouseSkillIcon* m_pMouseSkillIcon;
 	const _tchar* m_pSkillInfoTag;
 	CSkillManager::SkillGrade m_eGrade;
+	_uint m_iIndexNum;
+	const wchar_t* m_cSkillNotice;
 public:
 	virtual void Free() override;
 

@@ -31,7 +31,7 @@ public:
 
 	CSkillInfo* Get_SkillInfo(const _tchar* pSkillInfoTag, SkillGrade eGrade);
 	CSkillInfo* Find_SkillInfo(const _tchar* pSkillInfoTag, SkillGrade eGrade);
-
+	
 private:
 	_uint m_iSkillPoint;
 	CSkillFrame* m_pSkillFrame;

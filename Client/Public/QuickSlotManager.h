@@ -14,7 +14,11 @@ public:
 	virtual ~CQuickSlotManager() = default;
 
 public:
-	list<CQuickSlotManager*> m_QuickSlotSkill;
+	HRESULT Add_QuickSlotSkill(CQuickSlotSkill* pQuickSlot);
+	_bool Check_Texture(_uint iTextnum);
+	HRESULT Change_Slot(_uint iIndexnum, CQuickSlotSkill* pQUickSlot);
+private:
+	list<CQuickSlotSkill*> m_QuickSlotSkill;
 
 public:
 	virtual void Free() override;

@@ -6,6 +6,7 @@
 #include "QuestManager.h"
 #include "SkillManager.h"
 #include "MouseManager.h"
+#include "QuickSlotManager.h"
 #include "UIManager.h"
 #include "InvenManager.h"
 #include "SpawnerManager.h"
@@ -205,6 +206,7 @@ void CMainApp::Free()
 	CQuestManager::Destroy_Instance();
 	CMouseManager::Destroy_Instance();
 	CQuestManager::Destroy_Instance();
+	CQuickSlotManager::Destroy_Instance();
 	CSkillManager::Destroy_Instance();
 	CUIManager::Destroy_Instance();
 	CInvenManager::Destroy_Instance();

@@ -547,7 +547,7 @@ HRESULT CLevel_GamePlay::Ready_QuickSlot(const _tchar* pLayerTag)
 	CUI::UIINFO QuickSlot9;
 	QuickSlot9.fSizeX = 50.f;
 	QuickSlot9.fSizeY = 50.f;
-	QuickSlot9.fX = 765.f;
+	QuickSlot9.fX = 735.f;
 	QuickSlot9.fY = 580.f;
 
 	CUI::UIINFO QuickSlot10;
@@ -559,7 +559,7 @@ HRESULT CLevel_GamePlay::Ready_QuickSlot(const _tchar* pLayerTag)
 	CUI::UIINFO QuickSlot11;
 	QuickSlot11.fSizeX = 50.f;
 	QuickSlot11.fSizeY = 50.f;
-	QuickSlot11.fX = 820.f;
+	QuickSlot11.fX = 790.f;
 	QuickSlot11.fY = 580.f;
 
 	CUI::UIINFO QuickSlot12;
@@ -571,7 +571,7 @@ HRESULT CLevel_GamePlay::Ready_QuickSlot(const _tchar* pLayerTag)
 	CUI::UIINFO QuickSlot13;
 	QuickSlot13.fSizeX = 50.f;
 	QuickSlot13.fSizeY = 50.f;
-	QuickSlot13.fX = 875.f;
+	QuickSlot13.fX = 845.f;
 	QuickSlot13.fY = 580.f;
 
 	CUI::UIINFO QuickSlot14;
@@ -583,7 +583,7 @@ HRESULT CLevel_GamePlay::Ready_QuickSlot(const _tchar* pLayerTag)
 	CUI::UIINFO QuickSlot15;
 	QuickSlot15.fSizeX = 50.f;
 	QuickSlot15.fSizeY = 50.f;
-	QuickSlot15.fX = 930.f;
+	QuickSlot15.fX = 900.f;
 	QuickSlot15.fY = 580.f;
 
 	CUI::UIINFO QuickSlot16;
@@ -664,49 +664,107 @@ HRESULT CLevel_GamePlay::Ready_QuickSlotSkill(const _tchar * pLayerTag)
 	QuickSlotSkill2.fSizeY = 40.f;
 	QuickSlotSkill2.fX = 365.f;
 	QuickSlotSkill2.fY = 635.f;
-	QuickSlotSkill1.iNum = 1;
+	QuickSlotSkill2.iNum = 1;
 
 	CUI::UIINFO QuickSlotSkill3;
 	QuickSlotSkill3.fSizeX = 40.f;
 	QuickSlotSkill3.fSizeY = 40.f;
 	QuickSlotSkill3.fX = 405.f;
 	QuickSlotSkill3.fY = 580.f;
-	QuickSlotSkill1.iNum = 2;
+	QuickSlotSkill3.iNum = 2;
 
 	CUI::UIINFO QuickSlotSkill4;
 	QuickSlotSkill4.fSizeX = 40.f;
 	QuickSlotSkill4.fSizeY = 40.f;
 	QuickSlotSkill4.fX = 420.f;
 	QuickSlotSkill4.fY = 635.f;
-	QuickSlotSkill1.iNum = 3;
+	QuickSlotSkill4.iNum = 3;
 
 	CUI::UIINFO QuickSlotSkill5;
 	QuickSlotSkill5.fSizeX = 40.f;
 	QuickSlotSkill5.fSizeY = 40.f;
 	QuickSlotSkill5.fX = 460.f;
 	QuickSlotSkill5.fY = 580.f;
-	QuickSlotSkill1.iNum = 4;
+	QuickSlotSkill5.iNum = 4;
 
 	CUI::UIINFO QuickSlotSkill6;
 	QuickSlotSkill6.fSizeX = 40.f;
 	QuickSlotSkill6.fSizeY = 40.f;
 	QuickSlotSkill6.fX = 475.f;
 	QuickSlotSkill6.fY = 635.f;
-	QuickSlotSkill1.iNum = 5;
+	QuickSlotSkill6.iNum = 5;
 
 	CUI::UIINFO QuickSlotSkill7;
 	QuickSlotSkill7.fSizeX = 40.f;
 	QuickSlotSkill7.fSizeY = 40.f;
 	QuickSlotSkill7.fX = 515.f;
 	QuickSlotSkill7.fY = 580.f;
-	QuickSlotSkill1.iNum = 6;
+	QuickSlotSkill7.iNum = 6;
 
 	CUI::UIINFO QuickSlotSkill8;
 	QuickSlotSkill8.fSizeX = 40.f;
 	QuickSlotSkill8.fSizeY = 40.f;
 	QuickSlotSkill8.fX = 530.f;
 	QuickSlotSkill8.fY = 635.f;
-	QuickSlotSkill1.iNum = 7;
+	QuickSlotSkill8.iNum = 7;
+
+	CUI::UIINFO QuickSlotSkill9;
+	QuickSlotSkill9.fSizeX = 40.f;
+	QuickSlotSkill9.fSizeY = 40.f;
+	QuickSlotSkill9.fX = 735.f;
+	QuickSlotSkill9.fY = 580.f;
+	QuickSlotSkill9.iNum = 8;
+	
+	CUI::UIINFO QuickSlotSkill10;
+	QuickSlotSkill10.fSizeX = 40.f;
+	QuickSlotSkill10.fSizeY = 40.f;
+	QuickSlotSkill10.fX = 750.f;
+	QuickSlotSkill10.fY = 635.f;
+	QuickSlotSkill10.iNum = 9;
+
+	CUI::UIINFO QuickSlotSkill11;
+	QuickSlotSkill11.fSizeX = 40.f;
+	QuickSlotSkill11.fSizeY = 40.f;
+	QuickSlotSkill11.fX = 790.f;
+	QuickSlotSkill11.fY = 580.f;
+	QuickSlotSkill11.iNum = 10;
+	
+	CUI::UIINFO QuickSlotSkill12;
+	QuickSlotSkill12.fSizeX = 40.f;
+	QuickSlotSkill12.fSizeY = 40.f;
+	QuickSlotSkill12.fX = 805.f;
+	QuickSlotSkill12.fY = 635.f;
+	QuickSlotSkill12.iNum = 11;
+
+	CUI::UIINFO QuickSlotSkill13;
+	QuickSlotSkill13.fSizeX = 40.f;
+	QuickSlotSkill13.fSizeY = 40.f;
+	QuickSlotSkill13.fX = 845.f;
+	QuickSlotSkill13.fY = 580.f;
+	QuickSlotSkill13.iNum = 12;
+
+	CUI::UIINFO QuickSlotSkill14;
+	QuickSlotSkill14.fSizeX = 40.f;
+	QuickSlotSkill14.fSizeY = 40.f;
+	QuickSlotSkill14.fX = 860.f;
+	QuickSlotSkill14.fY = 635.f;
+	QuickSlotSkill14.iNum = 13;
+
+	CUI::UIINFO QuickSlotSkill15;
+	QuickSlotSkill15.fSizeX = 40.f;
+	QuickSlotSkill15.fSizeY = 40.f;
+	QuickSlotSkill15.fX = 900.f;
+	QuickSlotSkill15.fY = 580.f;
+	QuickSlotSkill15.iNum = 14;
+
+	CUI::UIINFO QuickSlotSkill16;
+	QuickSlotSkill16.fSizeX = 40.f;
+	QuickSlotSkill16.fSizeY = 40.f;
+	QuickSlotSkill16.fX = 915.f;
+	QuickSlotSkill16.fY = 635.f;
+	QuickSlotSkill16.iNum = 15;
+
+	
 
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill1)))
@@ -731,6 +789,30 @@ HRESULT CLevel_GamePlay::Ready_QuickSlotSkill(const _tchar * pLayerTag)
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill8)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill9)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill10)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill11)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill12)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill13)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill14)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill15)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill16)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
