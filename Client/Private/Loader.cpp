@@ -148,7 +148,7 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	/* For.Prototype_Component_Texture_Monster */
 
-	//Load_Monster_Texture();
+	Load_Monster_Texture();
 
 	/* For.Prototype_Component_Texture_Npc */
 
