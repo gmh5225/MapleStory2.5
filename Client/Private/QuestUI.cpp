@@ -16,6 +16,10 @@ CQuestUI::CQuestUI(const CQuestUI & rhs)
 
 HRESULT CQuestUI::Initialize_Prototype()
 {
+	D3DXCreateFont(m_pGraphic_Device, 15, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		TEXT("Arial"), &m_pFont);
+
 	return S_OK;
 }
 
@@ -34,9 +38,7 @@ HRESULT CQuestUI::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
-	D3DXCreateFont(m_pGraphic_Device, 15, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
-		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		TEXT("Arial"), &m_pFont);
+
 
 	return S_OK;
 }
@@ -56,7 +58,6 @@ void CQuestUI::Tick(_float fTimeDelta)
 
 void CQuestUI::LateTick(_float fTimeDelta)
 {
-	
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
