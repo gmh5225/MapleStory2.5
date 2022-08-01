@@ -9,7 +9,7 @@ class CMouseSkillIcon;
 class CUI;
 
 
-class CMouseManager final : CBase
+class CMouseManager final : public CBase
 {
 	DECLARE_SINGLETON(CMouseManager)
 public:
@@ -20,6 +20,7 @@ public:
 public:
 	HRESULT Add_pMouseSkillIcon(CMouseSkillIcon* pMouseSkillIcon);
 	void Set_SkillIconIndex(const _tchar* pSkillInfoTag, CSkillManager::SkillGrade eGrade , _uint iIndex);
+	_uint Get_SkillIconIndex();
 
 private:
 	CMouseSkillIcon* m_pMouseSkillIcon;

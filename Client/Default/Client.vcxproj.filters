@@ -271,6 +271,12 @@
     <Filter Include="04.UI\06.Mouse\MouseSkillIcon">
       <UniqueIdentifier>{7928b644-ab4c-453b-bf35-7ac952a0eefe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.UI\00.MainUI\QuickSlot\QuickSlotSkill">
+      <UniqueIdentifier>{6c3419f2-a87a-4bb1-8238-235cdfccb315}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\QuickSlotManager">
+      <UniqueIdentifier>{fa4a107b-f993-4ea4-87e8-cd4866ce3628}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -477,6 +483,12 @@
     <ClInclude Include="..\Public\MouseSkillIcon.h">
       <Filter>04.UI\06.Mouse\MouseSkillIcon</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\QuickSlotManager.h">
+      <Filter>89.Manager\QuickSlotManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\QuickSlotSkill.h">
+      <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotSkill</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -673,6 +685,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\MouseSkillIcon.cpp">
       <Filter>04.UI\06.Mouse\MouseSkillIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuickSlotManager.cpp">
+      <Filter>89.Manager\QuickSlotManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuickSlotSkill.cpp">
+      <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

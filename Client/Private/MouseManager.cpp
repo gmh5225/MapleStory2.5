@@ -28,6 +28,11 @@ void CMouseManager::Set_SkillIconIndex(const _tchar* pSkillInfoTag, CSkillManage
 
 }
 
+_uint CMouseManager::Get_SkillIconIndex()
+{
+	return m_pMouseSkillIcon->Get_IndexNum();
+}
+
 void CMouseManager::Free()
 {
 	Safe_Release(m_pMouseSkillIcon);

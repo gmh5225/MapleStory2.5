@@ -49,6 +49,7 @@
 #include "ExpLine.h"
 #include "MenuIcon.h"
 #include "QuickSlot.h"
+#include "QuickSlotSkill.h"
 
 
 
@@ -366,6 +367,10 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_QuickSlot"),
 		CQuickSlot::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_QuickSlotSkill"),
+		CQuickSlotSkill::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_MouseCursor"),

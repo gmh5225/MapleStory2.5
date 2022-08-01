@@ -116,7 +116,7 @@ void CSolunaSlashIcon::Change_Texture()
 		m_iTexturenum = 1;
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN)
+	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0)
 		pMouseInstance->Set_SkillIconIndex(L"SolunaSlashInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_IndexNum());
 
 

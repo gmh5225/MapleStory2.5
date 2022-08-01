@@ -303,6 +303,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 	Ready_QuickSlot(pLayerTag);
 
+	Ready_QuickSlotSkill(pLayerTag);
+
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseSkillIcon"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
@@ -630,6 +632,96 @@ HRESULT CLevel_GamePlay::Ready_QuickSlot(const _tchar* pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlot"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlot16)))
 		return E_FAIL;
 
+
+	Safe_Release(pGameInstance);
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_QuickSlotSkill(const _tchar * pLayerTag)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CUI::UIINFO QuickSlotSkill1;
+	QuickSlotSkill1.fSizeX = 40.f;
+	QuickSlotSkill1.fSizeY = 40.f;
+	QuickSlotSkill1.fX = 350.f;
+	QuickSlotSkill1.fY = 580.f;
+	QuickSlotSkill1.iNum = 0;
+
+	CUI::UIINFO QuickSlotSkill2;
+	QuickSlotSkill2.fSizeX = 40.f;
+	QuickSlotSkill2.fSizeY = 40.f;
+	QuickSlotSkill2.fX = 365.f;
+	QuickSlotSkill2.fY = 635.f;
+	QuickSlotSkill1.iNum = 1;
+
+	CUI::UIINFO QuickSlotSkill3;
+	QuickSlotSkill3.fSizeX = 40.f;
+	QuickSlotSkill3.fSizeY = 40.f;
+	QuickSlotSkill3.fX = 405.f;
+	QuickSlotSkill3.fY = 580.f;
+	QuickSlotSkill1.iNum = 2;
+
+	CUI::UIINFO QuickSlotSkill4;
+	QuickSlotSkill4.fSizeX = 40.f;
+	QuickSlotSkill4.fSizeY = 40.f;
+	QuickSlotSkill4.fX = 420.f;
+	QuickSlotSkill4.fY = 635.f;
+	QuickSlotSkill1.iNum = 3;
+
+	CUI::UIINFO QuickSlotSkill5;
+	QuickSlotSkill5.fSizeX = 40.f;
+	QuickSlotSkill5.fSizeY = 40.f;
+	QuickSlotSkill5.fX = 460.f;
+	QuickSlotSkill5.fY = 580.f;
+	QuickSlotSkill1.iNum = 4;
+
+	CUI::UIINFO QuickSlotSkill6;
+	QuickSlotSkill6.fSizeX = 40.f;
+	QuickSlotSkill6.fSizeY = 40.f;
+	QuickSlotSkill6.fX = 475.f;
+	QuickSlotSkill6.fY = 635.f;
+	QuickSlotSkill1.iNum = 5;
+
+	CUI::UIINFO QuickSlotSkill7;
+	QuickSlotSkill7.fSizeX = 40.f;
+	QuickSlotSkill7.fSizeY = 40.f;
+	QuickSlotSkill7.fX = 515.f;
+	QuickSlotSkill7.fY = 580.f;
+	QuickSlotSkill1.iNum = 6;
+
+	CUI::UIINFO QuickSlotSkill8;
+	QuickSlotSkill8.fSizeX = 40.f;
+	QuickSlotSkill8.fSizeY = 40.f;
+	QuickSlotSkill8.fX = 530.f;
+	QuickSlotSkill8.fY = 635.f;
+	QuickSlotSkill1.iNum = 7;
+
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill1)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill2)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill3)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill4)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill5)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill6)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill7)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuickSlotSkill"), LEVEL_GAMEPLAY, pLayerTag, &QuickSlotSkill8)))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 	return S_OK;

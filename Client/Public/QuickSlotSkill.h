@@ -2,12 +2,12 @@
 #include "UI.h"
 
 BEGIN(Client)
-class CMouseSkillIcon final : public  CUI
+class CQuickSlotSkill final : public  CUI
 {
 private:
-	CMouseSkillIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CMouseSkillIcon(const CMouseSkillIcon& rhs);
-	virtual ~CMouseSkillIcon() = default;
+	CQuickSlotSkill(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CQuickSlotSkill(const CQuickSlotSkill& rhs);
+	virtual ~CQuickSlotSkill() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -18,10 +18,12 @@ public:
 
 public:
 	void Change_Texture();
-	_uint Get_IndexNum() { return m_iTexturenum; }
+
+private:
+	_uint m_iIndexNum;
 
 public:
-	static CMouseSkillIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CQuickSlotSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 

@@ -194,6 +194,8 @@
     <ClInclude Include="..\Public\QuestManager.h" />
     <ClInclude Include="..\Public\QuestUI.h" />
     <ClInclude Include="..\Public\QuickSlot.h" />
+    <ClInclude Include="..\Public\QuickSlotManager.h" />
+    <ClInclude Include="..\Public\QuickSlotSkill.h" />
     <ClInclude Include="..\Public\RedPortion.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
@@ -263,6 +265,8 @@
     <ClCompile Include="..\Private\QuestManager.cpp" />
     <ClCompile Include="..\Private\QuestUI.cpp" />
     <ClCompile Include="..\Private\QuickSlot.cpp" />
+    <ClCompile Include="..\Private\QuickSlotManager.cpp" />
+    <ClCompile Include="..\Private\QuickSlotSkill.cpp" />
     <ClCompile Include="..\Private\RedPortion.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />

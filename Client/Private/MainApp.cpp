@@ -203,6 +203,7 @@ void CMainApp::Free()
 {
 	CQuestManager::Destroy_Instance();
 	CMouseManager::Destroy_Instance();
+	CQuestManager::Destroy_Instance();
 	CSkillManager::Destroy_Instance();
 	CUIManager::Destroy_Instance();
 	CInvenManager::Destroy_Instance();

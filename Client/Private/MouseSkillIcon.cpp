@@ -52,7 +52,6 @@ void CMouseSkillIcon::Tick(_float fTimeDelta)
 	m_UIInfo.fX = ptMouse.x ;
 	m_UIInfo.fY = ptMouse.y;
 
-	m_iTexturenum = 5;
 	Check_Collision(DIMK_LBUTTON);
 	Change_Texture();
 
@@ -96,6 +95,7 @@ void CMouseSkillIcon::Change_Texture()
 	{
 	case Client::CUI::TYPE_ON:
 		m_bRender = false;
+		m_iTexturenum = 5;
 		break;
 	case Client::CUI::TYPE_DOWN:
 		m_bRender = true;
