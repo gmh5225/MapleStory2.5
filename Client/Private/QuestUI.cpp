@@ -16,9 +16,6 @@ CQuestUI::CQuestUI(const CQuestUI & rhs)
 
 HRESULT CQuestUI::Initialize_Prototype()
 {
-	D3DXCreateFont(m_pGraphic_Device, 15, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
-		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		TEXT("Arial"), &m_pFont);
 
 	return S_OK;
 }
@@ -27,6 +24,12 @@ HRESULT CQuestUI::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
+
+
+	D3DXCreateFont(m_pGraphic_Device, 15, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		TEXT("Arial"), &m_pFont);
+
 
 	D3DXMatrixOrthoLH(&m_ProjMatrix, (_float)g_iWinSizeX, (_float)g_iWinSizeY, 0.f, 1.f);
 

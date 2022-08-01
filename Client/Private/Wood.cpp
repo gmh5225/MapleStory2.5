@@ -21,17 +21,22 @@ HRESULT CWood::Initialize_Prototype()
 
 HRESULT CWood::Initialize(void * pArg)
 {
-	if (FAILED(SetUp_Components()))
+	CVIBuffer_Voxel::VOXELDESC* pVoxDesc = (CVIBuffer_Voxel::VOXELDESC*)pArg;
+
+
+
+	if (FAILED(SetUp_Components(pVoxDesc->cFileName)))
 		return E_FAIL;	
 
 	if (nullptr == pArg)
 		return E_FAIL;
 
-	CVIBuffer_Voxel::VOXELDESC* pVoxDesc = (CVIBuffer_Voxel::VOXELDESC*)pArg;
-
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pVoxDesc->vPos);
 	m_pTransformCom->Set_Scaled(pVoxDesc->vScale);
-	m_pTransformCom->Rotation(pVoxDesc->vRotationAix, pVoxDesc->fAngle);
+	m_pTransformCom->RotationThree(
+		_float3(1.f, 0.f, 0.f), pVoxDesc->vRotationAix.x,
+		_float3(0.f, 1.f, 0.f), pVoxDesc->vRotationAix.y + 45.f,
+		_float3(0.f, 0.f, 1.f), pVoxDesc->vRotationAix.z);
 
 	return S_OK;
 }
@@ -82,14 +87,17 @@ HRESULT CWood::Reset_RenderState()
 	return S_OK;
 }
 
-HRESULT CWood::SetUp_Components()
+HRESULT CWood::SetUp_Components(_tchar* pName)
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Tree"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+
+
+
+	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, pName, TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
 	
 

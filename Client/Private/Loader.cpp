@@ -187,14 +187,16 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 
 
+	list<_tchar*>* tempFileNames = CGameInstance::Get_Instance()->GetVoxelNames();
+	for (auto& Names : *tempFileNames)
+	{
+		if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, Names,
+			CVIBuffer_Voxel::Create(m_pGraphic_Device, Names))))
+			return E_FAIL;
+	}
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Tree"),
-		CVIBuffer_Voxel::Create(m_pGraphic_Device, L"Wood"))))
-		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_MushHouse"),
-		CVIBuffer_Voxel::Create(m_pGraphic_Device, L"MushHouse"))))
-		return E_FAIL;
+
 
 	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니ㅏㄷ.  "));
 
@@ -445,11 +447,6 @@ HRESULT CLoader::Load_Model_Object()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
 		CWood::Create(m_pGraphic_Device))))
 		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_MushHouse"),
-		CMushHouse::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
 
 	Safe_Release(pGameInstance);
 

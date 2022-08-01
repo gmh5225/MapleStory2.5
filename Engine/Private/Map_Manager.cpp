@@ -4,21 +4,26 @@ IMPLEMENT_SINGLETON(CMap_Manager)
 
 CMap_Manager::CMap_Manager()
 {
-	SetFildNames();
+	
 }
 
 
 void CMap_Manager::SetFildNames()
 {
-	m_VoxelNames.push_back(string{ "Wood" });
-	m_VoxelNames.push_back(string{ "MushHouse" });
+	m_VoxelNames.push_back(string("Model_House1"));
+	m_VoxelNames.push_back(string("Model_Wood"));
+	m_cVoxelNames.push_back(L"Model_House1");
+	m_cVoxelNames.push_back(L"Model_Wood");
 
-	m_ModelNames.push_back(string{ "Test_Map_Model" });
+
+	m_ModelNames.push_back(string("Total_Test_1"));
 }
 
 
 HRESULT CMap_Manager::LoadMapData(HWND hWnd)
 {
+	SetFildNames();
+	
 	LoadData(hWnd);
 	LoadModel(hWnd);
 	LoadModelState(hWnd);
@@ -47,9 +52,20 @@ list<CMap_Manager::CUBEDATA>* CMap_Manager::Find_Map(const _tchar * pMapTag)
 }
 
 
+list<CMap_Manager::MODELDESC>* CMap_Manager::Find_Model(const _tchar* pModelTag)
+{
+	auto	iter = find_if(m_ModelPrototypes.begin(), m_ModelPrototypes.end(), CTag_Finder(pModelTag));
+
+	if (iter == m_ModelPrototypes.end())
+		return nullptr;
+
+	return &(iter->second);
+}
+
+
 void CMap_Manager::LoadData(HWND hWnd)
 {
-	HANDLE		hFile = CreateFile(L"../Data/Map/MapData.dat",
+	HANDLE		hFile = CreateFile(L"../Data/Map/Map_Test.dat",
 		GENERIC_READ,				
 		NULL,						
 		NULL,						
@@ -159,11 +175,12 @@ void CMap_Manager::LoadModel(HWND hWnd)
 }
 void CMap_Manager::LoadModelState(HWND hWnd)
 {
+
 	for (auto& name : m_ModelNames)
 	{
 
 		string FilePath = name;
-		string temp = "../Data/Model/";
+		string temp = "../Data/Mod/";
 
 		FilePath = temp + FilePath + ".dat";
 
@@ -205,15 +222,14 @@ void CMap_Manager::LoadModelState(HWND hWnd)
 			m_TempModelList.push_back(CubeData);
 		}
 
-		const wchar_t* pTemp = sFildName;
-
-		m_ModelPrototypes.emplace(pTemp, m_TempModelList);
+		m_ModelPrototypes.emplace(sFildName, m_TempModelList);
 		m_TempModelList.clear();
 
 		// 3. ÆÄÀÏ ¼Ò¸ê
 		CloseHandle(hFile);
 
 	}
+
 }
 
 

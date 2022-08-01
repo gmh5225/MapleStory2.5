@@ -20,7 +20,7 @@ public:
 	}CUBEDATA;
 	typedef struct tagModelDesc
 	{
-		string sFileName;
+		_tchar  cModelName[256] = { 0 };
 		_float3	vPos;
 		_float3 vAix;
 		_float fScale;
@@ -32,15 +32,20 @@ private:
 
 public:
 	void SetFildNames();
+	list<_tchar*>* GetVoxelNames() { return &m_cVoxelNames; }
+	
 	HRESULT LoadMapData(HWND hWnd);
 	list<CUBEDATA>* ReadMap(const _tchar* pMapTag);
+
+
 
 	void LoadData(HWND hWnd);
 	void LoadModel(HWND hWnd);
 	void LoadModelState(HWND hWnd);
 
-private:
+public:
 	list<CUBEDATA>* Find_Map(const _tchar* pMapTag);
+	list<MODELDESC>* Find_Model(const _tchar* pModelTag);
 
 
 private: /* 원형 Map들을 보관할 커넽이너ㅣ */
@@ -49,11 +54,13 @@ private: /* 원형 Map들을 보관할 커넽이너ㅣ */
 	list<CMap_Manager::CUBEDATA> m_TempList;
 
 
-	map<const _tchar*, list<MODELDESC>>			m_ModelPrototypes;
-	typedef map<const _tchar*, list<MODELDESC>>	MODELDATA;
+	map<const _tchar*, list<CMap_Manager::MODELDESC>>			m_ModelPrototypes;
+	// typedef map<const _tchar*, list<MODELDESC>>	MODELDATA;
 	list<CMap_Manager::MODELDESC> m_TempModelList;
 
 	list<string> m_VoxelNames;
+	list<_tchar*> m_cVoxelNames;
+
 	list<string> m_ModelNames;
 
 public:

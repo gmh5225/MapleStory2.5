@@ -29,7 +29,7 @@ HRESULT CMushHouse::Initialize(void * pArg)
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pVoxDesc->vPos);
 	m_pTransformCom->Set_Scaled(pVoxDesc->vScale);
-	m_pTransformCom->Rotation(pVoxDesc->vRotationAix, pVoxDesc->fAngle);
+
 
 
 	return S_OK;

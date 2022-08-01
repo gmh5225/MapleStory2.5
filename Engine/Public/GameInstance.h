@@ -75,6 +75,8 @@ public:
 
 public: /* For.Map_Manager */
 	list<CMap_Manager::CUBEDATA>* ReadMap(const _tchar* pMapTag);
+	list<CMap_Manager::MODELDESC>* ReadModel(const _tchar* pMapTag);
+	list<_tchar*>* GetVoxelNames();
 
 private:
 	CGraphic_Device*				m_pGraphic_Device = nullptr;

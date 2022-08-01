@@ -115,64 +115,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const _tchar * pLayerTag)
 	//	return E_FAIL;
 
 
-	CVIBuffer_Voxel::VOXELDESC VoxDesc;
-	VoxDesc.vPos = _float3{ 8.f, 2.f, 2.f };
-	VoxDesc.vScale = _float3{ 0.3f, 0.3f, 0.3f };
-	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
-	VoxDesc.fAngle = 40.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-
-	VoxDesc.vPos = _float3{ 15.f, -.1f, 2.f };
-	VoxDesc.vScale = _float3{ 0.6f, 0.6f, 0.6f };
-	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
-	VoxDesc.fAngle = 60.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-
-	VoxDesc.vPos = _float3{ 2.f, -.1f, -6.f };
-	VoxDesc.vScale = _float3{ 0.4f, 0.4f, 0.4f };
-	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
-	VoxDesc.fAngle = 52.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-
-	VoxDesc.vPos = _float3{ 10.f, -.1f, -14.f };
-	VoxDesc.vScale = _float3{ 0.4f, 0.4f, 0.4f };
-	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
-	VoxDesc.fAngle = 52.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-
-	VoxDesc.vPos = _float3{ -10.f, -.1f, 7.f };
-	VoxDesc.vScale = _float3{ 0.4f, 0.4f, 0.4f };
-	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
-	VoxDesc.fAngle = 52.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-
-	VoxDesc.vPos = _float3{ 10.f, -.1f, -12.f };
-	VoxDesc.vScale = _float3{ 0.4f, 0.4f, 0.4f };
-	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
-	VoxDesc.fAngle = 22.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-
-	VoxDesc.vPos = _float3{ 5.f, 3.f, 10.f };
-	VoxDesc.vScale = _float3{ 0.4f, 0.4f, 0.4f };
-	VoxDesc.vRotationAix = _float3{ 1.f, 1.f, 0.f };
-	VoxDesc.fAngle = 100.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-
-	VoxDesc.vPos = _float3{ -6.f, -.2f, 6.f };
-	VoxDesc.vScale = _float3{ 0.3f, 0.3f, 0.3f };
-	VoxDesc.vRotationAix = _float3{ 0.f, 1.f, 0.f };
-	VoxDesc.fAngle = 35.f;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MushHouse"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-		return E_FAIL;
-	
-
 
 	Safe_Release(pGameInstance);
 
@@ -199,15 +141,15 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	for (int i = 0; i < 12; ++i)
-	{
-		MonsterInfo.vPos = _float3{_float( i - 6), -0.6f, -2.f };
-		MonsterInfo.vScale = _float3{ 1.3f, 1.3f, 1.3f };
-		MonsterInfo.fColRad = 1.f;
+	//for (int i = 0; i < 12; ++i)
+	//{
+	//	MonsterInfo.vPos = _float3{_float( i - 6), -0.6f, -2.f };
+	//	MonsterInfo.vScale = _float3{ 1.3f, 1.3f, 1.3f };
+	//	MonsterInfo.fColRad = 1.f;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, pLayerTag, &MonsterInfo)))
-		return E_FAIL;
-	}
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, pLayerTag, &MonsterInfo)))
+	//	return E_FAIL;
+	//}
 	
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
@@ -241,13 +183,50 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"MapData");
-
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Test");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
 			return E_FAIL;
 	}
+
+
+	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Test_1");
+	if (nullptr != pModelData)
+	{
+		for (auto& Model : *pModelData)
+		{
+			CVIBuffer_Voxel::VOXELDESC VoxDesc;
+			CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
+			VoxDesc.vPos = Model.vPos;
+
+			_float4x4 Matrix;
+			D3DXMatrixIdentity(&Matrix);
+
+			D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), 45.f);
+
+			D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
+
+
+
+			VoxDesc.vPos.x += 0.f;
+			VoxDesc.vPos.z -= 3.f;
+			VoxDesc.vPos.y += 1.f;
+
+
+			VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
+			VoxDesc.vRotationAix = Model.vAix;
+
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
+				return E_FAIL;
+		}
+
+	}
+
+
+
+
+
 
 
 	Safe_Release(pGameInstance);

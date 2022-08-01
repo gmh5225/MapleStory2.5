@@ -272,6 +272,21 @@ list<CMap_Manager::CUBEDATA>* CGameInstance::ReadMap(const _tchar * pMapTag)
 
 	return m_pMap_Manager->ReadMap(pMapTag);
 }
+list<CMap_Manager::MODELDESC>* CGameInstance::ReadModel(const _tchar * pMapTag)
+{
+	if (nullptr == m_pMap_Manager)
+		return nullptr;
+
+	return m_pMap_Manager->Find_Model(pMapTag);
+}
+
+list<_tchar*>* CGameInstance::GetVoxelNames()
+{
+	if (nullptr == m_pMap_Manager)
+		return nullptr;
+
+	return m_pMap_Manager->GetVoxelNames();
+}
 
 void CGameInstance::Release_Engine()
 {

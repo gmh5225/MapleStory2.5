@@ -79,6 +79,7 @@ public:
 
 	void Rotation(_float3 vAxis, _float fRadian);
 	void RotationTwo(_float3 vAxis, _float fRadian, _float3 vAxis2, _float fRadian2);
+	void RotationThree(_float3 vAxis, _float fRadian, _float3 vAxis2, _float fRadian2, _float3 vAxis3, _float fRadian3);
 	void Turn(_float3 vAxis, _float fTimeDelta);
 
 	void RotationSpot(_float3 vAxisPos, _float3 vDisVec, _float fAngle);
@@ -99,6 +100,7 @@ private:
 	_float				m_fGravity = 1.f;
 	_float				m_fTimeAcc = 0.f;
 	
+	_float3				m_vOriginScale;
 
 public:
 	static CTransform* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
