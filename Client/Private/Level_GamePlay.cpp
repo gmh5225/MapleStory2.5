@@ -518,96 +518,112 @@ HRESULT CLevel_GamePlay::Ready_QuickSlot(const _tchar* pLayerTag)
 	QuickSlot1.fSizeY = 50.f;
 	QuickSlot1.fX = 350.f;
 	QuickSlot1.fY = 580.f;
+	QuickSlot1.iNum = 0;
 
 	CUI::UIINFO QuickSlot2;
 	QuickSlot2.fSizeX = 50.f;
 	QuickSlot2.fSizeY = 50.f;
 	QuickSlot2.fX = 365.f;
 	QuickSlot2.fY = 635.f;
+	QuickSlot2.iNum = 1;
 
 	CUI::UIINFO QuickSlot3;
 	QuickSlot3.fSizeX = 50.f;
 	QuickSlot3.fSizeY = 50.f;
 	QuickSlot3.fX = 405.f;
 	QuickSlot3.fY = 580.f;
+	QuickSlot3.iNum = 2;
 
 	CUI::UIINFO QuickSlot4;
 	QuickSlot4.fSizeX = 50.f;
 	QuickSlot4.fSizeY = 50.f;
 	QuickSlot4.fX = 420.f;
 	QuickSlot4.fY = 635.f;
+	QuickSlot4.iNum = 3;
 
 	CUI::UIINFO QuickSlot5;
 	QuickSlot5.fSizeX = 50.f;
 	QuickSlot5.fSizeY = 50.f;
 	QuickSlot5.fX = 460.f;
 	QuickSlot5.fY = 580.f;
+	QuickSlot5.iNum = 4;
 
 	CUI::UIINFO QuickSlot6;
 	QuickSlot6.fSizeX = 50.f;
 	QuickSlot6.fSizeY = 50.f;
 	QuickSlot6.fX = 475.f;
 	QuickSlot6.fY = 635.f;
+	QuickSlot6.iNum = 5;
 
 	CUI::UIINFO QuickSlot7;
 	QuickSlot7.fSizeX = 50.f;
 	QuickSlot7.fSizeY = 50.f;
 	QuickSlot7.fX = 515.f;
 	QuickSlot7.fY = 580.f;
+	QuickSlot7.iNum = 6;
 
 	CUI::UIINFO QuickSlot8;
 	QuickSlot8.fSizeX = 50.f;
 	QuickSlot8.fSizeY = 50.f;
 	QuickSlot8.fX = 530.f;
 	QuickSlot8.fY = 635.f;
+	QuickSlot8.iNum = 7;
 
 	CUI::UIINFO QuickSlot9;
 	QuickSlot9.fSizeX = 50.f;
 	QuickSlot9.fSizeY = 50.f;
 	QuickSlot9.fX = 735.f;
 	QuickSlot9.fY = 580.f;
+	QuickSlot9.iNum = 8;
 
 	CUI::UIINFO QuickSlot10;
 	QuickSlot10.fSizeX = 50.f;
 	QuickSlot10.fSizeY = 50.f;
 	QuickSlot10.fX = 750.f;
 	QuickSlot10.fY = 635.f;
+	QuickSlot10.iNum = 9;
 
 	CUI::UIINFO QuickSlot11;
 	QuickSlot11.fSizeX = 50.f;
 	QuickSlot11.fSizeY = 50.f;
 	QuickSlot11.fX = 790.f;
 	QuickSlot11.fY = 580.f;
+	QuickSlot11.iNum = 10;
 
 	CUI::UIINFO QuickSlot12;
 	QuickSlot12.fSizeX = 50.f;
 	QuickSlot12.fSizeY = 50.f;
 	QuickSlot12.fX = 805.f;
 	QuickSlot12.fY = 635.f;
+	QuickSlot12.iNum = 11;
 
 	CUI::UIINFO QuickSlot13;
 	QuickSlot13.fSizeX = 50.f;
 	QuickSlot13.fSizeY = 50.f;
 	QuickSlot13.fX = 845.f;
 	QuickSlot13.fY = 580.f;
+	QuickSlot13.iNum = 12;
 
 	CUI::UIINFO QuickSlot14;
 	QuickSlot14.fSizeX = 50.f;
 	QuickSlot14.fSizeY = 50.f;
 	QuickSlot14.fX = 860.f;
 	QuickSlot14.fY = 635.f;
+	QuickSlot14.iNum = 13;
 
 	CUI::UIINFO QuickSlot15;
 	QuickSlot15.fSizeX = 50.f;
 	QuickSlot15.fSizeY = 50.f;
 	QuickSlot15.fX = 900.f;
 	QuickSlot15.fY = 580.f;
+	QuickSlot15.iNum = 14;
 
 	CUI::UIINFO QuickSlot16;
 	QuickSlot16.fSizeX = 50.f;
 	QuickSlot16.fSizeY = 50.f;
 	QuickSlot16.fX = 915.f;
 	QuickSlot16.fY = 635.f;
+	QuickSlot16.iNum = 15;
 	
 	
 

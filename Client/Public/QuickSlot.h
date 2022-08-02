@@ -16,6 +16,11 @@ public:
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
+private:
+	void Draw_KeyText();
+private:
+	LPD3DXFONT m_KeyFont;
+	_uint m_iIndexNum;
 public:
 	static CQuickSlot* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

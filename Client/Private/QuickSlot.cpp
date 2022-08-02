@@ -25,14 +25,17 @@ HRESULT CQuickSlot::Initialize(void * pArg)
 		return E_FAIL;
 
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
-	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
+
+	m_iIndexNum = m_UIInfo.iNum;
 
 	__super::Initialize(pArg);
 
 	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_QuickSlot"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
+	D3DXCreateFont(m_pGraphic_Device, 12, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"µ¸¿òÃ¼", &m_KeyFont);
 
 	return S_OK;
 }
@@ -60,7 +63,99 @@ HRESULT CQuickSlot::Render()
 	m_pVIBufferCom->Render();
 
 	Reset_RenderState();
+
+	Draw_KeyText();
+
 	return S_OK;
+}
+
+void CQuickSlot::Draw_KeyText()
+{
+	switch (m_iIndexNum)
+	{
+	case 0:
+		RECT KeyQ;
+		SetRect(&KeyQ, m_UIInfo.fX-20.f, m_UIInfo.fY-20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"Q", -1, &KeyQ, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 1:
+		RECT KeyA;
+		SetRect(&KeyA, m_UIInfo.fX-20.f, m_UIInfo.fY-20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"A", -1, &KeyA, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 2:
+		RECT KeyW;
+		SetRect(&KeyW, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"W", -1, &KeyW, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 3:
+		RECT KeyS;
+		SetRect(&KeyS, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"S", -1, &KeyS, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 4:
+		RECT KeyE;
+		SetRect(&KeyE, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"E", -1, &KeyE, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 5:
+		RECT KeyD;
+		SetRect(&KeyD, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"D", -1, &KeyD, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 6:
+		RECT KeyR;
+		SetRect(&KeyR, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"R", -1, &KeyR, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 7:
+		RECT KeyF;
+		SetRect(&KeyF, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"F", -1, &KeyF, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 8:
+		RECT Key1;
+		SetRect(&Key1, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"1", -1, &Key1, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 9:
+		RECT Key5;
+		SetRect(&Key5, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"5", -1, &Key5, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 10:
+		RECT Key2;
+		SetRect(&Key2, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"2", -1, &Key2, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 11:
+		RECT Key6;
+		SetRect(&Key6, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"6", -1, &Key6, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 12:
+		RECT Key3;
+		SetRect(&Key3, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"3", -1, &Key3, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 13:
+		RECT Key7;
+		SetRect(&Key7, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"7", -1, &Key7, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 14:
+		RECT Key4;
+		SetRect(&Key4, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"4", -1, &Key4, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	case 15:
+		RECT Key8;
+		SetRect(&Key8, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"8", -1, &Key8, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+	default:
+		break;
+	}
 }
 
 

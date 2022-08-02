@@ -50,6 +50,7 @@ HRESULT CQuickSlotSkill::Initialize(void * pArg)
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
 		L"µ¸¿òÃ¼", &m_NoticeFont);
 
+
 	return S_OK;
 }
 
@@ -97,12 +98,15 @@ HRESULT CQuickSlotSkill::Render()
 	m_pVIBufferCom->Render();
 
 	Reset_RenderState();
+
 	if (m_eCollision == TYPE_ON)
 	{
 		RECT SunCrossNotice;
 		SetRect(&SunCrossNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
 		m_NoticeFont->DrawText(NULL, m_pSkillNotice, -1, &SunCrossNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
 	}
+
+
 	return S_OK;
 }
 
@@ -160,6 +164,10 @@ void CQuickSlotSkill::Clear_Data()
 	m_pSkillNotice = nullptr;
 	m_eGrade = CSkillManager::GRADE_END;
 }
+
+
+	
+
 
 CQuickSlotSkill* CQuickSlotSkill::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

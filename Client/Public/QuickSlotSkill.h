@@ -25,12 +25,15 @@ public:
 	CSkillManager::SkillGrade Get_Grade() { return m_eGrade; }
 	void Clear_Data();
 	void Set_Data(_uint Textnum, const _tchar* Tag, CSkillManager::SkillGrade eGrade, const wchar_t* pNotice) { m_iTexturenum = Textnum, m_pSkillInfoTag = Tag, m_eGrade = eGrade, m_pSkillNotice = pNotice; }
+
+
 private:
 	_uint m_iIndexNum;
 	const _tchar* m_pSkillInfoTag;
 	CSkillManager::SkillGrade m_eGrade;
 	const wchar_t* m_pSkillNotice;
 	LPD3DXFONT m_NoticeFont;
+
 	
 public:
 	static CQuickSlotSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
