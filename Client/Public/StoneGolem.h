@@ -47,6 +47,10 @@ public:
 	static CStoneGolem* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
+private:
+	_int	m_iHp;
+	_int	m_iIndexNum;
 };
 
 END

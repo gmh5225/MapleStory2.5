@@ -360,9 +360,6 @@
     <ClInclude Include="..\Public\SkillManager.h">
       <Filter>89.Manager\SkillManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\QuestManager.h">
-      <Filter>89.Manager\QuestManager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\InvenManager.h">
       <Filter>89.Manager\InvenManager</Filter>
     </ClInclude>
@@ -506,6 +503,9 @@
     </ClInclude>
     <ClInclude Include="..\public\Level_Henesys.h">
       <Filter>01.Level\Henesys</Filter>
+          </ClInclude>
+    <ClInclude Include="..\Public\QuestManager.h">
+      <Filter>89.Manager\QuestManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

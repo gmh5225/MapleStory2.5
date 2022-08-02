@@ -38,9 +38,6 @@ HRESULT CChat::Initialize(void * pArg)
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 
-
-
-
 	return S_OK;
 }
 
@@ -55,17 +52,12 @@ void CChat::Tick(_float fTimeDelta)
 	SetRect(&rcUI, _int(m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f), _int(m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f), _int(m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f), _int(m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f));
 
 
-	/*if (PtInRect(&rcUI, ptMouse))
-	{
-	MouseCollision();
-	}*/
 }
 
 void CChat::LateTick(_float fTimeDelta)
 {
-
-
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+
 }
 
 HRESULT CChat::Render()
@@ -83,30 +75,63 @@ HRESULT CChat::Render()
 
 	CQuestManager* pInstance = CQuestManager::Get_Instance();
 
-	m_bChat = pInstance->Check_Quest();
+	m_bChat = pInstance->Check_Quest(); 
 
-	// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
-	if (m_bChat && pInstance->Set_QuestState() == 0)
+
+	if (pInstance->Get_QuestNum() == 1)
 	{
-		m_pTextureCom->Bind_Texture(0);
-		m_pVIBufferCom->Render();
-		if ((GetKeyState(VK_RETURN)& 0x8000))
+		// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
+		if (m_bChat && pInstance->Set_QuestState() == 0)
 		{
-			pInstance->QuestProgress();
-			pInstance->Check_End_Quest();
+			m_pTextureCom->Bind_Texture(0);
+			m_pVIBufferCom->Render();
+			if ((GetKeyState(VK_RETURN) & 0x8000))
+			{
+				pInstance->QuestProgress();
+				pInstance->Check_End_Quest();
+			}
+		}
+
+		if (m_bChat && pInstance->Set_QuestState() == 2)
+		{
+			m_pTextureCom->Bind_Texture(1);
+			m_pVIBufferCom->Render();
+			if (GetKeyState(VK_RETURN) & 0x8000)
+			{
+				pInstance->QuestPrepare();
+				pInstance->Check_End_Quest();
+				pInstance->Reset_Hunt();
+				CQuestManager::Get_Instance()->Set_Second();
+				CSkillManager::Get_Instance()->Set_SkillPoint(3);
+			}
 		}
 	}
 
-	if (m_bChat && pInstance->Set_QuestState() == 2)
+	else if (pInstance->Get_QuestNum() == 2)
 	{
-		m_pTextureCom->Bind_Texture(1);
-		m_pVIBufferCom->Render();
-		if (GetKeyState(VK_RETURN) & 0x8000)
+		// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
+		if (m_bChat && pInstance->Set_QuestState() == 0)
 		{
-			pInstance->QuestEnd();
-			pInstance->Check_End_Quest();
-			pInstance->Reset_Hunt();
-			CSkillManager::Get_Instance()->Set_SkillPoint(1);
+			m_pTextureCom->Bind_Texture(2);
+			m_pVIBufferCom->Render();
+			if ((GetKeyState(VK_RETURN) & 0x8000))
+			{
+				pInstance->QuestProgress();
+				pInstance->Check_End_Quest();
+			}
+		}
+
+		if (m_bChat && pInstance->Set_QuestState() == 2)
+		{
+			m_pTextureCom->Bind_Texture(1);
+			m_pVIBufferCom->Render();
+			if (GetKeyState(VK_RETURN) & 0x8000)
+			{
+				pInstance->QuestEnd();
+				pInstance->Check_End_Quest();
+				pInstance->Reset_Hunt();
+				CSkillManager::Get_Instance()->Set_SkillPoint(3);
+			}
 		}
 	}
 
