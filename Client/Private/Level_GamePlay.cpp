@@ -12,6 +12,8 @@
 #include "SpawnerManager.h"
 #include "Maya.h"
 
+#include "Level_Loading.h"
+
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
 {
@@ -59,6 +61,21 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
+
+
+	if (GetKeyState(VK_SPACE) & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_HENESYS))))
+			return;
+
+
+		Safe_Release(pGameInstance);
+
+	}
+
 }
 
 HRESULT CLevel_GamePlay::Render()
@@ -177,7 +194,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Test");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Test1");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
@@ -302,18 +319,18 @@ HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
 	CSpawner::SPAWNERINFO MonsterInfo;
 
+	//MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
+	//MonsterInfo.MonsterPos = _float3{ -2.f , -0.6f, -2.f };
+	//MonsterInfo.SpawnerNum = 0;
+	//MonsterInfo.MonsterNum = 3;
+	//MonsterInfo.MonsterColRad = 1.f;
+
+
+
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
 	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ -2.f , -0.6f, -2.f };
-	MonsterInfo.SpawnerNum = 0;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ -1.f , -0.6f, 3.f };
+	MonsterInfo.MonsterPos = _float3{ 2.f , -0.6f, -3.f };
 	MonsterInfo.SpawnerNum = 1;
 	MonsterInfo.MonsterNum = 3;
 	MonsterInfo.MonsterColRad = 1.f;

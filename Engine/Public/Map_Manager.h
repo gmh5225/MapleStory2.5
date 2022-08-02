@@ -58,6 +58,8 @@ private: /* 원형 Map들을 보관할 커넽이너ㅣ */
 	// typedef map<const _tchar*, list<MODELDESC>>	MODELDATA;
 	list<CMap_Manager::MODELDESC> m_TempModelList;
 
+	list<string> m_MapNames;
+
 	list<string> m_VoxelNames;
 	list<_tchar*> m_cVoxelNames;
 

@@ -10,6 +10,9 @@ CMap_Manager::CMap_Manager()
 
 void CMap_Manager::SetFildNames()
 {
+	m_MapNames.push_back(string("Map_Test1"));
+	m_MapNames.push_back(string("Map_Test2"));
+
 	m_VoxelNames.push_back(string("Model_House1"));
 	m_VoxelNames.push_back(string("Model_Wood"));
 	m_cVoxelNames.push_back(L"Model_House1");
@@ -65,53 +68,83 @@ list<CMap_Manager::MODELDESC>* CMap_Manager::Find_Model(const _tchar* pModelTag)
 
 void CMap_Manager::LoadData(HWND hWnd)
 {
-	HANDLE		hFile = CreateFile(L"../Data/Map/Map_Test.dat",
-		GENERIC_READ,				
-		NULL,						
-		NULL,						
-		OPEN_EXISTING,				
-		FILE_ATTRIBUTE_NORMAL,		
-		NULL);						
 
-	
-
-	DWORD		dwByte = 0;
-	CMap_Manager::CUBEDATA		tInfo{};
-
-	wchar_t* sFildName = new wchar_t[256];
-	ReadFile(hFile, sFildName, sizeof(wchar_t) * 256, &dwByte, nullptr);
-
-
-	_float4x4 RotationMatrix;
-	D3DXMatrixIdentity(&RotationMatrix);
-	D3DXMatrixRotationAxis(&RotationMatrix, &_float3{ 0.f, 1.f, 0.f }, D3DXToRadian(45.f));
-
-
-
-	while (true)
+	for (auto& name : m_MapNames)
 	{
-		ReadFile(hFile, &tInfo, sizeof(CMap_Manager::CUBEDATA), &dwByte, nullptr);
 
-		if (0 == dwByte)	// 더이상 읽을 데이터가 없을 경우
-			break;
+		string FilePath = name;
+		string temp = "../Data/Map/";
 
-		CMap_Manager::CUBEDATA CubeData(tInfo);
+		FilePath = temp + FilePath + ".dat";
+
+		wchar_t RealPath[256] = { 0 };
+
+		for (int i = 0; i < FilePath.size(); i++)
+		{
+			RealPath[i] = FilePath[i];
+		}
 
 
-		D3DXVec3TransformCoord(&CubeData.vPos, &CubeData.vPos, &RotationMatrix);
-		// CubeData.vPos.y += 10.f;
 
 
-		m_TempList.push_back(CubeData);
+
+		HANDLE		hFile = CreateFile(RealPath,
+			GENERIC_READ,
+			NULL,
+			NULL,
+			OPEN_EXISTING,
+			FILE_ATTRIBUTE_NORMAL,
+			NULL);
+
+
+
+		DWORD		dwByte = 0;
+		CMap_Manager::CUBEDATA		tInfo{};
+
+		wchar_t* sFildName = new wchar_t[256];
+		ReadFile(hFile, sFildName, sizeof(wchar_t) * 256, &dwByte, nullptr);
+		delete sFildName;
+
+		_float4x4 RotationMatrix;
+		D3DXMatrixIdentity(&RotationMatrix);
+		D3DXMatrixRotationAxis(&RotationMatrix, &_float3{ 0.f, 1.f, 0.f }, D3DXToRadian(45.f));
+
+
+
+		while (true)
+		{
+			ReadFile(hFile, &tInfo, sizeof(CMap_Manager::CUBEDATA), &dwByte, nullptr);
+
+			if (0 == dwByte)	// 더이상 읽을 데이터가 없을 경우
+				break;
+
+			CMap_Manager::CUBEDATA CubeData(tInfo);
+
+
+			D3DXVec3TransformCoord(&CubeData.vPos, &CubeData.vPos, &RotationMatrix);
+			// CubeData.vPos.y += 10.f;
+
+
+			m_TempList.push_back(CubeData);
+		}
+
+		// const wchar_t* pTemp = sFildName;
+		
+		_tchar* pCtemp = new _tchar[256];
+		ZeroMemory(pCtemp, sizeof(_tchar) * 256);
+
+		for (int i = 0; i < name.size(); i++)
+		{
+			pCtemp[i] = name[i];
+		}
+
+		m_MapPrototypes.emplace(pCtemp, m_TempList);
+		m_TempList.clear();
+
+		// 3. 파일 소멸
+		CloseHandle(hFile);
+
 	}
-
-	const wchar_t* pTemp = sFildName;
-
-	m_MapPrototypes.emplace(pTemp, m_TempList);
-	m_TempList.clear();
-
-	// 3. 파일 소멸
-	CloseHandle(hFile);
 
 }
 void CMap_Manager::LoadModel(HWND hWnd)
