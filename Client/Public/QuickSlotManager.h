@@ -17,6 +17,8 @@ public:
 	HRESULT Add_QuickSlotSkill(CQuickSlotSkill* pQuickSlot);
 	_bool Check_Texture(_uint iTextnum);
 	HRESULT Change_Slot(_uint iIndexnum, CQuickSlotSkill* pQUickSlot);
+	void Clear_Data(_uint iIndexnum);
+	_bool Check_Delete();
 private:
 	list<CQuickSlotSkill*> m_QuickSlotSkill;
 

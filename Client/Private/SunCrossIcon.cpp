@@ -115,7 +115,7 @@ void CSunCrossIcon::Change_Texture()
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0)
-		pMouseInstance->Set_SkillIconIndex(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
+		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"SunCrossInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 	
 	
 }

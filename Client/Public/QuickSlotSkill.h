@@ -23,7 +23,7 @@ public:
 	const _tchar* Get_Tag() { return m_pSkillInfoTag; }
 	const wchar_t* Get_Notice() { return m_pSkillNotice; }
 	CSkillManager::SkillGrade Get_Grade() { return m_eGrade; }
-
+	void Clear_Data();
 	void Set_Data(_uint Textnum, const _tchar* Tag, CSkillManager::SkillGrade eGrade, const wchar_t* pNotice) { m_iTexturenum = Textnum, m_pSkillInfoTag = Tag, m_eGrade = eGrade, m_pSkillNotice = pNotice; }
 private:
 	_uint m_iIndexNum;
@@ -31,7 +31,7 @@ private:
 	CSkillManager::SkillGrade m_eGrade;
 	const wchar_t* m_pSkillNotice;
 	LPD3DXFONT m_NoticeFont;
-
+	
 public:
 	static CQuickSlotSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

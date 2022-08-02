@@ -55,19 +55,28 @@ HRESULT CQuickSlotSkill::Initialize(void * pArg)
 
 void CQuickSlotSkill::Tick(_float fTimeDelta)
 {
-	CGameInstance* pInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pInstance);
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	CQuickSlotManager* pQuickSlotInstance = CQuickSlotManager::Get_Instance();
+	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 
 
 	Check_Collision(DIMK_LBUTTON);
+
 	Change_Texture();
-	
-	Safe_Release(pInstance);
+
+	if (pGameInstance->Mouse_Up(DIMK_LBUTTON) && m_eCollision == TYPE_NO && pQuickSlotInstance->Check_Delete() && pMouseInstance->Get_PickType() == CMouseManager::TYPE_QUICK)
+	{
+		pQuickSlotInstance->Clear_Data(pMouseInstance->Get_Indexnum());
+	}
+
+
+	Safe_Release(pGameInstance);
 }
 
 void CQuickSlotSkill::LateTick(_float fTimeDelta)
 {
-
+	
 	if (m_bRender)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 
@@ -110,7 +119,7 @@ void CQuickSlotSkill::Change_Texture()
 
 		break;
 	case Client::CUI::TYPE_DOWN:
-		pMouseInstance->Set_SkillIconIndex(m_pSkillInfoTag, m_eGrade, m_iTexturenum, m_pSkillNotice, m_iIndexNum);
+		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_QUICK, m_pSkillInfoTag, m_eGrade, m_iTexturenum, m_pSkillNotice, m_iIndexNum);
 		break;
 	case Client::CUI::TYPE_UP:	
 		if (!pQuickSlotInstance->Check_Texture(pMouseInstance->Get_SkillIconTextnum()))
@@ -119,21 +128,21 @@ void CQuickSlotSkill::Change_Texture()
 			m_eGrade = pMouseInstance->Get_Grade();
 			m_iTexturenum = pMouseInstance->Get_SkillIconTextnum();
 			m_pSkillNotice = pMouseInstance->Get_SkillNotice();
-			m_bRender = true;
-			break;
+			
 		}
 		else
 		{
-			pQuickSlotInstance->Change_Slot(pMouseInstance->Get_Indexnum(), this);			
-			m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();
-			m_eGrade = pMouseInstance->Get_Grade();
-			m_iTexturenum = pMouseInstance->Get_SkillIconTextnum();
-			m_pSkillNotice = pMouseInstance->Get_SkillNotice();
-			m_bRender = true;
-			
+			if (pMouseInstance->Get_PickType() == CMouseManager::TYPE_QUICK)
+			{
+				pQuickSlotInstance->Change_Slot(pMouseInstance->Get_Indexnum(), this);
+				m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();
+				m_eGrade = pMouseInstance->Get_Grade();
+				m_iTexturenum = pMouseInstance->Get_SkillIconTextnum();
+				m_pSkillNotice = pMouseInstance->Get_SkillNotice();
+			}			
 		}
-
-		
+		m_bRender = true;
+		break;
 	case Client::CUI::TYPE_PRESSING:
 		break;
 	case Client::CUI::TYPE_END:
@@ -142,10 +151,14 @@ void CQuickSlotSkill::Change_Texture()
 		break;
 	}
 
+}
 
-
-
-
+void CQuickSlotSkill::Clear_Data()
+{
+	m_iTexturenum = 5;
+	m_pSkillInfoTag = nullptr;
+	m_pSkillNotice = nullptr;
+	m_eGrade = CSkillManager::GRADE_END;
 }
 
 CQuickSlotSkill* CQuickSlotSkill::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

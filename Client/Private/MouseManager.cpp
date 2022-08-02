@@ -24,15 +24,15 @@ HRESULT CMouseManager::Add_pMouseSkillIcon(CMouseSkillIcon* pMouseSkillIcon)
 	return S_OK;
 }
 
-void CMouseManager::Set_SkillIconIndex(const _tchar* pSkillInfoTag, CSkillManager::SkillGrade eGrade, _uint iText, const wchar_t* pNotice, _uint iIndex)
+void CMouseManager::Set_SkillIconIndex(PickType ePick, const _tchar* pSkillInfoTag, CSkillManager::SkillGrade eGrade, _uint iText, const wchar_t* pNotice, _uint iIndex)
 {
-	
+
+	m_ePick = ePick;
 	m_pSkillInfoTag = pSkillInfoTag;
 	m_eGrade = eGrade;
 	m_pMouseSkillIcon->Set_TextureNum(iText);
 	m_cSkillNotice = pNotice;
 	m_iIndexNum = iIndex;
-	
 
 }
 

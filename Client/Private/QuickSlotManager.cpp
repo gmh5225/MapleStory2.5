@@ -46,6 +46,30 @@ HRESULT CQuickSlotManager::Change_Slot(_uint iIndexnum, CQuickSlotSkill* pQuickS
 	return S_OK;
 }
 
+void CQuickSlotManager::Clear_Data(_uint iIndexnum)
+{
+	for (auto iter : m_QuickSlotSkill)
+	{
+		if (iter->Get_IndexNum() == iIndexnum)
+		{
+			iter->Clear_Data();
+		}
+	}
+}
+
+_bool CQuickSlotManager::Check_Delete()
+{
+	for (auto iter : m_QuickSlotSkill)
+	{
+		POINT		ptMouse;
+		GetCursorPos(&ptMouse);
+		ScreenToClient(g_hWnd, &ptMouse);		
+		if(PtInRect(&iter->Get_RectUI(), ptMouse))
+			return false;
+	}
+	return true;
+}
+
 void CQuickSlotManager::Free()
 {
 	for (auto iter : m_QuickSlotSkill)
