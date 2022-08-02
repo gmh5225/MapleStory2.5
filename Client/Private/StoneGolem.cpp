@@ -3,6 +3,7 @@
 
 #include "GameInstance.h"
 #include "QuestManager.h"
+#include "SpawnerManager.h"
 
 CStoneGolem::CStoneGolem(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -30,9 +31,12 @@ HRESULT CStoneGolem::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_sTag = "Tag_Monster";
+	m_iHp = 3;
+	m_iIndexNum = -1;
+
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-3.f, 0.2f, -4.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.5f, 6.f, 13.f));
 	m_pTransformCom->Set_Scaled(4.f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -211,8 +215,13 @@ void CStoneGolem::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
-
-	Set_Dead();
+	--m_iHp;
+	if (m_iHp == 0)
+	{
+		CQuestManager::Get_Instance()->Hunting(TEXT("StoneGolem"));
+		//CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
+		Set_Dead();
+	}
 
 }
 

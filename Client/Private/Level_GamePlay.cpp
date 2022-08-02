@@ -58,6 +58,8 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 {
 	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
 		CQuestManager::Get_Instance()->QuestClear();
+	else if (CQuestManager::Get_Instance()->Set_StoneGolem() >= 1)
+		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
 }
 
@@ -248,9 +250,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuestUI"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chat"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
-
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_GAMEPLAY, pLayerTag, &SkillFrameiInfo)))
 		return E_FAIL;
 
@@ -286,10 +285,13 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 	Ready_QuickSlotSkill(pLayerTag);
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseSkillIcon"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseSkillIcon"), LEVEL_GAMEPLAY, pLayerTag)))
+	//	return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseCursor"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chat"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -303,7 +305,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	CSpawner::SPAWNERINFO MonsterInfo;
 
 	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ -2.f , -0.6f, -2.f };
+	MonsterInfo.MonsterPos = _float3{ 25.f , 1.8f, -3.f };
 	MonsterInfo.SpawnerNum = 0;
 	MonsterInfo.MonsterNum = 3;
 	MonsterInfo.MonsterColRad = 1.f;
@@ -313,7 +315,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ -1.f , -0.6f, 3.f };
+	MonsterInfo.MonsterPos = _float3{ 26.f , 1.8f, -11.f };
 	MonsterInfo.SpawnerNum = 1;
 	MonsterInfo.MonsterNum = 3;
 	MonsterInfo.MonsterColRad = 1.f;

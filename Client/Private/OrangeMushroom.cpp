@@ -46,7 +46,7 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 
 	// 랜덤으로 어느방향으로 움직일지와 거리를 생성한다
 	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 4);
-	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(2, 7));
+	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(1, 5));
 
 
 	switch (m_iMove)

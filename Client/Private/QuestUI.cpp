@@ -50,10 +50,6 @@ HRESULT CQuestUI::Initialize(void * pArg)
 
 void CQuestUI::Tick(_float fTimeDelta)
 {
-	POINT		ptMouse;
-	GetCursorPos(&ptMouse);
-
-	ScreenToClient(g_hWnd, &ptMouse);
 
 	RECT		rcUI;
 	SetRect(&rcUI, _int(m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f), _int(m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f), _int(m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f), _int(m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f));
@@ -81,11 +77,6 @@ HRESULT CQuestUI::Render()
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
 
-
-
-
-
-
 	// 퀘스트의 상태가 1일때 -퀘스트가 진행중일 때만 퀘스트가 비어있다는것을 출력, 다른 경우에 퀘스트창이 비어있음을 출력
 	if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
 	{
@@ -108,38 +99,76 @@ HRESULT CQuestUI::Render()
 
 	m_pVIBufferCom->Render();
 
-	TCHAR cHunt[128];
-	TCHAR cOrangeMushroom[50];
-	TCHAR cCountHunt[15];
-	_uint iOrangeMushroom = Questinstance->Set_OrangeMushroom();
-	wsprintf(cHunt,TEXT("[헤네시스] 농장을 망치는 범인\n") TEXT(" 주황버섯"));
-	wsprintf(cOrangeMushroom, TEXT("%d"), iOrangeMushroom);
-	wsprintf(cCountHunt, TEXT(" / 10"));
-
-	if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
+	if (Questinstance->Get_QuestNum() == 1)
 	{
-		SetRect(&rc, 1100, 270, 1200, 150);
-		m_pFont->DrawText(NULL, cHunt,
-			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-		if (iOrangeMushroom == 10)
-		{
-			SetRect(&rc, 1165, 285, 1205, 165);
-			m_pFont->DrawText(NULL, cOrangeMushroom,
-				-1, &rc, DT_NOCLIP, D3DXCOLOR(0.f, 1.0f, 1.0f, 1.0f));
-		}
-		else
-		{
-			SetRect(&rc, 1165, 285, 1205, 165);
-			m_pFont->DrawText(NULL, cOrangeMushroom,
-				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.0f));
-		}
+		TCHAR cHunt[128];
+		TCHAR cOrangeMushroom[50];
+		TCHAR cCountHunt[15];
+		_uint iOrangeMushroom = Questinstance->Set_OrangeMushroom();
+		wsprintf(cHunt, TEXT("[헤네시스] 농장을 망치는 범인\n") TEXT(" 주황버섯"));
+		wsprintf(cOrangeMushroom, TEXT("%d"), iOrangeMushroom);
+		wsprintf(cCountHunt, TEXT(" / 10"));
 
-		SetRect(&rc, 1178, 285, 1218, 165);
-		m_pFont->DrawText(NULL, cCountHunt,
-			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
+		{
+			SetRect(&rc, 1100, 270, 1200, 150);
+			m_pFont->DrawText(NULL, cHunt,
+				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+
+			if (iOrangeMushroom == 10)
+			{
+				SetRect(&rc, 1165, 285, 1205, 165);
+				m_pFont->DrawText(NULL, cOrangeMushroom,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(0.f, 1.0f, 1.0f, 1.0f));
+			}
+			else
+			{
+				SetRect(&rc, 1165, 285, 1205, 165);
+				m_pFont->DrawText(NULL, cOrangeMushroom,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.0f));
+			}
+
+			SetRect(&rc, 1178, 285, 1218, 165);
+			m_pFont->DrawText(NULL, cCountHunt,
+				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
 	}
 
+	else if (Questinstance->Get_QuestNum() == 2)
+	{
+		TCHAR cHunt[128];
+		TCHAR cStoneGolem[50];
+		TCHAR cCountHunt[15];
+		_uint iStoneGolem = Questinstance->Set_StoneGolem();
+		wsprintf(cHunt, TEXT("[헤네시스] 길을 막는 스톤골렘\n") TEXT(" 스톤골렘"));
+		wsprintf(cStoneGolem, TEXT("%d"), iStoneGolem);
+		wsprintf(cCountHunt, TEXT(" / 1"));
+
+		if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
+		{
+			SetRect(&rc, 1100, 270, 1200, 150);
+			m_pFont->DrawText(NULL, cHunt,
+				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+
+			if (iStoneGolem == 1)
+			{
+				SetRect(&rc, 1165, 285, 1205, 165);
+				m_pFont->DrawText(NULL, cStoneGolem,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(0.f, 1.0f, 1.0f, 1.0f));
+			}
+			else
+			{
+				SetRect(&rc, 1165, 285, 1205, 165);
+				m_pFont->DrawText(NULL, cStoneGolem,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.0f));
+			}
+
+			SetRect(&rc, 1178, 285, 1218, 165);
+			m_pFont->DrawText(NULL, cCountHunt,
+				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+		}
+	}
 
 
 	return S_OK;

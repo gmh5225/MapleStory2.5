@@ -31,7 +31,7 @@ HRESULT CRibbonPig::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 
 	m_fColRad = 0.9f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, .0f, -2.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, 0.2f, -2.f));
 	m_pTransformCom->Set_Scaled(1.1f);
 
 	SetState(STATE_IDLE, DIR_END);
