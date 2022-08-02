@@ -65,7 +65,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 	__super::Tick(fTimeDelta);
 
 
-	if (GetKeyState(VK_SPACE) & 0x8000)
+	/*if (GetKeyState(VK_SPACE) & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
@@ -76,7 +76,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 
 		Safe_Release(pGameInstance);
 
-	}
+	}*/
 
 }
 
@@ -302,8 +302,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 	Ready_QuickSlotSkill(pLayerTag);
 
-	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseSkillIcon"), LEVEL_GAMEPLAY, pLayerTag)))
-	//	return E_FAIL;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseSkillIcon"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseCursor"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;

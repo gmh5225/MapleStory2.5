@@ -108,30 +108,6 @@ void CMouseSkillIcon::Change_Texture()
 
 }
 
-//HRESULT CMouseSkillIcon::Set_RenderState()
-//{
-//	if (nullptr == m_pGraphic_Device)
-//		return E_FAIL;
-//
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 130);
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
-//
-//
-//	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-//
-//
-//	return S_OK;
-//}
-//
-//HRESULT CMouseSkillIcon::Reset_RenderState()
-//{
-//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
-//
-//	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-//
-//	return S_OK;
-//}
 
 CMouseSkillIcon* CMouseSkillIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

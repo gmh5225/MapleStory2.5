@@ -19,8 +19,6 @@ HRESULT CMouseManager::Add_pMouseSkillIcon(CMouseSkillIcon* pMouseSkillIcon)
 
 	m_pMouseSkillIcon = pMouseSkillIcon;
 
-	Safe_AddRef(pMouseSkillIcon);
-
 	return S_OK;
 }
 
@@ -55,5 +53,5 @@ CSkillInfo * CMouseManager::Get_SkillInfo()
 
 void CMouseManager::Free()
 {
-	Safe_Release(m_pMouseSkillIcon);
+
 }
