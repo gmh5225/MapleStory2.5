@@ -37,13 +37,13 @@ HRESULT CPlayer::Initialize(void * pArg)
 	m_sTag = "Tag_Player";
 
 	// 원충돌 시 코드
-	// m_fColRad = 0.5f;
-
+	m_fColRad = 0.5f;
 
 
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, 2.f, 0.f));
 	m_pTransformCom->Set_Scaled(2.0f);
+
 
 
 	// *중력 코드
@@ -161,6 +161,12 @@ void CPlayer::Tick(_float fTimeDelta)
 }
 void CPlayer::LateTick(_float fTimeDelta)
 {
+	if(m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -20.f)
+	{
+		m_pTransformCom->Set_Vel(0.f);
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, 3.f, 0.f));
+	}
+		
 	SetOnceEndAni();
 	
 
@@ -171,6 +177,7 @@ void CPlayer::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_PLAYER, this);
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	
 }
@@ -193,7 +200,18 @@ HRESULT CPlayer::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 	
-	//__super::BoxColCom_Render(m_pTransformCom);
+
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_0))
+	{
+		if (temp)
+			temp = false;
+		else
+			temp = true;
+	}
+
+	if (temp)
+		__super::BoxColCom_Render(m_pTransformCom);
 	
 
 	return S_OK;
@@ -774,7 +792,7 @@ void CPlayer::Collision(CGameObject * pOther)
 			if(Get_PushedY())
 				SetState(STATE_IDLE, m_eDir);
 		}
-		//m_pTransformCom->Set_Vel(0.f);
+		
 	}
 	else if (pOther->Get_Tag() == "Tag_Item")
 	{

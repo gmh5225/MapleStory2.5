@@ -31,7 +31,7 @@ HRESULT CRibbonPig::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 
 	m_fColRad = 0.9f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, .0f, -2.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 1.f, 0.f));
 	m_pTransformCom->Set_Scaled(1.1f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -193,7 +193,7 @@ void CRibbonPig::SetState(STATE eState, DIR eDir)
 	{
 		// *중력 코드
 		// Y축 힘을 줍니다.
-		m_pTransformCom->Set_Vel(5.0f);
+		m_pTransformCom->Set_Vel(4.0f);
 	}
 }
 void CRibbonPig::SetAni()

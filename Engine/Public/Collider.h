@@ -10,7 +10,7 @@ BEGIN(Engine)
 class ENGINE_DLL CCollider final : public CComponent
 {
 public: /* 그려지는 순서에 따른 정의 */
-	enum COLLSIONGROUP { COLLSION_PLAYER, COLLSION_MONSTER, COLLSION_NPC, COLLSION_PLAYER_SKILL, COLLSION_MONSTER_SKILL, COLLSION_BLOCK, COLLISION_ITEM,COLLSION_UI, COLLSION_END };
+	enum COLLSIONGROUP { COLLSION_PLAYER, COLLSION_MONSTER, COLLSION_NPC, COLLSION_PLAYER_SKILL, COLLSION_MONSTER_SKILL, COLLSION_BLOCK, COLLISION_ITEM, COLLSION_UI, COLLSION_SECTION, COLLSION_END };
 
 
 private:
@@ -31,7 +31,11 @@ public:
 	HRESULT Check_BoxCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
 	HRESULT Check_PushBoxCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R);
 
+	HRESULT Check_PushCubeCollsion(COLLSIONGROUP eCollsionGroup_L);
+
 	HRESULT End_Collsion();
+
+	HRESULT Set_SectionCubes();
 
 public:
 	_bool Check_Sphere(CGameObject* pObj_L, CGameObject* pObj_R);
@@ -42,6 +46,8 @@ private:
 	list<class CGameObject*>				m_BoxCollisionObjects[COLLSION_END];
 	list<class CGameObject*>				m_PhshBoxCollisionObjects[COLLSION_END];
 	typedef list<class CGameObject*>		COLLSIONOBJECTS;
+
+	list<class CGameObject*>		m_Sections;
 
 public:
 	static CCollider* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

@@ -40,6 +40,8 @@ protected:
 private:
 	HRESULT SetUp_Components();
 
+	_bool temp = false;
+
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

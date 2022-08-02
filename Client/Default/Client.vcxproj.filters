@@ -286,6 +286,9 @@
     <Filter Include="01.Level\Henesys">
       <UniqueIdentifier>{eda8fc59-e5bc-4d42-8adf-652918bfa143}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Section">
+      <UniqueIdentifier>{a233faac-2772-41ae-86bb-f404126c07aa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -507,6 +510,9 @@
     <ClInclude Include="..\public\Level_Henesys.h">
       <Filter>01.Level\Henesys</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\Section.h">
+      <Filter>02.GameObject\Section</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -718,6 +724,9 @@
     </ClCompile>
     <ClCompile Include="..\private\Level_Henesys.cpp">
       <Filter>01.Level\Henesys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Section.cpp">
+      <Filter>02.GameObject\Section</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

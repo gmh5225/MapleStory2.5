@@ -32,7 +32,8 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	m_sTag = "Tag_UI";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 1.1f, 0.3f));
+	m_fColRad = 1.f;	
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.5f, 0.3f));
 	m_pTransformCom->Set_Scaled(0.8f);
 
 	// 퀘스트 false 초기화 및 퀘스트 시작으로 초기화
@@ -66,6 +67,9 @@ HRESULT CBulb::SetUp_Components()
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
 		return E_FAIL;
 
+
+
+
 	return S_OK;
 }
 
@@ -82,7 +86,7 @@ void CBulb::LateTick(_float fTimeDelta)
 		SetState(STATE_IDLE, m_eDir);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_UI, this);
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_UI, this);
 
 	Set_Billboard();
 }

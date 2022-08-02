@@ -3,6 +3,13 @@
 #include "Client_Defines.h"
 #include "Level.h"
 
+
+BEGIN(Engine)
+class CCollider;
+END
+
+
+
 BEGIN(Client)
 
 class CLevel_GamePlay final : public CLevel
@@ -32,6 +39,9 @@ private:
 	HRESULT Ready_SkillInfo();
 	HRESULT Ready_QuickSlot(const _tchar* pLayerTag);
 	HRESULT Ready_QuickSlotSkill(const _tchar* pLayerTag);
+
+private:
+	CCollider*				m_pColliderCom = nullptr;
 
 public:
 	static CLevel_GamePlay* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

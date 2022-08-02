@@ -15,7 +15,7 @@ END
 
 BEGIN(Client)
 
-class CCube final : public CGameObject
+class CSection final : public CGameObject
 {
 public:
 	typedef struct tagCubeDesc
@@ -24,9 +24,9 @@ public:
 		const _tchar* pTextureTag;
 	}CUBEDESC;
 private:
-	CCube(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CCube(const CCube& rhs);
-	virtual ~CCube() = default;
+	CSection(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CSection(const CSection& rhs);
+	virtual ~CSection() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -35,18 +35,20 @@ public:
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
+	virtual void Collision(CGameObject* pOther) override;
+
+	virtual list<class CGameObject*>* GetCubes() { return &m_Cubes; }
+
 private:
-	CTexture*				m_pTextureCom = nullptr;
-	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
-	CVIBuffer_Cube*			m_pVIBufferCom = nullptr;
 	CCollider*				m_pColliderCom = nullptr;
+	CRenderer*				m_pRendererCom = nullptr;
 
 private:
 	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);
 	CMap_Manager::CUBEDATA* m_pData;
 
-	_bool temp = false;
+	list<class CGameObject*> m_Cubes;
 
 private:
 	HRESULT Set_RenderState();
@@ -54,8 +56,13 @@ private:
 private:
 	HRESULT SetUp_Components();
 
+
+
+
+	_bool temp = false;
+
 public:
-	static CCube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CSection* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

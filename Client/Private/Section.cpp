@@ -1,77 +1,65 @@
 #include "stdafx.h"
-#include "..\Public\Cube.h"
+#include "..\Public\Section.h"
 
 #include "GameInstance.h"
+#include "Cube.h"
 
-CCube::CCube(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSection::CSection(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
 }
 
-CCube::CCube(const CCube & rhs)
+CSection::CSection(const CSection & rhs)
 	: CGameObject(rhs)
 {
 }
 
 
-HRESULT CCube::Initialize_Prototype()
+HRESULT CSection::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CCube::Initialize(void * pArg)
+HRESULT CSection::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
-		return E_FAIL;	
+		return E_FAIL;
 
 	if (nullptr == pArg)
 		return E_FAIL;
 
-	m_sTag = "Tag_Cube";
+	m_sTag = "Tag_Section";
 
 	m_pData = (CMap_Manager::CUBEDATA*)pArg;
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pData->vPos);
 
-	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
-	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_BLOCK, this);
+	// 1. 한 번 넣어준다.
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_SECTION, this);
 	__super::BoxColCom_Tick(m_pTransformCom);
 
 	return S_OK;
 }
 
-void CCube::Tick(_float fTimeDelta)
+void CSection::Tick(_float fTimeDelta)
 {
-	
+	list<CGameObject*> s = m_Cubes;
+	int i = 0;
 }
 
-void CCube::LateTick(_float fTimeDelta)
+void CSection::LateTick(_float fTimeDelta)
 {
-	__super::BoxColCom_Tick(m_pTransformCom); 
+	__super::BoxColCom_Tick(m_pTransformCom);
 
 
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }
 
-HRESULT CCube::Render()
+HRESULT CSection::Render()
 {
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
-		return E_FAIL;	
-	
-	if (FAILED(m_pTextureCom->Bind_Texture(m_pData->iIndex)))
-		return E_FAIL;
-
-
-	if (FAILED(Set_RenderState()))
-		return E_FAIL;
-
-
-		m_pVIBufferCom->Render();
-
-
-	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_0))
@@ -82,13 +70,14 @@ HRESULT CCube::Render()
 			temp = true;
 	}
 
-	if (temp)
+	if(temp)
 		__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }
 
-HRESULT CCube::Set_RenderState()
+
+HRESULT CSection::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -96,34 +85,19 @@ HRESULT CCube::Set_RenderState()
 	return S_OK;
 }
 
-HRESULT CCube::Reset_RenderState()
+HRESULT CSection::Reset_RenderState()
 {
 
 
 	return S_OK;
 }
 
-HRESULT CCube::SetUp_Components()
+HRESULT CSection::SetUp_Components()
 {
-	/* For.Com_Renderer */
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
-		return E_FAIL;
-
-	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Cube"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
-		return E_FAIL;
-
-	/* For.Com_Texture */
-
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
-		return E_FAIL;
-
-
-
 
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 1.0f, 1.0f, 1.0f };
+	BoxColDesc.vScale = _float3{ 5.0f, 5.0f, 5.0f };
 	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;
@@ -131,7 +105,11 @@ HRESULT CCube::SetUp_Components()
 	/* For.Com_Collider */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"), TEXT("Com_Collider"), (CComponent**)&m_pColliderCom)))
 		return E_FAIL;
-	
+
+	/* For.Com_Renderer */
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
+		return E_FAIL;
+
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -146,40 +124,57 @@ HRESULT CCube::SetUp_Components()
 	return S_OK;
 }
 
-CCube * CCube::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSection * CSection::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CCube*		pInstance = new CCube(pGraphic_Device);
+	CSection*		pInstance = new CSection(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CCube"));
+		MSG_BOX(TEXT("Failed To Created : CSection"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CCube::Clone(void* pArg)
+CGameObject * CSection::Clone(void* pArg)
 {
-	CCube*		pInstance = new CCube(*this);
+	CSection*		pInstance = new CSection(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CCube"));
+		MSG_BOX(TEXT("Failed To Cloned : CSection"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CCube::Free()
+
+
+
+void CSection::Collision(CGameObject * pOther)
+{
+	if ("Tag_Cube" == pOther->Get_Tag())
+	{
+		CCube* pCube = (CCube*)pOther;
+		m_Cubes.push_back(pCube);
+		Safe_AddRef(pCube);
+	}
+}
+
+
+
+
+void CSection::Free()
 {
 	__super::Free();
 
+	for (auto& pCube : m_Cubes)
+		Safe_Release(pCube);
+
+	Safe_Release(m_pRendererCom);
 	Safe_Release(m_pColliderCom);
 	Safe_Release(m_pTransformCom);
-	Safe_Release(m_pTextureCom);
-	Safe_Release(m_pVIBufferCom);
-	Safe_Release(m_pRendererCom);
 }
 

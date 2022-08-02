@@ -53,6 +53,43 @@ HRESULT CLevel_GamePlay::Initialize()
 
 
 
+
+
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	CComponent*			pComponent = pGameInstance->Clone_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"));
+	if (nullptr == pComponent)
+		return E_FAIL;
+	m_pColliderCom = (CCollider*)pComponent;
+	Safe_AddRef(m_pColliderCom);
+
+	CMap_Manager::CUBEDATA Data;
+	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
+
+
+
+	for (int i = -5; i < 7; i++)
+	{
+		for (int j = -5; j < 7; j++)
+		{
+			//for (int y = 0; y < 2; y++)
+			//{
+				Data.vPos = _float3((_float)i * 5.f, 1.f, (_float)j * 5.f);
+				// Data.vPos = _float3((_float)i * 5.f, y * 5.f, (_float)j * 5.f);
+				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, TEXT("Layer_Section"), &Data)))
+					return E_FAIL;
+			//}
+		}
+	}
+
+
+
+
+	Safe_Release(pGameInstance);
+
+
+	m_pColliderCom->Set_SectionCubes();
+
 	return S_OK;
 }
 
@@ -63,7 +100,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 	__super::Tick(fTimeDelta);
 
 
-	if (GetKeyState(VK_SPACE) & 0x8000)
+	if (GetKeyState('P') & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
@@ -319,26 +356,29 @@ HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
 	CSpawner::SPAWNERINFO MonsterInfo;
 
-	//MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	//MonsterInfo.MonsterPos = _float3{ -2.f , -0.6f, -2.f };
-	//MonsterInfo.SpawnerNum = 0;
-	//MonsterInfo.MonsterNum = 3;
-	//MonsterInfo.MonsterColRad = 1.f;
-
-
-
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
 	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 2.f , -0.6f, -3.f };
-	MonsterInfo.SpawnerNum = 1;
-	MonsterInfo.MonsterNum = 3;
+	MonsterInfo.MonsterPos = _float3{ -3.f , 0.f, -4.f };
+	MonsterInfo.SpawnerNum = 0;
+	MonsterInfo.MonsterNum = 5;
 	MonsterInfo.MonsterColRad = 1.f;
-
-
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
+	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
+	MonsterInfo.MonsterPos = _float3{ 2.f , 0.f, -3.f };
+	MonsterInfo.SpawnerNum = 1;
+	MonsterInfo.MonsterNum = 5;
+	MonsterInfo.MonsterColRad = 1.f;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
+	MonsterInfo.MonsterPos = _float3{ 25.f , 2.f, -10.f };
+	MonsterInfo.SpawnerNum = 1;
+	MonsterInfo.MonsterNum = 10;
+	MonsterInfo.MonsterColRad = 1.f;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
 	return S_OK;
@@ -853,6 +893,7 @@ void CLevel_GamePlay::Free()
 {
 	__super::Free();
 
+	Safe_Release(m_pColliderCom);
 }
 
 

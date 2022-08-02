@@ -94,6 +94,30 @@ HRESULT CCollider::End_Collsion()
 
 
 
+
+HRESULT CCollider::Set_SectionCubes()
+{
+	list<CGameObject*> Sections = m_PhshBoxCollisionObjects[COLLSION_SECTION];
+	list<CGameObject*> Cubes= m_PhshBoxCollisionObjects[COLLSION_BLOCK];
+
+	for (auto& Section : Sections)
+	{
+		m_Sections.push_back(Section);
+		//Safe_AddRef(Section);
+		for (auto& Cube : Cubes)
+		{
+			if (Check_Box(Section, Cube, false))
+			{
+				Section->Collision(Cube);
+			}
+		}
+	}
+
+	return S_OK;
+}
+
+
+
 HRESULT CCollider::Check_SphereCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R)
 {
 
@@ -145,6 +169,43 @@ HRESULT CCollider::Check_PushBoxCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIO
 				pR_Object->Collision(pL_Object);
 			}
 		}
+	}
+
+	return S_OK;
+}
+
+
+
+HRESULT CCollider::Check_PushCubeCollsion(COLLSIONGROUP eCollsionGroup_L)
+{
+	for (auto& pL_Object : m_PhshBoxCollisionObjects[eCollsionGroup_L])
+	{
+		pL_Object->Set_PushedX(false);
+		pL_Object->Set_PushedY(false);
+
+		for (auto& Section : m_Sections)
+		{
+			if (Check_Box(pL_Object, Section))
+			{
+
+
+				for (auto& pR_Object : *(Section->GetCubes()))
+				{
+					// 충돌 검사
+					if (Check_Box(pL_Object, pR_Object, true))
+					{
+						pL_Object->Collision(pR_Object);
+						pR_Object->Collision(pL_Object);
+					}
+				}
+
+
+
+
+			}
+		}
+
+
 	}
 
 	return S_OK;
@@ -348,4 +409,7 @@ void CCollider::Free()
 	__super::Free();
 
 	End_Collsion();
+
+	//for (auto& Section : m_Sections)
+	//	Safe_Release(Section);
 }
