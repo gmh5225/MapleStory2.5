@@ -146,7 +146,7 @@ void COrangeMushroom::LateTick(_float fTimeDelta)
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
 	__super::BoxColCom_Tick(m_pTransformCom);
-	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
@@ -172,6 +172,17 @@ HRESULT COrangeMushroom::Render()
 		return E_FAIL;
 
 	
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_0))
+	{
+		if (temp)
+			temp = false;
+		else
+			temp = true;
+	}
+
+	if (temp)
+		__super::BoxColCom_Render(m_pTransformCom);
+
 
 	return S_OK;
 }

@@ -51,7 +51,7 @@
 #include "QuickSlot.h"
 #include "QuickSlotSkill.h"
 #include "Spawner.h"
-
+#include "Section.h"
 
 
 
@@ -141,6 +141,9 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 	Load_Model_Object();
 	Load_Item_Object();
 	Load_Spawner_Object();
+
+
+
 
 
 	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
@@ -270,6 +273,11 @@ HRESULT CLoader::Load_Player_Object()
 	/* For.Prototype_GameObject_Camera_Free */
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Camera_Free"),
 		CCamera_Free::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Section"),
+		CSection::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -542,6 +550,7 @@ HRESULT CLoader::Load_Player_Texture()
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 
 	Safe_AddRef(pGameInstance);
+
 	// Attack
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_D"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Attack/G_Attack_D/Attack_D%d.png"), 12))))

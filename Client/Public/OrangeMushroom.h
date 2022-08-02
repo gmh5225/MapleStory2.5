@@ -51,6 +51,8 @@ private:
 	_uint m_iHp;
 	_int m_iIndexNum;
 
+	_bool temp = false;
+
 private:
 	HRESULT SetUp_Components();
 

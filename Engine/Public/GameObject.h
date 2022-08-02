@@ -42,6 +42,9 @@ public:
 	virtual void Collision(CGameObject* pOther) {};
 	virtual void Damaged(CGameObject* pOther) {};
 
+
+	virtual list<CGameObject*>* GetCubes() { return nullptr; }
+
 protected:
 	LPDIRECT3DDEVICE9			m_pGraphic_Device = nullptr;
 

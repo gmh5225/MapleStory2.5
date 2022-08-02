@@ -44,7 +44,8 @@ HRESULT CMainApp::Initialize()
 
 	if (FAILED(Open_Level(LEVEL_GAMEPLAY)))
 		return E_FAIL;
-	
+
+
 	return S_OK;
 }
 
@@ -59,7 +60,11 @@ void CMainApp::Tick(_float fTimeDelta)
 
 	m_pGameInstance->Tick_Engine(fTimeDelta);
 
-	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_BLOCK);
+	//m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_BLOCK);
+	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PLAYER);
+	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MONSTER);
+	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_BLOCK);
+	// m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_NPC);
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_UI, CCollider::COLLSION_PLAYER);
 	m_pCollider->End_Collsion();

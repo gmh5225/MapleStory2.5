@@ -199,6 +199,7 @@
     <ClInclude Include="..\Public\QuickSlotSkill.h" />
     <ClInclude Include="..\Public\RedPortion.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
+    <ClInclude Include="..\public\Section.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
     <ClInclude Include="..\Public\SkillGradeBtn0.h" />
     <ClInclude Include="..\Public\SkillGradeBtn1.h" />
@@ -273,6 +274,7 @@
     <ClCompile Include="..\Private\QuickSlotSkill.cpp" />
     <ClCompile Include="..\Private\RedPortion.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
+    <ClCompile Include="..\private\Section.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
     <ClCompile Include="..\Private\SkillGradeBtn0.cpp" />
     <ClCompile Include="..\Private\SkillGradeBtn1.cpp" />
