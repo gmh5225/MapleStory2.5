@@ -233,7 +233,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Test1");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Test1"); // 2로바꾸고
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
@@ -257,12 +257,9 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 
 			D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
 
-
-
 			VoxDesc.vPos.x += 0.f;
 			VoxDesc.vPos.z -= 3.f;
 			VoxDesc.vPos.y += 1.f;
-
 
 			VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
 			VoxDesc.vRotationAix = Model.vAix;
@@ -272,10 +269,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		}
 
 	}
-
-
-
-
 
 
 
@@ -359,38 +352,38 @@ HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	CSpawner::SPAWNERINFO MonsterInfo;
 
 	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 25.f , 1.8f, -3.f };
+	MonsterInfo.MonsterPos = _float3{ 25.f , 2.3f, -3.f };
 	MonsterInfo.SpawnerNum = 0;
 	MonsterInfo.MonsterNum = 3;
 	MonsterInfo.MonsterColRad = 1.f;
 
 
 
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 26.f , 1.8f, -11.f };
+	MonsterInfo.MonsterPos = _float3{ 26.f , 2.3f, -11.f };
 	MonsterInfo.SpawnerNum = 1;
 	MonsterInfo.MonsterNum = 3;
 	MonsterInfo.MonsterColRad = 1.f;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 2.f , 0.f, -3.f };
-	MonsterInfo.SpawnerNum = 1;
-	MonsterInfo.MonsterNum = 5;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
+	//MonsterInfo.MonsterPos = _float3{ 2.f , 0.f, -3.f };
+	//MonsterInfo.SpawnerNum = 1;
+	//MonsterInfo.MonsterNum = 5;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 25.f , 2.f, -10.f };
-	MonsterInfo.SpawnerNum = 1;
-	MonsterInfo.MonsterNum = 10;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = *TEXT("OrangeMushroom");
+	//MonsterInfo.MonsterPos = _float3{ 25.f , 2.f, -10.f };
+	//MonsterInfo.SpawnerNum = 1;
+	//MonsterInfo.MonsterNum = 10;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
 	return S_OK;

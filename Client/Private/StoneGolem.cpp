@@ -36,7 +36,7 @@ HRESULT CStoneGolem::Initialize(void * pArg)
 
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.5f, 6.f, 13.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-5.f, 0.2f, -2.f));
 	m_pTransformCom->Set_Scaled(4.f);
 
 	SetState(STATE_IDLE, DIR_END);
