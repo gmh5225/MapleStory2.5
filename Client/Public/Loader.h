@@ -35,6 +35,7 @@ public:
 	HRESULT Initialize(LEVEL eNextLevelID);
 	HRESULT Loading_ForLogoLevel();
 	HRESULT Loading_ForGamePlayLevel();
+	HRESULT Loading_ForHenesys();
 
 //객체원형 로딩함수
 private:

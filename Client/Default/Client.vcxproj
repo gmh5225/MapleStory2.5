@@ -178,6 +178,7 @@
     <ClInclude Include="..\Public\InvenManager.h" />
     <ClInclude Include="..\Public\ElderStan.h" />
     <ClInclude Include="..\Public\Level_GamePlay.h" />
+    <ClInclude Include="..\public\Level_Henesys.h" />
     <ClInclude Include="..\Public\Level_Loading.h" />
     <ClInclude Include="..\Public\Level_Logo.h" />
     <ClInclude Include="..\Public\Loader.h" />
@@ -251,6 +252,7 @@
     <ClCompile Include="..\Private\InvenManager.cpp" />
     <ClCompile Include="..\Private\ElderStan.cpp" />
     <ClCompile Include="..\Private\Level_GamePlay.cpp" />
+    <ClCompile Include="..\private\Level_Henesys.cpp" />
     <ClCompile Include="..\Private\Level_Loading.cpp" />
     <ClCompile Include="..\Private\Level_Logo.cpp" />
     <ClCompile Include="..\Private\Loader.cpp" />

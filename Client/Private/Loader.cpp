@@ -75,6 +75,9 @@ _uint APIENTRY LoadingMain(void* pArg)
 	case LEVEL_GAMEPLAY:
 		pLoader->Loading_ForGamePlayLevel();
 		break;
+	case LEVEL_HENESYS:
+		pLoader->Loading_ForHenesys();
+		break;
 	}
 
 	LeaveCriticalSection(&pLoader->Get_CS());
@@ -125,7 +128,6 @@ HRESULT CLoader::Loading_ForLogoLevel()
 
 	return S_OK;
 }
-
 HRESULT CLoader::Loading_ForGamePlayLevel()
 {
 
@@ -212,6 +214,48 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 	return S_OK;
 }
+HRESULT CLoader::Loading_ForHenesys()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+
+	lstrcpy(m_szLoadingText, TEXT("객체원형을 로딩중입니다. "));
+
+
+
+	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
+
+
+
+
+	lstrcpy(m_szLoadingText, TEXT("컴포넌트를 로딩중입니다. "));
+
+
+
+
+
+
+	lstrcpy(m_szLoadingText, TEXT("모델을 로딩중입니다. "));
+
+
+
+
+
+	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니ㅏㄷ.  "));
+
+	Safe_Release(pGameInstance);
+
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+
+
+
+
+
 
 HRESULT CLoader::Load_Player_Object()
 {
@@ -231,7 +275,6 @@ HRESULT CLoader::Load_Player_Object()
 	Safe_Release(pGameInstance);
 	return S_OK;
 }
-
 HRESULT CLoader::Load_Monster_Object()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -263,7 +306,6 @@ HRESULT CLoader::Load_Monster_Object()
 
 	return S_OK;
 }
-
 HRESULT CLoader::Load_Npc_Object()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -283,7 +325,6 @@ HRESULT CLoader::Load_Npc_Object()
 
 	return S_OK;
 }
-
 HRESULT CLoader::Load_PlayerSkill_Object()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -331,7 +372,6 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 
 	return S_OK;
 }
-
 HRESULT CLoader::Load_UI_Object()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -443,7 +483,6 @@ HRESULT CLoader::Load_UI_Object()
 
 	return S_OK;
 }
-
 HRESULT CLoader::Load_Model_Object()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -463,7 +502,6 @@ HRESULT CLoader::Load_Model_Object()
 
 	return S_OK;
 }
-
 HRESULT CLoader::Load_Item_Object()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
