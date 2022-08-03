@@ -58,7 +58,7 @@ HRESULT CSunCrossHit::Initialize(void * pArg)
 HRESULT CSunCrossHit::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCross_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunCross_Hit"), nullptr);
 	}
 
 

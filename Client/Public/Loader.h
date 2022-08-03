@@ -33,7 +33,7 @@ public:
 
 public:
 	HRESULT Initialize(LEVEL eNextLevelID);
-	HRESULT Loading_ForLogoLevel();
+	HRESULT Loading_ForStatic();
 	HRESULT Loading_ForGamePlayLevel();
 	HRESULT Loading_ForHenesys();
 
@@ -47,6 +47,7 @@ private:
 	HRESULT Load_Model_Object();
 	HRESULT Load_Item_Object();
 	HRESULT	Load_Spawner_Object();
+	HRESULT Load_Component();
 
 //텍스처 로딩함수
 private:

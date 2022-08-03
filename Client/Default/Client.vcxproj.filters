@@ -19,14 +19,8 @@
     <Filter Include="01.Level\Loading\Loader">
       <UniqueIdentifier>{59f12939-c457-47c2-9c79-47608723a368}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01.Level\Logo">
-      <UniqueIdentifier>{a11e0eeb-0677-4580-a93e-2484d884d12c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject">
       <UniqueIdentifier>{c4b8b095-92cb-44c3-aefb-94528c281461}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\BackGround">
-      <UniqueIdentifier>{b0996a4b-fc18-4aaa-8e8d-a67100e3c78d}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Camera">
       <UniqueIdentifier>{06c63064-d248-45d2-bb32-c642c92886c9}</UniqueIdentifier>
@@ -289,6 +283,9 @@
     <Filter Include="05.Spawner\SpawnerManager">
       <UniqueIdentifier>{577010bb-2fb9-45b0-9378-2d84a77ba3a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01.Level\Level_Static">
+      <UniqueIdentifier>{6e054273-b879-4854-8d43-7b0041d5f788}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -303,9 +300,6 @@
     <ClInclude Include="targetver.h">
       <Filter>90.Default</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\BackGround.h">
-      <Filter>02.GameObject\BackGround</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Camera_Free.h">
       <Filter>02.GameObject\Camera</Filter>
     </ClInclude>
@@ -317,9 +311,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\Loader.h">
       <Filter>01.Level\Loading\Loader</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\Level_Logo.h">
-      <Filter>01.Level\Logo</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\MainApp.h">
       <Filter>00.MainApp</Filter>
@@ -513,6 +504,9 @@
     <ClInclude Include="..\public\Section.h">
       <Filter>02.GameObject\Section</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Level_Static.h">
+      <Filter>01.Level\Level_Static</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -520,9 +514,6 @@
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>90.Default</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\BackGround.cpp">
-      <Filter>02.GameObject\BackGround</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Camera_Free.cpp">
       <Filter>02.GameObject\Camera</Filter>
@@ -535,9 +526,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\Loader.cpp">
       <Filter>01.Level\Loading\Loader</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\Level_Logo.cpp">
-      <Filter>01.Level\Logo</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\MainApp.cpp">
       <Filter>00.MainApp</Filter>
@@ -727,6 +715,9 @@
     </ClCompile>
     <ClCompile Include="..\private\Section.cpp">
       <Filter>02.GameObject\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_Static.cpp">
+      <Filter>01.Level\Level_Static</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

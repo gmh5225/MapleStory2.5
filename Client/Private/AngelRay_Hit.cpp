@@ -55,7 +55,7 @@ HRESULT CAngelRay_Hit::Initialize(void * pArg)
 HRESULT CAngelRay_Hit::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_AngelRay_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_AngelRay_Hit"), nullptr);
 	}
 
 

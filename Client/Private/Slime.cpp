@@ -49,12 +49,12 @@ HRESULT CSlime::Initialize(void * pArg)
 HRESULT CSlime::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_Idle"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_Move"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Idle"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Move"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Hit"), nullptr);
 	
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_MoveR"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Slime_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_MoveR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_HitR"), nullptr);
 	}
 
 
@@ -144,7 +144,7 @@ void CSlime::Tick_Chase(_float fTimeDelta)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
@@ -208,7 +208,7 @@ void CSlime::Damaged(CGameObject * pOther)
 	RedPortionDesc.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedPortion"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &RedPortionDesc);
 	//test_end
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 

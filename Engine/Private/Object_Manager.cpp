@@ -114,6 +114,7 @@ void CObject_Manager::LateTick(_float fTimeDelta)
 
 void CObject_Manager::Clear(_uint iLevelIndex)
 {
+
 	for (auto& Pair : m_pLayers[iLevelIndex])
 	{
 		Safe_Release(Pair.second);

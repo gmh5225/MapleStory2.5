@@ -42,7 +42,7 @@ HRESULT CMainApp::Initialize()
 	if (FAILED(Ready_Prototype_Component()))
 		return E_FAIL;
 
-	if (FAILED(Open_Level(LEVEL_GAMEPLAY)))
+	if (FAILED(Open_Level(LEVEL_STATIC)))
 		return E_FAIL;
 
 

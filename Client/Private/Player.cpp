@@ -19,8 +19,6 @@ CPlayer::CPlayer(const CPlayer & rhs)
 }
 
 
-
-
 HRESULT CPlayer::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
@@ -81,44 +79,44 @@ HRESULT CPlayer::SetUp_Components()
 	
 
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_U"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_D"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_L"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_R"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_LU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_RU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_LD"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Idle_RD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_U"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_D"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_L"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_R"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_LU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_RU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_LD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Idle_RD"), nullptr);
 	}
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_U"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_D"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_L"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_R"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_LU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_RU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_LD"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Move_RD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_U"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_D"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_L"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_R"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_LU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_RU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_LD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Move_RD"), nullptr);
 	}
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_U"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_D"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_L"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_R"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_LU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_RU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_LD"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Jump_RD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_U"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_D"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_L"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_R"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_LU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_RU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_LD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Jump_RD"), nullptr);
 	}
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_U"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_D"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_L"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_R"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_LU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_RU"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_LD"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Player_Attack_RD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_U"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_D"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_L"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_R"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_LU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_RU"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_LD"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_RD"), nullptr);
 	}
 
 	return S_OK;
@@ -528,8 +526,8 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
 		SolunaDECS.eDir = m_eDir;
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SolunaDECS);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SolunaDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 		SetState(STATE_DASH, m_eDir);
 		Safe_Release(pGameInstance);
 	}
@@ -542,7 +540,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CAngelRay_Effect::ANGELEFFECTDESC AngelDECS;
 		AngelDECS.eDir = m_eDir;
 		
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &AngelDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_STATIC, TEXT("Layer_Skill"), &AngelDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}
@@ -555,7 +553,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CCrossTheStyx::CROSSTHESTYXDESC CrossTheStyxDESC;
 		CrossTheStyxDESC.eDir = m_eDir;
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CrossTheStyx"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &CrossTheStyxDESC);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CrossTheStyx"), LEVEL_STATIC, TEXT("Layer_Skill"), &CrossTheStyxDESC);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}
@@ -568,7 +566,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CSunCross::SUNCROSSDESC SunCrossDECS;
 		SunCrossDECS.eDir = m_eDir;
 			
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SunCrossDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_STATIC, TEXT("Layer_Skill"), &SunCrossDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}
@@ -581,7 +579,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CSunderBreakAttack::SUNDERBREAKATTACKDESC SunderAttackDECS;
 		SunderAttackDECS.eDir = m_eDir;
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunderBreak_Attack"), LEVEL_GAMEPLAY, TEXT("Layer_Skill"), &SunderAttackDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunderBreak_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &SunderAttackDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}

@@ -25,6 +25,8 @@ public:
 private:
 	class CLevel*				m_pCurrentLevel = nullptr;
 	_uint						m_iCurrentLevelIndex = 0;
+	_bool						m_bClear;
+	_bool						m_bRender;
 
 public:
 	virtual void Free() override;

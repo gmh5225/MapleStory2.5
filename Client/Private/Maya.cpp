@@ -47,7 +47,7 @@ HRESULT CMaya::Initialize(void * pArg)
 HRESULT CMaya::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Maya_Idle"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Maya_Idle"), nullptr);
 
 	}
 
@@ -170,7 +170,7 @@ void CMaya::Damaged(CGameObject * pOther)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 

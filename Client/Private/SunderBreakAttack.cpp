@@ -48,7 +48,7 @@ HRESULT CSunderBreakAttack::Initialize(void * pArg)
 HRESULT CSunderBreakAttack::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunderBreak_Attack"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunderBreak_Attack"), nullptr);
 	}
 
 

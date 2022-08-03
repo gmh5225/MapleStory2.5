@@ -32,7 +32,7 @@ HRESULT CRedPortion::Initialize(void * pArg)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	CTransform* pMonsterTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Monster"), TEXT("Com_Transform"), 0);
+	CTransform* pMonsterTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Monster"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pGameInstance);
 	_float3 vMonsterPos = pMonsterTransform->Get_State(CTransform::STATE_POSITION);
@@ -58,7 +58,7 @@ HRESULT CRedPortion::Initialize(void * pArg)
 HRESULT CRedPortion::SetUp_Components()
 {
 	{
-		if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedPortion"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+		if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedPortion"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 			return E_FAIL;
 	}
 
@@ -214,7 +214,7 @@ void CRedPortion::SetPosition(DIR eDir)
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
 
-	CTransform* m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	CTransform* m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pInstance);
 

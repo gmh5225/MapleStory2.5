@@ -36,7 +36,8 @@ void CCamera_Free::Tick(_float fTimeDelta)
 	Safe_AddRef(pGameInstance);
 
 	// 카메라 위치 조정
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
 	m_pTransformCom->RotationSpot(vPlayerPos, _float3{ 0.f, 6.f, -6.f }, 0.f);

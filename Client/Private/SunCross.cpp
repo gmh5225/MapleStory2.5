@@ -30,7 +30,7 @@ HRESULT CSunCross::Initialize(void * pArg)
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
 
-	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pInstance);
 
@@ -55,7 +55,7 @@ HRESULT CSunCross::Initialize(void * pArg)
 HRESULT CSunCross::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCross"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunCross"), nullptr);
 	}
 
 
@@ -275,7 +275,7 @@ void CSunCross::Collision(CGameObject * pOther)
 		CTransform* pTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
 		SunCrossHitDesc.vPos = pTransform->Get_State(CTransform::STATE_POSITION);
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"), &SunCrossHitDesc);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &SunCrossHitDesc);
 		Safe_Release(pGameInstance);
 
 		m_pOther.push_back(pOther);

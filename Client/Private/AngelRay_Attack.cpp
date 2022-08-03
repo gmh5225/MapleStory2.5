@@ -49,7 +49,7 @@ HRESULT CAngelRay_Attack::Initialize(void * pArg)
 HRESULT CAngelRay_Attack::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_AngelRay_Attack"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_AngelRay_Attack"), nullptr);
 	}
 
 

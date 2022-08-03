@@ -37,7 +37,7 @@ HRESULT CExpBar::Initialize(void * pArg)
 	m_iExpDigit = g_iWinSizeX*0.5f;
 	__super::Initialize(pArg);
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_ExpBar"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ExpBar"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	D3DXCreateFont(m_pGraphic_Device, 12, 0, FW_BOLD, 1, FALSE, HANGEUL_CHARSET,

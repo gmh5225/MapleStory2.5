@@ -97,7 +97,7 @@ HRESULT CWood::SetUp_Components(_tchar* pName)
 
 
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, pName, TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, pName, TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
 	
 

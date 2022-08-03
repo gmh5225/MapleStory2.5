@@ -30,7 +30,7 @@ HRESULT CSolunaSlashEffectA::Initialize(void * pArg)
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
 
-	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_GAMEPLAY, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pInstance);
 
@@ -54,7 +54,7 @@ HRESULT CSolunaSlashEffectA::Initialize(void * pArg)
 HRESULT CSolunaSlashEffectA::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SolunaSlash_EffectA"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SolunaSlash_EffectA"), nullptr);
 	}
 
 
