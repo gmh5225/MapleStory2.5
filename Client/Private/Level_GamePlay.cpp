@@ -51,44 +51,7 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
 
-
-
-
-
-	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-	CComponent*			pComponent = pGameInstance->Clone_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"));
-	if (nullptr == pComponent)
-		return E_FAIL;
-	m_pColliderCom = (CCollider*)pComponent;
-	Safe_AddRef(m_pColliderCom);
-
-	CMap_Manager::CUBEDATA Data;
-	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
-
-
-
-	for (int i = -5; i < 7; i++)
-	{
-		for (int j = -5; j < 7; j++)
-		{
-			//for (int y = 0; y < 2; y++)
-			//{
-				Data.vPos = _float3((_float)i * 5.f, 1.f, (_float)j * 5.f);
-				// Data.vPos = _float3((_float)i * 5.f, y * 5.f, (_float)j * 5.f);
-				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, TEXT("Layer_Section"), &Data)))
-					return E_FAIL;
-			//}
-		}
-	}
-
-
-
-
-	Safe_Release(pGameInstance);
-
-
-	m_pColliderCom->Set_SectionCubes();
+	
 
 	return S_OK;
 }
@@ -102,18 +65,19 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 	__super::Tick(fTimeDelta);
 
 
-	/*if (GetKeyState(VK_SPACE) & 0x8000)
+	if (GetKeyState(VK_SPACE) & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
+		m_pColliderCom->ResetSection();
 		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_HENESYS))))
 			return;
-
+		
 
 		Safe_Release(pGameInstance);
 
-	}*/
+	}
 
 }
 
@@ -270,11 +234,41 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	}
 
+	Safe_Release(pGameInstance);
 
+
+	if (FAILED(Ready_Layer_Section(TEXT("Layer_Section"))))
+		return E_FAIL;
+
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_Layer_Section(const _tchar * pLayerTag)
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	CComponent*			pComponent = pGameInstance->Clone_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"));
+	if (nullptr == pComponent)
+		return E_FAIL;
+	m_pColliderCom = (CCollider*)pComponent;
+
+	CMap_Manager::CUBEDATA Data;
+	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
+
+	for (int i = -5; i < 7; i++)
+	{
+		for (int j = -5; j < 7; j++)
+		{
+			Data.vPos = _float3((_float)i * 5.f, 1.f, (_float)j * 5.f);
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+				return E_FAIL;
+		}
+	}
 
 	Safe_Release(pGameInstance);
 
-	return S_OK;
+
+	m_pColliderCom->Set_SectionCubes();
 }
 
 HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)

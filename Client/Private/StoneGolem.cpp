@@ -152,7 +152,7 @@ void CStoneGolem::Tick_Chase(_float fTimeDelta)
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
 		SetState(STATE_CHASE, DIR_R);
 	else
-		SetState(STATE_CHASE, DIR_L);
+		SetState(STATE_CHASE, DIR_L); 
 
 
 	m_pTransformCom->Chase(vPlayerPos, fTimeDelta);

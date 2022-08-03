@@ -36,6 +36,7 @@ public:
 	HRESULT End_Collsion();
 
 	HRESULT Set_SectionCubes();
+	void ResetSection();
 
 public:
 	_bool Check_Sphere(CGameObject* pObj_L, CGameObject* pObj_R);

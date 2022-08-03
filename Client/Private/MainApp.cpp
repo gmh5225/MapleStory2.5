@@ -177,13 +177,6 @@ HRESULT CMainApp::Ready_Prototype_Component()
 		return E_FAIL;
 
 
-
-
-
-	/*
-	Safe_AddRef(m_pCollider);
-	Safe_AddRef(m_pRenderer);
-*/
 	return S_OK;
 }
 

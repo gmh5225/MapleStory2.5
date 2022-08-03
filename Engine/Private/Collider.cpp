@@ -116,6 +116,11 @@ HRESULT CCollider::Set_SectionCubes()
 	return S_OK;
 }
 
+void CCollider::ResetSection()
+{
+	m_Sections.clear();
+}
+
 
 
 HRESULT CCollider::Check_SphereCollsion(COLLSIONGROUP eCollsionGroup_L, COLLSIONGROUP eCollsionGroup_R)
@@ -392,7 +397,7 @@ CCollider * CCollider::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CRenderer"));
+		MSG_BOX(TEXT("Failed To Created : CCollider"));
 		Safe_Release(pInstance);
 	}
 
@@ -412,4 +417,5 @@ void CCollider::Free()
 
 	//for (auto& Section : m_Sections)
 	//	Safe_Release(Section);
+
 }

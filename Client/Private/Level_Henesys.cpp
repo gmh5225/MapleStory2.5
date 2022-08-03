@@ -22,8 +22,8 @@ HRESULT CLevel_Henesys::Initialize()
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
 
-	if (FAILED(Ready_SkillInfo()))
-		return E_FAIL;
+	//if (FAILED(Ready_SkillInfo()))
+	//	return E_FAIL;
 
 	if (FAILED(Ready_Layer_Map(TEXT("Layer_Map"))))
 		return E_FAIL;
@@ -34,20 +34,20 @@ HRESULT CLevel_Henesys::Initialize()
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
+	//	return E_FAIL;
 
-	if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
+	//	return E_FAIL;
 
-	if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
-		return E_FAIL;
+	////if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
+	////	return E_FAIL;
 
-	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
+	//	return E_FAIL;
 
-	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
+	//	return E_FAIL;
 
 
 
@@ -59,6 +59,8 @@ void CLevel_Henesys::Tick(_float fTimeDelta)
 	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
+
+
 }
 
 HRESULT CLevel_Henesys::Render()
@@ -154,6 +156,8 @@ HRESULT CLevel_Henesys::Ready_Layer_Npc(const _tchar * pLayerTag)
 
 HRESULT CLevel_Henesys::Ready_Layer_Map(const _tchar * pLayerTag)
 {
+	/* 맵 큐브 추가 > 섹션 생성 > 콜리젼 매니저 컴포넌트 멤버함수 호출로 섹션에 큐브 채우기*/
+
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
@@ -165,11 +169,41 @@ HRESULT CLevel_Henesys::Ready_Layer_Map(const _tchar * pLayerTag)
 	}
 
 
-
 	Safe_Release(pGameInstance);
+
+	if (FAILED(Ready_Layer_Section(TEXT("Layer_Section"))))
+		return E_FAIL;
 
 	return S_OK;
 
+}
+
+HRESULT CLevel_Henesys::Ready_Layer_Section(const _tchar * pLayerTag)
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	CComponent*			pComponent = pGameInstance->Clone_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"));
+	if (nullptr == pComponent)
+		return E_FAIL;
+	m_pColliderCom = (CCollider*)pComponent;
+
+	CMap_Manager::CUBEDATA Data;
+	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
+
+	for (int i = -5; i < 7; i++)
+	{
+		for (int j = -5; j < 7; j++)
+		{
+			Data.vPos = _float3((_float)i * 5.f, 1.f, (_float)j * 5.f);
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+				return E_FAIL;
+		}
+	}
+
+	Safe_Release(pGameInstance);
+
+
+	m_pColliderCom->Set_SectionCubes();
 }
 
 HRESULT CLevel_Henesys::Ready_Layer_UI(const _tchar * pLayerTag)
@@ -672,6 +706,7 @@ void CLevel_Henesys::Free()
 {
 	__super::Free();
 
+	Safe_Release(m_pColliderCom);
 }
 
 

@@ -131,6 +131,7 @@ HRESULT CCube::SetUp_Components()
 	/* For.Com_Collider */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"), TEXT("Com_Collider"), (CComponent**)&m_pColliderCom)))
 		return E_FAIL;
+
 	
 
 	/* For.Com_Transform */

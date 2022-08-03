@@ -277,17 +277,17 @@
     <Filter Include="89.Manager\QuickSlotManager">
       <UniqueIdentifier>{fa4a107b-f993-4ea4-87e8-cd4866ce3628}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\05.Spawner">
-      <UniqueIdentifier>{9da1ed3c-e3bb-42d1-a842-0e0bb152ae75}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\05.Spawner\SpawnerManager">
-      <UniqueIdentifier>{577010bb-2fb9-45b0-9378-2d84a77ba3a7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01.Level\Henesys">
       <UniqueIdentifier>{eda8fc59-e5bc-4d42-8adf-652918bfa143}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Section">
       <UniqueIdentifier>{a233faac-2772-41ae-86bb-f404126c07aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Spawner">
+      <UniqueIdentifier>{9da1ed3c-e3bb-42d1-a842-0e0bb152ae75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="05.Spawner\SpawnerManager">
+      <UniqueIdentifier>{577010bb-2fb9-45b0-9378-2d84a77ba3a7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -499,14 +499,14 @@
       <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotSkill</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Spawner.h">
-      <Filter>02.GameObject\05.Spawner</Filter>
+      <Filter>05.Spawner</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\SpawnerManager.h">
-      <Filter>02.GameObject\05.Spawner\SpawnerManager</Filter>
+      <Filter>05.Spawner\SpawnerManager</Filter>
     </ClInclude>
     <ClInclude Include="..\public\Level_Henesys.h">
       <Filter>01.Level\Henesys</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\QuestManager.h">
       <Filter>89.Manager\QuestManager</Filter>
     </ClInclude>
@@ -717,10 +717,10 @@
       <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotSkill</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Spawner.cpp">
-      <Filter>02.GameObject\05.Spawner</Filter>
+      <Filter>05.Spawner</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\SpawnerManager.cpp">
-      <Filter>02.GameObject\05.Spawner\SpawnerManager</Filter>
+      <Filter>05.Spawner\SpawnerManager</Filter>
     </ClCompile>
     <ClCompile Include="..\private\Level_Henesys.cpp">
       <Filter>01.Level\Henesys</Filter>
