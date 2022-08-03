@@ -76,7 +76,7 @@ void CCamera_Free::Tick(_float fTimeDelta)
 	//}
 
 	//
-	//__super::Tick(fTimeDelta);
+	__super::Tick(fTimeDelta);
 
 
 	//Safe_Release(pGameInstance);
