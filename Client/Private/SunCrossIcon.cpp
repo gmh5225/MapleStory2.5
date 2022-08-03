@@ -36,7 +36,7 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 
 	m_pSkillInfo = (CSunCrossInfo*)pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER);
 
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
