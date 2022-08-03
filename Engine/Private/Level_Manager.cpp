@@ -47,6 +47,11 @@ HRESULT CLevel_Manager::Render()
 	return m_pCurrentLevel->Render();
 }
 
+HRESULT CLevel_Manager::Reserve_Check(_uint iNumLevels)
+{
+	return E_NOTIMPL;
+}
+
 void CLevel_Manager::Free()
 {
 	Safe_Release(m_pCurrentLevel);

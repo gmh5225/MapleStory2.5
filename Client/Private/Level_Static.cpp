@@ -27,8 +27,7 @@ HRESULT CLevel_Static::Initialize()
 void CLevel_Static::Tick(_float fTimeDelta)
 {
 
-	if (GetKeyState(VK_SPACE) & 0x8000)
-	{
+
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
@@ -36,7 +35,8 @@ void CLevel_Static::Tick(_float fTimeDelta)
 			return;
 
 		Safe_Release(pGameInstance);
-
+		if (GetKeyState(VK_SPACE) & 0x8000)
+		{
 	}
 
 }

@@ -11,6 +11,11 @@
 #include "InvenManager.h"
 #include "SpawnerManager.h"
 
+bool g_bStaticClone;
+bool g_bStatic;
+bool g_bGamePlay;
+bool g_bHenesys;
+
 
 using namespace Client;
 
@@ -29,6 +34,13 @@ HRESULT CMainApp::Initialize()
 	GraphicDesc.eWinMode = GRAPHICDESC::MODE_WIN;
 	GraphicDesc.iWinSizeX = g_iWinSizeX;
 	GraphicDesc.iWinSizeY = g_iWinSizeY;
+
+
+	g_bStaticClone = false;
+	g_bStatic = false;
+	g_bGamePlay = false;
+	g_bHenesys = false;
+	
 
 	if (FAILED(m_pGameInstance->Initialize_Engine(LEVEL_END, g_hInst, GraphicDesc, &m_pGraphic_Device)))
 		return E_FAIL;

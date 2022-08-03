@@ -51,6 +51,7 @@ private:  /* For.Static */
 public:
 	static CMainApp* Create();
 	virtual void Free();
+
 };
 
 

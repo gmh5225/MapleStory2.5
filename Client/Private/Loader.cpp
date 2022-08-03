@@ -81,7 +81,7 @@ _uint APIENTRY LoadingMain(void* pArg)
 	}
 
 	LeaveCriticalSection(&pLoader->Get_CS());
-
+	
 	return 0;
 }
 
@@ -101,78 +101,73 @@ HRESULT CLoader::Initialize(LEVEL eNextLevelID)
 
 HRESULT CLoader::Loading_ForStatic()
 {
-	lstrcpy(m_szLoadingText, TEXT("메이플 스토리 키는중~"));
-	Load_Player_Object();
-	
-	Load_PlayerSkill_Object();
-	Load_UI_Object();
-	Load_Model_Object();
-	Load_Item_Object();
-	Load_Spawner_Object();
+	if (g_bStatic == false)
+	{
+		lstrcpy(m_szLoadingText, TEXT("메이플 스토리 키는중~"));
+		Load_Player_Object();
 
-	lstrcpy(m_szLoadingText, TEXT("메이플 스토리 로딩중~. "));
-	/* 텍스쳐를 로드한다. */
+		Load_PlayerSkill_Object();
+		Load_UI_Object();
+		Load_Model_Object();
+		Load_Item_Object();
+		Load_Spawner_Object();
 
-	/* For.Prototype_Component_Texture_Player */
-	Load_Player_Texture();
+		lstrcpy(m_szLoadingText, TEXT("메이플 스토리 로딩중~. "));
+		/* 텍스쳐를 로드한다. */
 
-	/* For.Prototype_Component_Texture_Player_Skill */
-	Load_Player_Skill_Texture();
+		/* For.Prototype_Component_Texture_Player */
+		Load_Player_Texture();
 
-	/* For.Prototype_Component_Texture_Item */
-	Load_Item_Texture();
+		/* For.Prototype_Component_Texture_Player_Skill */
+		Load_Player_Skill_Texture();
 
-	/* For.Prototype_Component_Texture_Model */
-	Load_Model_Texture();
+		/* For.Prototype_Component_Texture_Item */
+		Load_Item_Texture();
 
-	/* For.Prototype_Component_Texture_UI */
-	Load_UI_Texture();
+		/* For.Prototype_Component_Texture_Model */
+		Load_Model_Texture();
 
-	Load_Component();
+		/* For.Prototype_Component_Texture_UI */
+		Load_UI_Texture();
 
+		Load_Component();
+		g_bStatic = true;
+	}
+	m_isFinished = true;
 	return S_OK;
 }
 
 HRESULT CLoader::Loading_ForGamePlayLevel()
 {
-	Load_Monster_Object();
-	Load_Npc_Object();
-	
-	/* For.Prototype_Component_Texture_Monster */
+	if (g_bGamePlay == false)
+	{
+		Load_Monster_Object();
+		Load_Npc_Object();
 
-	Load_Monster_Texture();
+		/* For.Prototype_Component_Texture_Monster */
 
-	/* For.Prototype_Component_Texture_Npc */
+		Load_Monster_Texture();
 
-	Load_Npc_Texture();
-	lstrcpy(m_szLoadingText, TEXT("제바르. "));
+		/* For.Prototype_Component_Texture_Npc */
 
+		Load_Npc_Texture();
+		lstrcpy(m_szLoadingText, TEXT("게임플레이 로딩 "));
+
+		g_bGamePlay = true;
+	}
 	m_isFinished = true;
 	return S_OK;
-	
 }
 HRESULT CLoader::Loading_ForHenesys()
 {
-	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
+	if (g_bHenesys == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
 
-
-	lstrcpy(m_szLoadingText, TEXT("객체원형을 로딩중입니다. "));
-
-
-	lstrcpy(m_szLoadingText, TEXT("텍스쳐를 로딩중입니다. "));
-
-
-	lstrcpy(m_szLoadingText, TEXT("컴포넌트를 로딩중입니다. "));
-
-
-	lstrcpy(m_szLoadingText, TEXT("모델을 로딩중입니다. "));
-
-
-	lstrcpy(m_szLoadingText, TEXT("로딩이 완료되었습니ㅏㄷ.  "));
-
-	Safe_Release(pGameInstance);
-
+		Safe_Release(pGameInstance);
+		g_bHenesys = true;
+	}
 	m_isFinished = true;
 
 	return S_OK;

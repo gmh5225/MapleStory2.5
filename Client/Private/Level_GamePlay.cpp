@@ -12,6 +12,7 @@
 #include "SpawnerManager.h"
 #include "Maya.h"
 #include "Level_Loading.h"
+#include "MainApp.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -23,16 +24,24 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
 
-	if (FAILED(Ready_SkillInfo()))
-		return E_FAIL;
+	if (g_bStaticClone == false)
+	{
+		if (FAILED(Ready_SkillInfo()))
+			return E_FAIL;
 
- 	if (FAILED(Ready_Layer_Map(TEXT("Layer_Map"))))
-		return E_FAIL;
+		if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
+			return E_FAIL;
 
-	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
-		return E_FAIL;
+		if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
+			return E_FAIL;
 
-	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
+		if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
+			return E_FAIL;
+		g_bStaticClone = true;
+	}
+
+
+	if (FAILED(Ready_Layer_Map(TEXT("Layer_Map"))))
 		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
@@ -41,16 +50,8 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
-		return E_FAIL;
-
-	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
-		return E_FAIL;
-
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
-
-	
 
 	return S_OK;
 }
@@ -62,9 +63,10 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 	else if (CQuestManager::Get_Instance()->Set_StoneGolem() >= 1)
 		CQuestManager::Get_Instance()->QuestClear();
 	//__super::Tick(fTimeDelta);
+	
 
-
-	if (GetKeyState(VK_SPACE) & 0x8000)
+	g_bGamePlay = true;
+	if (GetKeyState('N') & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
@@ -73,10 +75,12 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_HENESYS))))
 			return;
 		
-
+		
 		Safe_Release(pGameInstance);
 
 	}
+
+	
 
 }
 
@@ -129,20 +133,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Player(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_GamePlay::Ready_Layer_BackGround(const _tchar * pLayerTag)
-{
-	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
 
-	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Terrain"), LEVEL_GAMEPLAY, pLayerTag)))
-	//	return E_FAIL;
-
-
-
-	Safe_Release(pGameInstance);
-
-	return S_OK;
-}
 
 HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 {
@@ -233,11 +224,10 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	}
 
-	Safe_Release(pGameInstance);
-
-
 	if (FAILED(Ready_Layer_Section(TEXT("Layer_Section"))))
 		return E_FAIL;
+
+	Safe_Release(pGameInstance);
 
 	return S_OK;
 }

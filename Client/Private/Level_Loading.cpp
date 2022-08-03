@@ -17,6 +17,7 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevel)
 {
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
+	
 
 	m_eNextLevel = eNextLevel;
 
@@ -33,8 +34,7 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 
 	if (true == m_pLoader->Get_Finished())
 	{
-		if (GetKeyState(VK_RETURN) & 0x8000)
-		{
+		
 			CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 			Safe_AddRef(pGameInstance);
 
@@ -62,7 +62,9 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 
 			except:
 			Safe_Release(pGameInstance);
-		}
+		/*if (GetKeyState(VK_RETURN) & 0x8000)
+		{
+		}*/
 	}
 }
 

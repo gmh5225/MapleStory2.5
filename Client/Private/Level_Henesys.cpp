@@ -11,6 +11,7 @@
 #include "QuestManager.h"
 #include "SpawnerManager.h"
 #include "Maya.h"
+#include "Level_Loading.h"
 
 CLevel_Henesys::CLevel_Henesys(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -27,12 +28,12 @@ HRESULT CLevel_Henesys::Initialize()
 
 	if (FAILED(Ready_Layer_Map(TEXT("Layer_Map"))))
 		return E_FAIL;
-
+	/*
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
 		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
-		return E_FAIL;
+		return E_FAIL;*/
 
 	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
 	//	return E_FAIL;
@@ -59,6 +60,20 @@ void CLevel_Henesys::Tick(_float fTimeDelta)
 	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
+
+	if (GetKeyState('N') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		m_pColliderCom->ResetSection();
+		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
+			return;
+
+		
+		Safe_Release(pGameInstance);
+
+	}
 
 
 }
