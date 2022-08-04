@@ -20,13 +20,13 @@ public:
 	HRESULT Open_Level(_uint iLevelIndex, class CLevel* pNewLevel);
 	void Tick(_float fTimeDelta);
 	HRESULT Render();
+	HRESULT Reserve_Check(_uint iNumLevels);
 
 
 private:
 	class CLevel*				m_pCurrentLevel = nullptr;
 	_uint						m_iCurrentLevelIndex = 0;
-	_bool						m_bClear;
-	_bool						m_bRender;
+	
 
 public:
 	virtual void Free() override;
