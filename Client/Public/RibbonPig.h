@@ -7,6 +7,8 @@ BEGIN(Client)
 class CRibbonPig final : public CCreature
 {
 private:
+	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D, MOVE_END };
+private:
 	CRibbonPig(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CRibbonPig(const CRibbonPig& rhs);
 	virtual ~CRibbonPig() = default;
@@ -39,6 +41,15 @@ private:
 	DIR m_eDir;
 
 	CGameObject* m_pTarget;
+
+	_uint m_iMove;
+	_float3 m_fEndPos;
+	_float3 m_fStartPos;
+	_bool m_bDir;
+	_float m_fDistance;
+
+	_uint m_iHp;
+	_int m_iIndexNum;
 
 private:
 	HRESULT SetUp_Components();

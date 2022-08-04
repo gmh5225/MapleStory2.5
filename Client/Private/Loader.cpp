@@ -7,6 +7,7 @@
 #include "Cube.h"
 #include "Wood.h"
 #include "OrangeMushroom.h"
+#include "GoStump.h"
 #include "AngelRay_Attack.h"
 #include "AngelRay_Effect.h"
 #include "AngelRay_Hit.h"
@@ -53,6 +54,8 @@
 #include "Spawner.h"
 #include "Section.h"
 #include "Sky.h"
+#include "GreenMushroom.h"
+#include "BlueSnail.h"
 
 
 
@@ -214,6 +217,10 @@ HRESULT CLoader::Load_Monster_Object()
 		CRedSnail::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlueSnail"),
+		CBlueSnail::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Slime"),
 		CSlime::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -224,6 +231,14 @@ HRESULT CLoader::Load_Monster_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_StoneGolem"),
 		CStoneGolem::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GreenMushroom"),
+		CGreenMushroom::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GoStump"),
+		CGoStump::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -698,21 +713,60 @@ HRESULT CLoader::Load_Monster_Texture()
 		return E_FAIL;
 
 
+	// GreenMushRoom
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GreenMushroom_Idle"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Idle%d.png"), 3))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GreenMushroom_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Hit%d.png"), 1))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GreenMushroom_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Move%d.png"), 4))))
+		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GreenMushroom_HitR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_HitR%d.png"), 1))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GreenMushroom_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_MoveR%d.png"), 4))))
+		return E_FAIL;
+
 	//RedSnail
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Idle"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Move%d.png"), 3))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Move%d.png"), 4))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Hit"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Hit%d.png"), 1))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_IdleR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_MoveR%d.png"), 3))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_MoveR%d.png"), 4))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_HitR"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_HitR%d.png"), 1))))
+		return E_FAIL;
+
+	//RedSnail
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Move%d.png"), 4))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Hit%d.png"), 1))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_MoveR%d.png"), 4))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_HitR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_HitR%d.png"), 1))))
 		return E_FAIL;
 
 	// Slime
@@ -778,7 +832,27 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/StoneGolem/MoveR%d.png"), 4))))
 		return E_FAIL;
 
+	// GoStump
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GoStump_Idle"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Idle%d.png"), 4))))
+		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GoStump_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Hit%d.png"), 1))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GoStump_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Move%d.png"), 4))))
+		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GoStump_HitR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_HitR%d.png"), 1))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GoStump_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_MoveR%d.png"), 4))))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 

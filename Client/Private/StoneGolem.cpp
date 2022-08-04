@@ -36,7 +36,7 @@ HRESULT CStoneGolem::Initialize(void * pArg)
 
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-5.f, 0.2f, -2.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-5.f, 1.2f, -2.f));
 	m_pTransformCom->Set_Scaled(4.f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -64,7 +64,7 @@ HRESULT CStoneGolem::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 0.5f;
+	TransformDesc.fSpeedPerSec = 0.3f;
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))

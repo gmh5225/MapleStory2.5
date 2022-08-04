@@ -41,9 +41,47 @@ HRESULT CSpawner::Initialize(void * pArg)
 	{
 		m_SpawnerInfo.MonsterPos -= _float3{ _float(i) * 0.3f, 0.f, 0.f };
 
+		if (m_SpawnerInfo.MonsterName == TEXT("OrangeMushroom"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
 
-		if(FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), pArg)))
-			return E_FAIL;
+		else if (m_SpawnerInfo.MonsterName == TEXT("RibbonPig"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RibbonPig"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+		
+		else if (m_SpawnerInfo.MonsterName == TEXT("RedSnail"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("BlueSnail"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("GreenMushroom"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("GoStump"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
  	}
 
 	CSpawnerManager::Get_Instance()->Add_SpawnerInfo(this);
@@ -54,7 +92,7 @@ HRESULT CSpawner::Initialize(void * pArg)
 	Safe_Release(pGameInstance);
 
 
-	int i = m_SpawnerInfo.MonsterNum;
+	
 
 	return S_OK;
 }
@@ -93,8 +131,48 @@ void CSpawner::LateTick(_float fTimeDelta)
 				else if (Random == 4)
 					m_SpawnerInfo.MonsterPos += {-0.3f, 0.f, -0.5f};
 
-				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), &m_SpawnerInfo)))
-					int a = 0;
+				if (m_SpawnerInfo.MonsterName == TEXT("OrangeMushroom"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("RibbonPig"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RibbonPig"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("RedSnail"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("BlueSnail"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("GreenMushroom"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("GoStump"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
 				Plus_Mushroom();
 			}
 			Num = 0;

@@ -2,6 +2,9 @@
 #include "..\Public\RibbonPig.h"
 
 #include "GameInstance.h"
+#include "Spawner.h"
+#include "SpawnerManager.h"
+#include "QuestManager.h"
 
 CRibbonPig::CRibbonPig(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -30,12 +33,47 @@ HRESULT CRibbonPig::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 
-	m_fColRad = 0.9f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.f, 1.f, -2.f));
-	m_pTransformCom->Set_Scaled(1.1f);
+	m_iHp = 3;
 
-	SetState(STATE_IDLE, DIR_END);
 
+	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
+
+	m_iIndexNum = pMonsterDesc->SpawnerNum;
+
+	m_fColRad = pMonsterDesc->MonsterColRad;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->MonsterPos);
+	m_pTransformCom->Set_Scaled(1.f);
+	m_bDir = false;
+
+	m_fStartPos = pMonsterDesc->MonsterPos;
+
+	// 랜덤으로 어느방향으로 움직일지와 거리를 생성한다
+	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 4);
+	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(1, 5));
+
+
+	switch (m_iMove)
+	{
+	case MOVE_R:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.x = m_fStartPos.x + m_fDistance;
+		break;
+	case MOVE_L:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.x = m_fStartPos.x - m_fDistance;
+		break;
+	case MOVE_U:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.z = m_fStartPos.z + m_fDistance;
+		break;
+	case MOVE_D:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.z = m_fStartPos.z - m_fDistance;
+		break;
+	case MOVE_END:
+		SetState(STATE_IDLE, DIR_END);
+		break;
+	}
 
 
 	return S_OK;
@@ -46,6 +84,8 @@ HRESULT CRibbonPig::Initialize(void * pArg)
 
 HRESULT CRibbonPig::SetUp_Components()
 {
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"))))
+		return E_FAIL;
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
 	BoxColDesc.vScale = _float3{ 0.5f, 1.f, 0.5f };
@@ -98,7 +138,11 @@ void CRibbonPig::Tick(_float fTimeDelta)
 		Tick_Chase(fTimeDelta);
 		break;
 	}
-
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
+	{
+		Set_Dead();
+		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
+	}
 }
 void CRibbonPig::LateTick(_float fTimeDelta)
 {
@@ -143,10 +187,104 @@ HRESULT CRibbonPig::Render()
 
 void CRibbonPig::Tick_Idle(_float fTimeDelta)
 {
+	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 1000);
 
+	switch (m_iMove)
+	{
+	case MOVE_R:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.x = m_fStartPos.x + m_fDistance;
+		break;
+	case MOVE_L:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.x = m_fStartPos.x - m_fDistance;
+		break;
+	case MOVE_U:
+		SetState(STATE_MOVE, DIR_R);
+		m_fEndPos.z = m_fStartPos.z + m_fDistance;
+		break;
+	case MOVE_D:
+		SetState(STATE_MOVE, DIR_L);
+		m_fEndPos.z = m_fStartPos.z - m_fDistance;
+		break;
+	}
 }
 void CRibbonPig::Tick_Move(_float fTimeDelta)
 {
+	_float3 fPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+	if (m_iMove == MOVE_R)
+	{
+		if (m_fEndPos.x <= fPos.x)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.x > fPos.x)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_Right(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+		else
+		{
+			m_pTransformCom->Go_Left(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+	}
+	else if (m_iMove == MOVE_L)
+	{
+		if (m_fEndPos.x >= fPos.x)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.x < fPos.x)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_Left(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+		else
+		{
+			m_pTransformCom->Go_Right(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+	}
+	else if (m_iMove == MOVE_U)
+	{
+		if (m_fEndPos.z <= fPos.z)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.z > fPos.z)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_U(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+		else
+		{
+			m_pTransformCom->Go_D(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+	}
+	else if (m_iMove == MOVE_D)
+	{
+		if (m_fEndPos.z >= fPos.z)		// 최종 거리가 이동 거리보다 작거나 같아지면
+			m_bDir = true;
+		else if (m_fStartPos.z < fPos.z)
+			m_bDir = false;
+
+		if (!m_bDir)
+		{
+			m_pTransformCom->Go_D(fTimeDelta);
+			SetState(STATE_MOVE, DIR_R);
+		}
+		else
+		{
+			m_pTransformCom->Go_U(fTimeDelta);
+			SetState(STATE_MOVE, DIR_L);
+		}
+	}
 }
 void CRibbonPig::Tick_Hit(_float fTimeDelta)
 {
@@ -167,12 +305,17 @@ void CRibbonPig::Tick_Chase(_float fTimeDelta)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
-		SetState(STATE_CHASE, DIR_R);
-	else
-		SetState(STATE_CHASE, DIR_L);
 
-	m_pTransformCom->Chase(vPlayerPos, fTimeDelta);
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+	{
+		SetState(STATE_CHASE, DIR_R);
+		m_pTransformCom->Chase(vPlayerPos + _float3(-0.1f, 0.f, 0.1f), fTimeDelta);
+	}
+	else
+	{
+		SetState(STATE_CHASE, DIR_L);
+		m_pTransformCom->Chase(vPlayerPos + _float3(0.1f, 0.f, 0.1f), fTimeDelta);
+	}
 
 	Safe_Release(pGameInstance);
 }
@@ -201,11 +344,14 @@ void CRibbonPig::SetAni()
 	switch (m_eCurState)
 	{
 	case CRibbonPig::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Idle"), 1.f, CAnimator::STATE_LOOF);
-	break;
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Idle"), 0.5f, CAnimator::STATE_LOOF);
+		break;
 	case CRibbonPig::STATE_MOVE:
 	{
-
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_MoveR"), 0.3f, CAnimator::STATE_LOOF);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Move"), 0.3f, CAnimator::STATE_LOOF);
 	}
 	break;
 	case CRibbonPig::STATE_HIT:
@@ -213,12 +359,12 @@ void CRibbonPig::SetAni()
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_HitR"), 0.5f, CAnimator::STATE_ONCE);
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Hit"), 0.5f, CAnimator::STATE_ONCE);
-	break;
+		break;
 	case CRibbonPig::STATE_CHASE:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_MoveR"), 0.2f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_MoveR"), 0.3f, CAnimator::STATE_LOOF);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Move"), 0.2f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Move"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	}
 }
@@ -236,6 +382,14 @@ void CRibbonPig::Damaged(CGameObject * pOther)
 		SetState(STATE_HIT, DIR_R);
 	else
 		SetState(STATE_HIT, DIR_L);
+
+	--m_iHp;
+	if (m_iHp == 0)
+	{
+		CQuestManager::Get_Instance()->Eat_Item(TEXT("PigRibbon"));
+		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
+		Set_Dead();
+	}
 
 	Safe_Release(pGameInstance);
 }

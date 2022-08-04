@@ -4,14 +4,15 @@
 
 BEGIN(Client)
 
-class CSlime final : public CCreature
+class CBlueSnail final : public CCreature
 {
 private:
 	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D, MOVE_END };
-private:
-	CSlime(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSlime(const CSlime& rhs);
-	virtual ~CSlime() = default;
+
+
+	CBlueSnail(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CBlueSnail(const CBlueSnail& rhs);
+	virtual ~CBlueSnail() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -29,14 +30,11 @@ private:
 	void Tick_Chase(_float fTimeDelta);
 
 public:
-	void SetState(STATE eState, DIR eDir);
+	virtual	void SetState(STATE eState, DIR eDir) override;
 
 public:
 	virtual void SetAni() override;
 	virtual void Damaged(CGameObject* pOther) override;
-
-private:
-	HRESULT SetUp_Components();
 
 private:
 	STATE m_eCurState;
@@ -55,8 +53,11 @@ private:
 
 	_bool temp = false;
 
+private:
+	HRESULT SetUp_Components();
+
 public:
-	static CSlime* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CBlueSnail* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

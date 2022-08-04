@@ -160,6 +160,7 @@
     <ClInclude Include="..\Public\AngelRay_Attack.h" />
     <ClInclude Include="..\Public\AngelRay_Effect.h" />
     <ClInclude Include="..\Public\AngelRay_Hit.h" />
+    <ClInclude Include="..\Public\BlueSnail.h" />
     <ClInclude Include="..\Public\Bulb.h" />
     <ClInclude Include="..\Public\Camera_Free.h" />
     <ClInclude Include="..\Public\Client_Defines.h" />
@@ -170,6 +171,8 @@
     <ClInclude Include="..\Public\ExpBar.h" />
     <ClInclude Include="..\Public\ExpBase.h" />
     <ClInclude Include="..\Public\ExpLine.h" />
+    <ClInclude Include="..\Public\GoStump.h" />
+    <ClInclude Include="..\Public\GreenMushroom.h" />
     <ClInclude Include="..\Public\HpBarBase.h" />
     <ClInclude Include="..\Public\HpBarHp.h" />
     <ClInclude Include="..\Public\HpBarIcon.h" />
@@ -236,6 +239,7 @@
     <ClCompile Include="..\Private\AngelRay_Attack.cpp" />
     <ClCompile Include="..\Private\AngelRay_Effect.cpp" />
     <ClCompile Include="..\Private\AngelRay_Hit.cpp" />
+    <ClCompile Include="..\Private\BlueSnail.cpp" />
     <ClCompile Include="..\Private\Bulb.cpp" />
     <ClCompile Include="..\Private\Camera_Free.cpp" />
     <ClCompile Include="..\Private\Creature.cpp" />
@@ -245,6 +249,8 @@
     <ClCompile Include="..\Private\ExpBar.cpp" />
     <ClCompile Include="..\Private\ExpBase.cpp" />
     <ClCompile Include="..\Private\ExpLine.cpp" />
+    <ClCompile Include="..\Private\GoStump.cpp" />
+    <ClCompile Include="..\Private\GreenMushroom.cpp" />
     <ClCompile Include="..\Private\HpBarBase.cpp" />
     <ClCompile Include="..\Private\HpBarHp.cpp" />
     <ClCompile Include="..\Private\HpBarIcon.cpp" />

@@ -1,27 +1,27 @@
 #include "stdafx.h"
-#include "..\Public\RedSnail.h"
+#include "..\Public\BlueSnail.h"
 
 #include "GameInstance.h"
 #include "QuestManager.h"
 #include "Spawner.h"
 #include "SpawnerManager.h"
 
-CRedSnail::CRedSnail(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlueSnail::CBlueSnail(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CRedSnail::CRedSnail(const CRedSnail & rhs)
+CBlueSnail::CBlueSnail(const CBlueSnail & rhs)
 	: CCreature(rhs)
 {
 }
 
-HRESULT CRedSnail::Initialize_Prototype()
+HRESULT CBlueSnail::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CRedSnail::Initialize(void * pArg)
+HRESULT CBlueSnail::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
@@ -80,7 +80,7 @@ HRESULT CRedSnail::Initialize(void * pArg)
 
 
 
-HRESULT CRedSnail::SetUp_Components()
+HRESULT CBlueSnail::SetUp_Components()
 {
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"))))
 		return E_FAIL;
@@ -94,11 +94,11 @@ HRESULT CRedSnail::SetUp_Components()
 		return E_FAIL;
 
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Move"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_Move"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_Hit"), nullptr);
 
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_MoveR"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_MoveR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueSnail_HitR"), nullptr);
 	}
 
 
@@ -118,21 +118,21 @@ HRESULT CRedSnail::SetUp_Components()
 
 
 
-void CRedSnail::Tick(_float fTimeDelta)
+void CBlueSnail::Tick(_float fTimeDelta)
 {
 
 	switch (m_eCurState)
 	{
-	case Client::CRedSnail::STATE_IDLE:
+	case Client::CBlueSnail::STATE_IDLE:
 		Tick_Idle(fTimeDelta);
 		break;
-	case Client::CRedSnail::STATE_MOVE:
+	case Client::CBlueSnail::STATE_MOVE:
 		Tick_Move(fTimeDelta);
 		break;
-	case Client::CRedSnail::STATE_HIT:
+	case Client::CBlueSnail::STATE_HIT:
 		Tick_Hit(fTimeDelta);
 		break;
-	case Client::CRedSnail::STATE_CHASE:
+	case Client::CBlueSnail::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
 	}
@@ -144,7 +144,7 @@ void CRedSnail::Tick(_float fTimeDelta)
 	}
 
 }
-void CRedSnail::LateTick(_float fTimeDelta)
+void CBlueSnail::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
@@ -158,7 +158,7 @@ void CRedSnail::LateTick(_float fTimeDelta)
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
 }
-HRESULT CRedSnail::Render()
+HRESULT CBlueSnail::Render()
 {
 	Set_Billboard();
 
@@ -197,7 +197,7 @@ HRESULT CRedSnail::Render()
 
 
 
-void CRedSnail::Tick_Idle(_float fTimeDelta)
+void CBlueSnail::Tick_Idle(_float fTimeDelta)
 {
 	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 1000);
 
@@ -222,7 +222,7 @@ void CRedSnail::Tick_Idle(_float fTimeDelta)
 	}
 
 }
-void CRedSnail::Tick_Move(_float fTimeDelta)
+void CBlueSnail::Tick_Move(_float fTimeDelta)
 {
 	_float3 fPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
@@ -299,11 +299,11 @@ void CRedSnail::Tick_Move(_float fTimeDelta)
 		}
 	}
 }
-void CRedSnail::Tick_Hit(_float fTimeDelta)
+void CBlueSnail::Tick_Hit(_float fTimeDelta)
 {
 }
 
-void CRedSnail::Tick_Chase(_float fTimeDelta)
+void CBlueSnail::Tick_Chase(_float fTimeDelta)
 {
 	if (GetKeyState('L') & 0x8000)
 	{
@@ -339,7 +339,7 @@ void CRedSnail::Tick_Chase(_float fTimeDelta)
 
 
 
-void CRedSnail::SetState(STATE eState, DIR eDir)
+void CBlueSnail::SetState(STATE eState, DIR eDir)
 {
 	if (m_eCurState == eState && m_eDir == eDir)
 		return;
@@ -355,32 +355,32 @@ void CRedSnail::SetState(STATE eState, DIR eDir)
 		m_pTransformCom->Set_Vel(4.0f);
 	}
 }
-void CRedSnail::SetAni()
+void CBlueSnail::SetAni()
 {
 	switch (m_eCurState)
 	{
-	case CRedSnail::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Move"), 0.5f, CAnimator::STATE_LOOF);
+	case CBlueSnail::STATE_IDLE:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSnail_Move"), 0.5f, CAnimator::STATE_LOOF);
 		break;
-	case CRedSnail::STATE_MOVE:
+	case CBlueSnail::STATE_MOVE:
 	{
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_MoveR"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSnail_MoveR"), 0.3f, CAnimator::STATE_LOOF);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Move"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSnail_Move"), 0.3f, CAnimator::STATE_LOOF);
 	}
 	break;
-	case CRedSnail::STATE_HIT:
+	case CBlueSnail::STATE_HIT:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_HitR"), 0.5f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSnail_HitR"), 0.5f, CAnimator::STATE_ONCE);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Hit"), 0.5f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSnail_Hit"), 0.5f, CAnimator::STATE_ONCE);
 		break;
-	case CRedSnail::STATE_CHASE:
+	case CBlueSnail::STATE_CHASE:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_MoveR"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSnail_MoveR"), 0.3f, CAnimator::STATE_LOOF);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Move"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSnail_Move"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	}
 }
@@ -388,7 +388,7 @@ void CRedSnail::SetAni()
 
 
 
-void CRedSnail::Damaged(CGameObject * pOther)
+void CBlueSnail::Damaged(CGameObject * pOther)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -407,7 +407,7 @@ void CRedSnail::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp == 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("RedShell"));
+		CQuestManager::Get_Instance()->Eat_Item(TEXT("BlueShell"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Set_Dead();
 	}
@@ -416,25 +416,25 @@ void CRedSnail::Damaged(CGameObject * pOther)
 
 
 
-CRedSnail * CRedSnail::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlueSnail * CBlueSnail::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CRedSnail*		pInstance = new CRedSnail(pGraphic_Device);
+	CBlueSnail*		pInstance = new CBlueSnail(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : RedSnail"));
+		MSG_BOX(TEXT("Failed To Created : BlueSnail"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CRedSnail::Clone(void* pArg)
+CGameObject * CBlueSnail::Clone(void* pArg)
 {
-	CRedSnail*		pInstance = new CRedSnail(*this);
+	CBlueSnail*		pInstance = new CBlueSnail(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : RedSnail"));
+		MSG_BOX(TEXT("Failed To Cloned : BlueSnail"));
 		Safe_Release(pInstance);
 	}
 
@@ -444,7 +444,7 @@ CGameObject * CRedSnail::Clone(void* pArg)
 
 
 
-void CRedSnail::Collision(CGameObject * pOther)
+void CBlueSnail::Collision(CGameObject * pOther)
 {
 	if (pOther->Get_Tag() == "Tag_Cube")
 	{
@@ -460,7 +460,7 @@ void CRedSnail::Collision(CGameObject * pOther)
 
 
 
-void CRedSnail::Free()
+void CBlueSnail::Free()
 {
 	__super::Free();
 

@@ -33,6 +33,7 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 	m_iHp = 3;
 
+
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
 	m_iIndexNum = pMonsterDesc->SpawnerNum;
@@ -135,6 +136,12 @@ void COrangeMushroom::Tick(_float fTimeDelta)
 	case Client::COrangeMushroom::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
+	}
+
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
+	{
+		Set_Dead();
+		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 	}
 
 }
@@ -321,10 +328,6 @@ void COrangeMushroom::Tick_Chase(_float fTimeDelta)
 		SetState(STATE_CHASE, DIR_L);
 		m_pTransformCom->Chase(vPlayerPos + _float3(0.1f, 0.f, 0.1f), fTimeDelta);
 	}
-
-	
-
-
 
 
 	Safe_Release(pGameInstance);

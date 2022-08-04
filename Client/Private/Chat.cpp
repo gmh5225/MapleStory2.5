@@ -141,7 +141,7 @@ HRESULT CChat::Render()
 
 				else if (m_iRandom == 1)
 				{
-					wsprintf(m_cNPCChat, TEXT("허허..농작물들이 다 죽겠구만"));
+					wsprintf(m_cNPCChat, TEXT("허허..나 젊었을때는 이정도 의뢰는 10분이면.."));
 					SetRect(&rc, 350, 530, 0, 0);
 					m_pFont->DrawText(NULL, m_cNPCChat,
 						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
@@ -260,14 +260,33 @@ HRESULT CChat::Render()
 			{
 				pInstance->QuestProgress();
 				pInstance->Check_End_Quest();
+				m_bCountCheck = false;
 				m_fCount = 0;
 			}
 		}
 
 		if (m_bChat && pInstance->Set_QuestState() == 2)
 		{
+			m_bCountCheck = true;
 			Bind_Animation();
 			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				wsprintf(m_cNPCChat, TEXT("벌써 다 잡았는가?\n고맙네!"));
+				SetRect(&rc, 350, 530, 0, 0);
+				m_pFont->DrawText(NULL, m_cNPCChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+			}
+
 			if (GetKeyState(VK_RETURN) & 0x8000)
 			{
 				m_fCount = 0;
@@ -276,6 +295,7 @@ HRESULT CChat::Render()
 				pInstance->Reset_Hunt();
 				CQuestManager::Get_Instance()->Set_Second();
 				CSkillManager::Get_Instance()->Set_SkillPoint(3);
+				m_iChatProgress = 10;
 			}
 		}
 	}
@@ -285,8 +305,171 @@ HRESULT CChat::Render()
 		// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
 		if (m_bChat && pInstance->Set_QuestState() == 0)
 		{
+			m_bCountCheck = true;
 			Bind_Animation();
 			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				if (CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE))
+					m_iChatProgress++;
+
+				if (m_iChatProgress == 10)
+				{
+					wsprintf(m_cNPCChat, TEXT("아, 자네구만.. 주황버섯을 잡아준건 정말 고마웠네,\n마을에 도움이 많이 됐어."));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 11)
+				{
+					wsprintf(m_cNPCChat, TEXT("...그런데 혹시 자네 시간 좀 있나?\n개인적으로 부탁하고 싶은게 있어서.."));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 12)
+				{
+					wsprintf(m_cNPCChat, TEXT("사실 다음주가 내 아내인 밍밍부인 생일인데,\n선물을 좀 주고 싶어서 말이야"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 13)
+				{
+					wsprintf(m_cNPCChat, TEXT("내 이런걸 해본적 없어서\n젊은 자네가 더 잘 알지 않겠나"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else
+				{
+					wsprintf(m_cNPCChat, TEXT("혹시 선물로 줄만한 걸 찾아다 줄 수 있겠나?"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+			}
+			if ((GetKeyState(VK_RETURN) & 0x8000))
+			{
+				pInstance->QuestProgress();
+				pInstance->Check_End_Quest();
+				m_bCountCheck = false;
+				m_fCount = 0;
+			}
+		}
+
+		if (m_bChat && pInstance->Set_QuestState() == 2)
+		{
+			m_bCountCheck = true;
+			Bind_Animation();
+			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				wsprintf(m_cNPCChat, TEXT("...요새 젊은 사람들 취향은 이런가?\n크흠 아무튼 고맙네!"));
+				SetRect(&rc, 350, 530, 0, 0);
+				m_pFont->DrawText(NULL, m_cNPCChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+			}
+
+				if (GetKeyState(VK_RETURN) & 0x8000)
+				{
+					m_fCount = 0;
+					m_bCountCheck = false;
+					pInstance->QuestPrepare();
+					pInstance->Check_End_Quest();
+					pInstance->Reset_Hunt();
+					CQuestManager::Get_Instance()->Set_Third();
+					CSkillManager::Get_Instance()->Set_SkillPoint(3);
+					m_iChatProgress = 20;
+				}
+			}
+		}
+	else if (pInstance->Get_QuestNum() == 3)
+	{
+		// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
+		if (m_bChat && pInstance->Set_QuestState() == 0)
+		{
+			m_bCountCheck = true;
+			Bind_Animation();
+			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				if (CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE))
+					m_iChatProgress++;
+
+				if (m_iChatProgress == 20)
+				{
+					wsprintf(m_cNPCChat, TEXT("오, 용사여 오랜만이네,\n지난번 선물은 정말 고마웠네. 부인이 참 좋아하더군."));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 21)
+				{
+					wsprintf(m_cNPCChat, TEXT("내가 사실 자네 뭐라도 주려고\n옆마을 엘리니아에 다녀오려고 했었네."));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 22)
+				{
+					wsprintf(m_cNPCChat, TEXT("자네를 생각하며 기쁜 마음으로 나가려는데...이게 뭐람!\n엘리니아 가는 하나밖에 없는 길을 스톤 골렘이 막고있는게 아닌가!"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 23)
+				{
+					wsprintf(m_cNPCChat, TEXT("그래서 어쩔 수 없이 그냥 돌아왔다네...이렇게 난감한 일이 없지.\n누가 골렘을 잡아줄 사람이 없을까?\n 마을 사람들이 잡기엔 크게 다칠것이 분명한데..."));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else
+				{
+					wsprintf(m_cNPCChat, TEXT("...자네가 잡아주겠다고? 이렇게 고마운 일이!\n역시 용사야! 믿고 있겠네!"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+			}
 			if ((GetKeyState(VK_RETURN) & 0x8000))
 			{
 				m_fCount = 0;
@@ -297,8 +480,127 @@ HRESULT CChat::Render()
 
 		if (m_bChat && pInstance->Set_QuestState() == 2)
 		{
+			m_bCountCheck = true;
 			Bind_Animation();
 			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				wsprintf(m_cNPCChat, TEXT("아니 이렇게 빨리!자네는 역시 헤네시스의 보물일세!\n정말 고맙네!"));
+				SetRect(&rc, 350, 530, 0, 0);
+				m_pFont->DrawText(NULL, m_cNPCChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+			}
+			if (GetKeyState(VK_RETURN) & 0x8000)
+			{
+				{
+					m_fCount = 0;
+					m_bCountCheck = false;
+					pInstance->QuestPrepare();
+					pInstance->Check_End_Quest();
+					pInstance->Reset_Hunt();
+					CQuestManager::Get_Instance()->Set_Fourth();
+					CSkillManager::Get_Instance()->Set_SkillPoint(3);
+					m_iChatProgress = 30;
+				}
+			}
+
+		}
+	}
+
+
+	else if (pInstance->Get_QuestNum() == 4)
+	{
+		// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
+		if (m_bChat && pInstance->Set_QuestState() == 0)
+		{
+			m_bCountCheck = true;
+			Bind_Animation();
+			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				if (CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE))
+					m_iChatProgress++;
+
+				if (m_iChatProgress == 30)
+				{
+					wsprintf(m_cNPCChat, TEXT("저기.....저기! 저기 잠깐 멈춰보게!\n자네 왜 요즘 말을 걸어도 잘 듣지를 못하나?\n귀가 잘 안들린다고....? 이거 몸보신이라도 해야겠구만"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 31)
+				{
+					wsprintf(m_cNPCChat, TEXT("그래서 하는 말인데 내 자네에게 부탁을 자주 했지 않은가.\n이번에는 보양식 한그릇을 만들어주고 싶어서 말일세. 기다려보게."));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else if (m_iChatProgress == 32)
+				{
+					wsprintf(m_cNPCChat, TEXT("흠..이걸 어디 뒀더라....어라, 재료가 조금 모자라군! 이걸 어쩌나!\n....혹시 자네 지금 바쁜가?"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+				else
+				{
+					wsprintf(m_cNPCChat, TEXT("바쁘지 않다면 부족한 재료를 조금 구해다 줄 수 있겠나?\n겸사겸사 내 몫도 해서 2인분만....맛은 보장하겠네!"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+			}
+			if ((GetKeyState(VK_RETURN) & 0x8000))
+			{
+				m_fCount = 0;
+				pInstance->QuestProgress();
+				pInstance->Check_End_Quest();
+			}
+		}
+
+		if (m_bChat && pInstance->Set_QuestState() == 2)
+		{
+			m_bCountCheck = true;
+			Bind_Animation();
+			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				wsprintf(m_cNPCChat, TEXT("재료를 다 모아왔구만! 내 금방 만들어주겠네!\n다 만들었군!내가 먼저 한입 먹어보고...\n우..우웩! 으으..."));
+				SetRect(&rc, 350, 530, 0, 0);
+				m_pFont->DrawText(NULL, m_cNPCChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+			}
 			if (GetKeyState(VK_RETURN) & 0x8000)
 			{
 				m_fCount = 0;

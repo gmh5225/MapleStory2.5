@@ -7,6 +7,8 @@ BEGIN(Client)
 class CRedSnail final : public CCreature
 {
 private:
+	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D, MOVE_END };
+private:
 	CRedSnail(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CRedSnail(const CRedSnail& rhs);
 	virtual ~CRedSnail() = default;
@@ -42,6 +44,16 @@ private:
 
 	CGameObject* m_pTarget;
 
+	_uint m_iMove;
+	_float3 m_fEndPos;
+	_float3 m_fStartPos;
+	_bool m_bDir;
+	_float m_fDistance;
+
+	_uint m_iHp;
+	_int m_iIndexNum;
+
+	_bool temp = false;
 
 public:
 	static CRedSnail* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

@@ -17,7 +17,7 @@ public:
 	{
 		_float3			MonsterPos;
 		_int			MonsterNum;
-		_tchar			MonsterName;
+		_tchar*			MonsterName;
 		_int			SpawnerNum;
 		_float			MonsterColRad;
 	}SPAWNERINFO;

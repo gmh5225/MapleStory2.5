@@ -40,8 +40,13 @@ public:	//퀘스트의 상태를 변화시킴
 	_uint Set_OrangeMushroom() { return m_iHuntOrangeMushroom; }
 	_uint Set_StoneGolem() { return m_iHuntStoneGolem; }
 
-
-
+	// 먹은 아이템수 리턴
+	_uint Set_RedShell() { return m_iRedShell; }
+	_uint Set_BlueShell() { return m_iBlueShell; }
+	_uint Set_PigRibbon() { return m_iPigRibbon; }
+	_uint Set_SlimeEssence() { return m_iSlimeEssence; }
+	_uint Set_StumpFirewood() { return m_iStumpFirewood; }
+	_uint Set_GreenMushroom() { return m_iGreenMushroom; }
 
 	// 사냥한 모든 몬스터 초기화
 	void Reset_Hunt() { m_iHuntSlime = 0; m_iHuntOrangeMushroom = 0; m_iHuntStoneGolem = 0; }
@@ -49,6 +54,8 @@ public:	//퀘스트의 상태를 변화시킴
 	// 몇번째 퀘스트인지를 GETSET
 	void Set_First() { m_iQuestNum = QUEST_FIRST; }
 	void Set_Second() { m_iQuestNum = QUEST_SECOND; }
+	void Set_Third() { m_iQuestNum = QUEST_THIRD; }
+	void Set_Fourth() { m_iQuestNum = QUEST_FOURTH; }
 	_uint Get_QuestNum() { return m_iQuestNum; }
 
 public:
@@ -58,7 +65,7 @@ public:
 public:
 	enum QUEST_STATE { QUEST_PREPARE, QUEST_PROGRESS, QUEST_CLEAR, QUEST_END};
 	enum QUEST_HUNT { HUNT_SLIME, HUNT_ORANGEMUSHROOM, HUNT_END};
-	enum QUEST_NUM { QUEST_START, QUEST_FIRST, QUEST_SECOND, QUEST_THIRD };
+	enum QUEST_NUM { QUEST_START, QUEST_FIRST, QUEST_SECOND, QUEST_THIRD , QUEST_FOURTH};
 
 private:
 	_uint	m_iQuestState;
@@ -75,6 +82,10 @@ private:
 	_uint	m_iRedShell;
 	_uint	m_iBlueShell;
 	_uint	m_iPigRibbon;
+
+	_uint	m_iSlimeEssence;
+	_uint	m_iStumpFirewood;
+	_uint	m_iGreenMushroom;
 
 	// 몇번째 퀘스트인지
 	_uint	m_iQuestNum;
