@@ -501,6 +501,7 @@ HRESULT CLoader::Load_Player_Texture()
 	Safe_AddRef(pGameInstance);
 
 	// Attack
+
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_D"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Attack/G_Attack_D/Attack_D%d.png"), 12))))
 		return E_FAIL;
@@ -608,6 +609,7 @@ HRESULT CLoader::Load_Player_Texture()
 		return E_FAIL;
 
 
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -619,9 +621,10 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 
 	Safe_AddRef(pGameInstance);
 	// Attack
+
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_AngelRay_Attack"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Attack%d.png"), 8))))
-		return E_FAIL;
+		return E_FAIL;	
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_AngelRay_Effect"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Effect%d.png"), 13))))
@@ -871,8 +874,9 @@ HRESULT CLoader::Load_UI_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/QuestWindow/QuestBack%d.png"), 2))))
 		return E_FAIL;
 
+
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Chat"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/Dialog/Dialog%d.png"), 3))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/Dialog/Dialog%d.png"), 24))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SkillUpBtn"),
