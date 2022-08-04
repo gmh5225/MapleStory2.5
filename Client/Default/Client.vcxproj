@@ -179,8 +179,9 @@
     <ClInclude Include="..\Public\HpBarMp.h" />
     <ClInclude Include="..\Public\InvenManager.h" />
     <ClInclude Include="..\Public\ElderStan.h" />
+    <ClInclude Include="..\Public\Level_Elenya.h" />
     <ClInclude Include="..\Public\Level_GamePlay.h" />
-    <ClInclude Include="..\public\Level_Henesys.h" />
+    <ClInclude Include="..\Public\Level_Henesys_1.h" />
     <ClInclude Include="..\Public\Level_Loading.h" />
     <ClInclude Include="..\Public\Level_Static.h" />
     <ClInclude Include="..\Public\Loader.h" />
@@ -194,6 +195,7 @@
     <ClInclude Include="..\public\MushHouse.h" />
     <ClInclude Include="..\Public\OrangeMushroom.h" />
     <ClInclude Include="..\Public\Player.h" />
+    <ClInclude Include="..\Public\Potal.h" />
     <ClInclude Include="..\Public\QuestManager.h" />
     <ClInclude Include="..\Public\QuestUI.h" />
     <ClInclude Include="..\Public\QuickSlot.h" />
@@ -257,8 +259,9 @@
     <ClCompile Include="..\Private\HpBarMp.cpp" />
     <ClCompile Include="..\Private\InvenManager.cpp" />
     <ClCompile Include="..\Private\ElderStan.cpp" />
+    <ClCompile Include="..\Private\Level_Elenya.cpp" />
     <ClCompile Include="..\Private\Level_GamePlay.cpp" />
-    <ClCompile Include="..\private\Level_Henesys.cpp" />
+    <ClCompile Include="..\Private\Level_Henesys_1.cpp" />
     <ClCompile Include="..\Private\Level_Loading.cpp" />
     <ClCompile Include="..\Private\Level_Static.cpp" />
     <ClCompile Include="..\Private\Loader.cpp" />
@@ -272,6 +275,7 @@
     <ClCompile Include="..\private\MushHouse.cpp" />
     <ClCompile Include="..\Private\OrangeMushroom.cpp" />
     <ClCompile Include="..\Private\Player.cpp" />
+    <ClCompile Include="..\Private\Potal.cpp" />
     <ClCompile Include="..\Private\QuestManager.cpp" />
     <ClCompile Include="..\Private\QuestUI.cpp" />
     <ClCompile Include="..\Private\QuickSlot.cpp" />

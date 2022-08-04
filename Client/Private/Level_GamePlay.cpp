@@ -13,6 +13,7 @@
 #include "Maya.h"
 #include "Level_Loading.h"
 #include "MainApp.h"
+#include "Potal.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -80,7 +81,19 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 		Safe_Release(pGameInstance);
 
 	}
+	else if (GetKeyState('B') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
 
+		m_pColliderCom->ResetSection();
+		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_ELENYA))))
+			return;
+
+
+		Safe_Release(pGameInstance);
+
+	}
 	
 
 }
@@ -174,7 +187,20 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Henesys2");
+
+
+	CPotal::POTALDESC PotalDesc;
+	PotalDesc.eDestLevel = LEVEL_HENESYS;
+	PotalDesc.Pos = _float3(29.f, 4.f, -12.f);
+	PotalDesc.DestPos = _float3(-2.f, 2.f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
+		return E_FAIL;
+
+
+
+
+
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Henesys");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
@@ -182,7 +208,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	}
 
 
-	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Henesys2");
+	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Henesys");
 	if (nullptr != pModelData)
 	{
 		for (auto& Model : *pModelData)
@@ -225,19 +251,78 @@ HRESULT CLevel_GamePlay::Ready_Layer_Section(const _tchar * pLayerTag)
 		return E_FAIL;
 	m_pColliderCom = (CCollider*)pComponent;
 
+
+
 	CMap_Manager::CUBEDATA Data;
 	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
 
-	for (int i = -2; i < 15; i++)
+	for (int j = 0; j < 8; j++)
 	{
-		for (int j = -2; j < 15; j++)
+		for (int i = 0; i < 8; i++)
 		{
-			Data.vPos = _float3((_float)i * 5.f, 1.f, (_float)j * 5.f);
+			_float XIndex = i*5.f;
+			_float ZIndex = j*5.f;
+			Data.vPos = _float3((-12.f + XIndex) + ZIndex, 2.f, -1 - XIndex);
 			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
 				return E_FAIL;
 		}
 	}
+	Data.vPos = _float3(-10.f, 2.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(-5.f, 2.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(0.f, 2.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(5.f, 2.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(10.f, 2.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
 
+	Data.vPos = _float3(-5.f, 2.f, 9.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(0.f, 2.f, 9.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(5.f, 2.f, 9.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+
+	Data.vPos = _float3(9.f, 7.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(9.f, 7.f, -1.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(9.f, 7.f, -6.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(14.f, 7.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(14.f, 7.f, -1.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(14.f, 7.f, -6.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(19.f, 7.f, 4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(19.f, 7.f, -1.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+	Data.vPos = _float3(19.f, 7.f, -6.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
+		return E_FAIL;
+
+
+	
 	Safe_Release(pGameInstance);
 
 

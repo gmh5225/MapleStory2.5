@@ -56,6 +56,8 @@
 #include "Sky.h"
 #include "GreenMushroom.h"
 #include "BlueSnail.h"
+#include "Potal.h"
+
 
 
 
@@ -81,6 +83,9 @@ _uint APIENTRY LoadingMain(void* pArg)
 		break;
 	case LEVEL_HENESYS:
 		pLoader->Loading_ForHenesys();
+		break;
+	case LEVEL_ELENYA:
+		pLoader->Loading_ForElenya();
 		break;
 	}
 
@@ -115,6 +120,7 @@ HRESULT CLoader::Loading_ForStatic()
 		Load_Model_Object();
 		Load_Item_Object();
 		Load_Spawner_Object();
+		Load_Map();
 
 		lstrcpy(m_szLoadingText, TEXT("메이플 스토리 로딩중~. "));
 		/* 텍스쳐를 로드한다. */
@@ -133,6 +139,7 @@ HRESULT CLoader::Loading_ForStatic()
 
 		/* For.Prototype_Component_Texture_UI */
 		Load_UI_Texture();
+
 
 		Load_Component();
 		g_bStatic = true;
@@ -172,6 +179,21 @@ HRESULT CLoader::Loading_ForHenesys()
 
 		Safe_Release(pGameInstance);
 		g_bHenesys = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+HRESULT CLoader::Loading_ForElenya()
+{
+	if (g_bElenya == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+		Safe_Release(pGameInstance);
+		g_bElenya = true;
 	}
 	m_isFinished = true;
 
@@ -512,6 +534,19 @@ HRESULT CLoader::Load_Component()
 	m_isFinished = true;
 
 	return S_OK;
+}
+
+HRESULT CLoader::Load_Map()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	/* For.Prototype_GameObject_PlayerSkill*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Potal"),
+		CPotal::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
 }
 
 HRESULT CLoader::Load_Player_Texture()

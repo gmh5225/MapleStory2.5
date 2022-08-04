@@ -9,11 +9,11 @@ END
 
 BEGIN(Client)
 
-class CLevel_Henesys final : public CLevel
+class CLevel_Henesys_1 final : public CLevel
 {
 private:
-	CLevel_Henesys(LPDIRECT3DDEVICE9 pGraphic_Device);
-	virtual ~CLevel_Henesys() = default;
+	CLevel_Henesys_1(LPDIRECT3DDEVICE9 pGraphic_Device);
+	virtual ~CLevel_Henesys_1() = default;
 
 public:
 	virtual HRESULT Initialize() override;
@@ -42,7 +42,7 @@ private:
 	CCollider*				m_pColliderCom = nullptr;
 
 public:
-	static CLevel_Henesys* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CLevel_Henesys_1* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual void Free() override;
 };
 

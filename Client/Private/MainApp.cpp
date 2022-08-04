@@ -15,6 +15,7 @@ bool g_bStaticClone;
 bool g_bStatic;
 bool g_bGamePlay;
 bool g_bHenesys;
+bool g_bElenya;
 
 
 using namespace Client;
@@ -40,6 +41,7 @@ HRESULT CMainApp::Initialize()
 	g_bStatic = false;
 	g_bGamePlay = false;
 	g_bHenesys = false;
+	g_bElenya = false;
 	
 
 	if (FAILED(m_pGameInstance->Initialize_Engine(LEVEL_END, g_hInst, GraphicDesc, &m_pGraphic_Device)))
@@ -72,7 +74,7 @@ void CMainApp::Tick(_float fTimeDelta)
 
 	m_pGameInstance->Tick_Engine(fTimeDelta);
 
-	//m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_BLOCK);
+	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_POTAL);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PLAYER);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_BLOCK);

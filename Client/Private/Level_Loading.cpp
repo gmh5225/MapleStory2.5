@@ -3,7 +3,8 @@
 #include "GameInstance.h"
 #include"Level_Static.h"
 #include "Level_GamePlay.h"
-#include "Level_Henesys.h"
+#include "Level_Henesys_1.h"
+#include "Level_Elenya.h"
 
 #include "Loader.h"
 
@@ -49,7 +50,10 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 				pNewLevel = CLevel_GamePlay::Create(m_pGraphic_Device);
 				break;
 			case LEVEL_HENESYS:
-				pNewLevel = CLevel_Henesys::Create(m_pGraphic_Device);
+				pNewLevel = CLevel_Henesys_1::Create(m_pGraphic_Device);
+				break;
+			case LEVEL_ELENYA:
+				pNewLevel = CLevel_Elenya::Create(m_pGraphic_Device);
 				break;
 			}
 

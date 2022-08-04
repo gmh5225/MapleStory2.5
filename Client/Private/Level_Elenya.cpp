@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Public\Level_Henesys.h"
+#include "..\Public\Level_Elenya.h"
 
 #include "GameInstance.h"
 #include "Camera_Free.h"
@@ -12,13 +12,14 @@
 #include "SpawnerManager.h"
 #include "Maya.h"
 #include "Level_Loading.h"
+#include "Potal.h"
 
-CLevel_Henesys::CLevel_Henesys(LPDIRECT3DDEVICE9 pGraphic_Device)
+CLevel_Elenya::CLevel_Elenya(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
 {
 }
 
-HRESULT CLevel_Henesys::Initialize()
+HRESULT CLevel_Elenya::Initialize()
 {
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
@@ -56,7 +57,7 @@ HRESULT CLevel_Henesys::Initialize()
 	return S_OK;
 }
 
-void CLevel_Henesys::Tick(_float fTimeDelta)
+void CLevel_Elenya::Tick(_float fTimeDelta)
 {
 	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
 		CQuestManager::Get_Instance()->QuestClear();
@@ -76,10 +77,9 @@ void CLevel_Henesys::Tick(_float fTimeDelta)
 
 	}
 
-
 }
 
-HRESULT CLevel_Henesys::Render()
+HRESULT CLevel_Elenya::Render()
 {
 	if (FAILED(__super::Render()))
 		return E_FAIL;
@@ -90,7 +90,7 @@ HRESULT CLevel_Henesys::Render()
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_Camera(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_Camera(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -115,7 +115,7 @@ HRESULT CLevel_Henesys::Ready_Layer_Camera(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_Player(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_Player(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -128,7 +128,7 @@ HRESULT CLevel_Henesys::Ready_Layer_Player(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_BackGround(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_BackGround(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -143,7 +143,7 @@ HRESULT CLevel_Henesys::Ready_Layer_BackGround(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_Monster(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_Monster(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -158,7 +158,7 @@ HRESULT CLevel_Henesys::Ready_Layer_Monster(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_Npc(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_Npc(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -170,19 +170,62 @@ HRESULT CLevel_Henesys::Ready_Layer_Npc(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_Map(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_Map(const _tchar * pLayerTag)
 {
+
+
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+
+
+	CPotal::POTALDESC PotalDesc;
+	PotalDesc.eDestLevel = LEVEL_HENESYS;
+	PotalDesc.Pos =  _float3(-1.f, 1.f, 0.f);
+	PotalDesc.DestPos = _float3(51.f, 16.f, -2.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_ELENYA, pLayerTag, &PotalDesc)))
+		return E_FAIL;
+
+
+
+
 	/* 맵 큐브 추가 > 섹션 생성 > 콜리젼 매니저 컴포넌트 멤버함수 호출로 섹션에 큐브 채우기*/
 
-	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Test2");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Elenya");
 	for (auto& Data : *pMapData)
 	{
-		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_HENESYS, pLayerTag, &Data)))
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_ELENYA, pLayerTag, &Data)))
 			return E_FAIL;
 	}
+
+
+	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Elenya");
+	if (nullptr != pModelData)
+	{
+		for (auto& Model : *pModelData)
+		{
+			CVIBuffer_Voxel::VOXELDESC VoxDesc;
+			CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
+			VoxDesc.vPos = Model.vPos;
+
+			_float4x4 Matrix;
+			D3DXMatrixIdentity(&Matrix);
+
+			D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
+
+			D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
+
+
+			VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
+			VoxDesc.vRotationAix = Model.vAix;
+
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_ELENYA, pLayerTag, &VoxDesc)))
+				return E_FAIL;
+		}
+
+	}
+
+
 
 
 	Safe_Release(pGameInstance);
@@ -194,7 +237,7 @@ HRESULT CLevel_Henesys::Ready_Layer_Map(const _tchar * pLayerTag)
 
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_Section(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_Section(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -203,26 +246,36 @@ HRESULT CLevel_Henesys::Ready_Layer_Section(const _tchar * pLayerTag)
 		return E_FAIL;
 	m_pColliderCom = (CCollider*)pComponent;
 
+
 	CMap_Manager::CUBEDATA Data;
 	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
 
-	for (int i = -5; i < 7; i++)
+	for (int y = 0; y < 6; y++)
 	{
-		for (int j = -5; j < 7; j++)
+		for (int j = -5; j < 10; j++)
 		{
-			Data.vPos = _float3((_float)i * 5.f, 1.f, (_float)j * 5.f);
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
-				return E_FAIL;
+			for (int i = -5; i < 10; i++)
+			{
+				_float XIndex = i*5.f;
+				_float ZIndex = j*5.f;
+				Data.vPos = _float3((-16.f + XIndex) + ZIndex, 2.f + y * 5.f, 7 - XIndex);
+				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_ELENYA, pLayerTag, &Data)))
+					return E_FAIL;
+			}
 		}
 	}
+
+
 
 	Safe_Release(pGameInstance);
 
 
 	m_pColliderCom->Set_SectionCubes();
+
+	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_UI(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_UI(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -288,14 +341,14 @@ HRESULT CLevel_Henesys::Ready_Layer_UI(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_Layer_Spawner(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
 
 
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_SkillFrameBtn(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 {
 	//스킬Up Btn 간격 가로 144px 세로 40px
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -412,7 +465,7 @@ HRESULT CLevel_Henesys::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_SkillIcon(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_SkillIcon(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -440,7 +493,7 @@ HRESULT CLevel_Henesys::Ready_SkillIcon(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_SkillInfo()
+HRESULT CLevel_Elenya::Ready_SkillInfo()
 {
 	//CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 	//CSunCrossInfo* pSunCross = new CSunCrossInfo;
@@ -457,7 +510,7 @@ HRESULT CLevel_Henesys::Ready_SkillInfo()
 
 }
 
-HRESULT CLevel_Henesys::Ready_QuickSlot(const _tchar* pLayerTag)
+HRESULT CLevel_Elenya::Ready_QuickSlot(const _tchar* pLayerTag)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -615,7 +668,7 @@ HRESULT CLevel_Henesys::Ready_QuickSlot(const _tchar* pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys::Ready_QuickSlotSkill(const _tchar * pLayerTag)
+HRESULT CLevel_Elenya::Ready_QuickSlotSkill(const _tchar * pLayerTag)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -705,20 +758,20 @@ HRESULT CLevel_Henesys::Ready_QuickSlotSkill(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-CLevel_Henesys * CLevel_Henesys::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CLevel_Elenya * CLevel_Elenya::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CLevel_Henesys*		pInstance = new CLevel_Henesys(pGraphic_Device);
+	CLevel_Elenya*		pInstance = new CLevel_Elenya(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CLevel_Henesys"));
+		MSG_BOX(TEXT("Failed To Created : CLevel_Henesys_1"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CLevel_Henesys::Free()
+void CLevel_Elenya::Free()
 {
 	__super::Free();
 

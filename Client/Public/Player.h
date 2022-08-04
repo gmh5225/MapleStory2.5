@@ -29,6 +29,8 @@ public:
 
 	void SetOnceEndAni();
 
+	void SetRespownPos(_float3 RePos);
+
 private:
 	void Dash(_float fTimeDelta);
 	void Jump(_float fTimeDelta);
@@ -39,8 +41,11 @@ protected:
 
 private:
 	HRESULT SetUp_Components();
-
+	LPD3DXFONT m_Font;
 	_bool temp = false;
+
+	_float m_fRespownPosAcc;
+	_float3 m_vRespownPos;
 
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
