@@ -285,9 +285,12 @@
     </Filter>
     <Filter Include="01.Level\Level_Static">
       <UniqueIdentifier>{6e054273-b879-4854-8d43-7b0041d5f788}</UniqueIdentifier>
-         </Filter>
-    <Filter Include="02.GameObject\BackGround\Sky">
-      <UniqueIdentifier>{cfd28302-3983-4840-9aad-2c4ca535bc71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\Elenya">
+      <UniqueIdentifier>{3e1c87f4-4d77-415a-af1b-195d29504777}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Potal">
+      <UniqueIdentifier>{1d9a8ed7-cbee-4ca7-9d82-acbe418bb072}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -498,9 +501,6 @@
     <ClInclude Include="..\Public\SpawnerManager.h">
       <Filter>05.Spawner\SpawnerManager</Filter>
     </ClInclude>
-    <ClInclude Include="..\public\Level_Henesys.h">
-      <Filter>01.Level\Henesys</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\QuestManager.h">
       <Filter>89.Manager\QuestManager</Filter>
     </ClInclude>
@@ -509,9 +509,16 @@
     </ClInclude>
     <ClInclude Include="..\Public\Level_Static.h">
       <Filter>01.Level\Level_Static</Filter>
-        </ClInclude>
-    <ClInclude Include="..\Public\Sky.h">
-      <Filter>02.GameObject\BackGround\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Sky.h" />
+    <ClInclude Include="..\Public\Level_Henesys_1.h">
+      <Filter>01.Level\Henesys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_Elenya.h">
+      <Filter>01.Level\Elenya</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Potal.h">
+      <Filter>02.GameObject\Creature\Potal</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -716,17 +723,21 @@
     <ClCompile Include="..\Private\SpawnerManager.cpp">
       <Filter>05.Spawner\SpawnerManager</Filter>
     </ClCompile>
-    <ClCompile Include="..\private\Level_Henesys.cpp">
-      <Filter>01.Level\Henesys</Filter>
-    </ClCompile>
     <ClCompile Include="..\private\Section.cpp">
       <Filter>02.GameObject\Section</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Level_Static.cpp">
       <Filter>01.Level\Level_Static</Filter>
-          </ClCompile>
-    <ClCompile Include="..\Private\Sky.cpp">
-      <Filter>02.GameObject\BackGround\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Sky.cpp" />
+    <ClCompile Include="..\Private\Level_Henesys_1.cpp">
+      <Filter>01.Level\Henesys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_Elenya.cpp">
+      <Filter>01.Level\Elenya</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Potal.cpp">
+      <Filter>02.GameObject\Creature\Potal</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

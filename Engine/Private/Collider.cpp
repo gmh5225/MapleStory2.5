@@ -100,17 +100,23 @@ HRESULT CCollider::Set_SectionCubes()
 	list<CGameObject*> Sections = m_PhshBoxCollisionObjects[COLLSION_SECTION];
 	list<CGameObject*> Cubes= m_PhshBoxCollisionObjects[COLLSION_BLOCK];
 
-	for (auto& Section : Sections)
+
+	for (list<CGameObject*>::iterator iter = Sections.begin(); iter != Sections.end(); ++iter)
 	{
-		m_Sections.push_back(Section);
-		//Safe_AddRef(Section);
 		for (auto& Cube : Cubes)
 		{
-			if (Check_Box(Section, Cube, false))
+			if (Check_Box(*iter, Cube, false))
 			{
-				Section->Collision(Cube);
+				(*iter)->Collision(Cube);
 			}
 		}
+
+		if (!((*iter)->GetCubes()->empty()))
+		{
+			m_Sections.push_back(*iter);
+		}
+		else
+			(*iter)->Set_Dead();
 	}
 
 	return S_OK;

@@ -36,6 +36,7 @@ public:
 	HRESULT Loading_ForStatic();
 	HRESULT Loading_ForGamePlayLevel();
 	HRESULT Loading_ForHenesys();
+	HRESULT Loading_ForElenya();
 
 //객체원형 로딩함수
 private:
@@ -48,6 +49,7 @@ private:
 	HRESULT Load_Item_Object();
 	HRESULT	Load_Spawner_Object();
 	HRESULT Load_Component();
+	HRESULT Load_Map();
 
 //텍스처 로딩함수
 private:

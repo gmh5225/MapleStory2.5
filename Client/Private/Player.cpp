@@ -16,6 +16,8 @@ CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 CPlayer::CPlayer(const CPlayer & rhs)
 	: CCreature(rhs)
 {
+	ZeroMemory(&m_vRespownPos, sizeof(_float3));
+	m_fRespownPosAcc = 0.f;
 }
 
 
@@ -39,10 +41,14 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, 2.f, 0.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-9.f, 4.f, -3.f));
 	m_pTransformCom->Set_Scaled(2.5f);
 
+	m_vRespownPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
+	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"돋움체", &m_Font);
 
 	// *중력 코드
 	// 중력 값을 설정
@@ -159,15 +165,25 @@ void CPlayer::Tick(_float fTimeDelta)
 }
 void CPlayer::LateTick(_float fTimeDelta)
 {
+
+	// 최근 위치에서 리스폰하는 코드
+	m_fRespownPosAcc += 1.f * fTimeDelta;
+	if (2.f < m_fRespownPosAcc)
+	{
+		if((m_pTransformCom->Get_Vel() > -0.1f) && (m_eCurState == STATE_IDLE || m_eCurState == STATE_MOVE))
+			m_vRespownPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		m_fRespownPosAcc = 0.f;
+	}
 	if(m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -20.f)
 	{
 		m_pTransformCom->Set_Vel(0.f);
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, 3.f, 0.f));
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_vRespownPos);
 	}
 		
+
+	// 상태에 따른 마지막 행동 설정
 	SetOnceEndAni();
 	
-
 	// *중력 코드
 	// 중력 적용
 	m_pTransformCom->Go_Gravity(fTimeDelta);
@@ -175,6 +191,7 @@ void CPlayer::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
+	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
 	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_PLAYER, this);
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	
@@ -211,6 +228,34 @@ HRESULT CPlayer::Render()
 	if (temp)
 		__super::BoxColCom_Render(m_pTransformCom);
 	
+
+
+	_float3 pos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+
+	wchar_t PosX[10];
+	_itow_s(pos.x, PosX, 10);
+
+	wchar_t PosY[10];
+	_itow_s(pos.y, PosY, 10);
+
+	wchar_t PosZ[10];
+	_itow_s(pos.z, PosZ, 10);
+
+	RECT X;
+	SetRect(&X, 800, 180, 0, 0);
+	m_Font->DrawText(NULL, PosX, -1, &X, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+	RECT Y;
+	SetRect(&Y, 820, 180, 0, 0);
+	m_Font->DrawText(NULL, PosY, -1, &Y, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+	RECT Z;
+	SetRect(&Z, 840, 180, 0, 0);
+	m_Font->DrawText(NULL, PosZ, -1, &Z, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+
+
+
 
 	return S_OK;
 }
@@ -260,6 +305,11 @@ void CPlayer::SetOnceEndAni()
 			break;
 		}
 	}
+}
+void CPlayer::SetRespownPos(_float3 RePos)
+{
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, RePos);
+	m_vRespownPos = RePos;
 }
 void CPlayer::SetAni()
 {
@@ -792,7 +842,7 @@ void CPlayer::Collision(CGameObject * pOther)
 		}
 		
 	}
-	else if (pOther->Get_Tag() == "Tag_Item")
+	if (pOther->Get_Tag() == "Tag_Item")
 	{
 
 		if (GetKeyState('Z') & 0x8000)

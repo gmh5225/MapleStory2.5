@@ -82,8 +82,8 @@ HRESULT CCube::Render()
 			temp = true;
 	}
 
-	if (temp)
-		__super::BoxColCom_Render(m_pTransformCom);
+	//if (temp)
+	//	__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }
