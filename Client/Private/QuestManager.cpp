@@ -26,6 +26,21 @@ void CQuestManager::Hunting(const _tchar * MonsterName)
 
 }
 
+void CQuestManager::Eat_Item(const _tchar * ItemName)
+{
+	if (wcscmp(ItemName, TEXT("RedShell")) == 0 && m_iQuestState == QUEST_PROGRESS)
+		++m_iRedShell;
+
+	if (wcscmp(ItemName, TEXT("BlueShell")) == 0 && m_iQuestState == QUEST_PROGRESS)
+		++m_iBlueShell;
+
+	if (wcscmp(ItemName, TEXT("PigRibbon")) == 0 && m_iQuestState == QUEST_PROGRESS)
+		++m_iPigRibbon;
+
+	if (m_iPigRibbon == 10 && m_iBlueShell == 7 && m_iRedShell == 7)
+		QuestClear();
+}
+
 void CQuestManager::Free()
 {
 }

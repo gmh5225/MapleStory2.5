@@ -440,7 +440,7 @@ void CTransform::LookAtForLandObject(_float3 vTargetPos)
 
 	Set_State(CTransform::STATE_RIGHT, *D3DXVec3Normalize(&vRight, &vRight) * vScale.x);
 	Set_State(CTransform::STATE_UP, *D3DXVec3Normalize(&vUp, &vUp) * vScale.y);
-	Set_State(CTransform::STATE_LOOK, *D3DXVec3Normalize(&vLook, &vLook) * vScale.z);
+	Set_State(CTransform::STATE_LOOK, *D3DXVec3Normalize(&vLook, &vLook) * vScale.z );
 }
 
 void CTransform::Chase(_float3 vTargetPos, _float fTimeDelta)

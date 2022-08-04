@@ -41,19 +41,19 @@ HRESULT CQuestUI::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
-		D3DXCreateFont(m_pGraphic_Device, 15, 0, FW_NORMAL, 1, FALSE, DEFAULT_CHARSET,
-		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		TEXT("Arial"), &m_pFont);
 
 	return S_OK;
 }
 
 void CQuestUI::Tick(_float fTimeDelta)
 {
+	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
+		CQuestManager::Get_Instance()->QuestClear();
+	else if (CQuestManager::Get_Instance()->Set_StoneGolem() >= 1)
+		CQuestManager::Get_Instance()->QuestClear();
 
 	RECT		rcUI;
 	SetRect(&rcUI, _int(m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f), _int(m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f), _int(m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f), _int(m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f));
-
 
 }
 

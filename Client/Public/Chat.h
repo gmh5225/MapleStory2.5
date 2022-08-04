@@ -54,7 +54,25 @@ public:
 	virtual void Free() override;
 
 private:
-	bool	m_bChat;
+	_bool	m_bChat;
+	_float m_fCount;
+	_float m_fCountChat;
+
+	_bool m_bCountCheck;
+	_bool m_bCountCheck2;
+
+	_bool m_bWhy;
+
+	LPD3DXFONT m_pFontName;
+	LPD3DXFONT m_pFont;
+
+	_uint m_iChatProgress;
+	_uint m_iRandom;
+
+public:
+	void	Bind_Animation();
+	
+	void	Create_Chat(string Chat);
 };
 
 END

@@ -312,11 +312,20 @@ void COrangeMushroom::Tick_Chase(_float fTimeDelta)
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+	{
 		SetState(STATE_CHASE, DIR_R);
+		m_pTransformCom->Chase(vPlayerPos + _float3(-0.1f, 0.f, 0.1f), fTimeDelta);
+	}
 	else
+	{
 		SetState(STATE_CHASE, DIR_L);
+		m_pTransformCom->Chase(vPlayerPos + _float3(0.1f, 0.f, 0.1f), fTimeDelta);
+	}
 
-	m_pTransformCom->Chase(vPlayerPos, fTimeDelta);
+	
+
+
+
 
 	Safe_Release(pGameInstance);
 }

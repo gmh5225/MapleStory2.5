@@ -31,11 +31,16 @@ public:	//퀘스트의 상태를 변화시킴
 	// 몬스터가 죽을때 인자로 몬스터의 이름을 넣고 호출시킴, 퀘스트의 클리어를 담당
 	void Hunting(const _tchar* MonsterName);
 
+	// 아이템을 먹을때 인자로 아이템의 이름을 넣음, 아이템 퀘스트 클리어를 담당
+	void Eat_Item(const _tchar* ItemName);
+
 
 	// 사냥한 몬스터 마릿수 리턴
 	_uint Set_Slime(){ return m_iHuntSlime; }
 	_uint Set_OrangeMushroom() { return m_iHuntOrangeMushroom; }
 	_uint Set_StoneGolem() { return m_iHuntStoneGolem; }
+
+
 
 
 	// 사냥한 모든 몬스터 초기화
@@ -60,10 +65,16 @@ private:
 	_uint	m_iHunt;
 	bool	m_bCheckQuest;
 
+	//사냥한 몬스터를 갖고있는 변수
 	_uint	m_iHuntSlime;
 	_uint	m_iHuntOrangeMushroom;
 	_uint	m_iHuntRibbonPig;
 	_uint	m_iHuntStoneGolem;
+
+	//획득한 아이템을 갖고있는 변수
+	_uint	m_iRedShell;
+	_uint	m_iBlueShell;
+	_uint	m_iPigRibbon;
 
 	// 몇번째 퀘스트인지
 	_uint	m_iQuestNum;

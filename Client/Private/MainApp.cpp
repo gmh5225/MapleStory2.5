@@ -56,7 +56,7 @@ void CMainApp::Tick(_float fTimeDelta)
 
 #ifdef _DEBUG
 	m_fTimeAcc += fTimeDelta;
-#endif // _DEBUG
+#endif  _DEBUG
 
 	m_pGameInstance->Tick_Engine(fTimeDelta);
 
