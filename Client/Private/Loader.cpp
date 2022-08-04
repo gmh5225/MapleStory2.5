@@ -165,6 +165,7 @@ HRESULT CLoader::Loading_ForHenesys()
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
+
 		Safe_Release(pGameInstance);
 		g_bHenesys = true;
 	}
