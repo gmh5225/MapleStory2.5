@@ -202,6 +202,8 @@
     <ClInclude Include="..\Public\RedSnail.h" />
     <ClInclude Include="..\Public\ReefAttack.h" />
     <ClInclude Include="..\Public\ReefAttackHit.h" />
+    <ClInclude Include="..\Public\ReefAttackIcon.h" />
+    <ClInclude Include="..\Public\ReefAttackInfo.h" />
     <ClInclude Include="..\public\Section.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
     <ClInclude Include="..\Public\SkillGradeBtn0.h" />
@@ -220,6 +222,10 @@
     <ClInclude Include="..\Public\SolunaSlashInfo.h" />
     <ClInclude Include="..\Public\Spawner.h" />
     <ClInclude Include="..\Public\SpawnerManager.h" />
+    <ClInclude Include="..\Public\SpearPulling.h" />
+    <ClInclude Include="..\Public\SpearPullingHit.h" />
+    <ClInclude Include="..\Public\SpearPullingIcon.h" />
+    <ClInclude Include="..\Public\SpearPullingInfo.h" />
     <ClInclude Include="..\Public\SunCrossIcon.h" />
     <ClInclude Include="..\Public\SunCrossInfo.h" />
     <ClInclude Include="..\Public\StoneGolem.h" />
@@ -231,6 +237,8 @@
     <ClInclude Include="..\Public\SunCross.h" />
     <ClInclude Include="..\Public\SunCrossHit.h" />
     <ClInclude Include="..\Public\WarriorReef.h" />
+    <ClInclude Include="..\Public\WarriorReefIcon.h" />
+    <ClInclude Include="..\Public\WarriorReefInfo.h" />
     <ClInclude Include="..\Public\Wood.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Resource.h" />
@@ -282,6 +290,8 @@
     <ClCompile Include="..\Private\RedSnail.cpp" />
     <ClCompile Include="..\Private\ReefAttack.cpp" />
     <ClCompile Include="..\Private\ReefAttackHit.cpp" />
+    <ClCompile Include="..\Private\ReefAttackIcon.cpp" />
+    <ClCompile Include="..\Private\ReefAttackInfo.cpp" />
     <ClCompile Include="..\private\Section.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
     <ClCompile Include="..\Private\SkillGradeBtn0.cpp" />
@@ -300,6 +310,10 @@
     <ClCompile Include="..\Private\SolunaSlashInfo.cpp" />
     <ClCompile Include="..\Private\Spawner.cpp" />
     <ClCompile Include="..\Private\SpawnerManager.cpp" />
+    <ClCompile Include="..\Private\SpearPulling.cpp" />
+    <ClCompile Include="..\Private\SpearPullingHit.cpp" />
+    <ClCompile Include="..\Private\SpearPullingIcon.cpp" />
+    <ClCompile Include="..\Private\SpearPullingInfo.cpp" />
     <ClCompile Include="..\Private\SunCrossIcon.cpp" />
     <ClCompile Include="..\Private\SunCrossInfo.cpp" />
     <ClCompile Include="..\Private\StoneGolem.cpp" />
@@ -311,6 +325,8 @@
     <ClCompile Include="..\Private\SunCross.cpp" />
     <ClCompile Include="..\Private\SunCrossHit.cpp" />
     <ClCompile Include="..\Private\WarriorReef.cpp" />
+    <ClCompile Include="..\Private\WarriorReefIcon.cpp" />
+    <ClCompile Include="..\Private\WarriorReefInfo.cpp" />
     <ClCompile Include="..\Private\Wood.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">

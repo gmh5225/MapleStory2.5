@@ -6,6 +6,9 @@
 #include "SkillInfo.h"
 #include "SunCrossInfo.h"
 #include "SolunaSlashInfo.h"
+#include "WarriorReefInfo.h"
+#include "ReefAttackInfo.h"
+#include "SpearPullingInfo.h"
 #include "SkillManager.h"
 #include "UI.h"
 #include "QuestManager.h"
@@ -602,6 +605,18 @@ HRESULT CLevel_GamePlay::Ready_SkillIcon(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+	CUI::UIINFO ReefAttackInfo;
+	ReefAttackInfo.fSizeX = 32.f;
+	ReefAttackInfo.fSizeY = 32.f;
+	ReefAttackInfo.fMoveX = -129.f;
+	ReefAttackInfo.fMoveY = -69.f;
+
+	CUI::UIINFO WarriorReefInfo;
+	WarriorReefInfo.fSizeX = 32.f;
+	WarriorReefInfo.fSizeY = 32.f;
+	WarriorReefInfo.fMoveX = 15.f;
+	WarriorReefInfo.fMoveY = -69.f;
+
 	CUI::UIINFO SunCrossInfo;
 	SunCrossInfo.fSizeX = 32.f;
 	SunCrossInfo.fSizeY = 32.f;
@@ -614,10 +629,25 @@ HRESULT CLevel_GamePlay::Ready_SkillIcon(const _tchar * pLayerTag)
 	SolunaSlashInfo.fMoveX = 15.f;
 	SolunaSlashInfo.fMoveY = -69.f;
 
+	CUI::UIINFO SpearPullingInfo;
+	SpearPullingInfo.fSizeX = 32.f;
+	SpearPullingInfo.fSizeY = 32.f;
+	SpearPullingInfo.fMoveX = -129.f;
+	SpearPullingInfo.fMoveY = -69.f;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttackIcon"), LEVEL_STATIC, pLayerTag, &ReefAttackInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_WarriorReefIcon"), LEVEL_STATIC, pLayerTag, &WarriorReefInfo)))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCrossIcon"), LEVEL_STATIC, pLayerTag, &SunCrossInfo)))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlashIcon"), LEVEL_STATIC, pLayerTag, &SolunaSlashInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SpearPullingIcon"), LEVEL_STATIC, pLayerTag, &SpearPullingInfo)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -630,11 +660,22 @@ HRESULT CLevel_GamePlay::Ready_SkillInfo()
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 	CSunCrossInfo* pSunCross = new CSunCrossInfo;
 	CSolunaSlashInfo* pSolunaSlash = new CSolunaSlashInfo;
-	
-	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER, pSunCross)))
+	CReefAttackInfo* pReefAttack = new CReefAttackInfo;
+	CSpearPullingInfo* pSpearPulling = new CSpearPullingInfo;
+	CWarriorReefInfo* pWarriorReef = new CWarriorReefInfo;
+		if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("ReefAttackInfo"), CSkillManager::GRADE_BEGENNER, pReefAttack)))
+		return E_FAIL;
+
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("WarriorReefInfo"), CSkillManager::GRADE_BEGENNER, pWarriorReef)))
+		return E_FAIL;
+
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_FIRST, pSunCross)))
 		return E_FAIL;
 	
-	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER, pSolunaSlash)))
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_FIRST, pSolunaSlash)))
+		return E_FAIL;
+
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SpearPullingInfo"), CSkillManager::GRADE_SECOND, pSpearPulling)))
 		return E_FAIL;
 
 	return S_OK;

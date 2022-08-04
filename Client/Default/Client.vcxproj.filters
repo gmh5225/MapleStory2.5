@@ -301,6 +301,33 @@
     <Filter Include="02.GameObject\Skill\Effect\Dash\WarriorReef">
       <UniqueIdentifier>{9df7244f-5caa-4f29-b08e-c26af179ea2a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\CloseAttack\SpearPulling">
+      <UniqueIdentifier>{25cd20a8-3e30-4a90-b148-8529616443eb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\CloseAttack\SpearPulling\Attack">
+      <UniqueIdentifier>{2d13a6e3-4571-470f-9f57-9e23a12f1fb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\CloseAttack\SpearPulling\Hit">
+      <UniqueIdentifier>{fece6088-94ab-4a1f-b5a3-c76de346fd39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\CloseAttack\ReefAttack">
+      <UniqueIdentifier>{5eae765a-8f16-49d2-a889-9b22aedb06da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\CloseAttack\SpearPulling">
+      <UniqueIdentifier>{6611a43b-ee94-4fdf-ad24-936ff56e0d6d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\Dash\WarriorReef">
+      <UniqueIdentifier>{0403e166-5a94-42c5-b5aa-2ef27fdcae3c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\CloseAttack\ReefAttack">
+      <UniqueIdentifier>{0f5e2390-7dcd-4dc6-b7a6-58f089b98890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\CloseAttack\SpearPulling">
+      <UniqueIdentifier>{8ff02928-8db2-4853-8015-62b2d7ef7198}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\Dash\WarriorReef">
+      <UniqueIdentifier>{15db6d70-21ab-4e1a-86c1-f38027624189}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -538,6 +565,30 @@
     <ClInclude Include="..\Public\WarriorReef.h">
       <Filter>02.GameObject\Skill\Effect\Dash\WarriorReef</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\SpearPulling.h">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\SpearPulling\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SpearPullingHit.h">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\SpearPulling\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\WarriorReefInfo.h">
+      <Filter>20.DATA\SkillInfo\Dash\WarriorReef</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ReefAttackInfo.h">
+      <Filter>20.DATA\SkillInfo\CloseAttack\ReefAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SpearPullingInfo.h">
+      <Filter>20.DATA\SkillInfo\CloseAttack\SpearPulling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ReefAttackIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\CloseAttack\ReefAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SpearPullingIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\CloseAttack\SpearPulling</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\WarriorReefIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\Dash\WarriorReef</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -765,6 +816,30 @@
     </ClCompile>
     <ClCompile Include="..\Private\WarriorReef.cpp">
       <Filter>02.GameObject\Skill\Effect\Dash\WarriorReef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SpearPulling.cpp">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\SpearPulling\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SpearPullingHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\SpearPulling\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\WarriorReefInfo.cpp">
+      <Filter>20.DATA\SkillInfo\Dash\WarriorReef</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ReefAttackInfo.cpp">
+      <Filter>20.DATA\SkillInfo\CloseAttack\ReefAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SpearPullingInfo.cpp">
+      <Filter>20.DATA\SkillInfo\CloseAttack\SpearPulling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ReefAttackIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\CloseAttack\ReefAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SpearPullingIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\CloseAttack\SpearPulling</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\WarriorReefIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\Dash\WarriorReef</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -196,8 +196,11 @@ void CSkillFrame::BegennerText()
 	wchar_t SkillPoint[10];
 	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
 
-	wchar_t SunCrossLevel[10];
-	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SunCrossLevel, 10);
+	wchar_t ReefAttackGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("ReefAttackInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), ReefAttackGetLevel, 10);
+
+	wchar_t WarriorReefGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("WarriorReefInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), WarriorReefGetLevel, 10);
 
 	RECT Grade;
 	SetRect(&Grade, 865, 180, 0, 0);
@@ -207,13 +210,21 @@ void CSkillFrame::BegennerText()
 	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
 	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
 
-	RECT SuncrossName;
-	SetRect(&SuncrossName, 792, 215, 0, 0);
-	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+	RECT ReefAttackName;
+	SetRect(&ReefAttackName, 792, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("ReefAttackInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &ReefAttackName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 
-	RECT SuncrossLevel;
-	SetRect(&SuncrossLevel, 793, 233, 0, 0);
-	m_FrameFont->DrawText(NULL, SunCrossLevel, -1, &SuncrossLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+	RECT ReefAttackLevel;
+	SetRect(&ReefAttackLevel, 793, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, ReefAttackGetLevel, -1, &ReefAttackLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT WarriorReefName;
+	SetRect(&WarriorReefName, 935, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("WarriorReefInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &WarriorReefName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT WarriorReefLevel;
+	SetRect(&WarriorReefLevel, 936, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, WarriorReefGetLevel, -1, &WarriorReefLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 }
 
 void CSkillFrame::FirstText()
@@ -224,10 +235,10 @@ void CSkillFrame::FirstText()
 	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
 
 	wchar_t SunCrossGetLevel[10];
-	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SunCrossGetLevel, 10);
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_FIRST)->Get_SkillLevel(), SunCrossGetLevel, 10);
 
 	wchar_t SolunaSlashGetLevel[10];
-	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillLevel(), SolunaSlashGetLevel, 10);
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_FIRST)->Get_SkillLevel(), SolunaSlashGetLevel, 10);
 
 	RECT Grade;
 	SetRect(&Grade, 865, 180, 0, 0);
@@ -239,7 +250,7 @@ void CSkillFrame::FirstText()
 
 	RECT SuncrossName;
 	SetRect(&SuncrossName, 792, 215, 0, 0);
-	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_FIRST)->Get_SkillName(), -1, &SuncrossName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 
 	RECT SunCrossLevel;
 	SetRect(&SunCrossLevel, 793, 233, 0, 0);
@@ -247,7 +258,7 @@ void CSkillFrame::FirstText()
 
 	RECT SolunaSlashName;
 	SetRect(&SolunaSlashName, 935, 215, 0, 0);
-	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER)->Get_SkillName(), -1, &SolunaSlashName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_FIRST)->Get_SkillName(), -1, &SolunaSlashName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 
 	RECT SolunaSlashLevel;
 	SetRect(&SolunaSlashLevel, 936, 233, 0, 0);
@@ -261,6 +272,9 @@ void CSkillFrame::SecondText()
 	wchar_t SkillPoint[10];
 	_itow_s(m_pSkillManager->Get_SkillPoint(), SkillPoint, 10);
 
+	wchar_t SpearPullingGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SpearPullingInfo"), CSkillManager::GRADE_SECOND)->Get_SkillLevel(), SpearPullingGetLevel, 10);
+
 	RECT Grade;
 	SetRect(&Grade, 865, 180, 0, 0);
 	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
@@ -268,6 +282,14 @@ void CSkillFrame::SecondText()
 	RECT SkillPointrt;
 	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
 	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+
+	RECT SpearPullingName;
+	SetRect(&SpearPullingName, 792, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("SpearPullingInfo"), CSkillManager::GRADE_SECOND)->Get_SkillName(), -1, &SpearPullingName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT SpearPullingLevel;
+	SetRect(&SpearPullingLevel, 793, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, SpearPullingGetLevel, -1, &SpearPullingLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 }
 
 void CSkillFrame::ThirdText()

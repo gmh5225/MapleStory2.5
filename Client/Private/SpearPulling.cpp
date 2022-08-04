@@ -1,13 +1,13 @@
 #include "stdafx.h"
-#include "..\Public\SunCross.h"
-#include "SunCrossHit.h"
+#include "..\Public\SpearPulling.h"
+#include "SpearPullingHit.h"
 #include "GameInstance.h"
 
-CSunCross::CSunCross(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSpearPulling::CSpearPulling(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CSunCross::CSunCross(const CSunCross & rhs)
+CSpearPulling::CSpearPulling(const CSpearPulling & rhs)
 	: CCreature(rhs), m_bCreate(false)
 {
 }
@@ -15,13 +15,13 @@ CSunCross::CSunCross(const CSunCross & rhs)
 
 
 
-HRESULT CSunCross::Initialize_Prototype()
+HRESULT CSpearPulling::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CSunCross::Initialize(void * pArg)
+HRESULT CSpearPulling::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
@@ -36,14 +36,16 @@ HRESULT CSunCross::Initialize(void * pArg)
 
 	m_fColRad = 0.5f;
 
-	m_pTransformCom->Set_Scaled(4.f);
-	m_pTransformCom->Set_ScaledX(1.5f);
+	m_pTransformCom->Set_Scaled(5.f);
+	m_pTransformCom->Set_ScaledX(3.5f);
 
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SunCross"), 0.05f, CAnimator::STATE_LOOF);
-	memcpy(&m_Desc, pArg, sizeof(SUNCROSSDESC));
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SpearPulling"), 0.07f, CAnimator::STATE_LOOF);
+	memcpy(&m_Desc, pArg, sizeof(SPEARPULLINGDESC));
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
+	m_bPulling = false;
+	m_fPullAcc = 0.f;
 	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 	return S_OK;
@@ -52,18 +54,19 @@ HRESULT CSunCross::Initialize(void * pArg)
 
 
 
-HRESULT CSunCross::SetUp_Components()
+HRESULT CSpearPulling::SetUp_Components()
 {
 
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 2.5f, 2.f, 2.5f };
+	BoxColDesc.vScale = _float3{ 3.5f, 3.f, 3.5f };
 	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;
 
+
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunCross"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SpearPulling"), nullptr);
 	}
 
 
@@ -83,25 +86,33 @@ HRESULT CSunCross::SetUp_Components()
 
 
 
-void CSunCross::Tick(_float fTimeDelta)
+void CSpearPulling::Tick(_float fTimeDelta)
 {
 	SetPosition(m_eDir);
-
+	m_fPullAcc += 1.f * fTimeDelta;
+	if (m_fPullAcc > 0.5f)
+	{
+		m_bPulling = true;
+		m_fPullAcc = 0.f;
+	}
 }
-void CSunCross::LateTick(_float fTimeDelta)
+void CSpearPulling::LateTick(_float fTimeDelta)
 {
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 
-	if (m_pAnimatorCom->Get_AnimCount() == 4)
+	if (m_pAnimatorCom->Get_AnimCount() == 11)
 	{
 		Set_Dead();
 	}
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+
 	__super::BoxColCom_Tick(m_pTransformCom);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
+	//m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 
 }
-HRESULT CSunCross::Render()
+HRESULT CSpearPulling::Render()
 {
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
@@ -119,18 +130,23 @@ HRESULT CSunCross::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
+
+
 	__super::BoxColCom_Render(m_pTransformCom);
+
+
+
 
 	return S_OK;
 }
 
 
 
-void CSunCross::SetState(STATE eState, DIR eDir)
+void CSpearPulling::SetState(STATE eState, DIR eDir)
 {
 
 }
-void CSunCross::SetDirection()
+void CSpearPulling::SetDirection()
 {
 
 	switch (m_eDir)
@@ -167,41 +183,41 @@ void CSunCross::SetDirection()
 
 
 }
-void CSunCross::SetPosition(DIR eDir)
+void CSpearPulling::SetPosition(DIR eDir)
 {
 	_float3 vPosFix;
 	switch (eDir)
 	{
 	case Client::CCreature::DIR_L:
-		vPosFix = { -0.5f,0.f,0.f };
+		vPosFix = { -2.f,0.f,0.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_R:
-		vPosFix = { 0.5f,0.f,0.f };
+		vPosFix = { 2.f,0.f,0.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_U:
-		vPosFix = { 0.f,0.f,0.5f };
+		vPosFix = { 0.f,0.f,2.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_D:
-		vPosFix = { 0.f,0.f,-0.5f };
+		vPosFix = { 0.f,0.f,-2.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_LU:
-		vPosFix = { -0.25f,0.f,0.25f };
+		vPosFix = { -1.f,0.f,1.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_RU:
-		vPosFix = { 0.25f,0.f,0.25f };
+		vPosFix = { 1.f,0.f,1.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_LD:
-		vPosFix = { -0.25f,0.f,-0.25f };
+		vPosFix = { -1.f,0.f,-1.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_RD:
-		vPosFix = { 0.25f,0.f,-0.25f };
+		vPosFix = { 1.f,0.f,-1.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_END:
@@ -211,35 +227,31 @@ void CSunCross::SetPosition(DIR eDir)
 		break;
 	}
 }
-void CSunCross::SetAni()
+void CSpearPulling::SetAni()
 {
 
 }
 
 
-
-
-
-
-CSunCross * CSunCross::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CSpearPulling * CSpearPulling::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CSunCross*		pInstance = new CSunCross(pGraphic_Device);
+	CSpearPulling*		pInstance = new CSpearPulling(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CSunCross"));
+		MSG_BOX(TEXT("Failed To Created : CSpearPulling"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CSunCross::Clone(void* pArg)
+CGameObject * CSpearPulling::Clone(void* pArg)
 {
-	CSunCross*		pInstance = new CSunCross(*this);
+	CSpearPulling*		pInstance = new CSpearPulling(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CSunCross"));
+		MSG_BOX(TEXT("Failed To Cloned : CSpearPulling"));
 		Safe_Release(pInstance);
 	}
 
@@ -249,39 +261,49 @@ CGameObject * CSunCross::Clone(void* pArg)
 
 
 
-void CSunCross::Collision(CGameObject * pOther)
+void CSpearPulling::Collision(CGameObject * pOther)
 {
 	if (pOther->Get_Tag() == "Tag_Monster")
 	{
-
-		if (5 < m_pOther.size())
-			return;
-
-		for (auto& TempOther : m_pOther)
+		if (m_bPulling)
 		{
-			if (TempOther == pOther)
+			if (5 < m_pOther.size())
 				return;
+
+			for (auto& TempOther : m_pOther)
+			{
+				if (TempOther == pOther)
+					return;
+			}
+
+			CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+			Safe_AddRef(pGameInstance);
+
+			CSpearPullingHit::SPEARPULLINGHITDESC SpearPullingHitDesc;
+			CTransform* pTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
+			SpearPullingHitDesc.vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+
+			pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SpearPulling_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &SpearPullingHitDesc);
+			Safe_Release(pGameInstance);
+
+			m_pOther.push_back(pOther);
+
+			pOther->Damaged(this);
+			Pulling(pOther);
 		}
-
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
-		CSunCrossHit::SUNCROSSHITDESC SunCrossHitDesc;
-		CTransform* pTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
-		SunCrossHitDesc.vPos = pTransform->Get_State(CTransform::STATE_POSITION);
-
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &SunCrossHitDesc);
-		Safe_Release(pGameInstance);
-
-		m_pOther.push_back(pOther);
-
-		pOther->Damaged(this);
 
 		//Set_Dead();
 	}
 }
 
-HRESULT CSunCross::Set_RenderState()
+void CSpearPulling::Pulling(CGameObject * pOther)
+{
+	CTransform* pTrans = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
+	_float3 vLookTemp = m_pTransformCom->Get_State(CTransform::STATE_POSITION) - pTrans->Get_State(CTransform::STATE_POSITION);
+	pTrans->Set_State(CTransform::STATE_POSITION, pTrans->Get_State(CTransform::STATE_POSITION) + vLookTemp);
+}
+
+HRESULT CSpearPulling::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -299,7 +321,7 @@ HRESULT CSunCross::Set_RenderState()
 
 }
 
-HRESULT CSunCross::Reset_RenderState()
+HRESULT CSpearPulling::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
@@ -311,7 +333,7 @@ HRESULT CSunCross::Reset_RenderState()
 
 
 
-void CSunCross::Free()
+void CSpearPulling::Free()
 {
 	__super::Free();
 }

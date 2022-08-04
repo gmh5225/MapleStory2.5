@@ -136,7 +136,7 @@ void CSkillUpBtn::Set_RenderGroup()
 	switch (pSkillInstance->Get_SkillGrade())
 	{
 	case CSkillManager::GRADE_BEGENNER:
-		if (m_bRender && m_iBtnNum < 2)
+		if (m_bRender && m_iBtnNum < 3)
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 	case CSkillManager::GRADE_FIRST:
@@ -144,7 +144,7 @@ void CSkillUpBtn::Set_RenderGroup()
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 	case CSkillManager::GRADE_SECOND:
-		if (m_bRender && m_iBtnNum < 4)
+		if (m_bRender && m_iBtnNum < 2)
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 	case CSkillManager::GRADE_THIRD:
@@ -205,7 +205,12 @@ void CSkillUpBtn::SkillLevelUp_Begenner()
 	{
 	case 1:
 		pSkillInstance->Set_SkillPoint(-1);
-		pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		pSkillInstance->Get_SkillInfo(TEXT("ReefAttackInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		break;
+
+	case 2:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("WarriorReefInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
 		break;
 
 	default:
@@ -221,11 +226,11 @@ void CSkillUpBtn::SkillLevelUp_First()
 	{
 	case 1:
 		pSkillInstance->Set_SkillPoint(-1);
-		pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		pSkillInstance->Get_SkillInfo(TEXT("SunCrossInfo"), CSkillManager::GRADE_FIRST)->Set_SkillLevel(1);
 		break;
 	case 2:
 		pSkillInstance->Set_SkillPoint(-1);
-		pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_BEGENNER)->Set_SkillLevel(1);
+		pSkillInstance->Get_SkillInfo(TEXT("SolunaSlashInfo"), CSkillManager::GRADE_FIRST)->Set_SkillLevel(1);
 		break;
 
 	default:
@@ -237,6 +242,17 @@ void CSkillUpBtn::SkillLevelUp_First()
 
 void CSkillUpBtn::SkillLevelUp_Second()
 {
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	switch (m_iBtnNum)
+	{
+	case 1:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("SpearPullingInfo"), CSkillManager::GRADE_SECOND)->Set_SkillLevel(1);
+		break;
+
+	default:
+		break;
+	}
 }
 
 void CSkillUpBtn::SkillLevelUp_Third()

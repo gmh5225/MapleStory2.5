@@ -9,6 +9,7 @@
 #include "InvenManager.h"
 #include "ReefAttack.h"
 #include "WarriorReef.h"
+#include "SpearPulling.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -582,6 +583,19 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		Safe_Release(pGameInstance);
 	}
 
+	if (GetKeyState('V') & 0x8000)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
+		SolunaDECS.eDir = m_eDir;
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+		SetState(STATE_DASH, m_eDir);
+		Safe_Release(pGameInstance);
+	}
+
 	if (GetKeyState('A') & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -626,10 +640,10 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		CSunderBreakAttack::SUNDERBREAKATTACKDESC SunderAttackDECS;
-		SunderAttackDECS.eDir = m_eDir;
+		CSpearPulling::SPEARPULLINGDESC SpearPullingDECS;
+		SpearPullingDECS.eDir = m_eDir;
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunderBreak_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &SunderAttackDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SpearPulling"), LEVEL_STATIC, TEXT("Layer_Skill"), &SpearPullingDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}

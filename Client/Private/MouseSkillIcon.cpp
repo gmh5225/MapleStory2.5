@@ -63,7 +63,7 @@ void CMouseSkillIcon::LateTick(_float fTimeDelta)
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
-	if (m_iTexturenum > 3)
+	if (m_iTexturenum > 8)
 		m_bRender = false;
 
 	if (m_bRender)
@@ -95,7 +95,7 @@ void CMouseSkillIcon::Change_Texture()
 	{
 	case Client::CUI::TYPE_ON:
 		m_bRender = false;
-		m_iTexturenum = 5;
+		m_iTexturenum = 10;
 		break;
 	case Client::CUI::TYPE_DOWN:
 		m_bRender = true;

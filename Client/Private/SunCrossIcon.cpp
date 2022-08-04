@@ -2,7 +2,6 @@
 #include "..\Public\SunCrossIcon.h"
 #include "GameInstance.h"
 #include "SkillManager.h"
-#include "SunCrossInfo.h"
 #include "MouseManager.h"
 
 
@@ -34,7 +33,7 @@ HRESULT CSunCrossIcon::Initialize(void * pArg)
 	m_iTexturenum = 0;
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 
-	m_pSkillInfo = (CSunCrossInfo*)pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER);
+	m_pSkillInfo = (CSunCrossInfo*)pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_FIRST);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunCrossIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
@@ -74,7 +73,7 @@ void CSunCrossIcon::LateTick(_float fTimeDelta)
 
 	Change_Texture();
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-	if (m_bRender&& pSkillInstance->Get_SkillGrade() <= CSkillManager::GRADE_FIRST)
+	if (m_bRender&& pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FIRST)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 	
 }
@@ -108,14 +107,14 @@ HRESULT CSunCrossIcon::Render()
 void CSunCrossIcon::Change_Texture()
 {
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-	if (pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_BEGENNER)->Get_SkillLevel() < 1)
+	if (pSkillInstance->Get_SkillInfo(L"SunCrossInfo", CSkillManager::GRADE_FIRST)->Get_SkillLevel() < 1)
 		m_iTexturenum = 0;
 	else
 		m_iTexturenum = 1;
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0)
-		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"SunCrossInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
+	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0 && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FIRST)
+		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"SunCrossInfo", CSkillManager::GRADE_FIRST, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 	
 	
 }

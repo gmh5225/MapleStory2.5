@@ -29,6 +29,9 @@
 #include "SkillUpBtn.h"
 #include "SunCrossIcon.h"
 #include "SolunaSlashIcon.h"
+#include "ReefAttackIcon.h"
+#include "WarriorReefIcon.h"
+#include "SpearPullingIcon.h"
 #include "SkillGradeBtn0.h"
 #include "SkillGradeBtn1.h"
 #include "SkillGradeBtn2.h"
@@ -57,6 +60,8 @@
 #include "ReefAttack.h"
 #include "ReefAttackHit.h"
 #include "WarriorReef.h"
+#include "SpearPulling.h"
+#include "SpearPullingHit.h"
 
 
 
@@ -330,6 +335,14 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 		CWarriorReef::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SpearPulling"),
+		CSpearPulling::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SpearPulling_Hit"),
+		CSpearPullingHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -427,6 +440,18 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SolunaSlashIcon"),
 		CSolunaSlashIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ReefAttackIcon"),
+		CReefAttackIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SpearPullingIcon"),
+		CSpearPullingIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_WarriorReefIcon"),
+		CWarriorReefIcon::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bulb"),
@@ -714,6 +739,14 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Dash/WarriorReef/Edit/WarriorReef%d.png"), 7))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SpearPulling"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/SpearPulling/Edit/SpearPulling%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SpearPulling_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/SpearPulling/Edit/SpearPullingHit%d.png"), 6))))
+		return E_FAIL;
+
 	Safe_Release(pGameInstance);
 
 
@@ -925,7 +958,7 @@ HRESULT CLoader::Load_UI_Texture()
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseSkillIcon"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 2))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 5))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_HpBarBase"),
@@ -1028,6 +1061,18 @@ HRESULT CLoader::Load_UI_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SolunaSlashIcon"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/Dash/SolunaSlash/SolunaSlashIcon%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_WarriorReefIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/Dash/WarriorReef/WarriorReefIcon%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ReefAttackIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/CloseAttack/ReefAttack/ReefAttackIcon%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SpearPullingIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/CloseAttack/SpearPulling/SpearPullingIcon%d.png"), 2))))
 		return E_FAIL;
 
 

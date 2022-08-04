@@ -40,7 +40,6 @@ public:
 private:
 	LPDIRECTINPUT8				m_pInputSDK = nullptr;
 	LPDIRECTINPUTDEVICE8		m_pKeyboard = nullptr;
-	LPDIRECTINPUTDEVICE8		m_pMouse = nullptr;
 
 private:	
 	_char				m_preKeyState[256] = { 0 };

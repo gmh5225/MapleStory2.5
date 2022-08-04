@@ -1,28 +1,28 @@
 #include "stdafx.h"
-#include "..\Public\SolunaSlashIcon.h"
+#include "..\Public\ReefAttackIcon.h"
 #include "GameInstance.h"
 #include "SkillManager.h"
 #include "MouseManager.h"
 
 
-CSolunaSlashIcon::CSolunaSlashIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
+CReefAttackIcon::CReefAttackIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
 {
 }
 
-CSolunaSlashIcon::CSolunaSlashIcon(const CSolunaSlashIcon& rhs)
+CReefAttackIcon::CReefAttackIcon(const CReefAttackIcon& rhs)
 	: CUI(rhs)
 {
 }
 
 
-HRESULT CSolunaSlashIcon::Initialize_Prototype()
+HRESULT CReefAttackIcon::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 	return S_OK;
 }
 
-HRESULT CSolunaSlashIcon::Initialize(void * pArg)
+HRESULT CReefAttackIcon::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
@@ -33,9 +33,9 @@ HRESULT CSolunaSlashIcon::Initialize(void * pArg)
 	m_iTexturenum = 0;
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 
-	m_pSkillInfo = (CSolunaSlashInfo*)pSkillInstance->Get_SkillInfo(L"SolunaSlashInfo", CSkillManager::GRADE_FIRST);
+	m_pSkillInfo = (CReefAttackInfo*)pSkillInstance->Get_SkillInfo(L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER);
 
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SolunaSlashIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ReefAttackIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
@@ -47,7 +47,7 @@ HRESULT CSolunaSlashIcon::Initialize(void * pArg)
 	return S_OK;
 }
 
-void CSolunaSlashIcon::Tick(_float fTimeDelta)
+void CReefAttackIcon::Tick(_float fTimeDelta)
 {
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
@@ -66,21 +66,19 @@ void CSolunaSlashIcon::Tick(_float fTimeDelta)
 	Safe_Release(pInstance);
 }
 
-void CSolunaSlashIcon::LateTick(_float fTimeDelta)
+void CReefAttackIcon::LateTick(_float fTimeDelta)
 {
-
-
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 	Change_Texture();
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-	if (m_bRender && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FIRST)
+	if (m_bRender&& pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_BEGENNER)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 
 }
 
-HRESULT CSolunaSlashIcon::Render()
+HRESULT CReefAttackIcon::Render()
 {
 	if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
 		return E_FAIL;
@@ -98,58 +96,56 @@ HRESULT CSolunaSlashIcon::Render()
 
 	if (m_eCollision == TYPE_ON)
 	{
-		RECT SolunaSlashNotice;
-		SetRect(&SolunaSlashNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
-		m_NoticeFont->DrawText(NULL, m_pSkillInfo->Get_SkillNotice(), -1, &SolunaSlashNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+		RECT ReefAttackNotice;
+		SetRect(&ReefAttackNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
+		m_NoticeFont->DrawText(NULL, m_pSkillInfo->Get_SkillNotice(), -1, &ReefAttackNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
 	}
 
 	return S_OK;
 }
 
-void CSolunaSlashIcon::Change_Texture()
+void CReefAttackIcon::Change_Texture()
 {
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-	if (pSkillInstance->Get_SkillInfo(L"SolunaSlashInfo", CSkillManager::GRADE_FIRST)->Get_SkillLevel() < 1)
+	if (pSkillInstance->Get_SkillInfo(L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER)->Get_SkillLevel() < 1)
 		m_iTexturenum = 0;
 	else
 		m_iTexturenum = 1;
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0 && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FIRST)
-		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"SolunaSlashInfo", CSkillManager::GRADE_FIRST, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
-
+	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0)
+		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 
 
 }
 
-CSolunaSlashIcon* CSolunaSlashIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CReefAttackIcon* CReefAttackIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CSolunaSlashIcon*		pInstance = new CSolunaSlashIcon(pGraphic_Device);
+	CReefAttackIcon*		pInstance = new CReefAttackIcon(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CSolunaSlashIcon"));
+		MSG_BOX(TEXT("Failed To Created : CReefAttackIcon"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CSolunaSlashIcon::Clone(void * pArg)
+CGameObject * CReefAttackIcon::Clone(void * pArg)
 {
-	CSolunaSlashIcon*		pInstance = new CSolunaSlashIcon(*this);
+	CReefAttackIcon*		pInstance = new CReefAttackIcon(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CSolunaSlashIcon"));
+		MSG_BOX(TEXT("Failed To Cloned : CReefAttackIcon"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CSolunaSlashIcon::Free()
+void CReefAttackIcon::Free()
 {
 	__super::Free();
-
 }
