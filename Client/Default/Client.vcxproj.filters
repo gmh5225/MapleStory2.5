@@ -289,6 +289,9 @@
     <Filter Include="05.Spawner\SpawnerManager">
       <UniqueIdentifier>{577010bb-2fb9-45b0-9378-2d84a77ba3a7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\BackGround\Sky">
+      <UniqueIdentifier>{cfd28302-3983-4840-9aad-2c4ca535bc71}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -513,6 +516,9 @@
     <ClInclude Include="..\public\Section.h">
       <Filter>02.GameObject\Section</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Sky.h">
+      <Filter>02.GameObject\BackGround\Sky</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -727,6 +733,9 @@
     </ClCompile>
     <ClCompile Include="..\private\Section.cpp">
       <Filter>02.GameObject\Section</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Sky.cpp">
+      <Filter>02.GameObject\BackGround\Sky</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

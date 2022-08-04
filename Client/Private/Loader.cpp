@@ -52,6 +52,7 @@
 #include "QuickSlotSkill.h"
 #include "Spawner.h"
 #include "Section.h"
+#include "Sky.h"
 
 
 
@@ -504,6 +505,10 @@ HRESULT CLoader::Load_Model_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
 		CWood::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Sky"),
+		CSky::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -977,6 +982,10 @@ HRESULT CLoader::Load_Model_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Cube"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/Cube/Tile%d.dds"), 29))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 5))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
