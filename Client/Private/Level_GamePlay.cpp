@@ -142,8 +142,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
-
-
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
@@ -188,7 +186,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Test1"); // 2로바꾸고
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Henesys2");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
@@ -196,7 +194,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	}
 
 
-	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Test_1");
+	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Henesys2");
 	if (nullptr != pModelData)
 	{
 		for (auto& Model : *pModelData)
@@ -208,13 +206,10 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 			_float4x4 Matrix;
 			D3DXMatrixIdentity(&Matrix);
 
-			D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), 45.f);
+			D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
 
 			D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
 
-			VoxDesc.vPos.x += 0.f;
-			VoxDesc.vPos.z -= 3.f;
-			VoxDesc.vPos.y += 1.f;
 
 			VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
 			VoxDesc.vRotationAix = Model.vAix;
@@ -245,9 +240,9 @@ HRESULT CLevel_GamePlay::Ready_Layer_Section(const _tchar * pLayerTag)
 	CMap_Manager::CUBEDATA Data;
 	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
 
-	for (int i = -5; i < 7; i++)
+	for (int i = -2; i < 15; i++)
 	{
-		for (int j = -5; j < 7; j++)
+		for (int j = -2; j < 15; j++)
 		{
 			Data.vPos = _float3((_float)i * 5.f, 1.f, (_float)j * 5.f);
 			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))

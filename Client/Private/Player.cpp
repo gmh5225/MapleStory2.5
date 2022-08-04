@@ -40,7 +40,7 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-2.f, 2.f, 0.f));
-	m_pTransformCom->Set_Scaled(2.0f);
+	m_pTransformCom->Set_Scaled(2.5f);
 
 
 

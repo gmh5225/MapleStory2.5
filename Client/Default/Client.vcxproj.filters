@@ -285,6 +285,9 @@
     </Filter>
     <Filter Include="01.Level\Level_Static">
       <UniqueIdentifier>{6e054273-b879-4854-8d43-7b0041d5f788}</UniqueIdentifier>
+         </Filter>
+    <Filter Include="02.GameObject\BackGround\Sky">
+      <UniqueIdentifier>{cfd28302-3983-4840-9aad-2c4ca535bc71}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -506,6 +509,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\Level_Static.h">
       <Filter>01.Level\Level_Static</Filter>
+        </ClInclude>
+    <ClInclude Include="..\Public\Sky.h">
+      <Filter>02.GameObject\BackGround\Sky</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -718,6 +724,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Level_Static.cpp">
       <Filter>01.Level\Level_Static</Filter>
+          </ClCompile>
+    <ClCompile Include="..\Private\Sky.cpp">
+      <Filter>02.GameObject\BackGround\Sky</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

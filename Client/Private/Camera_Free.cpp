@@ -40,7 +40,7 @@ void CCamera_Free::Tick(_float fTimeDelta)
 	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	m_pTransformCom->RotationSpot(vPlayerPos, _float3{ 0.f, 6.f, -6.f }, 0.f);
+	m_pTransformCom->RotationSpot(vPlayerPos, _float3{ 0.f, 7.f, -8.f }, 0.f);
 	
 	Safe_Release(pGameInstance);
 
@@ -77,6 +77,7 @@ void CCamera_Free::Tick(_float fTimeDelta)
 	//}
 
 	//
+
 	__super::Tick(fTimeDelta);
 
 

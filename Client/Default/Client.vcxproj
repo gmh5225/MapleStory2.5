@@ -210,6 +210,7 @@
     <ClInclude Include="..\Public\SkillManager.h" />
     <ClInclude Include="..\Public\RibbonPig.h" />
     <ClInclude Include="..\Public\SkillUpBtn.h" />
+    <ClInclude Include="..\Public\Sky.h" />
     <ClInclude Include="..\Public\Slime.h" />
     <ClInclude Include="..\Public\SolunaSlashIcon.h" />
     <ClInclude Include="..\Public\SolunaSlashInfo.h" />
@@ -284,6 +285,7 @@
     <ClCompile Include="..\Private\SkillManager.cpp" />
     <ClCompile Include="..\Private\RibbonPig.cpp" />
     <ClCompile Include="..\Private\SkillUpBtn.cpp" />
+    <ClCompile Include="..\Private\Sky.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
     <ClCompile Include="..\Private\SolunaSlashIcon.cpp" />
     <ClCompile Include="..\Private\SolunaSlashInfo.cpp" />
