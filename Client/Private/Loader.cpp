@@ -8,9 +8,6 @@
 #include "Wood.h"
 #include "OrangeMushroom.h"
 #include "GoStump.h"
-#include "AngelRay_Attack.h"
-#include "AngelRay_Effect.h"
-#include "AngelRay_Hit.h"
 #include "RedSnail.h"
 #include "Slime.h"
 #include "UI.h"
@@ -57,6 +54,9 @@
 #include "GreenMushroom.h"
 #include "BlueSnail.h"
 #include "Potal.h"
+#include "ReefAttack.h"
+#include "ReefAttackHit.h"
+#include "WarriorReef.h"
 
 
 
@@ -293,17 +293,6 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 	/* 객체원형 로드한다. */
 
 	/* For.Prototype_GameObject_PlayerSkill*/
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Attack"),
-		CAngelRay_Attack::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Effect"),
-		CAngelRay_Effect::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AngelRay_Hit"),
-		CAngelRay_Hit::Create(m_pGraphic_Device))))
-		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SolunaSlash_EffectA"),
 		CSolunaSlashEffectA::Create(m_pGraphic_Device))))
@@ -327,6 +316,18 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunderBreak_Attack"),
 		CSunderBreakAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ReefAttack"),
+		CReefAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ReefAttack_Hit"),
+		CReefAttackHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_WarriorReef"),
+		CWarriorReef::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -677,18 +678,6 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 	Safe_AddRef(pGameInstance);
 	// Attack
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_AngelRay_Attack"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Attack%d.png"), 8))))
-		return E_FAIL;	
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_AngelRay_Effect"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Effect%d.png"), 13))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_AngelRay_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/AngelRay/Edit/AngelRay_Hit%d.png"), 6))))
-		return E_FAIL;
-
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SolunaSlash_EffectA"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Dash/SolunaSlash/Edit/SolunaSlashA%d.png"), 9))))
 		return E_FAIL;
@@ -711,6 +700,18 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunderBreak_Attack"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/SunderBreak/Edit/SunderBreakAttack%d.png"), 15))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ReefAttack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/ReefAttack/Edit/ReefAttack%d.png"), 8))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ReefAttack_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/ReefAttack/Edit/ReefAttackHit%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_WarriorReef"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Dash/WarriorReef/Edit/WarriorReef%d.png"), 7))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);

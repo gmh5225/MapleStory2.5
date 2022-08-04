@@ -157,9 +157,6 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\Public\AngelRay_Attack.h" />
-    <ClInclude Include="..\Public\AngelRay_Effect.h" />
-    <ClInclude Include="..\Public\AngelRay_Hit.h" />
     <ClInclude Include="..\Public\BlueSnail.h" />
     <ClInclude Include="..\Public\Bulb.h" />
     <ClInclude Include="..\Public\Camera_Free.h" />
@@ -203,6 +200,8 @@
     <ClInclude Include="..\Public\QuickSlotSkill.h" />
     <ClInclude Include="..\Public\RedPortion.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
+    <ClInclude Include="..\Public\ReefAttack.h" />
+    <ClInclude Include="..\Public\ReefAttackHit.h" />
     <ClInclude Include="..\public\Section.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
     <ClInclude Include="..\Public\SkillGradeBtn0.h" />
@@ -231,6 +230,7 @@
     <ClInclude Include="..\Public\SolunaSlashEffectB.h" />
     <ClInclude Include="..\Public\SunCross.h" />
     <ClInclude Include="..\Public\SunCrossHit.h" />
+    <ClInclude Include="..\Public\WarriorReef.h" />
     <ClInclude Include="..\Public\Wood.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Resource.h" />
@@ -238,9 +238,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Private\AngelRay_Attack.cpp" />
-    <ClCompile Include="..\Private\AngelRay_Effect.cpp" />
-    <ClCompile Include="..\Private\AngelRay_Hit.cpp" />
     <ClCompile Include="..\Private\BlueSnail.cpp" />
     <ClCompile Include="..\Private\Bulb.cpp" />
     <ClCompile Include="..\Private\Camera_Free.cpp" />
@@ -283,6 +280,8 @@
     <ClCompile Include="..\Private\QuickSlotSkill.cpp" />
     <ClCompile Include="..\Private\RedPortion.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
+    <ClCompile Include="..\Private\ReefAttack.cpp" />
+    <ClCompile Include="..\Private\ReefAttackHit.cpp" />
     <ClCompile Include="..\private\Section.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
     <ClCompile Include="..\Private\SkillGradeBtn0.cpp" />
@@ -311,6 +310,7 @@
     <ClCompile Include="..\Private\SolunaSlashEffectB.cpp" />
     <ClCompile Include="..\Private\SunCross.cpp" />
     <ClCompile Include="..\Private\SunCrossHit.cpp" />
+    <ClCompile Include="..\Private\WarriorReef.cpp" />
     <ClCompile Include="..\Private\Wood.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -30,10 +30,6 @@ protected:
 	virtual HRESULT Set_RenderState() override;
 	virtual HRESULT Reset_RenderState() override;
 
-private:
-	void Tick_Idle(_float fTimeDelta);
-	void Tick_Move(_float fTimeDelta);
-	void Tick_Hit(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);

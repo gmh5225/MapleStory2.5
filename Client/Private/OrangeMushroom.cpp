@@ -153,6 +153,7 @@ void COrangeMushroom::LateTick(_float fTimeDelta)
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
 	__super::BoxColCom_Tick(m_pTransformCom);
+	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 

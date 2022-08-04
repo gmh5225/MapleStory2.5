@@ -4,18 +4,18 @@
 
 BEGIN(Client)
 
-class CSolunaSlashEffectA final : public CCreature
+class CReefAttackHit final : public CCreature
 {
 public:
-	typedef struct tagSolunaEffectADESC
+	typedef struct tagReefAttackHitDESC
 	{
-		DIR eDir;
-	}SOLUNAEFFECTADESC;
+		_float3 vPos;
+	}REEFATTACKHITDESC;
 
 private:
-	CSolunaSlashEffectA(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSolunaSlashEffectA(const CSolunaSlashEffectA& rhs);
-	virtual ~CSolunaSlashEffectA() = default;
+	CReefAttackHit(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CReefAttackHit(const CReefAttackHit& rhs);
+	virtual ~CReefAttackHit() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -33,8 +33,7 @@ protected:
 
 public:
 	void SetState(STATE eState, DIR eDir);
-	void SetDirection();
-	void SetPosition(DIR eDir);
+
 public:
 	virtual void SetAni() override;
 
@@ -42,14 +41,13 @@ public:
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
-	_bool m_bRender;
-	CTransform* m_pTarget;
-	SOLUNAEFFECTADESC m_Desc;
+	REEFATTACKHITDESC m_Desc;
+
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CSolunaSlashEffectA* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CReefAttackHit* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

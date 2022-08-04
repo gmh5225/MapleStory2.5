@@ -300,15 +300,7 @@ void CSunderBreakAttack::Collision(CGameObject * pOther)
 				return;
 		}
 
-	/*	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
 
-		CAngelRay_Hit::ANGELHITDESC AngelDesc;
-		CTransform* pTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
-		AngelDesc.vPos = pTransform->Get_State(CTransform::STATE_POSITION);
-
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Hit"), LEVEL_GAMEPLAY, TEXT("Layer_Player_Skill"), &AngelDesc);
-		Safe_Release(pGameInstance);*/
 
 
 		m_pOther.push_back(pOther);

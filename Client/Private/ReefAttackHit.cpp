@@ -1,12 +1,12 @@
 #include "stdafx.h"
-#include "..\Public\SunCrossHit.h"
+#include "..\Public\ReefAttackHit.h"
 #include "GameInstance.h"
 
-CSunCrossHit::CSunCrossHit(LPDIRECT3DDEVICE9 pGraphic_Device)
+CReefAttackHit::CReefAttackHit(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CSunCrossHit::CSunCrossHit(const CSunCrossHit & rhs)
+CReefAttackHit::CReefAttackHit(const CReefAttackHit & rhs)
 	: CCreature(rhs)
 {
 }
@@ -14,25 +14,25 @@ CSunCrossHit::CSunCrossHit(const CSunCrossHit & rhs)
 
 
 
-HRESULT CSunCrossHit::Initialize_Prototype()
+HRESULT CReefAttackHit::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CSunCrossHit::Initialize(void * pArg)
+HRESULT CReefAttackHit::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	memcpy(&m_Desc, pArg, sizeof(SUNCROSSHITDESC));
+	memcpy(&m_Desc, pArg, sizeof(REEFATTACKHITDESC));
 
 	m_fColRad = 0.1f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos);
-	m_pTransformCom->Set_Scaled(2.f);
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SunCross_Hit"), 0.08f, CAnimator::STATE_LOOF);
+	m_pTransformCom->Set_Scaled(3.f);
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ReefAttack_Hit"), 0.08f, CAnimator::STATE_LOOF);
 	m_fYDistance = 11.f;
 
 	Set_Billboard();
@@ -45,7 +45,7 @@ HRESULT CSunCrossHit::Initialize(void * pArg)
 	_float4x4 ViewMatrix;
 	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
 	D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
-	_float3 vCPos = (*(_float3*)&ViewMatrix.m[3][0]);	
+	_float3 vCPos = (*(_float3*)&ViewMatrix.m[3][0]);
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	_float3 vCLook = vCPos - vPos;
 	D3DXVec3Normalize(&vCLook, &vCLook);
@@ -55,10 +55,10 @@ HRESULT CSunCrossHit::Initialize(void * pArg)
 
 
 
-HRESULT CSunCrossHit::SetUp_Components()
+HRESULT CReefAttackHit::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunCross_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ReefAttack_Hit"), nullptr);
 	}
 
 
@@ -78,11 +78,11 @@ HRESULT CSunCrossHit::SetUp_Components()
 
 
 
-void CSunCrossHit::Tick(_float fTimeDelta)
+void CReefAttackHit::Tick(_float fTimeDelta)
 {
 
 }
-void CSunCrossHit::LateTick(_float fTimeDelta)
+void CReefAttackHit::LateTick(_float fTimeDelta)
 {
 
 
@@ -94,7 +94,7 @@ void CSunCrossHit::LateTick(_float fTimeDelta)
 
 
 }
-HRESULT CSunCrossHit::Render()
+HRESULT CReefAttackHit::Render()
 {
 
 	Set_Billboard();
@@ -121,11 +121,11 @@ HRESULT CSunCrossHit::Render()
 
 
 
-void CSunCrossHit::SetState(STATE eState, DIR eDir)
+void CReefAttackHit::SetState(STATE eState, DIR eDir)
 {
 
 }
-void CSunCrossHit::SetAni()
+void CReefAttackHit::SetAni()
 {
 
 }
@@ -135,25 +135,25 @@ void CSunCrossHit::SetAni()
 
 
 
-CSunCrossHit * CSunCrossHit::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CReefAttackHit * CReefAttackHit::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CSunCrossHit*		pInstance = new CSunCrossHit(pGraphic_Device);
+	CReefAttackHit*		pInstance = new CReefAttackHit(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CSunCrossHit"));
+		MSG_BOX(TEXT("Failed To Created : CReefAttackHit"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CSunCrossHit::Clone(void* pArg)
+CGameObject * CReefAttackHit::Clone(void* pArg)
 {
-	CSunCrossHit*		pInstance = new CSunCrossHit(*this);
+	CReefAttackHit*		pInstance = new CReefAttackHit(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CSunCrossHit"));
+		MSG_BOX(TEXT("Failed To Cloned : CReefAttackHit"));
 		Safe_Release(pInstance);
 	}
 
@@ -163,12 +163,12 @@ CGameObject * CSunCrossHit::Clone(void* pArg)
 
 
 
-void CSunCrossHit::Collision(CGameObject * pOther)
+void CReefAttackHit::Collision(CGameObject * pOther)
 {
 
 }
 
-HRESULT CSunCrossHit::Set_RenderState()
+HRESULT CReefAttackHit::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -183,7 +183,7 @@ HRESULT CSunCrossHit::Set_RenderState()
 	return S_OK;
 }
 
-HRESULT CSunCrossHit::Reset_RenderState()
+HRESULT CReefAttackHit::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
@@ -195,7 +195,7 @@ HRESULT CSunCrossHit::Reset_RenderState()
 
 
 
-void CSunCrossHit::Free()
+void CReefAttackHit::Free()
 {
 	__super::Free();
 

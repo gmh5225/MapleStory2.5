@@ -419,6 +419,14 @@ HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
+	MonsterInfo.MonsterName = TEXT("OrangeMushroom");
+	MonsterInfo.MonsterPos = _float3{ 3.f , 2.1f, 1.f };
+	MonsterInfo.SpawnerNum = 2;
+	MonsterInfo.MonsterNum = 3;
+	MonsterInfo.MonsterColRad = 1.f;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
 	MonsterInfo.MonsterName = TEXT("RibbonPig");
 	MonsterInfo.MonsterPos = _float3{ 26.f , 5.1f, -11.f };
 	MonsterInfo.SpawnerNum = 2;

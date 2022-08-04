@@ -44,6 +44,7 @@ private:
 	LPD3DXFONT m_Font;
 	_bool temp = false;
 
+	_float m_fDashAcc;
 	_float m_fRespownPosAcc;
 	_float3 m_vRespownPos;
 

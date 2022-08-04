@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "..\Public\Player.h"
-#include "AngelRay_Effect.h"
 #include "SolunaSlashEffectA.h"
 #include "SolunaSlashEffectB.h"
 #include "CrossTheStyx.h"
@@ -8,6 +7,8 @@
 #include "SunderBreakAttack.h"
 #include "GameInstance.h"
 #include "InvenManager.h"
+#include "ReefAttack.h"
+#include "WarriorReef.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -39,7 +40,7 @@ HRESULT CPlayer::Initialize(void * pArg)
 	// 원충돌 시 코드
 	m_fColRad = 0.5f;
 
-
+	m_fDashAcc = 0.f;
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-9.f, 4.f, -3.f));
 	m_pTransformCom->Set_Scaled(2.5f);
@@ -155,7 +156,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		break;
 	case Client::CPlayer::STATE_DASH:		
 		CTransform::TRANSFORMDESC DashDesc;
-		DashDesc.fSpeedPerSec = 30.f;
+		DashDesc.fSpeedPerSec = 20.f;
 		DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
 		m_pTransformCom->Set_TransformDesc(DashDesc);
 		Dash(fTimeDelta);
@@ -295,7 +296,6 @@ void CPlayer::SetOnceEndAni()
 			SetState(STATE_IDLE, m_eDir);
 			break;
 		case Client::CCreature::STATE_DASH:
-			SetState(STATE_IDLE, m_eDir);
 			break;
 		case Client::CCreature::STATE_HIT:
 			break;
@@ -413,7 +413,7 @@ void CPlayer::SetAni()
 		switch (m_eDir)
 		{
 		case Client::CPlayer::DIR_L:
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_L"), 0.05f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_L"), 0.04f, CAnimator::STATE_ONCE);
 			break;
 		case Client::CPlayer::DIR_R:
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Player_Attack_R"), 0.05f, CAnimator::STATE_ONCE);
@@ -438,7 +438,7 @@ void CPlayer::SetAni()
 			break;
 		}
 	}
-
+	break;
 	case CPlayer::STATE_DASH:
 	{
 		switch (m_eDir)
@@ -575,9 +575,9 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
 		SolunaDECS.eDir = m_eDir;
-
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_WarriorReef"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 		SetState(STATE_DASH, m_eDir);
 		Safe_Release(pGameInstance);
 	}
@@ -587,10 +587,10 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		CAngelRay_Effect::ANGELEFFECTDESC AngelDECS;
-		AngelDECS.eDir = m_eDir;
-		
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AngelRay_Effect"), LEVEL_STATIC, TEXT("Layer_Skill"), &AngelDECS);
+		CReefAttack::REEFATTACKDESC ReefAttackDESC;
+		ReefAttackDESC.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack"), LEVEL_STATIC, TEXT("Layer_Skill"), &ReefAttackDESC);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}
@@ -710,6 +710,13 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 
 void CPlayer::Dash(_float fTimeDelta)
 {
+	m_fDashAcc += 1.f * fTimeDelta;
+	if (0.18f < m_fDashAcc)
+	{
+		SetState(STATE_IDLE, m_eDir);
+		m_fDashAcc = 0.f;
+	}
+
 	switch (m_eDir)
 		{
 		case Client::CPlayer::DIR_L:

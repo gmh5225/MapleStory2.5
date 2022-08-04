@@ -4,18 +4,18 @@
 
 BEGIN(Client)
 
-class CSolunaSlashEffectA final : public CCreature
+class CWarriorReef final : public CCreature
 {
 public:
-	typedef struct tagSolunaEffectADESC
+	typedef struct tagWarriorReefDESC
 	{
 		DIR eDir;
-	}SOLUNAEFFECTADESC;
+	}WARRIORREEFDESC;
 
 private:
-	CSolunaSlashEffectA(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSolunaSlashEffectA(const CSolunaSlashEffectA& rhs);
-	virtual ~CSolunaSlashEffectA() = default;
+	CWarriorReef(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CWarriorReef(const CWarriorReef& rhs);
+	virtual ~CWarriorReef() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -44,12 +44,12 @@ private:
 	DIR m_eDir;
 	_bool m_bRender;
 	CTransform* m_pTarget;
-	SOLUNAEFFECTADESC m_Desc;
+	WARRIORREEFDESC m_Desc;
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CSolunaSlashEffectA* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CWarriorReef* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

@@ -151,18 +151,6 @@
     <Filter Include="02.GameObject\Skill\Effect\RangeAttack">
       <UniqueIdentifier>{90197637-a33b-45e3-83a7-c6a284b8b593}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\AngelRay">
-      <UniqueIdentifier>{bbde3b1b-fd6f-43bd-bd68-e1c24d11d510}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\AngelRay\Effect">
-      <UniqueIdentifier>{48779021-1b11-4fc2-bf31-cdf8e4bc7a0f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\AngelRay\Attack">
-      <UniqueIdentifier>{ec04dc65-5da1-4319-9b7b-929e95132e9c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\AngelRay\Hit">
-      <UniqueIdentifier>{0667ff32-e47e-4583-b832-2e3805d863c0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02.GameObject\Skill\Effect\RangeAttack\SunderBreak">
       <UniqueIdentifier>{d2fa19f8-bc65-441b-b605-d91a031dc115}</UniqueIdentifier>
     </Filter>
@@ -294,12 +282,24 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\GoStump">
       <UniqueIdentifier>{68b9cc9d-5e45-40d5-a5d9-a52bf31df276}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="01.Level\Elenya">
       <UniqueIdentifier>{3e1c87f4-4d77-415a-af1b-195d29504777}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Creature\Potal">
       <UniqueIdentifier>{1d9a8ed7-cbee-4ca7-9d82-acbe418bb072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\CloseAttack\ReefAttack">
+      <UniqueIdentifier>{6b14714a-c07f-4286-94f0-29c366aee220}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\CloseAttack\ReefAttack\Attack">
+      <UniqueIdentifier>{00d2092b-74b2-4c8d-938b-b3db6f6e37f7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\CloseAttack\ReefAttack\Hit">
+      <UniqueIdentifier>{f3e76a62-bdbb-4aea-8260-e963475aaf20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\Dash\WarriorReef">
+      <UniqueIdentifier>{9df7244f-5caa-4f29-b08e-c26af179ea2a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -347,15 +347,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\OrangeMushroom.h">
       <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\AngelRay_Attack.h">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\AngelRay\Attack</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\AngelRay_Effect.h">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\AngelRay\Effect</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\AngelRay_Hit.h">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\AngelRay\Hit</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\RedSnail.h">
       <Filter>02.GameObject\Creature\Monster\RedSnail</Filter>
@@ -528,7 +519,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\GoStump.h">
       <Filter>02.GameObject\Creature\Monster\GoStump</Filter>
-         </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Level_Henesys_1.h">
       <Filter>01.Level\Henesys</Filter>
     </ClInclude>
@@ -537,6 +528,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\Potal.h">
       <Filter>02.GameObject\Creature\Potal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ReefAttack.h">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\ReefAttack\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ReefAttackHit.h">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\ReefAttack\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\WarriorReef.h">
+      <Filter>02.GameObject\Skill\Effect\Dash\WarriorReef</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -575,15 +575,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\OrangeMushroom.cpp">
       <Filter>02.GameObject\Creature\Monster\OrangeMushroom</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\AngelRay_Attack.cpp">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\AngelRay\Attack</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\AngelRay_Effect.cpp">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\AngelRay\Effect</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\AngelRay_Hit.cpp">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\AngelRay\Hit</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\RedSnail.cpp">
       <Filter>02.GameObject\Creature\Monster\RedSnail</Filter>
@@ -756,7 +747,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\GoStump.cpp">
       <Filter>02.GameObject\Creature\Monster\GoStump</Filter>
-         </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Level_Henesys_1.cpp">
       <Filter>01.Level\Henesys</Filter>
     </ClCompile>
@@ -765,6 +756,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Potal.cpp">
       <Filter>02.GameObject\Creature\Potal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ReefAttack.cpp">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\ReefAttack\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ReefAttackHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\CloseAttack\ReefAttack\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\WarriorReef.cpp">
+      <Filter>02.GameObject\Skill\Effect\Dash\WarriorReef</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

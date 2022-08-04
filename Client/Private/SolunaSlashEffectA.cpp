@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "..\Public\SolunaSlashEffectA.h"
-#include "AngelRay_Attack.h"
 #include "GameInstance.h"
 
 CSolunaSlashEffectA::CSolunaSlashEffectA(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -36,8 +35,8 @@ HRESULT CSolunaSlashEffectA::Initialize(void * pArg)
 
 	m_fColRad = 0.1f;
 
-	m_pTransformCom->Set_Scaled(_float3(6.f, 3.5f, 5.f));
-
+	m_pTransformCom->Set_Scaled(_float3(4.5f, 2.5f, 4.f));
+	//m_pTransformCom->Set_Scaled(_float3(6.f, 3.5f, 5.f));
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SolunaSlash_EffectA"), 0.05f, CAnimator::STATE_LOOF);
 	memcpy(&m_Desc, pArg, sizeof(SOLUNAEFFECTADESC));
 	m_eDir = m_Desc.eDir;
@@ -117,17 +116,6 @@ HRESULT CSolunaSlashEffectA::Render()
 	return S_OK;
 }
 
-
-void CSolunaSlashEffectA::Tick_Idle(_float fTimeDelta)
-{
-
-}
-void CSolunaSlashEffectA::Tick_Move(_float fTimeDelta)
-{
-}
-void CSolunaSlashEffectA::Tick_Hit(_float fTimeDelta)
-{
-}
 
 
 

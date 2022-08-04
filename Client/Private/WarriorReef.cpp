@@ -1,26 +1,26 @@
 #include "stdafx.h"
-#include "..\Public\CrossTheStyx.h"
+#include "..\Public\WarriorReef.h"
 #include "GameInstance.h"
 
-CCrossTheStyx::CCrossTheStyx(LPDIRECT3DDEVICE9 pGraphic_Device)
+CWarriorReef::CWarriorReef(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CCrossTheStyx::CCrossTheStyx(const CCrossTheStyx & rhs)
-	: CCreature(rhs), m_bCreate(false)
+CWarriorReef::CWarriorReef(const CWarriorReef & rhs)
+	: CCreature(rhs), m_bRender(true)
 {
 }
 
 
 
 
-HRESULT CCrossTheStyx::Initialize_Prototype()
+HRESULT CWarriorReef::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CCrossTheStyx::Initialize(void * pArg)
+HRESULT CWarriorReef::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
@@ -35,15 +35,14 @@ HRESULT CCrossTheStyx::Initialize(void * pArg)
 
 	m_fColRad = 0.1f;
 
-	m_pTransformCom->Set_Scaled(4.f);
-	m_pTransformCom->Set_ScaledX(1.5f);
-
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_CrossTheStyx"), 0.08f, CAnimator::STATE_LOOF);
-	memcpy(&m_Desc, pArg, sizeof(CROSSTHESTYXDESC));
+	m_pTransformCom->Set_Scaled(_float3(5.5f, 4.5f, 8.f));
+	//m_pTransformCom->Set_Scaled(_float3(6.f, 3.5f, 5.f));
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_WarriorReef"), 0.05f, CAnimator::STATE_LOOF);
+	memcpy(&m_Desc, pArg, sizeof(WARRIORREEFDESC));
 	m_eDir = m_Desc.eDir;
 	SetDirection();
 	SetPosition(m_eDir);
-
+	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 	return S_OK;
 }
@@ -51,10 +50,10 @@ HRESULT CCrossTheStyx::Initialize(void * pArg)
 
 
 
-HRESULT CCrossTheStyx::SetUp_Components()
+HRESULT CWarriorReef::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CrossTheStyx"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_WarriorReef"), nullptr);
 	}
 
 
@@ -74,24 +73,27 @@ HRESULT CCrossTheStyx::SetUp_Components()
 
 
 
-void CCrossTheStyx::Tick(_float fTimeDelta)
+void CWarriorReef::Tick(_float fTimeDelta)
 {
-	SetPosition(m_eDir);
+
+
 
 }
-void CCrossTheStyx::LateTick(_float fTimeDelta)
+void CWarriorReef::LateTick(_float fTimeDelta)
 {
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 
-	if (m_pAnimatorCom->Get_AnimCount() == 9)
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+
+
+	if (m_pAnimatorCom->Get_AnimCount() == 6)
 	{
 		Set_Dead();
 	}
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 }
-HRESULT CCrossTheStyx::Render()
+HRESULT CWarriorReef::Render()
 {
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
@@ -116,11 +118,13 @@ HRESULT CCrossTheStyx::Render()
 
 
 
-void CCrossTheStyx::SetState(STATE eState, DIR eDir)
+
+
+void CWarriorReef::SetState(STATE eState, DIR eDir)
 {
 
 }
-void CCrossTheStyx::SetDirection()
+void CWarriorReef::SetDirection()
 {
 
 	switch (m_eDir)
@@ -157,41 +161,41 @@ void CCrossTheStyx::SetDirection()
 
 
 }
-void CCrossTheStyx::SetPosition(DIR eDir)
+void CWarriorReef::SetPosition(DIR eDir)
 {
 	_float3 vPosFix;
 	switch (eDir)
 	{
 	case Client::CCreature::DIR_L:
-		vPosFix = { -1.4f,0.f,0.8f };
+		vPosFix = { 0.3f,0.1f,0.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_R:
-		vPosFix = { 1.f,0.f,0.f };
+		vPosFix = { -0.3f,0.1f,0.f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_U:
-		vPosFix = { -1.3f,0.f,1.4f };
+		vPosFix = { 0.f,0.1f,0.3f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_D:
-		vPosFix = { 0.f,0.f,-1.f };
+		vPosFix = { 0.f,0.1f,-0.3f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_LU:
-		vPosFix = { -1.3f,0.f,1.f };
+		vPosFix = { -0.15f,0.1f,0.15f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_RU:
-		vPosFix = { 1.f,0.f,1.f };
+		vPosFix = { 0.15f,0.1f,0.15f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_LD:
-		vPosFix = { -1.f,0.f,-1.f };
+		vPosFix = { -0.15f,0.1f,-0.15f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_RD:
-		vPosFix = { 1.f,0.f,-1.f };
+		vPosFix = { 0.15f,0.f,-0.15f };
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + vPosFix);
 		break;
 	case Client::CCreature::DIR_END:
@@ -201,7 +205,7 @@ void CCrossTheStyx::SetPosition(DIR eDir)
 		break;
 	}
 }
-void CCrossTheStyx::SetAni()
+void CWarriorReef::SetAni()
 {
 
 }
@@ -211,25 +215,25 @@ void CCrossTheStyx::SetAni()
 
 
 
-CCrossTheStyx * CCrossTheStyx::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CWarriorReef * CWarriorReef::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CCrossTheStyx*		pInstance = new CCrossTheStyx(pGraphic_Device);
+	CWarriorReef*		pInstance = new CWarriorReef(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CCrossTheStyx"));
+		MSG_BOX(TEXT("Failed To Created : CWarriorReef"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CCrossTheStyx::Clone(void* pArg)
+CGameObject * CWarriorReef::Clone(void* pArg)
 {
-	CCrossTheStyx*		pInstance = new CCrossTheStyx(*this);
+	CWarriorReef*		pInstance = new CWarriorReef(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CCrossTheStyx"));
+		MSG_BOX(TEXT("Failed To Cloned : CWarriorReef"));
 		Safe_Release(pInstance);
 	}
 
@@ -239,12 +243,12 @@ CGameObject * CCrossTheStyx::Clone(void* pArg)
 
 
 
-void CCrossTheStyx::Collision(CGameObject * pOther)
+void CWarriorReef::Collision(CGameObject * pOther)
 {
 
 }
 
-HRESULT CCrossTheStyx::Set_RenderState()
+HRESULT CWarriorReef::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -262,7 +266,7 @@ HRESULT CCrossTheStyx::Set_RenderState()
 
 }
 
-HRESULT CCrossTheStyx::Reset_RenderState()
+HRESULT CWarriorReef::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
@@ -274,7 +278,7 @@ HRESULT CCrossTheStyx::Reset_RenderState()
 
 
 
-void CCrossTheStyx::Free()
+void CWarriorReef::Free()
 {
 	__super::Free();
 }

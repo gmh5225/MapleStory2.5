@@ -117,19 +117,6 @@ HRESULT CSunCross::Render()
 }
 
 
-void CSunCross::Tick_Idle(_float fTimeDelta)
-{
-
-}
-void CSunCross::Tick_Move(_float fTimeDelta)
-{
-}
-void CSunCross::Tick_Hit(_float fTimeDelta)
-{
-}
-
-
-
 
 void CSunCross::SetState(STATE eState, DIR eDir)
 {
