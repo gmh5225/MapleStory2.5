@@ -294,12 +294,21 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\GoStump">
       <UniqueIdentifier>{68b9cc9d-5e45-40d5-a5d9-a52bf31df276}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="01.Level\Elenya">
       <UniqueIdentifier>{3e1c87f4-4d77-415a-af1b-195d29504777}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Creature\Potal">
       <UniqueIdentifier>{1d9a8ed7-cbee-4ca7-9d82-acbe418bb072}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Sky">
+      <UniqueIdentifier>{fb732ed9-19a3-4471-9c8d-810dde588abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Particle">
+      <UniqueIdentifier>{c227a9f7-9178-4fc1-9f5a-1f37d2e1ab91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\ParticleManager">
+      <UniqueIdentifier>{8c7e3bb7-50e9-4e7c-a6eb-64d08105f73e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -519,7 +528,6 @@
     <ClInclude Include="..\Public\Level_Static.h">
       <Filter>01.Level\Level_Static</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Sky.h" />
     <ClInclude Include="..\Public\GreenMushroom.h">
       <Filter>02.GameObject\Creature\Monster\GreenMushroom</Filter>
     </ClInclude>
@@ -528,7 +536,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\GoStump.h">
       <Filter>02.GameObject\Creature\Monster\GoStump</Filter>
-         </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Level_Henesys_1.h">
       <Filter>01.Level\Henesys</Filter>
     </ClInclude>
@@ -537,6 +545,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\Potal.h">
       <Filter>02.GameObject\Creature\Potal</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Sky.h">
+      <Filter>02.GameObject\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Particle.h">
+      <Filter>06.Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\ParticleManager.h">
+      <Filter>89.Manager\ParticleManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -747,7 +764,6 @@
     <ClCompile Include="..\Private\Level_Static.cpp">
       <Filter>01.Level\Level_Static</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Sky.cpp" />
     <ClCompile Include="..\Private\GreenMushroom.cpp">
       <Filter>02.GameObject\Creature\Monster\GreenMushroom</Filter>
     </ClCompile>
@@ -756,7 +772,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\GoStump.cpp">
       <Filter>02.GameObject\Creature\Monster\GoStump</Filter>
-         </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Level_Henesys_1.cpp">
       <Filter>01.Level\Henesys</Filter>
     </ClCompile>
@@ -765,6 +781,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\Potal.cpp">
       <Filter>02.GameObject\Creature\Potal</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Sky.cpp">
+      <Filter>02.GameObject\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Particle.cpp">
+      <Filter>06.Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\ParticleManager.cpp">
+      <Filter>89.Manager\ParticleManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

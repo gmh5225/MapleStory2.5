@@ -35,6 +35,8 @@ private:
 	void Dash(_float fTimeDelta);
 	void Jump(_float fTimeDelta);
 
+	void Particle(_float fTimeDelta);
+
 protected:
 	virtual HRESULT Set_RenderState() override;
 	virtual HRESULT Reset_RenderState() override;
@@ -46,6 +48,9 @@ private:
 
 	_float m_fRespownPosAcc;
 	_float3 m_vRespownPos;
+
+	// TEST
+	_float _fParticleMoveTimeAcc = 0.f;
 
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

@@ -57,6 +57,7 @@
 #include "GreenMushroom.h"
 #include "BlueSnail.h"
 #include "Potal.h"
+#include "Particle.h"
 
 
 
@@ -121,6 +122,7 @@ HRESULT CLoader::Loading_ForStatic()
 		Load_Item_Object();
 		Load_Spawner_Object();
 		Load_Map();
+		Load_Particle();
 
 		lstrcpy(m_szLoadingText, TEXT("메이플 스토리 로딩중~. "));
 		/* 텍스쳐를 로드한다. */
@@ -139,6 +141,9 @@ HRESULT CLoader::Loading_ForStatic()
 
 		/* For.Prototype_Component_Texture_UI */
 		Load_UI_Texture();
+
+		/* For.Prototype_Component_Texture_Particle */
+		Load_Particle_Texture();
 
 
 		Load_Component();
@@ -544,6 +549,19 @@ HRESULT CLoader::Load_Map()
 	/* For.Prototype_GameObject_PlayerSkill*/
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Potal"),
 		CPotal::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+}
+
+HRESULT CLoader::Load_Particle()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	/* For.Prototype_GameObject_PlayerSkill*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Particle"),
+		CParticle::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -1046,6 +1064,10 @@ HRESULT CLoader::Load_Model_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/Cube/Tile%d.dds"), 29))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Potal"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Potal/Potal_%d.png"), 8))))
+		return E_FAIL;
+
 	/*if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 5))))
 		return E_FAIL;*/
@@ -1070,6 +1092,22 @@ HRESULT CLoader::Load_Item_Texture()
 	Safe_Release(pGameInstance);
 	return S_OK;
 		
+}
+
+HRESULT CLoader::Load_Particle_Texture()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Dust"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Particle/Dust/Dust.png")))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+	return S_OK;
+
 }
 
 

@@ -50,6 +50,7 @@ private:
 	HRESULT	Load_Spawner_Object();
 	HRESULT Load_Component();
 	HRESULT Load_Map();
+	HRESULT Load_Particle();
 
 //텍스처 로딩함수
 private:
@@ -60,6 +61,7 @@ private:
 	HRESULT Load_UI_Texture();
 	HRESULT Load_Model_Texture();
 	HRESULT Load_Item_Texture();
+	HRESULT Load_Particle_Texture();
 
 private:
 	LPDIRECT3DDEVICE9	m_pGraphic_Device = nullptr;

@@ -10,6 +10,7 @@
 #include "UIManager.h"
 #include "InvenManager.h"
 #include "SpawnerManager.h"
+#include "ParticleManager.h"
 
 bool g_bStaticClone;
 bool g_bStatic;
@@ -215,6 +216,7 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
+	CParticleManager::Destroy_Instance();
 	CQuestManager::Destroy_Instance();
 	CMouseManager::Destroy_Instance();
 	CQuestManager::Destroy_Instance();

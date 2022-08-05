@@ -37,6 +37,9 @@ private:
 private:
 	HRESULT SetUp_Components();
 
+	virtual HRESULT Set_RenderState() override;
+	virtual HRESULT Reset_RenderState() override;
+
 public:
 	static CPotal* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
