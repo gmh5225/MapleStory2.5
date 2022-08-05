@@ -132,7 +132,7 @@ HRESULT CSpearPulling::Render()
 
 
 
-	__super::BoxColCom_Render(m_pTransformCom);
+	//__super::BoxColCom_Render(m_pTransformCom);
 
 
 

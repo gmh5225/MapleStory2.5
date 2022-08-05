@@ -119,7 +119,7 @@ HRESULT CSunCross::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
-	__super::BoxColCom_Render(m_pTransformCom);
+	//__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }
