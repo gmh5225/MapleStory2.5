@@ -36,7 +36,7 @@ HRESULT CStoneGolem::Initialize(void * pArg)
 
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(43.f, 15.f, -7.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(43.f, 10.f, -7.f));
 	m_pTransformCom->Set_Scaled(6.f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -101,6 +101,11 @@ void CStoneGolem::Tick(_float fTimeDelta)
 	case Client::CStoneGolem::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
+	}
+
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
+	{
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(43.f, 10.f, -7.f));
 	}
 
 }
