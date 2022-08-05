@@ -231,6 +231,22 @@ void CTransform::Go_RD(_float fTimeDelta)
 
 
 
+void CTransform::Go_DirForce(_float3 vDirVec, _float fForce, _float fTimeDelta)
+{
+	_float3		vPosition = Get_State(STATE_POSITION);
+
+	_float3		vNomaledDirVec = *D3DXVec3Normalize(&vDirVec, &vDirVec);
+	CulRUByLook(vNomaledDirVec);
+
+	//m_fTimeAcc += fTimeDelta;
+	//m_fVel_Y -= m_fGravity * m_fTimeAcc;
+	//vPosition += *D3DXVec3Normalize(&vUp, &vUp) * m_fVel_Y * fTimeDelta;
+
+	vPosition += vNomaledDirVec * fForce * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+}
+
 void CTransform::Go_Gravity(_float fTimeDelta)
 {
 	_float3		vPosition = Get_State(STATE_POSITION);
@@ -238,9 +254,9 @@ void CTransform::Go_Gravity(_float fTimeDelta)
 
 	m_fTimeAcc += fTimeDelta;
 
-	m_fVel_Y -= m_fTimeAcc;
+	m_fVel_Y -= m_fGravity * m_fTimeAcc;
 
-	vPosition += *D3DXVec3Normalize(&vUp, &vUp) * m_fVel_Y * m_fGravity * fTimeDelta;
+	vPosition += *D3DXVec3Normalize(&vUp, &vUp) * m_fVel_Y * fTimeDelta;
 
 	Set_State(CTransform::STATE_POSITION, vPosition);
 	// CulRUByLook(vLook);

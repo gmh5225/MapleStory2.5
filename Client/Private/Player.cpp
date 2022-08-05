@@ -10,6 +10,7 @@
 #include "ReefAttack.h"
 #include "WarriorReef.h"
 #include "SpearPulling.h"
+#include "ParticleManager.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -135,7 +136,6 @@ HRESULT CPlayer::SetUp_Components()
 
 void CPlayer::Tick(_float fTimeDelta)
 {
-	
 	switch (m_eCurState)
 	{
 	case Client::CPlayer::STATE_IDLE:
@@ -164,6 +164,9 @@ void CPlayer::Tick(_float fTimeDelta)
 		break;
 	}
 	
+
+	Particle(fTimeDelta);
+
 }
 void CPlayer::LateTick(_float fTimeDelta)
 {
@@ -795,6 +798,34 @@ void CPlayer::Jump(_float fTimeDelta)
 	}
 }
 
+void CPlayer::Particle(_float fTimeDelta)
+{
+
+	switch (m_eCurState)
+	{
+	case STATE_MOVE:
+	{
+			_fParticleMoveTimeAcc += 1.f * fTimeDelta;
+	if (0.3f < _fParticleMoveTimeAcc)
+	{
+		CParticleManager::Get_Instance()->Player_Walk(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
+
+		_fParticleMoveTimeAcc = 0.f;
+	}
+	}
+		break;
+	default:
+		break;
+	}
+
+
+
+
+
+
+
+}
+
 HRESULT CPlayer::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
@@ -858,8 +889,11 @@ void CPlayer::Collision(CGameObject * pOther)
 	{
 		if (m_eCurState == STATE_JUMP)
 		{
-			if(Get_PushedY())
+			if (Get_PushedY())
+			{
 				SetState(STATE_IDLE, m_eDir);
+				CParticleManager::Get_Instance()->Player_Lend(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+			}
 		}
 		
 	}

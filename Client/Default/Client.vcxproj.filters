@@ -327,6 +327,15 @@
     </Filter>
     <Filter Include="04.UI\05.Icon\SkillIcon\Dash\WarriorReef">
       <UniqueIdentifier>{15db6d70-21ab-4e1a-86c1-f38027624189}</UniqueIdentifier>
+         </Filter>
+    <Filter Include="02.GameObject\Sky">
+      <UniqueIdentifier>{fb732ed9-19a3-4471-9c8d-810dde588abd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="06.Particle">
+      <UniqueIdentifier>{c227a9f7-9178-4fc1-9f5a-1f37d2e1ab91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\ParticleManager">
+      <UniqueIdentifier>{8c7e3bb7-50e9-4e7c-a6eb-64d08105f73e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -537,7 +546,6 @@
     <ClInclude Include="..\Public\Level_Static.h">
       <Filter>01.Level\Level_Static</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\Sky.h" />
     <ClInclude Include="..\Public\GreenMushroom.h">
       <Filter>02.GameObject\Creature\Monster\GreenMushroom</Filter>
     </ClInclude>
@@ -588,6 +596,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\WarriorReefIcon.h">
       <Filter>04.UI\05.Icon\SkillIcon\Dash\WarriorReef</Filter>
+          </ClInclude>
+    <ClInclude Include="..\Public\Sky.h">
+      <Filter>02.GameObject\Sky</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Particle.h">
+      <Filter>06.Particle</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\ParticleManager.h">
+      <Filter>89.Manager\ParticleManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -789,7 +806,6 @@
     <ClCompile Include="..\Private\Level_Static.cpp">
       <Filter>01.Level\Level_Static</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\Sky.cpp" />
     <ClCompile Include="..\Private\GreenMushroom.cpp">
       <Filter>02.GameObject\Creature\Monster\GreenMushroom</Filter>
     </ClCompile>
@@ -840,6 +856,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\WarriorReefIcon.cpp">
       <Filter>04.UI\05.Icon\SkillIcon\Dash\WarriorReef</Filter>
+          </ClCompile>
+    <ClCompile Include="..\Private\Sky.cpp">
+      <Filter>02.GameObject\Sky</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Particle.cpp">
+      <Filter>06.Particle</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\ParticleManager.cpp">
+      <Filter>89.Manager\ParticleManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

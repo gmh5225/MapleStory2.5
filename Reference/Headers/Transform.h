@@ -75,6 +75,7 @@ public:
 	void Go_LD(_float fTimeDelta);
 	void Go_RD(_float fTimeDelta);
 
+	void Go_DirForce(_float3 vDirVec, _float fForce, _float fTimeDelta);
 	void Go_Gravity(_float fTimeDelta);
 
 	void Rotation(_float3 vAxis, _float fRadian);

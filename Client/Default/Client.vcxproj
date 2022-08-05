@@ -191,6 +191,8 @@
     <ClInclude Include="..\Public\MouseSkillIcon.h" />
     <ClInclude Include="..\public\MushHouse.h" />
     <ClInclude Include="..\Public\OrangeMushroom.h" />
+    <ClInclude Include="..\public\Particle.h" />
+    <ClInclude Include="..\public\ParticleManager.h" />
     <ClInclude Include="..\Public\Player.h" />
     <ClInclude Include="..\Public\Potal.h" />
     <ClInclude Include="..\Public\QuestManager.h" />
@@ -279,6 +281,8 @@
     <ClCompile Include="..\Private\MouseSkillIcon.cpp" />
     <ClCompile Include="..\private\MushHouse.cpp" />
     <ClCompile Include="..\Private\OrangeMushroom.cpp" />
+    <ClCompile Include="..\private\Particle.cpp" />
+    <ClCompile Include="..\private\ParticleManager.cpp" />
     <ClCompile Include="..\Private\Player.cpp" />
     <ClCompile Include="..\Private\Potal.cpp" />
     <ClCompile Include="..\Private\QuestManager.cpp" />

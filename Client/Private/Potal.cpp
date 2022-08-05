@@ -44,7 +44,7 @@ HRESULT CPotal::Initialize(void * pArg)
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(vPos.x, vPos.y, vPos.z));
 
 	m_fColRad = 0.9f;
-	m_pTransformCom->Set_Scaled(1.1f);
+	m_pTransformCom->Set_Scaled(_float3(1.5f, 3.0f, 1.5f));
 
 
 	return S_OK;
@@ -64,14 +64,10 @@ HRESULT CPotal::SetUp_Components()
 
 
 	{
-		//m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_Idle"), nullptr);
-		//m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_Move"), nullptr);
-		//m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_Hit"), nullptr);
-		//									
-		//m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_MoveR"), nullptr);
-		//m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RibbonPig_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Potal"), nullptr);
 	}
 
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Potal"), 0.05f, CAnimator::STATE_LOOF);
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -82,6 +78,30 @@ HRESULT CPotal::SetUp_Components()
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
 		return E_FAIL;
+
+	return S_OK;
+}
+
+HRESULT CPotal::Set_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+
+	return S_OK;
+}
+
+HRESULT CPotal::Reset_RenderState()
+{
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+
+	m_pTransformCom->CulRUByLook(m_vLookTemp);
 
 	return S_OK;
 }
@@ -100,7 +120,7 @@ void CPotal::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_POTAL, this);
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 }
 HRESULT CPotal::Render()
 {
@@ -121,7 +141,7 @@ HRESULT CPotal::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
-	__super::BoxColCom_Render(m_pTransformCom);
+	// __super::BoxColCom_Render(m_pTransformCom);
 
 	
 
