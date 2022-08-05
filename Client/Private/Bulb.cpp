@@ -32,12 +32,16 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	m_sTag = "Tag_UI";
 
-	m_fColRad = 5.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.5f, 0.3f));
-	m_pTransformCom->Set_Scaled(0.8f);
+	m_fColRad = 5.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
+	m_pTransformCom->Set_Scaled(1.2f);
 
-	// 퀘스트 false 초기화 및 퀘스트 시작으로 초기화
-	CQuestManager::Get_Instance()->Check_End_Quest();
-	CQuestManager::Get_Instance()->QuestPrepare();
+	if (!g_bStaticClone)
+	{
+		// 퀘스트 false 초기화 및 퀘스트 시작으로 초기화
+		CQuestManager::Get_Instance()->Check_End_Quest();
+		CQuestManager::Get_Instance()->QuestPrepare();
+	}
+
 
 	SetState(STATE_IDLE, DIR_END);
 

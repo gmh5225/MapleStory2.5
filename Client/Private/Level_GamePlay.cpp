@@ -41,7 +41,7 @@ HRESULT CLevel_GamePlay::Initialize()
 
 		if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
 			return E_FAIL;
-		g_bStaticClone = true;
+		
 	}
 
 
@@ -57,6 +57,10 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
 
+	if (FAILED(Ready_Layer_NonStatic_UI(TEXT("Layer_NonStatic_UI"))))
+		return E_FAIL;
+
+	g_bStaticClone = true;
 	return S_OK;
 }
 
@@ -157,8 +161,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_HENESYS, pLayerTag)))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_HENESYS, pLayerTag)))
+	//	return E_FAIL;
 
 
 	Safe_Release(pGameInstance);
@@ -346,9 +350,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 	
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bulb"), LEVEL_HENESYS, pLayerTag)))
-		return E_FAIL;
-
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuestUI"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
 
@@ -402,82 +403,22 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	return S_OK;
 }
 
+HRESULT CLevel_GamePlay::Ready_Layer_NonStatic_UI(const _tchar * pLayerTag)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bulb"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
 HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
-	CSpawner::SPAWNERINFO MonsterInfo;
-
-	MonsterInfo.MonsterName = TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 25.f , 5.1f, -3.f };
-	MonsterInfo.SpawnerNum = 0;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 26.f , 5.1f, -11.f };
-	MonsterInfo.SpawnerNum = 1;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 3.f , 2.1f, 1.f };
-	MonsterInfo.SpawnerNum = 2;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("RibbonPig");
-	MonsterInfo.MonsterPos = _float3{ 26.f , 5.1f, -11.f };
-	MonsterInfo.SpawnerNum = 2;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-
-	MonsterInfo.MonsterName = TEXT("Slime");
-	MonsterInfo.MonsterPos = _float3{ 25.f , 5.1f, -3.f };
-	MonsterInfo.SpawnerNum = 3;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("RedSnail");
-	MonsterInfo.MonsterPos = _float3{ 35.f , 5.f, -3.f };
-	MonsterInfo.SpawnerNum = 4;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("BlueSnail");
-	MonsterInfo.MonsterPos = _float3{ 35.f , 5.f, -3.f };
-	MonsterInfo.SpawnerNum = 5;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("GreenMushroom");
-	MonsterInfo.MonsterPos = _float3{ 28.f , 2.1f, -3.f };
-	MonsterInfo.SpawnerNum = 6;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("GoStump");
-	MonsterInfo.MonsterPos = _float3{ 28.f , 2.1f, -3.f };
-	MonsterInfo.SpawnerNum = 7;
-	MonsterInfo.MonsterNum = 3;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
 	return S_OK;

@@ -20,6 +20,7 @@ public:
 		_tchar*			MonsterName;
 		_int			SpawnerNum;
 		_float			MonsterColRad;
+		LEVEL			Level;
 	}SPAWNERINFO;
 private:
 	CSpawner(LPDIRECT3DDEVICE9 pGraphic_Device);

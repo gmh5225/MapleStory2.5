@@ -30,6 +30,7 @@ private:
 	HRESULT Ready_Layer_Npc(const _tchar* pLayerTag);
 	HRESULT Ready_Layer_Map(const _tchar* pLayerTag);
 	HRESULT Ready_Layer_UI(const _tchar* pLayerTag);
+	HRESULT Ready_Layer_NonStatic_UI(const _tchar* pLayerTag);
 	HRESULT Ready_Layer_Spawner(const _tchar* pLayerTag);
 	HRESULT Ready_Layer_Section(const _tchar* pLayerTag);
 

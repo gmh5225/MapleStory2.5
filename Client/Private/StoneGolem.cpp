@@ -31,13 +31,13 @@ HRESULT CStoneGolem::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_sTag = "Tag_Monster";
-	m_iHp = 3;
+	m_iHp = 10;
 	m_iIndexNum = -1;
 
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-5.f, 1.2f, -2.f));
-	m_pTransformCom->Set_Scaled(4.f);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(43.f, 15.f, -7.f));
+	m_pTransformCom->Set_Scaled(6.f);
 
 	SetState(STATE_IDLE, DIR_END);
 
@@ -51,6 +51,14 @@ HRESULT CStoneGolem::Initialize(void * pArg)
 
 HRESULT CStoneGolem::SetUp_Components()
 {
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 4.f, 3.5f, 4.f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
+		return E_FAIL;
+
+
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_StoneGolem_Idle"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_StoneGolem_Hit"), nullptr);
@@ -101,8 +109,13 @@ void CStoneGolem::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
 
+	m_pTransformCom->Go_Gravity(fTimeDelta);
+	__super::BoxColCom_Tick(m_pTransformCom);
+
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	Set_Billboard();
 }

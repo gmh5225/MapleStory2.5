@@ -31,8 +31,8 @@ HRESULT CElderStan::Initialize(void * pArg)
 
 	m_sTag = "Tag_Npc";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, -0.3f, 0.f));
-	m_pTransformCom->Set_Scaled(1.1f);
+	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.f, 6.0f, -1.0f));
+	m_pTransformCom->Set_Scaled(1.5f);
 
 	SetState(STATE_IDLE, DIR_END);
 

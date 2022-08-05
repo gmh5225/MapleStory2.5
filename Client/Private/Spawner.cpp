@@ -39,7 +39,7 @@ HRESULT CSpawner::Initialize(void * pArg)
 	// monsternum값 만큼 생성시키면됨
 	for (int i = 0; i < m_SpawnerInfo.MonsterNum; ++i)
 	{
-		m_SpawnerInfo.MonsterPos -= _float3{ _float(i) * 0.3f, 0.f, 0.f };
+		m_SpawnerInfo.MonsterPos -= _float3{ _float(i) * 0.2f, 0.f, 0.f };
 
 		if (m_SpawnerInfo.MonsterName == TEXT("OrangeMushroom"))
 		{
@@ -50,12 +50,6 @@ HRESULT CSpawner::Initialize(void * pArg)
 		else if (m_SpawnerInfo.MonsterName == TEXT("RibbonPig"))
 		{
 			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RibbonPig"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
-				return E_FAIL;
-		}
-
-		else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
-		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
 				return E_FAIL;
 		}
 		
@@ -73,13 +67,19 @@ HRESULT CSpawner::Initialize(void * pArg)
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("GreenMushroom"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_ELENYA, TEXT("Layer_Monster"), pArg)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("GoStump"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_ELENYA, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_ELENYA, TEXT("Layer_Monster"), pArg)))
 				return E_FAIL;
 		}
  	}
@@ -143,12 +143,6 @@ void CSpawner::LateTick(_float fTimeDelta)
 						int a = 0;
 				}
 
-				else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
-				{
-					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
-						int a = 0;
-				}
-
 				else if (m_SpawnerInfo.MonsterName == TEXT("RedSnail"))
 				{
 					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
@@ -163,13 +157,19 @@ void CSpawner::LateTick(_float fTimeDelta)
 
 				else if (m_SpawnerInfo.MonsterName == TEXT("GreenMushroom"))
 				{
-					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 						int a = 0;
 				}
 
 				else if (m_SpawnerInfo.MonsterName == TEXT("GoStump"))
 				{
-					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 						int a = 0;
 				}
 

@@ -30,7 +30,7 @@ void CSpawnerManager::Add_Spawner(void* pArg)
 	CSpawner::SPAWNERINFO* pSpawnerInfo = (CSpawner::SPAWNERINFO*)pArg;
 
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Spawner"), LEVEL_GAMEPLAY, TEXT("Layer_Spawner"), pArg)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Spawner"), pSpawnerInfo->Level, TEXT("Layer_Spawner"), pArg)))
 		int a = 0;
 
 	Safe_Release(pGameInstance);

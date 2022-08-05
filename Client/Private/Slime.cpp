@@ -40,14 +40,14 @@ HRESULT CSlime::Initialize(void * pArg)
 
 	m_fColRad = pMonsterDesc->MonsterColRad;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->MonsterPos);
-	m_pTransformCom->Set_Scaled(1.f);
+	m_pTransformCom->Set_Scaled(1.5f);
 	m_bDir = false;
 
 	m_fStartPos = pMonsterDesc->MonsterPos;
 
 	// 랜덤으로 어느방향으로 움직일지와 거리를 생성한다
 	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 4);
-	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(1, 5));
+	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(1, 3));
 
 
 	switch (m_iMove)
@@ -82,10 +82,6 @@ HRESULT CSlime::Initialize(void * pArg)
 
 HRESULT CSlime::SetUp_Components()
 {
-	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"))))
-		return E_FAIL;
-
-
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
 	BoxColDesc.vScale = _float3{ 0.5f, 1.f, 0.5f };
@@ -140,8 +136,8 @@ void CSlime::Tick(_float fTimeDelta)
 
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
 	{
-		Set_Dead();
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
+		Set_Dead();
 	}
 
 }
@@ -153,8 +149,9 @@ void CSlime::LateTick(_float fTimeDelta)
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
 	__super::BoxColCom_Tick(m_pTransformCom);
+
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
-	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
