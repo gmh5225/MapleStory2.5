@@ -1,53 +1,52 @@
 #include "stdafx.h"
-#include "..\Public\SkillGradeBtn0.h"
+#include "..\Public\EquipBtn.h"
 #include "GameInstance.h"
-#include "SkillManager.h"
+#include "InvenManager.h"
 
 
 
-CSkillGradeBtn0::CSkillGradeBtn0(LPDIRECT3DDEVICE9 pGraphic_Device)
+CEquipBtn::CEquipBtn(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
 {
 }
 
-CSkillGradeBtn0::CSkillGradeBtn0(const CSkillGradeBtn0& rhs)
+CEquipBtn::CEquipBtn(const CEquipBtn& rhs)
 	: CUI(rhs)
 {
 }
 
 
-HRESULT CSkillGradeBtn0::Initialize_Prototype()
+HRESULT CEquipBtn::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 	return S_OK;
 }
 
-HRESULT CSkillGradeBtn0::Initialize(void * pArg)
+HRESULT CEquipBtn::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
-	
+
 	m_iTexturenum = 0;
 	__super::Initialize(pArg);
 
-	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SkillGradeBtn0"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_EquipBtn"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
-	pSkillInstance->Add_SkillFrameImage(this);
-	m_bRender = false;
+	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
+	pInvenInstance->Add_InvenImage(this);
+
 	return S_OK;
 }
 
-void CSkillGradeBtn0::Tick(_float fTimeDelta)
+void CEquipBtn::Tick(_float fTimeDelta)
 {
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
 
-	if (pInstance->Key_Down(DIK_K))
+	if (pInstance->Key_Down(DIK_I))
 	{
 		m_bRender = !m_bRender;
 	}
@@ -59,12 +58,12 @@ void CSkillGradeBtn0::Tick(_float fTimeDelta)
 	Safe_Release(pInstance);
 }
 
-void CSkillGradeBtn0::LateTick(_float fTimeDelta)
+void CEquipBtn::LateTick(_float fTimeDelta)
 {
-	
+
 
 	SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
-	
+
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 	if (m_bRender)
@@ -73,7 +72,7 @@ void CSkillGradeBtn0::LateTick(_float fTimeDelta)
 
 }
 
-HRESULT CSkillGradeBtn0::Render()
+HRESULT CEquipBtn::Render()
 {
 	if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
 		return E_FAIL;
@@ -90,66 +89,67 @@ HRESULT CSkillGradeBtn0::Render()
 	return S_OK;
 }
 
-void CSkillGradeBtn0::Change_Texture()
+
+void CEquipBtn::Change_Texture()
 {
 
-	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
 
 	switch (m_eCollision)
 	{
 	case Client::CUI::TYPE_NO:
 		break;
-	case Client::CUI::TYPE_ON:		
+	case Client::CUI::TYPE_ON:
 		break;
 	case Client::CUI::TYPE_DOWN:
-		pSkillInstance->Set_SkillGrade(CSkillManager::GRADE_BEGENNER);		
+		pInvenInstance->Set_InvenType(CInvenManager::TYPE_EQUIP);
 		break;
 	case Client::CUI::TYPE_UP:
 		break;
-	case Client::CUI::TYPE_PRESSING:	
+	case Client::CUI::TYPE_PRESSING:
 		break;
 	case Client::CUI::TYPE_END:
 		break;
 	default:
 		break;
 	}
-	if (pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_BEGENNER)
+	if (pInvenInstance->Get_InvenType() == CInvenManager::TYPE_EQUIP)
 		m_iTexturenum = 1;
 	else
 		m_iTexturenum = 0;
-	
 
-	
+
+
 
 }
 
-CSkillGradeBtn0* CSkillGradeBtn0::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CEquipBtn* CEquipBtn::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CSkillGradeBtn0*		pInstance = new CSkillGradeBtn0(pGraphic_Device);
+	CEquipBtn*		pInstance = new CEquipBtn(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CSkillGradeBtn0"));
+		MSG_BOX(TEXT("Failed To Created : CEquipBtn"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CSkillGradeBtn0::Clone(void * pArg)
+CGameObject * CEquipBtn::Clone(void * pArg)
 {
-	CSkillGradeBtn0*		pInstance = new CSkillGradeBtn0(*this);
+	CEquipBtn*		pInstance = new CEquipBtn(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CSkillGradeBtn0"));
+		MSG_BOX(TEXT("Failed To Cloned : CEquipBtn"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CSkillGradeBtn0::Free()
+void CEquipBtn::Free()
 {
 	__super::Free();
 

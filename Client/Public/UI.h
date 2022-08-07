@@ -21,6 +21,8 @@ public:
 	{
 		_float					fMoveX, fMoveY, fX, fY, fSizeX, fSizeY;
 		_uint iNum;
+		_uint iTextNum;
+		const _tchar* pTag;
 	}UIINFO;
 protected:
 	CUI(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -40,6 +42,7 @@ public:
 	void Set_UIPos(UIINFO tUIInfo) { m_UIInfo.fX = tUIInfo.fX, m_UIInfo.fY = tUIInfo.fY; }
 	RECT Get_RectUI() { return m_RectUI; }
 	Collision_Type Get_CollisionType() { return m_eCollision; }
+	const _tchar* Get_Tag() { return m_UIInfo.pTag; }
 
 protected:
 	CTexture*				m_pTextureCom = nullptr;

@@ -35,6 +35,9 @@ private:
 	HRESULT Ready_Layer_Section(const _tchar* pLayerTag);
 
 private:
+	HRESULT Ready_InvenBtn(const _tchar* pLayerTag);
+	HRESULT Ready_ItemInfo();
+	HRESULT Ready_ItemIcon(const _tchar* pLayerTag);
 	HRESULT Ready_SkillFrameBtn(const _tchar* pLayerTag);
 	HRESULT Ready_SkillIcon(const _tchar* pLayerTag);
 	HRESULT Ready_SkillInfo();

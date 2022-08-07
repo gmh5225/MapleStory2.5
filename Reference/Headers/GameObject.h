@@ -61,8 +61,6 @@ protected:
 	_float				m_fYDistance;
 	_bool				m_bDead;
 
-
-
 	_bool				m_bPushedX = false;
 	_bool				m_bPushedY = false;
 

@@ -11,6 +11,7 @@
 #include "WarriorReef.h"
 #include "SpearPulling.h"
 #include "ParticleManager.h"
+#include "Item.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -163,7 +164,33 @@ void CPlayer::Tick(_float fTimeDelta)
 		Dash(fTimeDelta);
 		break;
 	}
-	
+
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_7))
+	{
+		CItem::ITEMINFO RedPortion;
+		RedPortion.eType = CInvenManager::TYPE_CONSUM;
+		RedPortion.iTextNum = 0;
+		RedPortion.pTag = L"RedPortionInfo";
+		RedPortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &RedPortion);
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &ReefAttackHitDesc);
+	}
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_8))
+	{
+		CItem::ITEMINFO BluePortion;
+		BluePortion.eType = CInvenManager::TYPE_CONSUM;
+		BluePortion.iTextNum = 1;
+		BluePortion.pTag = L"BluePortionInfo";
+		BluePortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &BluePortion);
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &ReefAttackHitDesc);
+	}
+
+	Safe_Release(pGameInstance);
 
 	Particle(fTimeDelta);
 
@@ -238,7 +265,7 @@ HRESULT CPlayer::Render()
 	_float3 pos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
 
-	wchar_t PosX[10];
+	/*wchar_t PosX[10];
 	_itow_s(pos.x, PosX, 10);
 
 	wchar_t PosY[10];
@@ -257,7 +284,7 @@ HRESULT CPlayer::Render()
 
 	RECT Z;
 	SetRect(&Z, 840, 180, 0, 0);
-	m_Font->DrawText(NULL, PosZ, -1, &Z, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+	m_Font->DrawText(NULL, PosZ, -1, &Z, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));*/
 
 
 

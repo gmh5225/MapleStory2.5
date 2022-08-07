@@ -157,14 +157,20 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\Public\BluePortionInfo.h" />
     <ClInclude Include="..\Public\BlueSnail.h" />
     <ClInclude Include="..\Public\Bulb.h" />
     <ClInclude Include="..\Public\Camera_Free.h" />
+    <ClInclude Include="..\Public\CashBtn.h" />
     <ClInclude Include="..\Public\Client_Defines.h" />
+    <ClInclude Include="..\Public\ConsumBtn.h" />
+    <ClInclude Include="..\Public\DefaultInfo.h" />
+    <ClInclude Include="..\Public\ConsumIcon.h" />
     <ClInclude Include="..\Public\Creature.h" />
     <ClInclude Include="..\Public\CrossTheStyx.h" />
     <ClInclude Include="..\Public\Cube.h" />
     <ClInclude Include="..\Public\Chat.h" />
+    <ClInclude Include="..\Public\EquipBtn.h" />
     <ClInclude Include="..\Public\ExpBar.h" />
     <ClInclude Include="..\Public\ExpBase.h" />
     <ClInclude Include="..\Public\ExpLine.h" />
@@ -174,8 +180,12 @@
     <ClInclude Include="..\Public\HpBarHp.h" />
     <ClInclude Include="..\Public\HpBarIcon.h" />
     <ClInclude Include="..\Public\HpBarMp.h" />
+    <ClInclude Include="..\Public\InstallBtn.h" />
     <ClInclude Include="..\Public\InvenManager.h" />
     <ClInclude Include="..\Public\ElderStan.h" />
+    <ClInclude Include="..\Public\Inventory.h" />
+    <ClInclude Include="..\Public\Item.h" />
+    <ClInclude Include="..\Public\ItemInfo.h" />
     <ClInclude Include="..\Public\Level_Elenya.h" />
     <ClInclude Include="..\Public\Level_GamePlay.h" />
     <ClInclude Include="..\Public\Level_Henesys_1.h" />
@@ -200,7 +210,7 @@
     <ClInclude Include="..\Public\QuickSlot.h" />
     <ClInclude Include="..\Public\QuickSlotManager.h" />
     <ClInclude Include="..\Public\QuickSlotSkill.h" />
-    <ClInclude Include="..\Public\RedPortion.h" />
+    <ClInclude Include="..\Public\RedPortionInfo.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
     <ClInclude Include="..\Public\ReefAttack.h" />
     <ClInclude Include="..\Public\ReefAttackHit.h" />
@@ -228,6 +238,8 @@
     <ClInclude Include="..\Public\SpearPullingHit.h" />
     <ClInclude Include="..\Public\SpearPullingIcon.h" />
     <ClInclude Include="..\Public\SpearPullingInfo.h" />
+    <ClInclude Include="..\Public\StuffBtn.h" />
+    <ClInclude Include="..\Public\StuffIcon.h" />
     <ClInclude Include="..\Public\SunCrossIcon.h" />
     <ClInclude Include="..\Public\SunCrossInfo.h" />
     <ClInclude Include="..\Public\StoneGolem.h" />
@@ -248,13 +260,19 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\Private\BluePortionInfo.cpp" />
     <ClCompile Include="..\Private\BlueSnail.cpp" />
     <ClCompile Include="..\Private\Bulb.cpp" />
     <ClCompile Include="..\Private\Camera_Free.cpp" />
+    <ClCompile Include="..\Private\CashBtn.cpp" />
+    <ClCompile Include="..\Private\ConsumBtn.cpp" />
+    <ClCompile Include="..\Private\DefaultInfo.cpp" />
+    <ClCompile Include="..\Private\ConsumIcon.cpp" />
     <ClCompile Include="..\Private\Creature.cpp" />
     <ClCompile Include="..\Private\CrossTheStyx.cpp" />
     <ClCompile Include="..\Private\Cube.cpp" />
     <ClCompile Include="..\Private\Chat.cpp" />
+    <ClCompile Include="..\Private\EquipBtn.cpp" />
     <ClCompile Include="..\Private\ExpBar.cpp" />
     <ClCompile Include="..\Private\ExpBase.cpp" />
     <ClCompile Include="..\Private\ExpLine.cpp" />
@@ -264,8 +282,12 @@
     <ClCompile Include="..\Private\HpBarHp.cpp" />
     <ClCompile Include="..\Private\HpBarIcon.cpp" />
     <ClCompile Include="..\Private\HpBarMp.cpp" />
+    <ClCompile Include="..\Private\InstallBtn.cpp" />
     <ClCompile Include="..\Private\InvenManager.cpp" />
     <ClCompile Include="..\Private\ElderStan.cpp" />
+    <ClCompile Include="..\Private\Inventory.cpp" />
+    <ClCompile Include="..\Private\Item.cpp" />
+    <ClCompile Include="..\Private\ItemInfo.cpp" />
     <ClCompile Include="..\Private\Level_Elenya.cpp" />
     <ClCompile Include="..\Private\Level_GamePlay.cpp" />
     <ClCompile Include="..\Private\Level_Henesys_1.cpp" />
@@ -290,7 +312,7 @@
     <ClCompile Include="..\Private\QuickSlot.cpp" />
     <ClCompile Include="..\Private\QuickSlotManager.cpp" />
     <ClCompile Include="..\Private\QuickSlotSkill.cpp" />
-    <ClCompile Include="..\Private\RedPortion.cpp" />
+    <ClCompile Include="..\Private\RedPortionInfo.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
     <ClCompile Include="..\Private\ReefAttack.cpp" />
     <ClCompile Include="..\Private\ReefAttackHit.cpp" />
@@ -318,6 +340,8 @@
     <ClCompile Include="..\Private\SpearPullingHit.cpp" />
     <ClCompile Include="..\Private\SpearPullingIcon.cpp" />
     <ClCompile Include="..\Private\SpearPullingInfo.cpp" />
+    <ClCompile Include="..\Private\StuffBtn.cpp" />
+    <ClCompile Include="..\Private\StuffIcon.cpp" />
     <ClCompile Include="..\Private\SunCrossIcon.cpp" />
     <ClCompile Include="..\Private\SunCrossInfo.cpp" />
     <ClCompile Include="..\Private\StoneGolem.cpp" />

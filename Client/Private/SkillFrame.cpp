@@ -25,7 +25,6 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	//m_UIInfo = *(UIINFO*)pArg;
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
 
 	m_pSkillManager = CSkillManager::Get_Instance();
@@ -45,7 +44,7 @@ HRESULT CSkillFrame::Initialize(void * pArg)
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SkillFrame"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
-
+	m_bRender = false;
 
 	return S_OK;
 }
@@ -81,6 +80,7 @@ void CSkillFrame::Tick(_float fTimeDelta)
 
 void CSkillFrame::LateTick(_float fTimeDelta)
 {
+	
 	if (m_bRender)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 
@@ -116,9 +116,6 @@ HRESULT CSkillFrame::Render()
 	
 	RenderText();
 	
-	
-	
-
 	return S_OK;
 }
 

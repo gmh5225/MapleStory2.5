@@ -289,6 +289,8 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Section(const _tchar * pLayerTag)
 
 
 	m_pColliderCom->Set_SectionCubes();
+
+	return S_OK;
 }
 
 HRESULT CLevel_Henesys_1::Ready_Layer_UI(const _tchar * pLayerTag)

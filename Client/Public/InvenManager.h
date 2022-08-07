@@ -2,25 +2,43 @@
 
 #include "Client_Defines.h"
 #include "Base.h"
-#include "RedPortion.h"
-//모든 아이템 데이터관리 
-//출력은 UI에서 하는것임 
+
 BEGIN(Client)
+
+class CUI;
+class CInventory;
+class CItemInfo;
 
 class CInvenManager final : CBase
 {
 	DECLARE_SINGLETON(CInvenManager)
+public:
+	enum InvenType { TYPE_EQUIP, TYPE_CONSUM, TYPE_STUFF,TYPE_INSTALL, TYPE_CASH, TYPE_END};
 
 private:
 	CInvenManager();
 	virtual ~CInvenManager() = default;
 
 public:
-	HRESULT AddItemNum(void* pArg);
+	HRESULT Set_Inventory(CInventory* pInvenFrame);
 
-private:
-	CRedPortion* m_pRedPortion;
+	HRESULT Add_InvenImage(CUI* pInvenImage);
+	HRESULT Add_InvenIcon(InvenType eType, CUI* pInvenIcon);
+
+	HRESULT Set_InvenType(InvenType eType);
+	InvenType Get_InvenType() { return m_eInvenType; }
+
+	HRESULT Add_ItemInfo(const _tchar* pTag, InvenType eType, CItemInfo* pItemInfo);
+	HRESULT Set_InvenInfo(const _tchar* pTag);
+	CItemInfo* Get_ItemInfo(const _tchar* pTag, InvenType eType);
+	CItemInfo* Find_ItemInfo(const _tchar* pTag, InvenType eType);
+	HRESULT Check_Icon(const _tchar* pTag, InvenType eType, _uint iNum);
 	
+	
+private:
+	CInventory* m_pInventory;
+	InvenType m_eInvenType;
+	map<const _tchar*, CItemInfo*> m_ItemInfo[TYPE_END];
 
 public:
 	virtual void Free() override;

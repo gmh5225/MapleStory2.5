@@ -37,6 +37,8 @@ HRESULT CSkillGradeBtn5::Initialize(void * pArg)
 
 	pSkillInstance->Add_SkillFrameImage(this);
 
+	m_bRender = false;
+
 	return S_OK;
 }
 

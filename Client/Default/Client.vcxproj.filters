@@ -79,12 +79,6 @@
     <Filter Include="02.GameObject\Creature\Npc">
       <UniqueIdentifier>{8f214ff5-1c18-4057-b474-2d32a59d3b86}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Item">
-      <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Item\RedPortion">
-      <UniqueIdentifier>{ebff119c-82f0-44d7-8dd6-9ebee650be9d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="04.UI\01.PlayerUI">
       <UniqueIdentifier>{951933e2-f95a-4ab8-a599-623d35845055}</UniqueIdentifier>
     </Filter>
@@ -114,9 +108,6 @@
     </Filter>
     <Filter Include="03.MoDel\MushHouse">
       <UniqueIdentifier>{33c2b3e5-aecd-4978-8c4d-6ba0569ccc2c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.UI\ItemInventory">
-      <UniqueIdentifier>{e724cf80-6773-4807-93aa-3dc1814924df}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Skill\Effect">
       <UniqueIdentifier>{500f84c4-6659-46e0-ab66-a2cbe8a33c71}</UniqueIdentifier>
@@ -327,7 +318,7 @@
     </Filter>
     <Filter Include="04.UI\05.Icon\SkillIcon\Dash\WarriorReef">
       <UniqueIdentifier>{15db6d70-21ab-4e1a-86c1-f38027624189}</UniqueIdentifier>
-         </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Sky">
       <UniqueIdentifier>{fb732ed9-19a3-4471-9c8d-810dde588abd}</UniqueIdentifier>
     </Filter>
@@ -336,6 +327,48 @@
     </Filter>
     <Filter Include="89.Manager\ParticleManager">
       <UniqueIdentifier>{8c7e3bb7-50e9-4e7c-a6eb-64d08105f73e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\Inventory">
+      <UniqueIdentifier>{972333fc-755f-433e-bb5e-1e15bd8f1410}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\Inventory\InvenBtn">
+      <UniqueIdentifier>{4c8c24ee-6f5b-4aad-91ff-75e697566293}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\Inventory\ItemIcon">
+      <UniqueIdentifier>{d9115112-5f41-4a0b-bc24-f6b2e35f4850}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\Inventory\ItemIcon\ConsumIcon">
+      <UniqueIdentifier>{316941eb-91aa-444e-ac59-3079c6c53485}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\Inventory\ItemIcon\EquipIcon">
+      <UniqueIdentifier>{be010ec3-6b69-4081-88ba-3c7f359cdc81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\00.MainUI\Inventory\ItemIcon\StuffIcon">
+      <UniqueIdentifier>{24bfce3f-195c-4a48-85db-5b7a62167339}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo">
+      <UniqueIdentifier>{63cde2b9-9d17-49df-a289-dc8c34c76806}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\ConsumInfo">
+      <UniqueIdentifier>{547894a2-2c88-409d-a3a7-2df2cc36728f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\StuffInfo">
+      <UniqueIdentifier>{84128ed9-9145-41d2-bdf9-28e0b3699f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\ConsumInfo\RedPortion">
+      <UniqueIdentifier>{39703acc-9651-4408-b0e3-71833e158f74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\ConsumInfo\BluePortion">
+      <UniqueIdentifier>{2ee13c37-d495-4d86-a203-db5c94290451}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Item">
+      <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Item\EquipItem">
+      <UniqueIdentifier>{b521bd14-68e6-473b-9556-e62b16cadf72}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\DefaultInfo">
+      <UniqueIdentifier>{95838574-73df-486c-8b71-97d19ec2f034}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -423,9 +456,6 @@
     <ClInclude Include="..\Public\Bulb.h">
       <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\RedPortion.h">
-      <Filter>02.GameObject\Item\RedPortion</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\SkillFrame.h">
       <Filter>04.UI\01.PlayerUI\SkillFrame</Filter>
     </ClInclude>
@@ -491,9 +521,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\HpBarBase.h">
       <Filter>04.UI\00.MainUI\HpBar\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\SkillInfo.h">
-      <Filter>20.DATA</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\HpBarIcon.h">
       <Filter>04.UI\00.MainUI\HpBar\Icon</Filter>
@@ -596,7 +623,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\WarriorReefIcon.h">
       <Filter>04.UI\05.Icon\SkillIcon\Dash\WarriorReef</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Sky.h">
       <Filter>02.GameObject\Sky</Filter>
     </ClInclude>
@@ -605,6 +632,48 @@
     </ClInclude>
     <ClInclude Include="..\public\ParticleManager.h">
       <Filter>89.Manager\ParticleManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Inventory.h">
+      <Filter>04.UI\00.MainUI\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\EquipBtn.h">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ConsumBtn.h">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\StuffBtn.h">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\InstallBtn.h">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CashBtn.h">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SkillInfo.h">
+      <Filter>20.DATA\SkillInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ConsumIcon.h">
+      <Filter>04.UI\00.MainUI\Inventory\ItemIcon\ConsumIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\StuffIcon.h">
+      <Filter>04.UI\00.MainUI\Inventory\ItemIcon\StuffIcon</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ItemInfo.h">
+      <Filter>20.DATA\ItemInfo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BluePortionInfo.h">
+      <Filter>20.DATA\ItemInfo\ConsumInfo\BluePortion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RedPortionInfo.h">
+      <Filter>20.DATA\ItemInfo\ConsumInfo\RedPortion</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Item.h">
+      <Filter>02.GameObject\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\DefaultInfo.h">
+      <Filter>20.DATA\ItemInfo\DefaultInfo</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -686,9 +755,6 @@
     <ClCompile Include="..\Private\Bulb.cpp">
       <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\RedPortion.cpp">
-      <Filter>02.GameObject\Item\RedPortion</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\SkillFrame.cpp">
       <Filter>04.UI\01.PlayerUI\SkillFrame</Filter>
     </ClCompile>
@@ -754,9 +820,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\HpBarBase.cpp">
       <Filter>04.UI\00.MainUI\HpBar\Base</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\SkillInfo.cpp">
-      <Filter>20.DATA</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\HpBarIcon.cpp">
       <Filter>04.UI\00.MainUI\HpBar\Icon</Filter>
@@ -856,7 +919,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\WarriorReefIcon.cpp">
       <Filter>04.UI\05.Icon\SkillIcon\Dash\WarriorReef</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Sky.cpp">
       <Filter>02.GameObject\Sky</Filter>
     </ClCompile>
@@ -865,6 +928,48 @@
     </ClCompile>
     <ClCompile Include="..\private\ParticleManager.cpp">
       <Filter>89.Manager\ParticleManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Inventory.cpp">
+      <Filter>04.UI\00.MainUI\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\EquipBtn.cpp">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ConsumBtn.cpp">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\StuffBtn.cpp">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\InstallBtn.cpp">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CashBtn.cpp">
+      <Filter>04.UI\00.MainUI\Inventory\InvenBtn</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SkillInfo.cpp">
+      <Filter>20.DATA\SkillInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ConsumIcon.cpp">
+      <Filter>04.UI\00.MainUI\Inventory\ItemIcon\ConsumIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\StuffIcon.cpp">
+      <Filter>04.UI\00.MainUI\Inventory\ItemIcon\StuffIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ItemInfo.cpp">
+      <Filter>20.DATA\ItemInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BluePortionInfo.cpp">
+      <Filter>20.DATA\ItemInfo\ConsumInfo\BluePortion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RedPortionInfo.cpp">
+      <Filter>20.DATA\ItemInfo\ConsumInfo\RedPortion</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Item.cpp">
+      <Filter>02.GameObject\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\DefaultInfo.cpp">
+      <Filter>20.DATA\ItemInfo\DefaultInfo</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -3,6 +3,10 @@
 
 #include "GameInstance.h"
 #include "Camera_Free.h"
+#include "ItemInfo.h"
+#include "DefaultInfo.h"
+#include "RedPortionInfo.h"
+#include "BluePortionInfo.h"
 #include "SkillInfo.h"
 #include "SunCrossInfo.h"
 #include "SolunaSlashInfo.h"
@@ -10,6 +14,7 @@
 #include "ReefAttackInfo.h"
 #include "SpearPullingInfo.h"
 #include "SkillManager.h"
+#include "InvenManager.h"
 #include "UI.h"
 #include "QuestManager.h"
 #include "SpawnerManager.h"
@@ -17,6 +22,8 @@
 #include "Level_Loading.h"
 #include "MainApp.h"
 #include "Potal.h"
+#include "ConsumIcon.h"
+
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -31,6 +38,9 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (g_bStaticClone == false)
 	{
 		if (FAILED(Ready_SkillInfo()))
+			return E_FAIL;
+
+		if (FAILED(Ready_ItemInfo()))
 			return E_FAIL;
 
 		if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
@@ -204,9 +214,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-
-
-
 	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Henesys");
 	for (auto& Data : *pMapData)
 	{
@@ -334,6 +341,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Section(const _tchar * pLayerTag)
 
 
 	m_pColliderCom->Set_SectionCubes();
+	
+	return S_OK;
 }
 
 HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
@@ -348,10 +357,23 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	SkillFrameiInfo.fX = 900.f;
 	SkillFrameiInfo.fY = 300.f;
 
+	CUI::UIINFO InvenFrameiInfo;
+	InvenFrameiInfo.fSizeX = 197.f;
+	InvenFrameiInfo.fSizeY = 380.f;
+	InvenFrameiInfo.fX = 750.f;
+	InvenFrameiInfo.fY = 250.f;
+
 	
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_QuestUI"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_InvenFrame"), LEVEL_STATIC, pLayerTag, &InvenFrameiInfo)))
+		return E_FAIL;
+
+	Ready_InvenBtn(pLayerTag);
+
+	Ready_ItemIcon(pLayerTag);
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SkillFrame"), LEVEL_STATIC, pLayerTag, &SkillFrameiInfo)))
 		return E_FAIL;
@@ -359,6 +381,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	Ready_SkillFrameBtn(pLayerTag);
 
 	Ready_SkillIcon(pLayerTag);
+
+
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_HpBarBase"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
@@ -420,7 +444,382 @@ HRESULT CLevel_GamePlay::Ready_Layer_NonStatic_UI(const _tchar * pLayerTag)
 HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
 
+	return S_OK;
+}
 
+HRESULT CLevel_GamePlay::Ready_InvenBtn(const _tchar * pLayerTag)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CUI::UIINFO EquipInfo;
+	EquipInfo.fSizeX = 29.f;
+	EquipInfo.fSizeY = 17.f;
+	EquipInfo.fMoveX = -70.f;
+	EquipInfo.fMoveY = -153.f;
+	EquipInfo.iNum = 1;
+
+	CUI::UIINFO ConsumInfo;
+	ConsumInfo.fSizeX = 29.f;
+	ConsumInfo.fSizeY = 17.f;
+	ConsumInfo.fMoveX = -39.f;
+	ConsumInfo.fMoveY = -153.f;
+	ConsumInfo.iNum = 2;
+
+	CUI::UIINFO StuffInfo;
+	StuffInfo.fSizeX = 29.f;
+	StuffInfo.fSizeY = 17.f;
+	StuffInfo.fMoveX = -8.f;
+	StuffInfo.fMoveY = -153.f;
+	StuffInfo.iNum = 3;
+
+	CUI::UIINFO InstallInfo;
+	InstallInfo.fSizeX = 29.f;
+	InstallInfo.fSizeY = 17.f;
+	InstallInfo.fMoveX = 23.f;
+	InstallInfo.fMoveY = -153.f;
+	InstallInfo.iNum = 4;
+
+	CUI::UIINFO CashInfo;
+	CashInfo.fSizeX = 29.f;
+	CashInfo.fSizeY = 17.f;
+	CashInfo.fMoveX = 54.f;
+	CashInfo.fMoveY = -153.f;
+	CashInfo.iNum = 5;
+
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_EquipBtn"), LEVEL_STATIC, pLayerTag, &EquipInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumBtn"), LEVEL_STATIC, pLayerTag, &ConsumInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StuffBtn"), LEVEL_STATIC, pLayerTag, &StuffInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_InstallBtn"), LEVEL_STATIC, pLayerTag, &InstallInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CashBtn"), LEVEL_STATIC, pLayerTag, &CashInfo)))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_ItemInfo()
+{
+	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
+	CDefaultInfo* pDefaultInfo = new CDefaultInfo;
+	CRedPortionInfo* pRedPortion = new CRedPortionInfo;
+	CBluePortionInfo* pBluePortion = new CBluePortionInfo;
+
+	if (FAILED(pInvenInstance->Add_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM, pDefaultInfo)))
+		return E_FAIL;
+
+	if (FAILED(pInvenInstance->Add_ItemInfo(TEXT("RedPortionInfo"), CInvenManager::TYPE_CONSUM, pRedPortion)))
+		return E_FAIL;
+
+	if (FAILED(pInvenInstance->Add_ItemInfo(TEXT("BluePortionInfo"), CInvenManager::TYPE_CONSUM, pBluePortion)))
+		return E_FAIL;
+	return S_OK;
+}
+
+HRESULT CLevel_GamePlay::Ready_ItemIcon(const _tchar* pLayerTag)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+	//xÅÒ 42 yÅÒ 42
+	CUI::UIINFO ConsumIcon1;
+	ConsumIcon1.fSizeX = 27.f;
+	ConsumIcon1.fSizeY = 27.f;
+	ConsumIcon1.fMoveX = -69.f;
+	ConsumIcon1.fMoveY = -118.f;
+	ConsumIcon1.iNum = 1;
+	ConsumIcon1.iTextNum = 0;
+	ConsumIcon1.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon2;
+	ConsumIcon2.fSizeX = 27.f;
+	ConsumIcon2.fSizeY = 27.f;
+	ConsumIcon2.fMoveX = -27.f;
+	ConsumIcon2.fMoveY = -118.f;
+	ConsumIcon2.iNum = 2;
+	ConsumIcon2.iTextNum = 0;
+	ConsumIcon2.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon3;
+	ConsumIcon3.fSizeX = 27.f;
+	ConsumIcon3.fSizeY = 27.f;
+	ConsumIcon3.fMoveX = 15.f;
+	ConsumIcon3.fMoveY = -118.f;
+	ConsumIcon3.iNum = 3;
+	ConsumIcon3.iTextNum = 0;
+	ConsumIcon3.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon4;
+	ConsumIcon4.fSizeX = 27.f;
+	ConsumIcon4.fSizeY = 27.f;
+	ConsumIcon4.fMoveX = 57.f;
+	ConsumIcon4.fMoveY = -118.f;
+	ConsumIcon4.iNum = 4;
+	ConsumIcon4.iTextNum = 0;
+	ConsumIcon4.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon5;
+	ConsumIcon5.fSizeX = 27.f;
+	ConsumIcon5.fSizeY = 27.f;
+	ConsumIcon5.fMoveX = -69.f;
+	ConsumIcon5.fMoveY = -76.f;
+	ConsumIcon5.iNum = 5;
+	ConsumIcon5.iTextNum = 0;
+	ConsumIcon5.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon6;
+	ConsumIcon6.fSizeX = 27.f;
+	ConsumIcon6.fSizeY = 27.f;
+	ConsumIcon6.fMoveX = -27.f;
+	ConsumIcon6.fMoveY = -76.f;
+	ConsumIcon6.iNum = 6;
+	ConsumIcon6.iTextNum = 0;
+	ConsumIcon6.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon7;
+	ConsumIcon7.fSizeX = 27.f;
+	ConsumIcon7.fSizeY = 27.f;
+	ConsumIcon7.fMoveX = 15.f;
+	ConsumIcon7.fMoveY = -76.f;
+	ConsumIcon7.iNum = 7;
+	ConsumIcon7.iTextNum = 0;
+	ConsumIcon7.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon8;
+	ConsumIcon8.fSizeX = 27.f;
+	ConsumIcon8.fSizeY = 27.f;
+	ConsumIcon8.fMoveX = 57.f;
+	ConsumIcon8.fMoveY = -76.f;
+	ConsumIcon8.iNum = 8;
+	ConsumIcon8.iTextNum = 0;
+	ConsumIcon8.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon9;
+	ConsumIcon9.fSizeX = 27.f;
+	ConsumIcon9.fSizeY = 27.f;
+	ConsumIcon9.fMoveX = -69.f;
+	ConsumIcon9.fMoveY = -34.f;
+	ConsumIcon9.iNum = 9;
+	ConsumIcon9.iTextNum = 0;
+	ConsumIcon9.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon10;
+	ConsumIcon10.fSizeX = 27.f;
+	ConsumIcon10.fSizeY = 27.f;
+	ConsumIcon10.fMoveX = -27.f;
+	ConsumIcon10.fMoveY = -34.f;
+	ConsumIcon10.iNum = 10;
+	ConsumIcon10.iTextNum = 0;
+	ConsumIcon10.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon11;
+	ConsumIcon11.fSizeX = 27.f;
+	ConsumIcon11.fSizeY = 27.f;
+	ConsumIcon11.fMoveX = 15.f;
+	ConsumIcon11.fMoveY = -34.f;
+	ConsumIcon11.iNum = 11;
+	ConsumIcon11.iTextNum = 0;
+	ConsumIcon11.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon12;
+	ConsumIcon12.fSizeX = 27.f;
+	ConsumIcon12.fSizeY = 27.f;
+	ConsumIcon12.fMoveX = 57.f;
+	ConsumIcon12.fMoveY = -34.f;
+	ConsumIcon12.iNum = 12;
+	ConsumIcon12.iTextNum = 0;
+	ConsumIcon12.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon13;
+	ConsumIcon13.fSizeX = 27.f;
+	ConsumIcon13.fSizeY = 27.f;
+	ConsumIcon13.fMoveX = -69.f;
+	ConsumIcon13.fMoveY = 8.f;
+	ConsumIcon13.iNum = 13;
+	ConsumIcon13.iTextNum = 0;
+	ConsumIcon13.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon14;
+	ConsumIcon14.fSizeX = 27.f;
+	ConsumIcon14.fSizeY = 27.f;
+	ConsumIcon14.fMoveX = -27.f;
+	ConsumIcon14.fMoveY = 8.f;
+	ConsumIcon14.iNum = 14;
+	ConsumIcon14.iTextNum = 0;
+	ConsumIcon14.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon15;
+	ConsumIcon15.fSizeX = 27.f;
+	ConsumIcon15.fSizeY = 27.f;
+	ConsumIcon15.fMoveX = 15.f;
+	ConsumIcon15.fMoveY = 8.f;
+	ConsumIcon15.iNum = 15;
+	ConsumIcon15.iTextNum = 0;
+	ConsumIcon15.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon16;
+	ConsumIcon16.fSizeX = 27.f;
+	ConsumIcon16.fSizeY = 27.f;
+	ConsumIcon16.fMoveX = 57.f;
+	ConsumIcon16.fMoveY = 8.f;
+	ConsumIcon16.iNum = 16;
+	ConsumIcon16.iTextNum = 0;
+	ConsumIcon16.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon17;
+	ConsumIcon17.fSizeX = 27.f;
+	ConsumIcon17.fSizeY = 27.f;
+	ConsumIcon17.fMoveX = -69.f;
+	ConsumIcon17.fMoveY = 50.f;
+	ConsumIcon17.iNum = 17;
+	ConsumIcon17.iTextNum = 0;
+	ConsumIcon17.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon18;
+	ConsumIcon18.fSizeX = 27.f;
+	ConsumIcon18.fSizeY = 27.f;
+	ConsumIcon18.fMoveX = -27.f;
+	ConsumIcon18.fMoveY = 50.f;
+	ConsumIcon18.iNum = 18;
+	ConsumIcon18.iTextNum = 0;
+	ConsumIcon18.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon19;
+	ConsumIcon19.fSizeX = 27.f;
+	ConsumIcon19.fSizeY = 27.f;
+	ConsumIcon19.fMoveX = 15.f;
+	ConsumIcon19.fMoveY = 50.f;
+	ConsumIcon19.iNum = 19;
+	ConsumIcon19.iTextNum = 0;
+	ConsumIcon19.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon20;
+	ConsumIcon20.fSizeX = 27.f;
+	ConsumIcon20.fSizeY = 27.f;
+	ConsumIcon20.fMoveX = 57.f;
+	ConsumIcon20.fMoveY = 50.f;
+	ConsumIcon20.iNum = 20;
+	ConsumIcon20.iTextNum = 0;
+	ConsumIcon20.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon21;
+	ConsumIcon21.fSizeX = 27.f;
+	ConsumIcon21.fSizeY = 27.f;
+	ConsumIcon21.fMoveX = -69.f;
+	ConsumIcon21.fMoveY = 92.f;
+	ConsumIcon21.iNum = 21;
+	ConsumIcon21.iTextNum = 0;
+	ConsumIcon21.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon22;
+	ConsumIcon22.fSizeX = 27.f;
+	ConsumIcon22.fSizeY = 27.f;
+	ConsumIcon22.fMoveX = -27.f;
+	ConsumIcon22.fMoveY = 92.f;
+	ConsumIcon22.iNum = 22;
+	ConsumIcon22.iTextNum = 0;
+	ConsumIcon22.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon23;
+	ConsumIcon23.fSizeX = 27.f;
+	ConsumIcon23.fSizeY = 27.f;
+	ConsumIcon23.fMoveX = 15.f;
+	ConsumIcon23.fMoveY = 92.f;
+	ConsumIcon23.iNum = 23;
+	ConsumIcon23.iTextNum = 0;
+	ConsumIcon23.pTag = L"DefaultInfo";
+
+	CUI::UIINFO ConsumIcon24;
+	ConsumIcon24.fSizeX = 27.f;
+	ConsumIcon24.fSizeY = 27.f;
+	ConsumIcon24.fMoveX = 57.f;
+	ConsumIcon24.fMoveY = 92.f;
+	ConsumIcon24.iNum = 24;
+	ConsumIcon24.iTextNum = 0;
+	ConsumIcon24.pTag = L"DefaultInfo";
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon1)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon2)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon3)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon4)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon5)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon6)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon7)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon8)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon9)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon10)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon11)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon12)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon13)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon14)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon15)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon16)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon17)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon18)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon19)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon20)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon21)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon22)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon23)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ConsumIcon"), LEVEL_STATIC, pLayerTag, &ConsumIcon24)))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
 	return S_OK;
 }
 

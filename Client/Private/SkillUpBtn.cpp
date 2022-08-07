@@ -40,6 +40,7 @@ HRESULT CSkillUpBtn::Initialize(void * pArg)
 
 	pSkillInstance->Add_SkillFrameImage(this);
 
+	m_bRender = false;
 	return S_OK;
 }
 
