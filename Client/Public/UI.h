@@ -43,6 +43,8 @@ public:
 	RECT Get_RectUI() { return m_RectUI; }
 	Collision_Type Get_CollisionType() { return m_eCollision; }
 	const _tchar* Get_Tag() { return m_UIInfo.pTag; }
+	_uint Get_TextNum() { return m_iTexturenum; }
+	_uint Get_IndexNum() { return m_UIInfo.iNum; }
 
 protected:
 	CTexture*				m_pTextureCom = nullptr;

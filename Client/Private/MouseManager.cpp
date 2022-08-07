@@ -1,15 +1,16 @@
 #include "stdafx.h"
 #include "..\Public\MouseManager.h"
 #include "MouseSkillIcon.h"
-#include "SkillManager.h"
+#include "MouseItemIcon.h"
 #include "SkillInfo.h"
+#include "ItemInfo.h"
 
 IMPLEMENT_SINGLETON(CMouseManager)
 
 CMouseManager::CMouseManager()
 {
-	m_pSkillInfoTag = L"SunCrossInfo";
 	m_eGrade = CSkillManager::GRADE_BEGENNER;
+	m_eType = CInvenManager::TYPE_END;
 }
 
 HRESULT CMouseManager::Add_pMouseSkillIcon(CMouseSkillIcon* pMouseSkillIcon)
@@ -42,13 +43,43 @@ _uint CMouseManager::Get_SkillIconTextnum()
 
 CSkillInfo * CMouseManager::Get_SkillInfo()
 {
-	m_pSkillInfoTag;
-	m_eGrade;
-	
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
-	CSkillInfo* a = pSkillInstance->Get_SkillInfo(m_pSkillInfoTag, m_eGrade);
+	CSkillInfo* pSkillInfo = pSkillInstance->Get_SkillInfo(m_pSkillInfoTag, m_eGrade);
 	
-	return a;
+	return pSkillInfo;
+}
+
+HRESULT CMouseManager::Add_pMouseItemIcon(CMouseItemIcon * pMouseItemIcon)
+{
+	if (pMouseItemIcon == nullptr)
+		return E_FAIL;
+
+	m_pMouseItemIcon = pMouseItemIcon;
+
+	return S_OK;
+}
+
+void CMouseManager::Set_ItemIconIndex(PickType ePick, const _tchar * pItemInfoTag, CInvenManager::InvenType eType, _uint iText, const wchar_t * pNotice, _uint iIndex)
+{
+	m_ePick = ePick;
+	m_pItemInfoTag = pItemInfoTag;
+	m_eType = eType;
+	m_pMouseItemIcon->Set_TextureNum(iText);
+	m_cItemNotice = pNotice;
+	m_iIndexNum = iIndex;
+}
+
+_uint CMouseManager::Get_ItemIconTextnum()
+{
+	return m_pMouseItemIcon->Get_TextNum();
+}
+
+CItemInfo * CMouseManager::Get_ItemInfo()
+{
+	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
+	CItemInfo* pItemInfo = pInvenInstance->Get_ItemInfo(m_pItemInfoTag, m_eType);
+
+	return pItemInfo;
 }
 
 void CMouseManager::Free()

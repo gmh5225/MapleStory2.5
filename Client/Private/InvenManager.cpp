@@ -90,7 +90,6 @@ HRESULT CInvenManager::Check_Icon(const _tchar* pTag, InvenType eType, _uint iNu
 }
 
 
-
 void CInvenManager::Free()
 {
 	for (size_t i = TYPE_EQUIP; i < TYPE_END - 1; ++i)

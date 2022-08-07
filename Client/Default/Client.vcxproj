@@ -197,6 +197,7 @@
     <ClInclude Include="..\Public\MenuIcon.h" />
     <ClInclude Include="..\Public\MissionUI.h" />
     <ClInclude Include="..\Public\MouseCursor.h" />
+    <ClInclude Include="..\Public\MouseItemIcon.h" />
     <ClInclude Include="..\Public\MouseManager.h" />
     <ClInclude Include="..\Public\MouseSkillIcon.h" />
     <ClInclude Include="..\public\MushHouse.h" />
@@ -208,6 +209,7 @@
     <ClInclude Include="..\Public\QuestManager.h" />
     <ClInclude Include="..\Public\QuestUI.h" />
     <ClInclude Include="..\Public\QuickSlot.h" />
+    <ClInclude Include="..\Public\QuickSlotItem.h" />
     <ClInclude Include="..\Public\QuickSlotManager.h" />
     <ClInclude Include="..\Public\QuickSlotSkill.h" />
     <ClInclude Include="..\Public\RedPortionInfo.h" />
@@ -299,6 +301,7 @@
     <ClCompile Include="..\Private\MenuIcon.cpp" />
     <ClCompile Include="..\Private\MissionUI.cpp" />
     <ClCompile Include="..\Private\MouseCursor.cpp" />
+    <ClCompile Include="..\Private\MouseItemIcon.cpp" />
     <ClCompile Include="..\Private\MouseManager.cpp" />
     <ClCompile Include="..\Private\MouseSkillIcon.cpp" />
     <ClCompile Include="..\private\MushHouse.cpp" />
@@ -310,6 +313,7 @@
     <ClCompile Include="..\Private\QuestManager.cpp" />
     <ClCompile Include="..\Private\QuestUI.cpp" />
     <ClCompile Include="..\Private\QuickSlot.cpp" />
+    <ClCompile Include="..\Private\QuickSlotItem.cpp" />
     <ClCompile Include="..\Private\QuickSlotManager.cpp" />
     <ClCompile Include="..\Private\QuickSlotSkill.cpp" />
     <ClCompile Include="..\Private\RedPortionInfo.cpp" />

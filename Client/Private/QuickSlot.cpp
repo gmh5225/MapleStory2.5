@@ -153,6 +153,42 @@ void CQuickSlot::Draw_KeyText()
 		SetRect(&Key8, m_UIInfo.fX - 20.f, m_UIInfo.fY - 20.f, 0, 0);
 		m_KeyFont->DrawText(NULL, L"8", -1, &Key8, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
 		break;
+
+	case 16:
+		RECT KeyNum4;
+		SetRect(&KeyNum4, m_UIInfo.fX - 18.f, m_UIInfo.fY - 18.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"Num4", -1, &KeyNum4, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+
+	case 17:
+		RECT KeyNum1;
+		SetRect(&KeyNum1, m_UIInfo.fX - 18.f, m_UIInfo.fY - 18.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"Num1", -1, &KeyNum1, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+
+	case 18:
+		RECT KeyNum5;
+		SetRect(&KeyNum5, m_UIInfo.fX - 18.f, m_UIInfo.fY - 18.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"Num5", -1, &KeyNum5, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+
+	case 19:
+		RECT KeyNum2;
+		SetRect(&KeyNum2, m_UIInfo.fX - 18.f, m_UIInfo.fY - 18.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"Num2", -1, &KeyNum2, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+
+	case 20:
+		RECT KeyNum6;
+		SetRect(&KeyNum6, m_UIInfo.fX - 18.f, m_UIInfo.fY - 18.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"Num6", -1, &KeyNum6, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
+
+	case 21:
+		RECT KeyNum3;
+		SetRect(&KeyNum3, m_UIInfo.fX - 18.f, m_UIInfo.fY - 18.f, 0, 0);
+		m_KeyFont->DrawText(NULL, L"Num3", -1, &KeyNum3, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
+		break;
 	default:
 		break;
 	}

@@ -99,7 +99,7 @@ HRESULT CInventory::Add_InvenImage(CUI * pInvenImage)
 	return S_OK;
 }
 
-HRESULT CInventory::Add_InvenIcon(CInvenManager::InvenType eType, CUI * pInvenIcon)
+HRESULT CInventory::Add_InvenIcon(CInvenManager::InvenType eType, CUI* pInvenIcon)
 {
 	if (pInvenIcon == nullptr)
 		return E_FAIL;
@@ -162,6 +162,10 @@ HRESULT CInventory::Set_Icon(const _tchar * pTag, CInvenManager::InvenType eType
 
 	return S_OK;
 }
+
+
+
+
 
 CInventory * CInventory::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

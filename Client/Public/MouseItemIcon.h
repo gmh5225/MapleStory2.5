@@ -3,12 +3,13 @@
 
 BEGIN(Client)
 
-class CMouseSkillIcon final : public  CUI
+
+class CMouseItemIcon final : public  CUI
 {
 private:
-	CMouseSkillIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CMouseSkillIcon(const CMouseSkillIcon& rhs);
-	virtual ~CMouseSkillIcon() = default;
+	CMouseItemIcon(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CMouseItemIcon(const CMouseItemIcon& rhs);
+	virtual ~CMouseItemIcon() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -22,9 +23,10 @@ public:
 	_uint Get_TextNum() { return m_iTexturenum; }
 
 public:
-	static CMouseSkillIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CMouseItemIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
 
 };
 END

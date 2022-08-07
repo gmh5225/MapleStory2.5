@@ -103,7 +103,7 @@ void CConsumBtn::Change_Texture()
 	case Client::CUI::TYPE_DOWN:
 		pInvenInstance->Set_InvenType(CInvenManager::TYPE_CONSUM);
 		break;
-	case Client::CUI::TYPE_UP:
+	case Client::CUI::TYPE_UP:		
 		break;
 	case Client::CUI::TYPE_PRESSING:
 		break;

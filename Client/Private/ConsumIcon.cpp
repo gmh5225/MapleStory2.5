@@ -63,9 +63,10 @@ void CConsumIcon::Tick(_float fTimeDelta)
 		m_bRender = !m_bRender;
 	}
 
-	if (pInstance->Mouse_Up(DIMK_LBUTTON))
+	if (pInstance->Mouse_Up(DIMK_RBUTTON) && m_eCollision == TYPE_ON)
 	{
-
+		if(m_pItemInfo->Get_NowNum() != 0)
+			m_pItemInfo->Set_NowNum(-1);	
 	}
 	Check_Collision(DIMK_LBUTTON);
 
@@ -81,6 +82,7 @@ void CConsumIcon::LateTick(_float fTimeDelta)
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
 	if (m_bRender&& pInvenInstance->Get_InvenType() == CInvenManager::TYPE_CONSUM)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
+
 
 }
 
@@ -124,7 +126,6 @@ HRESULT CConsumIcon::Set_ItemInfo(const _tchar * pTag)
 
 	m_pItemInfo = pInvenInstance->Get_ItemInfo(pTag, CInvenManager::TYPE_CONSUM);
 	m_pTag = m_pItemInfo->Get_ItemName();
-
 	return S_OK;
 }
 
@@ -137,7 +138,10 @@ void CConsumIcon::Change_Texture()
 {
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
 	if (pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_CONSUM)->Get_NowNum() < 1)
+	{
 		m_iTexturenum = 99;
+		m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM);
+	}
 	else
 		m_iTexturenum = m_pItemInfo->Get_TextNum();
 	
@@ -145,8 +149,15 @@ void CConsumIcon::Change_Texture()
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 	if (m_eCollision == TYPE_DOWN && m_pItemInfo->Get_NowNum() != 0)
 	{
-
+		pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_CONSUM, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
 	}
+
+	if (m_eCollision == TYPE_UP)
+	{		
+		
+	}
+	
+	
 		//pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 
 

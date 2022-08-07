@@ -5,6 +5,7 @@
 BEGIN(Client)
 
 class CQuickSlotSkill;
+class CQuickSlotItem;
 
 class CQuickSlotManager final : public CBase
 {
@@ -15,12 +16,17 @@ public:
 
 public:
 	HRESULT Add_QuickSlotSkill(CQuickSlotSkill* pQuickSlot);
+	HRESULT Add_QuickSlotItem(CQuickSlotItem* pQuickSlot);
 	_bool Check_Texture(_uint iTextnum);
-	HRESULT Change_Slot(_uint iIndexnum, CQuickSlotSkill* pQUickSlot);
+	HRESULT Change_SkillSlot(_uint iIndexnum, CQuickSlotSkill* pQuickSlot);
+	HRESULT Change_ItemSlot(_uint iIndexnum, CQuickSlotItem* pQuickSlot);
 	void Clear_Data(_uint iIndexnum);
 	_bool Check_Delete();
+
 private:
 	list<CQuickSlotSkill*> m_QuickSlotSkill;
+	list<CQuickSlotItem*> m_QuickSlotItem;
+
 
 public:
 	virtual void Free() override;

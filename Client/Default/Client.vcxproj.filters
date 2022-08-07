@@ -370,6 +370,12 @@
     <Filter Include="20.DATA\ItemInfo\DefaultInfo">
       <UniqueIdentifier>{95838574-73df-486c-8b71-97d19ec2f034}</UniqueIdentifier>
     </Filter>
+    <Filter Include="04.UI\00.MainUI\QuickSlot\QuickSlotItem">
+      <UniqueIdentifier>{a8306c3e-362b-44d6-af3f-b10b3fb2430b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\06.Mouse\MouseItemIcon">
+      <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -675,6 +681,12 @@
     <ClInclude Include="..\Public\DefaultInfo.h">
       <Filter>20.DATA\ItemInfo\DefaultInfo</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\QuickSlotItem.h">
+      <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotItem</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\MouseItemIcon.h">
+      <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -970,6 +982,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\DefaultInfo.cpp">
       <Filter>20.DATA\ItemInfo\DefaultInfo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuickSlotItem.cpp">
+      <Filter>04.UI\00.MainUI\QuickSlot\QuickSlotItem</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\MouseItemIcon.cpp">
+      <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -34,7 +34,7 @@ HRESULT CQuickSlotSkill::Initialize(void * pArg)
 	
 	
 	__super::Initialize(pArg);
-	m_iTexturenum = 5;
+	m_iTexturenum = 99;
 	m_eGrade = CSkillManager::GRADE_END;
 	m_pSkillInfoTag = nullptr;
 	m_pSkillNotice = nullptr;
@@ -61,7 +61,6 @@ void CQuickSlotSkill::Tick(_float fTimeDelta)
 	CQuickSlotManager* pQuickSlotInstance = CQuickSlotManager::Get_Instance();
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 
-
 	Check_Collision(DIMK_LBUTTON);
 
 	Change_Texture();
@@ -70,7 +69,6 @@ void CQuickSlotSkill::Tick(_float fTimeDelta)
 	{
 		pQuickSlotInstance->Clear_Data(pMouseInstance->Get_Indexnum());
 	}
-
 
 	Safe_Release(pGameInstance);
 }
@@ -138,7 +136,7 @@ void CQuickSlotSkill::Change_Texture()
 		{
 			if (pMouseInstance->Get_PickType() == CMouseManager::TYPE_QUICK)
 			{
-				pQuickSlotInstance->Change_Slot(pMouseInstance->Get_Indexnum(), this);
+				pQuickSlotInstance->Change_SkillSlot(pMouseInstance->Get_Indexnum(), this);
 				m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();
 				m_eGrade = pMouseInstance->Get_Grade();
 				m_iTexturenum = pMouseInstance->Get_SkillIconTextnum();
@@ -159,7 +157,7 @@ void CQuickSlotSkill::Change_Texture()
 
 void CQuickSlotSkill::Clear_Data()
 {
-	m_iTexturenum = 5;
+	m_iTexturenum = 99;
 	m_pSkillInfoTag = nullptr;
 	m_pSkillNotice = nullptr;
 	m_eGrade = CSkillManager::GRADE_END;

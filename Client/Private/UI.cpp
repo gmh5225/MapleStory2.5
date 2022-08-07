@@ -109,7 +109,6 @@ void CUI::Check_Collision(DIMK m_eMouseKey)
 		if (pGameInstance->Mouse_Down(m_eMouseKey))
 		{
 			m_eCollision = TYPE_DOWN;
-
 		
 		}
 		else if (pGameInstance->Mouse_Up(m_eMouseKey))

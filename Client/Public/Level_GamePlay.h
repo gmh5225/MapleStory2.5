@@ -43,6 +43,7 @@ private:
 	HRESULT Ready_SkillInfo();
 	HRESULT Ready_QuickSlot(const _tchar* pLayerTag);
 	HRESULT Ready_QuickSlotSkill(const _tchar* pLayerTag);
+	HRESULT Ready_QuickSlotItem(const _tchar* pLayerTag);
 
 private:
 	CCollider*				m_pColliderCom = nullptr;
