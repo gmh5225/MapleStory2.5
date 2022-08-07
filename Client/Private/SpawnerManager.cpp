@@ -50,6 +50,10 @@ void CSpawnerManager::Check_MonsterIndex(_int index)
 void CSpawnerManager::Free()
 {
 	//Safe_Release(m_SpawnerList);
+	for (auto& Spawner : m_SpawnerList)
+	{
+		Safe_Release(Spawner);
+	}
 }
 
 

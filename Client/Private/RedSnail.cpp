@@ -73,6 +73,7 @@ HRESULT CRedSnail::Initialize(void * pArg)
 		break;
 	}
 
+	SetShadow(pMonsterDesc->Level, 1.2f);
 
 	return S_OK;
 }
@@ -84,7 +85,7 @@ HRESULT CRedSnail::SetUp_Components()
 {
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 0.5f, 1.f, 0.5f };
+	BoxColDesc.vScale = _float3{ 0.3f, 0.3f, 0.3f };
 	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;

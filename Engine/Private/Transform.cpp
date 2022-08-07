@@ -126,6 +126,17 @@ void CTransform::Go_Left(_float fTimeDelta)
 	Set_State(CTransform::STATE_POSITION, vPosition);
 }
 
+void CTransform::Go_Dir(_float3 vDir, _float fSpeed, _float fTimeDelta)
+{
+	_float3		vPosition = Get_State(CTransform::STATE_POSITION);
+
+	D3DXVec3Normalize(&vDir, &vDir);
+
+	vPosition += vDir * fSpeed * fTimeDelta;
+
+	Set_State(CTransform::STATE_POSITION, vPosition);
+}
+
 
 
 

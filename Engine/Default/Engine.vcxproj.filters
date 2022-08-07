@@ -16,9 +16,6 @@
     <ClInclude Include="..\Public\Level_Manager.h">
       <Filter>02.Level\Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\GameObject.h">
-      <Filter>03.GameObject</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Object_Manager.h">
       <Filter>03.GameObject\Manager</Filter>
     </ClInclude>
@@ -99,6 +96,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\BoxCollider.h">
       <Filter>04.Component\BoxCollider</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GameObject.h">
+      <Filter>03.GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

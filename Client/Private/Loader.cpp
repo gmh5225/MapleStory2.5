@@ -63,7 +63,7 @@
 #include "SpearPulling.h"
 #include "SpearPullingHit.h"
 #include "Particle.h"
-
+#include "Shadow.h"
 
 
 
@@ -572,10 +572,19 @@ HRESULT CLoader::Load_Map()
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	/* For.Prototype_GameObject_PlayerSkill*/
+	/* For.Prototype_GameObject_Potal*/
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Potal"),
 		CPotal::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	/* For.Prototype_GameObject_Shadow*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Shadow"),
+		CShadow::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Sky"),
+	//	CSky::Create(m_pGraphic_Device))))
+	//	return E_FAIL;
 
 	Safe_Release(pGameInstance);
 }
@@ -1114,9 +1123,14 @@ HRESULT CLoader::Load_Model_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Potal/Potal_%d.png"), 8))))
 		return E_FAIL;
 
-	/*if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Sky"),
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Shadow"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Shadow/Shadow.png")))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Sky"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 5))))
-		return E_FAIL;*/
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 

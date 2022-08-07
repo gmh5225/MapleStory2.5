@@ -41,6 +41,7 @@ public:
 public:
 	_bool Check_Sphere(CGameObject* pObj_L, CGameObject* pObj_R);
 	_bool Check_Box(CGameObject* pObj_L, CGameObject* pObj_R, _bool bPush = false);
+	_bool Check_Lay(CGameObject* pObj_L, CGameObject* pObj_R, _float3* pOutDis);
 
 private:
 	list<class CGameObject*>				m_SphereCollisionObjects[COLLSION_END];

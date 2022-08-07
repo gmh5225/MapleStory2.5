@@ -2,6 +2,7 @@
 #include "..\Public\Creature.h"
 
 #include "GameInstance.h"
+#include "Shadow.h"
 
 CCreature::CCreature(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
@@ -115,6 +116,13 @@ void CCreature::SetState(STATE eState, DIR eDir)
 	m_eDir = eDir;
 	SetAni();
 }
+void CCreature::Set_Dead()
+{
+	m_bDead = true;
+
+	if (nullptr != m_pShadow)
+		m_pShadow->Set_Dead();
+}
 void CCreature::SetAni()
 {
 	switch (m_eCurState)
@@ -147,6 +155,25 @@ void CCreature::Set_Billboard()
 	m_pTransformCom->Set_State(CTransform::STATE_RIGHT, (*(_float3*)&ViewMatrix.m[0][0]) * fScale.x);
 	m_pTransformCom->Set_State(CTransform::STATE_UP, (*(_float3*)&ViewMatrix.m[1][0]) * fScale.y);
 	m_pTransformCom->Set_State(CTransform::STATE_LOOK, (*(_float3*)&ViewMatrix.m[2][0]) * fScale.z);
+}
+
+void CCreature::SetShadow(LEVEL eLevel, _float fScale)
+{
+	// Test ±×¸²ÀÚ
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+
+	CShadow::SHADOWDESC ShadowDesc;
+	ShadowDesc.fScale = fScale;
+
+	CGameObject* pShadow = nullptr;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Shadow"), eLevel, TEXT("Layer_Shadow"), &pShadow, &ShadowDesc)))
+		return;
+	m_pShadow = (CShadow*)pShadow;
+	//Safe_AddRef(m_pShadow);
+
+	Safe_Release(pGameInstance);
 }
 
 
@@ -207,12 +234,23 @@ CGameObject * CCreature::Clone(void* pArg)
 
 
 
+void CCreature::OnLay(_float3 vOutDis)
+{
+	if (nullptr == m_pShadow)
+		return;
+
+	vOutDis.y += 0.01f;
+	vOutDis.z -= 0.2f;
+	CTransform* pShadowTrans = (CTransform*)m_pShadow->Get_ComponentPtr(TEXT("Com_Transform"));
+	pShadowTrans->Set_State(CTransform::STATE_POSITION, vOutDis);
+}
 
 
 
 void CCreature::Free()
 {
 	__super::Free();
+
 
 	Safe_Release(m_pAnimatorCom);
 	Safe_Release(m_pTransformCom);

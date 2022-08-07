@@ -20,6 +20,7 @@ public:
 	virtual HRESULT Render() override;
 
 	virtual void Collision(CGameObject* pOther) override;
+	virtual void OnLay(_float3 vOutDis) override;
 
 public:
 	void GetKeyInput(_float fTimeDelta);
@@ -31,9 +32,14 @@ public:
 
 	void SetRespownPos(_float3 RePos);
 
+
+	virtual void SetShadow(LEVEL eLevel, _float fScale) override;
+
 private:
+	void Idle(_float fTimeDelta);
 	void Dash(_float fTimeDelta);
 	void Jump(_float fTimeDelta);
+	void DoubleJump(_float fTimeDelta);
 
 	void Particle(_float fTimeDelta);
 
@@ -52,6 +58,7 @@ private:
 
 	// TEST
 	_float _fParticleMoveTimeAcc = 0.f;
+
 
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

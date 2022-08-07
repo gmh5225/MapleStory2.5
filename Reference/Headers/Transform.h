@@ -49,6 +49,8 @@ public:
 
 
 	void Set_Vel(_float fVel) { m_fVel_Y = fVel; m_fTimeAcc = 0.f; }
+	void Plus_Vel(_float fVel) { m_fVel_Y += fVel; m_fTimeAcc = 0.f; }
+
 	_float Get_Vel() { return m_fVel_Y; }
 	void Set_Gravity(_float fGravity) { m_fGravity = fGravity; }
 	void ReSet_Gravity() { m_fVel_Y = 0.f; m_fTimeAcc = 0.f; }
@@ -65,6 +67,7 @@ public:
 	void Go_Backward(_float fTimeDelta);
 	void Go_Right(_float fTimeDelta);
 	void Go_Left(_float fTimeDelta);
+	void Go_Dir(_float3 vDir, _float fSpeed, _float fTimeDelta);
 
 	void Go_U(_float fTimeDelta);
 	void Go_D(_float fTimeDelta);
