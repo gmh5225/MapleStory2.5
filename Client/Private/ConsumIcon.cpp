@@ -140,7 +140,7 @@ void CConsumIcon::Change_Texture()
 	if (pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_CONSUM)->Get_NowNum() < 1)
 	{
 		m_iTexturenum = 99;
-		m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM);
+		//m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM);
 	}
 	else
 		m_iTexturenum = m_pItemInfo->Get_TextNum();
