@@ -37,7 +37,6 @@ HRESULT CTexture::Initialize_Prototype(TYPE eType, const _tchar * pTextureFilePa
 
 		if (TYPE_DEFAULT == eType)
 		{
-			LPDIRECT3DTEXTURE9		pTest;
 			if (FAILED(D3DXCreateTextureFromFile(m_pGraphic_Device, szFullPath, (LPDIRECT3DTEXTURE9*)&pTexture)))
 				return E_FAIL;
 		}

@@ -38,8 +38,6 @@ HRESULT CMouseItemIcon::Initialize(void * pArg)
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseItemIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
-	//pSkillInstance->Add_SkillFrameImage(this);
-
 	return S_OK;
 }
 

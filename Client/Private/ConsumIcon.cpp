@@ -67,6 +67,12 @@ void CConsumIcon::Tick(_float fTimeDelta)
 	{
 		if(m_pItemInfo->Get_NowNum() != 0)
 			m_pItemInfo->Set_NowNum(-1);	
+		if (m_pItemInfo->Get_NowNum() == 0)
+		{
+			CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
+			m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM);
+			m_pTag = m_pItemInfo->Get_ItemName();
+		}
 	}
 	Check_Collision(DIMK_LBUTTON);
 
@@ -140,7 +146,6 @@ void CConsumIcon::Change_Texture()
 	if (pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_CONSUM)->Get_NowNum() < 1)
 	{
 		m_iTexturenum = 99;
-		//m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM);
 	}
 	else
 		m_iTexturenum = m_pItemInfo->Get_TextNum();
@@ -154,13 +159,13 @@ void CConsumIcon::Change_Texture()
 
 	if (m_eCollision == TYPE_UP)
 	{		
+		CItemInfo* pTemp = pMouseInstance->Get_ItemInfo();
+		pInvenInstance->Change_Info(m_pTag, pMouseInstance->Get_Indexnum(), CInvenManager::TYPE_CONSUM);
+		m_pItemInfo = pTemp;
+		m_pTag = pTemp->Get_ItemName();
 		
 	}
-	
-	
-		//pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
-
-
+	//pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 }
 
 CConsumIcon* CConsumIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

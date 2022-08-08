@@ -163,6 +163,16 @@ HRESULT CInventory::Set_Icon(const _tchar * pTag, CInvenManager::InvenType eType
 	return S_OK;
 }
 
+HRESULT CInventory::Change_Info(const _tchar* pTag, _uint iIndex, CInvenManager::InvenType eType)
+{
+	for (auto iter : m_InvenIcon[eType])
+	{
+		if (iter->Get_IndexNum() == iIndex)
+			((CConsumIcon*)iter)->Set_ItemInfo(pTag);
+	}
+	return S_OK;
+}
+
 
 
 

@@ -27,6 +27,7 @@ public:
 	HRESULT Add_InvenImage(CUI* pInvenImage);
 	HRESULT Add_InvenIcon(CInvenManager::InvenType eType, CUI* pInvenIcon);
 	HRESULT Set_Icon(const _tchar* pTag, CInvenManager::InvenType eType, _uint iNum);
+	HRESULT Change_Info(const _tchar* pTag, _uint iIndex, CInvenManager::InvenType eType);
 	
 public:
 	static CInventory* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
