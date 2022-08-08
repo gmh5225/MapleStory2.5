@@ -51,7 +51,6 @@ protected:
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
 	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
-
 protected:
 	_float4x4				m_ProjMatrix;
 	_float4x4				m_ViewMatrix;

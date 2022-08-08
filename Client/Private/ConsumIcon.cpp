@@ -111,8 +111,8 @@ HRESULT CConsumIcon::Render()
 	_itow_s(m_pItemInfo->Get_NowNum(), NowNum, 10);
 
 	RECT ItemNum;
-	SetRect(&ItemNum, m_UIInfo.fX-10.f, m_UIInfo.fY+2.f, 0, 0);
-	m_NoticeFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+	SetRect(&ItemNum, m_UIInfo.fX-12.f, m_UIInfo.fY+2.f, 0, 0);
+	m_NoticeFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
 
 	if (m_eCollision == TYPE_ON)
 	{
@@ -152,7 +152,7 @@ void CConsumIcon::Change_Texture()
 	
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN && m_pItemInfo->Get_NowNum() != 0)
+	if (m_eCollision == TYPE_DOWN)
 	{
 		pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_CONSUM, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
 	}
@@ -165,7 +165,6 @@ void CConsumIcon::Change_Texture()
 		m_pTag = pTemp->Get_ItemName();
 		
 	}
-	//pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 }
 
 CConsumIcon* CConsumIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

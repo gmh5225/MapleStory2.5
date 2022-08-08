@@ -364,9 +364,6 @@
     <Filter Include="02.GameObject\Item">
       <UniqueIdentifier>{15d0d89b-c9a3-483b-9673-fe10dd9c15e8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Item\EquipItem">
-      <UniqueIdentifier>{b521bd14-68e6-473b-9556-e62b16cadf72}</UniqueIdentifier>
-    </Filter>
     <Filter Include="20.DATA\ItemInfo\DefaultInfo">
       <UniqueIdentifier>{95838574-73df-486c-8b71-97d19ec2f034}</UniqueIdentifier>
     </Filter>
@@ -375,6 +372,24 @@
     </Filter>
     <Filter Include="04.UI\06.Mouse\MouseItemIcon">
       <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\StuffInfo\BuleSnail">
+      <UniqueIdentifier>{95e7af74-787f-41ea-a244-1b6a3bd4f619}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\StuffInfo\RedSnail">
+      <UniqueIdentifier>{c6b63bec-6527-4b85-ad54-1d9a718477ee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\StuffInfo\GoStump">
+      <UniqueIdentifier>{2bbd58b3-e39f-4aeb-8d1d-e723e40c4b0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\StuffInfo\RibbonPig">
+      <UniqueIdentifier>{89f5d605-a4fb-4b8e-aafe-c9f15bdb399b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\StuffInfo\Slime">
+      <UniqueIdentifier>{c15ab198-2ca8-4630-9c11-d819262f22fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\ItemInfo\StuffInfo\GreenMushRoom">
+      <UniqueIdentifier>{ef1d2cf3-ddb3-4d3a-8333-495298cdfc81}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -687,6 +702,24 @@
     <ClInclude Include="..\Public\MouseItemIcon.h">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\GreenMushroomInfo.h">
+      <Filter>20.DATA\ItemInfo\StuffInfo\GreenMushRoom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlueSnailInfo.h">
+      <Filter>20.DATA\ItemInfo\StuffInfo\BuleSnail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GoStumpInfo.h">
+      <Filter>20.DATA\ItemInfo\StuffInfo\GoStump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RedSnailInfo.h">
+      <Filter>20.DATA\ItemInfo\StuffInfo\RedSnail</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SlimeInfo.h">
+      <Filter>20.DATA\ItemInfo\StuffInfo\Slime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RibbonPigInfo.h">
+      <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -988,6 +1021,24 @@
     </ClCompile>
     <ClCompile Include="..\Private\MouseItemIcon.cpp">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GreenMushroomInfo.cpp">
+      <Filter>20.DATA\ItemInfo\StuffInfo\GreenMushRoom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlueSnailInfo.cpp">
+      <Filter>20.DATA\ItemInfo\StuffInfo\BuleSnail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GoStumpInfo.cpp">
+      <Filter>20.DATA\ItemInfo\StuffInfo\GoStump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RedSnailInfo.cpp">
+      <Filter>20.DATA\ItemInfo\StuffInfo\RedSnail</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SlimeInfo.cpp">
+      <Filter>20.DATA\ItemInfo\StuffInfo\Slime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RibbonPigInfo.cpp">
+      <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

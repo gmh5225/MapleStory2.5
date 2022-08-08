@@ -129,7 +129,14 @@ HRESULT CInventory::Set_Icon(const _tchar * pTag, CInvenManager::InvenType eType
 			}
 		}
 		case Client::CInvenManager::TYPE_STUFF:
-			break;
+		{
+			CStuffIcon* pStuffIcon = (CStuffIcon*)iter;
+			if (pStuffIcon->Get_Tag() == pTag)
+			{
+				pStuffIcon->Set_NowNum(iNum);
+				return S_OK;
+			}
+		}
 		default:
 			break;
 		}				
@@ -153,7 +160,16 @@ HRESULT CInventory::Set_Icon(const _tchar * pTag, CInvenManager::InvenType eType
 			break;
 		}
 		case Client::CInvenManager::TYPE_STUFF:
+		{
+			CStuffIcon* pStuffIcon = (CStuffIcon*)iter;
+			if (pStuffIcon->Get_Tag() == TEXT("DefaultInfo"))
+			{
+				pStuffIcon->Set_ItemInfo(pTag);
+				pStuffIcon->Set_NowNum(iNum);
+				return S_OK;
+			}
 			break;
+		}
 		default:
 			break;
 		}
