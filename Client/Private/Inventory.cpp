@@ -184,7 +184,23 @@ HRESULT CInventory::Change_Info(const _tchar* pTag, _uint iIndex, CInvenManager:
 	for (auto iter : m_InvenIcon[eType])
 	{
 		if (iter->Get_IndexNum() == iIndex)
-			((CConsumIcon*)iter)->Set_ItemInfo(pTag);
+		{
+			/*if (eType = CInvenManager::TYPE_EQUIP)
+			{
+				((CConsumIcon*)iter)->Set_ItemInfo(pTag);
+				return S_OK;
+			}*/
+			if (eType == CInvenManager::TYPE_CONSUM)
+			{
+				((CConsumIcon*)iter)->Set_ItemInfo(pTag);
+				return S_OK;
+			}
+			else if (eType == CInvenManager::TYPE_STUFF)
+			{
+				((CStuffIcon*)iter)->Set_ItemInfo(pTag);
+				return S_OK;
+			}
+		}
 	}
 	return S_OK;
 }

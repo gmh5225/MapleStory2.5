@@ -26,7 +26,7 @@ public:
 	void Change_Texture();
 	_uint Get_TextNum() { return m_iTexturenum; }
 	void Set_Type(CInvenManager::InvenType eType) { m_eType = eType; }
-	CTexture* m_pTextureCom2 = nullptr;
+	
 public:
 	static CMouseItemIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
@@ -34,7 +34,7 @@ public:
 
 private:
 	CInvenManager::InvenType m_eType;
-	
+	CTexture* m_pTextureCom2 = nullptr;
 };
 END
 

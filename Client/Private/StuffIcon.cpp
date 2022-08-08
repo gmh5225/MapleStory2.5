@@ -62,16 +62,19 @@ void CStuffIcon::Tick(_float fTimeDelta)
 	{
 		m_bRender = !m_bRender;
 	}
-
-	if (pInstance->Mouse_Up(DIMK_RBUTTON) && m_eCollision == TYPE_ON)
+	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
+	if (pInvenInstance->Get_InvenType() == CInvenManager::TYPE_STUFF)
 	{
-		if (m_pItemInfo->Get_NowNum() != 0)
-			m_pItemInfo->Set_NowNum(-1);
-		if (m_pItemInfo->Get_NowNum() == 0)
+		if (pInstance->Mouse_Up(DIMK_RBUTTON) && m_eCollision == TYPE_ON)
 		{
-			CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
-			m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_STUFF);
-			m_pTag = m_pItemInfo->Get_ItemName();
+			if (m_pItemInfo->Get_NowNum() != 0)
+				m_pItemInfo->Set_NowNum(-1);
+			if (m_pItemInfo->Get_NowNum() == 0)
+			{
+
+				m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_STUFF);
+				m_pTag = m_pItemInfo->Get_ItemName();
+			}
 		}
 	}
 	Check_Collision(DIMK_LBUTTON);
@@ -129,9 +132,9 @@ HRESULT CStuffIcon::Set_ItemInfo(const _tchar * pTag)
 	if (pTag == nullptr)
 		return E_FAIL;
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
-
 	m_pItemInfo = pInvenInstance->Get_ItemInfo(pTag, CInvenManager::TYPE_STUFF);
 	m_pTag = m_pItemInfo->Get_ItemName();
+	
 	return S_OK;
 }
 
@@ -143,27 +146,30 @@ void CStuffIcon::Set_NowNum(_uint iNum)
 void CStuffIcon::Change_Texture()
 {
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
-	if (pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_STUFF)->Get_NowNum() < 1)
+	if (pInvenInstance->Get_InvenType() == CInvenManager::TYPE_STUFF)
 	{
-		m_iTexturenum = 99;
-	}
-	else
-		m_iTexturenum = m_pItemInfo->Get_TextNum();
+		if (pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_STUFF)->Get_NowNum() < 1)
+		{
+			m_iTexturenum = 99;
+		}
+		else
+			m_iTexturenum = m_pItemInfo->Get_TextNum();
 
 
-	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN)
-	{
-		pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_STUFF, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
-	}
+		CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
+		if (m_eCollision == TYPE_DOWN)
+		{
+			pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_STUFF, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
+		}
 
-	if (m_eCollision == TYPE_UP)
-	{
-		CItemInfo* pTemp = pMouseInstance->Get_ItemInfo();
-		pInvenInstance->Change_Info(m_pTag, pMouseInstance->Get_Indexnum(), CInvenManager::TYPE_STUFF);
-		m_pItemInfo = pTemp;
-		m_pTag = pTemp->Get_ItemName();
+		if (m_eCollision == TYPE_UP)
+		{
+			CItemInfo* pTemp = pMouseInstance->Get_ItemInfo();
+			pInvenInstance->Change_Info(m_pTag, pMouseInstance->Get_Indexnum(), CInvenManager::TYPE_STUFF);
+			m_pItemInfo = pTemp;
+			m_pTag = pTemp->Get_ItemName();
 
+		}
 	}
 }
 
