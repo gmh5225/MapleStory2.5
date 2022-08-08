@@ -121,7 +121,7 @@ HRESULT CLevel_GamePlay::Render()
 		return E_FAIL;
 
 
-	SetWindowText(g_hWnd, TEXT("게임플레이레벨임"));
+	//SetWindowText(g_hWnd, TEXT("게임플레이레벨임"));
 
 	return S_OK;
 }
@@ -163,7 +163,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Player(const _tchar * pLayerTag)
 
 	return S_OK;
 }
-
 
 HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 {
