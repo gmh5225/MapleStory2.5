@@ -75,6 +75,8 @@ void CMainApp::Tick(_float fTimeDelta)
 
 	m_pGameInstance->Tick_Engine(fTimeDelta);
 
+	CCutSceneManager::Get_Instance()->Tick(fTimeDelta);
+
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_POTAL);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLISION_ITEM);

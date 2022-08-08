@@ -2,6 +2,8 @@
 #include "..\Public\Camera_Free.h"
 #include "GameInstance.h"
 
+#include "CutSceneManager.h"
+
 CCamera_Free::CCamera_Free(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCamera(pGraphic_Device)
 	, m_pTarget(nullptr)
@@ -11,7 +13,7 @@ CCamera_Free::CCamera_Free(LPDIRECT3DDEVICE9 pGraphic_Device)
 CCamera_Free::CCamera_Free(const CCamera_Free & rhs, CTransform::TRANSFORMDESC * pArg)
 	: CCamera(rhs, pArg)
 	, m_pTarget(nullptr)
-	, m_eCamMode(CAM_PLAYER)
+	, m_eCamMode(CAM_END)
 	, m_fDelayTimeAcc(0.f)
 	, m_fFocusTime(0.f)
 	, m_fShakeTimeAcc(0.f)
@@ -76,6 +78,8 @@ void CCamera_Free::Tick(_float fTimeDelta)
 	case CAM_PLAYER:
 		ChaseModeByPlayer(fTimeDelta);
 		break;
+	case CAM_CUTSCENE:
+		break;
 	case CAM_END:
 		break;
 	}
@@ -124,6 +128,14 @@ void CCamera_Free::StartShake(_float fShakeTime, _float fShortShakeTime, _float 
 	m_vShakeDir = vShakeDir;
 
 	m_bShake = true;
+}
+
+void CCamera_Free::SetSpeed(_float fSpeed)
+{
+	CTransform::TRANSFORMDESC DashDesc;
+	DashDesc.fSpeedPerSec = fSpeed;
+	DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
+	m_pTransformCom->Set_TransformDesc(DashDesc);
 }
 
 void CCamera_Free::FreeMode(_float fTimeDelta)

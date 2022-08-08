@@ -8,7 +8,7 @@ BEGIN(Client)
 class CCamera_Free final : public CCamera
 {
 public:
-	enum CAMMODE { CAM_FREE, CAM_PLAYER, CAM_FOCUS, CAM_END };
+	enum CAMMODE { CAM_FREE, CAM_PLAYER, CAM_FOCUS, CAM_CUTSCENE, CAM_END };
 
 private:
 	CCamera_Free(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -24,6 +24,8 @@ public:
 
 
 public:
+	CTransform* Get_Transform() { return m_pTransformCom; }
+
 	void SetFocus(CGameObject* pTarget, _float3 vFocusPos, _float fTime) {
 		m_vFocusPos = vFocusPos;
 		m_fFocusTime = fTime;
@@ -40,6 +42,8 @@ public:
 
 	// For.Shake
 	void StartShake(_float fShakeTime, _float fShortShakeTime, _float fShakePower, _float3 vShakeDir);
+
+	void SetSpeed(_float fSpeed);
 
 public:
 	void FreeMode(_float fTimeDelta);

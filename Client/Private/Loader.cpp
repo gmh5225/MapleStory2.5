@@ -130,7 +130,7 @@ HRESULT CLoader::Loading_ForStatic()
 		lstrcpy(m_szLoadingText, TEXT("메이플 스토리 키는중~"));
 		Load_Player_Object();
 
-		Load_PlayerSkill_Object();
+		// Load_PlayerSkill_Object();
 		Load_UI_Object();
 		Load_Model_Object();
 		Load_Item_Object();
@@ -142,10 +142,10 @@ HRESULT CLoader::Loading_ForStatic()
 		/* 텍스쳐를 로드한다. */
 
 		/* For.Prototype_Component_Texture_Player */
-		Load_Player_Texture();
+		//Load_Player_Texture();
 
 		/* For.Prototype_Component_Texture_Player_Skill */
-		Load_Player_Skill_Texture();
+		//Load_Player_Skill_Texture();
 
 		/* For.Prototype_Component_Texture_Item */
 		Load_Item_Texture();

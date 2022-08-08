@@ -24,6 +24,7 @@
 #include "Potal.h"
 #include "ConsumIcon.h"
 
+#include "CutSceneManager.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -71,6 +72,8 @@ HRESULT CLevel_GamePlay::Initialize()
 		return E_FAIL;
 
 	g_bStaticClone = true;
+
+	CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
 
 	return S_OK;
 }
@@ -122,7 +125,7 @@ HRESULT CLevel_GamePlay::Render()
 		return E_FAIL;
 
 
-	//SetWindowText(g_hWnd, TEXT("°ÔÀÓÇÃ·¹ÀÌ·¹º§ÀÓ"));
+	//SetWindowText(g_hWnd, TEXT("ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½Ì·ï¿½ï¿½ï¿½ï¿½ï¿½"));
 
 	return S_OK;
 }
@@ -492,7 +495,7 @@ HRESULT CLevel_GamePlay::Ready_ItemIcon(const _tchar* pLayerTag)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
-	//xÅÒ 42 yÅÒ 42
+	//xï¿½ï¿½ 42 yï¿½ï¿½ 42
 	CUI::UIINFO ConsumIcon1;
 	ConsumIcon1.fSizeX = 27.f;
 	ConsumIcon1.fSizeY = 27.f;
@@ -787,7 +790,7 @@ HRESULT CLevel_GamePlay::Ready_ItemIcon(const _tchar* pLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 {
-	//½ºÅ³Up Btn °£°Ý °¡·Î 144px ¼¼·Î 40px
+	//ï¿½ï¿½Å³Up Btn ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 144px ï¿½ï¿½ï¿½ï¿½ 40px
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
@@ -990,7 +993,7 @@ HRESULT CLevel_GamePlay::Ready_QuickSlot(const _tchar* pLayerTag)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	//Æ²¾îÁøx 15 x°£°Ý 5 y°£°Ý 5
+	//Æ²ï¿½ï¿½ï¿½ï¿½x 15 xï¿½ï¿½ï¿½ï¿½ 5 yï¿½ï¿½ï¿½ï¿½ 5
 
 	CUI::UIINFO QuickSlot1;
 	QuickSlot1.fSizeX = 50.f;
