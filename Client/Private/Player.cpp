@@ -660,8 +660,6 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
 		SolunaDECS.eDir = m_eDir;
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_WarriorReef"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
-		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
-		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 		SetState(STATE_DASH, m_eDir);
 		Safe_Release(pGameInstance);
 	}
