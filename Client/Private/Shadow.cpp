@@ -36,11 +36,11 @@ HRESULT CShadow::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_sTag = "Tag_Shadow";
-
+	m_fOriScale = pDesc->fScale * 0.4f;
 
 	// m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-10.f, 2.f, -2.f));
 	m_pTransformCom->Rotation(_float3{ 1.f, 0.f, 0.f }, 90.f);
-	m_pTransformCom->Set_Scaled(pDesc->fScale * 0.4f);
+	m_pTransformCom->Set_Scaled(m_fOriScale);
 
 	return S_OK;
 }
@@ -101,7 +101,6 @@ void CShadow::Tick(_float fTimeDelta)
 }
 void CShadow::LateTick(_float fTimeDelta)
 {
-
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 }
 HRESULT CShadow::Render()

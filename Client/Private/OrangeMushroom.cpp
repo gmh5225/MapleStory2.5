@@ -134,6 +134,10 @@ void COrangeMushroom::Tick(_float fTimeDelta)
 	case Client::COrangeMushroom::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
+	case Client::COrangeMushroom::STATE_JUMP:
+		Tick_Chase(fTimeDelta);
+		Tick_Jump(fTimeDelta);
+		break;
 	}
 
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
@@ -305,10 +309,6 @@ void COrangeMushroom::Tick_Hit(_float fTimeDelta)
 
 void COrangeMushroom::Tick_Chase(_float fTimeDelta)
 {
-	if (GetKeyState('L') & 0x8000)
-	{
-		SetState(STATE_JUMP, m_eDir);
-	}
 
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -330,6 +330,10 @@ void COrangeMushroom::Tick_Chase(_float fTimeDelta)
 
 
 	Safe_Release(pGameInstance);
+}
+
+void COrangeMushroom::Tick_Jump(_float fTimeDelta)
+{
 }
 
 
@@ -450,6 +454,18 @@ void COrangeMushroom::Collision(CGameObject * pOther)
 				SetState(STATE_IDLE, m_eDir);
 		}
 		//m_pTransformCom->Set_Vel(0.f);
+	}
+}
+
+void COrangeMushroom::OnLookLay(_float3 vOutDis)
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	_float3 DisVec = vOutDis - vPos;
+	_float fLen = D3DXVec3Length(&DisVec);
+
+	if (0.6f > fLen && m_eCurState != STATE_JUMP)
+	{
+		SetState(STATE_JUMP, m_eDir);
 	}
 }
 

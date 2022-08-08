@@ -22,12 +22,14 @@ public:
 	virtual HRESULT Render() override;
 
 	virtual void Collision(CGameObject* pOther) override;
+	virtual void OnLookLay(_float3 vOutDis) override;
 
 private:
 	void Tick_Idle(_float fTimeDelta);
 	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
+	void Tick_Jump(_float fTimeDelta);
 
 public:
     virtual	void SetState(STATE eState, DIR eDir) override;

@@ -278,7 +278,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Section(const _tchar * pLayerTag)
 			{
 				_float XIndex = i*5.f;
 				_float ZIndex = j*5.f;
-				Data.vPos = _float3((-12.f + XIndex) + ZIndex + 50.f, 7.f + (y * 5.f), -1.f - XIndex);
+				Data.vPos = _float3((-12.f + XIndex) + ZIndex + 50.f, 7.f + (y * 9.f), -1.f - XIndex);
 				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_HENESYS, pLayerTag, &Data)))
 					return E_FAIL;
 			}
@@ -371,39 +371,39 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	MonsterInfo.MonsterName = TEXT("BlueSnail");
-	MonsterInfo.MonsterPos = _float3{ 6.f , 3.f, 8.f };
-	MonsterInfo.SpawnerNum = 1;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = TEXT("BlueSnail");
+	//MonsterInfo.MonsterPos = _float3{ 6.f , 3.f, 8.f };
+	//MonsterInfo.SpawnerNum = 1;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	MonsterInfo.MonsterName = TEXT("BlueSnail");
-	MonsterInfo.MonsterPos = _float3{ 11.f , 3.f, 10.f };
-	MonsterInfo.SpawnerNum = 2;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = TEXT("BlueSnail");
+	//MonsterInfo.MonsterPos = _float3{ 11.f , 3.f, 10.f };
+	//MonsterInfo.SpawnerNum = 2;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-
-	MonsterInfo.MonsterName = TEXT("RedSnail");
-	MonsterInfo.MonsterPos = _float3{ 18.f , 5.f, 2.f };
-	MonsterInfo.SpawnerNum = 3;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
-	MonsterInfo.MonsterName = TEXT("BlueSnail");
-	MonsterInfo.MonsterPos = _float3{ 16.f , 5.f, 1.f };
-	MonsterInfo.SpawnerNum = 4;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = TEXT("RedSnail");
+	//MonsterInfo.MonsterPos = _float3{ 18.f , 5.f, 2.f };
+	//MonsterInfo.SpawnerNum = 3;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+
+	//MonsterInfo.MonsterName = TEXT("BlueSnail");
+	//MonsterInfo.MonsterPos = _float3{ 16.f , 5.f, 1.f };
+	//MonsterInfo.SpawnerNum = 4;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
+
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	MonsterInfo.MonsterName = TEXT("OrangeMushroom");
 	MonsterInfo.MonsterPos = _float3{ 21.f , 3.f, -10.f };
@@ -413,38 +413,38 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	MonsterInfo.MonsterName = TEXT("OrangeMushroom");
-	MonsterInfo.MonsterPos = _float3{ 29.f , 4.f,0.f };
-	MonsterInfo.SpawnerNum = 6;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = TEXT("OrangeMushroom");
+	//MonsterInfo.MonsterPos = _float3{ 29.f , 4.f,0.f };
+	//MonsterInfo.SpawnerNum = 6;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	MonsterInfo.MonsterName = TEXT("RibbonPig");
-	MonsterInfo.MonsterPos = _float3{ 32.f , 2.f, 1.f };
-	MonsterInfo.SpawnerNum = 7;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = TEXT("RibbonPig");
+	//MonsterInfo.MonsterPos = _float3{ 32.f , 2.f, 1.f };
+	//MonsterInfo.SpawnerNum = 7;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	MonsterInfo.MonsterName = TEXT("RibbonPig");
-	MonsterInfo.MonsterPos = _float3{ 30.f , 2.f, -2.f };
-	MonsterInfo.SpawnerNum = 8;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = TEXT("RibbonPig");
+	//MonsterInfo.MonsterPos = _float3{ 30.f , 2.f, -2.f };
+	//MonsterInfo.SpawnerNum = 8;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
-	MonsterInfo.MonsterName = TEXT("BlueSnail");
-	MonsterInfo.MonsterPos = _float3{ 9.f , 3.f, 7.0f };
-	MonsterInfo.SpawnerNum = 9;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.MonsterName = TEXT("BlueSnail");
+	//MonsterInfo.MonsterPos = _float3{ 9.f , 3.f, 7.0f };
+	//MonsterInfo.SpawnerNum = 9;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	return S_OK;
 }

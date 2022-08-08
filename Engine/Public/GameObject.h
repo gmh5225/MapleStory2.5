@@ -41,6 +41,7 @@ public:
 public:
 	virtual void Collision(CGameObject* pOther) {};
 	virtual void OnLay(_float3 vOutDis) {};
+	virtual void OnLookLay(_float3 vOutDis) {};
 	virtual void Damaged(CGameObject* pOther) {};
 
 

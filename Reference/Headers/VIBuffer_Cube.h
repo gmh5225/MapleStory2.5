@@ -17,6 +17,7 @@ public:
 
 public:
 	_bool PickCube(class CGameObject* pMe, class CGameObject *pOther, _float3* pOutDis, _float3* pOutVec);
+	_bool PickLookCube(class CGameObject* pMe, class CGameObject *pOther, _float3* pOutDis, _float3* pOutVec);
 
 public:
 	static CVIBuffer_Cube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

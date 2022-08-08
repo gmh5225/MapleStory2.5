@@ -243,6 +243,11 @@ void CCreature::OnLay(_float3 vOutDis)
 	vOutDis.z -= 0.2f;
 	CTransform* pShadowTrans = (CTransform*)m_pShadow->Get_ComponentPtr(TEXT("Com_Transform"));
 	pShadowTrans->Set_State(CTransform::STATE_POSITION, vOutDis);
+
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	_float y = vPos.y - vOutDis.y;
+	_float fOriScale = m_pShadow->Get_OriScale();
+	pShadowTrans->Set_Scaled(fOriScale - y * 0.1f);
 }
 
 

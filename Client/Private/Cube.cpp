@@ -59,8 +59,8 @@ void CCube::LateTick(_float fTimeDelta)
 	D3DXVec3TransformCoord(&vPos, &vPos, &ViewMatrix);
 	D3DXVec3TransformCoord(&vPos, &vPos, &ProjMatrix);
 
-	_float3 LU = { -1.5f, 1.5f, 0.f };
-	_float3 RD = { 1.5f, -1.5f, 0.f };
+	_float3 LU = { -1.2f, 1.2f, 0.f };
+	_float3 RD = { 1.2f, -1.2f, 0.f };
 
 	if(LU.x < vPos.x && RD.x > vPos.x && 
 		LU.y > vPos.y && RD.y < vPos.y)

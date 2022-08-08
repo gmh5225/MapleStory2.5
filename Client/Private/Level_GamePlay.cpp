@@ -276,7 +276,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Section(const _tchar * pLayerTag)
 			{
 				_float XIndex = i*5.f;
 				_float ZIndex = j*5.f;
-				Data.vPos = _float3((-12.f + XIndex) + ZIndex, 1 + y * 5.f, -1 - XIndex);
+				Data.vPos = _float3((-12.f + XIndex) + ZIndex, 1 + y * 9.f, -1 - XIndex);
 				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
 					return E_FAIL;
 			}

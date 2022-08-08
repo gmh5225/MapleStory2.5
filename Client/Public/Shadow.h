@@ -27,6 +27,8 @@ public:
 
 	virtual void Collision(CGameObject* pOther) override;
 
+public:
+	_float Get_OriScale() { return m_fOriScale; }
 
 
 private:
@@ -34,6 +36,9 @@ private:
 
 	virtual HRESULT Set_RenderState() override;
 	virtual HRESULT Reset_RenderState() override;
+
+private:
+	_float m_fOriScale  = 0.f;
 
 public:
 	static CShadow* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
