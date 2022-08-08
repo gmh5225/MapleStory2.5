@@ -19,7 +19,6 @@ public:
 	HRESULT Set_ItemInfo(const _tchar* pTag);
 	const _tchar* Get_Tag() { return m_pTag; }
 	void Set_NowNum(_uint iNum);
-	CConsumIcon* Get_This() { return this; }
 public:
 	void Change_Texture();
 

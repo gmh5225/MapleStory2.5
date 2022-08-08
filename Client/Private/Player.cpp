@@ -170,6 +170,27 @@ void CPlayer::Tick(_float fTimeDelta)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_5))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 2;
+		SlimeItem.pTag = L"SlimeInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &SlimeItem);
+	}
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_6))
+	{
+		CItem::ITEMINFO GoStumpItem;
+		GoStumpItem.eType = CInvenManager::TYPE_STUFF;
+		GoStumpItem.iTextNum = 4;
+		GoStumpItem.pTag = L"GoStumpInfo";
+		GoStumpItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &GoStumpItem);
+
+	}
+
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_7))
 	{
 		CItem::ITEMINFO RedPortion;
@@ -178,7 +199,6 @@ void CPlayer::Tick(_float fTimeDelta)
 		RedPortion.pTag = L"RedPortionInfo";
 		RedPortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &RedPortion);
-		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &ReefAttackHitDesc);
 	}
 
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_8))
@@ -189,8 +209,9 @@ void CPlayer::Tick(_float fTimeDelta)
 		BluePortion.pTag = L"BluePortionInfo";
 		BluePortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &BluePortion);
-		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &ReefAttackHitDesc);
 	}
+
+	
 
 	Safe_Release(pGameInstance);
 

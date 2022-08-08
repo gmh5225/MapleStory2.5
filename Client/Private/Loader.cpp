@@ -73,6 +73,9 @@
 #include "Item.h"
 #include "MouseItemIcon.h"
 #include "Shadow.h"
+#include "StuffIcon.h"
+
+
 
 
 
@@ -130,7 +133,7 @@ HRESULT CLoader::Loading_ForStatic()
 		lstrcpy(m_szLoadingText, TEXT("메이플 스토리 키는중~"));
 		Load_Player_Object();
 
-		// Load_PlayerSkill_Object();
+		Load_PlayerSkill_Object();
 		Load_UI_Object();
 		Load_Model_Object();
 		Load_Item_Object();
@@ -142,10 +145,10 @@ HRESULT CLoader::Loading_ForStatic()
 		/* 텍스쳐를 로드한다. */
 
 		/* For.Prototype_Component_Texture_Player */
-		//Load_Player_Texture();
+		Load_Player_Texture();
 
 		/* For.Prototype_Component_Texture_Player_Skill */
-		//Load_Player_Skill_Texture();
+		Load_Player_Skill_Texture();
 
 		/* For.Prototype_Component_Texture_Item */
 		Load_Item_Texture();
@@ -514,6 +517,10 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ConsumIcon"),
 		CConsumIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_StuffIcon"),
+		CStuffIcon::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -1039,8 +1046,12 @@ HRESULT CLoader::Load_UI_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 5))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseItemIcon"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/ItemIcon/ItemIcon%d.png"), 2))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseConsumItemIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/ItemIcon/Consum/Consum%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseStuffItemIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/ItemIcon/Stuff/Stuff%d.png"), 6))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_HpBarBase"),
@@ -1183,6 +1194,10 @@ HRESULT CLoader::Load_UI_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Inventory/ItemIcon/Consum/Consum%d.png"), 2))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_StuffIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Inventory/ItemIcon/Stuff/Stuff%d.png"), 6))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -1225,16 +1240,12 @@ HRESULT CLoader::Load_Item_Texture()
 
 	Safe_AddRef(pGameInstance);
 
-	/*if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_EquipItem"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Item/Consum/Consum%d.png"), 2))))
-		return E_FAIL;*/
-
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ConsumItem"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Item/Consum/Consum%d.png"), 2))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_StuffItem"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Item/Stuff/Stuff%d.png"), 2))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Item/Stuff/Stuff%d.png"), 6))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);

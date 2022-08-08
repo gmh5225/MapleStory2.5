@@ -129,7 +129,14 @@ HRESULT CInventory::Set_Icon(const _tchar * pTag, CInvenManager::InvenType eType
 			}
 		}
 		case Client::CInvenManager::TYPE_STUFF:
-			break;
+		{
+			CStuffIcon* pStuffIcon = (CStuffIcon*)iter;
+			if (pStuffIcon->Get_Tag() == pTag)
+			{
+				pStuffIcon->Set_NowNum(iNum);
+				return S_OK;
+			}
+		}
 		default:
 			break;
 		}				
@@ -153,13 +160,48 @@ HRESULT CInventory::Set_Icon(const _tchar * pTag, CInvenManager::InvenType eType
 			break;
 		}
 		case Client::CInvenManager::TYPE_STUFF:
+		{
+			CStuffIcon* pStuffIcon = (CStuffIcon*)iter;
+			if (pStuffIcon->Get_Tag() == TEXT("DefaultInfo"))
+			{
+				pStuffIcon->Set_ItemInfo(pTag);
+				pStuffIcon->Set_NowNum(iNum);
+				return S_OK;
+			}
 			break;
+		}
 		default:
 			break;
 		}
 	
 	}
 
+	return S_OK;
+}
+
+HRESULT CInventory::Change_Info(const _tchar* pTag, _uint iIndex, CInvenManager::InvenType eType)
+{
+	for (auto iter : m_InvenIcon[eType])
+	{
+		if (iter->Get_IndexNum() == iIndex)
+		{
+			/*if (eType = CInvenManager::TYPE_EQUIP)
+			{
+				((CConsumIcon*)iter)->Set_ItemInfo(pTag);
+				return S_OK;
+			}*/
+			if (eType == CInvenManager::TYPE_CONSUM)
+			{
+				((CConsumIcon*)iter)->Set_ItemInfo(pTag);
+				return S_OK;
+			}
+			else if (eType == CInvenManager::TYPE_STUFF)
+			{
+				((CStuffIcon*)iter)->Set_ItemInfo(pTag);
+				return S_OK;
+			}
+		}
+	}
 	return S_OK;
 }
 

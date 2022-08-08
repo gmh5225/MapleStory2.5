@@ -62,11 +62,17 @@ void CConsumIcon::Tick(_float fTimeDelta)
 	{
 		m_bRender = !m_bRender;
 	}
-
-	if (pInstance->Mouse_Up(DIMK_RBUTTON) && m_eCollision == TYPE_ON)
+	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
+	if (pInstance->Mouse_Up(DIMK_RBUTTON) && m_eCollision == TYPE_ON && pInvenInstance->Get_InvenType() == CInvenManager::TYPE_CONSUM)
 	{
 		if(m_pItemInfo->Get_NowNum() != 0)
 			m_pItemInfo->Set_NowNum(-1);	
+		if (m_pItemInfo->Get_NowNum() == 0)
+		{
+			
+			m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM);
+			m_pTag = m_pItemInfo->Get_ItemName();
+		}
 	}
 	Check_Collision(DIMK_LBUTTON);
 
@@ -105,8 +111,8 @@ HRESULT CConsumIcon::Render()
 	_itow_s(m_pItemInfo->Get_NowNum(), NowNum, 10);
 
 	RECT ItemNum;
-	SetRect(&ItemNum, m_UIInfo.fX-10.f, m_UIInfo.fY+2.f, 0, 0);
-	m_NoticeFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+	SetRect(&ItemNum, m_UIInfo.fX-12.f, m_UIInfo.fY+2.f, 0, 0);
+	m_NoticeFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
 
 	if (m_eCollision == TYPE_ON)
 	{
@@ -123,9 +129,10 @@ HRESULT CConsumIcon::Set_ItemInfo(const _tchar * pTag)
 	if (pTag == nullptr)
 		return E_FAIL;
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
-
+	
 	m_pItemInfo = pInvenInstance->Get_ItemInfo(pTag, CInvenManager::TYPE_CONSUM);
 	m_pTag = m_pItemInfo->Get_ItemName();
+	
 	return S_OK;
 }
 
@@ -137,30 +144,30 @@ void CConsumIcon::Set_NowNum(_uint iNum)
 void CConsumIcon::Change_Texture()
 {
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
-	if (pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_CONSUM)->Get_NowNum() < 1)
+	if (pInvenInstance->Get_InvenType() == CInvenManager::TYPE_CONSUM)
 	{
-		m_iTexturenum = 99;
-		//m_pItemInfo = pInvenInstance->Find_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM);
+		if (pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_CONSUM)->Get_NowNum() < 1)
+		{
+			m_iTexturenum = 99;
+		}
+		else
+			m_iTexturenum = m_pItemInfo->Get_TextNum();
+
+
+		CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
+		if (m_eCollision == TYPE_DOWN)
+		{
+			pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_CONSUM, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
+		}
+
+		if (m_eCollision == TYPE_UP)
+		{
+			CItemInfo* pTemp = pMouseInstance->Get_ItemInfo();
+			pInvenInstance->Change_Info(m_pTag, pMouseInstance->Get_Indexnum(), CInvenManager::TYPE_CONSUM);
+			m_pItemInfo = pTemp;
+			m_pTag = pTemp->Get_ItemName();
+		}
 	}
-	else
-		m_iTexturenum = m_pItemInfo->Get_TextNum();
-	
-
-	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN && m_pItemInfo->Get_NowNum() != 0)
-	{
-		pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_CONSUM, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
-	}
-
-	if (m_eCollision == TYPE_UP)
-	{		
-		
-	}
-	
-	
-		//pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"ReefAttackInfo", CSkillManager::GRADE_BEGENNER, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
-
-
 }
 
 CConsumIcon* CConsumIcon::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

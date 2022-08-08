@@ -159,6 +159,7 @@
   <ItemGroup>
     <ClInclude Include="..\Public\BluePortionInfo.h" />
     <ClInclude Include="..\Public\BlueSnail.h" />
+    <ClInclude Include="..\Public\BlueSnailInfo.h" />
     <ClInclude Include="..\Public\Bulb.h" />
     <ClInclude Include="..\Public\Camera_Free.h" />
     <ClInclude Include="..\Public\CashBtn.h" />
@@ -176,7 +177,9 @@
     <ClInclude Include="..\Public\ExpBase.h" />
     <ClInclude Include="..\Public\ExpLine.h" />
     <ClInclude Include="..\Public\GoStump.h" />
+    <ClInclude Include="..\Public\GoStumpInfo.h" />
     <ClInclude Include="..\Public\GreenMushroom.h" />
+    <ClInclude Include="..\Public\GreenMushroomInfo.h" />
     <ClInclude Include="..\Public\HpBarBase.h" />
     <ClInclude Include="..\Public\HpBarHp.h" />
     <ClInclude Include="..\Public\HpBarIcon.h" />
@@ -215,10 +218,12 @@
     <ClInclude Include="..\Public\QuickSlotSkill.h" />
     <ClInclude Include="..\Public\RedPortionInfo.h" />
     <ClInclude Include="..\Public\RedSnail.h" />
+    <ClInclude Include="..\Public\RedSnailInfo.h" />
     <ClInclude Include="..\Public\ReefAttack.h" />
     <ClInclude Include="..\Public\ReefAttackHit.h" />
     <ClInclude Include="..\Public\ReefAttackIcon.h" />
     <ClInclude Include="..\Public\ReefAttackInfo.h" />
+    <ClInclude Include="..\Public\RibbonPigInfo.h" />
     <ClInclude Include="..\public\Section.h" />
     <ClInclude Include="..\public\Shadow.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
@@ -234,6 +239,7 @@
     <ClInclude Include="..\Public\SkillUpBtn.h" />
     <ClInclude Include="..\Public\Sky.h" />
     <ClInclude Include="..\Public\Slime.h" />
+    <ClInclude Include="..\Public\SlimeInfo.h" />
     <ClInclude Include="..\Public\SolunaSlashIcon.h" />
     <ClInclude Include="..\Public\SolunaSlashInfo.h" />
     <ClInclude Include="..\Public\Spawner.h" />
@@ -266,6 +272,7 @@
   <ItemGroup>
     <ClCompile Include="..\Private\BluePortionInfo.cpp" />
     <ClCompile Include="..\Private\BlueSnail.cpp" />
+    <ClCompile Include="..\Private\BlueSnailInfo.cpp" />
     <ClCompile Include="..\Private\Bulb.cpp" />
     <ClCompile Include="..\Private\Camera_Free.cpp" />
     <ClCompile Include="..\Private\CashBtn.cpp" />
@@ -282,7 +289,9 @@
     <ClCompile Include="..\Private\ExpBase.cpp" />
     <ClCompile Include="..\Private\ExpLine.cpp" />
     <ClCompile Include="..\Private\GoStump.cpp" />
+    <ClCompile Include="..\Private\GoStumpInfo.cpp" />
     <ClCompile Include="..\Private\GreenMushroom.cpp" />
+    <ClCompile Include="..\Private\GreenMushroomInfo.cpp" />
     <ClCompile Include="..\Private\HpBarBase.cpp" />
     <ClCompile Include="..\Private\HpBarHp.cpp" />
     <ClCompile Include="..\Private\HpBarIcon.cpp" />
@@ -321,10 +330,12 @@
     <ClCompile Include="..\Private\QuickSlotSkill.cpp" />
     <ClCompile Include="..\Private\RedPortionInfo.cpp" />
     <ClCompile Include="..\Private\RedSnail.cpp" />
+    <ClCompile Include="..\Private\RedSnailInfo.cpp" />
     <ClCompile Include="..\Private\ReefAttack.cpp" />
     <ClCompile Include="..\Private\ReefAttackHit.cpp" />
     <ClCompile Include="..\Private\ReefAttackIcon.cpp" />
     <ClCompile Include="..\Private\ReefAttackInfo.cpp" />
+    <ClCompile Include="..\Private\RibbonPigInfo.cpp" />
     <ClCompile Include="..\private\Section.cpp" />
     <ClCompile Include="..\private\Shadow.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
@@ -340,6 +351,7 @@
     <ClCompile Include="..\Private\SkillUpBtn.cpp" />
     <ClCompile Include="..\Private\Sky.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
+    <ClCompile Include="..\Private\SlimeInfo.cpp" />
     <ClCompile Include="..\Private\SolunaSlashIcon.cpp" />
     <ClCompile Include="..\Private\SolunaSlashInfo.cpp" />
     <ClCompile Include="..\Private\Spawner.cpp" />

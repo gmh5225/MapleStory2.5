@@ -64,6 +64,7 @@ void CMouseManager::Set_ItemIconIndex(PickType ePick, const _tchar * pItemInfoTa
 	m_ePick = ePick;
 	m_pItemInfoTag = pItemInfoTag;
 	m_eType = eType;
+	m_pMouseItemIcon->Set_Type(eType);
 	m_pMouseItemIcon->Set_TextureNum(iText);
 	m_cItemNotice = pNotice;
 	m_iIndexNum = iIndex;

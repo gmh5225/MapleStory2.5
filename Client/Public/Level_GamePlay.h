@@ -36,8 +36,12 @@ private:
 
 private:
 	HRESULT Ready_InvenBtn(const _tchar* pLayerTag);
-	HRESULT Ready_ItemInfo();
-	HRESULT Ready_ItemIcon(const _tchar* pLayerTag);
+	HRESULT Ready_EquipItemInfo();
+	HRESULT Ready_ConsumItemInfo();
+	HRESULT Ready_StuffItemInfo();
+	HRESULT Ready_EquipItemIcon(const _tchar* pLayerTag);
+	HRESULT Ready_ConsumItemIcon(const _tchar* pLayerTag);
+	HRESULT Ready_StuffItemIcon(const _tchar* pLayerTag);
 	HRESULT Ready_SkillFrameBtn(const _tchar* pLayerTag);
 	HRESULT Ready_SkillIcon(const _tchar* pLayerTag);
 	HRESULT Ready_SkillInfo();

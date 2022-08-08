@@ -42,7 +42,7 @@ HRESULT CQuickSlotItem::Initialize(void * pArg)
 	m_bRender = false;
 	CQuickSlotManager* pQuickSlotInstance = CQuickSlotManager::Get_Instance();
 
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseItemIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseConsumItemIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	pQuickSlotInstance->Add_QuickSlotItem(this);

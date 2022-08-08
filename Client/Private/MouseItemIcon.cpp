@@ -2,6 +2,7 @@
 #include "..\Public\MouseItemIcon.h"
 #include "GameInstance.h"
 #include "MouseManager.h"
+#include "Texture.h"
 
 
 CMouseItemIcon::CMouseItemIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -35,10 +36,12 @@ HRESULT CMouseItemIcon::Initialize(void * pArg)
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 	pMouseInstance->Add_pMouseItemIcon(this);
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseItemIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseConsumItemIcon"), TEXT("Com_Texture2"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
-	//pSkillInstance->Add_SkillFrameImage(this);
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseStuffItemIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom2)))
+		return E_FAIL;
 
 	return S_OK;
 }
@@ -73,8 +76,21 @@ void CMouseItemIcon::LateTick(_float fTimeDelta)
 
 HRESULT CMouseItemIcon::Render()
 {
-	if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
+	switch (m_eType)
+	{
+	case Client::CInvenManager::TYPE_EQUIP:
+		break;
+	case Client::CInvenManager::TYPE_CONSUM:
+		if (FAILED(m_pTextureCom->Bind_Texture(m_iTexturenum)))
 		return E_FAIL;
+		break;
+	case Client::CInvenManager::TYPE_STUFF:
+		if (FAILED(m_pTextureCom2->Bind_Texture(m_iTexturenum)))
+		return E_FAIL;
+		break;		
+	default:
+		break;
+	}
 
 	m_pTransformCom->Bind_WorldMatrix();
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &m_ViewMatrix);
@@ -137,6 +153,7 @@ CGameObject * CMouseItemIcon::Clone(void * pArg)
 
 void CMouseItemIcon::Free()
 {
+	Safe_Release(m_pTextureCom2);
 	__super::Free();
 
 }

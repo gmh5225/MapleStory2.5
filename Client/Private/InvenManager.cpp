@@ -59,10 +59,6 @@ HRESULT CInvenManager::Add_ItemInfo(const _tchar * pTag, InvenType eType, CItemI
 	return S_OK;
 }
 
-HRESULT CInvenManager::Set_InvenInfo(const _tchar * pTag)
-{
-	return E_NOTIMPL;
-}
 
 CItemInfo * CInvenManager::Get_ItemInfo(const _tchar* pTag, InvenType eType)
 {
@@ -87,6 +83,11 @@ HRESULT CInvenManager::Check_Icon(const _tchar* pTag, InvenType eType, _uint iNu
 	m_pInventory->Set_Icon(pTag, eType, iNum);
 	
 	return S_OK;
+}
+
+HRESULT CInvenManager::Change_Info(const _tchar * pTag, _uint iIndex, InvenType eType)
+{
+	return m_pInventory->Change_Info(pTag, iIndex, eType);
 }
 
 

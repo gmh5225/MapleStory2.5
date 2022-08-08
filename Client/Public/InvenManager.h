@@ -29,10 +29,10 @@ public:
 	InvenType Get_InvenType() { return m_eInvenType; }
 
 	HRESULT Add_ItemInfo(const _tchar* pTag, InvenType eType, CItemInfo* pItemInfo);
-	HRESULT Set_InvenInfo(const _tchar* pTag);
 	CItemInfo* Get_ItemInfo(const _tchar* pTag, InvenType eType);
 	CItemInfo* Find_ItemInfo(const _tchar* pTag, InvenType eType);
 	HRESULT Check_Icon(const _tchar* pTag, InvenType eType, _uint iNum);
+	HRESULT Change_Info(const _tchar* pTag, _uint iIndex, InvenType eType);
 	
 	
 private:
