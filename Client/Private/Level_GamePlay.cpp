@@ -17,6 +17,7 @@
 #include "Level_Loading.h"
 #include "MainApp.h"
 #include "Potal.h"
+#include "CutSceneManager.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -61,6 +62,8 @@ HRESULT CLevel_GamePlay::Initialize()
 		return E_FAIL;
 
 	g_bStaticClone = true;
+
+	CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
 
 	return S_OK;
 }
