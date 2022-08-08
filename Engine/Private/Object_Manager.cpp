@@ -84,6 +84,39 @@ HRESULT CObject_Manager::Add_GameObjectToLayer(const _tchar* pPrototypeTag, _uin
 	return S_OK;
 }
 
+HRESULT CObject_Manager::Add_GameObjectToLayer(const _tchar * pPrototypeTag, _uint iLevelIndex, const _tchar * pLayerTag, CGameObject ** pObj, void * pArg)
+{
+	CGameObject*	pPrototype = Find_Prototype(pPrototypeTag);
+
+	if (nullptr == pPrototype)
+		return E_FAIL;
+
+	CGameObject*	pGameObject = pPrototype->Clone(pArg);
+
+	if (nullptr == pGameObject)
+		return E_FAIL;
+
+	CLayer*		pLayer = Find_Layer(iLevelIndex, pLayerTag);
+
+	if (nullptr == pLayer)
+	{
+		pLayer = CLayer::Create();
+		if (nullptr == pLayer)
+			return E_FAIL;
+
+		pLayer->Add_GameObject(pGameObject);
+
+		m_pLayers[iLevelIndex].emplace(pLayerTag, pLayer);
+
+	}
+	else
+		pLayer->Add_GameObject(pGameObject);
+
+	*pObj = pGameObject;
+
+	return S_OK;
+}
+
 void CObject_Manager::Tick(_float fTimeDelta)
 {
 	for (_uint i = 0; i < m_iNumLevels; ++i)

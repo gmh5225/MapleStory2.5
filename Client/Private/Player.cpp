@@ -13,6 +13,8 @@
 #include "ParticleManager.h"
 #include "Item.h"
 
+#include "Shadow.h"
+
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -60,7 +62,10 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 
 	SetState(STATE_IDLE, DIR_D);
-	
+
+	// 그림자 생성
+	SetShadow(LEVEL_STATIC, 2.5f);
+
 	return S_OK;
 }
 
@@ -140,28 +145,25 @@ void CPlayer::Tick(_float fTimeDelta)
 	switch (m_eCurState)
 	{
 	case Client::CPlayer::STATE_IDLE:
+	{
 		GetKeyInput(fTimeDelta);
-		CTransform::TRANSFORMDESC IdleDesc;
-		IdleDesc.fSpeedPerSec = 4.f;
-		IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
-		m_pTransformCom->Set_TransformDesc(IdleDesc);
+		Idle(fTimeDelta);
+	}
 		break;
 	case Client::CPlayer::STATE_MOVE:
 		GetKeyInput(fTimeDelta);
 		break;
 	case Client::CPlayer::STATE_JUMP:
 		GetJumpKeyInput(fTimeDelta);
-		// GetKeyInput(fTimeDelta);
 		Jump(fTimeDelta);
 		break;
 	case Client::CPlayer::STATE_ATTACK:		
 		break;
-	case Client::CPlayer::STATE_DASH:		
-		CTransform::TRANSFORMDESC DashDesc;
-		DashDesc.fSpeedPerSec = 20.f;
-		DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
-		m_pTransformCom->Set_TransformDesc(DashDesc);
+	case Client::CPlayer::STATE_DASH:
 		Dash(fTimeDelta);
+		break;
+	case Client::CPlayer::STATE_DJUMP:
+		DoubleJump(fTimeDelta);
 		break;
 	}
 
@@ -309,6 +311,19 @@ void CPlayer::SetState(STATE eState, DIR eDir)
 		// *중력 코드
 		// Y축 힘을 줍니다.
 		m_pTransformCom->Set_Vel(7.0f);
+	}
+	else if(m_eCurState == STATE_DJUMP)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
+		SolunaDECS.eDir = m_eDir;
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_WarriorReef"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+
+		Safe_Release(pGameInstance);
+
+		m_pTransformCom->Set_Vel(3.0f);
 	}
 }
 void CPlayer::SetOnceEndAni()
@@ -503,7 +518,24 @@ void CPlayer::SetAni()
 		break;
 	}
 }
+void CPlayer::SetShadow(LEVEL eLevel, _float fScale)
+{
+	// Test 그림자
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
 
+
+	CShadow::SHADOWDESC ShadowDesc;
+	ShadowDesc.fScale = fScale * 0.5f;
+
+	CGameObject* pShadow = nullptr;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Shadow"), eLevel, TEXT("Layer_Shadow"), &pShadow, &ShadowDesc)))
+		return;
+	m_pShadow = (CShadow*)pShadow;
+	//Safe_AddRef(m_pShadow);
+
+	Safe_Release(pGameInstance);
+}
 
 
 
@@ -683,6 +715,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
 
 	if (GetKeyState(VK_UP) & 0x8000)
 	{
@@ -746,14 +779,35 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 		}
 	}
 
+	if (pGameInstance->Key_Down(DIK_X))
+	{
+		SetState(STATE_DJUMP, m_eDir);
+	}
+
+	Safe_Release(pGameInstance);
+
 }
 
 
 
 
 
+void CPlayer::Idle(_float fTimeDelta)
+{
+	CTransform::TRANSFORMDESC IdleDesc;
+	IdleDesc.fSpeedPerSec = 4.f;
+	IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
+	m_pTransformCom->Set_TransformDesc(IdleDesc);
+}
 void CPlayer::Dash(_float fTimeDelta)
 {
+	CTransform::TRANSFORMDESC DashDesc;
+	DashDesc.fSpeedPerSec = 20.f;
+	DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
+	m_pTransformCom->Set_TransformDesc(DashDesc);
+
+
+
 	m_fDashAcc += 1.f * fTimeDelta;
 	if (0.18f < m_fDashAcc)
 	{
@@ -823,6 +877,43 @@ void CPlayer::Jump(_float fTimeDelta)
 		m_pTransformCom->Go_RD(fTimeDelta);
 		break;
 	}
+}
+void CPlayer::DoubleJump(_float fTimeDelta)
+{
+	CTransform::TRANSFORMDESC IdleDesc;
+	IdleDesc.fSpeedPerSec = 8.f;
+	IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
+	m_pTransformCom->Set_TransformDesc(IdleDesc);
+
+	switch (m_eDir)
+	{
+	case Client::CCreature::DIR_L:
+		m_pTransformCom->Go_L(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_R:
+		m_pTransformCom->Go_R(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_U:
+		m_pTransformCom->Go_U(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_D:
+		m_pTransformCom->Go_D(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_LU:
+		m_pTransformCom->Go_LU(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_RU:
+		m_pTransformCom->Go_RU(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_LD:
+		m_pTransformCom->Go_LD(fTimeDelta);
+		break;
+	case Client::CCreature::DIR_RD:
+		m_pTransformCom->Go_RD(fTimeDelta);
+		break;
+	}
+
+
 }
 
 void CPlayer::Particle(_float fTimeDelta)
@@ -914,7 +1005,7 @@ void CPlayer::Collision(CGameObject * pOther)
 {
 	if (pOther->Get_Tag() == "Tag_Cube")
 	{
-		if (m_eCurState == STATE_JUMP)
+		if (m_eCurState == STATE_JUMP || m_eCurState == STATE_DJUMP)
 		{
 			if (Get_PushedY())
 			{
@@ -938,6 +1029,13 @@ void CPlayer::Collision(CGameObject * pOther)
 	}
 }
 
+void CPlayer::OnLay(_float3 vOutDis)
+{
+	__super::OnLay(vOutDis);
+
+
+}
+
 
 
 
@@ -945,5 +1043,7 @@ void CPlayer::Collision(CGameObject * pOther)
 void CPlayer::Free()
 {
 	__super::Free();
+
+	//Safe_Release(m_pShadow);
 }
 

@@ -97,7 +97,7 @@ HRESULT CSection::SetUp_Components()
 
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 5.0f, 5.0f, 5.0f };
+	BoxColDesc.vScale = _float3{ 5.0f, 9.0f, 5.0f };
 	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;

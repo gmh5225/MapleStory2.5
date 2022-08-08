@@ -375,6 +375,12 @@
     </Filter>
     <Filter Include="04.UI\06.Mouse\MouseItemIcon">
       <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
+       </Filter>
+    <Filter Include="89.Manager\CutSceneManager">
+      <UniqueIdentifier>{2d898817-bcb4-444f-a58f-89894d99064b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Shadow">
+      <UniqueIdentifier>{8b687f9d-0fb1-49fa-afbd-9c226b35fb36}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -686,6 +692,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\MouseItemIcon.h">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
+      </ClInclude>
+    <ClInclude Include="..\public\CutSceneManager.h">
+      <Filter>89.Manager\CutSceneManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Shadow.h">
+      <Filter>02.GameObject\Creature\Shadow</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -988,6 +1000,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\MouseItemIcon.cpp">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
+         </ClCompile>
+    <ClCompile Include="..\private\CutSceneManager.cpp">
+      <Filter>89.Manager\CutSceneManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Shadow.cpp">
+      <Filter>02.GameObject\Creature\Shadow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

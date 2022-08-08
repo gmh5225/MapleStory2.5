@@ -41,6 +41,7 @@ HRESULT CStoneGolem::Initialize(void * pArg)
 
 	SetState(STATE_IDLE, DIR_END);
 
+	SetShadow(LEVEL_HENESYS, 6.f);
 
 
 	return S_OK;

@@ -171,6 +171,7 @@
     <ClInclude Include="..\Public\Cube.h" />
     <ClInclude Include="..\Public\Chat.h" />
     <ClInclude Include="..\Public\EquipBtn.h" />
+    <ClInclude Include="..\public\CutSceneManager.h" />
     <ClInclude Include="..\Public\ExpBar.h" />
     <ClInclude Include="..\Public\ExpBase.h" />
     <ClInclude Include="..\Public\ExpLine.h" />
@@ -219,6 +220,7 @@
     <ClInclude Include="..\Public\ReefAttackIcon.h" />
     <ClInclude Include="..\Public\ReefAttackInfo.h" />
     <ClInclude Include="..\public\Section.h" />
+    <ClInclude Include="..\public\Shadow.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
     <ClInclude Include="..\Public\SkillGradeBtn0.h" />
     <ClInclude Include="..\Public\SkillGradeBtn1.h" />
@@ -275,6 +277,7 @@
     <ClCompile Include="..\Private\Cube.cpp" />
     <ClCompile Include="..\Private\Chat.cpp" />
     <ClCompile Include="..\Private\EquipBtn.cpp" />
+    <ClCompile Include="..\private\CutSceneManager.cpp" />
     <ClCompile Include="..\Private\ExpBar.cpp" />
     <ClCompile Include="..\Private\ExpBase.cpp" />
     <ClCompile Include="..\Private\ExpLine.cpp" />
@@ -323,6 +326,7 @@
     <ClCompile Include="..\Private\ReefAttackIcon.cpp" />
     <ClCompile Include="..\Private\ReefAttackInfo.cpp" />
     <ClCompile Include="..\private\Section.cpp" />
+    <ClCompile Include="..\private\Shadow.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
     <ClCompile Include="..\Private\SkillGradeBtn0.cpp" />
     <ClCompile Include="..\Private\SkillGradeBtn1.cpp" />

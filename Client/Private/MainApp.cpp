@@ -11,6 +11,7 @@
 #include "InvenManager.h"
 #include "SpawnerManager.h"
 #include "ParticleManager.h"
+#include "CutSceneManager.h"
 
 bool g_bStaticClone;
 bool g_bStatic;
@@ -216,10 +217,10 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
+	CCutSceneManager::Destroy_Instance();
 	CParticleManager::Destroy_Instance();
 	CQuestManager::Destroy_Instance();
 	CMouseManager::Destroy_Instance();
-	CQuestManager::Destroy_Instance();
 	CQuickSlotManager::Destroy_Instance();
 	CSkillManager::Destroy_Instance();
 	CUIManager::Destroy_Instance();

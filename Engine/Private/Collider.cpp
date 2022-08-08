@@ -3,6 +3,7 @@
 #include "GameObject.h"
 #include "Transform.h"
 #include "BoxCollider.h"
+#include "VIBuffer_Cube.h"
 
 CCollider::CCollider(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CComponent(pGraphic_Device)
@@ -200,6 +201,16 @@ HRESULT CCollider::Check_PushCubeCollsion(COLLSIONGROUP eCollsionGroup_L)
 			{
 
 
+				_float3 vMinOutDis;
+				_float fMinLen = 99999.f;
+				_float3 vOutDis;
+				_bool bDownLay = false;
+
+				_float3 vLookMinOutDis;
+				_float fLookMinLen = 99999.f;
+				_float3 vLookOutDis;
+				_bool bLookLay = false;
+
 				for (auto& pR_Object : *(Section->GetCubes()))
 				{
 					// 충돌 검사
@@ -208,9 +219,53 @@ HRESULT CCollider::Check_PushCubeCollsion(COLLSIONGROUP eCollsionGroup_L)
 						pL_Object->Collision(pR_Object);
 						pR_Object->Collision(pL_Object);
 					}
+
+
+
+
+
+					// 다운 레이 검사
+					if (Check_Lay(pL_Object, pR_Object, &vOutDis))
+					{
+						_float3 pLPos = ((CTransform*)pL_Object->Get_ComponentPtr(TEXT("Com_Transform")))->Get_State(CTransform::STATE_POSITION);
+						_float3 DisVec = pLPos - vOutDis;
+
+						_float tempLen = D3DXVec3Length(&DisVec);
+
+						if (tempLen < fMinLen)
+						{
+							vMinOutDis = vOutDis;
+							fMinLen = tempLen;
+							bDownLay = true;
+						}
+					}
+
+
+					// 룩 레이 검사
+					if (Check_LookLay(pL_Object, pR_Object, &vLookOutDis))
+					{
+						_float3 pLLookPos = ((CTransform*)pL_Object->Get_ComponentPtr(TEXT("Com_Transform")))->Get_State(CTransform::STATE_POSITION);
+						_float3 DisLookVec = pLLookPos - vLookOutDis;
+
+						_float tempLookLen = D3DXVec3Length(&DisLookVec);
+
+						if (tempLookLen < fLookMinLen)
+						{
+							vLookMinOutDis = vLookOutDis;
+							fLookMinLen = tempLookLen;
+							bLookLay = true;
+						}
+					}
+
+
+
+
+
+					if(bDownLay)
+						pL_Object->OnLay(vMinOutDis);
+					if (bLookLay)
+						pL_Object->OnLookLay(vLookMinOutDis);
 				}
-
-
 
 
 			}
@@ -393,6 +448,28 @@ _bool CCollider::Check_Box(CGameObject * pObj_L, CGameObject * pObj_R, _bool bPu
 
 		return false;
 	}
+	return false;
+}
+
+_bool CCollider::Check_Lay(CGameObject * pObj_L, CGameObject * pObj_R, _float3* pOutDis)
+{
+	_float3 vPickDir;
+	
+	CVIBuffer_Cube* pCubeBuffer = (CVIBuffer_Cube*)pObj_R->Get_ComponentPtr(TEXT("Com_VIBuffer"));
+	if (pCubeBuffer->PickCube(pObj_R, pObj_L, pOutDis, &vPickDir))
+		return true;
+
+	return false;
+}
+
+_bool CCollider::Check_LookLay(CGameObject * pObj_L, CGameObject * pObj_R, _float3 * pOutDis)
+{
+	_float3 vPickDir;
+
+	CVIBuffer_Cube* pCubeBuffer = (CVIBuffer_Cube*)pObj_R->Get_ComponentPtr(TEXT("Com_VIBuffer"));
+	if (pCubeBuffer->PickLookCube(pObj_R, pObj_L, pOutDis, &vPickDir))
+		return true;
+
 	return false;
 }
 

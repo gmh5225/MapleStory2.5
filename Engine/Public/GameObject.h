@@ -20,7 +20,7 @@ public:
 	string Get_Tag() { return m_sTag; }
 
 	_bool Get_Dead() { return m_bDead; }
-	void Set_Dead() { m_bDead = true; }
+	virtual void Set_Dead() { m_bDead = true; }
 
 	list<class CBoxCollider*>* Get_BoxColComList() { return &m_BoxColliders; }
 
@@ -40,6 +40,8 @@ public:
 
 public:
 	virtual void Collision(CGameObject* pOther) {};
+	virtual void OnLay(_float3 vOutDis) {};
+	virtual void OnLookLay(_float3 vOutDis) {};
 	virtual void Damaged(CGameObject* pOther) {};
 
 

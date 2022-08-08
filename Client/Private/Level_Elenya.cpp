@@ -257,7 +257,7 @@ HRESULT CLevel_Elenya::Ready_Layer_Section(const _tchar * pLayerTag)
 			{
 				_float XIndex = i*5.f;
 				_float ZIndex = j*5.f;
-				Data.vPos = _float3((-16.f + XIndex) + ZIndex, 2.f + y * 5.f, 7 - XIndex);
+				Data.vPos = _float3((-16.f + XIndex) + ZIndex, 2.f + y * 9.f, 7 - XIndex);
 				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_ELENYA, pLayerTag, &Data)))
 					return E_FAIL;
 			}

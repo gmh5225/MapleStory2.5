@@ -17,7 +17,7 @@ BEGIN(Client)
 class CCreature : public CGameObject
 {
 public:
-	enum STATE { STATE_IDLE, STATE_MOVE, STATE_JUMP, STATE_ATTACK, STATE_DASH, STATE_HIT, STATE_CHASE, STATE_DIE, STATE_END };
+	enum STATE { STATE_IDLE, STATE_MOVE, STATE_JUMP, STATE_DJUMP, STATE_ATTACK, STATE_DASH, STATE_HIT, STATE_CHASE, STATE_DIE, STATE_END };
 	enum DIR { DIR_L, DIR_R, DIR_U, DIR_D, DIR_LU, DIR_RU, DIR_LD, DIR_RD, DIR_END };
 
 	typedef struct tagCreatureDesc
@@ -43,9 +43,11 @@ public:
 	virtual HRESULT Render() override;
 
 	virtual void Collision(CGameObject* pOther) override {};
+	virtual void OnLay(_float3 vOutDis) override;
 
 public:
 	virtual void SetState(STATE eState, DIR eDir);
+	virtual void Set_Dead() override;
 
 public:
 	virtual void SetAni();
@@ -53,6 +55,9 @@ public:
 
 	virtual void Damaged(CGameObject* pOther) override {};
 	
+protected:
+	virtual void SetShadow(LEVEL eLevel, _float fScale);
+
 protected:
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
@@ -65,6 +70,8 @@ protected:
 	_float3 m_vLookTemp;
 	STATE m_eCurState;
 	DIR m_eDir;
+
+	class CShadow* m_pShadow = nullptr;
 
 protected:
  	virtual HRESULT Set_RenderState();

@@ -31,6 +31,7 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
+	void Set_Billboard();
 
 private:
 	CTexture*				m_pTextureCom = nullptr;
@@ -40,6 +41,8 @@ private:
 
 private:
 	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);
+
+	_float3 m_vLookTemp;
 
 private:
 	HRESULT Set_RenderState();

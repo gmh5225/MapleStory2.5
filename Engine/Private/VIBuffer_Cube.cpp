@@ -1,5 +1,8 @@
 #include "..\Public\VIBuffer_Cube.h"
 
+#include "Transform.h"
+#include "GameObject.h"
+
 CVIBuffer_Cube::CVIBuffer_Cube(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CVIBuffer(pGraphic_Device)
 {
@@ -23,24 +26,26 @@ HRESULT CVIBuffer_Cube::Initialize_Prototype()
 
 	VTXCUBETEX*		pVertices = nullptr;
 
+	m_pVerticesPos = new _float3[m_iNumVertices];
+
 	m_pVB->Lock(0, /*m_iStride * m_iNumVertices*/0, (void**)&pVertices, 0);
 
-	pVertices[0].vPosition = _float3(-0.5f, 0.5f, -0.5f);
+	m_pVerticesPos[0] = pVertices[0].vPosition = _float3(-0.5f, 0.5f, -0.5f);
 	pVertices[0].vTexture = pVertices[0].vPosition;
-	pVertices[1].vPosition = _float3(0.5f, 0.5f, -0.5f);
+	m_pVerticesPos[1] = pVertices[1].vPosition = _float3(0.5f, 0.5f, -0.5f);
 	pVertices[1].vTexture = pVertices[1].vPosition;
-	pVertices[2].vPosition = _float3(0.5f, -0.5f, -0.5f);
+	m_pVerticesPos[2] = pVertices[2].vPosition = _float3(0.5f, -0.5f, -0.5f);
 	pVertices[2].vTexture = pVertices[2].vPosition;
-	pVertices[3].vPosition = _float3(-0.5f, -0.5f, -0.5f);
+	m_pVerticesPos[3] = pVertices[3].vPosition = _float3(-0.5f, -0.5f, -0.5f);
 	pVertices[3].vTexture = pVertices[3].vPosition;
 
-	pVertices[4].vPosition = _float3(-0.5f, 0.5f, 0.5f);
+	m_pVerticesPos[4] = pVertices[4].vPosition = _float3(-0.5f, 0.5f, 0.5f);
 	pVertices[4].vTexture = pVertices[4].vPosition;
-	pVertices[5].vPosition = _float3(0.5f, 0.5f, 0.5f);
+	m_pVerticesPos[5] = pVertices[5].vPosition = _float3(0.5f, 0.5f, 0.5f);
 	pVertices[5].vTexture = pVertices[5].vPosition;
-	pVertices[6].vPosition = _float3(0.5f, -0.5f, 0.5f);
+	m_pVerticesPos[6] = pVertices[6].vPosition = _float3(0.5f, -0.5f, 0.5f);
 	pVertices[6].vTexture = pVertices[6].vPosition;
-	pVertices[7].vPosition = _float3(-0.5f, -0.5f, 0.5f);
+	m_pVerticesPos[7] = pVertices[7].vPosition = _float3(-0.5f, -0.5f, 0.5f);
 	pVertices[7].vTexture = pVertices[7].vPosition;
 
 
@@ -90,6 +95,533 @@ HRESULT CVIBuffer_Cube::Initialize(void * pArg)
 {
 	return S_OK;
 }
+
+
+
+
+_bool CVIBuffer_Cube::PickCube(CGameObject* pMe, CGameObject *pOther, _float3* pOutDis, _float3* pOutVec)
+{
+
+	CTransform*		pMeTransform		= (CTransform*)pMe->Get_ComponentPtr(TEXT("Com_Transform"));
+	_float4x4		Me_WorldMatrixInv	= pMeTransform->Get_WorldMatrixInverse();
+
+	CTransform*		pOtherTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
+
+
+	_float3			vRayLook, vRayDown, vRayPos;
+ 
+	vRayPos = pOtherTransform->Get_State(CTransform::STATE_POSITION);
+	// vRayLook = pTransform->Get_State(CTransform::STATE_LOOK);
+	vRayLook = _float3{ 0.f, -1.f, 0.f };
+
+
+	D3DXVec3TransformCoord(&vRayPos, &vRayPos, &Me_WorldMatrixInv);
+	// D3DXVec3TransformNormal(&vRayLook, &vRayLook, &Me_WorldMatrixInv);
+	D3DXVec3Normalize(&vRayLook, &vRayLook);
+
+
+	_float		fU, fV, fDist;
+
+	_float fMinDis = 9999999.f;
+	_float3	vMinPickPickVec;
+	_float3 vMinPickPos;
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[1], &m_pVerticesPos[5], &m_pVerticesPos[6], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[1], &m_pVerticesPos[5], &m_pVerticesPos[6]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[1], &m_pVerticesPos[6], &m_pVerticesPos[2], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[1], &m_pVerticesPos[6], &m_pVerticesPos[2]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[0], &m_pVerticesPos[3], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[0], &m_pVerticesPos[3]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[3], &m_pVerticesPos[7], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[3], &m_pVerticesPos[7]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[5], &m_pVerticesPos[1], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[5], &m_pVerticesPos[1]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[1], &m_pVerticesPos[0], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[1], &m_pVerticesPos[0]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[3], &m_pVerticesPos[2], &m_pVerticesPos[6], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[3], &m_pVerticesPos[2], &m_pVerticesPos[6]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[3], &m_pVerticesPos[6], &m_pVerticesPos[7], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[3], &m_pVerticesPos[6], &m_pVerticesPos[7]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[5], &m_pVerticesPos[4], &m_pVerticesPos[7], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[5], &m_pVerticesPos[4], &m_pVerticesPos[7]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[5], &m_pVerticesPos[7], &m_pVerticesPos[6], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[5], &m_pVerticesPos[7], &m_pVerticesPos[6]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[0], &m_pVerticesPos[1], &m_pVerticesPos[2], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[0], &m_pVerticesPos[1], &m_pVerticesPos[2]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[0], &m_pVerticesPos[2], &m_pVerticesPos[3], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[0], &m_pVerticesPos[2], &m_pVerticesPos[3]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (9999999.f != fMinDis)
+	{
+
+		_float		fU, fV, fDist;
+		_float4x4	WorldMatrix = pMeTransform->Get_WorldMatrix();
+
+		*pOutVec = vMinPickPickVec;
+		D3DXVec3TransformCoord(pOutDis, &vMinPickPos, &WorldMatrix);
+		return true;
+	}
+
+
+	return false;
+
+}
+
+_bool CVIBuffer_Cube::PickLookCube(CGameObject * pMe, CGameObject * pOther, _float3 * pOutDis, _float3 * pOutVec)
+{
+
+	CTransform*		pMeTransform = (CTransform*)pMe->Get_ComponentPtr(TEXT("Com_Transform"));
+	_float4x4		Me_WorldMatrixInv = pMeTransform->Get_WorldMatrixInverse();
+
+	CTransform*		pOtherTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
+
+
+	_float3			vRayLook, vRayDown, vRayPos;
+
+	vRayPos = pOtherTransform->Get_State(CTransform::STATE_POSITION);
+	vRayLook = pOtherTransform->Get_State(CTransform::STATE_LOOK);
+	// vRayLook = _float3{ 0.f, -1.f, 0.f };
+
+
+	D3DXVec3TransformCoord(&vRayPos, &vRayPos, &Me_WorldMatrixInv);
+	// D3DXVec3TransformNormal(&vRayLook, &vRayLook, &Me_WorldMatrixInv);
+	D3DXVec3Normalize(&vRayLook, &vRayLook);
+
+
+	_float		fU, fV, fDist;
+
+	_float fMinDis = 9999999.f;
+	_float3	vMinPickPickVec;
+	_float3 vMinPickPos;
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[1], &m_pVerticesPos[5], &m_pVerticesPos[6], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[1], &m_pVerticesPos[5], &m_pVerticesPos[6]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[1], &m_pVerticesPos[6], &m_pVerticesPos[2], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[1], &m_pVerticesPos[6], &m_pVerticesPos[2]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[0], &m_pVerticesPos[3], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[0], &m_pVerticesPos[3]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[3], &m_pVerticesPos[7], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[3], &m_pVerticesPos[7]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[5], &m_pVerticesPos[1], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[5], &m_pVerticesPos[1]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[4], &m_pVerticesPos[1], &m_pVerticesPos[0], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[4], &m_pVerticesPos[1], &m_pVerticesPos[0]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[3], &m_pVerticesPos[2], &m_pVerticesPos[6], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[3], &m_pVerticesPos[2], &m_pVerticesPos[6]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[3], &m_pVerticesPos[6], &m_pVerticesPos[7], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[3], &m_pVerticesPos[6], &m_pVerticesPos[7]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[5], &m_pVerticesPos[4], &m_pVerticesPos[7], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[5], &m_pVerticesPos[4], &m_pVerticesPos[7]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[5], &m_pVerticesPos[7], &m_pVerticesPos[6], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[5], &m_pVerticesPos[7], &m_pVerticesPos[6]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (true == D3DXIntersectTri(&m_pVerticesPos[0], &m_pVerticesPos[1], &m_pVerticesPos[2], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[0], &m_pVerticesPos[1], &m_pVerticesPos[2]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+	if (true == D3DXIntersectTri(&m_pVerticesPos[0], &m_pVerticesPos[2], &m_pVerticesPos[3], &vRayPos, &vRayLook, &fU, &fV, &fDist))
+	{
+		_float3	vPickPos = vRayPos + vRayLook * fDist;
+
+		D3DXPLANE			Plane;
+		D3DXPlaneFromPoints(&Plane, &m_pVerticesPos[0], &m_pVerticesPos[2], &m_pVerticesPos[3]);
+		_float3 vPickVec{ Plane.a, Plane.b, Plane.c };
+		D3DXVec3Normalize(&vPickVec, &vPickVec);
+
+		if (fDist < fMinDis)
+		{
+			fMinDis = fDist;
+			vMinPickPos = vPickPos;
+			vMinPickPickVec = vPickVec;
+		}
+		//return true;
+	}
+
+
+	if (9999999.f != fMinDis)
+	{
+
+		_float		fU, fV, fDist;
+		_float4x4	WorldMatrix = pMeTransform->Get_WorldMatrix();
+
+		*pOutVec = vMinPickPickVec;
+		D3DXVec3TransformCoord(pOutDis, &vMinPickPos, &WorldMatrix);
+		return true;
+	}
+
+
+	return false;
+
+}
+
+
+
+
+
+
 
 CVIBuffer_Cube * CVIBuffer_Cube::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
