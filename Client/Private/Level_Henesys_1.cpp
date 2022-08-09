@@ -13,6 +13,7 @@
 #include "Maya.h"
 #include "Level_Loading.h"
 #include "Potal.h"
+#include "CutSceneManager.h"
 
 CLevel_Henesys_1::CLevel_Henesys_1(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -54,7 +55,7 @@ HRESULT CLevel_Henesys_1::Initialize()
 		return E_FAIL;
 	
 	
-
+	//CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
 	return S_OK;
 }

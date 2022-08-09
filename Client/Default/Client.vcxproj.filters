@@ -375,12 +375,15 @@
     </Filter>
     <Filter Include="04.UI\06.Mouse\MouseItemIcon">
       <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
-       </Filter>
+    </Filter>
     <Filter Include="89.Manager\CutSceneManager">
       <UniqueIdentifier>{2d898817-bcb4-444f-a58f-89894d99064b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Creature\Shadow">
       <UniqueIdentifier>{8b687f9d-0fb1-49fa-afbd-9c226b35fb36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Bandit">
+      <UniqueIdentifier>{3f7c83c1-da7f-49d8-b406-4a8d7131267e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -692,12 +695,15 @@
     </ClInclude>
     <ClInclude Include="..\Public\MouseItemIcon.h">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\CutSceneManager.h">
       <Filter>89.Manager\CutSceneManager</Filter>
     </ClInclude>
     <ClInclude Include="..\public\Shadow.h">
       <Filter>02.GameObject\Creature\Shadow</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Bandit.h">
+      <Filter>02.GameObject\Creature\Bandit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1000,12 +1006,15 @@
     </ClCompile>
     <ClCompile Include="..\Private\MouseItemIcon.cpp">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
-         </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\CutSceneManager.cpp">
       <Filter>89.Manager\CutSceneManager</Filter>
     </ClCompile>
     <ClCompile Include="..\private\Shadow.cpp">
       <Filter>02.GameObject\Creature\Shadow</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Bandit.cpp">
+      <Filter>02.GameObject\Creature\Bandit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

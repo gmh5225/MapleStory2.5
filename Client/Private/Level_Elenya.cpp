@@ -13,6 +13,8 @@
 #include "Maya.h"
 #include "Level_Loading.h"
 #include "Potal.h"
+#include "CutSceneManager.h"
+#include "Bandit.h"
 
 CLevel_Elenya::CLevel_Elenya(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -52,6 +54,9 @@ HRESULT CLevel_Elenya::Initialize()
 
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
+
+
+	//CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
 
 	return S_OK;
 }
@@ -223,6 +228,32 @@ HRESULT CLevel_Elenya::Ready_Layer_Map(const _tchar * pLayerTag)
 		}
 
 	}
+
+
+
+
+
+	for (_int i = 0; i < 50; i++)
+	{
+		_float fScale = pGameInstance->Get_FloatRandom(0.5f, 1.5f);
+		_float fTime = pGameInstance->Get_FloatRandom(0.1f, 0.3f);
+
+		_float x = pGameInstance->Get_FloatRandom(-10.f, 20.f);
+		_float y = pGameInstance->Get_FloatRandom(1.f, 60.f);
+		_float z = pGameInstance->Get_FloatRandom(-5.f, 10.f);
+
+
+		_float3 vPos = { x, y , z };
+
+		CBandit::BANDITDESC BanditDesc;
+		BanditDesc.vPos = vPos;
+		BanditDesc.fScale = fScale;
+		BanditDesc.fTime = fTime;
+
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bandit"), LEVEL_ELENYA, pLayerTag, &BanditDesc)))
+			return E_FAIL;
+	}
+
 
 
 

@@ -52,20 +52,45 @@ void CParticleManager::Shot(_float3 _vPos, _float3 _vDirVec)
 	_float fDegreeY = 0.f;
 	for (_int i = 0; i < 4; i++)
 	{
-		fDegreeX = (_float)CGameInstance::Get_Instance()->Get_Random(-10, 10);
-		fDegreeY = (_float)CGameInstance::Get_Instance()->Get_Random(-10, 10);
+		fDegreeX = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(-5.f, 5.f);
+		fDegreeY = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(-10.f, 10.f);
 
 		_float4x4  Mat_X, Mat_Y;
 		D3DXMatrixIdentity(&Mat_X);
 		D3DXMatrixIdentity(&Mat_Y);
 
 
-		D3DXMatrixRotationX(&Mat_X, fDegreeX);
+		D3DXMatrixRotationX(&Mat_X, D3DXToRadian(fDegreeX));
 		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_X);
-		D3DXMatrixRotationY(&Mat_Y, fDegreeY);
+		D3DXMatrixRotationY(&Mat_Y, D3DXToRadian(fDegreeY));
 		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_Y);
 
-		MakeParticle(vStartPos, 0.4f, _vDirVec, 2.0f, 5.0f, true, 0.1f, 0.7f);
+		MakeParticle(vStartPos, 0.1f, _vDirVec, 2.0f, 10.0f, true, 1.f, 0.7f);
+	}
+}
+
+void CParticleManager::BackShot(_float3 _vPos, _float3 _vDirVec)
+{
+	_float3 vStartPos = _vPos;
+
+	_float fDegreeX = 0.f;
+	_float fDegreeY = 0.f;
+	for (_int i = 0; i < 4; i++)
+	{
+		fDegreeX = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(-5.f, 5.f);
+		fDegreeY = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(-5.f, 5.f);
+
+		_float4x4  Mat_X, Mat_Y;
+		D3DXMatrixIdentity(&Mat_X);
+		D3DXMatrixIdentity(&Mat_Y);
+
+
+		D3DXMatrixRotationX(&Mat_X, D3DXToRadian(fDegreeX));
+		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_X);
+		D3DXMatrixRotationY(&Mat_Y, D3DXToRadian(fDegreeY));
+		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_Y);
+
+		MakeParticle(vStartPos, 0.1f, _vDirVec * -1.f, 2.0f, 5.0f, true, 0.2f, 0.7f);
 	}
 }
 

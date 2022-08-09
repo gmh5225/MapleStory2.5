@@ -73,6 +73,7 @@
 #include "Item.h"
 #include "MouseItemIcon.h"
 #include "Shadow.h"
+#include "Bandit.h"
 
 
 
@@ -130,7 +131,7 @@ HRESULT CLoader::Loading_ForStatic()
 		lstrcpy(m_szLoadingText, TEXT("메이플 스토리 키는중~"));
 		Load_Player_Object();
 
-		// Load_PlayerSkill_Object();
+		Load_PlayerSkill_Object();
 		Load_UI_Object();
 		Load_Model_Object();
 		Load_Item_Object();
@@ -142,10 +143,10 @@ HRESULT CLoader::Loading_ForStatic()
 		/* 텍스쳐를 로드한다. */
 
 		/* For.Prototype_Component_Texture_Player */
-		//Load_Player_Texture();
+		Load_Player_Texture();
 
 		/* For.Prototype_Component_Texture_Player_Skill */
-		//Load_Player_Skill_Texture();
+		Load_Player_Skill_Texture();
 
 		/* For.Prototype_Component_Texture_Item */
 		Load_Item_Texture();
@@ -209,6 +210,27 @@ HRESULT CLoader::Loading_ForElenya()
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
+
+
+
+		// 객체
+		if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bandit"),
+			CBandit::Create(m_pGraphic_Device))))
+			return E_FAIL;
+
+
+
+
+
+
+		// 컴포넌트
+		if (FAILED(pGameInstance->Add_Prototype(LEVEL_ELENYA, TEXT("Prototype_Component_Texture_Bandit"),
+			CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Bandit.png")))))
+			return E_FAIL;
+
+
+
+
 
 
 		Safe_Release(pGameInstance);
