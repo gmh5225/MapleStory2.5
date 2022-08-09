@@ -4,18 +4,13 @@
 
 BEGIN(Client)
 
-class CReefAttack final : public CCreature
+class CBlackWizardAttack1 final : public CCreature
 {
-public:
-	typedef struct tagReefAttackDESC
-	{
-		DIR eDir;
-	}REEFATTACKDESC;
 
 private:
-	CReefAttack(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CReefAttack(const CReefAttack& rhs);
-	virtual ~CReefAttack() = default;
+	CBlackWizardAttack1(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CBlackWizardAttack1(const CBlackWizardAttack1& rhs);
+	virtual ~CBlackWizardAttack1() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -31,26 +26,14 @@ protected:
 	virtual HRESULT Reset_RenderState() override;
 
 
-public:
-	void SetState(STATE eState, DIR eDir);
-	void SetDirection();
-	void SetPosition(DIR eDir);
-public:
-	virtual void SetAni() override;
-
-
 private:
-	STATE m_eCurState;
-	DIR m_eDir;
 	CTransform* m_pTarget;
-	REEFATTACKDESC m_Desc;
-
 	list<CGameObject*> m_pOther;
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CReefAttack* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CBlackWizardAttack1* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

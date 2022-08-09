@@ -3,6 +3,8 @@
 #include "GameInstance.h"
 #include "InvenManager.h"
 #include "MouseManager.h"
+#include "UIManager.h"
+
 
 
 CConsumIcon::CConsumIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -37,16 +39,13 @@ HRESULT CConsumIcon::Initialize(void * pArg)
 
 	m_pItemInfo = pInvenInstance->Get_ItemInfo(m_pTag, CInvenManager::TYPE_CONSUM);
 
+
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ConsumIcon"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	D3DXCreateFont(m_pGraphic_Device, 11, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
 		L"µ¸¿òÃ¼", &m_NumFont);
-
-	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
-		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"µ¸¿òÃ¼", &m_NoticeFont);
 
 	pInvenInstance->Add_InvenIcon(CInvenManager::TYPE_CONSUM, this);
 
@@ -111,14 +110,19 @@ HRESULT CConsumIcon::Render()
 	_itow_s(m_pItemInfo->Get_NowNum(), NowNum, 10);
 
 	RECT ItemNum;
-	SetRect(&ItemNum, m_UIInfo.fX-12.f, m_UIInfo.fY+2.f, 0, 0);
-	m_NoticeFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+	SetRect(&ItemNum, m_UIInfo.fX-12.f, m_UIInfo.fY+3.f, 0, 0);
+	m_NumFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
 
 	if (m_eCollision == TYPE_ON)
 	{
-		RECT ReefAttackNotice;
-		SetRect(&ReefAttackNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
-		m_NoticeFont->DrawText(NULL, m_pItemInfo->Get_ItemNotice(), -1, &ReefAttackNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+		Set_Notice();
+	}
+
+	if (m_eCollision == TYPE_NO)
+	{
+		CUIManager* pUIInstance = CUIManager::Get_Instance();
+		if(pUIInstance->Check_Change(m_iTexturenum))
+			pUIInstance->Set_ItemNoticeTextNum(99, false);
 	}
 
 	return S_OK;
@@ -139,6 +143,23 @@ HRESULT CConsumIcon::Set_ItemInfo(const _tchar * pTag)
 void CConsumIcon::Set_NowNum(_uint iNum)
 {
 	m_pItemInfo->Set_NowNum(iNum);
+}
+
+void CConsumIcon::Set_Notice()
+{
+	CUIManager* pUIInstance = CUIManager::Get_Instance();
+	switch (m_iTexturenum)
+	{
+	case 0:
+		pUIInstance->Set_ItemNoticeTextNum(0, true);
+		break;
+	case 1:
+		pUIInstance->Set_ItemNoticeTextNum(1, true);
+		break;
+	default:
+		break;
+	}
+	
 }
 
 void CConsumIcon::Change_Texture()

@@ -45,6 +45,8 @@ public:
 	const _tchar* Get_Tag() { return m_UIInfo.pTag; }
 	_uint Get_TextNum() { return m_iTexturenum; }
 	_uint Get_IndexNum() { return m_UIInfo.iNum; }
+	void Set_Render(bool bRender) { m_bRender = bRender; }
+	bool Get_Render() { return m_bRender; }
 
 protected:
 	CTexture*				m_pTextureCom = nullptr;

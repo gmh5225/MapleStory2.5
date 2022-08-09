@@ -8,7 +8,7 @@ CSpearPulling::CSpearPulling(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 }
 CSpearPulling::CSpearPulling(const CSpearPulling & rhs)
-	: CCreature(rhs), m_bCreate(false)
+	: CCreature(rhs)
 {
 }
 

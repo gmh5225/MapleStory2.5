@@ -42,6 +42,7 @@ public:
 private:
 	HRESULT Load_Player_Object();
 	HRESULT Load_PlayerSkill_Object();
+	HRESULT Load_BossMonster_Object();
 	HRESULT Load_Monster_Object();
 	HRESULT Load_Npc_Object();
 	HRESULT Load_UI_Object();
@@ -56,6 +57,7 @@ private:
 private:
 	HRESULT Load_Player_Texture();
 	HRESULT Load_Player_Skill_Texture();
+	HRESULT Load_BossMonster_Texture();
 	HRESULT Load_Monster_Texture();
 	HRESULT Load_Npc_Texture();
 	HRESULT Load_UI_Texture();

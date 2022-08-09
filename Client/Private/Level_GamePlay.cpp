@@ -29,8 +29,8 @@
 #include "SlimeInfo.h"
 #include "GoStumpInfo.h"
 #include "RibbonPigInfo.h"
-
 #include "CutSceneManager.h"
+#include "ItemNotice.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -137,7 +137,6 @@ HRESULT CLevel_GamePlay::Render()
 		return E_FAIL;
 
 
-	//SetWindowText(g_hWnd, TEXT("�����÷��̷�����"));
 
 	return S_OK;
 }
@@ -188,6 +187,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_HENESYS, pLayerTag)))
 	//	return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizard"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 
@@ -391,6 +392,9 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseItemIcon"), LEVEL_STATIC, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ItemNotice"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseCursor"), LEVEL_STATIC, pLayerTag)))

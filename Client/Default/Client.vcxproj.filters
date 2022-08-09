@@ -199,9 +199,6 @@
     <Filter Include="20.DATA\SkillInfo\Dash\SolunaSlash">
       <UniqueIdentifier>{f879b7dc-fcff-4aac-aa15-4d00c81fee80}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.UI\06.Mouse">
-      <UniqueIdentifier>{0355bad6-3928-4378-8886-2234e79d623f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="89.Manager\MouseManager">
       <UniqueIdentifier>{ce307312-bdac-4cae-a0ea-446ee5ebb502}</UniqueIdentifier>
     </Filter>
@@ -237,12 +234,6 @@
     </Filter>
     <Filter Include="04.UI\00.MainUI\QuickSlot">
       <UniqueIdentifier>{f94e8e2d-3a7a-49ac-961f-4f0fa534bb6d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.UI\06.Mouse\MouseCursor">
-      <UniqueIdentifier>{58b5e812-71df-4286-8309-07cde33ee763}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="04.UI\06.Mouse\MouseSkillIcon">
-      <UniqueIdentifier>{7928b644-ab4c-453b-bf35-7ac952a0eefe}</UniqueIdentifier>
     </Filter>
     <Filter Include="04.UI\00.MainUI\QuickSlot\QuickSlotSkill">
       <UniqueIdentifier>{6c3419f2-a87a-4bb1-8238-235cdfccb315}</UniqueIdentifier>
@@ -370,9 +361,6 @@
     <Filter Include="04.UI\00.MainUI\QuickSlot\QuickSlotItem">
       <UniqueIdentifier>{a8306c3e-362b-44d6-af3f-b10b3fb2430b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="04.UI\06.Mouse\MouseItemIcon">
-      <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
-    </Filter>
     <Filter Include="89.Manager\CutSceneManager">
       <UniqueIdentifier>{2d898817-bcb4-444f-a58f-89894d99064b}</UniqueIdentifier>
     </Filter>
@@ -396,9 +384,45 @@
     </Filter>
     <Filter Include="20.DATA\ItemInfo\StuffInfo\GreenMushRoom">
       <UniqueIdentifier>{ef1d2cf3-ddb3-4d3a-8333-495298cdfc81}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Bandit">
       <UniqueIdentifier>{3f7c83c1-da7f-49d8-b406-4a8d7131267e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster">
+      <UniqueIdentifier>{30d70f8c-4851-44e6-8bcd-4821819f5d7d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard">
+      <UniqueIdentifier>{fa8f5249-667d-428e-9ed1-3426648ded37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.Notice">
+      <UniqueIdentifier>{48b4079e-1f24-4261-b256-6bef74560783}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.Notice\Item">
+      <UniqueIdentifier>{7e7aeecf-ae58-4422-b154-0e3b05b4cce4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.Notice\Skill">
+      <UniqueIdentifier>{b52bf7f9-688b-44ff-8b97-636b76cd8ebd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill">
+      <UniqueIdentifier>{acb9ce7a-d6ca-4353-8da6-f30fa959412d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack1">
+      <UniqueIdentifier>{44ed32a3-4933-4230-8a80-116310b9ea17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Hit">
+      <UniqueIdentifier>{3f0cd5ad-5442-4974-a896-1ebdd2c0bde6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\06.Mouse">
+      <UniqueIdentifier>{0355bad6-3928-4378-8886-2234e79d623f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\06.Mouse\MouseCursor">
+      <UniqueIdentifier>{58b5e812-71df-4286-8309-07cde33ee763}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\06.Mouse\MouseSkillIcon">
+      <UniqueIdentifier>{7928b644-ab4c-453b-bf35-7ac952a0eefe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\06.Mouse\MouseItemIcon">
+      <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -734,9 +758,21 @@
     </ClInclude>
     <ClInclude Include="..\Public\RibbonPigInfo.h">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\Bandit.h">
       <Filter>02.GameObject\Creature\Bandit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlackWizard.h">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ItemNotice.h">
+      <Filter>04.UI\07.Notice\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlackWizardAttack1.h">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack1</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlackWizardHit.h">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Hit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1063,9 +1099,21 @@
     </ClCompile>
     <ClCompile Include="..\Private\RibbonPigInfo.cpp">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\Bandit.cpp">
       <Filter>02.GameObject\Creature\Bandit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlackWizard.cpp">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ItemNotice.cpp">
+      <Filter>04.UI\07.Notice\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlackWizardAttack1.cpp">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack1</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlackWizardHit.cpp">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

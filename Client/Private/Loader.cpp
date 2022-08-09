@@ -74,10 +74,11 @@
 #include "MouseItemIcon.h"
 #include "Shadow.h"
 #include "StuffIcon.h"
-
-
+#include "BlackWizard.h"
 #include "Bandit.h"
-
+#include "ItemNotice.h"
+#include "BlackWizardAttack1.h"
+#include "BlackWizardHit.h"
 
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -175,10 +176,13 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 {
 	if (g_bGamePlay == false)
 	{
+		Load_BossMonster_Object();
 		Load_Monster_Object();
 		Load_Npc_Object();
 
 		/* For.Prototype_Component_Texture_Monster */
+
+		Load_BossMonster_Texture();
 
 		Load_Monster_Texture();
 
@@ -263,6 +267,26 @@ HRESULT CLoader::Load_Player_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Section"),
 		CSection::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
+	return S_OK;
+}
+HRESULT CLoader::Load_BossMonster_Object()
+{
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizard"),
+		CBlackWizard::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardHit"),
+		CBlackWizardHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardAttack1"),
+		CBlackWizardAttack1::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -386,6 +410,7 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 
 	return S_OK;
 }
+
 HRESULT CLoader::Load_UI_Object()
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -544,6 +569,11 @@ HRESULT CLoader::Load_UI_Object()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_StuffIcon"),
 		CStuffIcon::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ItemNotice"),
+		CItemNotice::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -857,6 +887,37 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 	Safe_Release(pGameInstance);
 
 
+	return S_OK;
+}
+
+HRESULT CLoader::Load_BossMonster_Texture()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+
+	Safe_AddRef(pGameInstance);
+
+	
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Appear"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Appear/Edit/Appear%d.png"), 18))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Stand"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Stand/Edit/Stand%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Skill1"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Skill1/Edit/Skill1_%d.png"), 37))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Attack1"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Attack1/Edit/Attack1_%d.png"), 36))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Hit/Edit/Hit%d.png"), 7))))
+		return E_FAIL;
+
+	Safe_Release(pGameInstance);
 	return S_OK;
 }
 
@@ -1218,6 +1279,10 @@ HRESULT CLoader::Load_UI_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_StuffIcon"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Inventory/ItemIcon/Stuff/Stuff%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ItemNotice"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Notice/Item/ItemNotice%d.png"), 1))))
 		return E_FAIL;
 
 

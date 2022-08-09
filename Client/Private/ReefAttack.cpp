@@ -8,7 +8,7 @@ CReefAttack::CReefAttack(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 }
 CReefAttack::CReefAttack(const CReefAttack & rhs)
-	: CCreature(rhs), m_bCreate(false)
+	: CCreature(rhs)
 {
 }
 

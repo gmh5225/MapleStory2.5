@@ -19,6 +19,7 @@ public:
 	HRESULT Set_ItemInfo(const _tchar* pTag);
 	const _tchar* Get_Tag() { return m_pTag; }
 	void Set_NowNum(_uint iNum);
+	void Set_Notice();
 public:
 	void Change_Texture();
 
@@ -30,7 +31,6 @@ public:
 private:
 	CItemInfo* m_pItemInfo;
 	LPD3DXFONT m_NumFont;
-	LPD3DXFONT m_NoticeFont;
 	_uint m_iIndexNum;
 	const _tchar* m_pTag;
 };

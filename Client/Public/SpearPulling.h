@@ -43,7 +43,6 @@ public:
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
-	_bool m_bCreate;
 	_bool m_bPulling;
 	_float m_fPullAcc;
 	CTransform* m_pTarget;
