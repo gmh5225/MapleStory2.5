@@ -688,6 +688,8 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack"), LEVEL_STATIC, TEXT("Layer_Skill"), &ReefAttackDESC);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
+
+		CParticleManager::Get_Instance()->Shot(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
 	}
 
 	if (GetKeyState('S') & 0x8000)
@@ -801,6 +803,7 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 	if (pGameInstance->Key_Down(DIK_X))
 	{
 		SetState(STATE_DJUMP, m_eDir);
+		CParticleManager::Get_Instance()->BackShot(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
 	}
 
 	Safe_Release(pGameInstance);

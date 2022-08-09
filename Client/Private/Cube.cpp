@@ -106,6 +106,7 @@ HRESULT CCube::Set_RenderState()
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
+
 	return S_OK;
 }
 

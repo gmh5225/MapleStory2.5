@@ -76,6 +76,7 @@
 #include "StuffIcon.h"
 
 
+#include "Bandit.h"
 
 
 
@@ -212,6 +213,27 @@ HRESULT CLoader::Loading_ForElenya()
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
+
+
+
+		// °´Ã¼
+		if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bandit"),
+			CBandit::Create(m_pGraphic_Device))))
+			return E_FAIL;
+
+
+
+
+
+
+		// ÄÄÆ÷³ÍÆ®
+		if (FAILED(pGameInstance->Add_Prototype(LEVEL_ELENYA, TEXT("Prototype_Component_Texture_Bandit"),
+			CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Bandit.png")))))
+			return E_FAIL;
+
+
+
+
 
 
 		Safe_Release(pGameInstance);

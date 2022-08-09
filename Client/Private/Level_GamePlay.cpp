@@ -85,7 +85,7 @@ HRESULT CLevel_GamePlay::Initialize()
 
 	g_bStaticClone = true;
 
-	CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
+	//CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
 
 	return S_OK;
 }

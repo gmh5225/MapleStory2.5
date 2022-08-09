@@ -273,6 +273,15 @@ _uint CGameInstance::Get_Random(_uint iStart, _uint iEnd)
 	return dis(gen);
 }
 
+_float CGameInstance::Get_FloatRandom(_float iStart, _float iEnd)
+{
+	random_device rd;
+	mt19937 gen(rd());
+	uniform_real_distribution<float> dis(iStart, iEnd);
+	
+	return dis(gen);
+}
+
 list<CMap_Manager::CUBEDATA>* CGameInstance::ReadMap(const _tchar * pMapTag)
 {
 	if (nullptr == m_pMap_Manager)

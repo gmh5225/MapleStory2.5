@@ -74,6 +74,7 @@ public: /* For.Input_Device */
 
 public:
 	_uint Get_Random(_uint iStart, _uint iEnd);
+	_float Get_FloatRandom(_float iStart, _float iEnd);
 
 
 public: /* For.Map_Manager */

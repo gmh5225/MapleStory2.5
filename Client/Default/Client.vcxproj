@@ -157,6 +157,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\public\Bandit.h" />
     <ClInclude Include="..\Public\BluePortionInfo.h" />
     <ClInclude Include="..\Public\BlueSnail.h" />
     <ClInclude Include="..\Public\BlueSnailInfo.h" />
@@ -270,6 +271,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\private\Bandit.cpp" />
     <ClCompile Include="..\Private\BluePortionInfo.cpp" />
     <ClCompile Include="..\Private\BlueSnail.cpp" />
     <ClCompile Include="..\Private\BlueSnailInfo.cpp" />

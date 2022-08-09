@@ -100,6 +100,9 @@
     <ClInclude Include="..\Public\GameObject.h">
       <Filter>03.GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\VIBuffer_ColorRect.h">
+      <Filter>04.Component\VIBuffer\ColorRect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\GameInstance.cpp">
@@ -182,6 +185,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\BoxCollider.cpp">
       <Filter>04.Component\BoxCollider</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\VIBuffer_ColorRect.cpp">
+      <Filter>04.Component\VIBuffer\ColorRect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -274,6 +280,9 @@
     </Filter>
     <Filter Include="04.Component\BoxCollider">
       <UniqueIdentifier>{d6ffbe77-8ddf-4f7e-ad30-05f32e60d810}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\VIBuffer\ColorRect">
+      <UniqueIdentifier>{c16497d4-19ce-4ce4-942e-fcb2c0658444}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -67,6 +67,7 @@ public:
 	void Go_Backward(_float fTimeDelta);
 	void Go_Right(_float fTimeDelta);
 	void Go_Left(_float fTimeDelta);
+	void Go_Up(_float fTimeDelta);
 	void Go_Dir(_float3 vDir, _float fSpeed, _float fTimeDelta);
 
 	void Go_U(_float fTimeDelta);

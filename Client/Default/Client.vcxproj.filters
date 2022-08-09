@@ -372,7 +372,7 @@
     </Filter>
     <Filter Include="04.UI\06.Mouse\MouseItemIcon">
       <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
-       </Filter>
+    </Filter>
     <Filter Include="89.Manager\CutSceneManager">
       <UniqueIdentifier>{2d898817-bcb4-444f-a58f-89894d99064b}</UniqueIdentifier>
     </Filter>
@@ -396,6 +396,9 @@
     </Filter>
     <Filter Include="20.DATA\ItemInfo\StuffInfo\GreenMushRoom">
       <UniqueIdentifier>{ef1d2cf3-ddb3-4d3a-8333-495298cdfc81}</UniqueIdentifier>
+        </Filter>
+    <Filter Include="02.GameObject\Creature\Bandit">
+      <UniqueIdentifier>{3f7c83c1-da7f-49d8-b406-4a8d7131267e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -707,7 +710,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\MouseItemIcon.h">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\CutSceneManager.h">
       <Filter>89.Manager\CutSceneManager</Filter>
     </ClInclude>
@@ -731,6 +734,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\RibbonPigInfo.h">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
+          </ClInclude>
+    <ClInclude Include="..\public\Bandit.h">
+      <Filter>02.GameObject\Creature\Bandit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1033,7 +1039,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\MouseItemIcon.cpp">
       <Filter>04.UI\06.Mouse\MouseItemIcon</Filter>
-         </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\CutSceneManager.cpp">
       <Filter>89.Manager\CutSceneManager</Filter>
     </ClCompile>
@@ -1057,6 +1063,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\RibbonPigInfo.cpp">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
+          </ClCompile>
+    <ClCompile Include="..\private\Bandit.cpp">
+      <Filter>02.GameObject\Creature\Bandit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
