@@ -206,6 +206,31 @@ HRESULT CLevel_GamePlay::Ready_Layer_Npc(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Maya"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Helena"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Ming"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bird"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GgoGgo"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
+
+	CCreature::CRETUREDESC Creatureinfo;
+	Creatureinfo.vPos = _float3(11.5f, 6.0f, -3.5f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chick"), LEVEL_GAMEPLAY, pLayerTag,&Creatureinfo)))
+		return E_FAIL;
+	CCreature::CRETUREDESC Creatureinfo1;
+	Creatureinfo1.vPos = _float3(11.8f, 6.0f, -3.7f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chick"), LEVEL_GAMEPLAY, pLayerTag, &Creatureinfo1)))
+		return E_FAIL;
+	CCreature::CRETUREDESC Creatureinfo2;
+	Creatureinfo2.vPos = _float3(12.1f, 6.0f, -3.9f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chick"), LEVEL_GAMEPLAY, pLayerTag, &Creatureinfo2)))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 

@@ -43,7 +43,7 @@ void CSky::LateTick(_float fTimeDelta)
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *(_float3*)&CamWorldMatrix.m[3][0]);
 
-	// m_pTransformCom->Rotation(_float3(0.f, 1.f, 0.f), 90.f);
+	 m_pTransformCom->Rotation(_float3(1.f, 0.f, 0.f),30.f);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_PRIORITY, this);
 }
@@ -54,8 +54,9 @@ HRESULT CSky::Render()
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
-
-	if (FAILED(m_pTextureCom->Bind_Texture(3)))
+	//Sky_5헤네시스
+	//Sky_6 엘리니아
+	if (FAILED(m_pTextureCom->Bind_Texture(5)))
 		return E_FAIL;
 
 	if (FAILED(Set_RenderState()))
