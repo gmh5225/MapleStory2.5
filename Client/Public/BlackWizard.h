@@ -41,6 +41,7 @@ private:
 private:
 	CGameObject* m_pTarget;
 	STATE m_eCurState;
+	bool m_bState;
 public:
 	static CBlackWizard* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
