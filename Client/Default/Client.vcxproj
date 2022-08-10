@@ -163,12 +163,14 @@
     <ClInclude Include="..\Public\BlackWizardHit.h" />
     <ClInclude Include="..\Public\BlueMushmom.h" />
     <ClInclude Include="..\Public\BlueMushmomHpGage.h" />
+    <ClInclude Include="..\Public\Bird.h" />
     <ClInclude Include="..\Public\BluePortionInfo.h" />
     <ClInclude Include="..\Public\BlueSnail.h" />
     <ClInclude Include="..\Public\BlueSnailInfo.h" />
     <ClInclude Include="..\Public\Bulb.h" />
     <ClInclude Include="..\Public\Camera_Free.h" />
     <ClInclude Include="..\Public\CashBtn.h" />
+    <ClInclude Include="..\Public\Chick.h" />
     <ClInclude Include="..\Public\Client_Defines.h" />
     <ClInclude Include="..\Public\ConsumBtn.h" />
     <ClInclude Include="..\Public\DefaultInfo.h" />
@@ -182,10 +184,12 @@
     <ClInclude Include="..\Public\ExpBar.h" />
     <ClInclude Include="..\Public\ExpBase.h" />
     <ClInclude Include="..\Public\ExpLine.h" />
+    <ClInclude Include="..\Public\GgoGgo.h" />
     <ClInclude Include="..\Public\GoStump.h" />
     <ClInclude Include="..\Public\GoStumpInfo.h" />
     <ClInclude Include="..\Public\GreenMushroom.h" />
     <ClInclude Include="..\Public\GreenMushroomInfo.h" />
+    <ClInclude Include="..\Public\Helena.h" />
     <ClInclude Include="..\Public\HpBarBase.h" />
     <ClInclude Include="..\Public\HpBarHp.h" />
     <ClInclude Include="..\Public\HpBarIcon.h" />
@@ -210,6 +214,8 @@
     <ClInclude Include="..\Public\Maya.h" />
     <ClInclude Include="..\Public\MenuIcon.h" />
     <ClInclude Include="..\Public\BlueMushmomHpbar.h" />
+    <ClInclude Include="..\Public\Ming.h" />
+  
     <ClInclude Include="..\Public\MouseCursor.h" />
     <ClInclude Include="..\Public\MouseItemIcon.h" />
     <ClInclude Include="..\Public\MouseManager.h" />
@@ -288,12 +294,14 @@
     <ClCompile Include="..\Private\BlackWizardHit.cpp" />
     <ClCompile Include="..\Private\BlueMushmom.cpp" />
     <ClCompile Include="..\Private\BlueMushmomHpGage.cpp" />
+    <ClCompile Include="..\Private\Bird.cpp" />
     <ClCompile Include="..\Private\BluePortionInfo.cpp" />
     <ClCompile Include="..\Private\BlueSnail.cpp" />
     <ClCompile Include="..\Private\BlueSnailInfo.cpp" />
     <ClCompile Include="..\Private\Bulb.cpp" />
     <ClCompile Include="..\Private\Camera_Free.cpp" />
     <ClCompile Include="..\Private\CashBtn.cpp" />
+    <ClCompile Include="..\Private\Chick.cpp" />
     <ClCompile Include="..\Private\ConsumBtn.cpp" />
     <ClCompile Include="..\Private\DefaultInfo.cpp" />
     <ClCompile Include="..\Private\ConsumIcon.cpp" />
@@ -306,10 +314,12 @@
     <ClCompile Include="..\Private\ExpBar.cpp" />
     <ClCompile Include="..\Private\ExpBase.cpp" />
     <ClCompile Include="..\Private\ExpLine.cpp" />
+    <ClCompile Include="..\Private\GgoGgo.cpp" />
     <ClCompile Include="..\Private\GoStump.cpp" />
     <ClCompile Include="..\Private\GoStumpInfo.cpp" />
     <ClCompile Include="..\Private\GreenMushroom.cpp" />
     <ClCompile Include="..\Private\GreenMushroomInfo.cpp" />
+    <ClCompile Include="..\Private\Helena.cpp" />
     <ClCompile Include="..\Private\HpBarBase.cpp" />
     <ClCompile Include="..\Private\HpBarHp.cpp" />
     <ClCompile Include="..\Private\HpBarIcon.cpp" />
@@ -334,6 +344,8 @@
     <ClCompile Include="..\Private\Maya.cpp" />
     <ClCompile Include="..\Private\MenuIcon.cpp" />
     <ClCompile Include="..\Private\BlueMushmomHpbar.cpp" />
+    <ClCompile Include="..\Private\Ming.cpp" />
+ 
     <ClCompile Include="..\Private\MouseCursor.cpp" />
     <ClCompile Include="..\Private\MouseItemIcon.cpp" />
     <ClCompile Include="..\Private\MouseManager.cpp" />

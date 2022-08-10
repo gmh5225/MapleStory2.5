@@ -447,6 +447,21 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Npc\03.Warning">
       <UniqueIdentifier>{9f6b9fa9-753c-459f-bca4-887b5a2f3655}</UniqueIdentifier>
+        </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\03.Helena">
+      <UniqueIdentifier>{41b48f26-0f6f-47d7-8e56-78b11741947c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\04.Ming">
+      <UniqueIdentifier>{40368aa3-8c8f-4a9c-94f3-20974f237e82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\05.Bird">
+      <UniqueIdentifier>{fad270cc-a528-448b-8b51-5db6af65041c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\06.GgoGgo">
+      <UniqueIdentifier>{bae2cedb-6e95-4ced-858c-034984f69bf7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\07.Chick">
+      <UniqueIdentifier>{96cb89cb-978d-4ffb-a265-6becf1c6a944}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -818,6 +833,21 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlueMushmom.h">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
+        </ClInclude>
+    <ClInclude Include="..\Public\Bird.h">
+      <Filter>02.GameObject\Creature\Npc\05.Bird</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GgoGgo.h">
+      <Filter>02.GameObject\Creature\Npc\06.GgoGgo</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Ming.h">
+      <Filter>02.GameObject\Creature\Npc\04.Ming</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Helena.h">
+      <Filter>02.GameObject\Creature\Npc\03.Helena</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Chick.h">
+      <Filter>02.GameObject\Creature\Npc\07.Chick</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1180,6 +1210,21 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlueMushmom.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
+         </ClCompile>
+    <ClCompile Include="..\Private\Bird.cpp">
+      <Filter>02.GameObject\Creature\Npc\05.Bird</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GgoGgo.cpp">
+      <Filter>02.GameObject\Creature\Npc\06.GgoGgo</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Helena.cpp">
+      <Filter>02.GameObject\Creature\Npc\03.Helena</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Ming.cpp">
+      <Filter>02.GameObject\Creature\Npc\04.Ming</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Chick.cpp">
+      <Filter>02.GameObject\Creature\Npc\07.Chick</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
