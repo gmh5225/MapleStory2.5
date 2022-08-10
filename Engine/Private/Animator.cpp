@@ -108,9 +108,9 @@ HRESULT CAnimator::Play_Once(_float fTimeDelta)
 		if (m_AniInfo.eMode != STATE_ONCEEND)
 			++m_iAnimCount;
 
-		if (m_iAnimCount >= pTex->Get_Size())
+		if (m_iAnimCount > pTex->Get_Size() - 1)
 		{
-			m_iAnimCount = 0;
+			m_iAnimCount = pTex->Get_Size() - 1;
 			m_AniInfo.eMode = STATE_ONCEEND;
 		}
 

@@ -14,9 +14,17 @@ public:
 	virtual ~CUIManager() = default;
 
 
+public:
+	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
+	_uint Set_BlueMushmomHp() { return m_iBlueMushmomHp; };
+
 
 public:
 	virtual void Free() override;
+
+
+private:
+	_uint m_iBlueMushmomHp;
 };
 
 END

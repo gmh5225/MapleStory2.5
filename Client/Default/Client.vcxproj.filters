@@ -396,9 +396,18 @@
     </Filter>
     <Filter Include="20.DATA\ItemInfo\StuffInfo\GreenMushRoom">
       <UniqueIdentifier>{ef1d2cf3-ddb3-4d3a-8333-495298cdfc81}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Bandit">
       <UniqueIdentifier>{3f7c83c1-da7f-49d8-b406-4a8d7131267e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\MiddleBoss">
+      <UniqueIdentifier>{9231d880-11a1-4ba9-8d64-dcc17d1b63d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.BossHpBar">
+      <UniqueIdentifier>{ef7dfba7-f40b-4892-a7ea-119dd7e5587d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\03.Warning">
+      <UniqueIdentifier>{9f6b9fa9-753c-459f-bca4-887b5a2f3655}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -527,9 +536,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\SunCrossInfo.h">
       <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\MissionUI.h">
-      <Filter>04.UI\02.Quest\04.MissionUI</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\ElderStan.h">
       <Filter>02.GameObject\Creature\Npc\01.ElderStan</Filter>
@@ -734,9 +740,21 @@
     </ClInclude>
     <ClInclude Include="..\Public\RibbonPigInfo.h">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\Bandit.h">
       <Filter>02.GameObject\Creature\Bandit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlueMushmomHpbar.h">
+      <Filter>04.UI\07.BossHpBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlueMushmomHpGage.h">
+      <Filter>04.UI\07.BossHpBar</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Warning.h">
+      <Filter>02.GameObject\Creature\Npc\03.Warning</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlueMushmom.h">
+      <Filter>02.GameObject\Creature\MiddleBoss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -824,9 +842,6 @@
     <ClCompile Include="..\Private\UI.cpp">
       <Filter>04.UI\99.UI</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\QuestUI.cpp">
-      <Filter>04.UI\02.Quest</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Chat.cpp">
       <Filter>04.UI\03.Dialog</Filter>
     </ClCompile>
@@ -859,9 +874,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\SunCrossInfo.cpp">
       <Filter>20.DATA\SkillInfo\CloseAttack\SunCross</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\MissionUI.cpp">
-      <Filter>04.UI\02.Quest\04.MissionUI</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Maya.cpp">
       <Filter>02.GameObject\Creature\Npc\02.Maya</Filter>
@@ -1063,9 +1075,24 @@
     </ClCompile>
     <ClCompile Include="..\Private\RibbonPigInfo.cpp">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\Bandit.cpp">
       <Filter>02.GameObject\Creature\Bandit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\QuestUI.cpp">
+      <Filter>04.UI\02.Quest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlueMushmomHpbar.cpp">
+      <Filter>04.UI\07.BossHpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlueMushmomHpGage.cpp">
+      <Filter>04.UI\07.BossHpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Warning.cpp">
+      <Filter>02.GameObject\Creature\Npc\03.Warning</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlueMushmom.cpp">
+      <Filter>02.GameObject\Creature\MiddleBoss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

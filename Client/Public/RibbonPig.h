@@ -27,6 +27,7 @@ private:
 	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
+	void Tick_Die(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -51,8 +52,11 @@ private:
 	_uint m_iHp;
 	_int m_iIndexNum;
 
+	_float m_fCountDead;
+
 private:
 	HRESULT SetUp_Components();
+	void Die();
 
 public:
 	static CRibbonPig* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

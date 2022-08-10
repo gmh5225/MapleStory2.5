@@ -33,6 +33,7 @@ HRESULT CRedSnail::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 	m_iHp = 3;
 
+	m_fCountDead = 0;
 
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
@@ -96,6 +97,8 @@ HRESULT CRedSnail::SetUp_Components()
 
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_MoveR"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_DieR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedSnail_Die"), nullptr);
 	}
 
 
@@ -112,6 +115,18 @@ HRESULT CRedSnail::SetUp_Components()
 	return S_OK;
 }
 
+void CRedSnail::Die()
+{
+	if (m_eDir == DIR_L)
+	{
+		SetState(STATE_DIE, DIR_L);
+	}
+	else if (m_eDir == DIR_R)
+	{
+		SetState(STATE_DIE, DIR_R);
+	}
+	m_fColRad = 0;
+}
 
 
 
@@ -132,6 +147,9 @@ void CRedSnail::Tick(_float fTimeDelta)
 	case Client::CRedSnail::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
+	case Client::CRedSnail::STATE_DIE:
+		Tick_Die(fTimeDelta);
+		break;
 	}
 
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
@@ -144,7 +162,8 @@ void CRedSnail::Tick(_float fTimeDelta)
 void CRedSnail::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_CHASE, m_eDir);
+		if (m_eCurState != STATE_DIE)
+			SetState(STATE_CHASE, m_eDir);
 
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
@@ -334,6 +353,12 @@ void CRedSnail::Tick_Chase(_float fTimeDelta)
 	Safe_Release(pGameInstance);
 }
 
+void CRedSnail::Tick_Die(_float fTimeDelta)
+{
+	m_fCountDead += fTimeDelta;
+	if (m_fCountDead >= 1.f)
+		Set_Dead();
+}
 
 
 
@@ -380,6 +405,12 @@ void CRedSnail::SetAni()
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Move"), 0.3f, CAnimator::STATE_LOOF);
 		break;
+	case CRedSnail::STATE_DIE:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_DieR"), 0.3f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSnail_Die"), 0.3f, CAnimator::STATE_ONCE);
+		break;
 	}
 }
 
@@ -395,19 +426,22 @@ void CRedSnail::Damaged(CGameObject * pOther)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
-		SetState(STATE_HIT, DIR_R);
-	else
-		SetState(STATE_HIT, DIR_L);
+	if (m_eCurState != STATE_DIE)
+	{
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+			SetState(STATE_HIT, DIR_R);
+		else
+			SetState(STATE_HIT, DIR_L);
+	}
 
 	Safe_Release(pGameInstance);
 
 	--m_iHp;
-	if (m_iHp == 0)
+	if (m_iHp <= 0)
 	{
 		CQuestManager::Get_Instance()->Eat_Item(TEXT("RedShell"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
-		Set_Dead();
+		Die();
 	}
 	//
 }

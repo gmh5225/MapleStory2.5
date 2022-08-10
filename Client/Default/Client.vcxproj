@@ -158,6 +158,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Bandit.h" />
+    <ClInclude Include="..\Public\BlueMushmom.h" />
+    <ClInclude Include="..\Public\BlueMushmomHpGage.h" />
     <ClInclude Include="..\Public\BluePortionInfo.h" />
     <ClInclude Include="..\Public\BlueSnail.h" />
     <ClInclude Include="..\Public\BlueSnailInfo.h" />
@@ -200,7 +202,7 @@
     <ClInclude Include="..\Public\MainApp.h" />
     <ClInclude Include="..\Public\Maya.h" />
     <ClInclude Include="..\Public\MenuIcon.h" />
-    <ClInclude Include="..\Public\MissionUI.h" />
+    <ClInclude Include="..\Public\BlueMushmomHpbar.h" />
     <ClInclude Include="..\Public\MouseCursor.h" />
     <ClInclude Include="..\Public\MouseItemIcon.h" />
     <ClInclude Include="..\Public\MouseManager.h" />
@@ -261,6 +263,7 @@
     <ClInclude Include="..\Public\SolunaSlashEffectB.h" />
     <ClInclude Include="..\Public\SunCross.h" />
     <ClInclude Include="..\Public\SunCrossHit.h" />
+    <ClInclude Include="..\Public\Warning.h" />
     <ClInclude Include="..\Public\WarriorReef.h" />
     <ClInclude Include="..\Public\WarriorReefIcon.h" />
     <ClInclude Include="..\Public\WarriorReefInfo.h" />
@@ -272,6 +275,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Bandit.cpp" />
+    <ClCompile Include="..\Private\BlueMushmom.cpp" />
+    <ClCompile Include="..\Private\BlueMushmomHpGage.cpp" />
     <ClCompile Include="..\Private\BluePortionInfo.cpp" />
     <ClCompile Include="..\Private\BlueSnail.cpp" />
     <ClCompile Include="..\Private\BlueSnailInfo.cpp" />
@@ -313,7 +318,7 @@
     <ClCompile Include="..\Private\MainApp.cpp" />
     <ClCompile Include="..\Private\Maya.cpp" />
     <ClCompile Include="..\Private\MenuIcon.cpp" />
-    <ClCompile Include="..\Private\MissionUI.cpp" />
+    <ClCompile Include="..\Private\BlueMushmomHpbar.cpp" />
     <ClCompile Include="..\Private\MouseCursor.cpp" />
     <ClCompile Include="..\Private\MouseItemIcon.cpp" />
     <ClCompile Include="..\Private\MouseManager.cpp" />
@@ -374,6 +379,7 @@
     <ClCompile Include="..\Private\SolunaSlashEffectB.cpp" />
     <ClCompile Include="..\Private\SunCross.cpp" />
     <ClCompile Include="..\Private\SunCrossHit.cpp" />
+    <ClCompile Include="..\Private\Warning.cpp" />
     <ClCompile Include="..\Private\WarriorReef.cpp" />
     <ClCompile Include="..\Private\WarriorReefIcon.cpp" />
     <ClCompile Include="..\Private\WarriorReefInfo.cpp" />

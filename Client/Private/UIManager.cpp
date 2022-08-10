@@ -5,6 +5,7 @@ IMPLEMENT_SINGLETON(CUIManager)
 
 CUIManager::CUIManager()
 {
+	m_iBlueMushmomHp = 3;
 }
 
 void CUIManager::Free()
