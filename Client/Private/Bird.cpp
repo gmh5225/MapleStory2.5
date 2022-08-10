@@ -49,11 +49,8 @@ HRESULT CBird::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 0.5f;
-	if (m_eCurState == STATE_MOVE)
-	{
-		TransformDesc.fSpeedPerSec = 1.f;
-	}
+	TransformDesc.fSpeedPerSec = 0.7f;
+
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
@@ -88,7 +85,7 @@ void CBird::Tick(_float fTimeDelta)
 void CBird::LateTick(_float fTimeDelta)
 {
 	Set_Billboard();
-
+	
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
 
@@ -175,7 +172,12 @@ void CBird::Tick_Hit(_float fTimeDelta)
 
 void CBird::Tick_Chase(_float fTimeDelta)
 {
-	_float3 vTargetPos = _float3(2.f, 12.f, -4.f);
+	CTransform::TRANSFORMDESC ChaseDesc;
+	ChaseDesc.fSpeedPerSec = 10.f;
+	ChaseDesc.fRotationPerSec = D3DXToRadian(90.0f);
+	m_pTransformCom->Set_TransformDesc(ChaseDesc);
+
+	_float3 vTargetPos = _float3(6.f, 12.f, -4.f);
 
 
 	_float3	vLook = vTargetPos - m_pTransformCom->Get_State(CTransform::STATE_POSITION);
@@ -218,9 +220,9 @@ void CBird::SetAni()
 		break;
 
 	case CBird::STATE_CHASE:
-		if (m_eDir == DIR_L)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_MoveL"), 0.3f, CAnimator::STATE_LOOF);
-		else
+		//if (m_eDir == DIR_L)
+		//	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_MoveL"), 0.3f, CAnimator::STATE_LOOF);
+		//else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_MoveR"), 0.3f, CAnimator::STATE_LOOF);
 
 		break;
