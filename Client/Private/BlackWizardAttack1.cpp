@@ -35,7 +35,6 @@ HRESULT CBlackWizardAttack1::Initialize(void * pArg)
 
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Attack1"), 0.1f, CAnimator::STATE_ONCE);
 
-	m_fYDistance = 110.f;
 
 	return S_OK;
 }
@@ -76,8 +75,8 @@ void CBlackWizardAttack1::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AnimCount() >= 35)
 		Set_Dead();
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 

@@ -34,7 +34,6 @@ HRESULT CBlackWizardHit::Initialize(void * pArg)
 
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Hit"), 0.2f, CAnimator::STATE_ONCE);
 
-	//m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 	return S_OK;
 }
@@ -63,7 +62,7 @@ void CBlackWizardHit::Tick(_float fTimeDelta)
 }
 void CBlackWizardHit::LateTick(_float fTimeDelta)
 {
-
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
