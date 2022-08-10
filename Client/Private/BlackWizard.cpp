@@ -34,6 +34,7 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-9.f, 4.f, -1.f));
 	m_pTransformCom->Set_Scaled(6.f);
 	m_bState = false;
+	m_bFinal = false;
 	SetShadow(LEVEL_GAMEPLAY, 1.5f);
 	return S_OK;
 }
@@ -44,7 +45,13 @@ void CBlackWizard::Tick(_float fTimeDelta)
 
 void CBlackWizard::LateTick(_float fTimeDelta)
 {
-	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+	if (m_bFinal)
+	{
+		m_eCurState = STATE_STAND;
+		SetAni();
+	}
+		
+	else if(m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 	{
 		Pattern();
 		SetState();
@@ -106,15 +113,19 @@ void CBlackWizard::Pattern()
 	Safe_AddRef(pGameInstance);
 	switch (m_eCurState)
 	{
-	case Client::CBlackWizard::STATE_APPEAR:
+	case STATE_APPEAR:
 		break;
-	case Client::CBlackWizard::STATE_STAND:
+	case STATE_STAND:
 		break;
-	case Client::CBlackWizard::STATE_SKILL1:
+	case STATE_SKILL1:
 		if(m_bState)
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack1"), LEVEL_STATIC, TEXT("Layer_Monster_Skill"));
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack1"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"));
 		break;
-	case Client::CBlackWizard::STATE_END:
+	case STATE_SKILL2:
+		if (m_bState)
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack2"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"));
+		break;
+	case STATE_END:
 		break;
 	default:
 		break;
@@ -154,6 +165,9 @@ void CBlackWizard::SetAni()
 		break;
 	case Client::CBlackWizard::STATE_SKILL1:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Skill1"), 0.1f, CAnimator::STATE_ONCE);
+		break;
+	case Client::CBlackWizard::STATE_SKILL2:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Skill2"), 0.1f, CAnimator::STATE_ONCE);
 		break;
 	case Client::CBlackWizard::STATE_END:
 		break;
@@ -205,6 +219,7 @@ HRESULT CBlackWizard::SetUp_Components()
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Appear"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Stand"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Skill1"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Skill2"), nullptr);
 	}
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom)))

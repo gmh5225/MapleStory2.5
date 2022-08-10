@@ -160,7 +160,11 @@
     <ClInclude Include="..\public\Bandit.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
+    <ClInclude Include="..\Public\BlackWizardAttack2.h" />
+    <ClInclude Include="..\Public\BlackWizardFinal.h" />
     <ClInclude Include="..\Public\BlackWizardHit.h" />
+    <ClInclude Include="..\Public\BlackWizardPatternUI.h" />
+    <ClInclude Include="..\Public\BlackWizardScene.h" />
     <ClInclude Include="..\Public\BlueMushmom.h" />
     <ClInclude Include="..\Public\BlueMushmomHpGage.h" />
     <ClInclude Include="..\Public\Bird.h" />
@@ -215,7 +219,6 @@
     <ClInclude Include="..\Public\MenuIcon.h" />
     <ClInclude Include="..\Public\BlueMushmomHpbar.h" />
     <ClInclude Include="..\Public\Ming.h" />
-  
     <ClInclude Include="..\Public\MouseCursor.h" />
     <ClInclude Include="..\Public\MouseItemIcon.h" />
     <ClInclude Include="..\Public\MouseManager.h" />
@@ -291,7 +294,11 @@
     <ClCompile Include="..\private\Bandit.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />
+    <ClCompile Include="..\Private\BlackWizardAttack2.cpp" />
+    <ClCompile Include="..\Private\BlackWizardFinal.cpp" />
     <ClCompile Include="..\Private\BlackWizardHit.cpp" />
+    <ClCompile Include="..\Private\BlackWizardPatternUI.cpp" />
+    <ClCompile Include="..\Private\BlackWizardScene.cpp" />
     <ClCompile Include="..\Private\BlueMushmom.cpp" />
     <ClCompile Include="..\Private\BlueMushmomHpGage.cpp" />
     <ClCompile Include="..\Private\Bird.cpp" />
@@ -345,7 +352,6 @@
     <ClCompile Include="..\Private\MenuIcon.cpp" />
     <ClCompile Include="..\Private\BlueMushmomHpbar.cpp" />
     <ClCompile Include="..\Private\Ming.cpp" />
- 
     <ClCompile Include="..\Private\MouseCursor.cpp" />
     <ClCompile Include="..\Private\MouseItemIcon.cpp" />
     <ClCompile Include="..\Private\MouseManager.cpp" />

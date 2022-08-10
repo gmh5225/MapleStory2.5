@@ -3,6 +3,7 @@
 #include "Client_Defines.h"
 #include "Base.h"
 #include "ItemNotice.h"
+#include "BlackWizardPatternUI.h"
 
 BEGIN(Client)
 
@@ -36,14 +37,15 @@ private:
 public:
 	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
 	_uint Set_BlueMushmomHp() { return m_iBlueMushmomHp; };
-
-
+	HRESULT Add_BlackWizardPatternUI(CBlackWizardPatternUI* pInstance);
+	CBlackWizardPatternUI* Get_BlackWizardPatternUI() { return m_pBlackWizardPatternUI; }
 public:
 	virtual void Free() override;
 
 
 private:
 	_uint m_iBlueMushmomHp;
+	CBlackWizardPatternUI* m_pBlackWizardPatternUI;
 };
 
 END

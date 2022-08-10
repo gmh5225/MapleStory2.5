@@ -14,7 +14,7 @@ HRESULT CUIManager::Add_ItemNotice(CItemNotice * pItemNotice)
 {
 	if (pItemNotice == nullptr)
 		return E_FAIL;
-
+	Safe_AddRef(pItemNotice);
 	m_pItemNotice = pItemNotice;
 
 	return S_OK;
@@ -77,8 +77,20 @@ void CUIManager::LateTick(_float TimeDelta)
 	m_pLoading->LateTick(TimeDelta);
 }
 
+HRESULT CUIManager::Add_BlackWizardPatternUI(CBlackWizardPatternUI * pInstance)
+{
+	if (pInstance == nullptr)
+		return E_FAIL;
+	Safe_AddRef(pInstance);
+	m_pBlackWizardPatternUI = pInstance;
+
+	return S_OK;
+}
+
 void CUIManager::Free()
 {
+	Safe_Release(m_pItemNotice);
+	Safe_Release(m_pBlackWizardPatternUI);
 	Safe_Release(m_pLoading);
 }
 

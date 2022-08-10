@@ -1,24 +1,24 @@
 #include "stdafx.h"
-#include "..\Public\BlackWizardAttack1.h"
+#include "..\Public\BlackWizardAttack2.h"
 #include "GameInstance.h"
 #include "UIManager.h"
 
-CBlackWizardAttack1::CBlackWizardAttack1(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlackWizardAttack2::CBlackWizardAttack2(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CBlackWizardAttack1::CBlackWizardAttack1(const CBlackWizardAttack1 & rhs)
+CBlackWizardAttack2::CBlackWizardAttack2(const CBlackWizardAttack2 & rhs)
 	: CCreature(rhs)
 {
 }
 
-HRESULT CBlackWizardAttack1::Initialize_Prototype()
+HRESULT CBlackWizardAttack2::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CBlackWizardAttack1::Initialize(void * pArg)
+HRESULT CBlackWizardAttack2::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
@@ -28,13 +28,13 @@ HRESULT CBlackWizardAttack1::Initialize(void * pArg)
 	Safe_AddRef(pInstance);
 
 	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-	
+
 	Safe_Release(pInstance);
 
-	m_pTransformCom->Set_Scaled(_float3{ 8.f,12.f,8.f });
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + _float3{ 0.f,4.f,2.f });
+	m_pTransformCom->Set_Scaled(_float3{ 8.f,8.f,8.f });
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + _float3{ 0.f,2.f,0.f });
 
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Attack1"), 0.1f, CAnimator::STATE_ONCE);
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Attack2"), 0.1f, CAnimator::STATE_ONCE);
 
 
 	return S_OK;
@@ -43,19 +43,19 @@ HRESULT CBlackWizardAttack1::Initialize(void * pArg)
 
 
 
-HRESULT CBlackWizardAttack1::SetUp_Components()
+HRESULT CBlackWizardAttack2::SetUp_Components()
 {
 
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
 	BoxColDesc.vScale = _float3{ 2.5f, 10.f, 2.5f };
-	BoxColDesc.vPivot = _float3{ 0.f, -5.f, -2.f };
+	BoxColDesc.vPivot = _float3{ 0.f, -5.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;
 
 
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Attack1"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Attack2"), nullptr);
 	}
 
 
@@ -68,13 +68,13 @@ HRESULT CBlackWizardAttack1::SetUp_Components()
 
 
 
-void CBlackWizardAttack1::Tick(_float fTimeDelta)
+void CBlackWizardAttack2::Tick(_float fTimeDelta)
 {
-	
+
 }
-void CBlackWizardAttack1::LateTick(_float fTimeDelta)
+void CBlackWizardAttack2::LateTick(_float fTimeDelta)
 {
-	if (m_pAnimatorCom->Get_AnimCount() >= 35)
+	if (m_pAnimatorCom->Get_AnimCount() >= 22)
 		Set_Dead();
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
@@ -83,10 +83,10 @@ void CBlackWizardAttack1::LateTick(_float fTimeDelta)
 
 	__super::BoxColCom_Tick(m_pTransformCom);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER_SKILL, this);
-	
+
 
 }
-HRESULT CBlackWizardAttack1::Render()
+HRESULT CBlackWizardAttack2::Render()
 {
 
 	Set_Billboard();
@@ -112,25 +112,25 @@ HRESULT CBlackWizardAttack1::Render()
 	return S_OK;
 }
 
-CBlackWizardAttack1 * CBlackWizardAttack1::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlackWizardAttack2 * CBlackWizardAttack2::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CBlackWizardAttack1*		pInstance = new CBlackWizardAttack1(pGraphic_Device);
+	CBlackWizardAttack2*		pInstance = new CBlackWizardAttack2(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlackWizardAttack1"));
+		MSG_BOX(TEXT("Failed To Created : CBlackWizardAttack2"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CBlackWizardAttack1::Clone(void* pArg)
+CGameObject * CBlackWizardAttack2::Clone(void* pArg)
 {
-	CBlackWizardAttack1*		pInstance = new CBlackWizardAttack1(*this);
+	CBlackWizardAttack2*		pInstance = new CBlackWizardAttack2(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CBlackWizardAttack1"));
+		MSG_BOX(TEXT("Failed To Cloned : CBlackWizardAttack2"));
 		Safe_Release(pInstance);
 	}
 
@@ -140,11 +140,11 @@ CGameObject * CBlackWizardAttack1::Clone(void* pArg)
 
 
 
-void CBlackWizardAttack1::Collision(CGameObject * pOther)
+void CBlackWizardAttack2::Collision(CGameObject * pOther)
 {
 	if (pOther->Get_Tag() == "Tag_Player")
 	{
-		if (m_pAnimatorCom->Get_AnimCount() > 15)
+		if (m_pAnimatorCom->Get_AnimCount() == 8)
 		{
 			if (0 < m_pOther.size())
 				return;
@@ -168,7 +168,7 @@ void CBlackWizardAttack1::Collision(CGameObject * pOther)
 	}
 }
 
-HRESULT CBlackWizardAttack1::Set_RenderState()
+HRESULT CBlackWizardAttack2::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -186,7 +186,7 @@ HRESULT CBlackWizardAttack1::Set_RenderState()
 
 }
 
-HRESULT CBlackWizardAttack1::Reset_RenderState()
+HRESULT CBlackWizardAttack2::Reset_RenderState()
 {
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
 
@@ -198,7 +198,7 @@ HRESULT CBlackWizardAttack1::Reset_RenderState()
 
 
 
-void CBlackWizardAttack1::Free()
+void CBlackWizardAttack2::Free()
 {
 	__super::Free();
 }

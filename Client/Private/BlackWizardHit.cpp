@@ -32,8 +32,8 @@ HRESULT CBlackWizardHit::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(4.f);
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *(_float3*)pArg);
 
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Hit"), 0.2f, CAnimator::STATE_ONCE);
-
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Hit"), 0.1f, CAnimator::STATE_ONCE);
+	Safe_Release(pInstance);
 
 	return S_OK;
 }
@@ -64,7 +64,6 @@ void CBlackWizardHit::LateTick(_float fTimeDelta)
 {
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
-	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 	if (m_pAnimatorCom->Get_AnimCount() == 6)
 		Set_Dead();
@@ -90,9 +89,6 @@ HRESULT CBlackWizardHit::Render()
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
-
-
-	__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }

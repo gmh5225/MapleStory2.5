@@ -78,7 +78,6 @@
 #include "BlueMushmomHpbar.h"
 #include "BlueMushmomHpGage.h"
 #include "Warning.h"
-
 #include "Helena.h"
 #include "Ming.h"
 #include "Bird.h"
@@ -87,9 +86,14 @@
 #include "Bandit.h"
 #include "ItemNotice.h"
 #include "BlackWizardAttack1.h"
+#include "BlackWizardAttack2.h"
 #include "BlackWizardHit.h"
 #include "Bandit.h"
 #include "UIManager.h"
+#include "BlackWizardPatternUI.h"
+#include "BlackWizardScene.h"
+#include "BlackWizardFinal.h"
+
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
 {
@@ -317,6 +321,22 @@ HRESULT CLoader::Load_BossMonster_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardAttack1"),
 		CBlackWizardAttack1::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardAttack2"),
+		CBlackWizardAttack2::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardPatternUI"),
+		CBlackWizardPatternUI::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardScene"),
+		CBlackWizardScene::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardFinal"),
+		CBlackWizardFinal::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -973,15 +993,35 @@ HRESULT CLoader::Load_BossMonster_Texture()
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Skill1"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Skill1/Edit/Skill1_%d.png"), 37))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Skill1/Edit/skill1_%d.png"), 37))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Skill2"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Skill2/Edit/skill2_%d.png"), 39))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Attack1"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Attack1/Edit/Attack1_%d.png"), 36))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Attack2"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Attack2/Edit/Chain%d.png"), 23))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Hit"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Hit/Edit/Hit%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizardPatternUI"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizardUI/UI%d.png"), 10))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizardScene"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizardScene/Scene%d.png"), 20))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizardFinal"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Final/Edit/Final%d.png"), 28))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
