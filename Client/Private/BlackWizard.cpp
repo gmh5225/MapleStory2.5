@@ -33,7 +33,7 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 	SetAni();
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-9.f, 4.f, -1.f));
 	m_pTransformCom->Set_Scaled(6.f);
-
+	m_bState = false;
 	SetShadow(LEVEL_GAMEPLAY, 1.5f);
 	return S_OK;
 }
@@ -91,8 +91,12 @@ void CBlackWizard::Collision(CGameObject * pOther)
 
 void CBlackWizard::SetState()
 {
-
-	m_eCurState = (STATE)CGameInstance::Get_Instance()->Get_Random(STATE_STAND, STATE_END-1);
+	STATE State = (STATE)CGameInstance::Get_Instance()->Get_Random(STATE_STAND, STATE_END - 1);
+	if (m_eCurState == State)
+		m_bState = false;
+	else
+		m_bState = true;
+	m_eCurState = State;
 	SetAni();
 }
 
@@ -107,6 +111,7 @@ void CBlackWizard::Pattern()
 	case Client::CBlackWizard::STATE_STAND:
 		break;
 	case Client::CBlackWizard::STATE_SKILL1:
+		if(m_bState)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack1"), LEVEL_STATIC, TEXT("Layer_Monster_Skill"));
 		break;
 	case Client::CBlackWizard::STATE_END:
