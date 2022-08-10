@@ -21,6 +21,7 @@ public:
 	void Set_NowNum(_uint iNum);
 public:
 	void Change_Texture();
+	void Set_Notice();
 
 public:
 	static CStuffIcon* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
@@ -30,7 +31,6 @@ public:
 private:
 	CItemInfo* m_pItemInfo;
 	LPD3DXFONT m_NumFont;
-	LPD3DXFONT m_NoticeFont;
 	_uint m_iIndexNum;
 	const _tchar* m_pTag;
 };

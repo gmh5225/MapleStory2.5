@@ -3,6 +3,7 @@
 #include "GameInstance.h"
 #include "InvenManager.h"
 #include "MouseManager.h"
+#include "UIManager.h"
 
 
 CStuffIcon::CStuffIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -43,10 +44,6 @@ HRESULT CStuffIcon::Initialize(void * pArg)
 	D3DXCreateFont(m_pGraphic_Device, 11, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
 		L"µ¸¿òÃ¼", &m_NumFont);
-
-	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
-		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"µ¸¿òÃ¼", &m_NoticeFont);
 
 	pInvenInstance->Add_InvenIcon(CInvenManager::TYPE_STUFF, this);
 
@@ -114,14 +111,19 @@ HRESULT CStuffIcon::Render()
 	_itow_s(m_pItemInfo->Get_NowNum(), NowNum, 10);
 
 	RECT ItemNum;
-	SetRect(&ItemNum, m_UIInfo.fX - 10.f, m_UIInfo.fY + 2.f, 0, 0);
-	m_NoticeFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+	SetRect(&ItemNum, m_UIInfo.fX - 10.f, m_UIInfo.fY + 3.f, 0, 0);
+	m_NumFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
 
 	if (m_eCollision == TYPE_ON)
 	{
-		RECT ReefAttackNotice;
-		SetRect(&ReefAttackNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
-		m_NoticeFont->DrawText(NULL, m_pItemInfo->Get_ItemNotice(), -1, &ReefAttackNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
+		Set_Notice();
+	}
+
+	if (m_eCollision == TYPE_NO)
+	{
+		CUIManager* pUIInstance = CUIManager::Get_Instance();
+		if (pUIInstance->Check_Change(m_iTexturenum+2))
+			pUIInstance->Set_ItemNoticeTextNum(99, false);
 	}
 
 	return S_OK;
@@ -170,6 +172,34 @@ void CStuffIcon::Change_Texture()
 			m_pTag = pTemp->Get_ItemName();
 
 		}
+	}
+}
+
+void CStuffIcon::Set_Notice()
+{
+	CUIManager* pUIInstance = CUIManager::Get_Instance();
+	switch (m_iTexturenum)
+	{
+	case 0:
+		pUIInstance->Set_ItemNoticeTextNum(2, true);
+		break;
+	case 1:
+		pUIInstance->Set_ItemNoticeTextNum(3, true);
+		break;
+	case 2:
+		pUIInstance->Set_ItemNoticeTextNum(4, true);
+		break;
+	case 3:
+		pUIInstance->Set_ItemNoticeTextNum(5, true);
+		break;
+	case 4:
+		pUIInstance->Set_ItemNoticeTextNum(6, true);
+		break;
+	case 5:
+		pUIInstance->Set_ItemNoticeTextNum(7, true);
+		break;
+	default:
+		break;
 	}
 }
 

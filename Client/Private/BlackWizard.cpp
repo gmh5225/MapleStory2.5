@@ -35,7 +35,7 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(6.f);
 
 	SetShadow(LEVEL_GAMEPLAY, 1.5f);
-
+	m_fYDistance = 99.f;
 	return S_OK;
 }
 
@@ -56,7 +56,7 @@ void CBlackWizard::LateTick(_float fTimeDelta)
 
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
 
 }
 
