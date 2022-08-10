@@ -46,7 +46,7 @@ private:
 private:  /* For.Static */
 	HRESULT Ready_Prototype_Component();
 	HRESULT Ready_Prototype_GameObject();
-
+	HRESULT Loading_ForLoading();
 
 public:
 	static CMainApp* Create();

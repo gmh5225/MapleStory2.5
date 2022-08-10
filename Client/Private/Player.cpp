@@ -242,6 +242,9 @@ void CPlayer::LateTick(_float fTimeDelta)
 	// *중력 코드
 	// 중력 적용
 	m_pTransformCom->Go_Gravity(fTimeDelta);
+	// TEST
+	//if (CGameInstance::Get_Instance()->Key_Down(DIK_2))
+	//	m_pTransformCom->Go_Gravity(fTimeDelta);
 
 	__super::BoxColCom_Tick(m_pTransformCom);
 
@@ -288,7 +291,7 @@ HRESULT CPlayer::Render()
 	_float3 pos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
 
-	/*wchar_t PosX[10];
+	wchar_t PosX[10];
 	_itow_s(pos.x, PosX, 10);
 
 	wchar_t PosY[10];
@@ -307,7 +310,7 @@ HRESULT CPlayer::Render()
 
 	RECT Z;
 	SetRect(&Z, 840, 180, 0, 0);
-	m_Font->DrawText(NULL, PosZ, -1, &Z, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));*/
+	m_Font->DrawText(NULL, PosZ, -1, &Z, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
 
 
 

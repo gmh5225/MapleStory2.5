@@ -12,12 +12,17 @@
 #include "SpawnerManager.h"
 #include "ParticleManager.h"
 #include "CutSceneManager.h"
+#include "ToolManager.h"
+#include "Loading.h"
+#include "Loading_Mop.h"
+
 
 bool g_bStaticClone;
 bool g_bStatic;
 bool g_bGamePlay;
 bool g_bHenesys;
 bool g_bElenya;
+bool g_bElenyaEnter;
 
 using namespace Client;
 
@@ -43,6 +48,7 @@ HRESULT CMainApp::Initialize()
 	g_bGamePlay = false;
 	g_bHenesys = false;
 	g_bElenya = false;
+	g_bElenyaEnter = false;
 	
 
 	if (FAILED(m_pGameInstance->Initialize_Engine(LEVEL_END, g_hInst, GraphicDesc, &m_pGraphic_Device)))
@@ -55,6 +61,9 @@ HRESULT CMainApp::Initialize()
 		return E_FAIL;
 
 	if (FAILED(Ready_Prototype_Component()))
+		return E_FAIL;
+
+	if (FAILED(Loading_ForLoading()))
 		return E_FAIL;
 
 	if (FAILED(Open_Level(LEVEL_STATIC)))
@@ -76,6 +85,8 @@ void CMainApp::Tick(_float fTimeDelta)
 	m_pGameInstance->Tick_Engine(fTimeDelta);
 
 	CCutSceneManager::Get_Instance()->Tick(fTimeDelta);
+	CUIManager::Get_Instance()->Tick(fTimeDelta);
+	CUIManager::Get_Instance()->LateTick(fTimeDelta);
 
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_POTAL);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER);
@@ -89,6 +100,7 @@ void CMainApp::Tick(_float fTimeDelta)
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_UI, CCollider::COLLSION_PLAYER);
 	m_pCollider->End_Collsion();
 
+	CToolManager::Get_Instance()->CheckDestLevel(m_pCollider, m_pGraphic_Device);
 }
 
 HRESULT CMainApp::Render()
@@ -206,6 +218,46 @@ HRESULT CMainApp::Ready_Prototype_GameObject()
 	return S_OK;
 }
 
+
+HRESULT CMainApp::Loading_ForLoading()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Move%d.png"), 3))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Move%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Loading"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Loading/Loading_%d.png"), 16))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Loading"),
+		CLoading::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Loading_Mop"),
+		CLoading_Mop::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
+	CUIManager::Get_Instance()->Set_Loading();
+
+	Safe_Release(pGameInstance);
+
+	return S_OK;
+}
+
+
+
+
+
+
 CMainApp * CMainApp::Create()
 {	
 	CMainApp*		pInstance = new CMainApp();
@@ -221,6 +273,7 @@ CMainApp * CMainApp::Create()
 
 void CMainApp::Free()
 {
+	CToolManager::Destroy_Instance();
 	CCutSceneManager::Destroy_Instance();
 	CParticleManager::Destroy_Instance();
 	CQuestManager::Destroy_Instance();

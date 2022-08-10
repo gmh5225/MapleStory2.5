@@ -15,6 +15,7 @@
 #include "Potal.h"
 #include "CutSceneManager.h"
 #include "Bandit.h"
+#include "UIManager.h"
 
 CLevel_Elenya::CLevel_Elenya(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -55,8 +56,8 @@ HRESULT CLevel_Elenya::Initialize()
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
 
-
-	//CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
+	CUIManager::Get_Instance()->End_Loading();
+	// CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
 
 	return S_OK;
 }
@@ -184,9 +185,9 @@ HRESULT CLevel_Elenya::Ready_Layer_Map(const _tchar * pLayerTag)
 
 
 	CPotal::POTALDESC PotalDesc;
-	PotalDesc.eDestLevel = LEVEL_HENESYS;
+	PotalDesc.eDestLevel = LEVEL_ELENYAENTER;
 	PotalDesc.Pos =  _float3(-1.f, 1.f, 0.f);
-	PotalDesc.DestPos = _float3(51.f, 16.f, -2.f);
+	PotalDesc.DestPos = _float3(51.f, 17.f, -2.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_ELENYA, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 

@@ -37,6 +37,8 @@ public:
 	HRESULT Loading_ForGamePlayLevel();
 	HRESULT Loading_ForHenesys();
 	HRESULT Loading_ForElenya();
+	HRESULT Loading_ForElenyaEnter();
+	
 
 //객체원형 로딩함수
 private:
@@ -64,6 +66,8 @@ private:
 	HRESULT Load_Model_Texture();
 	HRESULT Load_Item_Texture();
 	HRESULT Load_Particle_Texture();
+
+
 
 private:
 	LPDIRECT3DDEVICE9	m_pGraphic_Device = nullptr;

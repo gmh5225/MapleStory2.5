@@ -117,6 +117,25 @@ HRESULT CObject_Manager::Add_GameObjectToLayer(const _tchar * pPrototypeTag, _ui
 	return S_OK;
 }
 
+HRESULT CObject_Manager::Add_GameObject(const _tchar * pPrototypeTag, CGameObject ** pObj, void * pArg)
+{
+	CGameObject*	pPrototype = Find_Prototype(pPrototypeTag);
+
+	if (nullptr == pPrototype)
+		return E_FAIL;
+
+	CGameObject*	pGameObject = pPrototype->Clone(pArg);
+
+	if (nullptr == pGameObject)
+		return E_FAIL;
+
+	*pObj = pGameObject;
+
+	return S_OK;
+}
+
+
+
 void CObject_Manager::Tick(_float fTimeDelta)
 {
 	for (_uint i = 0; i < m_iNumLevels; ++i)

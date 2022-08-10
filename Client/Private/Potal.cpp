@@ -4,6 +4,8 @@
 #include "GameInstance.h"
 #include "Player.h"
 #include "Level_Loading.h"
+#include "UIManager.h"
+#include "ToolManager.h"
 
 CPotal::CPotal(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -112,6 +114,17 @@ HRESULT CPotal::Reset_RenderState()
 void CPotal::Tick(_float fTimeDelta)
 {
 
+	if (nullptr == m_pOther)
+		return;
+
+	m_fTimeAcc += fTimeDelta;
+
+	if (5.f < m_fTimeAcc)
+	{
+		m_bTrigger = true;
+	}
+
+
 
 
 }
@@ -121,6 +134,14 @@ void CPotal::LateTick(_float fTimeDelta)
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_POTAL, this);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+
+
+
+	if (m_bTrigger)
+	{
+		CToolManager::Get_Instance()->SetDestLevel(m_eDestLevel, m_vDestPos);
+	}
+
 }
 HRESULT CPotal::Render()
 {
@@ -190,13 +211,9 @@ void CPotal::Collision(CGameObject * pOther)
 
 		if (pGameInstance->Key_Down(DIK_Z))
 		{
-			CPlayer* pPlayer = (CPlayer*)pOther;
-			pPlayer->SetRespownPos(m_vDestPos);
+			CUIManager::Get_Instance()->Start_Loading();
 
-			m_pColliderCom->ResetSection();
-			if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, m_eDestLevel))))
-				return;
-
+			m_pOther = pOther;
 		}
 	
 		Safe_Release(pGameInstance);

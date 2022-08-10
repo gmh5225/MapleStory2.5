@@ -138,6 +138,14 @@ HRESULT CGameInstance::Add_GameObjectToLayer(const _tchar * pPrototypeTag, _uint
 	return m_pObject_Manager->Add_GameObjectToLayer(pPrototypeTag, iLevelIndex, pLayerTag, pObj, pArg);
 }
 
+HRESULT CGameInstance::Add_GameObject(const _tchar * pPrototypeTag, CGameObject ** pObj, void * pArg)
+{
+	if (nullptr == m_pObject_Manager)
+		return E_FAIL;
+
+	return m_pObject_Manager->Add_GameObject(pPrototypeTag, pObj, pArg);
+}
+
 CComponent* CGameInstance::Get_ComponentPtr(_uint iLevelIndex, const _tchar * pLayerTag, const _tchar * pComponentTag, _uint iLayerIndex)
 {
 	if (nullptr == m_pObject_Manager)

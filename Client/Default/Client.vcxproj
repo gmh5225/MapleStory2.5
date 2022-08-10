@@ -196,11 +196,14 @@
     <ClInclude Include="..\Public\ItemInfo.h" />
     <ClInclude Include="..\Public\ItemNotice.h" />
     <ClInclude Include="..\Public\Level_Elenya.h" />
+    <ClInclude Include="..\Public\Level_ElenyaEnter.h" />
     <ClInclude Include="..\Public\Level_GamePlay.h" />
     <ClInclude Include="..\Public\Level_Henesys_1.h" />
     <ClInclude Include="..\Public\Level_Loading.h" />
     <ClInclude Include="..\Public\Level_Static.h" />
     <ClInclude Include="..\Public\Loader.h" />
+    <ClInclude Include="..\public\Loading.h" />
+    <ClInclude Include="..\Public\Loading_Mop.h" />
     <ClInclude Include="..\Public\MainApp.h" />
     <ClInclude Include="..\Public\Maya.h" />
     <ClInclude Include="..\Public\MenuIcon.h" />
@@ -259,6 +262,7 @@
     <ClInclude Include="..\Public\SunCrossInfo.h" />
     <ClInclude Include="..\Public\StoneGolem.h" />
     <ClInclude Include="..\Public\SunderBreakAttack.h" />
+    <ClInclude Include="..\public\ToolManager.h" />
     <ClInclude Include="..\Public\UI.h" />
     <ClInclude Include="..\Public\UIManager.h" />
     <ClInclude Include="..\Public\SolunaSlashEffectA.h" />
@@ -313,11 +317,14 @@
     <ClCompile Include="..\Private\ItemInfo.cpp" />
     <ClCompile Include="..\Private\ItemNotice.cpp" />
     <ClCompile Include="..\Private\Level_Elenya.cpp" />
+    <ClCompile Include="..\Private\Level_ElenyaEnter.cpp" />
     <ClCompile Include="..\Private\Level_GamePlay.cpp" />
     <ClCompile Include="..\Private\Level_Henesys_1.cpp" />
     <ClCompile Include="..\Private\Level_Loading.cpp" />
     <ClCompile Include="..\Private\Level_Static.cpp" />
     <ClCompile Include="..\Private\Loader.cpp" />
+    <ClCompile Include="..\private\Loading.cpp" />
+    <ClCompile Include="..\Private\Loading_Mop.cpp" />
     <ClCompile Include="..\Private\MainApp.cpp" />
     <ClCompile Include="..\Private\Maya.cpp" />
     <ClCompile Include="..\Private\MenuIcon.cpp" />
@@ -376,6 +383,7 @@
     <ClCompile Include="..\Private\SunCrossInfo.cpp" />
     <ClCompile Include="..\Private\StoneGolem.cpp" />
     <ClCompile Include="..\Private\SunderBreakAttack.cpp" />
+    <ClCompile Include="..\private\ToolManager.cpp" />
     <ClCompile Include="..\Private\UI.cpp" />
     <ClCompile Include="..\Private\UIManager.cpp" />
     <ClCompile Include="..\Private\SolunaSlashEffectA.cpp" />
