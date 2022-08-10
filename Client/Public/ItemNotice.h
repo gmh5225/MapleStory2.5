@@ -15,11 +15,20 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
+	void RenderNotice();
+	void RedPortionNotice();
+	void BluePortionNotice();
 
 public:
 	static CItemNotice* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
+private:
+	LPD3DXFONT m_TitleFont;
+	LPD3DXFONT m_TextFont;
+	LPCSTR m_cTitle;
+	LPCSTR m_cText;
 };
 END
 

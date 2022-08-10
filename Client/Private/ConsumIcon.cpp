@@ -113,7 +113,6 @@ HRESULT CConsumIcon::Render()
 	RECT ItemNum;
 	SetRect(&ItemNum, m_UIInfo.fX-12.f, m_UIInfo.fY+3.f, 0, 0);
 	m_NumFont->DrawText(NULL, NowNum, -1, &ItemNum, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
-
 	if (m_eCollision == TYPE_ON)
 	{
 		Set_Notice();

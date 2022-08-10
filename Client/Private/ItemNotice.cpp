@@ -33,8 +33,20 @@ HRESULT CItemNotice::Initialize(void * pArg)
 	
 	__super::Initialize(pArg);
 	m_bRender = false;
+	
+	
+	
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ItemNotice"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
+
+	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"돋움체", &m_TitleFont);
+
+	D3DXCreateFont(m_pGraphic_Device, 11, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"돋움체", &m_TextFont);
+
 	CUIManager* pUIInstance = CUIManager::Get_Instance();
 	pUIInstance->Add_ItemNotice(this);
 
@@ -72,8 +84,60 @@ HRESULT CItemNotice::Render()
 
 	m_pVIBufferCom->Render();
 
+	RenderNotice();
+	
+
 	Reset_RenderState();
 	return S_OK;
+}
+
+void CItemNotice::RenderNotice()
+{
+	switch (m_iTexturenum)
+	{
+	case 0:
+		RedPortionNotice();
+		break;
+	case 1:
+		BluePortionNotice();
+		break;
+	case 2:
+		break;
+
+	default:
+		m_cTitle = "";
+		m_cText = "";
+		break;
+	}
+}
+
+
+void CItemNotice::RedPortionNotice()
+{
+	m_cTitle = "빨간포션";
+	m_cText = "HP회복";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 12.f, m_UIInfo.fY , 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 12.f, m_UIInfo.fY+3, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::BluePortionNotice()
+{
+	m_cTitle = "파란포션";
+	m_cText = "MP회복";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 12.f, m_UIInfo.fY, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 12.f, m_UIInfo.fY+3, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
 }
 
 
