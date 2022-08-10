@@ -161,6 +161,7 @@
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
     <ClInclude Include="..\Public\BlackWizardAttack2.h" />
+    <ClInclude Include="..\Public\BlackWizardAttack3.h" />
     <ClInclude Include="..\Public\BlackWizardFinal.h" />
     <ClInclude Include="..\Public\BlackWizardHit.h" />
     <ClInclude Include="..\Public\BlackWizardPatternUI.h" />
@@ -295,6 +296,7 @@
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack2.cpp" />
+    <ClCompile Include="..\Private\BlackWizardAttack3.cpp" />
     <ClCompile Include="..\Private\BlackWizardFinal.cpp" />
     <ClCompile Include="..\Private\BlackWizardHit.cpp" />
     <ClCompile Include="..\Private\BlackWizardPatternUI.cpp" />

@@ -74,7 +74,7 @@ void CBlackWizardPatternUI::Tick(_float fTimeDelta)
 
 void CBlackWizardPatternUI::LateTick(_float fTimeDelta)
 {
-	if (m_iTexturenum == m_pTextureCom->Get_Size())
+	if (m_iTexturenum >= m_pTextureCom->Get_Size())
 	{
 		CGameInstance*	pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);

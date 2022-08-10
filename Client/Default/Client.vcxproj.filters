@@ -481,6 +481,9 @@
     <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Final">
       <UniqueIdentifier>{de02f50b-bde5-4a52-9584-8115fda41480}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3">
+      <UniqueIdentifier>{0cc6cfca-3d37-4734-bb83-51c86165d496}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -879,6 +882,9 @@
     <ClInclude Include="..\Public\BlackWizardFinal.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Final</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\BlackWizardAttack3.h">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1267,6 +1273,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardFinal.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Final</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlackWizardAttack3.cpp">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

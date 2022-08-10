@@ -7,7 +7,7 @@ BEGIN(Client)
 class CBlackWizard final : public CCreature
 {
 public:
-	enum STATE {STATE_APPEAR, STATE_STAND, STATE_SKILL1, STATE_SKILL2, STATE_END};
+	enum STATE {STATE_APPEAR, STATE_STAND, STATE_SKILL1, STATE_SKILL2,STATE_SKILL3, STATE_SKILL4, STATE_END};
 public:
 	CBlackWizard(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CBlackWizard(const CBlackWizard& rhs);
@@ -31,7 +31,8 @@ public:
 	virtual void SetAni() override;
 	virtual void Damaged(CGameObject* pOther) override;
 	void Set_Final() { m_bFinal = true; }
-
+	void Skill3();
+	void Skill4();
 protected:
 	virtual HRESULT Set_RenderState() override;
 	virtual HRESULT Reset_RenderState() override;
@@ -40,7 +41,7 @@ private:
 	HRESULT SetUp_Components();
 
 private:
-	CGameObject* m_pTarget;
+	CTransform* m_pTarget;
 	STATE m_eCurState;
 	bool m_bState;
 	bool m_bFinal;
