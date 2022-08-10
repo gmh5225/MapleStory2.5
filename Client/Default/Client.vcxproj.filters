@@ -396,9 +396,24 @@
     </Filter>
     <Filter Include="20.DATA\ItemInfo\StuffInfo\GreenMushRoom">
       <UniqueIdentifier>{ef1d2cf3-ddb3-4d3a-8333-495298cdfc81}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Bandit">
       <UniqueIdentifier>{3f7c83c1-da7f-49d8-b406-4a8d7131267e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.Loading">
+      <UniqueIdentifier>{82cba3e5-1e05-4257-b6c0-ccf16cc65b68}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.Loading\Screen">
+      <UniqueIdentifier>{4ba49980-14a6-412f-90e3-1ac657dede25}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.Loading\Mob">
+      <UniqueIdentifier>{2631555f-baf3-45ac-9fa1-542051be4188}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="89.Manager\ToolManager">
+      <UniqueIdentifier>{55b031f4-db86-4f17-9c4b-1de74faaaf71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\ElenyaEnter">
+      <UniqueIdentifier>{d1e0760f-c088-4a4d-819c-9b6d5f09bc73}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -734,9 +749,21 @@
     </ClInclude>
     <ClInclude Include="..\Public\RibbonPigInfo.h">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\Bandit.h">
       <Filter>02.GameObject\Creature\Bandit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Loading.h">
+      <Filter>04.UI\07.Loading\Screen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Loading_Mop.h">
+      <Filter>04.UI\07.Loading\Mob</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\ToolManager.h">
+      <Filter>89.Manager\ToolManager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_ElenyaEnter.h">
+      <Filter>01.Level\ElenyaEnter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1063,9 +1090,21 @@
     </ClCompile>
     <ClCompile Include="..\Private\RibbonPigInfo.cpp">
       <Filter>20.DATA\ItemInfo\StuffInfo\RibbonPig</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\Bandit.cpp">
       <Filter>02.GameObject\Creature\Bandit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Loading.cpp">
+      <Filter>04.UI\07.Loading\Screen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Loading_Mop.cpp">
+      <Filter>04.UI\07.Loading\Mob</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\ToolManager.cpp">
+      <Filter>89.Manager\ToolManager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_ElenyaEnter.cpp">
+      <Filter>01.Level\ElenyaEnter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -31,6 +31,7 @@
 #include "RibbonPigInfo.h"
 
 #include "CutSceneManager.h"
+#include "UIManager.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -85,7 +86,9 @@ HRESULT CLevel_GamePlay::Initialize()
 
 	g_bStaticClone = true;
 
-	//CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
+
+	CUIManager::Get_Instance()->End_Loading();
+	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
 
 	return S_OK;
 }
@@ -398,6 +401,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chat"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 

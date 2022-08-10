@@ -5,6 +5,8 @@
 #include "Level_GamePlay.h"
 #include "Level_Henesys_1.h"
 #include "Level_Elenya.h"
+#include "Level_ElenyaEnter.h"
+#include "UIManager.h"
 
 #include "Loader.h"
 
@@ -19,6 +21,7 @@ HRESULT CLevel_Loading::Initialize(LEVEL eNextLevel)
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
 	
+	CUIManager::Get_Instance()->Start_Loading();
 
 	m_eNextLevel = eNextLevel;
 
@@ -51,6 +54,9 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 				break;
 			case LEVEL_HENESYS:
 				pNewLevel = CLevel_Henesys_1::Create(m_pGraphic_Device);
+				break;
+			case LEVEL_ELENYAENTER:
+				pNewLevel = CLevel_ElenyaEnter::Create(m_pGraphic_Device);
 				break;
 			case LEVEL_ELENYA:
 				pNewLevel = CLevel_Elenya::Create(m_pGraphic_Device);

@@ -34,6 +34,10 @@ private:
 	_float3 m_vDestPos;
 	LEVEL	m_eDestLevel;
 
+	_float m_fTimeAcc = 0.f;
+	_bool m_bTrigger = false;
+	CGameObject* m_pOther = nullptr;
+
 private:
 	HRESULT SetUp_Components();
 

@@ -24,6 +24,7 @@ public:
 	HRESULT Add_Prototype(const _tchar* pPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_GameObjectToLayer(const _tchar* pPrototypeTag, _uint iLevelIndex, const _tchar* pLayerTag, void* pArg = nullptr);
 	HRESULT Add_GameObjectToLayer(const _tchar* pPrototypeTag, _uint iLevelIndex, const _tchar* pLayerTag, CGameObject** pObj, void* pArg = nullptr);
+	HRESULT Add_GameObject(const _tchar* pPrototypeTag, CGameObject** pObj, void* pArg = nullptr);
 
 public:
 	void Tick(_float fTimeDelta);

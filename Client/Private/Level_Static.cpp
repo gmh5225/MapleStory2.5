@@ -2,6 +2,7 @@
 #include "..\Public\Level_Static.h"
 #include "GameInstance.h"
 #include "Level_Loading.h"
+#include "UIManager.h"
 
 
 CLevel_Static::CLevel_Static(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -18,6 +19,12 @@ HRESULT CLevel_Static::Initialize()
 
 	
 
+
+	if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
+		return E_FAIL;
+
+
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -27,18 +34,34 @@ HRESULT CLevel_Static::Initialize()
 void CLevel_Static::Tick(_float fTimeDelta)
 {
 
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
 
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
+	if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
+		return;
 
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
-			return;
-
-		Safe_Release(pGameInstance);
-		if (GetKeyState(VK_SPACE) & 0x8000)
-		{
+	Safe_Release(pGameInstance);
+	if (GetKeyState(VK_SPACE) & 0x8000)
+	{
 	}
 
+}
+
+HRESULT CLevel_Static::Ready_Layer_UI(const _tchar * pLayerTag)
+{
+
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+
+
+
+
+
+	Safe_Release(pGameInstance);
+
+
+	return S_OK;
 }
 
 CLevel_Static * CLevel_Static::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
