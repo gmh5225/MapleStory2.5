@@ -30,7 +30,7 @@ HRESULT CStuffBtn::Initialize(void * pArg)
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
 	m_iTexturenum = 0;
 	__super::Initialize(pArg);
-
+	m_bRender = false;
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_StuffBtn"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 

@@ -385,6 +385,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MenuIcon"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
 
+
+
 	Ready_QuickSlot(pLayerTag);
 
 	Ready_QuickSlotSkill(pLayerTag);

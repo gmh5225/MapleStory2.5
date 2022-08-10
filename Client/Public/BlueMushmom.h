@@ -4,15 +4,12 @@
 
 BEGIN(Client)
 
-class CGreenMushroom final : public CCreature
+class CBlueMushmom final : public CCreature
 {
 private:
-	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D , MOVE_END};
-
-
-	CGreenMushroom(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CGreenMushroom(const CGreenMushroom& rhs);
-	virtual ~CGreenMushroom() = default;
+	CBlueMushmom(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CBlueMushmom(const CBlueMushmom& rhs);
+	virtual ~CBlueMushmom() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -28,14 +25,20 @@ private:
 	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
+	void Tick_Attack(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
+	void Tick_End(_float fTimeDelta);
 
 public:
-    virtual	void SetState(STATE eState, DIR eDir) override;
+	void SetState(STATE eState, DIR eDir);
 
 public:
 	virtual void SetAni() override;
 	virtual void Damaged(CGameObject* pOther) override;
+
+private:
+	HRESULT SetUp_Components();
+	void Die();
 
 private:
 	STATE m_eCurState;
@@ -43,27 +46,28 @@ private:
 
 	CGameObject* m_pTarget;
 
-	_uint m_iMove;
-	_float3 m_fEndPos;
-	_float3 m_fStartPos;
-	_bool m_bDir;
-	_float m_fDistance;
-
-	_uint m_iHp;
-	_int m_iIndexNum;
-
-	_bool temp = false;
-
-	_float m_fCountDead;
-
-private:
-	HRESULT SetUp_Components();
-	void Die();
 
 public:
-	static CGreenMushroom* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CBlueMushmom* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
+private:
+	_int	m_iHp;
+	_int	m_iIndexNum;
+	_float m_fCountDead;
+
+	// 블루머쉬맘을 일정 거리만큼 점프시키는 변수
+	_float m_fCountJump;
+	_bool m_bAttack;
+
+	_float m_fCountLanding;
+	_bool m_bLanding;
+
+	_float m_fCountLand;
+
+	// 블루 머쉬맘이 점프하기 전 좌표
+	_float3 vPos;
 };
 
 END

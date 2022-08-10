@@ -1,35 +1,36 @@
 #include "stdafx.h"
-#include "..\Public\MissionUI.h"
+#include "..\Public\BlueMushmomHpbar.h"
 #include "GameInstance.h"
 #include "QuestManager.h"
+#include "UIManager.h"
 
-CMissionUI::CMissionUI(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlueMushmomHpbar::CBlueMushmomHpbar(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
 	ZeroMemory(&m_UIInfo, sizeof(UIINFO));
 }
 
-CMissionUI::CMissionUI(const CMissionUI & rhs)
+CBlueMushmomHpbar::CBlueMushmomHpbar(const CBlueMushmomHpbar & rhs)
 	: CGameObject(rhs)
 {
 }
 
-HRESULT CMissionUI::Initialize_Prototype()
+HRESULT CBlueMushmomHpbar::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CMissionUI::Initialize(void * pArg)
+HRESULT CBlueMushmomHpbar::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
 	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
 
-	m_UIInfo.fSizeX = 150.0f;
-	m_UIInfo.fSizeY = 150.0f;
-	m_UIInfo.fX = 1200.0f;
-	m_UIInfo.fY = 320.0f;
+	m_UIInfo.fSizeX = 640.f;
+	m_UIInfo.fSizeY = 30.f;
+	m_UIInfo.fX = 600.0f;
+	m_UIInfo.fY = 20.0f;
 
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
@@ -41,7 +42,7 @@ HRESULT CMissionUI::Initialize(void * pArg)
 	return S_OK;
 }
 
-void CMissionUI::Tick(_float fTimeDelta)
+void CBlueMushmomHpbar::Tick(_float fTimeDelta)
 {
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);
@@ -53,22 +54,27 @@ void CMissionUI::Tick(_float fTimeDelta)
 
 }
 
-void CMissionUI::LateTick(_float fTimeDelta)
+void CBlueMushmomHpbar::LateTick(_float fTimeDelta)
 {
 	
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
 
-HRESULT CMissionUI::Render()
+HRESULT CBlueMushmomHpbar::Render()
 {
 
 	_float4x4		Matrix;
 	D3DXMatrixIdentity(&Matrix);
 
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
 
 	// 비어있는 퀘스트 ui를 출력
-	if (FAILED(m_pTextureCom->Bind_Texture(0)))
+	if (FAILED(m_pTextureCom->Bind_Texture(1)))
 		return E_FAIL;
 
 
@@ -78,12 +84,22 @@ HRESULT CMissionUI::Render()
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &Matrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
-	m_pVIBufferCom->Render();
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+	if (vPlayerPos.x > 36.f && (_float(CUIManager::Get_Instance()->Set_BlueMushmomHp()) > 0))
+		m_pVIBufferCom->Render();
+
+	Safe_Release(pGameInstance);
 
 	return S_OK;
 }
 
-HRESULT CMissionUI::SetUp_Components()
+HRESULT CBlueMushmomHpbar::SetUp_Components()
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
@@ -104,7 +120,7 @@ HRESULT CMissionUI::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Quest"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmomHpbar"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 
@@ -112,37 +128,37 @@ HRESULT CMissionUI::SetUp_Components()
 	return S_OK;
 }
 
-void CMissionUI::MouseCollision()
+void CBlueMushmomHpbar::MouseCollision()
 {
 }
 
-CMissionUI * CMissionUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlueMushmomHpbar * CBlueMushmomHpbar::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CMissionUI*		pInstance = new CMissionUI(pGraphic_Device);
+	CBlueMushmomHpbar*		pInstance = new CBlueMushmomHpbar(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CMissionUI"));
+		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpbar"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CMissionUI::Clone(void* pArg)
+CGameObject * CBlueMushmomHpbar::Clone(void* pArg)
 {
-	CMissionUI*		pInstance = new CMissionUI(*this);
+	CBlueMushmomHpbar*		pInstance = new CBlueMushmomHpbar(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Created : CMissionUI"));
+		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpbar"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CMissionUI::Free()
+void CBlueMushmomHpbar::Free()
 {
 	__super::Free();
 

@@ -35,6 +35,7 @@ HRESULT CRibbonPig::Initialize(void * pArg)
 
 	m_iHp = 3;
 
+	m_fCountDead = 0;
 
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
@@ -101,6 +102,8 @@ HRESULT CRibbonPig::SetUp_Components()
 											
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_MoveR"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_DieR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Die"), nullptr);
 	}
 
 
@@ -117,6 +120,18 @@ HRESULT CRibbonPig::SetUp_Components()
 	return S_OK;
 }
 
+void CRibbonPig::Die()
+{
+	if (m_eDir == DIR_L)
+	{
+		SetState(STATE_DIE, DIR_L);
+	}
+	else if (m_eDir == DIR_R)
+	{
+		SetState(STATE_DIE, DIR_R);
+	}
+	m_fColRad = 0;
+}
 
 
 
@@ -137,6 +152,9 @@ void CRibbonPig::Tick(_float fTimeDelta)
 	case Client::CRibbonPig::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
+	case Client::CRibbonPig::STATE_DIE:
+		Tick_Die(fTimeDelta);
+		break;
 	}
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
 	{
@@ -147,7 +165,8 @@ void CRibbonPig::Tick(_float fTimeDelta)
 void CRibbonPig::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_CHASE, m_eDir);
+		if (m_eCurState != STATE_DIE)
+			SetState(STATE_CHASE, m_eDir);
 
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
@@ -321,6 +340,13 @@ void CRibbonPig::Tick_Chase(_float fTimeDelta)
 	Safe_Release(pGameInstance);
 }
 
+void CRibbonPig::Tick_Die(_float fTimeDelta)
+{
+	m_fCountDead += fTimeDelta;
+	if (m_fCountDead >= 1.f)
+		Set_Dead();
+}
+
 
 
 
@@ -367,6 +393,12 @@ void CRibbonPig::SetAni()
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Move"), 0.3f, CAnimator::STATE_LOOF);
 		break;
+	case CRibbonPig::STATE_DIE:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_DieR"), 0.3f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RibbonPig_Die"), 0.3f, CAnimator::STATE_ONCE);
+		break;
 	}
 }
 
@@ -379,17 +411,20 @@ void CRibbonPig::Damaged(CGameObject * pOther)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
-		SetState(STATE_HIT, DIR_R);
-	else
-		SetState(STATE_HIT, DIR_L);
+	if (m_eCurState != STATE_DIE)
+	{
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+			SetState(STATE_HIT, DIR_R);
+		else
+			SetState(STATE_HIT, DIR_L);
+	}
 
 	--m_iHp;
-	if (m_iHp == 0)
+	if (m_iHp <= 0)
 	{
 		CQuestManager::Get_Instance()->Eat_Item(TEXT("PigRibbon"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
-		Set_Dead();
+		Die();
 	}
 
 	Safe_Release(pGameInstance);

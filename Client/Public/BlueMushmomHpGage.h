@@ -12,7 +12,7 @@ END
 
 BEGIN(Client)
 
-class CMissionUI final : public CGameObject
+class CBlueMushmomHpGage final : public CGameObject
 {
 public:
 	typedef struct tagUIInfo
@@ -20,9 +20,9 @@ public:
 		_float					fX, fY, fSizeX, fSizeY;
 	}UIINFO;
 private:
-	CMissionUI(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CMissionUI(const CMissionUI& rhs);
-	virtual ~CMissionUI() = default;
+	CBlueMushmomHpGage(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CBlueMushmomHpGage(const CBlueMushmomHpGage& rhs);
+	virtual ~CBlueMushmomHpGage() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -47,9 +47,15 @@ private:
 	void MouseCollision();
 
 public:
-	static CMissionUI* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CBlueMushmomHpGage* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+
+private:
+	_float m_fOriginHp;
+	_float m_fNowHp;
+
+	_float m_fOriginSize;
 };
 
 END

@@ -33,6 +33,7 @@ HRESULT CSlime::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 	m_iHp = 3;
 
+	m_fCountDead = 0;
 
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
@@ -97,6 +98,8 @@ HRESULT CSlime::SetUp_Components()
 
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_MoveR"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_DieR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Die"), nullptr);
 	}
 
 
@@ -111,6 +114,19 @@ HRESULT CSlime::SetUp_Components()
 		return E_FAIL;
 
 	return S_OK;
+}
+
+void CSlime::Die()
+{
+	if (m_eDir == DIR_L)
+	{
+		SetState(STATE_DIE, DIR_L);
+	}
+	else if (m_eDir == DIR_R)
+	{
+		SetState(STATE_DIE, DIR_R);
+	}
+	m_fColRad = 0;
 }
 
 
@@ -133,6 +149,9 @@ void CSlime::Tick(_float fTimeDelta)
 	case Client::CSlime::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
+	case Client::CSlime::STATE_DIE:
+		Tick_Die(fTimeDelta);
+		break;
 	}
 
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
@@ -145,7 +164,8 @@ void CSlime::Tick(_float fTimeDelta)
 void CSlime::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_CHASE, m_eDir);
+		if (m_eCurState != STATE_DIE)
+			SetState(STATE_CHASE, m_eDir);
 
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
@@ -331,6 +351,13 @@ void CSlime::Tick_Chase(_float fTimeDelta)
 	Safe_Release(pGameInstance);
 }
 
+void CSlime::Tick_Die(_float fTimeDelta)
+{
+	m_fCountDead += fTimeDelta;
+	if (m_fCountDead >= 1.f)
+		Set_Dead();
+}
+
 
 
 
@@ -377,6 +404,12 @@ void CSlime::SetAni()
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_Move"), 0.3f, CAnimator::STATE_LOOF);
 		break;
+	case CSlime::STATE_DIE:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_DieR"), 0.3f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Slime_Die"), 0.3f, CAnimator::STATE_ONCE);
+		break;
 	}
 }
 
@@ -392,19 +425,22 @@ void CSlime::Damaged(CGameObject * pOther)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
-		SetState(STATE_HIT, DIR_R);
-	else
-		SetState(STATE_HIT, DIR_L);
+	if (m_eCurState != STATE_DIE)
+	{
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+			SetState(STATE_HIT, DIR_R);
+		else
+			SetState(STATE_HIT, DIR_L);
+	}
 
 	Safe_Release(pGameInstance);
 
 	--m_iHp;
-	if (m_iHp == 0)
+	if (m_iHp <= 0)
 	{
 		CQuestManager::Get_Instance()->Eat_Item(TEXT("SlimeEssence"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
-		Set_Dead();
+		Die();
 	}
 	//
 }

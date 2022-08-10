@@ -31,6 +31,7 @@ HRESULT CStuffIcon::Initialize(void * pArg)
 	memcpy(&m_UIInfo, pArg, sizeof(UIINFO));
 
 	__super::Initialize(pArg);
+	m_bRender = false;
 	m_iTexturenum = m_UIInfo.iTextNum;
 	m_iIndexNum = m_UIInfo.iNum;
 	m_pTag = m_UIInfo.pTag;

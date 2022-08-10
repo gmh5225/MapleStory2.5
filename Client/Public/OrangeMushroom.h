@@ -30,6 +30,7 @@ private:
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
 	void Tick_Jump(_float fTimeDelta);
+	void Tick_Die(_float fTimeDelta);
 
 public:
     virtual	void SetState(STATE eState, DIR eDir) override;
@@ -55,8 +56,11 @@ private:
 
 	_bool temp = false;
 
+	_float m_fCountDead;
+
 private:
 	HRESULT SetUp_Components();
+	void Die();
 
 public:
 	static COrangeMushroom* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

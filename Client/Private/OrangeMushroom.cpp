@@ -33,6 +33,7 @@ HRESULT COrangeMushroom::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 	m_iHp = 3;
 
+	m_fCountDead = 0;
 
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
@@ -98,6 +99,8 @@ HRESULT COrangeMushroom::SetUp_Components()
 
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_MoveR"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_DieR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Die"), nullptr);
 	}
 
 
@@ -114,7 +117,18 @@ HRESULT COrangeMushroom::SetUp_Components()
 	return S_OK;
 }
 
-
+void COrangeMushroom::Die()
+{
+	if (m_eDir == DIR_L)
+	{
+		SetState(STATE_DIE, DIR_L);
+	}
+	else if (m_eDir == DIR_R)
+	{
+		SetState(STATE_DIE, DIR_R);
+	}
+	m_fColRad = 0;
+}
 
 
 void COrangeMushroom::Tick(_float fTimeDelta)
@@ -138,6 +152,9 @@ void COrangeMushroom::Tick(_float fTimeDelta)
 		Tick_Chase(fTimeDelta);
 		Tick_Jump(fTimeDelta);
 		break;
+	case Client::COrangeMushroom::STATE_DIE:
+		Tick_Die(fTimeDelta);
+		break;
 	}
 
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
@@ -150,7 +167,8 @@ void COrangeMushroom::Tick(_float fTimeDelta)
 void COrangeMushroom::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_CHASE, m_eDir);
+		if (m_eCurState != STATE_DIE)
+			SetState(STATE_CHASE, m_eDir);
 
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
@@ -336,7 +354,12 @@ void COrangeMushroom::Tick_Jump(_float fTimeDelta)
 {
 }
 
-
+void COrangeMushroom::Tick_Die(_float fTimeDelta)
+{
+	m_fCountDead += fTimeDelta;
+	if (m_fCountDead >= 1.f)
+		Set_Dead();
+}
 
 
 void COrangeMushroom::SetState(STATE eState, DIR eDir)
@@ -382,6 +405,12 @@ void COrangeMushroom::SetAni()
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Move"), 0.3f, CAnimator::STATE_LOOF);
 	break;
+	case COrangeMushroom::STATE_DIE:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_DieR"), 0.3f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_OrangeMushroom_Die"), 0.3f, CAnimator::STATE_ONCE);
+		break;
 	}
 }
 
@@ -397,19 +426,22 @@ void COrangeMushroom::Damaged(CGameObject * pOther)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
-		SetState(STATE_HIT, DIR_R);
-	else
-		SetState(STATE_HIT, DIR_L);
+	if (m_eCurState != STATE_DIE)
+	{
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
+			SetState(STATE_HIT, DIR_R);
+		else
+			SetState(STATE_HIT, DIR_L);
+	}
 
 	Safe_Release(pGameInstance);
 
 	--m_iHp;
-	if (m_iHp == 0)
+	if (m_iHp <= 0)
 	{
 		CQuestManager::Get_Instance()->Hunting(TEXT("OrangeMushroom"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
-		Set_Dead();
+		Die();
 	}
 	//
 }

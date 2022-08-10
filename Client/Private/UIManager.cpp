@@ -7,6 +7,7 @@ IMPLEMENT_SINGLETON(CUIManager)
 
 CUIManager::CUIManager()
 {
+	m_iBlueMushmomHp = 3;
 }
 
 HRESULT CUIManager::Add_ItemNotice(CItemNotice * pItemNotice)
