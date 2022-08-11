@@ -376,7 +376,7 @@ HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
 	CSpawner::SPAWNERINFO MonsterInfo;
 
-	MonsterInfo.MonsterName = TEXT("GoStump");
+	/*MonsterInfo.MonsterName = TEXT("GoStump");
 	MonsterInfo.MonsterPos = _float3{ 4.5f , 9.0f, 0.f };
 	MonsterInfo.SpawnerNum = 10;
 	MonsterInfo.MonsterNum = 2;
@@ -437,7 +437,7 @@ HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);*/
 
 	return S_OK;
 }

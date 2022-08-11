@@ -423,7 +423,7 @@
     </Filter>
     <Filter Include="04.UI\06.Mouse\MouseItemIcon">
       <UniqueIdentifier>{83ac1191-34ca-4d06-b6d7-8c2f239302ae}</UniqueIdentifier>
-         </Filter>
+    </Filter>
     <Filter Include="04.UI\07.Loading">
       <UniqueIdentifier>{82cba3e5-1e05-4257-b6c0-ccf16cc65b68}</UniqueIdentifier>
     </Filter>
@@ -438,7 +438,7 @@
     </Filter>
     <Filter Include="01.Level\ElenyaEnter">
       <UniqueIdentifier>{d1e0760f-c088-4a4d-819c-9b6d5f09bc73}</UniqueIdentifier>
-          </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\MiddleBoss">
       <UniqueIdentifier>{9231d880-11a1-4ba9-8d64-dcc17d1b63d8}</UniqueIdentifier>
     </Filter>
@@ -447,7 +447,7 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Npc\03.Warning">
       <UniqueIdentifier>{9f6b9fa9-753c-459f-bca4-887b5a2f3655}</UniqueIdentifier>
-        </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Npc\03.Helena">
       <UniqueIdentifier>{41b48f26-0f6f-47d7-8e56-78b11741947c}</UniqueIdentifier>
     </Filter>
@@ -809,7 +809,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlackWizardHit.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Hit</Filter>
-       </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\Loading.h">
       <Filter>04.UI\07.Loading\Screen</Filter>
     </ClInclude>
@@ -821,7 +821,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\Level_ElenyaEnter.h">
       <Filter>01.Level\ElenyaEnter</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\BlueMushmomHpbar.h">
       <Filter>04.UI\07.BossHpBar</Filter>
     </ClInclude>
@@ -833,7 +833,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlueMushmom.h">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
-        </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Bird.h">
       <Filter>02.GameObject\Creature\Npc\05.Bird</Filter>
     </ClInclude>
@@ -848,6 +848,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\Chick.h">
       <Filter>02.GameObject\Creature\Npc\07.Chick</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GAS.h">
+      <Filter>02.GameObject\Creature\MiddleBoss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1183,7 +1186,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardHit.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Hit</Filter>
-         </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\Loading.cpp">
       <Filter>04.UI\07.Loading\Screen</Filter>
     </ClCompile>
@@ -1195,7 +1198,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\Level_ElenyaEnter.cpp">
       <Filter>01.Level\ElenyaEnter</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\QuestUI.cpp">
       <Filter>04.UI\02.Quest</Filter>
     </ClCompile>
@@ -1210,7 +1213,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlueMushmom.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
-         </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Bird.cpp">
       <Filter>02.GameObject\Creature\Npc\05.Bird</Filter>
     </ClCompile>
@@ -1225,6 +1228,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Chick.cpp">
       <Filter>02.GameObject\Creature\Npc\07.Chick</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GAS.cpp">
+      <Filter>02.GameObject\Creature\MiddleBoss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
