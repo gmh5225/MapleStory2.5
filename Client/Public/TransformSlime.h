@@ -1,18 +1,17 @@
 #pragma once
 
 #include "Creature.h"
-#include "Item.h"
 
 BEGIN(Client)
 
-class CRibbonPig final : public CCreature
+class CTransformSlime final : public CCreature
 {
 private:
 	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D, MOVE_END };
 private:
-	CRibbonPig(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CRibbonPig(const CRibbonPig& rhs);
-	virtual ~CRibbonPig() = default;
+	CTransformSlime(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CTransformSlime(const CTransformSlime& rhs);
+	virtual ~CTransformSlime() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -29,6 +28,7 @@ private:
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
+	void Tick_Attack(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -55,14 +55,14 @@ private:
 
 	_float m_fCountDead;
 
-	CItem::ITEMINFO  RibbonPigItem;
+	_float m_fCountAttack;
 
 private:
 	HRESULT SetUp_Components();
 	void Die();
 
 public:
-	static CRibbonPig* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CTransformSlime* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

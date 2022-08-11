@@ -355,7 +355,17 @@ void CGoStump::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.2f)
+	{
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+		GoStumpItem.eType = CInvenManager::TYPE_STUFF;
+		GoStumpItem.iTextNum = 4;
+		GoStumpItem.pTag = L"GoStumpInfo";
+		GoStumpItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &GoStumpItem);
+		Safe_Release(pGameInstance);
 		Set_Dead();
+	}
 }
 
 

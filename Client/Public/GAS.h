@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Creature.h"
+#include "Spawner.h"
 
 BEGIN(Client)
 
@@ -22,12 +23,14 @@ public:
 
 private:
 	void Tick_Idle(_float fTimeDelta);
-	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
+	void Tick_Jump(_float fTimeDelta);
+	void Tick_DJump(_float fTimeDelta);
+	void Tick_Dash(_float fTimeDelta);
+	void Tick_End(_float fTimeDelta);	// 텔포 이후
 	void Tick_Attack(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
-	void Tick_End(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -57,17 +60,18 @@ private:
 	_int	m_iIndexNum;
 	_float m_fCountDead;
 
-	// 블루머쉬맘을 일정 거리만큼 점프시키는 변수
-	_float m_fCountJump;
-	_bool m_bAttack;
+	_bool m_bPatterStart;
+	_int m_iRandomPattern;
+	_float m_fPatternCycle;
 
-	_float m_fCountLanding;
-	_bool m_bLanding;
+	_float m_fJump;
+	_float m_fDJump;
+	_float m_fAttack;
+	_float m_fDash;
+	_float m_fEnd;
 
-	_float m_fCountLand;
+	_bool m_bTest;
 
-	// 블루 머쉬맘이 점프하기 전 좌표
-	_float3 vPos;
 };
 
 END

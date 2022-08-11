@@ -612,6 +612,81 @@ HRESULT CChat::Render()
 		}
 	}
 
+
+
+	else if (pInstance->Get_QuestNum() == 5)
+	{
+		// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
+		if (m_bChat && pInstance->Set_QuestState() == 0)
+		{
+			m_bCountCheck = true;
+			Bind_Animation();
+			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				if (CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE))
+					m_iChatProgress++;
+
+				if (m_iChatProgress == 30)
+				{
+					wsprintf(m_cNPCChat, TEXT("가디언 엔젤 슬라임 좀 잡아주게!"));
+					SetRect(&rc, 350, 530, 0, 0);
+					m_pFont->DrawText(NULL, m_cNPCChat,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+				}
+
+			}
+			if ((GetKeyState(VK_RETURN) & 0x8000))
+			{
+				m_fCount = 0;
+				pInstance->QuestProgress();
+				pInstance->Check_End_Quest();
+			}
+		}
+
+		if (m_bChat && pInstance->Set_QuestState() == 2)
+		{
+			m_bCountCheck = true;
+			Bind_Animation();
+			m_pVIBufferCom->Render();
+
+			if (!m_bCountCheck)
+			{
+				m_bCountCheck2 = true;
+				TCHAR cChat[128];
+				_tchar m_cNPCChat[128];
+				wsprintf(cChat, TEXT("장로스탄"));
+				SetRect(&rc, 350, 500, 0, 0);
+				m_pFont->DrawText(NULL, cChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
+
+				wsprintf(m_cNPCChat, TEXT("고맙네!"));
+				SetRect(&rc, 350, 530, 0, 0);
+				m_pFont->DrawText(NULL, m_cNPCChat,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
+			}
+			if (GetKeyState(VK_RETURN) & 0x8000)
+			{
+				m_fCount = 0;
+				pInstance->QuestPrepare();
+				pInstance->Check_End_Quest();
+				pInstance->Reset_Hunt();
+				CSkillManager::Get_Instance()->Set_SkillPoint(3);
+				CQuestManager::Get_Instance()->Set_Fifth();
+			}
+		}
+	}
+
 	return S_OK;
 }
 

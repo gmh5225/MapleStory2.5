@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Creature.h"
+#include "Item.h"
 
 BEGIN(Client)
 
@@ -55,6 +56,8 @@ private:
 	_bool temp = false;
 
 	_float m_fCountDead;
+
+	CItem::ITEMINFO  GreenMushroomItem;
 
 private:
 	HRESULT SetUp_Components();

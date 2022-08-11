@@ -1,26 +1,26 @@
 #include "stdafx.h"
-#include "..\Public\BlueMushmomHpbar.h"
+#include "..\Public\GASHpbar.h"
 #include "GameInstance.h"
 #include "QuestManager.h"
 #include "UIManager.h"
 
-CBlueMushmomHpbar::CBlueMushmomHpbar(LPDIRECT3DDEVICE9 pGraphic_Device)
+CGASHpbar::CGASHpbar(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
 	ZeroMemory(&m_UIInfo, sizeof(UIINFO));
 }
 
-CBlueMushmomHpbar::CBlueMushmomHpbar(const CBlueMushmomHpbar & rhs)
+CGASHpbar::CGASHpbar(const CGASHpbar & rhs)
 	: CGameObject(rhs)
 {
 }
 
-HRESULT CBlueMushmomHpbar::Initialize_Prototype()
+HRESULT CGASHpbar::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CBlueMushmomHpbar::Initialize(void * pArg)
+HRESULT CGASHpbar::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
@@ -35,10 +35,14 @@ HRESULT CBlueMushmomHpbar::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
+	
+	
+
+
 	return S_OK;
 }
 
-void CBlueMushmomHpbar::Tick(_float fTimeDelta)
+void CGASHpbar::Tick(_float fTimeDelta)
 {
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);
@@ -50,14 +54,14 @@ void CBlueMushmomHpbar::Tick(_float fTimeDelta)
 
 }
 
-void CBlueMushmomHpbar::LateTick(_float fTimeDelta)
+void CGASHpbar::LateTick(_float fTimeDelta)
 {
 	
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
 
-HRESULT CBlueMushmomHpbar::Render()
+HRESULT CGASHpbar::Render()
 {
 
 	_float4x4		Matrix;
@@ -69,7 +73,8 @@ HRESULT CBlueMushmomHpbar::Render()
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
 
-	if (FAILED(m_pTextureCom->Bind_Texture(1)))
+	// 비어있는 퀘스트 ui를 출력
+	if (FAILED(m_pTextureCom->Bind_Texture(0)))
 		return E_FAIL;
 
 
@@ -86,7 +91,7 @@ HRESULT CBlueMushmomHpbar::Render()
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (vPlayerPos.x > 36.f && (_float(CUIManager::Get_Instance()->Set_BlueMushmomHp()) > 0))
+	if ((_float(CUIManager::Get_Instance()->Set_GASHp()) > 0))
 		m_pVIBufferCom->Render();
 
 	Safe_Release(pGameInstance);
@@ -94,7 +99,7 @@ HRESULT CBlueMushmomHpbar::Render()
 	return S_OK;
 }
 
-HRESULT CBlueMushmomHpbar::SetUp_Components()
+HRESULT CGASHpbar::SetUp_Components()
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
@@ -115,7 +120,7 @@ HRESULT CBlueMushmomHpbar::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmomHpbar"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GASHpbar"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 
@@ -123,37 +128,37 @@ HRESULT CBlueMushmomHpbar::SetUp_Components()
 	return S_OK;
 }
 
-void CBlueMushmomHpbar::MouseCollision()
+void CGASHpbar::MouseCollision()
 {
 }
 
-CBlueMushmomHpbar * CBlueMushmomHpbar::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CGASHpbar * CGASHpbar::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CBlueMushmomHpbar*		pInstance = new CBlueMushmomHpbar(pGraphic_Device);
+	CGASHpbar*		pInstance = new CGASHpbar(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpbar"));
+		MSG_BOX(TEXT("Failed To Created : CGASHpbar"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CBlueMushmomHpbar::Clone(void* pArg)
+CGameObject * CGASHpbar::Clone(void* pArg)
 {
-	CBlueMushmomHpbar*		pInstance = new CBlueMushmomHpbar(*this);
+	CGASHpbar*		pInstance = new CGASHpbar(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpbar"));
+		MSG_BOX(TEXT("Failed To Created : CGASHpbar"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CBlueMushmomHpbar::Free()
+void CGASHpbar::Free()
 {
 	__super::Free();
 

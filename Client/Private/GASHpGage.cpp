@@ -1,44 +1,53 @@
 #include "stdafx.h"
-#include "..\Public\BlueMushmomHpbar.h"
+#include "..\Public\GASHpGage.h"
 #include "GameInstance.h"
 #include "QuestManager.h"
 #include "UIManager.h"
 
-CBlueMushmomHpbar::CBlueMushmomHpbar(LPDIRECT3DDEVICE9 pGraphic_Device)
+CGASHpGage::CGASHpGage(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
 	ZeroMemory(&m_UIInfo, sizeof(UIINFO));
 }
 
-CBlueMushmomHpbar::CBlueMushmomHpbar(const CBlueMushmomHpbar & rhs)
+CGASHpGage::CGASHpGage(const CGASHpGage & rhs)
 	: CGameObject(rhs)
 {
 }
 
-HRESULT CBlueMushmomHpbar::Initialize_Prototype()
+HRESULT CGASHpGage::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CBlueMushmomHpbar::Initialize(void * pArg)
+HRESULT CGASHpGage::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
 	D3DXMatrixOrthoLH(&m_ProjMatrix, g_iWinSizeX, g_iWinSizeY, 0, 1);
 
-	m_UIInfo.fSizeX = 640.f;
-	m_UIInfo.fSizeY = 30.f;
-	m_UIInfo.fX = 600.0f;
+	m_UIInfo.fSizeX = 608.f;
+	m_UIInfo.fSizeY = 21.f;
+	m_UIInfo.fX = 613.0f;
 	m_UIInfo.fY = 20.0f;
+
+
 
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
+	m_fOriginHp = _float(CUIManager::Get_Instance()->Set_GASHp());
+	m_fNowHp = 0;
+
+	m_fOriginSize = m_UIInfo.fSizeX;
+	
+
+	
 	return S_OK;
 }
 
-void CBlueMushmomHpbar::Tick(_float fTimeDelta)
+void CGASHpGage::Tick(_float fTimeDelta)
 {
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);
@@ -50,14 +59,22 @@ void CBlueMushmomHpbar::Tick(_float fTimeDelta)
 
 }
 
-void CBlueMushmomHpbar::LateTick(_float fTimeDelta)
+void CGASHpGage::LateTick(_float fTimeDelta)
 {
-	
+	m_fNowHp = _float(CUIManager::Get_Instance()->Set_GASHp());
+
+	m_UIInfo.fSizeX = m_fOriginSize * (m_fNowHp / m_fOriginHp);
+
+	_float fTemp = (m_fOriginSize - m_fOriginSize * (m_fNowHp / m_fOriginHp)) / 2;
+
+
+	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f - fTemp, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
 
-HRESULT CBlueMushmomHpbar::Render()
+HRESULT CGASHpGage::Render()
 {
 
 	_float4x4		Matrix;
@@ -69,7 +86,8 @@ HRESULT CBlueMushmomHpbar::Render()
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
 
 
-	if (FAILED(m_pTextureCom->Bind_Texture(1)))
+	// 비어있는 퀘스트 ui를 출력
+	if (FAILED(m_pTextureCom->Bind_Texture(0)))
 		return E_FAIL;
 
 
@@ -79,22 +97,21 @@ HRESULT CBlueMushmomHpbar::Render()
 	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &Matrix);
 	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
 
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+	m_pTransformCom->Bind_WorldMatrix();
+	m_pGraphic_Device->SetTransform(D3DTS_VIEW, &Matrix);
+	m_pGraphic_Device->SetTransform(D3DTS_PROJECTION, &m_ProjMatrix);
 
-	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (vPlayerPos.x > 36.f && (_float(CUIManager::Get_Instance()->Set_BlueMushmomHp()) > 0))
+
+	if ((_float(CUIManager::Get_Instance()->Set_GASHp()) > 0))
 		m_pVIBufferCom->Render();
 
-	Safe_Release(pGameInstance);
 
 	return S_OK;
 }
 
-HRESULT CBlueMushmomHpbar::SetUp_Components()
+HRESULT CGASHpGage::SetUp_Components()
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
@@ -115,7 +132,7 @@ HRESULT CBlueMushmomHpbar::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmomHpbar"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Hp"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 
@@ -123,37 +140,37 @@ HRESULT CBlueMushmomHpbar::SetUp_Components()
 	return S_OK;
 }
 
-void CBlueMushmomHpbar::MouseCollision()
+void CGASHpGage::MouseCollision()
 {
 }
 
-CBlueMushmomHpbar * CBlueMushmomHpbar::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CGASHpGage * CGASHpGage::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CBlueMushmomHpbar*		pInstance = new CBlueMushmomHpbar(pGraphic_Device);
+	CGASHpGage*		pInstance = new CGASHpGage(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpbar"));
+		MSG_BOX(TEXT("Failed To Created : CGASHpGage"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CBlueMushmomHpbar::Clone(void* pArg)
+CGameObject * CGASHpGage::Clone(void* pArg)
 {
-	CBlueMushmomHpbar*		pInstance = new CBlueMushmomHpbar(*this);
+	CGASHpGage*		pInstance = new CGASHpGage(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpbar"));
+		MSG_BOX(TEXT("Failed To Created : CGASHpGage"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CBlueMushmomHpbar::Free()
+void CGASHpGage::Free()
 {
 	__super::Free();
 

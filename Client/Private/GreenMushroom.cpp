@@ -360,7 +360,17 @@ void CGreenMushroom::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.2f)
+	{
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+		GreenMushroomItem.eType = CInvenManager::TYPE_STUFF;
+		GreenMushroomItem.iTextNum = 3;
+		GreenMushroomItem.pTag = L"GoStumpInfo";
+		GreenMushroomItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &GreenMushroomItem);
+		Safe_Release(pGameInstance);
 		Set_Dead();
+	}
 }
 
 

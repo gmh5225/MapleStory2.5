@@ -5,6 +5,8 @@
 #include "QuestManager.h"
 #include "UIManager.h"
 #include "BlueMushmom.h"
+#include "QuestManager.h"
+#include "Spawner.h"
 
 CGAS::CGAS(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -31,22 +33,28 @@ HRESULT CGAS::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+
 	m_sTag = "Tag_Monster";
-	m_iHp = 3;
+	m_iHp = 10;
 	m_iIndexNum = -1;
 	m_fCountDead = 0;
-	m_fCountJump = 5.f;
-	m_bAttack = false;
-	m_fCountLanding = 0.f;
-	m_bLanding = false;
-	m_fCountLand = 0.f;
 
-	CUIManager::Get_Instance()->Get_BlueMushmomHp(m_iHp);
+	m_iRandomPattern = 0;
 
-	vPos.y = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
+	m_bPatterStart = false;
+
+	m_fPatternCycle = 2;
+
+	m_fJump = 0;
+	m_fDJump = 0;
+	m_fAttack = 0;
+	m_fDash = 0;
+	m_fEnd = 0;
+
+	m_bTest = false;
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(37.f, 15.f, -9.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 5.f, -5.f));
 	m_pTransformCom->Set_Scaled(10.f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -84,6 +92,15 @@ HRESULT CGAS::SetUp_Components()
 
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Jump"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_JumpR"), nullptr);
+
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_DJump"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_DJumpR"), nullptr);
+
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_TP"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_TPR"), nullptr);
+
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_TPA"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_TPAR"), nullptr);
 
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Idle"), nullptr);
 
@@ -130,63 +147,109 @@ void CGAS::Tick(_float fTimeDelta)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	m_fCountJump += fTimeDelta;
+	if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
+		m_bPatterStart = true;
 
-	//if (vPlayerPos.x < 37.f)
-	//{
-	//	SetState(STATE_END, DIR_END);
-	//	m_iHp = 3;
-	//}
 
-	if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f)
+	CUIManager::Get_Instance()->Get_GASHp(m_iHp);
+
+	if (m_bPatterStart)
+		m_fPatternCycle += fTimeDelta;
+
+	if (m_fPatternCycle > 5.f)
 	{
-		if (m_fCountJump >= 10.f && m_eCurState != STATE_ATTACK)
-		{
-			if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
-			{
-			/*	if (m_eDir == DIR_R)
-					SetState(STATE_ATTACK, DIR_R);
-				else
-					SetState(STATE_ATTACK, DIR_L);*/
-			}
-		}
+		m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 3);
+		m_fPatternCycle = 0;
 	}
 
-	else if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f)
+
+	if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
 	{
-		if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE &&  m_eCurState != STATE_ATTACK)
-			if (m_eDir == DIR_R)
+
+		if (m_iRandomPattern == 0)
+		{
+			if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
 				SetState(STATE_CHASE, DIR_R);
 			else
 				SetState(STATE_CHASE, DIR_L);
+		}
+
+		else if (m_iRandomPattern == 1) // 점프패턴
+		{
+			if (m_eDir == DIR_R)
+				SetState(STATE_JUMP, DIR_R);
+			else
+				SetState(STATE_JUMP, DIR_L);
+		}
+
+		else if (m_iRandomPattern == 2) // 일반공격
+		{
+			if (m_eDir == DIR_R)
+				SetState(STATE_ATTACK, DIR_R);
+			else
+				SetState(STATE_ATTACK, DIR_L);
+		}
+
+		else if (m_iRandomPattern == 3) // 텔레포트
+		{
+			if (m_eDir == DIR_R)
+				SetState(STATE_DASH, DIR_R);
+			else
+				SetState(STATE_DASH, DIR_L);
+		}
+
+		else if (m_iRandomPattern == 4) // 슬라임 소환
+		{
+			if (m_eDir == DIR_R)
+				SetState(STATE_DJUMP, DIR_R);
+			else
+				SetState(STATE_DJUMP, DIR_L);
+		}
+
+
+		else if (m_iRandomPattern == 100)	// 텔포 이후
+		{
+			if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
+				SetState(STATE_END, DIR_R);
+			else
+				SetState(STATE_END, DIR_L);
+		}
+
 	}
+
 
 	Safe_Release(pGameInstance);
 
 
-	CUIManager::Get_Instance()->Get_BlueMushmomHp(m_iHp);
+	CUIManager::Get_Instance()->Get_GASHp(m_iHp);
 
 	switch (m_eCurState)
 	{
-	case Client::CBlueMushmom::STATE_IDLE:
+	case STATE_IDLE:
 		Tick_Idle(fTimeDelta);
 		break;
-	case Client::CBlueMushmom::STATE_MOVE:
-		Tick_Move(fTimeDelta);
-		break;
-	case Client::CBlueMushmom::STATE_HIT:
+	case STATE_HIT:
 		Tick_Hit(fTimeDelta);
 		break;
-	case Client::CBlueMushmom::STATE_CHASE:
+	case STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
-	case Client::CBlueMushmom::STATE_ATTACK:
+	case STATE_DASH:
+		Tick_Dash(fTimeDelta);
+		break;
+	case STATE_JUMP:
+		Tick_Jump(fTimeDelta);
+		break;
+	case STATE_DJUMP:
+		Tick_DJump(fTimeDelta);
+		break;
+	case STATE_ATTACK:
 		Tick_Attack(fTimeDelta);
 		break;
-	case Client::CBlueMushmom::STATE_DIE:
+	case STATE_DIE:
 		Tick_Die(fTimeDelta);
 		break;
-	case Client::CBlueMushmom::STATE_END:
+	case STATE_END:
 		Tick_End(fTimeDelta);
 		break;
 	}
@@ -199,7 +262,7 @@ void CGAS::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 
 	_float3 Mushpos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	if (Mushpos.y < 3.5f)
+	if (Mushpos.y < -1.f)
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(Mushpos.x, 3.5f, Mushpos.z));
 
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
@@ -250,9 +313,6 @@ HRESULT CGAS::Render()
 void CGAS::Tick_Idle(_float fTimeDelta)
 {
 }
-void CGAS::Tick_Move(_float fTimeDelta)
-{
-}
 void CGAS::Tick_Hit(_float fTimeDelta)
 {
 }
@@ -272,12 +332,77 @@ void CGAS::Tick_Chase(_float fTimeDelta)
 		SetState(STATE_CHASE, DIR_L);
 
 
-	m_pTransformCom->Chase(vPlayerPos, fTimeDelta);
+	m_pTransformCom->Chase(vPlayerPos + _float3(0.1f,0,0), fTimeDelta * 3);
 
 	Safe_Release(pGameInstance);
 }
 
-void CGAS::Tick_Attack(_float fTimeDelta)
+void CGAS::Tick_Jump(_float fTimeDelta)
+{
+	m_fJump += fTimeDelta;
+	if (m_fJump > 2.0f)
+	{
+		m_iRandomPattern = 0;
+		m_fJump = 0;
+	}
+}
+
+void CGAS::Tick_DJump(_float fTimeDelta)
+{
+	m_fDJump += fTimeDelta;
+
+
+	if (m_fDJump > 2.f && !m_bTest)
+	{
+		m_bTest = true;
+
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSpawner::SPAWNERINFO m_Slime;
+
+
+		m_Slime.GAS = TEXT("GAS");
+		m_Slime.Level = LEVEL_GAS;
+		m_Slime.MonsterColRad = 1.f;
+
+		m_Slime.MonsterPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+		float random = pGameInstance->Get_FloatRandom(-2, 2);
+		float random2 = pGameInstance->Get_FloatRandom(-2, 2);
+		float random3 = pGameInstance->Get_FloatRandom(0, 2);
+
+		m_Slime.MonsterPos += _float3{ random, random3, random2 };
+
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
+			int a = 0;
+
+
+		for (int i = 0; i < 7; ++i)
+		{
+			m_Slime.MonsterPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+			random = pGameInstance->Get_FloatRandom(-5, 5);
+			random2 = pGameInstance->Get_FloatRandom(-5, 5);
+			random3 = pGameInstance->Get_FloatRandom(3, 7);
+
+			m_Slime.MonsterPos += _float3{ random, random3, random2 };
+
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
+				int a = 0;
+		}
+
+		Safe_Release(pGameInstance);
+	}
+	if (m_fDJump > 2.2f)
+	{
+		m_iRandomPattern = 0;
+		m_fDJump = 0;
+		m_bTest = false;
+	}
+}
+
+void CGAS::Tick_Dash(_float fTimeDelta)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -286,55 +411,46 @@ void CGAS::Tick_Attack(_float fTimeDelta)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-
-	// 내려오고 나서 상태를 바꾸는 시간
-	m_fCountLand += fTimeDelta;
-
-	//어느정도 시간이 지나고 점프를 시키는 시간
-	if (!m_bLanding)
-		m_fCountLanding += fTimeDelta;
-
-	if (m_fCountLanding > 0.5f)
+	m_fDash += fTimeDelta;
+	if (m_fDash > 1.6f)
 	{
-		m_pTransformCom->Set_Vel(30.0f);
-		m_fCountJump = 0;
-		m_fCountLanding = 0;
-		m_bLanding = true;
+		m_iRandomPattern = 100;
+		m_fDash = 0;
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPlayerPos + _float3(0.f,1.f,0.f));
 	}
-
-	// 점프를 시작하고 5초 있다가 상태를 쫒아가게 바꿈
-	if (m_fCountLand > 3.5f)
-	{
-		if (m_eDir == DIR_R)
-			SetState(STATE_CHASE, DIR_R);
-		else
-			SetState(STATE_CHASE, DIR_L);
-		m_bLanding = false;
-		m_fCountLand = 0;
-	}
-
-	if (5.5f < m_pTransformCom->Get_State(CTransform::STATE_POSITION).y)
-		m_pTransformCom->Chase(vPlayerPos, fTimeDelta * 5);
 
 	Safe_Release(pGameInstance);
+}
+
+void CGAS::Tick_End(_float fTimeDelta)
+{
+	m_fEnd += fTimeDelta;
+	if (m_fEnd > 0.8f)
+	{
+		m_iRandomPattern = 0;
+		m_fEnd = 0;
+	}
+}
+
+void CGAS::Tick_Attack(_float fTimeDelta)
+{
+	m_fAttack += fTimeDelta;
+	if (m_fAttack > 2.0f)
+	{
+		m_iRandomPattern = 0;
+		m_fAttack = 0;
+	}
 }
 
 
 void CGAS::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
-	if (m_fCountDead >= 20.0f)
+	if (m_fCountDead >= 10.0f)
+	{
 		Set_Dead();
+	}
 }
-
-void CGAS::Tick_End(_float fTimeDelta)
-{
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 42.9f)
-		SetState(STATE_IDLE, DIR_END);
-	else
-		m_pTransformCom->Chase(_float3(43.f, 10.f, -7.f), fTimeDelta * 5);
-}
-
 
 
 void CGAS::SetState(STATE eState, DIR eDir)
@@ -350,43 +466,66 @@ void CGAS::SetAni()
 {
 	switch (m_eCurState)
 	{
-	case CBlueMushmom::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Skill"), 0.1f, CAnimator::STATE_LOOF);
+	case STATE_IDLE:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Idle"), 0.1f, CAnimator::STATE_LOOF);
 		break;
-	case CBlueMushmom::STATE_MOVE:
+	case STATE_MOVE:
 		if (m_eDir == DIR_R)
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_MoveR"), 0.1f, CAnimator::STATE_LOOF);
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Move"), 0.1f, CAnimator::STATE_LOOF);
 		break;
-	case CBlueMushmom::STATE_HIT:
+	case STATE_HIT:
 		if (m_eDir == DIR_R)
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_HitR"), 0.5f, CAnimator::STATE_ONCE);
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Hit"), 0.5f, CAnimator::STATE_ONCE);
 		break;
-	case CBlueMushmom::STATE_CHASE:
+	case STATE_CHASE:
 		if (m_eDir == DIR_R)
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_MoveR"), 0.1f, CAnimator::STATE_LOOF);
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Move"), 0.1f, CAnimator::STATE_LOOF);
 		break;
-	case CBlueMushmom::STATE_DIE:
+	case STATE_DIE:
 		if (m_eDir == DIR_R)
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_DieR"), 0.1f, CAnimator::STATE_ONCE);
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Die"), 0.1f, CAnimator::STATE_ONCE);
 		break;
-
-	case CBlueMushmom::STATE_ATTACK:
+	case STATE_JUMP:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_AttackR"), 0.5f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_JumpR"), 0.1f, CAnimator::STATE_ONCE);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Attack"), 0.5f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Jump"), 0.1f, CAnimator::STATE_ONCE);
 		break;
 
-	case CBlueMushmom::STATE_END:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_MoveR"), 0.1f, CAnimator::STATE_LOOF);
+	case STATE_ATTACK:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_AttackR"), 0.1f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Attack"), 0.1f, CAnimator::STATE_ONCE);
+		break;
+
+	case STATE_DASH:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPR"), 0.1f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TP"), 0.1f, CAnimator::STATE_ONCE);
+		break;
+
+	case STATE_DJUMP:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_DJumpR"), 0.1f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_DJump"), 0.1f, CAnimator::STATE_ONCE);
+		break;
+
+	case STATE_END:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPAR"), 0.15f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPA"), 0.15f, CAnimator::STATE_ONCE);
 		break;
 	}
 }
@@ -400,13 +539,14 @@ void CGAS::Damaged(CGameObject * pOther)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (m_eCurState != STATE_ATTACK)
+	if (m_eCurState == STATE_CHASE || m_eCurState == STATE_IDLE)
 	{
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
 			SetState(STATE_HIT, DIR_R);
 		else
 			SetState(STATE_HIT, DIR_L);
 	}
+	
 
 
 	Safe_Release(pGameInstance);
@@ -414,7 +554,7 @@ void CGAS::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Hunting(TEXT("BlueMushmom"));
+		CQuestManager::Get_Instance()->Hunting(TEXT("GAS"));
 		Die();
 	}
 

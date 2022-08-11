@@ -1,6 +1,8 @@
 #pragma once
 
 #include "Creature.h"
+#include "InvenManager.h"
+#include "Item.h"
 
 BEGIN(Client)
 
@@ -55,6 +57,8 @@ private:
 	_bool temp = false;
 
 	_float m_fCountDead;
+
+	CItem::ITEMINFO  GoStumpItem;
 private:
 	HRESULT SetUp_Components();
 	void Die();

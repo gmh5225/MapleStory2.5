@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Creature.h"
+#include "Item.h"
 
 BEGIN(Client)
 
@@ -58,6 +59,8 @@ private:
 	_bool temp = false;
 
 	_float m_fCountDead;
+
+	CItem::ITEMINFO  RedSnailItem;
 
 public:
 	static CRedSnail* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

@@ -157,9 +157,6 @@ HRESULT CLevel_ElenyaEnter::Ready_Layer_Monster(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_ELENYAENTER, pLayerTag)))
-		return E_FAIL;
-
 	Safe_Release(pGameInstance);
 
 

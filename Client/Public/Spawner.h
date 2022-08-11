@@ -21,6 +21,7 @@ public:
 		_int			SpawnerNum;
 		_float			MonsterColRad;
 		LEVEL			Level;
+		_tchar*			GAS;
 	}SPAWNERINFO;
 private:
 	CSpawner(LPDIRECT3DDEVICE9 pGraphic_Device);

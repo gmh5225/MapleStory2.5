@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Creature.h"
+#include "Item.h"
 
 BEGIN(Client)
 
@@ -59,6 +60,8 @@ private:
 
 
 	_float m_fCountDead;
+
+	CItem::ITEMINFO  SlimeItem;
 
 public:
 	static CSlime* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

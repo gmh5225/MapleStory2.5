@@ -519,6 +519,21 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Weed">
       <UniqueIdentifier>{78078aef-85fa-4ee2-b3b8-e97e130634c2}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="04.UI\07.BossHpBar\BlueMushmom">
+      <UniqueIdentifier>{675326f8-ca04-460e-bf89-2db22c410b39}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\07.BossHpBar\GAS">
+      <UniqueIdentifier>{a5be0500-2b3d-4a53-ac8b-29ee31adbd17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\TransformPig">
+      <UniqueIdentifier>{ec6cc0ee-7330-4626-b832-e8961075ae28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\TransformSlime">
+      <UniqueIdentifier>{6f2afcf9-413c-4bb6-8538-11556de20764}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\TransformStump">
+      <UniqueIdentifier>{c9af17c8-b6b5-48d8-afd5-ee5893b8b0a3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -876,12 +891,6 @@
     <ClInclude Include="..\Public\Level_ElenyaEnter.h">
       <Filter>01.Level\ElenyaEnter</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\BlueMushmomHpbar.h">
-      <Filter>04.UI\07.BossHpBar</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\BlueMushmomHpGage.h">
-      <Filter>04.UI\07.BossHpBar</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Warning.h">
       <Filter>02.GameObject\Creature\Npc\03.Warning</Filter>
     </ClInclude>
@@ -965,6 +974,27 @@
     </ClInclude>
     <ClInclude Include="..\Public\Weed.h">
       <Filter>02.GameObject\Creature\Weed</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\BlueMushmomHpbar.h">
+      <Filter>04.UI\07.BossHpBar\BlueMushmom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlueMushmomHpGage.h">
+      <Filter>04.UI\07.BossHpBar\BlueMushmom</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GASHpbar.h">
+      <Filter>04.UI\07.BossHpBar\GAS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GASHpGage.h">
+      <Filter>04.UI\07.BossHpBar\GAS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TransformPig.h">
+      <Filter>02.GameObject\Creature\Monster\TransformPig</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TransformSlime.h">
+      <Filter>02.GameObject\Creature\Monster\TransformSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TransformStump.h">
+      <Filter>02.GameObject\Creature\Monster\TransformStump</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1313,12 +1343,6 @@
     <ClCompile Include="..\Private\QuestUI.cpp">
       <Filter>04.UI\02.Quest</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\BlueMushmomHpbar.cpp">
-      <Filter>04.UI\07.BossHpBar</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\BlueMushmomHpGage.cpp">
-      <Filter>04.UI\07.BossHpBar</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\Warning.cpp">
       <Filter>02.GameObject\Creature\Npc\03.Warning</Filter>
     </ClCompile>
@@ -1402,6 +1426,27 @@
     </ClCompile>
     <ClCompile Include="..\Private\Weed.cpp">
       <Filter>02.GameObject\Creature\Weed</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\BlueMushmomHpbar.cpp">
+      <Filter>04.UI\07.BossHpBar\BlueMushmom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlueMushmomHpGage.cpp">
+      <Filter>04.UI\07.BossHpBar\BlueMushmom</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GASHpbar.cpp">
+      <Filter>04.UI\07.BossHpBar\GAS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GASHpGage.cpp">
+      <Filter>04.UI\07.BossHpBar\GAS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TransformPig.cpp">
+      <Filter>02.GameObject\Creature\Monster\TransformPig</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TransformSlime.cpp">
+      <Filter>02.GameObject\Creature\Monster\TransformSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TransformStump.cpp">
+      <Filter>02.GameObject\Creature\Monster\TransformStump</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
