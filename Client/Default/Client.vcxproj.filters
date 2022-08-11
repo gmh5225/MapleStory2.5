@@ -513,6 +513,12 @@
     </Filter>
     <Filter Include="20.DATA\ItemInfo\ConsumInfo\Teleport">
       <UniqueIdentifier>{1143fc4d-e3cd-42a6-ade3-06b0a0d0025d}</UniqueIdentifier>
+          </Filter>
+    <Filter Include="02.GameObject\Creature\Grass">
+      <UniqueIdentifier>{2ff14d73-7f9b-43a6-835d-b30b879b713b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Weed">
+      <UniqueIdentifier>{78078aef-85fa-4ee2-b3b8-e97e130634c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -953,6 +959,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\TeleportInfo.h">
       <Filter>20.DATA\ItemInfo\ConsumInfo\Teleport</Filter>
+          </ClInclude>
+    <ClInclude Include="..\Public\Grass.h">
+      <Filter>02.GameObject\Creature\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Weed.h">
+      <Filter>02.GameObject\Creature\Weed</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1384,6 +1396,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\TeleportInfo.cpp">
       <Filter>20.DATA\ItemInfo\ConsumInfo\Teleport</Filter>
+          </ClCompile>
+    <ClCompile Include="..\Private\Grass.cpp">
+      <Filter>02.GameObject\Creature\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Weed.cpp">
+      <Filter>02.GameObject\Creature\Weed</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

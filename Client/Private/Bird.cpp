@@ -33,7 +33,7 @@ HRESULT CBird::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(0.5f);
 	m_fTime = 0.f;
 	SetState(STATE_MOVE, DIR_R);
-	m_fSpeed = 10.f;
+	m_fSpeed = 6.f;
 	return S_OK;
 }
 
@@ -174,6 +174,12 @@ void CBird::Tick_Hit(_float fTimeDelta)
 
 void CBird::Tick_Chase(_float fTimeDelta)
 {
+	m_fTime += fTimeDelta;
+	if (m_fTime > 5.f)
+	{
+		Set_Dead();
+		m_fTime = 0.f;
+	}
 	CTransform::TRANSFORMDESC ChaseDesc;
 	ChaseDesc.fSpeedPerSec = m_fSpeed;
 	ChaseDesc.fRotationPerSec = D3DXToRadian(90.0f);
@@ -182,10 +188,18 @@ void CBird::Tick_Chase(_float fTimeDelta)
 	_float3 vTargetPos = _float3(8.f, 10.f, 4.f);
 	_float3	vLook = vTargetPos - m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	m_pTransformCom->Set_State(CTransform::STATE_LOOK,vLook);
-	m_pTransformCom->Go_Straight(fTimeDelta);
-	if (m_fSpeed > 3.f)
+
+	
+	if (m_fSpeed > 2.f)
 	{
-		m_fSpeed -= 0.4f;
+		m_pTransformCom->Go_Straight(fTimeDelta);
+		m_fSpeed -= 0.1f;	
+
+	}
+
+	if (m_fSpeed < 2.f)
+	{
+		m_pTransformCom->Go_R(fTimeDelta);
 	}
 }
 

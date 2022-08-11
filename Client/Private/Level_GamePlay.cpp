@@ -218,15 +218,15 @@ HRESULT CLevel_GamePlay::Ready_Layer_Npc(const _tchar * pLayerTag)
 		return E_FAIL;
 
 	CCreature::CRETUREDESC Creatureinfo;
-	Creatureinfo.vPos = _float3(11.5f, 6.0f, -3.5f);
+	Creatureinfo.vPos = _float3(11.5f, 5.7f, -3.5f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chick"), LEVEL_GAMEPLAY, pLayerTag,&Creatureinfo)))
 		return E_FAIL;
 	CCreature::CRETUREDESC Creatureinfo1;
-	Creatureinfo1.vPos = _float3(11.8f, 6.0f, -3.7f);
+	Creatureinfo1.vPos = _float3(11.8f, 5.7f, -3.7f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chick"), LEVEL_GAMEPLAY, pLayerTag, &Creatureinfo1)))
 		return E_FAIL;
 	CCreature::CRETUREDESC Creatureinfo2;
-	Creatureinfo2.vPos = _float3(12.1f, 6.0f, -3.9f);
+	Creatureinfo2.vPos = _float3(12.1f, 5.7f, -3.9f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chick"), LEVEL_GAMEPLAY, pLayerTag, &Creatureinfo2)))
 		return E_FAIL;
 
@@ -242,6 +242,78 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+
+	//О©╫О©╫О©╫О©╫2О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo0;
+	WeedInfo0.vPos = _float3(-9.f, 0.68f, -0.5f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo0)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo1;
+	WeedInfo1.vPos = _float3(-8.5f, 0.68f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo1)))
+		return E_FAIL;
+	//О©╫О©╫э©О©╫О©╫О©╫О©╫О©╫2О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo2;
+	WeedInfo2.vPos = _float3(-3.8f, 0.68f, 0.7f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo2)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo3;
+	WeedInfo3.vPos = _float3(-3.3f, 0.68f, 0.5f);
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo3)))
+		//return E_FAIL;
+	//О©╫О©╫э©О©╫О©╫О©╫1О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo4;
+	WeedInfo4.vPos = _float3(-5.7f, 0.68f, 2.5f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo4)))
+		return E_FAIL;
+	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫й╠О©╫О©╫О©╫3О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo7;
+	WeedInfo7.vPos = _float3(-0.3f, 3.68f, 3.0f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo7)))
+		return E_FAIL;
+	//О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo8;
+	WeedInfo8.vPos = _float3(-3.8f, 3.68f, 6.8f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo8)))
+		return E_FAIL;
+	//О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo9;
+	WeedInfo9.vPos = _float3(1.3f, 3.68f, 9.0f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo9)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo10;
+	WeedInfo10.vPos = _float3(1.5f, 3.68f, 7.4f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo10)))
+		return E_FAIL;
+	//О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫О©╫О©╫О©╫ О©╫О©╫О©╫Г╦╝
+	CCreature::CRETUREDESC GrassInfo1;
+	GrassInfo1.vPos = _float3(4.8f, 3.78f, 4.8f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo1)))
+		return E_FAIL;
+	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫Г╦╝
+	CCreature::CRETUREDESC GrassInfo2;
+	GrassInfo2.vPos = _float3(0.f, 2.78f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo2)))
+		return E_FAIL;
+	//О©╫ь©О©╫О©╫ы╢О©╫
+	CCreature::CRETUREDESC WeedInfo11;
+	WeedInfo11.vPos = _float3(0.f, 0.68f, -8.0f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo11)))
+		return E_FAIL;
+	//О©╫О©╫н╫О©╫е╨О©╫О©╫О©╫О©╫О©╫О©╫3О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo12;
+	WeedInfo12.vPos = _float3(10.f, 5.68f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo12)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo13;
+	WeedInfo13.vPos = _float3(13.f, 5.68f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo13)))
+		return E_FAIL;
+	//О©╫О©╫О©╫О©╫О©╫О©╫О©╫О©╫
+	CCreature::CRETUREDESC WeedInfo14;
+	WeedInfo14.vPos = _float3(17.f, 5.68f, -7.4f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo14)))
+		return E_FAIL;
 
 
 	CPotal::POTALDESC PotalDesc;
@@ -899,7 +971,7 @@ HRESULT CLevel_GamePlay::Ready_ConsumItemIcon(const _tchar* pLayerTag)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
-	//xер 42 yер 42
+	//xО©╫О©╫ 42 yО©╫О©╫ 42
 	CUI::UIINFO ConsumIcon1;
 	ConsumIcon1.fSizeX = 27.f;
 	ConsumIcon1.fSizeY = 27.f;
@@ -1196,7 +1268,7 @@ HRESULT CLevel_GamePlay::Ready_StuffItemIcon(const _tchar * pLayerTag)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
-	//xер 42 yер 42
+	//xО©╫О©╫ 42 yО©╫О©╫ 42
 	CUI::UIINFO StuffIcon1;
 	StuffIcon1.fSizeX = 27.f;
 	StuffIcon1.fSizeY = 27.f;

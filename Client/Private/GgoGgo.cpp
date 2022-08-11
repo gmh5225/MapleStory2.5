@@ -28,7 +28,7 @@ HRESULT CGgoGgo::Initialize(void * pArg)
 	m_sTag = "Tag_Npc";
 
 	m_fColRad = 1.f;	
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(11.f, 6.0f, -3.0f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(11.f, 5.7f, -3.0f));
 	m_pTransformCom->Set_Scaled(0.5f);
 	m_fTime = 0.f;
 	SetState(STATE_IDLE, DIR_L);

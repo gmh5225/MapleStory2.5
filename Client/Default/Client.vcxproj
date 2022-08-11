@@ -196,6 +196,7 @@
     <ClInclude Include="..\Public\GgoGgo.h" />
     <ClInclude Include="..\Public\GoStump.h" />
     <ClInclude Include="..\Public\GoStumpInfo.h" />
+    <ClInclude Include="..\Public\Grass.h" />
     <ClInclude Include="..\Public\GreenMushroom.h" />
     <ClInclude Include="..\Public\GreenMushroomInfo.h" />
     <ClInclude Include="..\Public\Helena.h" />
@@ -298,6 +299,7 @@
     <ClInclude Include="..\Public\WarriorReef.h" />
     <ClInclude Include="..\Public\WarriorReefIcon.h" />
     <ClInclude Include="..\Public\WarriorReefInfo.h" />
+    <ClInclude Include="..\Public\Weed.h" />
     <ClInclude Include="..\Public\Wood.h" />
     <ClInclude Include="Client.h" />
     <ClInclude Include="Resource.h" />
@@ -343,6 +345,7 @@
     <ClCompile Include="..\Private\GgoGgo.cpp" />
     <ClCompile Include="..\Private\GoStump.cpp" />
     <ClCompile Include="..\Private\GoStumpInfo.cpp" />
+    <ClCompile Include="..\Private\Grass.cpp" />
     <ClCompile Include="..\Private\GreenMushroom.cpp" />
     <ClCompile Include="..\Private\GreenMushroomInfo.cpp" />
     <ClCompile Include="..\Private\Helena.cpp" />
@@ -445,6 +448,7 @@
     <ClCompile Include="..\Private\WarriorReef.cpp" />
     <ClCompile Include="..\Private\WarriorReefIcon.cpp" />
     <ClCompile Include="..\Private\WarriorReefInfo.cpp" />
+    <ClCompile Include="..\Private\Weed.cpp" />
     <ClCompile Include="..\Private\Wood.cpp" />
     <ClCompile Include="Client.cpp" />
     <ClCompile Include="stdafx.cpp">
