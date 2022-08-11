@@ -101,8 +101,8 @@ HRESULT CUIManager::Add_BlackWizardPatternUI(CBlackWizardPatternUI * pInstance)
 {
 	if (pInstance == nullptr)
 		return E_FAIL;
-	Safe_AddRef(pInstance);
 	m_pBlackWizardPatternUI = pInstance;
+
 
 	return S_OK;
 }
@@ -110,7 +110,6 @@ HRESULT CUIManager::Add_BlackWizardPatternUI(CBlackWizardPatternUI * pInstance)
 void CUIManager::Free()
 {
 	Safe_Release(m_pItemNotice);
-	Safe_Release(m_pBlackWizardPatternUI);
 	Safe_Release(m_pCutScreen);
 	Safe_Release(m_pLoading);
 }
