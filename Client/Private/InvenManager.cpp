@@ -95,7 +95,7 @@ HRESULT CInvenManager::Change_Info(const _tchar * pTag, _uint iIndex, InvenType 
 }
 
 
-void CInvenManager::MakeItem(InvenType eType, _int TextNum, const _tchar * pTag, _float3 vPos)
+void CInvenManager::MakeItem(InvenType eType, _int TextNum, const _tchar * pTag, _float3 vPos, LEVEL eLevel)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -106,7 +106,7 @@ void CInvenManager::MakeItem(InvenType eType, _int TextNum, const _tchar * pTag,
 	ItemInfo.pTag = pTag;
 	ItemInfo.vPos = vPos;
 
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &ItemInfo);
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), eLevel, TEXT("Layer_Item"), &ItemInfo);
 
 	Safe_Release(pGameInstance);
 }

@@ -75,7 +75,6 @@ protected:
 	void BoxColCom_Tick(class CTransform* pTrans);
 	void BoxColCom_Render(class CTransform* pTrans);
 
-
 public:
 	class CComponent* Find_Component(const _tchar* pComponentTag);
 

@@ -35,7 +35,7 @@ public:
 	HRESULT Check_Icon(const _tchar* pTag, InvenType eType, _uint iNum);
 	HRESULT Change_Info(const _tchar* pTag, _uint iIndex, InvenType eType);
 	
-	void MakeItem(InvenType eType, _int TextNum, const _tchar* pTag, _float3 vPos);
+	void MakeItem(InvenType eType, _int TextNum, const _tchar* pTag, _float3 vPos, LEVEL eLevel);
 
 	
 private:
