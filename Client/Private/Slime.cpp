@@ -358,7 +358,17 @@ void CSlime::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.f)
+	{
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 2;
+		SlimeItem.pTag = L"GoStumpInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &SlimeItem);
+		Safe_Release(pGameInstance);
 		Set_Dead();
+	}
 }
 
 

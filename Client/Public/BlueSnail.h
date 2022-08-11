@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Creature.h"
+#include "Item.h"
 
 BEGIN(Client)
 
@@ -56,6 +57,7 @@ private:
 
 	_float m_fCountDead;
 
+	CItem::ITEMINFO  BlueSnailItem;
 private:
 	HRESULT SetUp_Components();
 	void Die();

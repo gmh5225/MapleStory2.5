@@ -353,7 +353,17 @@ void CBlueSnail::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.f)
+	{
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+		BlueSnailItem.eType = CInvenManager::TYPE_STUFF;
+		BlueSnailItem.iTextNum = 0;
+		BlueSnailItem.pTag = L"GoStumpInfo";
+		BlueSnailItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &BlueSnailItem);
+		Safe_Release(pGameInstance);
 		Set_Dead();
+	}
 }
 
 

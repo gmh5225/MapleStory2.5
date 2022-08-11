@@ -197,9 +197,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardPatternUI"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;*/
 
-	/*if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_GAS, pLayerTag)))
-		return E_FAIL;*/
-
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -276,7 +273,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	
 
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_GAS");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Henesys");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
@@ -479,45 +476,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_NonStatic_UI(const _tchar * pLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
-
-	CSpawner::SPAWNERINFO MonsterInfo;
-
-
-	MonsterInfo.MonsterName = TEXT("GoStump");
-	MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
-	MonsterInfo.SpawnerNum = 0;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
-	MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	//MonsterInfo.MonsterName = TEXT("TransformPig");
-	//MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
-	//MonsterInfo.SpawnerNum = 0;
-	//MonsterInfo.MonsterNum = 2;
-	//MonsterInfo.MonsterColRad = 1.f;
-	//MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	//MonsterInfo.MonsterName = TEXT("TransformSlime");
-	//MonsterInfo.MonsterPos = _float3{ -5.f , 1.f, -1.f };
-	//MonsterInfo.SpawnerNum = 1;
-	//MonsterInfo.MonsterNum = 2;
-	//MonsterInfo.MonsterColRad = 1.f;
-	//MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	//MonsterInfo.MonsterName = TEXT("TransformStump");
-	//MonsterInfo.MonsterPos = _float3{ -5.f , 1.f, -1.f };
-	//MonsterInfo.SpawnerNum = 2;
-	//MonsterInfo.MonsterNum = 2;
-	//MonsterInfo.MonsterColRad = 1.f;
-	//MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	return S_OK;
 }

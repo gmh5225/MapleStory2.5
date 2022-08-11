@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Creature.h"
+#include "Item.h"
 
 BEGIN(Client)
 
@@ -53,6 +54,8 @@ private:
 	_int m_iIndexNum;
 
 	_float m_fCountDead;
+
+	CItem::ITEMINFO  RibbonPigItem;
 
 private:
 	HRESULT SetUp_Components();
