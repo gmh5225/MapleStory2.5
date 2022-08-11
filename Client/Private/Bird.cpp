@@ -29,11 +29,11 @@ HRESULT CBird::Initialize(void * pArg)
 
 	m_fColRad = 0.5f;
 	
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(2.f, 4.0f, 3.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(2.f, 4.0f, 4.f));
 	m_pTransformCom->Set_Scaled(0.5f);
 	m_fTime = 0.f;
 	SetState(STATE_MOVE, DIR_R);
-
+	m_fSpeed = 10.f;
 	return S_OK;
 }
 
@@ -174,7 +174,7 @@ void CBird::Tick_Hit(_float fTimeDelta)
 void CBird::Tick_Chase(_float fTimeDelta)
 {
 	CTransform::TRANSFORMDESC ChaseDesc;
-	ChaseDesc.fSpeedPerSec = 2.f;
+	ChaseDesc.fSpeedPerSec = m_fSpeed;
 	ChaseDesc.fRotationPerSec = D3DXToRadian(90.0f);
 	m_pTransformCom->Set_TransformDesc(ChaseDesc);
 
@@ -182,9 +182,10 @@ void CBird::Tick_Chase(_float fTimeDelta)
 	_float3	vLook = vTargetPos - m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	m_pTransformCom->Set_State(CTransform::STATE_LOOK,vLook);
 	m_pTransformCom->Go_Straight(fTimeDelta);
-	//m_pTransformCom->Get_State(CTransform::STATE_POSITION).y - 0.5f;
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+	if(m_fSpeed>2.f)
+	m_fSpeed -= 0.3f;
+	
+	//m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	
 }
 
@@ -222,12 +223,12 @@ void CBird::SetAni()
 		break;
 
 	case CBird::STATE_CHASE:
-		if (m_eDir == DIR_L)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_MoveL"), 0.3f, CAnimator::STATE_LOOF);
-		else
+		//if (m_eDir == DIR_L)
+		//	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_MoveL"), 0.3f, CAnimator::STATE_LOOF);
+		//else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_ChaseR"), 0.1f, CAnimator::STATE_LOOF);
 
-		break;
+	//	break;
 	}
 }
 
