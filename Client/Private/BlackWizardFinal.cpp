@@ -2,6 +2,8 @@
 #include "..\Public\BlackWizardFinal.h"
 #include "GameInstance.h"
 #include "UIManager.h"
+#include "ToolManager.h"
+#include "CutSceneManager.h"
 
 CBlackWizardFinal::CBlackWizardFinal(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -74,8 +76,16 @@ void CBlackWizardFinal::Tick(_float fTimeDelta)
 }
 void CBlackWizardFinal::LateTick(_float fTimeDelta)
 {
-	if (m_pAnimatorCom->Get_AnimCount() >= 27)
-		Set_Dead();
+	if (m_pAnimatorCom->Get_AnimCount() == 13)
+		CCutSceneManager::Get_Instance()->Get_MainCam()->StartShake(0.4f, 0.05f, 15.f, _float3(1.f, 1.f, 1.f));
+
+	if (m_pAnimatorCom->Get_AnimCount() == 20)
+	{
+		CToolManager::Get_Instance()->SetDestLevel(LEVEL_DARKMAGEENTER, _float3{ -1.f, 2.f, 0.f });
+	}
+
+	
+		
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 
@@ -139,24 +149,20 @@ CGameObject * CBlackWizardFinal::Clone(void* pArg)
 
 void CBlackWizardFinal::Collision(CGameObject * pOther)
 {
-	if (pOther->Get_Tag() == "Tag_Player")
+	/*if (pOther->Get_Tag() == "Tag_Player")
 	{
 		if (m_pAnimatorCom->Get_AnimCount() == 15)
 		{
 			if (0 < m_pOther.size())
 				return;
-
-			
-
 		
-			
 		
 			m_pOther.push_back(pOther);
 
 			pOther->Damaged(this);
 
 		}
-	}
+	}*/
 }
 
 HRESULT CBlackWizardFinal::Set_RenderState()

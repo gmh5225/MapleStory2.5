@@ -35,10 +35,6 @@ HRESULT CBlueMushmomHpbar::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
-	
-	
-
-
 	return S_OK;
 }
 

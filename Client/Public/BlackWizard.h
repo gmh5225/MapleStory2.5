@@ -7,7 +7,7 @@ BEGIN(Client)
 class CBlackWizard final : public CCreature
 {
 public:
-	enum STATE {STATE_APPEAR, STATE_STAND, STATE_SKILL1, STATE_SKILL2,STATE_SKILL3, STATE_SKILL4, STATE_END};
+	enum STATE {STATE_APPEAR, STATE_ESCAPE, STATE_STAND, STATE_SKILL1, STATE_SKILL2,STATE_SKILL3, STATE_SKILL4,  STATE_END};
 public:
 	CBlackWizard(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CBlackWizard(const CBlackWizard& rhs);
@@ -45,6 +45,7 @@ private:
 	STATE m_eCurState;
 	bool m_bState;
 	bool m_bFinal;
+	_uint m_iHp;
 public:
 	static CBlackWizard* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

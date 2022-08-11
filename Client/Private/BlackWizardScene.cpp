@@ -59,8 +59,8 @@ void CBlackWizardScene::LateTick(_float fTimeDelta)
 	{
 		CGameInstance* pInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pInstance);
-		((CBlackWizard*)pInstance->Get_ObjectPtr(LEVEL_GAMEPLAY, L"Layer_BlackWizard", 0))->Set_Final();
-		pInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardFinal"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"));
+		((CBlackWizard*)pInstance->Get_ObjectPtr(LEVEL_DARKMAGE, L"Layer_BlackWizard", 0))->Set_Final();
+		pInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardFinal"), LEVEL_DARKMAGE, TEXT("Layer_Monster_Skill"));
 		Safe_Release(pInstance);
 		m_bFinal = true;
 	}

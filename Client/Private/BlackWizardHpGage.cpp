@@ -1,26 +1,25 @@
 #include "stdafx.h"
-#include "..\Public\BlueMushmomHpGage.h"
+#include "..\Public\BlackWizardHpGage.h"
 #include "GameInstance.h"
-#include "QuestManager.h"
 #include "UIManager.h"
 
-CBlueMushmomHpGage::CBlueMushmomHpGage(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlackWizardHpGage::CBlackWizardHpGage(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
 {
 	ZeroMemory(&m_UIInfo, sizeof(UIINFO));
 }
 
-CBlueMushmomHpGage::CBlueMushmomHpGage(const CBlueMushmomHpGage & rhs)
+CBlackWizardHpGage::CBlackWizardHpGage(const CBlackWizardHpGage & rhs)
 	: CGameObject(rhs)
 {
 }
 
-HRESULT CBlueMushmomHpGage::Initialize_Prototype()
+HRESULT CBlackWizardHpGage::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CBlueMushmomHpGage::Initialize(void * pArg)
+HRESULT CBlackWizardHpGage::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
@@ -29,25 +28,25 @@ HRESULT CBlueMushmomHpGage::Initialize(void * pArg)
 
 	m_UIInfo.fSizeX = 608.f;
 	m_UIInfo.fSizeY = 21.f;
-	m_UIInfo.fX = 613.0f;
-	m_UIInfo.fY = 20.0f;
+	m_UIInfo.fX = 633.0f;
+	m_UIInfo.fY = 19.0f;
 
 
 
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
-	m_fOriginHp = _float(CUIManager::Get_Instance()->Set_BlueMushmomHp());
+	m_fOriginHp = _float(CUIManager::Get_Instance()->Get_BlackWizardHp());
 	m_fNowHp = 0;
 
 	m_fOriginSize = m_UIInfo.fSizeX;
-	
 
-	
+
+
 	return S_OK;
 }
 
-void CBlueMushmomHpGage::Tick(_float fTimeDelta)
+void CBlackWizardHpGage::Tick(_float fTimeDelta)
 {
 	POINT		ptMouse;
 	GetCursorPos(&ptMouse);
@@ -59,9 +58,9 @@ void CBlueMushmomHpGage::Tick(_float fTimeDelta)
 
 }
 
-void CBlueMushmomHpGage::LateTick(_float fTimeDelta)
+void CBlackWizardHpGage::LateTick(_float fTimeDelta)
 {
-	m_fNowHp = _float(CUIManager::Get_Instance()->Set_BlueMushmomHp());
+	m_fNowHp = _float(CUIManager::Get_Instance()->Get_BlackWizardHp());
 
 	m_UIInfo.fSizeX = m_fOriginSize * (m_fNowHp / m_fOriginHp);
 
@@ -73,7 +72,7 @@ void CBlueMushmomHpGage::LateTick(_float fTimeDelta)
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 }
 
-HRESULT CBlueMushmomHpGage::Render()
+HRESULT CBlackWizardHpGage::Render()
 {
 
 	_float4x4		Matrix;
@@ -108,7 +107,7 @@ HRESULT CBlueMushmomHpGage::Render()
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (vPlayerPos.x > 36.f && (_float(CUIManager::Get_Instance()->Set_BlueMushmomHp()) > 0))
+	if ((_float(CUIManager::Get_Instance()->Get_BlackWizardHp()) > 0))
 		m_pVIBufferCom->Render();
 
 	Safe_Release(pGameInstance);
@@ -116,7 +115,7 @@ HRESULT CBlueMushmomHpGage::Render()
 	return S_OK;
 }
 
-HRESULT CBlueMushmomHpGage::SetUp_Components()
+HRESULT CBlackWizardHpGage::SetUp_Components()
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
@@ -140,42 +139,40 @@ HRESULT CBlueMushmomHpGage::SetUp_Components()
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Hp"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
-
-	
 	return S_OK;
 }
 
-void CBlueMushmomHpGage::MouseCollision()
+void CBlackWizardHpGage::MouseCollision()
 {
 }
 
-CBlueMushmomHpGage * CBlueMushmomHpGage::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlackWizardHpGage * CBlackWizardHpGage::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CBlueMushmomHpGage*		pInstance = new CBlueMushmomHpGage(pGraphic_Device);
+	CBlackWizardHpGage*		pInstance = new CBlackWizardHpGage(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpGage"));
+		MSG_BOX(TEXT("Failed To Created : CBlackWizardHpGage"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-CGameObject * CBlueMushmomHpGage::Clone(void* pArg)
+CGameObject * CBlackWizardHpGage::Clone(void* pArg)
 {
-	CBlueMushmomHpGage*		pInstance = new CBlueMushmomHpGage(*this);
+	CBlackWizardHpGage*		pInstance = new CBlackWizardHpGage(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlueMushmomHpGage"));
+		MSG_BOX(TEXT("Failed To Created : CBlackWizardHpGage"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CBlueMushmomHpGage::Free()
+void CBlackWizardHpGage::Free()
 {
 	__super::Free();
 

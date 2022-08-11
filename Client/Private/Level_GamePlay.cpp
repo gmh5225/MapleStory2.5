@@ -188,15 +188,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_HENESYS, pLayerTag)))
-	//	return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizard"), LEVEL_GAMEPLAY, L"Layer_BlackWizard")))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardPatternUI"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
-
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -260,7 +251,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	PotalDesc.eDestLevel = LEVEL_DHENESYS;
+	//PotalDesc.eDestLevel = LEVEL_DHENESYS;
+	PotalDesc.eDestLevel = LEVEL_DARKMAGE;
 	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
 	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))

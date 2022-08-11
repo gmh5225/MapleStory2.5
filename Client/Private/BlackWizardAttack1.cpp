@@ -2,6 +2,7 @@
 #include "..\Public\BlackWizardAttack1.h"
 #include "GameInstance.h"
 #include "UIManager.h"
+#include "CutSceneManager.h"
 
 CBlackWizardAttack1::CBlackWizardAttack1(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -74,6 +75,10 @@ void CBlackWizardAttack1::Tick(_float fTimeDelta)
 }
 void CBlackWizardAttack1::LateTick(_float fTimeDelta)
 {
+	if (m_pAnimatorCom->Get_AnimCount() == 15)
+	{
+		CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
+	}
 	if (m_pAnimatorCom->Get_AnimCount() >= 35)
 		Set_Dead();
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
@@ -156,7 +161,7 @@ void CBlackWizardAttack1::Collision(CGameObject * pOther)
 
 			_float3 vPos = m_pTarget->Get_State(CTransform::STATE_POSITION);
 
-			pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardHit"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &vPos);
+			pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardHit"), LEVEL_DARKMAGE, TEXT("Layer_Monster_Skill"), &vPos);
 			Safe_Release(pGameInstance);
 			m_pOther.push_back(pOther);
 

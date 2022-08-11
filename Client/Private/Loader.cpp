@@ -91,11 +91,13 @@
 #include "BlackWizardHit.h"
 #include "Bandit.h"
 #include "CutScreen.h"
-
+#include "BlackWizardHpBar.h"
 #include "UIManager.h"
 #include "BlackWizardPatternUI.h"
 #include "BlackWizardScene.h"
 #include "BlackWizardFinal.h"
+#include "BlackWizardHpBar.h"
+#include "BlackWizardHpGage.h"
 
 #include "GAS.h"
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -811,6 +813,14 @@ HRESULT CLoader::Load_UI_Object()
 		CBlueMushmomHpbar::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardHpBar"),
+		CBlackWizardHpBar::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardHpGage"),
+		CBlackWizardHpGage::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlueMushmomHpGage"),
 		CBlueMushmomHpGage::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -1180,6 +1190,10 @@ HRESULT CLoader::Load_BossMonster_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Stand"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Stand/Edit/Stand%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Escape"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/Escape/Edit/Escape%d.png"), 19))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Skill1"),
@@ -1743,11 +1757,13 @@ HRESULT CLoader::Load_UI_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Hpbar/BlueMushmomHp%d.png"), 2))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackWizardHpBar"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Hpbar/BlackWizardHpBar.png")))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Hp"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Hpbar/Hp%d.png"), 1))))
 		return E_FAIL;
-
-
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Chat"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Quest/Dialog/Dialog%d.png"), 24))))

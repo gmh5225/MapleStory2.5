@@ -32,7 +32,7 @@ HRESULT CBlackWizardPatternUI::Initialize(void * pArg)
 	m_UIInfo.fY = 300.f;
 
 	__super::Initialize(pArg);
-	m_iTexturenum = 0;
+	m_iTexturenum = 7;
 	m_fShakeAcc = 0.f;
 	m_bRight = true;
 	m_bShake = false;

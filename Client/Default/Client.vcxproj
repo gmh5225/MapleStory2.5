@@ -164,6 +164,8 @@
     <ClInclude Include="..\Public\BlackWizardAttack3.h" />
     <ClInclude Include="..\Public\BlackWizardFinal.h" />
     <ClInclude Include="..\Public\BlackWizardHit.h" />
+    <ClInclude Include="..\Public\BlackWizardHpBar.h" />
+    <ClInclude Include="..\Public\BlackWizardHpGage.h" />
     <ClInclude Include="..\Public\BlackWizardPatternUI.h" />
     <ClInclude Include="..\Public\BlackWizardScene.h" />
     <ClInclude Include="..\Public\BlueMushmom.h" />
@@ -309,6 +311,8 @@
     <ClCompile Include="..\Private\BlackWizardAttack3.cpp" />
     <ClCompile Include="..\Private\BlackWizardFinal.cpp" />
     <ClCompile Include="..\Private\BlackWizardHit.cpp" />
+    <ClCompile Include="..\Private\BlackWizardHpBar.cpp" />
+    <ClCompile Include="..\Private\BlackWizardHpGage.cpp" />
     <ClCompile Include="..\Private\BlackWizardPatternUI.cpp" />
     <ClCompile Include="..\Private\BlackWizardScene.cpp" />
     <ClCompile Include="..\Private\BlueMushmom.cpp" />

@@ -15,9 +15,6 @@ CBlueMushmom::CBlueMushmom(const CBlueMushmom & rhs)
 {
 }
 
-
-
-
 HRESULT CBlueMushmom::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
