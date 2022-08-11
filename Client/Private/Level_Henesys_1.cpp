@@ -212,31 +212,31 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Map(const _tchar * pLayerTag)
 	}
 
 
-	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_HenesysHunting");
-	if (nullptr != pModelData)
-	{
-		for (auto& Model : *pModelData)
-		{
-			CVIBuffer_Voxel::VOXELDESC VoxDesc;
-			CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
-			VoxDesc.vPos = Model.vPos;
+	//list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_DHenesysHunting");
+	//if (nullptr != pModelData)
+	//{
+	//	for (auto& Model : *pModelData)
+	//	{
+	//		CVIBuffer_Voxel::VOXELDESC VoxDesc;
+	//		CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
+	//		VoxDesc.vPos = Model.vPos;
 
-			_float4x4 Matrix;
-			D3DXMatrixIdentity(&Matrix);
+	//		_float4x4 Matrix;
+	//		D3DXMatrixIdentity(&Matrix);
 
-			D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
+	//		D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
 
-			D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
+	//		D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
 
 
-			VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
-			VoxDesc.vRotationAix = Model.vAix;
+	//		VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
+	//		VoxDesc.vRotationAix = Model.vAix;
 
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_HENESYS, pLayerTag, &VoxDesc)))
-				return E_FAIL;
-		}
+	//		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_HENESYS, pLayerTag, &VoxDesc)))
+	//			return E_FAIL;
+	//	}
 
-	}
+	//}
 
 
 

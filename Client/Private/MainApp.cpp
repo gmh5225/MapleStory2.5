@@ -21,8 +21,18 @@ bool g_bStaticClone;
 bool g_bStatic;
 bool g_bGamePlay;
 bool g_bHenesys;
-bool g_bElenya;
 bool g_bElenyaEnter;
+bool g_bElenya;
+
+bool g_bElenyaGAS;
+bool g_bDHenesys;
+bool g_bDHenesysHunting;
+bool g_bDElenyaEnter;
+bool g_bDElenya;
+bool g_bBlackMageEnter;
+bool g_bBlackMage;
+bool g_bWhiteMage;
+
 
 using namespace Client;
 
@@ -49,6 +59,15 @@ HRESULT CMainApp::Initialize()
 	g_bHenesys = false;
 	g_bElenya = false;
 	g_bElenyaEnter = false;
+
+	g_bElenyaGAS = false;
+	g_bDHenesys = false;
+	g_bDHenesysHunting = false;
+	g_bDElenyaEnter = false;
+	g_bDElenya = false;
+	g_bBlackMageEnter = false;
+	g_bBlackMage = false;
+	g_bWhiteMage = false;
 	
 
 	if (FAILED(m_pGameInstance->Initialize_Engine(LEVEL_END, g_hInst, GraphicDesc, &m_pGraphic_Device)))
