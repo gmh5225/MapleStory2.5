@@ -4,6 +4,7 @@
 #include "InvenManager.h"
 #include "MouseManager.h"
 #include "UIManager.h"
+#include "ToolManager.h"
 
 
 
@@ -65,8 +66,11 @@ void CConsumIcon::Tick(_float fTimeDelta)
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
 	if (pInstance->Mouse_Up(DIMK_RBUTTON) && m_eCollision == TYPE_ON && pInvenInstance->Get_InvenType() == CInvenManager::TYPE_CONSUM)
 	{
-		if(m_pItemInfo->Get_NowNum() != 0)
-			m_pItemInfo->Set_NowNum(-1);	
+		if (m_pItemInfo->Get_NowNum() != 0)
+		{
+			m_pItemInfo->Set_NowNum(-1);
+			Use_Item();
+		}
 		if (m_pItemInfo->Get_NowNum() == 0)
 		{
 			
@@ -160,6 +164,23 @@ void CConsumIcon::Set_Notice()
 		break;
 	}
 	
+}
+
+void CConsumIcon::Use_Item()
+{
+	switch (m_iTexturenum)
+	{
+	case 0:
+		break;
+	case 1:
+		break;
+	case 2:
+		CToolManager::Get_Instance()->SetDestLevel(LEVEL_GAMEPLAY, _float3{ -9.f, 4.f, -3.f });
+		break;
+
+	default:
+		break;
+	}
 }
 
 void CConsumIcon::Change_Texture()

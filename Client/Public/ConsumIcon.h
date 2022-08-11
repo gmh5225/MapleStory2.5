@@ -20,6 +20,7 @@ public:
 	const _tchar* Get_Tag() { return m_pTag; }
 	void Set_NowNum(_uint iNum);
 	void Set_Notice();
+	void Use_Item();
 public:
 	void Change_Texture();
 

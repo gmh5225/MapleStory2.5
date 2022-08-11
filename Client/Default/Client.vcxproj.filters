@@ -511,6 +511,9 @@
     <Filter Include="04.UI\08.CutScreen">
       <UniqueIdentifier>{805b4480-a9e7-4aae-b97d-451593128bd6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="20.DATA\ItemInfo\ConsumInfo\Teleport">
+      <UniqueIdentifier>{1143fc4d-e3cd-42a6-ade3-06b0a0d0025d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -948,6 +951,9 @@
     <ClInclude Include="..\Public\BlackWizardHpGage.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\UI\HpBar</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\TeleportInfo.h">
+      <Filter>20.DATA\ItemInfo\ConsumInfo\Teleport</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1375,6 +1381,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardHpGage.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\UI\HpBar</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TeleportInfo.cpp">
+      <Filter>20.DATA\ItemInfo\ConsumInfo\Teleport</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

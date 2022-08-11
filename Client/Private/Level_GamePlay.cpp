@@ -33,6 +33,7 @@
 #include "ItemNotice.h"
 #include "UIManager.h"
 #include "BlackWizardPatternUI.h"
+#include "TeleportInfo.h"
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -251,8 +252,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	//PotalDesc.eDestLevel = LEVEL_DHENESYS;
-	PotalDesc.eDestLevel = LEVEL_DARKMAGE;
+	PotalDesc.eDestLevel = LEVEL_DHENESYS;
+	//PotalDesc.eDestLevel = LEVEL_DARKMAGE;
 	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
 	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
@@ -265,7 +266,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	
 
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_DarkMage");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Henesys");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
@@ -273,7 +274,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	}
 
 
-	/*list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Henesys");
+	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Henesys");
 	if (nullptr != pModelData)
 	{
 		for (auto& Model : *pModelData)
@@ -297,7 +298,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 				return E_FAIL;
 		}
 
-	}*/
+	}
 
 	if (FAILED(Ready_Layer_Section(TEXT("Layer_Section"))))
 		return E_FAIL;
@@ -544,6 +545,7 @@ HRESULT CLevel_GamePlay::Ready_ConsumItemInfo()
 	CDefaultInfo* pDefaultConsum = new CDefaultInfo;
 	CRedPortionInfo* pRedPortion = new CRedPortionInfo;
 	CBluePortionInfo* pBluePortion = new CBluePortionInfo;
+	CTeleportInfo* pTeleport = new CTeleportInfo;
 
 	
 	if (FAILED(pInvenInstance->Add_ItemInfo(TEXT("DefaultInfo"), CInvenManager::TYPE_CONSUM, pDefaultConsum)))
@@ -553,6 +555,9 @@ HRESULT CLevel_GamePlay::Ready_ConsumItemInfo()
 		return E_FAIL;
 
 	if (FAILED(pInvenInstance->Add_ItemInfo(TEXT("BluePortionInfo"), CInvenManager::TYPE_CONSUM, pBluePortion)))
+		return E_FAIL;
+
+	if (FAILED(pInvenInstance->Add_ItemInfo(TEXT("TeleportInfo"), CInvenManager::TYPE_CONSUM, pTeleport)))
 		return E_FAIL;
 	return S_OK;
 }

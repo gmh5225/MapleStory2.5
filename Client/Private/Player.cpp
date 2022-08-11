@@ -211,6 +211,16 @@ void CPlayer::Tick(_float fTimeDelta)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &BluePortion);
 	}
 
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_9))
+	{
+		CItem::ITEMINFO Teleport;
+		Teleport.eType = CInvenManager::TYPE_CONSUM;
+		Teleport.iTextNum = 2;
+		Teleport.pTag = L"TeleportInfo";
+		Teleport.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &Teleport);
+	}
+
 	
 
 	Safe_Release(pGameInstance);
@@ -655,7 +665,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		SetState(STATE_JUMP, m_eDir);
 	}
 
-	if (GetKeyState('C') & 0x8000)
+	/*if (GetKeyState('C') & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
@@ -665,9 +675,9 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_WarriorReef"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 		SetState(STATE_DASH, m_eDir);
 		Safe_Release(pGameInstance);
-	}
+	}*/
 
-	if (GetKeyState('V') & 0x8000)
+	if (GetKeyState('C') & 0x8000)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
