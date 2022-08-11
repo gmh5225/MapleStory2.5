@@ -27,7 +27,10 @@ private:
 	void Tick_Chase(_float fTimeDelta);
 	void Tick_Attack(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
+	void Tick_CutScene(_float fTimeDelta);
 	void Tick_End(_float fTimeDelta);
+	void Cut_Attack(_float fTimeDelta);
+	
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -68,6 +71,10 @@ private:
 
 	// 블루 머쉬맘이 점프하기 전 좌표
 	_float3 vPos;
+
+	// For.CutScene
+	_float m_fCutTimeAcc = 0.f;
+	_bool m_bShake = false;
 };
 
 END

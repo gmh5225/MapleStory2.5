@@ -49,20 +49,51 @@ HRESULT CItem::Initialize(void* pArg)
 	m_pTransformCom->Set_Scaled(0.3f);
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_ItemInfo.vPos);
 
+
+	m_pTransformCom->Set_Vel(4.f);
+
+
+	m_vLook = _float3{ 1.f, 0.f, 0.f };
+	_float Angle = CGameInstance::Get_Instance()->Get_FloatRandom(0.f, 360.f);
+	
+	_float4x4 Matrix;
+	D3DXMatrixRotationY(&Matrix, D3DXToRadian(Angle));
+	D3DXVec3TransformNormal(&m_vLook, &m_vLook, &Matrix);
+
 	return S_OK;
 }
 
 void CItem::Tick(_float fTimeDelta)
 {
+	if (m_bDrop && !m_bDance)
+	{
+		m_fTimeAcc += fTimeDelta;
+		if (0.3f < m_fTimeAcc)
+		{
+			_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+			m_fDropY = vPos.y;
+			m_bDance = true;
+		}
+	}
+
+
 	MoveItem(fTimeDelta);
 }
 
 void CItem::LateTick(_float fTimeDelta)
 {
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 
-	__super::BoxColCom_Tick(m_pTransformCom);
+	if (!m_bDance)
+	{
+		m_pTransformCom->Go_Gravity(fTimeDelta);
+		__super::BoxColCom_Tick(m_pTransformCom);
+		m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLISION_ITEM, this);
+	}
+
+	
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLISION_ITEM, this);
+
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }
 
 HRESULT CItem::Render()
@@ -83,7 +114,7 @@ HRESULT CItem::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
-	__super::BoxColCom_Render(m_pTransformCom);
+	// __super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }
@@ -101,6 +132,13 @@ void CItem::Collision(CGameObject * pOther)
 			Set_Dead();
 		}
 	}
+
+
+	if (pOther->Get_Tag() == "Tag_Cube")
+	{
+		m_bDrop = true;
+	}
+
 
 	Safe_Release(pGameInstance);
 }
@@ -126,23 +164,32 @@ void CItem::Set_Billboard()
 void CItem::MoveItem(_float fTimeDelta)
 {
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	if (m_iDirection < 60 && m_bUP)
+	if (!m_bDrop)
 	{
-		vPos.y += 0.3f* fTimeDelta;
-		m_iDirection++;
+		m_pTransformCom->Go_Dir(m_vLook, 1.5f, fTimeDelta);
 	}
-	else
-		m_bUP = false;
+	 else
+	 {
+		if (m_fDropY >= vPos.y - 0.2f)
+		{
+			m_bUP = true;
+		}
+		else if(m_fDropY + 0.30f < vPos.y)
+		{
+			m_bUP = false;
+		}
 
-	if (m_iDirection > 0 && !m_bUP)
-	{
-		vPos.y -= 0.3f* fTimeDelta;
-		m_iDirection--;
-	}
-	else
-		m_bUP = true;
+		if (m_bUP)
+		{
+			vPos.y += 0.1f* fTimeDelta;
+		}
+		else
+		{
+			vPos.y -= 0.1f* fTimeDelta;
+		}
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos);
+		 m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos);
+	 }
 }
 
 HRESULT CItem::SetUp_Components()
@@ -179,21 +226,18 @@ HRESULT CItem::Set_RenderState()
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
 
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAREF, 150);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHAFUNC, D3DCMP_GREATER);
 
-
-	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
+	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
 
 	return S_OK;
 }
 
 HRESULT CItem::Reset_RenderState()
 {
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHATESTENABLE, FALSE);
 
 	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
 
@@ -201,9 +245,6 @@ HRESULT CItem::Reset_RenderState()
 
 	return S_OK;
 
-	
-
-	
 }
 
 CItem * CItem::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

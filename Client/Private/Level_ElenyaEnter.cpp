@@ -60,7 +60,7 @@ HRESULT CLevel_ElenyaEnter::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
-	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
+	CCutSceneManager::Get_Instance()->Start_Enter_ElenyaEnter();
 
 	return S_OK;
 }
@@ -157,7 +157,10 @@ HRESULT CLevel_ElenyaEnter::Ready_Layer_Monster(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_ELENYAENTER, pLayerTag)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueMushmom"), LEVEL_ELENYAENTER, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Warning"), LEVEL_ELENYAENTER, pLayerTag)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);

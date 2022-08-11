@@ -483,7 +483,7 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3">
       <UniqueIdentifier>{0cc6cfca-3d37-4734-bb83-51c86165d496}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="01.Level\DHenesys">
       <UniqueIdentifier>{8bbc53b0-cb72-4cd4-8407-9ede7f68e76a}</UniqueIdentifier>
     </Filter>
@@ -510,6 +510,21 @@
     </Filter>
     <Filter Include="04.UI\08.CutScreen">
       <UniqueIdentifier>{805b4480-a9e7-4aae-b97d-451593128bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\ChatBox">
+      <UniqueIdentifier>{d947de5e-e292-49fe-8969-3ff8421256e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Taxi">
+      <UniqueIdentifier>{f14d9933-6c76-4325-8636-4b51ac641349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Taxi\TaxiButton">
+      <UniqueIdentifier>{a877fbbb-2dcd-4273-bffb-c591c66f448f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Taxi\TaxiChatBox">
+      <UniqueIdentifier>{59d48b4c-d7b9-475f-b7b0-ac7df74497ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Taxi">
+      <UniqueIdentifier>{11d238cb-25ac-42a8-8a76-60c1f8f491b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -908,7 +923,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlackWizardAttack3.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Level_DHenesys.h">
       <Filter>01.Level\DHenesys</Filter>
     </ClInclude>
@@ -935,12 +950,24 @@
     </ClInclude>
     <ClInclude Include="..\public\CutScreen.h">
       <Filter>04.UI\08.CutScreen</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\GAS.h">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\ItemNotice.h">
       <Filter>04.UI\07.Notice\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\ChatBox.h">
+      <Filter>04.UI\03.Dialog\ChatBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\TaxiChatBox.h">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiChatBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\TaxiButton.h">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Taxi.h">
+      <Filter>02.GameObject\Creature\Taxi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1330,7 +1357,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardAttack3.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Level_DHenesys.cpp">
       <Filter>01.Level\DHenesys</Filter>
     </ClCompile>
@@ -1357,12 +1384,24 @@
     </ClCompile>
     <ClCompile Include="..\private\CutScreen.cpp">
       <Filter>04.UI\08.CutScreen</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\GAS.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\ItemNotice.cpp">
       <Filter>04.UI\07.Notice\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\ChatBox.cpp">
+      <Filter>04.UI\03.Dialog\ChatBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\TaxiChatBox.cpp">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiChatBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\TaxiButton.cpp">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Taxi.cpp">
+      <Filter>02.GameObject\Creature\Taxi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

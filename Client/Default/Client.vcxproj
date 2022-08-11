@@ -175,6 +175,7 @@
     <ClInclude Include="..\Public\Bulb.h" />
     <ClInclude Include="..\Public\Camera_Free.h" />
     <ClInclude Include="..\Public\CashBtn.h" />
+    <ClInclude Include="..\public\ChatBox.h" />
     <ClInclude Include="..\Public\Chick.h" />
     <ClInclude Include="..\Public\Client_Defines.h" />
     <ClInclude Include="..\Public\ConsumBtn.h" />
@@ -284,6 +285,9 @@
     <ClInclude Include="..\Public\SunCrossInfo.h" />
     <ClInclude Include="..\Public\StoneGolem.h" />
     <ClInclude Include="..\Public\SunderBreakAttack.h" />
+    <ClInclude Include="..\public\Taxi.h" />
+    <ClInclude Include="..\public\TaxiButton.h" />
+    <ClInclude Include="..\public\TaxiChatBox.h" />
     <ClInclude Include="..\public\ToolManager.h" />
     <ClInclude Include="..\Public\UI.h" />
     <ClInclude Include="..\Public\UIManager.h" />
@@ -320,6 +324,7 @@
     <ClCompile Include="..\Private\Bulb.cpp" />
     <ClCompile Include="..\Private\Camera_Free.cpp" />
     <ClCompile Include="..\Private\CashBtn.cpp" />
+    <ClCompile Include="..\private\ChatBox.cpp" />
     <ClCompile Include="..\Private\Chick.cpp" />
     <ClCompile Include="..\Private\ConsumBtn.cpp" />
     <ClCompile Include="..\private\CutScreen.cpp" />
@@ -428,6 +433,9 @@
     <ClCompile Include="..\Private\SunCrossInfo.cpp" />
     <ClCompile Include="..\Private\StoneGolem.cpp" />
     <ClCompile Include="..\Private\SunderBreakAttack.cpp" />
+    <ClCompile Include="..\private\Taxi.cpp" />
+    <ClCompile Include="..\private\TaxiButton.cpp" />
+    <ClCompile Include="..\private\TaxiChatBox.cpp" />
     <ClCompile Include="..\private\ToolManager.cpp" />
     <ClCompile Include="..\Private\UI.cpp" />
     <ClCompile Include="..\Private\UIManager.cpp" />

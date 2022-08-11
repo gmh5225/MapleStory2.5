@@ -57,6 +57,15 @@ private:
 	_float3 m_vLookTemp;
 	_uint m_iDirection;
 	bool m_bUP;
+
+	_float3 m_vLook;
+	_bool m_bDrop = false;
+	_float m_fDropY = 0.f;
+	_bool m_bDance = false;
+	
+	_float m_fTimeAcc = 0.f;
+
+
 public:
 	static CItem* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

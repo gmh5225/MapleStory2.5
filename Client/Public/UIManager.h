@@ -19,9 +19,14 @@ public:
 	HRESULT Add_ItemNotice(CItemNotice* pItemNotice);
 	void Set_ItemNoticeTextNum(_uint iTextNum, bool bRender);
 	bool Check_Change(_uint iTextNum);
+	void SetTaxiChatBox(class CGameObject* pTaxiChatBox) { m_pTaxiChatBox = (class CTaxiChatBox*)pTaxiChatBox; }
 	
 private:
 	CItemNotice* m_pItemNotice;
+
+
+
+
 public:
 	// For.Loading
 	void Set_Loading();
@@ -32,18 +37,28 @@ public:
 	void On_CutScreen();
 	void Off_CutScreen();
 
+	// For.TaxiChatBox
+	void On_TaxiChatBox();
+	void Off_TaxiChatBox();
+
+
 	void Tick(_float TimeDelta);
 	void LateTick(_float TimeDelta);
+
+
 
 private:
 	class CLoading* m_pLoading = nullptr;
 	class CCutScreen* m_pCutScreen = nullptr;
+	class CTaxiChatBox* m_pTaxiChatBox = nullptr;
 
 public:
 	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
 	_uint Set_BlueMushmomHp() { return m_iBlueMushmomHp; };
 	HRESULT Add_BlackWizardPatternUI(CBlackWizardPatternUI* pInstance);
 	CBlackWizardPatternUI* Get_BlackWizardPatternUI() { return m_pBlackWizardPatternUI; }
+
+
 public:
 	virtual void Free() override;
 

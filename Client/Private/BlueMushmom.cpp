@@ -5,6 +5,7 @@
 #include "QuestManager.h"
 #include "UIManager.h"
 #include "BlueMushmom.h"
+#include "CutSceneManager.h"
 
 CBlueMushmom::CBlueMushmom(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -46,10 +47,10 @@ HRESULT CBlueMushmom::Initialize(void * pArg)
 	vPos.y = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(43.f, 10.f, -7.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(45.f, 10.f, -9.f));
 	m_pTransformCom->Set_Scaled(4.f);
 
-	SetState(STATE_IDLE, DIR_END);
+	SetState(STATE_CUTSCEEN, DIR_END);
 
 	SetShadow(LEVEL_HENESYS, 4.5f);
 
@@ -118,46 +119,51 @@ void CBlueMushmom::Die()
 
 void CBlueMushmom::Tick(_float fTimeDelta)
 {
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-
-	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
-
-	m_fCountJump += fTimeDelta;
-
-	if (vPlayerPos.x < 37.f)
+	if (STATE_CUTSCEEN != m_eCurState)
 	{
-		SetState(STATE_END, DIR_END);
-		m_iHp = 3;
-	}
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
 
-	if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f)
-	{
-		if (m_fCountJump >= 10.f && m_eCurState != STATE_ATTACK)
+		CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+		_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+		m_fCountJump += fTimeDelta;
+
+		if (vPlayerPos.x < 30.f)
 		{
-			if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
-				if (m_eDir == DIR_R)
-					SetState(STATE_ATTACK, DIR_R);
-				else
-					SetState(STATE_ATTACK, DIR_L);
+			SetState(STATE_END, DIR_END);
+			m_iHp = 3;
 		}
+
+		if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f)
+		{
+			if (m_fCountJump >= 10.f && m_eCurState != STATE_ATTACK)
+			{
+				if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
+					if (m_eDir == DIR_R)
+						SetState(STATE_ATTACK, DIR_R);
+					else
+						SetState(STATE_ATTACK, DIR_L);
+			}
+		}
+
+		else if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f)
+		{
+			if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE &&  m_eCurState != STATE_ATTACK)
+				if (m_eDir == DIR_R)
+					SetState(STATE_CHASE, DIR_R);
+				else
+					SetState(STATE_CHASE, DIR_L);
+		}
+
+		Safe_Release(pGameInstance);
+
+
+		CUIManager::Get_Instance()->Get_BlueMushmomHp(m_iHp);
 	}
 
-	else if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f)
-	{
-		if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE &&  m_eCurState != STATE_ATTACK)
-			if (m_eDir == DIR_R)
-				SetState(STATE_CHASE, DIR_R);
-			else
-				SetState(STATE_CHASE, DIR_L);
-	}
 
-	Safe_Release(pGameInstance);
-
-
-	CUIManager::Get_Instance()->Get_BlueMushmomHp(m_iHp);
 
 	switch (m_eCurState)
 	{
@@ -178,6 +184,9 @@ void CBlueMushmom::Tick(_float fTimeDelta)
 		break;
 	case Client::CBlueMushmom::STATE_DIE:
 		Tick_Die(fTimeDelta);
+		break;
+	case Client::CBlueMushmom::STATE_CUTSCEEN:
+		Tick_CutScene(fTimeDelta);
 		break;
 	case Client::CBlueMushmom::STATE_END:
 		Tick_End(fTimeDelta);
@@ -282,6 +291,7 @@ void CBlueMushmom::Tick_Attack(_float fTimeDelta)
 		m_fCountJump = 0;
 		m_fCountLanding = 0;
 		m_bLanding = true;
+		m_bShake = true;
 	}
 
 	// 점프를 시작하고 5초 있다가 상태를 쫒아가게 바꿈
@@ -301,6 +311,47 @@ void CBlueMushmom::Tick_Attack(_float fTimeDelta)
 	Safe_Release(pGameInstance);
 }
 
+void CBlueMushmom::Cut_Attack(_float fTimeDelta)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+
+	// 내려오고 나서 상태를 바꾸는 시간
+	m_fCountLand += fTimeDelta;
+
+	//어느정도 시간이 지나고 점프를 시키는 시간
+	if (!m_bLanding)
+		m_fCountLanding += fTimeDelta;
+
+	if (m_fCountLanding > 0.5f)
+	{
+		m_pTransformCom->Set_Vel(60.0f);
+		m_fCountJump = 0;
+		m_fCountLanding = 0;
+		m_bLanding = true;
+		m_bShake = true;
+	}
+
+	// 점프를 시작하고 5초 있다가 상태를 쫒아가게 바꿈
+	if (m_fCountLand > 8.0f)
+	{
+		if (m_eDir == DIR_R)
+			SetState(STATE_CHASE, DIR_R);
+		else
+			SetState(STATE_CHASE, DIR_L);
+		m_bLanding = false;
+		m_fCountLand = 0;
+	}
+
+	if (5.5f < m_pTransformCom->Get_State(CTransform::STATE_POSITION).y)
+		m_pTransformCom->Chase(_float3(39.f, 3.f, -9.f), fTimeDelta * 10);
+
+
+
+	Safe_Release(pGameInstance);
+}
+
 
 void CBlueMushmom::Tick_Die(_float fTimeDelta)
 {
@@ -309,12 +360,20 @@ void CBlueMushmom::Tick_Die(_float fTimeDelta)
 		Set_Dead();
 }
 
+void CBlueMushmom::Tick_CutScene(_float fTimeDelta)
+{
+	m_fCutTimeAcc += fTimeDelta;
+	if(4.f < m_fCutTimeAcc)
+		Cut_Attack(fTimeDelta);
+}
+
 void CBlueMushmom::Tick_End(_float fTimeDelta)
 {
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 42.9f)
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 38.9f)
 		SetState(STATE_IDLE, DIR_END);
 	else
-		m_pTransformCom->Chase(_float3(43.f, 10.f, -7.f), fTimeDelta * 5);
+		m_pTransformCom->Chase(_float3(39.f, 3.f, -9.f), fTimeDelta * 5);
+
 }
 
 
@@ -366,7 +425,9 @@ void CBlueMushmom::SetAni()
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueMushmom_Attack"), 0.5f, CAnimator::STATE_ONCE);
 		break;
-
+	case CBlueMushmom::STATE_CUTSCEEN:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueMushmom_Idle"), 0.1f, CAnimator::STATE_LOOF);
+		break;
 	case CBlueMushmom::STATE_END:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueMushmom_MoveR"), 0.1f, CAnimator::STATE_LOOF);
 		break;
@@ -437,6 +498,16 @@ CGameObject * CBlueMushmom::Clone(void* pArg)
 
 void CBlueMushmom::Collision(CGameObject * pOther)
 {
+	if (pOther->Get_Tag() == "Tag_Cube")
+	{
+		if (m_bLanding && m_bShake)
+		{
+			CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
+			m_bShake = false;
+		}
+	}
+	
+
 }
 
 

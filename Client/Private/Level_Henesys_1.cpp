@@ -157,11 +157,6 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Monster(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueMushmom"), LEVEL_HENESYS, pLayerTag)))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Warning"), LEVEL_HENESYS, pLayerTag)))
-		return E_FAIL;
 
 
 	Safe_Release(pGameInstance);
@@ -326,14 +321,14 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 
 
 
-	//MonsterInfo.MonsterName = TEXT("BlueSnail");
-	//MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
-	//MonsterInfo.SpawnerNum = 0;
-	//MonsterInfo.MonsterNum = 2;
-	//MonsterInfo.MonsterColRad = 1.f;
-	//MonsterInfo.Level = LEVEL_HENESYS;
+	MonsterInfo.MonsterName = TEXT("BlueSnail");
+	MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
+	MonsterInfo.SpawnerNum = 0;
+	MonsterInfo.MonsterNum = 2;
+	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_HENESYS;
 
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	//MonsterInfo.MonsterName = TEXT("BlueSnail");
 	//MonsterInfo.MonsterPos = _float3{ 6.f , 3.f, 8.f };

@@ -116,6 +116,7 @@ void CMainApp::Tick(_float fTimeDelta)
 
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PLAYER);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MONSTER);
+	m_pCollider->Check_PushCubeCollsion(CCollider::COLLISION_ITEM);
 
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_UI, CCollider::COLLSION_PLAYER);
 	m_pCollider->End_Collsion();

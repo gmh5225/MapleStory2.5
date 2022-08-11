@@ -7,6 +7,7 @@ BEGIN(Engine)
 class CCollider;
 END
 
+
 BEGIN(Client)
 
 class CToolManager final : CBase
@@ -22,7 +23,6 @@ public:
 	// For. LevelChange
 	void SetDestLevel(LEVEL eLevel, _float3 vDestPos) { m_eDestLevel = eLevel; m_vDestPos = vDestPos; }
 	void CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGraphic_Device);
-
 
 private:
 	LEVEL m_eDestLevel = LEVEL_END;
