@@ -43,8 +43,8 @@ HRESULT CLevel_ElenyaEnter::Initialize()
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;*/
 
-	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
+		return E_FAIL;
 
 	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
 	//	return E_FAIL;
@@ -157,10 +157,8 @@ HRESULT CLevel_ElenyaEnter::Ready_Layer_Monster(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_HENESYS, pLayerTag)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_ELENYAENTER, pLayerTag)))
 		return E_FAIL;
-
 
 	Safe_Release(pGameInstance);
 

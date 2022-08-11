@@ -190,6 +190,7 @@
     <ClInclude Include="..\Public\ExpBar.h" />
     <ClInclude Include="..\Public\ExpBase.h" />
     <ClInclude Include="..\Public\ExpLine.h" />
+    <ClInclude Include="..\Public\GAS.h" />
     <ClInclude Include="..\Public\GgoGgo.h" />
     <ClInclude Include="..\Public\GoStump.h" />
     <ClInclude Include="..\Public\GoStumpInfo.h" />
@@ -333,6 +334,7 @@
     <ClCompile Include="..\Private\ExpBar.cpp" />
     <ClCompile Include="..\Private\ExpBase.cpp" />
     <ClCompile Include="..\Private\ExpLine.cpp" />
+    <ClCompile Include="..\Private\GAS.cpp" />
     <ClCompile Include="..\Private\GgoGgo.cpp" />
     <ClCompile Include="..\Private\GoStump.cpp" />
     <ClCompile Include="..\Private\GoStumpInfo.cpp" />

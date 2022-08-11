@@ -97,6 +97,7 @@
 #include "BlackWizardScene.h"
 #include "BlackWizardFinal.h"
 
+#include "GAS.h"
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
 {
@@ -556,6 +557,11 @@ HRESULT CLoader::Load_Monster_Object()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlueMushmom"),
 		CBlueMushmom::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GAS"),
+		CGAS::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GreenMushroom"),
 		CGreenMushroom::Create(m_pGraphic_Device))))
@@ -1231,235 +1237,292 @@ HRESULT CLoader::Load_Monster_Texture()
 	Safe_AddRef(pGameInstance);
 
 	// MushRoom
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Idle%d.png"), 2))))
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Idle%d.png"), 2))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Hit%d.png"), 1))))
+	//	return E_FAIL;
+
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_HitR%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_MoveR%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_DieR%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Die%d.png"), 3))))
+	//	return E_FAIL;
+
+	//// BlueMushmom
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Idle"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Idle%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Hit%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Move"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Move%d.png"), 11))))
+	//	return E_FAIL;
+
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_HitR%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_MoveR%d.png"), 11))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Attack"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Attack%d.png"), 5))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_AttackR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_AttackR%d.png"), 5))))
+	//	return E_FAIL;
+
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Die%d.png"), 6))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_DieR%d.png"), 6))))
+	//	return E_FAIL;
+
+
+	// GAS
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Idle"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Idle%d.png"), 23))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Hit%d.png"), 1))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Hit%d.png"), 1))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Move%d.png"), 12))))
 		return E_FAIL;
 
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_HitR%d.png"), 1))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_HitR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/HitR%d.png"), 1))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_MoveR%d.png"), 3))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/MoveR%d.png"), 12))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_DieR%d.png"), 3))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Attack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Attack_Base%d.png"), 20))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Die%d.png"), 3))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_AttackR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Attack_BaseR%d.png"), 20))))
 		return E_FAIL;
 
-	// BlueMushmom
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Idle"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Idle%d.png"), 1))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Die"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Die%d.png"), 37))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Hit%d.png"), 1))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_DieR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/DieR%d.png"), 37))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Move"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Move%d.png"), 11))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Jump"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Jump%d.png"), 20))))
 		return E_FAIL;
 
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_HitR%d.png"), 1))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_MoveR%d.png"), 11))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Attack"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Attack%d.png"), 5))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_AttackR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_AttackR%d.png"), 5))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_JumpR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/JumpR%d.png"), 20))))
 		return E_FAIL;
 
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Die%d.png"), 6))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Skill"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Skill%d.png"), 16))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_DieR%d.png"), 6))))
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_SkillR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/SkillR%d.png"), 16))))
 		return E_FAIL;
+
 
 	// GreenMushRoom
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Idle"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Idle%d.png"), 3))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Idle"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Idle%d.png"), 3))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Hit%d.png"), 1))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Hit%d.png"), 1))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Move"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Move%d.png"), 4))))
-		return E_FAIL;
-
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_HitR%d.png"), 1))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_MoveR%d.png"), 4))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_DieR%d.png"), 4))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Die%d.png"), 4))))
-		return E_FAIL;
-
-	//RedSnail
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Move"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Move%d.png"), 4))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Hit%d.png"), 1))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_MoveR%d.png"), 4))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_HitR%d.png"), 1))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_DieR%d.png"), 3))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Die%d.png"), 3))))
-		return E_FAIL;
-
-	//RedSnail
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Move"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Move%d.png"), 4))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Hit%d.png"), 1))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_MoveR%d.png"), 4))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_HitR%d.png"), 1))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_DieR%d.png"), 3))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Die%d.png"), 3))))
-		return E_FAIL;
-
-	// Slime
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Idle"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Idle%d.png"), 3))))
-		return E_FAIL;
-
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Hit%d.png"), 1))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Move"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Move%d.png"), 4))))
+	//	return E_FAIL;
 
 
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_HitR%d.png"), 1))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_HitR%d.png"), 1))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_MoveR%d.png"), 4))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_MoveR%d.png"), 7))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_DieR%d.png"), 4))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_DieR%d.png"), 4))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenMushroom_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Die%d.png"), 4))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Die%d.png"), 4))))
-		return E_FAIL;
+	////RedSnail
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Move"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Move%d.png"), 4))))
+	//	return E_FAIL;
 
-	// RibbonPig
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Idle"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Idle%d.png"), 3))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Hit%d.png"), 1))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Hit%d.png"), 1))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_MoveR%d.png"), 4))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Move"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Move%d.png"), 3))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_HitR%d.png"), 1))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_HitR%d.png"), 1))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_DieR%d.png"), 3))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_MoveR%d.png"), 3))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Die%d.png"), 3))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_DieR%d.png"), 3))))
-		return E_FAIL;
+	////RedSnail
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Move"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Move%d.png"), 4))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Die%d.png"), 3))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Hit%d.png"), 1))))
+	//	return E_FAIL;
 
-	// GoStump
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Idle"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Idle%d.png"), 4))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_MoveR%d.png"), 4))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Hit"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Hit%d.png"), 1))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_HitR%d.png"), 1))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Move"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Move%d.png"), 4))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_DieR%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Die%d.png"), 3))))
+	//	return E_FAIL;
+
+	//// Slime
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Idle"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Idle%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Hit%d.png"), 1))))
+	//	return E_FAIL;
 
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_HitR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_HitR%d.png"), 1))))
-		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_MoveR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_MoveR%d.png"), 4))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_HitR%d.png"), 1))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_DieR"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_DieR%d.png"), 5))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_MoveR%d.png"), 7))))
+	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Die"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Die%d.png"), 5))))
-		return E_FAIL;
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_DieR%d.png"), 4))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Die%d.png"), 4))))
+	//	return E_FAIL;
+
+	//// RibbonPig
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Idle"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Idle%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Hit%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Move"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Move%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_HitR%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_MoveR%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_DieR%d.png"), 3))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Die%d.png"), 3))))
+	//	return E_FAIL;
+
+	//// GoStump
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Idle"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Idle%d.png"), 4))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Hit"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Hit%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Move"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Move%d.png"), 4))))
+	//	return E_FAIL;
+
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_HitR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_HitR%d.png"), 1))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_MoveR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_MoveR%d.png"), 4))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_DieR"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_DieR%d.png"), 5))))
+	//	return E_FAIL;
+
+	//if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Die"),
+	//	CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Die%d.png"), 5))))
+	//	return E_FAIL;
 
 
 	Safe_Release(pGameInstance);

@@ -938,6 +938,9 @@
     </ClInclude>
     <ClInclude Include="..\public\CutScreen.h">
       <Filter>04.UI\08.CutScreen</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\GAS.h">
+      <Filter>02.GameObject\Creature\MiddleBoss</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1357,6 +1360,9 @@
     </ClCompile>
     <ClCompile Include="..\private\CutScreen.cpp">
       <Filter>04.UI\08.CutScreen</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\GAS.cpp">
+      <Filter>02.GameObject\Creature\MiddleBoss</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
