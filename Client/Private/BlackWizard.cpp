@@ -38,7 +38,7 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 	m_sTag = "Tag_Monster";
 	m_eCurState = STATE_APPEAR;
 	SetAni();
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-9.f, 4.f, -1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-0.f, 2.f, 0.f));
 	m_pTransformCom->Set_Scaled(6.f);
 	m_bState = false;
 	m_bFinal = false;
@@ -153,7 +153,7 @@ void CBlackWizard::Fix_Scale()
 	switch (m_eCurState)
 	{
 	case Client::CBlackWizard::STATE_APPEAR:
-		m_pTransformCom->Set_Scaled(7.f);
+		m_pTransformCom->Set_Scaled(6.f);
 		break;
 	case Client::CBlackWizard::STATE_STAND:
 		m_pTransformCom->Set_Scaled(_float3{ 4.5f,6.f,4.5f });
