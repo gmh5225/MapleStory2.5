@@ -18,6 +18,12 @@ public:
 	void RenderNotice();
 	void RedPortionNotice();
 	void BluePortionNotice();
+	void BlueSnailNotice();
+	void RedSnailNotice();
+	void WoodNotice();
+	void SlimeNotice();
+	void RibbonNotice();
+	void GreenmushroomNotice();
 
 public:
 	static CItemNotice* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

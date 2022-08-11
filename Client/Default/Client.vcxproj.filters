@@ -849,9 +849,6 @@
     <ClInclude Include="..\Public\BlackWizard.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\ItemNotice.h">
-      <Filter>04.UI\07.Notice\Item</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\BlackWizardAttack1.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack1</Filter>
     </ClInclude>
@@ -941,6 +938,9 @@
       </ClInclude>
     <ClInclude Include="..\Public\GAS.h">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\ItemNotice.h">
+      <Filter>04.UI\07.Notice\Item</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1268,9 +1268,6 @@
     <ClCompile Include="..\Private\BlackWizard.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard</Filter>
     </ClCompile>
-    <ClCompile Include="..\Private\ItemNotice.cpp">
-      <Filter>04.UI\07.Notice\Item</Filter>
-    </ClCompile>
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack1</Filter>
     </ClCompile>
@@ -1363,6 +1360,9 @@
       </ClCompile>
     <ClCompile Include="..\Private\GAS.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\ItemNotice.cpp">
+      <Filter>04.UI\07.Notice\Item</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

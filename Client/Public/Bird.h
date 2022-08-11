@@ -42,7 +42,7 @@ private:
 
 	CGameObject* m_pTarget;
 	float m_fTime;
-
+	float m_fSpeed;
 public:
 	static CBird* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
