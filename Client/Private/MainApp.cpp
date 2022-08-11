@@ -15,6 +15,7 @@
 #include "ToolManager.h"
 #include "Loading.h"
 #include "Loading_Mop.h"
+#include "CutScreen.h"
 
 
 bool g_bStaticClone;
@@ -256,6 +257,10 @@ HRESULT CMainApp::Loading_ForLoading()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Loading/Loading_%d.png"), 16))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CutScreen"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/CutScreen/CutScreen_%d.png"), 11))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Loading"),
 		CLoading::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -264,6 +269,9 @@ HRESULT CMainApp::Loading_ForLoading()
 		CLoading_Mop::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CutScreen"),
+		CCutScreen::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 	CUIManager::Get_Instance()->Set_Loading();
 
