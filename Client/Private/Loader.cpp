@@ -83,13 +83,15 @@
 #include "Bird.h"
 #include "GgoGgo.h"
 #include "Chick.h"
+#include "Grass.h"
+#include "Weed.h"
 #include "Bandit.h"
 #include "ItemNotice.h"
 #include "BlackWizardAttack1.h"
 #include "BlackWizardAttack2.h"
 #include "BlackWizardAttack3.h"
 #include "BlackWizardHit.h"
-#include "Bandit.h"
+
 #include "CutScreen.h"
 
 #include "UIManager.h"
@@ -961,6 +963,16 @@ HRESULT CLoader::Load_Map()
 	/* For.Prototype_GameObject_Shadow*/
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Shadow"),
 		CShadow::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
+	/* For.Prototype_GameObject_Grass*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Grass"),
+		CGrass::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_Weed*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Weed"),
+		CWeed::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	//if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Sky"),
@@ -1867,6 +1879,17 @@ HRESULT CLoader::Load_Model_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/SkyBox/Sky_%d.dds"), 9))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Grass"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Grass/Grass%d.png"),7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GrassIdle"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Grass/Grass_Idle.png")))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Weed"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/weed.png")))))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 

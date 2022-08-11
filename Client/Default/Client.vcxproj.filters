@@ -483,7 +483,7 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3">
       <UniqueIdentifier>{0cc6cfca-3d37-4734-bb83-51c86165d496}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="01.Level\DHenesys">
       <UniqueIdentifier>{8bbc53b0-cb72-4cd4-8407-9ede7f68e76a}</UniqueIdentifier>
     </Filter>
@@ -510,6 +510,12 @@
     </Filter>
     <Filter Include="04.UI\08.CutScreen">
       <UniqueIdentifier>{805b4480-a9e7-4aae-b97d-451593128bd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Grass">
+      <UniqueIdentifier>{2ff14d73-7f9b-43a6-835d-b30b879b713b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Weed">
+      <UniqueIdentifier>{78078aef-85fa-4ee2-b3b8-e97e130634c2}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -908,7 +914,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlackWizardAttack3.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Level_DHenesys.h">
       <Filter>01.Level\DHenesys</Filter>
     </ClInclude>
@@ -935,12 +941,18 @@
     </ClInclude>
     <ClInclude Include="..\public\CutScreen.h">
       <Filter>04.UI\08.CutScreen</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\GAS.h">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\ItemNotice.h">
       <Filter>04.UI\07.Notice\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Grass.h">
+      <Filter>02.GameObject\Creature\Grass</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Weed.h">
+      <Filter>02.GameObject\Creature\Weed</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1330,7 +1342,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardAttack3.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Level_DHenesys.cpp">
       <Filter>01.Level\DHenesys</Filter>
     </ClCompile>
@@ -1357,12 +1369,18 @@
     </ClCompile>
     <ClCompile Include="..\private\CutScreen.cpp">
       <Filter>04.UI\08.CutScreen</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\GAS.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\ItemNotice.cpp">
       <Filter>04.UI\07.Notice\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Grass.cpp">
+      <Filter>02.GameObject\Creature\Grass</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Weed.cpp">
+      <Filter>02.GameObject\Creature\Weed</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
