@@ -31,7 +31,7 @@ HRESULT CBlackWizardAttack2::Initialize(void * pArg)
 
 	Safe_Release(pInstance);
 
-	m_pTransformCom->Set_Scaled(_float3{ 8.f,8.f,8.f });
+	m_pTransformCom->Set_Scaled(_float3{ 6.f,8.f,8.f });
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + _float3{ 0.f,2.f,0.f });
 
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Attack2"), 0.1f, CAnimator::STATE_ONCE);

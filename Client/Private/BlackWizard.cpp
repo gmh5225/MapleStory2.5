@@ -217,22 +217,22 @@ void CBlackWizard::Skill3()
 
 	_float3 vPos = m_pTarget->Get_State(CTransform::STATE_POSITION);
 	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &vPos);
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -1.5f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 1.5f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,1.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-1.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -3.f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 3.f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,3.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-3.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -4.5f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 4.5f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,4.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-4.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -6.f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 6.f,0.f,0.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,6.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-6.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -2.5f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 2.5f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,2.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-2.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -5.f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 5.f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,5.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-5.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -7.5f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 7.5f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,7.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-7.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -10.f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 10.f,0.f,0.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,10.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.f,0.f,-10.f }));
 	Safe_Release(pGameInstance);
 }
 
@@ -242,24 +242,23 @@ void CBlackWizard::Skill4()
 	Safe_AddRef(pGameInstance);
 
 	_float3 vPos = m_pTarget->Get_State(CTransform::STATE_POSITION);
-
 	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &vPos);
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -0.75f,0.f,0.75f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.75f,0.f,0.75f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -0.75f,0.f,-0.75f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 0.75f,0.f,-0.75f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -1.5f,0.f,1.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 1.5f,0.f,1.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -1.5f,0.f,-1.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 1.5f,0.f,-1.5f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -2.25f,0.f,2.25f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 2.25f,0.f,2.25f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -2.25f,0.f,-2.25f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 2.25f,0.f,-2.25f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -3.f,0.f,3.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 3.f,0.f,3.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -3.f,0.f,-3.f }));
-	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 3.f,0.f,-3.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -1.25f,0.f,1.25f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 1.25f,0.f,1.25f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -1.25f,0.f,-1.25f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 1.25f,0.f,-1.25f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -2.5f,0.f,2.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 2.5f,0.f,2.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -2.5f,0.f,-2.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 2.5f,0.f,-2.5f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -3.75f,0.f,3.75f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 3.75f,0.f,3.75f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -3.75f,0.f,-3.75f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 3.75f,0.f,-3.75f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -5.f,0.f,5.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 5.f,0.f,5.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ -5.f,0.f,-5.f }));
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardAttack3"), LEVEL_GAMEPLAY, TEXT("Layer_Monster_Skill"), &(vPos - _float3{ 5.f,0.f,-5.f }));
 	Safe_Release(pGameInstance);
 }
 
