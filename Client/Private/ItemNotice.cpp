@@ -33,8 +33,20 @@ HRESULT CItemNotice::Initialize(void * pArg)
 	
 	__super::Initialize(pArg);
 	m_bRender = false;
+	
+	
+	
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ItemNotice"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
+
+	D3DXCreateFont(m_pGraphic_Device, 12, 0, FW_SEMIBOLD, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"°íµñÃ¼", &m_TitleFont);
+
+	D3DXCreateFont(m_pGraphic_Device, 10, 0, FW_THIN, 1, FALSE, DEFAULT_CHARSET,
+		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
+		L"°íµñÃ¼", &m_TextFont);
+
 	CUIManager* pUIInstance = CUIManager::Get_Instance();
 	pUIInstance->Add_ItemNotice(this);
 
@@ -72,8 +84,161 @@ HRESULT CItemNotice::Render()
 
 	m_pVIBufferCom->Render();
 
+	RenderNotice();
+	
+
 	Reset_RenderState();
 	return S_OK;
+}
+
+void CItemNotice::RenderNotice()
+{
+	switch (m_iTexturenum)
+	{
+	case 0:
+		RedPortionNotice();
+		break;
+	case 1:
+		BluePortionNotice();
+		break;
+	case 2:
+		BlueSnailNotice();
+		break;
+	case 3:
+		RibbonNotice();
+		break;
+	case 4:
+		SlimeNotice();
+		break;
+	case 5:
+		GreenmushroomNotice();
+		break;
+	case 6:
+		WoodNotice();
+		break;
+	case 7:
+		RedSnailNotice();
+		break;
+		
+
+	default:
+		m_cTitle = "";
+		m_cText = "";
+		break;
+	}
+}
+
+
+void CItemNotice::RedPortionNotice()
+{
+	m_cTitle = "»¡°£ Æ÷¼Ç";
+	m_cText = "HP¸¦ ¾à 50 È¸º¹½ÃÅ²´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 25.f, m_UIInfo.fY-34.f , 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 33.f, m_UIInfo.fY-2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::BlueSnailNotice()
+{
+	m_cTitle = "ÆÄ¶õ ´ÞÆØÀÌÀÇ ²®Áú";
+	m_cText = "ÆÄ¶õ ´ÞÆØÀÌÀÇ ²®ÁúÀ» ¹þ±ä °ÍÀÌ´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 25.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 29.f, m_UIInfo.fY - 2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::RedSnailNotice()
+{
+	m_cTitle = "»¡°£ ´ÞÆØÀÌÀÇ ²®Áú";
+	m_cText = "»¡°£ ´ÞÆØÀÌÀÇ ²®ÁúÀ» ¹þ±ä °ÍÀÌ´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 25.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 29.f, m_UIInfo.fY - 2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::WoodNotice()
+{
+	m_cTitle = "ÀåÀÛ";
+	m_cText = "¿¢½ºÅÒÇÁ¿¡¼­ ¶¼¾î³½ \n°íÇ°Áú ÀåÀÛÀÌ´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 20.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 32.f, m_UIInfo.fY - 2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::SlimeNotice()
+{
+	m_cTitle = "¹°ÄÈ¹°ÄÈÇÑ ¾×Ã¼";
+	m_cText = "Á¡¼ºÀÌ ³ô¾Æ ²öÀû²öÀûÇÑ \n¾×Ã¼ÀÌ´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 43.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 33.f, m_UIInfo.fY - 2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::RibbonNotice()
+{
+	m_cTitle = "¿µ¿õÀÇ ¸®º»";
+	m_cText = "¸®º»µÅÁöÀÇ ¸®º»À» ²÷Àº °ÍÀÌ´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 25.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 29.f, m_UIInfo.fY - 2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::GreenmushroomNotice()
+{
+	m_cTitle = "ÃÊ·Ï¹ö¼¸ÀÇ °«";
+	m_cText = "¹ö¼¸ÀÇ °«À» ÀÚ¸¥ °ÍÀÌ´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 25.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 29.f, m_UIInfo.fY - 2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
+void CItemNotice::BluePortionNotice()
+{
+	m_cTitle = "ÆÄ¶õ Æ÷¼Ç";
+	m_cText = "MP¸¦ ¾à 100 È¸º¹½ÃÅ²´Ù.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 25.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 33.f, m_UIInfo.fY - 2, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
 }
 
 

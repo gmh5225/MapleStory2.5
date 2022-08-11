@@ -56,7 +56,9 @@ HRESULT CSky::Render()
 		return E_FAIL;
 	//Sky_5헤네시스
 	//Sky_6 엘리니아
-	if (FAILED(m_pTextureCom->Bind_Texture(5)))
+	//Sky_7파헤
+	//Sky_8파엘
+	if (FAILED(m_pTextureCom->Bind_Texture(8)))
 		return E_FAIL;
 
 	if (FAILED(Set_RenderState()))

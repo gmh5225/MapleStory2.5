@@ -215,7 +215,6 @@
     <ClInclude Include="..\Public\MenuIcon.h" />
     <ClInclude Include="..\Public\BlueMushmomHpbar.h" />
     <ClInclude Include="..\Public\Ming.h" />
-  
     <ClInclude Include="..\Public\MouseCursor.h" />
     <ClInclude Include="..\Public\MouseItemIcon.h" />
     <ClInclude Include="..\Public\MouseManager.h" />
@@ -345,7 +344,6 @@
     <ClCompile Include="..\Private\MenuIcon.cpp" />
     <ClCompile Include="..\Private\BlueMushmomHpbar.cpp" />
     <ClCompile Include="..\Private\Ming.cpp" />
- 
     <ClCompile Include="..\Private\MouseCursor.cpp" />
     <ClCompile Include="..\Private\MouseItemIcon.cpp" />
     <ClCompile Include="..\Private\MouseManager.cpp" />
