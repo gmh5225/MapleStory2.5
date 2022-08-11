@@ -260,6 +260,14 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
+	PotalDesc.eDestLevel = LEVEL_DHENESYS;
+	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
+	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
+		return E_FAIL;
+
+
+
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 	
@@ -434,6 +442,9 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chat"), LEVEL_STATIC, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CutScreen"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
 
 

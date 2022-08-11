@@ -28,11 +28,16 @@ public:
 	void Start_Loading();
 	void End_Loading();
 
+	// For.CutScreen
+	void On_CutScreen();
+	void Off_CutScreen();
+
 	void Tick(_float TimeDelta);
 	void LateTick(_float TimeDelta);
 
 private:
 	class CLoading* m_pLoading = nullptr;
+	class CCutScreen* m_pCutScreen = nullptr;
 
 public:
 	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };

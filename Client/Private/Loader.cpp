@@ -90,6 +90,8 @@
 #include "BlackWizardAttack3.h"
 #include "BlackWizardHit.h"
 #include "Bandit.h"
+#include "CutScreen.h"
+
 #include "UIManager.h"
 #include "BlackWizardPatternUI.h"
 #include "BlackWizardScene.h"
@@ -123,6 +125,31 @@ _uint APIENTRY LoadingMain(void* pArg)
 		break;
 	case LEVEL_ELENYA:
 		pLoader->Loading_ForElenya();
+		break;
+	case LEVEL_GAS:
+		pLoader->Loading_ForElenya();
+		break;
+
+	case LEVEL_DHENESYS:
+		pLoader->Loading_ForDHenesys();
+		break;
+	case LEVEL_DHENESYSHUNTING:
+		pLoader->Loading_ForDHenesysHunting();
+		break;
+	case LEVEL_DELENYAENTER:
+		pLoader->Loading_ForDElenyaEnter();
+		break;
+	case LEVEL_DELENYA:
+		pLoader->Loading_ForDElenya();
+		break;
+	case LEVEL_DARKMAGEENTER:
+		pLoader->Loading_ForDBlackMageEnter();
+		break;
+	case LEVEL_DARKMAGE:
+		pLoader->Loading_ForDBlackMage();
+		break;
+	case LEVEL_WHITEMAGE:
+		pLoader->Loading_ForDWhiteMage();
 		break;
 	}
 
@@ -276,6 +303,158 @@ HRESULT CLoader::Loading_ForElenyaEnter()
 
 		Safe_Release(pGameInstance);
 		g_bElenyaEnter = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForElenyaGas()
+{
+	if (g_bElenyaGAS == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bElenyaGAS = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDHenesys()
+{
+	if (g_bDHenesys == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bDHenesys = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDHenesysHunting()
+{
+	if (g_bDHenesysHunting == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bDHenesysHunting = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDElenyaEnter()
+{
+	if (g_bDElenyaEnter == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bDElenyaEnter = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDElenya()
+{
+	if (g_bDElenya == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bDElenya = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDBlackMageEnter()
+{
+	if (g_bBlackMageEnter == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bBlackMageEnter = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDBlackMage()
+{
+	if (g_bBlackMage == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bBlackMage = true;
+	}
+	m_isFinished = true;
+
+	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDWhiteMage()
+{
+	if (g_bWhiteMage == false)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+
+
+
+
+		Safe_Release(pGameInstance);
+		g_bWhiteMage = true;
 	}
 	m_isFinished = true;
 
@@ -1591,7 +1770,6 @@ HRESULT CLoader::Load_UI_Texture()
 
 
 
-
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -1605,7 +1783,7 @@ HRESULT CLoader::Load_Model_Texture()
 	Safe_AddRef(pGameInstance);
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Cube"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/Cube/Tile%d.dds"), 29))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_CUBEMAP, TEXT("../Bin/Resources/Textures/Cube/Tile%d.dds"), 31))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Potal"),

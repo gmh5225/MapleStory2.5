@@ -38,7 +38,17 @@ public:
 	HRESULT Loading_ForHenesys();
 	HRESULT Loading_ForElenya();
 	HRESULT Loading_ForElenyaEnter();
-	
+	HRESULT Loading_ForElenyaGas();
+
+	HRESULT Loading_ForDHenesys();
+	HRESULT Loading_ForDHenesysHunting();
+	HRESULT Loading_ForDElenyaEnter();
+	HRESULT Loading_ForDElenya();
+	HRESULT Loading_ForDBlackMageEnter();
+	HRESULT Loading_ForDBlackMage();
+	HRESULT Loading_ForDWhiteMage();
+
+
 
 //객체원형 로딩함수
 private:

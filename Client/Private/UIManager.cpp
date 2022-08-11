@@ -2,6 +2,7 @@
 #include "..\Public\UIManager.h"
 #include "GameInstance.h"
 #include "Loading.h"
+#include "CutSCreen.h"
 
 IMPLEMENT_SINGLETON(CUIManager)
 
@@ -45,8 +46,12 @@ void CUIManager::Set_Loading()
 	CGameObject* pObj = nullptr;
 	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_Loading"), &pObj, nullptr)))
 		return;
-
 	m_pLoading = (CLoading*)pObj;
+
+	pObj = nullptr;
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_CutScreen"), &pObj, nullptr)))
+		return;
+	m_pCutScreen = (CCutScreen*)pObj;
 
 
 	Safe_Release(pGameInstance);
@@ -65,6 +70,21 @@ void CUIManager::End_Loading()
 		return;
 
 	m_pLoading->EndLoading();
+}
+
+void CUIManager::On_CutScreen()
+{
+	if (nullptr == m_pCutScreen)
+		return;
+
+	m_pCutScreen->OnCutScreen();
+}
+void CUIManager::Off_CutScreen()
+{
+	if (nullptr == m_pCutScreen)
+		return;
+
+	m_pCutScreen->OffCutScreen();
 }
 
 void CUIManager::Tick(_float TimeDelta)
@@ -91,6 +111,7 @@ void CUIManager::Free()
 {
 	Safe_Release(m_pItemNotice);
 	Safe_Release(m_pBlackWizardPatternUI);
+	Safe_Release(m_pCutScreen);
 	Safe_Release(m_pLoading);
 }
 

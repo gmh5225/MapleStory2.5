@@ -483,6 +483,33 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3">
       <UniqueIdentifier>{0cc6cfca-3d37-4734-bb83-51c86165d496}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="01.Level\DHenesys">
+      <UniqueIdentifier>{8bbc53b0-cb72-4cd4-8407-9ede7f68e76a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\DHenesysHunting">
+      <UniqueIdentifier>{e9339da1-8bec-40aa-88db-d0d715d63adb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\DElenyaEnter">
+      <UniqueIdentifier>{e7109a59-5743-42ca-abd2-d415d4ff922e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\DElenya">
+      <UniqueIdentifier>{4db80fe8-e0f4-42a0-af5c-38262746fc5c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\ElenyaGAS">
+      <UniqueIdentifier>{44a7355f-930e-4597-a9e4-ca0899d062f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\BlackMageEnter">
+      <UniqueIdentifier>{5a2ad42e-f0b1-4606-86e6-b22ac31c22e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\BlackMage">
+      <UniqueIdentifier>{249e968e-6974-4dbc-a263-f07778378a45}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\WhiteMage">
+      <UniqueIdentifier>{5ff9fefb-0789-4dd1-ac1b-ba2b24a361bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\08.CutScreen">
+      <UniqueIdentifier>{805b4480-a9e7-4aae-b97d-451593128bd6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -884,6 +911,33 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlackWizardAttack3.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\Level_DHenesys.h">
+      <Filter>01.Level\DHenesys</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_DHenesysHunting.h">
+      <Filter>01.Level\DHenesysHunting</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_DElenyaEnter.h">
+      <Filter>01.Level\DElenyaEnter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_DElenya.h">
+      <Filter>01.Level\DElenya</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_ElenyaGAS.h">
+      <Filter>01.Level\ElenyaGAS</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_BlackMageEnter.h">
+      <Filter>01.Level\BlackMageEnter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_BlackMage.h">
+      <Filter>01.Level\BlackMage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Level_WhiteMage.h">
+      <Filter>01.Level\WhiteMage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\CutScreen.h">
+      <Filter>04.UI\08.CutScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1276,6 +1330,33 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardAttack3.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Attack3</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\Level_DHenesys.cpp">
+      <Filter>01.Level\DHenesys</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_DHenesysHunting.cpp">
+      <Filter>01.Level\DHenesysHunting</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_DElenyaEnter.cpp">
+      <Filter>01.Level\DElenyaEnter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_DElenya.cpp">
+      <Filter>01.Level\DElenya</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_ElenyaGAS.cpp">
+      <Filter>01.Level\ElenyaGAS</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_BlackMageEnter.cpp">
+      <Filter>01.Level\BlackMageEnter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_BlackMage.cpp">
+      <Filter>01.Level\BlackMage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Level_WhiteMage.cpp">
+      <Filter>01.Level\WhiteMage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\CutScreen.cpp">
+      <Filter>04.UI\08.CutScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

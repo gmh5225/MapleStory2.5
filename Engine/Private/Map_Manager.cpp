@@ -12,17 +12,47 @@ void CMap_Manager::SetFildNames()
 {
 	m_MapNames.push_back(string("Map_Henesys"));
 	m_MapNames.push_back(string("Map_HenesysHunting"));
-	m_MapNames.push_back(string("Map_ElenyaEnter"));
 	m_MapNames.push_back(string("Map_Elenya"));
+	m_MapNames.push_back(string("Map_ElenyaEnter"));
+	m_MapNames.push_back(string("Map_GAS"));
+
+	m_MapNames.push_back(string("Map_DHenesys"));
+	m_MapNames.push_back(string("Map_DHenesysHunting"));
+	m_MapNames.push_back(string("Map_DElenyaEnter"));
+	m_MapNames.push_back(string("Map_DElenya"));
+	m_MapNames.push_back(string("Map_DarkMageEnter"));
+	m_MapNames.push_back(string("Map_DarkMage"));
+	m_MapNames.push_back(string("Map_WhiteMageds"));
+
+
+
+
+
 
 	m_VoxelNames.push_back(string("Model_House1"));
 	m_VoxelNames.push_back(string("Model_House2"));
 	m_VoxelNames.push_back(string("Model_Wood1"));
 	m_VoxelNames.push_back(string("Model_Wood2"));
+
+	m_VoxelNames.push_back(string("Model_DHouse1"));
+	m_VoxelNames.push_back(string("Model_DHouse2"));
+	m_VoxelNames.push_back(string("Model_DMood1"));
+	m_VoxelNames.push_back(string("Model_DWood2"));
+
 	m_cVoxelNames.push_back(L"Model_House1");
 	m_cVoxelNames.push_back(L"Model_House2");
 	m_cVoxelNames.push_back(L"Model_Wood1");
 	m_cVoxelNames.push_back(L"Model_Wood2");
+
+	m_cVoxelNames.push_back(L"Model_DHouse1");
+	m_cVoxelNames.push_back(L"Model_DHouse2");
+	m_cVoxelNames.push_back(L"Model_DMood1");
+	m_cVoxelNames.push_back(L"Model_DWood2");
+
+
+
+
+
 
 
 
@@ -30,6 +60,11 @@ void CMap_Manager::SetFildNames()
 	m_ModelNames.push_back(string("Total_HenesysHunting"));
 	m_ModelNames.push_back(string("Model_ElenyaEnter"));
 	m_ModelNames.push_back(string("Total_Elenya"));
+
+	m_ModelNames.push_back(string("Total_DHenesys"));
+	//m_ModelNames.push_back(string("Total_DHenesysHunting"));
+	m_ModelNames.push_back(string("Total_DElenyaEnter"));
+
 }
 
 

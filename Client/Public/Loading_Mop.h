@@ -1,7 +1,5 @@
 #pragma once
 #include "Client_Defines.h"
-#include "SkillManager.h"
-#include "SkillInfo.h"
 #include "UI.h"
 
 BEGIN(Client)
