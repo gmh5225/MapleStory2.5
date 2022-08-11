@@ -3,6 +3,7 @@
 #include "GameInstance.h"
 #include "Loading.h"
 #include "CutSCreen.h"
+#include "TaxiChatBox.h"
 
 IMPLEMENT_SINGLETON(CUIManager)
 
@@ -88,14 +89,32 @@ void CUIManager::Off_CutScreen()
 	m_pCutScreen->OffCutScreen();
 }
 
+void CUIManager::On_TaxiChatBox()
+{
+	if (nullptr == m_pTaxiChatBox)
+		return;
+
+	m_pTaxiChatBox->Start_Chat();
+}
+
+void CUIManager::Off_TaxiChatBox()
+{
+	if (nullptr == m_pTaxiChatBox)
+		return;
+
+	m_pTaxiChatBox->End_Chat();
+}
+
 void CUIManager::Tick(_float TimeDelta)
 {
 	m_pLoading->Tick(TimeDelta);
+	m_pCutScreen->Tick(TimeDelta);
 }
 
 void CUIManager::LateTick(_float TimeDelta)
 {
 	m_pLoading->LateTick(TimeDelta);
+	m_pCutScreen->LateTick(TimeDelta);
 }
 
 HRESULT CUIManager::Add_BlackWizardPatternUI(CBlackWizardPatternUI * pInstance)

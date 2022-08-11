@@ -8,6 +8,7 @@ BEGIN(Client)
 class CUI;
 class CInventory;
 class CItemInfo;
+class CItem;
 
 class CInvenManager final : CBase
 {
@@ -34,6 +35,8 @@ public:
 	HRESULT Check_Icon(const _tchar* pTag, InvenType eType, _uint iNum);
 	HRESULT Change_Info(const _tchar* pTag, _uint iIndex, InvenType eType);
 	
+	void MakeItem(InvenType eType, _int TextNum, const _tchar* pTag, _float3 vPos);
+
 	
 private:
 	CInventory* m_pInventory;

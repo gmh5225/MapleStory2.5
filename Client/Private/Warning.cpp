@@ -31,7 +31,7 @@ HRESULT CWarning::Initialize(void * pArg)
 
 	m_sTag = "Tag_Npc";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(36.f, 3.f, -8.f));
+	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(30.f, 3.f, -8.f));
 	m_pTransformCom->Set_Scaled(1.f);
 
 	SetState(STATE_IDLE, DIR_END);

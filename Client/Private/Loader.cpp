@@ -107,6 +107,13 @@
 #include "TransformPig.h"
 #include "TransformSlime.h"
 #include "TransformStump.h"
+
+#include "ChatBox.h"
+
+#include "TaxiChatBox.h"
+#include "TaxiButton.h"
+#include "Taxi.h"
+
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
 {
@@ -636,7 +643,9 @@ HRESULT CLoader::Load_Npc_Object()
 		CChick::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
-
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Taxi"),
+		CTaxi::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 
 
@@ -888,6 +897,17 @@ HRESULT CLoader::Load_UI_Object()
 		CItemNotice::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ChatBox"),
+		CChatBox::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_TaxiChatBox"),
+		CTaxiChatBox::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_TaxiButton"),
+		CTaxiButton::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 
@@ -1313,7 +1333,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Die%d.png"), 3))))
 		return E_FAIL;
 
-	//// BlueMushmom
+	// BlueMushmom
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueMushmom_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_Idle%d.png"), 1))))
 		return E_FAIL;
@@ -1458,7 +1478,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GreenMushroom/GreenMushroom_Die%d.png"), 4))))
 		return E_FAIL;
 
-	////RedSnail
+	//RedSnail
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Move"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Move%d.png"), 4))))
 		return E_FAIL;
@@ -1483,7 +1503,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Die%d.png"), 3))))
 		return E_FAIL;
 
-	////RedSnail
+	//RedSnail
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Move"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Move%d.png"), 4))))
 		return E_FAIL;
@@ -1508,7 +1528,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Die%d.png"), 3))))
 		return E_FAIL;
 
-	//// Slime
+	// Slime
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Slime_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Idle%d.png"), 3))))
 		return E_FAIL;
@@ -1535,7 +1555,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Die%d.png"), 4))))
 		return E_FAIL;
 
-	//// RibbonPig
+	// RibbonPig
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RibbonPig_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Idle%d.png"), 3))))
 		return E_FAIL;
@@ -1564,7 +1584,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RibbonPig/RibbonPig_Die%d.png"), 3))))
 		return E_FAIL;
 
-	//// GoStump
+	// GoStump
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GoStump/GoStump_Idle%d.png"), 4))))
 		return E_FAIL;
@@ -1830,6 +1850,10 @@ HRESULT CLoader::Load_Npc_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Warning"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Warning/WarningBoard%d.png"), 1))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Taxi"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Taxi/Taxi.png")))))
 		return E_FAIL;
 
 

@@ -106,33 +106,7 @@ void CLevel_GamePlay::Tick(_float fTimeDelta)
 	__super::Tick(fTimeDelta);
 
 	g_bGamePlay = true;
-	if (GetKeyState('N') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
 
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_HENESYS))))
-			return;
-		
-		
-		Safe_Release(pGameInstance);
-
-	}
-	else if (GetKeyState('B') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_ELENYA))))
-			return;
-
-
-		Safe_Release(pGameInstance);
-
-	}
-	
 
 }
 
@@ -228,6 +202,11 @@ HRESULT CLevel_GamePlay::Ready_Layer_Npc(const _tchar * pLayerTag)
 	CCreature::CRETUREDESC Creatureinfo2;
 	Creatureinfo2.vPos = _float3(12.1f, 5.7f, -3.9f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chick"), LEVEL_GAMEPLAY, pLayerTag, &Creatureinfo2)))
+		return E_FAIL;
+
+
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Taxi"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
 
@@ -327,7 +306,6 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
 		return E_FAIL;
-
 
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
@@ -500,14 +478,28 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ItemNotice"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseCursor"), LEVEL_STATIC, pLayerTag)))
-		return E_FAIL;
+
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Chat"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CutScreen"), LEVEL_STATIC, pLayerTag)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ChatBox"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
+
+
+	CGameObject* pObj = nullptr;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TaxiChatBox"), LEVEL_STATIC, pLayerTag, &pObj, nullptr)))
+		return E_FAIL;
+	CUIManager::Get_Instance()->SetTaxiChatBox(pObj);
+
+
+
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_MouseCursor"), LEVEL_STATIC, pLayerTag)))
+		return E_FAIL;
+
+
+
 
 
 	Safe_Release(pGameInstance);
@@ -532,6 +524,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_NonStatic_UI(const _tchar * pLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
+
 
 	return S_OK;
 }

@@ -1,8 +1,12 @@
 #include "stdafx.h"
 #include "..\Public\InvenManager.h"
+
+#include "GameInstance.h"
+
 #include "UI.h"
 #include "Inventory.h"
 #include "ItemInfo.h"
+#include "Item.h"
 
 IMPLEMENT_SINGLETON(CInvenManager)
 
@@ -90,6 +94,22 @@ HRESULT CInvenManager::Change_Info(const _tchar * pTag, _uint iIndex, InvenType 
 	return m_pInventory->Change_Info(pTag, iIndex, eType);
 }
 
+
+void CInvenManager::MakeItem(InvenType eType, _int TextNum, const _tchar * pTag, _float3 vPos)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CItem::ITEMINFO ItemInfo;
+	ItemInfo.eType = eType;
+	ItemInfo.iTextNum = 0;
+	ItemInfo.pTag = pTag;
+	ItemInfo.vPos = vPos;
+
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &ItemInfo);
+
+	Safe_Release(pGameInstance);
+}
 
 void CInvenManager::Free()
 {

@@ -3,6 +3,7 @@
 
 #include "GameInstance.h"
 #include "Camera_Free.h"
+#include "UIManager.h"
 
 IMPLEMENT_SINGLETON(CCutSceneManager)
 
@@ -27,6 +28,8 @@ void CCutSceneManager::Tick(_float fTimeDelta)
 	if (m_bEnter_Elenya)
 		Enter_Elenya(fTimeDelta);
 
+	if (m_bEnter_ElenyaEnter)
+		Enter_ElenyaEnter(fTimeDelta);
 }
 
 CCamera_Free* CCutSceneManager::Get_MainCam()
@@ -202,6 +205,62 @@ void CCutSceneManager::End_Enter_Elenya()
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
 	m_bIsCutScene = false;
 	m_bEnter_Elenya = false;
+}
+
+
+
+
+
+void CCutSceneManager::Start_Enter_ElenyaEnter()
+{
+	if (m_bElenyaEnter)
+		return;
+	m_bElenyaEnter = true;
+
+
+	m_fElenyaEnter_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
+	Get_MainCam()->Get_Transform()->RotationTwo(_float3(1.f, 0.f, 0.f), 15.f, _float3(0.f, 1.f, 0.f), 90.f);
+	SetCamPos(_float3(25.f, 7.f, -9.f));
+	Get_MainCam()->SetSpeed(1.f);
+
+	CUIManager::Get_Instance()->On_CutScreen();
+	
+	m_bEnter_ElenyaEnter = true;
+	m_bIsCutScene = true;
+}
+void CCutSceneManager::Enter_ElenyaEnter(_float fTimeDelta)
+{
+	m_fElenyaEnter_TimeAcc += fTimeDelta;
+
+
+	if (!m_b4_1)
+		Get_MainCam()->Get_Transform()->Go_Straight(fTimeDelta);
+
+
+
+	if (7.5f < m_fElenyaEnter_TimeAcc && !m_b4_1)
+	{
+		m_b4_1 = true;
+	}
+
+
+
+	if (12.f < m_fElenyaEnter_TimeAcc)
+	{
+		Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+		End_Enter_ElenyaEnter();
+	}
+}
+void CCutSceneManager::End_Enter_ElenyaEnter()
+{
+	m_fElenyaEnter_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
+
+	CUIManager::Get_Instance()->Off_CutScreen();
+
+	m_bIsCutScene = false;
+	m_bEnter_ElenyaEnter = false;
 }
 
 

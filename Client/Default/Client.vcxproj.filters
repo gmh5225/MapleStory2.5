@@ -534,6 +534,21 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\TransformStump">
       <UniqueIdentifier>{c9af17c8-b6b5-48d8-afd5-ee5893b8b0a3}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="04.UI\03.Dialog\ChatBox">
+      <UniqueIdentifier>{d947de5e-e292-49fe-8969-3ff8421256e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Taxi">
+      <UniqueIdentifier>{f14d9933-6c76-4325-8636-4b51ac641349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Taxi\TaxiButton">
+      <UniqueIdentifier>{a877fbbb-2dcd-4273-bffb-c591c66f448f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Taxi\TaxiChatBox">
+      <UniqueIdentifier>{59d48b4c-d7b9-475f-b7b0-ac7df74497ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Taxi">
+      <UniqueIdentifier>{11d238cb-25ac-42a8-8a76-60c1f8f491b9}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -995,6 +1010,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\TransformStump.h">
       <Filter>02.GameObject\Creature\Monster\TransformStump</Filter>
+      </ClInclude>
+    <ClInclude Include="..\public\ChatBox.h">
+      <Filter>04.UI\03.Dialog\ChatBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\TaxiChatBox.h">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiChatBox</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\TaxiButton.h">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiButton</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Taxi.h">
+      <Filter>02.GameObject\Creature\Taxi</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1447,6 +1474,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\TransformStump.cpp">
       <Filter>02.GameObject\Creature\Monster\TransformStump</Filter>
+      </ClCompile>
+    <ClCompile Include="..\private\ChatBox.cpp">
+      <Filter>04.UI\03.Dialog\ChatBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\TaxiChatBox.cpp">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiChatBox</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\TaxiButton.cpp">
+      <Filter>04.UI\03.Dialog\Taxi\TaxiButton</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Taxi.cpp">
+      <Filter>02.GameObject\Creature\Taxi</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -5,6 +5,7 @@
 #include "QuestManager.h"
 #include "Spawner.h"
 #include "SpawnerManager.h"
+#include "InvenManager.h"
 
 CBlueSnail::CBlueSnail(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -367,6 +368,19 @@ void CBlueSnail::Tick_Die(_float fTimeDelta)
 }
 
 
+void CBlueSnail::MakeItem()
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+}
+
+
 
 
 void CBlueSnail::SetState(STATE eState, DIR eDir)
@@ -450,8 +464,9 @@ void CBlueSnail::Damaged(CGameObject * pOther)
 		CQuestManager::Get_Instance()->Eat_Item(TEXT("BlueShell"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
+		MakeItem();
 	}
-	//
+
 }
 
 
