@@ -248,7 +248,7 @@ HRESULT CQuestUI::Render()
 		TCHAR cStoneGolem[50];
 		TCHAR cCountHunt[15];
 		_uint iStoneGolem = Questinstance->Set_StoneGolem();
-		wsprintf(cHunt, TEXT("[헤네시스] 길을 막는 스톤골렘\n") TEXT(" 스톤골렘"));
+		wsprintf(cHunt, TEXT("[헤네시스] 길을 막는 파란버섯\n") TEXT(" 파란버섯"));
 		wsprintf(cStoneGolem, TEXT("%d"), iStoneGolem);
 		wsprintf(cCountHunt, TEXT(" / 1"));
 
@@ -383,6 +383,48 @@ HRESULT CQuestUI::Render()
 
 		}
 	}
+
+
+
+		else if (Questinstance->Get_QuestNum() == 5)
+		{
+			TCHAR cQuest[128];
+			TCHAR cGAS[50];
+			TCHAR cCountSlime[15];
+
+			_uint iGAS = Questinstance->Set_GAS();
+
+			wsprintf(cQuest, TEXT("[헤네시스] 가디언 엔젤 슬라임 처치\n") TEXT(" 가디언 엔젤 슬라임"));
+			wsprintf(cGAS, TEXT("%d"), iGAS);
+			wsprintf(cCountSlime, TEXT(" / 1\n"));
+
+
+
+			if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
+			{
+				SetRect(&rc, 1100, 270, 1200, 150);
+				m_pFont->DrawText(NULL, cQuest,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+
+				if (iGAS == 11)
+				{
+					SetRect(&rc, 1165, 285, 1205, 165);
+					m_pFont->DrawText(NULL, cGAS,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(0.f, 1.0f, 1.0f, 1.0f));
+				}
+				else
+				{
+					SetRect(&rc, 1165, 285, 1205, 165);
+					m_pFont->DrawText(NULL, cGAS,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.0f));
+				}
+
+				SetRect(&rc, 1178, 285, 1218, 165);
+				m_pFont->DrawText(NULL, cCountSlime,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+
+			}
+		}
 
 	return S_OK;
 }

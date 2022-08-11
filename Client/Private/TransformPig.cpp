@@ -1,39 +1,43 @@
 #include "stdafx.h"
-#include "..\Public\GoStump.h"
+#include "..\Public\TransformPig.h"
 
 #include "GameInstance.h"
-#include "QuestManager.h"
 #include "Spawner.h"
 #include "SpawnerManager.h"
+#include "QuestManager.h"
 
-CGoStump::CGoStump(LPDIRECT3DDEVICE9 pGraphic_Device)
+CTransformPig::CTransformPig(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CGoStump::CGoStump(const CGoStump & rhs)
+CTransformPig::CTransformPig(const CTransformPig & rhs)
 	: CCreature(rhs)
 {
 }
 
-HRESULT CGoStump::Initialize_Prototype()
+
+
+
+HRESULT CTransformPig::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CGoStump::Initialize(void * pArg)
+HRESULT CTransformPig::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
-
-	m_iIndexNum = -1;
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
 	m_sTag = "Tag_Monster";
+
 	m_iHp = 3;
 
 	m_fCountDead = 0;
+
+	m_fCountAttack = 0;
 
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
@@ -41,14 +45,14 @@ HRESULT CGoStump::Initialize(void * pArg)
 
 	m_fColRad = pMonsterDesc->MonsterColRad;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->MonsterPos);
-	m_pTransformCom->Set_Scaled(1.5f);
+	m_pTransformCom->Set_Scaled(5.f);
 	m_bDir = false;
 
 	m_fStartPos = pMonsterDesc->MonsterPos;
 
 	// 랜덤으로 어느방향으로 움직일지와 거리를 생성한다
 	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 4);
-	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(1, 3));
+	m_fDistance = _float(CGameInstance::Get_Instance()->Get_Random(1, 5));
 
 
 	switch (m_iMove)
@@ -74,7 +78,6 @@ HRESULT CGoStump::Initialize(void * pArg)
 		break;
 	}
 
-
 	SetShadow(pMonsterDesc->Level, 1.5f);
 
 	return S_OK;
@@ -83,24 +86,28 @@ HRESULT CGoStump::Initialize(void * pArg)
 
 
 
-HRESULT CGoStump::SetUp_Components()
+HRESULT CTransformPig::SetUp_Components()
 {
+
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 0.5f, 0.8f, 0.5f };
+	BoxColDesc.vScale = _float3{ 0.5f, 2.f, 0.5f };
 	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;
 
-	{
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Idle"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Move"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Hit"), nullptr);
 
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_MoveR"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_HitR"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_DieR"), nullptr);
-		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GoStump_Die"), nullptr);
+	{
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_Idle"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_Move"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_Hit"), nullptr);
+											
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_MoveR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_HitR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_DieR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_Die"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_AttackR"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TransformPig_Attack"), nullptr);
 	}
 
 
@@ -108,7 +115,7 @@ HRESULT CGoStump::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 0.5f;
+	TransformDesc.fSpeedPerSec = 0.7f;
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
@@ -117,7 +124,7 @@ HRESULT CGoStump::SetUp_Components()
 	return S_OK;
 }
 
-void CGoStump::Die()
+void CTransformPig::Die()
 {
 	if (m_eDir == DIR_L)
 	{
@@ -132,36 +139,64 @@ void CGoStump::Die()
 
 
 
-void CGoStump::Tick(_float fTimeDelta)
+void CTransformPig::Tick(_float fTimeDelta)
 {
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+	if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f && fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).z - vPlayerPos.z) < 2.f)
+	{
+		if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
+		{
+			if (m_eDir == DIR_R)
+				SetState(STATE_ATTACK, DIR_R);
+			else
+				SetState(STATE_ATTACK, DIR_L);
+		}
+	}
+
+	else if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 4.f)
+	{
+		if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE &&  m_eCurState != STATE_ATTACK)
+			if (m_eDir == DIR_R)
+				SetState(STATE_CHASE, DIR_R);
+			else
+				SetState(STATE_CHASE, DIR_L);
+	}
+
 
 	switch (m_eCurState)
 	{
-	case Client::CGoStump::STATE_IDLE:
+	case Client::CTransformPig::STATE_IDLE:
 		Tick_Idle(fTimeDelta);
 		break;
-	case Client::CGoStump::STATE_MOVE:
+	case Client::CTransformPig::STATE_MOVE:
 		Tick_Move(fTimeDelta);
 		break;
-	case Client::CGoStump::STATE_HIT:
+	case Client::CTransformPig::STATE_HIT:
 		Tick_Hit(fTimeDelta);
 		break;
-	case Client::CGoStump::STATE_CHASE:
+	case Client::CTransformPig::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
-	case Client::CGoStump::STATE_DIE:
+	case Client::CTransformPig::STATE_DIE:
 		Tick_Die(fTimeDelta);
 		break;
+	case Client::CTransformPig::STATE_ATTACK:
+		Tick_Attack(fTimeDelta);
+		break;
 	}
-
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
 	{
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Set_Dead();
 	}
-
 }
-void CGoStump::LateTick(_float fTimeDelta)
+void CTransformPig::LateTick(_float fTimeDelta)
 {
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		if (m_eCurState != STATE_DIE)
@@ -175,9 +210,8 @@ void CGoStump::LateTick(_float fTimeDelta)
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-
 }
-HRESULT CGoStump::Render()
+HRESULT CTransformPig::Render()
 {
 	Set_Billboard();
 
@@ -197,17 +231,6 @@ HRESULT CGoStump::Render()
 		return E_FAIL;
 
 	
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_0))
-	{
-		if (temp)
-			temp = false;
-		else
-			temp = true;
-	}
-
-	if (temp)
-		__super::BoxColCom_Render(m_pTransformCom);
-
 
 	return S_OK;
 }
@@ -216,7 +239,7 @@ HRESULT CGoStump::Render()
 
 
 
-void CGoStump::Tick_Idle(_float fTimeDelta)
+void CTransformPig::Tick_Idle(_float fTimeDelta)
 {
 	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 1000);
 
@@ -239,9 +262,8 @@ void CGoStump::Tick_Idle(_float fTimeDelta)
 		m_fEndPos.z = m_fStartPos.z - m_fDistance;
 		break;
 	}
-
 }
-void CGoStump::Tick_Move(_float fTimeDelta)
+void CTransformPig::Tick_Move(_float fTimeDelta)
 {
 	_float3 fPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 
@@ -318,16 +340,17 @@ void CGoStump::Tick_Move(_float fTimeDelta)
 		}
 	}
 }
-void CGoStump::Tick_Hit(_float fTimeDelta)
+void CTransformPig::Tick_Hit(_float fTimeDelta)
 {
 }
 
-void CGoStump::Tick_Chase(_float fTimeDelta)
+void CTransformPig::Tick_Chase(_float fTimeDelta)
 {
 	if (GetKeyState('L') & 0x8000)
 	{
 		SetState(STATE_JUMP, m_eDir);
 	}
+
 
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -335,6 +358,7 @@ void CGoStump::Tick_Chase(_float fTimeDelta)
 	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
 
 	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x < vPlayerPos.x)
 	{
@@ -347,31 +371,33 @@ void CGoStump::Tick_Chase(_float fTimeDelta)
 		m_pTransformCom->Chase(vPlayerPos + _float3(0.1f, 0.f, 0.1f), fTimeDelta);
 	}
 
-
 	Safe_Release(pGameInstance);
 }
 
-void CGoStump::Tick_Die(_float fTimeDelta)
+void CTransformPig::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
-	if (m_fCountDead >= 1.2f)
-	{
-		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		GoStumpItem.eType = CInvenManager::TYPE_STUFF;
-		GoStumpItem.iTextNum = 6;
-		GoStumpItem.pTag = L"GoStumpInfo";
-		GoStumpItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &GoStumpItem);
-		Safe_Release(pGameInstance);
+	if (m_fCountDead >= 2.5f)
 		Set_Dead();
+}
+
+void CTransformPig::Tick_Attack(_float fTimeDelta)
+{
+	m_fCountAttack += fTimeDelta;
+	if (m_fCountAttack > 1.4f)
+	{
+		m_fCountAttack = 0;
+		if (m_eDir == DIR_R)
+			SetState(STATE_CHASE, DIR_R);
+		else
+			SetState(STATE_CHASE, DIR_L);
 	}
 }
 
 
 
 
-void CGoStump::SetState(STATE eState, DIR eDir)
+void CTransformPig::SetState(STATE eState, DIR eDir)
 {
 	if (m_eCurState == eState && m_eDir == eDir)
 		return;
@@ -387,46 +413,49 @@ void CGoStump::SetState(STATE eState, DIR eDir)
 		m_pTransformCom->Set_Vel(4.0f);
 	}
 }
-void CGoStump::SetAni()
+void CTransformPig::SetAni()
 {
 	switch (m_eCurState)
 	{
-	case CGoStump::STATE_IDLE:
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_Idle"), 0.5f, CAnimator::STATE_LOOF);
-	break;
-	case CGoStump::STATE_MOVE:
+	case CTransformPig::STATE_IDLE:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_Idle"), 0.2f, CAnimator::STATE_LOOF);
+		break;
+	case CTransformPig::STATE_MOVE:
 	{
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_MoveR"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_MoveR"), 0.2f, CAnimator::STATE_LOOF);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_Move"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_Move"), 0.2f, CAnimator::STATE_LOOF);
 	}
 	break;
-	case CGoStump::STATE_HIT:
+	case CTransformPig::STATE_HIT:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_HitR"), 0.5f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_HitR"), 0.5f, CAnimator::STATE_ONCE);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_Hit"), 0.5f, CAnimator::STATE_ONCE);
-	break;
-	case CGoStump::STATE_CHASE:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_Hit"), 0.5f, CAnimator::STATE_ONCE);
+		break;
+	case CTransformPig::STATE_CHASE:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_MoveR"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_MoveR"), 0.1f, CAnimator::STATE_LOOF);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_Move"), 0.3f, CAnimator::STATE_LOOF);
-	break;
-	case CGoStump::STATE_DIE:
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_Move"), 0.1f, CAnimator::STATE_LOOF);
+		break;
+	case CTransformPig::STATE_DIE:
 		if (m_eDir == DIR_R)
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_DieR"), 0.3f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_DieR"), 0.15f, CAnimator::STATE_ONCE);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GoStump_Die"), 0.3f, CAnimator::STATE_ONCE);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_Die"), 0.15f, CAnimator::STATE_ONCE);
+		break;
+	case CTransformPig::STATE_ATTACK:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_AttackR"), 0.1f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_TransformPig_Attack"), 0.1f, CAnimator::STATE_ONCE);
 		break;
 	}
 }
 
-
-
-
-void CGoStump::Damaged(CGameObject * pOther)
+void CTransformPig::Damaged(CGameObject * pOther)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -443,39 +472,41 @@ void CGoStump::Damaged(CGameObject * pOther)
 			SetState(STATE_HIT, DIR_L);
 	}
 
-	Safe_Release(pGameInstance);
-
 	--m_iHp;
-	if (m_iHp == 0)
+	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("StumpFirewood"));
+		CQuestManager::Get_Instance()->Eat_Item(TEXT("TransformPig"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
 	}
-	//
+
+	Safe_Release(pGameInstance);
 }
 
 
 
-CGoStump * CGoStump::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+
+
+
+CTransformPig * CTransformPig::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CGoStump*		pInstance = new CGoStump(pGraphic_Device);
+	CTransformPig*		pInstance = new CTransformPig(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CGoStump"));
+		MSG_BOX(TEXT("Failed To Created : CTransformPig"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CGoStump::Clone(void* pArg)
+CGameObject * CTransformPig::Clone(void* pArg)
 {
-	CGoStump*		pInstance = new CGoStump(*this);
+	CTransformPig*		pInstance = new CTransformPig(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CGoStump"));
+		MSG_BOX(TEXT("Failed To Cloned : CTransformPig"));
 		Safe_Release(pInstance);
 	}
 
@@ -485,7 +516,7 @@ CGameObject * CGoStump::Clone(void* pArg)
 
 
 
-void CGoStump::Collision(CGameObject * pOther)
+void CTransformPig::Collision(CGameObject * pOther)
 {
 	if (pOther->Get_Tag() == "Tag_Cube")
 	{
@@ -501,7 +532,7 @@ void CGoStump::Collision(CGameObject * pOther)
 
 
 
-void CGoStump::Free()
+void CTransformPig::Free()
 {
 	__super::Free();
 

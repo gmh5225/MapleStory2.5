@@ -191,6 +191,8 @@
     <ClInclude Include="..\Public\ExpBase.h" />
     <ClInclude Include="..\Public\ExpLine.h" />
     <ClInclude Include="..\Public\GAS.h" />
+    <ClInclude Include="..\Public\GASHpGage.h" />
+    <ClInclude Include="..\Public\GASHpbar.h" />
     <ClInclude Include="..\Public\GgoGgo.h" />
     <ClInclude Include="..\Public\GoStump.h" />
     <ClInclude Include="..\Public\GoStumpInfo.h" />
@@ -285,6 +287,9 @@
     <ClInclude Include="..\Public\StoneGolem.h" />
     <ClInclude Include="..\Public\SunderBreakAttack.h" />
     <ClInclude Include="..\public\ToolManager.h" />
+    <ClInclude Include="..\Public\TransformPig.h" />
+    <ClInclude Include="..\Public\TransformSlime.h" />
+    <ClInclude Include="..\Public\TransformStump.h" />
     <ClInclude Include="..\Public\UI.h" />
     <ClInclude Include="..\Public\UIManager.h" />
     <ClInclude Include="..\Public\SolunaSlashEffectA.h" />
@@ -335,6 +340,8 @@
     <ClCompile Include="..\Private\ExpBase.cpp" />
     <ClCompile Include="..\Private\ExpLine.cpp" />
     <ClCompile Include="..\Private\GAS.cpp" />
+    <ClCompile Include="..\Private\GASHpbar.cpp" />
+    <ClCompile Include="..\Private\GASHpGage.cpp" />
     <ClCompile Include="..\Private\GgoGgo.cpp" />
     <ClCompile Include="..\Private\GoStump.cpp" />
     <ClCompile Include="..\Private\GoStumpInfo.cpp" />
@@ -429,6 +436,9 @@
     <ClCompile Include="..\Private\StoneGolem.cpp" />
     <ClCompile Include="..\Private\SunderBreakAttack.cpp" />
     <ClCompile Include="..\private\ToolManager.cpp" />
+    <ClCompile Include="..\Private\TransformPig.cpp" />
+    <ClCompile Include="..\Private\TransformSlime.cpp" />
+    <ClCompile Include="..\Private\TransformStump.cpp" />
     <ClCompile Include="..\Private\UI.cpp" />
     <ClCompile Include="..\Private\UIManager.cpp" />
     <ClCompile Include="..\Private\SolunaSlashEffectA.cpp" />

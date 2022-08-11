@@ -76,6 +76,9 @@ HRESULT CSlime::Initialize(void * pArg)
 
 	SetShadow(pMonsterDesc->Level, 1.5f);
 
+	if (pMonsterDesc->GAS == TEXT("GAS"))
+		SetState(STATE_CHASE, DIR_END);
+
 	return S_OK;
 }
 

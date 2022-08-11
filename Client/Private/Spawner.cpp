@@ -82,6 +82,24 @@ HRESULT CSpawner::Initialize(void * pArg)
 			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_ELENYA, TEXT("Layer_Monster"), pArg)))
 				return E_FAIL;
 		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("TransformPig"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("TransformSlime"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("TransformStump"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
  	}
 
 	CSpawnerManager::Get_Instance()->Add_SpawnerInfo(this);
@@ -170,6 +188,24 @@ void CSpawner::LateTick(_float fTimeDelta)
 				else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
 				{
 					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("TransformPig"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("TransformSlime"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
+						int a = 0;
+				}
+
+				else if (m_SpawnerInfo.MonsterName == TEXT("TransformStump"))
+				{
+					if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 						int a = 0;
 				}
 

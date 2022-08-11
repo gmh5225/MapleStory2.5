@@ -1,16 +1,17 @@
 #pragma once
 
 #include "Creature.h"
-#include "Spawner.h"
 
 BEGIN(Client)
 
-class CGAS final : public CCreature
+class CTransformPig final : public CCreature
 {
 private:
-	CGAS(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CGAS(const CGAS& rhs);
-	virtual ~CGAS() = default;
+	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D, MOVE_END };
+private:
+	CTransformPig(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CTransformPig(const CTransformPig& rhs);
+	virtual ~CTransformPig() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -23,14 +24,11 @@ public:
 
 private:
 	void Tick_Idle(_float fTimeDelta);
+	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
-	void Tick_Jump(_float fTimeDelta);
-	void Tick_DJump(_float fTimeDelta);
-	void Tick_Dash(_float fTimeDelta);
-	void Tick_End(_float fTimeDelta);	// 텔포 이후
-	void Tick_Attack(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
+	void Tick_Attack(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -39,9 +37,6 @@ public:
 	virtual void SetAni() override;
 	virtual void Damaged(CGameObject* pOther) override;
 
-private:
-	HRESULT SetUp_Components();
-	void Die();
 
 private:
 	STATE m_eCurState;
@@ -49,29 +44,27 @@ private:
 
 	CGameObject* m_pTarget;
 
+	_uint m_iMove;
+	_float3 m_fEndPos;
+	_float3 m_fStartPos;
+	_bool m_bDir;
+	_float m_fDistance;
 
-public:
-	static CGAS* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
-	virtual CGameObject* Clone(void* pArg);
-	virtual void Free() override;
+	_uint m_iHp;
+	_int m_iIndexNum;
 
-private:
-	_int	m_iHp;
-	_int	m_iIndexNum;
 	_float m_fCountDead;
 
-	_bool m_bPatterStart;
-	_int m_iRandomPattern;
-	_float m_fPatternCycle;
+	_float m_fCountAttack;
 
-	_float m_fJump;
-	_float m_fDJump;
-	_float m_fAttack;
-	_float m_fDash;
-	_float m_fEnd;
+private:
+	HRESULT SetUp_Components();
+	void Die();
 
-	_bool m_bTest;
-
+public:
+	static CTransformPig* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	virtual CGameObject* Clone(void* pArg);
+	virtual void Free() override;
 };
 
 END

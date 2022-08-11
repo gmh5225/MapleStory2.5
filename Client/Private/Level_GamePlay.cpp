@@ -191,11 +191,14 @@ HRESULT CLevel_GamePlay::Ready_Layer_Monster(const _tchar * pLayerTag)
 	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_HENESYS, pLayerTag)))
 	//	return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizard"), LEVEL_GAMEPLAY, L"Layer_BlackWizard")))
+	/*if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizard"), LEVEL_GAMEPLAY, L"Layer_BlackWizard")))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardPatternUI"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
+		return E_FAIL;*/
+
+	/*if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;*/
 
 	Safe_Release(pGameInstance);
 
@@ -273,7 +276,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	
 
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_Henesys");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_GAS");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAMEPLAY, pLayerTag, &Data)))
@@ -281,31 +284,31 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	}
 
 
-	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Henesys");
-	if (nullptr != pModelData)
-	{
-		for (auto& Model : *pModelData)
-		{
-			CVIBuffer_Voxel::VOXELDESC VoxDesc;
-			CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
-			VoxDesc.vPos = Model.vPos;
+	//list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_Henesys");
+	//if (nullptr != pModelData)
+	//{
+	//	for (auto& Model : *pModelData)
+	//	{
+	//		CVIBuffer_Voxel::VOXELDESC VoxDesc;
+	//		CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
+	//		VoxDesc.vPos = Model.vPos;
 
-			_float4x4 Matrix;
-			D3DXMatrixIdentity(&Matrix);
+	//		_float4x4 Matrix;
+	//		D3DXMatrixIdentity(&Matrix);
 
-			D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
+	//		D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
 
-			D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
+	//		D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
 
 
-			VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
-			VoxDesc.vRotationAix = Model.vAix;
+	//		VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
+	//		VoxDesc.vRotationAix = Model.vAix;
 
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
-				return E_FAIL;
-		}
+	//		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_GAMEPLAY, pLayerTag, &VoxDesc)))
+	//			return E_FAIL;
+	//	}
 
-	}
+	//}
 
 	if (FAILED(Ready_Layer_Section(TEXT("Layer_Section"))))
 		return E_FAIL;
@@ -447,6 +450,12 @@ HRESULT CLevel_GamePlay::Ready_Layer_UI(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CutScreen"), LEVEL_STATIC, pLayerTag)))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GASHpbar"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GASHpGage"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -470,6 +479,45 @@ HRESULT CLevel_GamePlay::Ready_Layer_NonStatic_UI(const _tchar * pLayerTag)
 
 HRESULT CLevel_GamePlay::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
+
+	CSpawner::SPAWNERINFO MonsterInfo;
+
+
+	MonsterInfo.MonsterName = TEXT("GoStump");
+	MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
+	MonsterInfo.SpawnerNum = 0;
+	MonsterInfo.MonsterNum = 2;
+	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_GAMEPLAY;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+	//MonsterInfo.MonsterName = TEXT("TransformPig");
+	//MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
+	//MonsterInfo.SpawnerNum = 0;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.Level = LEVEL_GAMEPLAY;
+
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+	//MonsterInfo.MonsterName = TEXT("TransformSlime");
+	//MonsterInfo.MonsterPos = _float3{ -5.f , 1.f, -1.f };
+	//MonsterInfo.SpawnerNum = 1;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.Level = LEVEL_GAMEPLAY;
+
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+	//MonsterInfo.MonsterName = TEXT("TransformStump");
+	//MonsterInfo.MonsterPos = _float3{ -5.f , 1.f, -1.f };
+	//MonsterInfo.SpawnerNum = 2;
+	//MonsterInfo.MonsterNum = 2;
+	//MonsterInfo.MonsterColRad = 1.f;
+	//MonsterInfo.Level = LEVEL_GAMEPLAY;
+
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	return S_OK;
 }

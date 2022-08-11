@@ -344,7 +344,17 @@ void CRibbonPig::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.f)
+	{
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+		RibbonPigItem.eType = CInvenManager::TYPE_STUFF;
+		RibbonPigItem.iTextNum = 1;
+		RibbonPigItem.pTag = L"GoStumpInfo";
+		RibbonPigItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &RibbonPigItem);
+		Safe_Release(pGameInstance);
 		Set_Dead();
+	}
 }
 
 

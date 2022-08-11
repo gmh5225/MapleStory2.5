@@ -42,6 +42,8 @@ private:
 public:
 	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
 	_uint Set_BlueMushmomHp() { return m_iBlueMushmomHp; };
+	void Get_GASHp(_uint iHp) { m_iGASHp = iHp; };
+	_uint Set_GASHp() { return m_iGASHp; };
 	HRESULT Add_BlackWizardPatternUI(CBlackWizardPatternUI* pInstance);
 	CBlackWizardPatternUI* Get_BlackWizardPatternUI() { return m_pBlackWizardPatternUI; }
 public:
@@ -50,6 +52,7 @@ public:
 
 private:
 	_uint m_iBlueMushmomHp;
+	_uint m_iGASHp;
 	CBlackWizardPatternUI* m_pBlackWizardPatternUI;
 };
 
