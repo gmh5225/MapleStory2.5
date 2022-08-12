@@ -102,7 +102,7 @@ void CInvenManager::MakeItem(InvenType eType, _int TextNum, const _tchar * pTag,
 
 	CItem::ITEMINFO ItemInfo;
 	ItemInfo.eType = eType;
-	ItemInfo.iTextNum = 0;
+	ItemInfo.iTextNum = TextNum;
 	ItemInfo.pTag = pTag;
 	ItemInfo.vPos = vPos;
 

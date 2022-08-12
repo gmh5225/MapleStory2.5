@@ -86,7 +86,7 @@ HRESULT CBlueMushmomHpbar::Render()
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (vPlayerPos.x > 36.f && (_float(CUIManager::Get_Instance()->Set_BlueMushmomHp()) > 0))
+	if ((_float(CUIManager::Get_Instance()->Set_BlueMushmomHp()) > 0))
 		m_pVIBufferCom->Render();
 
 	Safe_Release(pGameInstance);

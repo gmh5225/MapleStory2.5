@@ -155,16 +155,16 @@ HRESULT CQuestUI::Render()
 
 		wsprintf(cQuest, TEXT("[헤네시스] 밍밍부인의 생일선물\n") TEXT(" 빨간 껍질"));
 		wsprintf(cRedShell, TEXT("%d"), iRedShell);
-		wsprintf(cCountRed, TEXT(" / 7\n"));
+		wsprintf(cCountRed, TEXT(" / 2\n"));
 
 
 		wsprintf(cQuest2, TEXT(" 파란 껍질"));
 		wsprintf(cBlueShell, TEXT("%d"), iBlueShell);
-		wsprintf(cCountBlue, TEXT(" / 7\n"));
+		wsprintf(cCountBlue, TEXT(" / 2\n"));
 
 		wsprintf(cQuest3, TEXT("돼지의 리본"));
 		wsprintf(cPigRibbon, TEXT("%d"), iPigRibbon);
-		wsprintf(cCountRibbon, TEXT(" / 10"));
+		wsprintf(cCountRibbon, TEXT(" / 2"));
 
 
 		if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
@@ -173,7 +173,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cQuest,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iRedShell == 7)
+			if (iRedShell >= 2)
 			{
 				SetRect(&rc, 1165, 285, 1205, 165);
 				m_pFont->DrawText(NULL, cRedShell,
@@ -197,7 +197,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cQuest2,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iBlueShell == 7)
+			if (iBlueShell >= 2)
 			{
 				SetRect(&rc, 1165, 300, 1205, 165);
 				m_pFont->DrawText(NULL, cBlueShell,
@@ -220,7 +220,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cQuest3,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iPigRibbon == 10)
+			if (iPigRibbon >= 2)
 			{
 				SetRect(&rc, 1170, 315, 1205, 165);
 				m_pFont->DrawText(NULL, cPigRibbon,
@@ -248,7 +248,7 @@ HRESULT CQuestUI::Render()
 		TCHAR cStoneGolem[50];
 		TCHAR cCountHunt[15];
 		_uint iStoneGolem = Questinstance->Set_StoneGolem();
-		wsprintf(cHunt, TEXT("[헤네시스] 길을 막는 파란버섯\n") TEXT(" 파란버섯"));
+		wsprintf(cHunt, TEXT("[헤네시스] 길을 막는 파란색버섯\n") TEXT(" 블루머쉬맘"));
 		wsprintf(cStoneGolem, TEXT("%d"), iStoneGolem);
 		wsprintf(cCountHunt, TEXT(" / 1"));
 
@@ -297,16 +297,16 @@ HRESULT CQuestUI::Render()
 
 		wsprintf(cQuest, TEXT("[헤네시스] 장로스탄의 보양식\n") TEXT(" 슬라임 정수"));
 		wsprintf(cSlimeEssence, TEXT("%d"), iSlimeEssence);
-		wsprintf(cCountSlime, TEXT(" / 6\n"));
+		wsprintf(cCountSlime, TEXT(" / 2\n"));
 
 
 		wsprintf(cQuest2, TEXT(" 고스텀프의 장작"));
 		wsprintf(cStumpFirewoodl, TEXT("%d"), iStumpFirewoodl);
-		wsprintf(cCountStump, TEXT(" / 6\n"));
+		wsprintf(cCountStump, TEXT(" / 2\n"));
 
 		wsprintf(cQuest3, TEXT("초록버섯의 갓"));
 		wsprintf(cGreenMushroom, TEXT("%d"), iGreenMushroom);
-		wsprintf(cCountMushroom, TEXT(" / 6"));
+		wsprintf(cCountMushroom, TEXT(" / 2"));
 
 
 		if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
@@ -315,7 +315,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cQuest,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iSlimeEssence == 6)
+			if (iSlimeEssence >= 2)
 			{
 				SetRect(&rc, 1200, 285, 1205, 165);
 				m_pFont->DrawText(NULL, cSlimeEssence,
@@ -339,7 +339,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cQuest2,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iStumpFirewoodl == 6)
+			if (iStumpFirewoodl >= 2)
 			{
 				SetRect(&rc, 1200, 300, 1205, 165);
 				m_pFont->DrawText(NULL, cStumpFirewoodl,
@@ -362,7 +362,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cQuest3,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iGreenMushroom == 6)
+			if (iGreenMushroom >= 2)
 			{
 				SetRect(&rc, 1200, 315, 1205, 165);
 				m_pFont->DrawText(NULL, cGreenMushroom,

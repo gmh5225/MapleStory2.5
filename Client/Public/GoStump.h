@@ -32,6 +32,8 @@ private:
 	void Tick_Chase(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
 
+	void MakeItem();
+
 public:
     virtual	void SetState(STATE eState, DIR eDir) override;
 

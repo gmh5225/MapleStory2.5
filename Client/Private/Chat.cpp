@@ -3,6 +3,8 @@
 #include "GameInstance.h"
 #include "QuestManager.h"
 #include "SkillManager.h"
+#include "InvenManager.h"
+#include "ItemInfo.h"
 
 CChat::CChat(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
@@ -404,6 +406,13 @@ HRESULT CChat::Render()
 					CQuestManager::Get_Instance()->Set_Third();
 					CSkillManager::Get_Instance()->Set_SkillPoint(3);
 					m_iChatProgress = 20;
+
+					CItemInfo* RedSnailInfo = CInvenManager::Get_Instance()->Get_ItemInfo(L"RedSnailInfo", CInvenManager::TYPE_STUFF);
+					CItemInfo* BlueSnailInfo = CInvenManager::Get_Instance()->Get_ItemInfo(L"BlueSnailInfo", CInvenManager::TYPE_STUFF);
+					CItemInfo* RibbonPigInfo = CInvenManager::Get_Instance()->Get_ItemInfo(L"RibbonPigInfo", CInvenManager::TYPE_STUFF);
+					RedSnailInfo->Set_NowNum(0);
+					BlueSnailInfo->Set_NowNum(0);
+					RibbonPigInfo->Set_NowNum(0);
 				}
 			}
 		}
@@ -604,10 +613,18 @@ HRESULT CChat::Render()
 			if (GetKeyState(VK_RETURN) & 0x8000)
 			{
 				m_fCount = 0;
-				pInstance->QuestEnd();
+				pInstance->QuestPrepare();
 				pInstance->Check_End_Quest();
 				pInstance->Reset_Hunt();
 				CSkillManager::Get_Instance()->Set_SkillPoint(3);
+
+				CItemInfo* SlimeInfo = CInvenManager::Get_Instance()->Get_ItemInfo(L"SlimeInfo", CInvenManager::TYPE_STUFF);
+				CItemInfo* GoStumpInfo = CInvenManager::Get_Instance()->Get_ItemInfo(L"GoStumpInfo", CInvenManager::TYPE_STUFF);
+				CItemInfo* GreenMushroomInfo = CInvenManager::Get_Instance()->Get_ItemInfo(L"GreenMushroomInfo", CInvenManager::TYPE_STUFF);
+
+				SlimeInfo->Set_NowNum(0);
+				GoStumpInfo->Set_NowNum(0);
+				GreenMushroomInfo->Set_NowNum(0);
 			}
 		}
 	}
@@ -678,7 +695,7 @@ HRESULT CChat::Render()
 			if (GetKeyState(VK_RETURN) & 0x8000)
 			{
 				m_fCount = 0;
-				pInstance->QuestPrepare();
+				pInstance->QuestClear();
 				pInstance->Check_End_Quest();
 				pInstance->Reset_Hunt();
 				CSkillManager::Get_Instance()->Set_SkillPoint(3);

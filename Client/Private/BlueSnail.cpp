@@ -355,14 +355,7 @@ void CBlueSnail::Tick_Die(_float fTimeDelta)
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.f)
 	{
-		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		BlueSnailItem.eType = CInvenManager::TYPE_STUFF;
-		BlueSnailItem.iTextNum = 0;
-		BlueSnailItem.pTag = L"GoStumpInfo";
-		BlueSnailItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &BlueSnailItem);
-		Safe_Release(pGameInstance);
+
 		Set_Dead();
 	}
 }
@@ -371,13 +364,7 @@ void CBlueSnail::Tick_Die(_float fTimeDelta)
 void CBlueSnail::MakeItem()
 {
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
-	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
-	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
-	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
-	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
-	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
-	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 0, L"BlueSnailInfo", vPos,LEVEL_HENESYS);
 }
 
 
@@ -461,7 +448,6 @@ void CBlueSnail::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("BlueShell"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
 		MakeItem();

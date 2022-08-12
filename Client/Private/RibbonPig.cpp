@@ -345,20 +345,16 @@ void CRibbonPig::Tick_Die(_float fTimeDelta)
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.f)
 	{
-		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		RibbonPigItem.eType = CInvenManager::TYPE_STUFF;
-		RibbonPigItem.iTextNum = 1;
-		RibbonPigItem.pTag = L"GoStumpInfo";
-		RibbonPigItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &RibbonPigItem);
-		Safe_Release(pGameInstance);
 		Set_Dead();
 	}
 }
 
 
-
+void CRibbonPig::MakeItem()
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 1, L"RibbonPigInfo", vPos, LEVEL_HENESYS);
+}
 
 void CRibbonPig::SetState(STATE eState, DIR eDir)
 {
@@ -432,9 +428,9 @@ void CRibbonPig::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("PigRibbon"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
+		MakeItem();
 	}
 
 	Safe_Release(pGameInstance);
