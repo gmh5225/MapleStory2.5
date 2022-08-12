@@ -246,6 +246,7 @@
     <ClInclude Include="..\public\ParticleManager.h" />
     <ClInclude Include="..\Public\Player.h" />
     <ClInclude Include="..\Public\Potal.h" />
+    <ClInclude Include="..\public\PushCube.h" />
     <ClInclude Include="..\Public\QuestManager.h" />
     <ClInclude Include="..\Public\QuestUI.h" />
     <ClInclude Include="..\Public\QuickSlot.h" />
@@ -404,6 +405,7 @@
     <ClCompile Include="..\private\ParticleManager.cpp" />
     <ClCompile Include="..\Private\Player.cpp" />
     <ClCompile Include="..\Private\Potal.cpp" />
+    <ClCompile Include="..\private\PushCube.cpp" />
     <ClCompile Include="..\Private\QuestManager.cpp" />
     <ClCompile Include="..\Private\QuestUI.cpp" />
     <ClCompile Include="..\Private\QuickSlot.cpp" />

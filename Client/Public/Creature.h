@@ -17,7 +17,7 @@ BEGIN(Client)
 class CCreature : public CGameObject
 {
 public:
-	enum STATE { STATE_IDLE, STATE_MOVE, STATE_JUMP, STATE_DJUMP, STATE_ATTACK, STATE_DASH, STATE_HIT, STATE_CHASE, STATE_DIE, STATE_CUTSCEEN, STATE_END };
+	enum STATE { STATE_IDLE, STATE_MOVE, STATE_JUMP, STATE_DJUMP, STATE_ATTACK, STATE_DASH, STATE_HIT, STATE_CHASE, STATE_DIE, STATE_CUTSCEEN, STATE_KNOCKBACK, STATE_END };
 	enum DIR { DIR_L, DIR_R, DIR_U, DIR_D, DIR_LU, DIR_RU, DIR_LD, DIR_RD, DIR_END };
 
 	typedef struct tagCreatureDesc
@@ -54,6 +54,7 @@ public:
 	void Set_Billboard();
 
 	virtual void Damaged(CGameObject* pOther) override {};
+	void SetKnockBack(_float fPowerY, _float fPowerX, _float3 vDir);
 	
 protected:
 	virtual void SetShadow(LEVEL eLevel, _float fScale);
@@ -73,9 +74,15 @@ protected:
 
 	class CShadow* m_pShadow = nullptr;
 
+	_float m_fKnockPowerY = 0.f;
+	_float m_fKnockPowerX = 0.f;
+	_float3 m_vKnockDir;
+
 protected:
  	virtual HRESULT Set_RenderState();
 	virtual HRESULT Reset_RenderState();
+
+	void TickKnockBack(_float fTimeDelta);
 
 protected:
 	HRESULT SetUp_Components();

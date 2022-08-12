@@ -513,13 +513,13 @@
     </Filter>
     <Filter Include="20.DATA\ItemInfo\ConsumInfo\Teleport">
       <UniqueIdentifier>{1143fc4d-e3cd-42a6-ade3-06b0a0d0025d}</UniqueIdentifier>
-          </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Grass">
       <UniqueIdentifier>{2ff14d73-7f9b-43a6-835d-b30b879b713b}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Creature\Weed">
       <UniqueIdentifier>{78078aef-85fa-4ee2-b3b8-e97e130634c2}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="04.UI\07.BossHpBar\BlueMushmom">
       <UniqueIdentifier>{675326f8-ca04-460e-bf89-2db22c410b39}</UniqueIdentifier>
     </Filter>
@@ -534,7 +534,7 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\TransformStump">
       <UniqueIdentifier>{c9af17c8-b6b5-48d8-afd5-ee5893b8b0a3}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="04.UI\03.Dialog\ChatBox">
       <UniqueIdentifier>{d947de5e-e292-49fe-8969-3ff8421256e9}</UniqueIdentifier>
     </Filter>
@@ -549,6 +549,9 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Taxi">
       <UniqueIdentifier>{11d238cb-25ac-42a8-8a76-60c1f8f491b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Cube\PushCube">
+      <UniqueIdentifier>{c1c4a5f9-73e1-4578-a5ae-7133f3df1546}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -983,13 +986,13 @@
     </ClInclude>
     <ClInclude Include="..\Public\TeleportInfo.h">
       <Filter>20.DATA\ItemInfo\ConsumInfo\Teleport</Filter>
-          </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Grass.h">
       <Filter>02.GameObject\Creature\Grass</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Weed.h">
       <Filter>02.GameObject\Creature\Weed</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\BlueMushmomHpbar.h">
       <Filter>04.UI\07.BossHpBar\BlueMushmom</Filter>
     </ClInclude>
@@ -1010,7 +1013,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\TransformStump.h">
       <Filter>02.GameObject\Creature\Monster\TransformStump</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\ChatBox.h">
       <Filter>04.UI\03.Dialog\ChatBox</Filter>
     </ClInclude>
@@ -1022,6 +1025,9 @@
     </ClInclude>
     <ClInclude Include="..\public\Taxi.h">
       <Filter>02.GameObject\Creature\Taxi</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\PushCube.h">
+      <Filter>02.GameObject\Cube\PushCube</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1447,13 +1453,13 @@
     </ClCompile>
     <ClCompile Include="..\Private\TeleportInfo.cpp">
       <Filter>20.DATA\ItemInfo\ConsumInfo\Teleport</Filter>
-          </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Grass.cpp">
       <Filter>02.GameObject\Creature\Grass</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Weed.cpp">
       <Filter>02.GameObject\Creature\Weed</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\BlueMushmomHpbar.cpp">
       <Filter>04.UI\07.BossHpBar\BlueMushmom</Filter>
     </ClCompile>
@@ -1474,7 +1480,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\TransformStump.cpp">
       <Filter>02.GameObject\Creature\Monster\TransformStump</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\ChatBox.cpp">
       <Filter>04.UI\03.Dialog\ChatBox</Filter>
     </ClCompile>
@@ -1486,6 +1492,9 @@
     </ClCompile>
     <ClCompile Include="..\private\Taxi.cpp">
       <Filter>02.GameObject\Creature\Taxi</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\PushCube.cpp">
+      <Filter>02.GameObject\Cube\PushCube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

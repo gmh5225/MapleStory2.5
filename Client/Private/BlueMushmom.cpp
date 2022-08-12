@@ -6,6 +6,8 @@
 #include "UIManager.h"
 #include "BlueMushmom.h"
 #include "CutSceneManager.h"
+#include "ParticleManager.h"
+#include "ToolManager.h"
 
 CBlueMushmom::CBlueMushmom(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -500,7 +502,23 @@ void CBlueMushmom::Collision(CGameObject * pOther)
 		if (m_bLanding && m_bShake)
 		{
 			CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
+			CParticleManager::Get_Instance()->BlueMushRoom_Lend(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 			m_bShake = false;
+
+
+			CCreature* pPlayer = (CCreature*)CToolManager::Get_Instance()->GetPlayer();
+			CTransform* pPlayerTran = (CTransform*)pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
+			_float3 PlayerPos = pPlayerTran->Get_State(CTransform::STATE_POSITION);
+			_float3 MePos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+			_float PlayerY = pPlayerTran->Get_Vel();
+			if(-0.1f < PlayerY && 0.1f > PlayerY)
+			{
+				_float3 vDir = PlayerPos - MePos;
+				vDir.y = 0.f;
+				pPlayer->SetKnockBack(7.f, 8.f, vDir);
+			}
+
 		}
 	}
 	

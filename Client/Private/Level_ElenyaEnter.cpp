@@ -306,6 +306,12 @@ HRESULT CLevel_ElenyaEnter::Ready_Layer_UI(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueMushmomHpbar"), LEVEL_ELENYAENTER, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueMushmomHpGage"), LEVEL_ELENYAENTER, pLayerTag)))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 

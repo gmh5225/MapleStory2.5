@@ -58,7 +58,7 @@ private:
 
 	// TEST
 	_float _fParticleMoveTimeAcc = 0.f;
-
+	_bool _bPushBlock = false;
 
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

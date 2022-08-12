@@ -5,6 +5,7 @@
 
 BEGIN(Engine)
 class CCollider;
+class CGameObject;
 END
 
 
@@ -23,6 +24,9 @@ public:
 	// For. LevelChange
 	void SetDestLevel(LEVEL eLevel, _float3 vDestPos) { m_eDestLevel = eLevel; m_vDestPos = vDestPos; }
 	void CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGraphic_Device);
+
+	// For. Player
+	CGameObject* GetPlayer();
 
 private:
 	LEVEL m_eDestLevel = LEVEL_END;
