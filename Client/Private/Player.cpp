@@ -173,26 +173,52 @@ void CPlayer::Tick(_float fTimeDelta)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_5))
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_1))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 0;
+		SlimeItem.pTag = L"BlueSnailInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_2))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 1;
+		SlimeItem.pTag = L"RibbonPig";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_3))
 	{
 		CItem::ITEMINFO SlimeItem;
 		SlimeItem.eType = CInvenManager::TYPE_STUFF;
 		SlimeItem.iTextNum = 2;
 		SlimeItem.pTag = L"SlimeInfo";
 		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &SlimeItem);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
 	}
-
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_6))
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_4))
 	{
-		CItem::ITEMINFO GoStumpItem;
-		GoStumpItem.eType = CInvenManager::TYPE_STUFF;
-		GoStumpItem.iTextNum = 4;
-		GoStumpItem.pTag = L"GoStumpInfo";
-		GoStumpItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &GoStumpItem);
-
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 3;
+		SlimeItem.pTag = L"GreenMushRoomInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
 	}
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_5))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 4;
+		SlimeItem.pTag = L"GoStumpInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+
 
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_7))
 	{
@@ -201,7 +227,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		RedPortion.iTextNum = 0;
 		RedPortion.pTag = L"RedPortionInfo";
 		RedPortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &RedPortion);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &RedPortion);
 	}
 
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_8))
@@ -211,7 +237,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		BluePortion.iTextNum = 1;
 		BluePortion.pTag = L"BluePortionInfo";
 		BluePortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &BluePortion);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &BluePortion);
 	}
 
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_9))
@@ -221,7 +247,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		Teleport.iTextNum = 2;
 		Teleport.pTag = L"TeleportInfo";
 		Teleport.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &Teleport);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &Teleport);
 	}
 
 	
