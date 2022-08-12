@@ -302,6 +302,12 @@ HRESULT CLevel_Henesys_1::Ready_Layer_UI(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueMushmomHpbar"), LEVEL_HENESYS, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueMushmomHpGage"), LEVEL_HENESYS, pLayerTag)))
+		return E_FAIL;
+
 	Safe_Release(pGameInstance);
 
 

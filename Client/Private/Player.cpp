@@ -165,9 +165,6 @@ void CPlayer::Tick(_float fTimeDelta)
 	case Client::CPlayer::STATE_DJUMP:
 		DoubleJump(fTimeDelta);
 		break;
-	case Client::CPlayer::STATE_KNOCKBACK:
-		TickKnockBack(fTimeDelta);
-		break;
 	}
 
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
@@ -578,22 +575,6 @@ void CPlayer::SetShadow(LEVEL eLevel, _float fScale)
 
 void CPlayer::GetKeyInput(_float fTimeDelta)
 {
-	if (_bPushBlock)
-	{
-		CTransform::TRANSFORMDESC IdleDesc;
-		IdleDesc.fSpeedPerSec = 0.2f;
-		IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
-		m_pTransformCom->Set_TransformDesc(IdleDesc);
-	}
-	else
-	{
-		CTransform::TRANSFORMDESC IdleDesc;
-		IdleDesc.fSpeedPerSec = 4.f;
-		IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
-		m_pTransformCom->Set_TransformDesc(IdleDesc);
-	}
-	_bPushBlock = false;
-
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 
 	if (GetKeyState(VK_UP) & 0x8000)
@@ -1059,7 +1040,7 @@ void CPlayer::Collision(CGameObject * pOther)
 {
 	if (pOther->Get_Tag() == "Tag_Cube")
 	{
-		if (m_eCurState == STATE_JUMP || m_eCurState == STATE_DJUMP || m_eCurState == STATE_KNOCKBACK)
+		if (m_eCurState == STATE_JUMP || m_eCurState == STATE_DJUMP)
 		{
 			if (Get_PushedY())
 			{
@@ -1069,12 +1050,6 @@ void CPlayer::Collision(CGameObject * pOther)
 		}
 		
 	}
-
-	if (pOther->Get_Tag() == "Tag_PushCube")
-		_bPushBlock = true;
-		
-
-
 	if (pOther->Get_Tag() == "Tag_Item")
 	{
 

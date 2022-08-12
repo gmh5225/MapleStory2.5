@@ -40,18 +40,6 @@ void CToolManager::CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGr
 
 }
 
-CGameObject* CToolManager::GetPlayer()
-{
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	CGameObject* pObj = pGameInstance->Get_ObjectPtr(LEVEL_STATIC, TEXT("Layer_Player"), 0);
-
-	Safe_Release(pGameInstance);
-
-	return pObj;
-}
-
 void CToolManager::Free()
 {
 

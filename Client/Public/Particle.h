@@ -39,8 +39,6 @@ public:
 		// 몇 초 동안
 		_float fLifeTime;
 
-		_tchar* pTag;
-
 	}PARTICLEDESC;
 
 private:

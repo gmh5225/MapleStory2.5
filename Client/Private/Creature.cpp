@@ -157,21 +157,6 @@ void CCreature::Set_Billboard()
 	m_pTransformCom->Set_State(CTransform::STATE_LOOK, (*(_float3*)&ViewMatrix.m[2][0]) * fScale.z);
 }
 
-void CCreature::SetKnockBack(_float fPowerY, _float fPowerX, _float3 vDir)
-{
-	m_fKnockPowerX = fPowerX;
-	m_fKnockPowerY = fPowerY;
-	m_vKnockDir = vDir;
-	m_pTransformCom->Set_Vel(m_fKnockPowerY);
-	SetState(STATE_KNOCKBACK, m_eDir);
-}
-
-void CCreature::TickKnockBack(_float fTimeDelta)
-{
-	m_pTransformCom->Go_DirForce(m_vKnockDir, m_fKnockPowerX, fTimeDelta);
-}
-
-
 void CCreature::SetShadow(LEVEL eLevel, _float fScale)
 {
 	// Test ±×¸²ÀÚ
@@ -216,6 +201,7 @@ HRESULT CCreature::Reset_RenderState()
 
 	return S_OK;
 }
+
 
 
 

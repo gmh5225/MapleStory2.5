@@ -17,7 +17,7 @@ void CParticleManager::Player_Walk(_float3 _vPos, _float3 _vDirVec)
 	_float3 vStartPos = _vPos;
 	vStartPos.y -= 0.5f;
 
-	MakeParticle(vStartPos, 0.15f, _vDirVec, 2.0f, 0.8f, true, 0.6f, 0.5f, nullptr);
+	MakeParticle(vStartPos, 0.15f, _vDirVec, 2.0f, 0.8f, true, 0.6f, 0.5f);
 }
 
 void CParticleManager::Player_Lend(_float3 _vPos)
@@ -38,38 +38,9 @@ void CParticleManager::Player_Lend(_float3 _vPos)
 		D3DXMatrixRotationY(&Mat_Y, fDegree);
 		D3DXVec3TransformNormal(&vDirVec, &vDirVec, &Mat_Y);
 
-		MakeParticle(vStartPos, 0.15f, vDirVec, 2.0f, 1.0f, true, 0.6f, 0.7f, nullptr);
+		MakeParticle(vStartPos, 0.15f, vDirVec, 2.0f, 1.0f, true, 0.6f, 0.7f);
 	}
 
-}
-
-void CParticleManager::BlueMushRoom_Lend(_float3 _vPos)
-{
-	_float3 vStartPos = _vPos;
-	vStartPos.y -= 0.5f;
-
-	_float fDegree = 0.f;
-	_float fScale = 0.f;
-	_float3 vTempPos;
-	for (_int i = 0; i < 10; i++)
-	{
-		fDegree = CGameInstance::Get_Instance()->Get_FloatRandom(0.f, 360.f);
-		fScale = CGameInstance::Get_Instance()->Get_FloatRandom(0.3f, 0.6f);
-		_float3 vRenPos{ CGameInstance::Get_Instance()->Get_FloatRandom(-1.f, 1.f)
-		,CGameInstance::Get_Instance()->Get_FloatRandom(-1.f, 1.f)
-		,CGameInstance::Get_Instance()->Get_FloatRandom(-1.f, 1.f) };
-		
-		_float3 vDirVec = { 1.f, 0.f, 0.f };
-		vTempPos = vStartPos + vRenPos;
-
-		_float4x4 Mat_Y;
-		D3DXMatrixIdentity(&Mat_Y);
-
-		D3DXMatrixRotationY(&Mat_Y, fDegree);
-		D3DXVec3TransformNormal(&vDirVec, &vDirVec, &Mat_Y);
-
-		MakeParticle(vTempPos, fScale, vDirVec, 3.0f, 3.5f, true, 1.f, 1.f, TEXT("Prototype_Component_Texture_Rock"));
-	}
 }
 
 
@@ -94,7 +65,7 @@ void CParticleManager::Shot(_float3 _vPos, _float3 _vDirVec)
 		D3DXMatrixRotationY(&Mat_Y, D3DXToRadian(fDegreeY));
 		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_Y);
 
-		MakeParticle(vStartPos, 0.1f, _vDirVec, 2.0f, 10.0f, true, 1.f, 0.7f, nullptr);
+		MakeParticle(vStartPos, 0.1f, _vDirVec, 2.0f, 10.0f, true, 1.f, 0.7f);
 	}
 }
 
@@ -119,12 +90,12 @@ void CParticleManager::BackShot(_float3 _vPos, _float3 _vDirVec)
 		D3DXMatrixRotationY(&Mat_Y, D3DXToRadian(fDegreeY));
 		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_Y);
 
-		MakeParticle(vStartPos, 0.1f, _vDirVec * -1.f, 2.0f, 5.0f, true, 0.2f, 0.7f, nullptr);
+		MakeParticle(vStartPos, 0.1f, _vDirVec * -1.f, 2.0f, 5.0f, true, 0.2f, 0.7f);
 	}
 }
 
 
-void CParticleManager::MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDirVec, _float _fForce_Y, _float _fForce_X, _bool _bGravity, _float _fGravityVal, _float _fLifeTime, _tchar* pTag)
+void CParticleManager::MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDirVec, _float _fForce_Y, _float _fForce_X, _bool _bGravity, _float _fGravityVal, _float _fLifeTime)
 {
 	CParticle::PARTICLEDESC ParticleDesc;
 	ZeroMemory(&ParticleDesc, sizeof(CParticle::PARTICLEDESC));
@@ -140,8 +111,6 @@ void CParticleManager::MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDir
 	ParticleDesc.fForce_Y = _fForce_Y;
 
 	ParticleDesc.fLifeTime = _fLifeTime;
-
-	ParticleDesc.pTag = pTag;
 
 	CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Particle"), LEVEL_GAMEPLAY, TEXT("Layer_Particle"), &ParticleDesc);
 
