@@ -24,7 +24,6 @@ bool g_bGamePlay;
 bool g_bHenesys;
 bool g_bElenyaEnter;
 bool g_bElenya;
-
 bool g_bElenyaGAS;
 bool g_bDHenesys;
 bool g_bDHenesysHunting;
