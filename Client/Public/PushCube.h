@@ -5,48 +5,28 @@
 #include "Map_Manager.h"
 
 BEGIN(Engine)
+class CCollider;
 class CTexture;
 class CRenderer;
 class CTransform;
-class CVIBuffer_Rect;
+class CVIBuffer_Cube;
 END
 
 
 BEGIN(Client)
 
-class CParticle final : public CGameObject
+class CPushCube final : public CGameObject
 {
 public:
-	typedef struct tagParticleDesc
-	{
-		// 어디서
-		_float3 vPos;
-
-		// 크기를
-		_float fScale;
-
-		// 어떤 방향으로,
-		_float3 vDirVec;
-		// 힘을
-		_float  fForce_Y;
-		_float  fForce_X;
-
-		// 중력 여부, 중력 값
-		_bool bGravity;
-		_float fGravityVal;
-		// 마찰력 여부, 마찰 값
-
-		// 몇 초 동안
-		_float fLifeTime;
-
-		_tchar* pTag;
-
-	}PARTICLEDESC;
-
+	//typedef struct tagCubeDesc
+	//{
+	//	_float3	vPos;
+	//	const _tchar* pTextureTag;
+	//}CUBEDESC;
 private:
-	CParticle(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CParticle(const CParticle& rhs);
-	virtual ~CParticle() = default;
+	CPushCube(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CPushCube(const CPushCube& rhs);
+	virtual ~CPushCube() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -55,29 +35,26 @@ public:
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
+	virtual void Collision(CGameObject* pOther) override;
+
 private:
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
-	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
+	CVIBuffer_Cube*			m_pVIBufferCom = nullptr;
+	CCollider*				m_pColliderCom = nullptr;
 
 private:
-	PARTICLEDESC			m_ParticleDesc;
-	_float					m_fLifeTimeAcc;
-
-	_float3					m_vLookTemp;
+	_bool temp = false;
 
 private:
 	HRESULT Set_RenderState();
 	HRESULT Reset_RenderState();
-
-	void Set_Billboard();
-
 private:
 	HRESULT SetUp_Components();
 
 public:
-	static CParticle* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CPushCube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

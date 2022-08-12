@@ -25,14 +25,17 @@ HRESULT CParticle::Initialize_Prototype()
 
 HRESULT CParticle::Initialize(void * pArg)
 {
-	if (FAILED(SetUp_Components()))
-		return E_FAIL;
-
 	if (nullptr == pArg)
 		return E_FAIL;
 
-	
 	m_ParticleDesc = *((PARTICLEDESC*)pArg);
+
+
+
+	if (FAILED(SetUp_Components()))
+		return E_FAIL;
+
+
 
 	m_sTag = "Tag_Particle";
 
@@ -74,10 +77,13 @@ HRESULT CParticle::Render()
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
-	//if (FAILED(m_pTextureCom->Bind_Texture(0)))
-	//	return E_FAIL;
-
-	m_pGraphic_Device->SetTexture(0, nullptr);
+	if (nullptr != m_ParticleDesc.pTag)
+	{
+		if (FAILED(m_pTextureCom->Bind_Texture(0)))
+			return E_FAIL;
+	}
+	else
+		m_pGraphic_Device->SetTexture(0, nullptr);
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
@@ -131,9 +137,13 @@ HRESULT CParticle::SetUp_Components()
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Rect"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
 
-	/* For.Com_Texture */
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Dust"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
-		return E_FAIL;
+	if (nullptr != m_ParticleDesc.pTag)
+	{
+		/* For.Com_Texture */
+		if (FAILED(__super::Add_Component(LEVEL_STATIC, m_ParticleDesc.pTag, TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+			return E_FAIL;
+	}
+
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;

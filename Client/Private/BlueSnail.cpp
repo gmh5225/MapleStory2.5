@@ -371,13 +371,13 @@ void CBlueSnail::Tick_Die(_float fTimeDelta)
 void CBlueSnail::MakeItem()
 {
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
+	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
+	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
+	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"BluePortionInfo", vPos);
+	//CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_CONSUM, 0, L"RedPortionInfo", vPos);
 }
 
 
