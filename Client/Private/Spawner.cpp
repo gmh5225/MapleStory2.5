@@ -85,21 +85,23 @@ HRESULT CSpawner::Initialize(void * pArg)
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("TransformPig"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), pArg)))
-				return E_FAIL;
-		}
-
-		else if (m_SpawnerInfo.MonsterName == TEXT("TransformSlime"))
-		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), pArg)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("TransformStump"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_GAMEPLAY, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), pArg)))
 				return E_FAIL;
 		}
+
+		else if (m_SpawnerInfo.MonsterName == TEXT("TransformSlime"))
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_DELENYA, TEXT("Layer_Monster"), pArg)))
+				return E_FAIL;
+		}
+
+	
  	}
 
 	CSpawnerManager::Get_Instance()->Add_SpawnerInfo(this);

@@ -34,8 +34,8 @@ HRESULT CTaxi::Initialize(void * pArg)
 
 	m_sTag = "Tag_Npc";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.f, 1.2f, -2.0f));
-	m_pTransformCom->Set_Scaled(_float3(1.5f, 1.f, 1.f));
+	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.2f, 1.2f, -2.0f));
+	m_pTransformCom->Set_Scaled(_float3(2.1f, 1.6f, 1.6f));
 
 
 

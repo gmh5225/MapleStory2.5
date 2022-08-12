@@ -78,7 +78,7 @@ HRESULT CTransformPig::Initialize(void * pArg)
 		break;
 	}
 
-	SetShadow(pMonsterDesc->Level, 1.5f);
+	// SetShadow(pMonsterDesc->Level, 1.5f);
 
 	return S_OK;
 }

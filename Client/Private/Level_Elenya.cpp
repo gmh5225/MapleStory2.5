@@ -57,7 +57,7 @@ HRESULT CLevel_Elenya::Initialize()
 		return E_FAIL;
 
 	CUIManager::Get_Instance()->End_Loading();
-	// CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
+	CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
 
 	return S_OK;
 }
@@ -383,8 +383,8 @@ HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	CSpawner::SPAWNERINFO MonsterInfo;
 
 	MonsterInfo.MonsterName = TEXT("GoStump");
-	MonsterInfo.MonsterPos = _float3{ 4.5f , 10.0f, 0.f };
-	MonsterInfo.SpawnerNum = 90;
+	MonsterInfo.MonsterPos = _float3{ 4.5f , 9.0f, 0.f };
+	MonsterInfo.SpawnerNum = 10;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
 	MonsterInfo.Level = LEVEL_ELENYA;
@@ -412,27 +412,30 @@ HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 
 	MonsterInfo.MonsterName = TEXT("Slime");
 	MonsterInfo.MonsterPos = _float3{ 0.f , 13.f, 11.f };
-	MonsterInfo.SpawnerNum = 93;
+	MonsterInfo.SpawnerNum = 13;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_ELENYA;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
 	MonsterInfo.MonsterName = TEXT("Slime");
 	MonsterInfo.MonsterPos = _float3{ 6.f , 22.f, 13.f };
-	MonsterInfo.SpawnerNum = 94;
+	MonsterInfo.SpawnerNum = 14;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_ELENYA;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
 	MonsterInfo.MonsterName = TEXT("GreenMushroom");
 	MonsterInfo.MonsterPos = _float3{ 10.f , 22.f, 13.f };
-	MonsterInfo.SpawnerNum = 95;
+	MonsterInfo.SpawnerNum = 15;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_ELENYA;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 

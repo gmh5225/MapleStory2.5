@@ -55,8 +55,8 @@ HRESULT CLevel_DHenesysHunting::Initialize()
 	//if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 	//	return E_FAIL;
 
-	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
+		return E_FAIL;
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
@@ -315,7 +315,34 @@ HRESULT CLevel_DHenesysHunting::Ready_Layer_UI(const _tchar * pLayerTag)
 HRESULT CLevel_DHenesysHunting::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
 
+	CSpawner::SPAWNERINFO MonsterInfo;
 
+	MonsterInfo.MonsterName = TEXT("TransformStump");
+	MonsterInfo.MonsterPos = _float3{ 6.f , 4.f, -6.f };
+	MonsterInfo.SpawnerNum = 0;
+	MonsterInfo.MonsterNum = 2;
+	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_DHENESYSHUNTING;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+	MonsterInfo.MonsterName = TEXT("TransformPig");
+	MonsterInfo.MonsterPos = _float3{ 8.f , 2.f, -5.f };
+	MonsterInfo.SpawnerNum = 1;
+	MonsterInfo.MonsterNum = 2;
+	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_DHENESYSHUNTING;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+
+	MonsterInfo.MonsterName = TEXT("TransformPig");
+	MonsterInfo.MonsterPos = _float3{ 29.f , 3.f, -2.f };
+	MonsterInfo.SpawnerNum = 2;
+	MonsterInfo.MonsterNum = 2;
+	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_DHENESYSHUNTING;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
 	return S_OK;

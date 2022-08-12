@@ -34,6 +34,9 @@ private:
 	LPD3DXFONT m_NumFont;
 	_uint m_iIndexNum;
 	const _tchar* m_pTag;
+
+	_float m_fTimeAcc = 0.f;
+	_bool m_bSceneChange = false;
 };
 END
 
