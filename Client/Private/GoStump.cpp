@@ -356,18 +356,15 @@ void CGoStump::Tick_Die(_float fTimeDelta)
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.2f)
 	{
-		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		GoStumpItem.eType = CInvenManager::TYPE_STUFF;
-		GoStumpItem.iTextNum = 4;
-		GoStumpItem.pTag = L"GoStumpInfo";
-		GoStumpItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &GoStumpItem);
-		Safe_Release(pGameInstance);
 		Set_Dead();
 	}
 }
 
+void CGoStump::MakeItem()
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 4, L"GoStumpInfo", vPos, LEVEL_ELENYA);
+}
 
 
 
@@ -448,9 +445,9 @@ void CGoStump::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp == 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("StumpFirewood"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
+		MakeItem();
 	}
 	//
 }

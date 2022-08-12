@@ -359,19 +359,15 @@ void CSlime::Tick_Die(_float fTimeDelta)
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.f)
 	{
-		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		SlimeItem.eType = CInvenManager::TYPE_STUFF;
-		SlimeItem.iTextNum = 2;
-		SlimeItem.pTag = L"GoStumpInfo";
-		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &SlimeItem);
-		Safe_Release(pGameInstance);
 		Set_Dead();
 	}
 }
 
-
+void CSlime::MakeItem()
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 2, L"SlimeInfo", vPos, LEVEL_HENESYS);
+}
 
 
 void CSlime::SetState(STATE eState, DIR eDir)
@@ -451,9 +447,9 @@ void CSlime::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("SlimeEssence"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
+		MakeItem();
 	}
 	//
 }

@@ -358,18 +358,16 @@ void CRedSnail::Tick_Die(_float fTimeDelta)
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.f)
 	{
-		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		RedSnailItem.eType = CInvenManager::TYPE_STUFF;
-		RedSnailItem.iTextNum = 5;
-		RedSnailItem.pTag = L"GoStumpInfo";
-		RedSnailItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &RedSnailItem);
-		Safe_Release(pGameInstance);
 		Set_Dead();
 	}
 }
 
+
+void CRedSnail::MakeItem()
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 5, L"RedSnailInfo", vPos, LEVEL_HENESYS);
+}
 
 
 void CRedSnail::SetState(STATE eState, DIR eDir)
@@ -449,9 +447,9 @@ void CRedSnail::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("RedShell"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
+		MakeItem();
 	}
 	//
 }

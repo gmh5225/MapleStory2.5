@@ -361,18 +361,16 @@ void CGreenMushroom::Tick_Die(_float fTimeDelta)
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 1.2f)
 	{
-		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		GreenMushroomItem.eType = CInvenManager::TYPE_STUFF;
-		GreenMushroomItem.iTextNum = 3;
-		GreenMushroomItem.pTag = L"GoStumpInfo";
-		GreenMushroomItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_STATIC, TEXT("Layer_Item"), &GreenMushroomItem);
-		Safe_Release(pGameInstance);
 		Set_Dead();
 	}
 }
 
+
+void CGreenMushroom::MakeItem()
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 3, L"GreenMushroomInfo", vPos, LEVEL_ELENYA);
+}
 
 
 void CGreenMushroom::SetState(STATE eState, DIR eDir)
@@ -452,9 +450,9 @@ void CGreenMushroom::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("GreenMushroom"));
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
+		MakeItem();
 	}
 	//
 }

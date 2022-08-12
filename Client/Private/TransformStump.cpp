@@ -195,6 +195,10 @@ void CTransformStump::Tick(_float fTimeDelta)
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Set_Dead();
 	}
+
+	Safe_Release(pGameInstance);
+
+
 }
 void CTransformStump::LateTick(_float fTimeDelta)
 {

@@ -2,6 +2,7 @@
 
 #include "Client_Defines.h"
 #include "Base.h"
+#include "InvenManager.h"
 
 BEGIN(Client)
 
