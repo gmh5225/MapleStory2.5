@@ -324,21 +324,21 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	//MonsterInfo.MonsterName = TEXT("BlueSnail");
-	//MonsterInfo.MonsterPos = _float3{ 6.f , 3.f, 8.f };
-	//MonsterInfo.SpawnerNum = 1;
-	//MonsterInfo.MonsterNum = 2;
-	//MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.MonsterName = TEXT("BlueSnail");
+	MonsterInfo.MonsterPos = _float3{ 6.f , 3.f, 8.f };
+	MonsterInfo.SpawnerNum = 1;
+	MonsterInfo.MonsterNum = 2;
+	MonsterInfo.MonsterColRad = 1.f;
 
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
-	//MonsterInfo.MonsterName = TEXT("BlueSnail");
-	//MonsterInfo.MonsterPos = _float3{ 11.f , 3.f, 10.f };
-	//MonsterInfo.SpawnerNum = 2;
-	//MonsterInfo.MonsterNum = 2;
-	//MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.MonsterName = TEXT("BlueSnail");
+	MonsterInfo.MonsterPos = _float3{ 11.f , 3.f, 10.f };
+	MonsterInfo.SpawnerNum = 2;
+	MonsterInfo.MonsterNum = 2;
+	MonsterInfo.MonsterColRad = 1.f;
 
-	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 
 	//MonsterInfo.MonsterName = TEXT("RedSnail");

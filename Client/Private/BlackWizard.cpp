@@ -77,7 +77,7 @@ void CBlackWizard::LateTick(_float fTimeDelta)
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
 	if(m_eCurState != STATE_END)
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 
 	CUIManager::Get_Instance()->Set_BlackWizardHp(m_iHp);
 
@@ -140,7 +140,7 @@ void CBlackWizard::Pattern()
 		break;
 	case STATE_ESCAPE:
 		m_eCurState = STATE_END;
-		CToolManager::Get_Instance()->SetDestLevel(LEVEL_WHITEMAGE, _float3{ 0.f, 1.f, 0.f });
+		CToolManager::Get_Instance()->SetDestLevel(LEVEL_WHITEMAGE, _float3{ 0.f, 4.f, 0.f });
 		break;
 	case STATE_STAND:
 		break;

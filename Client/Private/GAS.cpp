@@ -269,7 +269,7 @@ void CGAS::LateTick(_float fTimeDelta)
 		if (m_eCurState != STATE_DIE && m_eCurState != STATE_ATTACK)
 			SetState(STATE_CHASE, m_eDir);
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
@@ -546,8 +546,6 @@ void CGAS::Damaged(CGameObject * pOther)
 		else
 			SetState(STATE_HIT, DIR_L);
 	}
-	
-
 
 	Safe_Release(pGameInstance);
 
@@ -559,11 +557,6 @@ void CGAS::Damaged(CGameObject * pOther)
 	}
 
 }
-
-
-
-
-
 
 CGAS * CGAS::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
@@ -591,13 +584,9 @@ CGameObject * CGAS::Clone(void* pArg)
 }
 
 
-
-
 void CGAS::Collision(CGameObject * pOther)
 {
 }
-
-
 
 
 void CGAS::Free()
