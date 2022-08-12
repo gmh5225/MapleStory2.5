@@ -2,7 +2,6 @@
 
 #include "Client_Defines.h"
 #include "GameObject.h"
-
 BEGIN(Engine)
 class CTexture;
 class CRenderer;
@@ -48,6 +47,10 @@ public:
 	void Set_Render(bool bRender) { m_bRender = bRender; }
 	bool Get_Render() { return m_bRender; }
 
+	void Start_CutScene(_float fTimeDelta);
+	void End_CutScene(_float fTimeDelta);
+	
+
 protected:
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
@@ -57,9 +60,12 @@ protected:
 	_float4x4				m_ProjMatrix;
 	_float4x4				m_ViewMatrix;
 	UIINFO					m_UIInfo;
+	UIINFO					m_OriginInfo;
 	RECT					m_RectUI;
 	Collision_Type			m_eCollision;
 	_uint					m_iTexturenum;
+	_float					m_fStartAcc;
+	_float					m_fEndAcc;
 
 protected:
 	HRESULT SetUp_Components();

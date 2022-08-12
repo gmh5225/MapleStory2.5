@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Public\HpBarBase.h"
 #include "GameInstance.h"
-
+#include "UIManager.h"
 
 
 CHpBarBase::CHpBarBase(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -34,6 +34,8 @@ HRESULT CHpBarBase::Initialize(void * pArg)
 
 	__super::Initialize(pArg);
 
+	
+
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_HpBarBase"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
@@ -43,6 +45,16 @@ HRESULT CHpBarBase::Initialize(void * pArg)
 
 void CHpBarBase::Tick(_float fTimeDelta)
 {
+	if (CUIManager::Get_Instance()->Get_StartMove())
+		Start_CutScene(fTimeDelta);
+	else
+		m_fStartAcc = 0.f;
+
+
+	if (CUIManager::Get_Instance()->Get_EndMove())
+		End_CutScene(fTimeDelta);
+	else
+		m_fEndAcc = 0.f;
 }
 
 void CHpBarBase::LateTick(_float fTimeDelta)

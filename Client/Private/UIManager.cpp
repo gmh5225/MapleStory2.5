@@ -11,6 +11,7 @@ CUIManager::CUIManager()
 {
 	m_iBlueMushmomHp = 3;
 	m_iGASHp = 10;
+	
 }
 
 HRESULT CUIManager::Add_ItemNotice(CItemNotice * pItemNotice)

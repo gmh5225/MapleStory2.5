@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Public\HpBarHp.h"
 #include "GameInstance.h"
-
+#include "UIManager.h"
 
 
 CHpBarHp::CHpBarHp(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -61,6 +61,16 @@ void CHpBarHp::Tick(_float fTimeDelta)
 	}
 
 	Safe_Release(pInstance);
+	if (CUIManager::Get_Instance()->Get_StartMove())
+		Start_CutScene(fTimeDelta);
+	else
+		m_fStartAcc = 0.f;
+
+
+	if (CUIManager::Get_Instance()->Get_EndMove())
+		End_CutScene(fTimeDelta);
+	else
+		m_fEndAcc = 0.f;
 }
 
 void CHpBarHp::LateTick(_float fTimeDelta)

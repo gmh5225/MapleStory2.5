@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Public\ExpBase.h"
 #include "GameInstance.h"
-
+#include "UIManager.h"
 
 
 CExpBase::CExpBase(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -43,6 +43,16 @@ HRESULT CExpBase::Initialize(void * pArg)
 
 void CExpBase::Tick(_float fTimeDelta)
 {
+	if (CUIManager::Get_Instance()->Get_StartMove())
+		Start_CutScene(fTimeDelta);
+	else
+		m_fStartAcc = 0.f;
+
+
+	if (CUIManager::Get_Instance()->Get_EndMove())
+		End_CutScene(fTimeDelta);
+	else
+		m_fEndAcc = 0.f;
 }
 
 void CExpBase::LateTick(_float fTimeDelta)

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Public\QuickSlot.h"
 #include "GameInstance.h"
+#include "UIManager.h"
 
 CQuickSlot::CQuickSlot(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
@@ -42,6 +43,16 @@ HRESULT CQuickSlot::Initialize(void * pArg)
 
 void CQuickSlot::Tick(_float fTimeDelta)
 {
+	if (CUIManager::Get_Instance()->Get_StartMove())
+		Start_CutScene(fTimeDelta);
+	else
+		m_fStartAcc = 0.f;
+
+
+	if (CUIManager::Get_Instance()->Get_EndMove())
+		End_CutScene(fTimeDelta);
+	else
+		m_fEndAcc = 0.f;
 }
 
 void CQuickSlot::LateTick(_float fTimeDelta)

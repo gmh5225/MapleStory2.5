@@ -61,7 +61,10 @@ public:
 	_uint Set_GASHp() { return m_iGASHp; };
 	HRESULT Add_BlackWizardPatternUI(CBlackWizardPatternUI* pInstance);
 	CBlackWizardPatternUI* Get_BlackWizardPatternUI() { return m_pBlackWizardPatternUI; }
-
+	bool Get_StartMove() { return m_bStartMove; }
+	void Set_StartMove(bool bMove) { m_bStartMove = bMove; }
+	bool Get_EndMove() { return m_bEndMove; }
+	void Set_EndMove(bool bMove) { m_bEndMove = bMove; }
 
 public:
 	virtual void Free() override;
@@ -71,6 +74,8 @@ private:
 	_uint m_iBlueMushmomHp;
 	_uint m_iBlackWizardHp;
 	_uint m_iGASHp;
+	bool m_bStartMove;
+	bool m_bEndMove;
 	CBlackWizardPatternUI* m_pBlackWizardPatternUI;
 };
 

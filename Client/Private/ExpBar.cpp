@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "..\Public\ExpBar.h"
 #include "GameInstance.h"
-
+#include "UIManager.h"
 
 
 CExpBar::CExpBar(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -80,6 +80,16 @@ void CExpBar::Tick(_float fTimeDelta)
 	
 
 	Safe_Release(pInstance);
+	if (CUIManager::Get_Instance()->Get_StartMove())
+		Start_CutScene(fTimeDelta);
+	else
+		m_fStartAcc = 0.f;
+
+
+	if (CUIManager::Get_Instance()->Get_EndMove())
+		End_CutScene(fTimeDelta);
+	else
+		m_fEndAcc = 0.f;
 }
 
 void CExpBar::LateTick(_float fTimeDelta)
@@ -113,23 +123,23 @@ HRESULT CExpBar::Render()
 	_itow_s(m_iLevel, Level, 10);
 
 	RECT Exprt;
-	SetRect(&Exprt, m_iExpDigit+10, 705, 0, 0);
+	SetRect(&Exprt, m_iExpDigit+10, m_UIInfo.fY-5.f, 0, 0);
 	m_ExpFont->DrawText(NULL, Exp, -1, &Exprt, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
 
 	RECT Percentrt;
-	SetRect(&Percentrt, g_iWinSizeX*0.5f + 20.f, 705, 0, 0);
+	SetRect(&Percentrt, g_iWinSizeX*0.5f + 20.f, m_UIInfo.fY-5.f, 0, 0);
 	m_ExpFont->DrawText(NULL, L"%", -1, &Percentrt, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
 
 	RECT LVrt;
-	SetRect(&LVrt, 595, 680, 0, 0);
+	SetRect(&LVrt, 595, m_UIInfo.fY-23.f, 0, 0);
 	m_LevelFont->DrawText(NULL, L"LV", -1, &LVrt, DT_NOCLIP, D3DXCOLOR(255.f, 212, 0.f, 1.0f));
 
 	RECT Levelrt;
-	SetRect(&Levelrt, 615, 680, 0, 0);
+	SetRect(&Levelrt, 615, m_UIInfo.fY-23.f, 0, 0);
 	m_LevelFont->DrawText(NULL, Level, -1, &Levelrt, DT_NOCLIP, D3DXCOLOR(255.f, 212, 0.f, 1.0f));
 
 	RECT Namert;
-	SetRect(&Namert, 640, 680, 0, 0);
+	SetRect(&Namert, 640, m_UIInfo.fY-23.f, 0, 0);
 	m_LevelFont->DrawText(NULL, L"ต้มใฤแ", -1, &Namert, DT_NOCLIP, D3DXCOLOR(255.f, 212, 0.f, 1.0f));
 
 
