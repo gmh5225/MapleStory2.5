@@ -29,7 +29,7 @@ HRESULT CBird::Initialize(void * pArg)
 
 	m_fColRad = 0.5f;
 	
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(1.f, 4.0f, 3.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 0.7f, -7.8f));
 	m_pTransformCom->Set_Scaled(0.5f);
 	m_fTime = 0.f;
 	SetState(STATE_MOVE, DIR_R);
@@ -190,7 +190,7 @@ void CBird::Tick_Chase(_float fTimeDelta)
 	m_pTransformCom->Set_State(CTransform::STATE_LOOK,vLook);
 
 	
-	if (m_fSpeed > 2.f)
+	if (m_fSpeed >=2.f)
 	{
 		m_pTransformCom->Go_Straight(fTimeDelta);
 		m_fSpeed -= 0.1f;	
@@ -199,7 +199,8 @@ void CBird::Tick_Chase(_float fTimeDelta)
 
 	if (m_fSpeed < 2.f)
 	{
-		m_pTransformCom->Go_R(fTimeDelta);
+		m_pTransformCom->Go_Straight(fTimeDelta);
+	//	m_pTransformCom->Go_RU(fTimeDelta);
 	}
 }
 
