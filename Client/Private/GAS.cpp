@@ -158,7 +158,7 @@ void CGAS::Tick(_float fTimeDelta)
 
 	if (m_fPatternCycle > 5.f)
 	{
-		m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 3);
+		m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 4);
 		m_fPatternCycle = 0;
 	}
 

@@ -60,7 +60,7 @@ HRESULT CLevel_DHenesys::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
-	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
+	CCutSceneManager::Get_Instance()->Start_Enter_DHenesys();
 
 	return S_OK;
 }
@@ -308,8 +308,6 @@ HRESULT CLevel_DHenesys::Ready_Layer_UI(const _tchar * pLayerTag)
 
 HRESULT CLevel_DHenesys::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
-
-
 
 
 	return S_OK;

@@ -90,7 +90,7 @@ HRESULT CLevel_GamePlay::Initialize()
 
 
 	CUIManager::Get_Instance()->End_Loading();
-	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
+	CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
 
 	return S_OK;
 }

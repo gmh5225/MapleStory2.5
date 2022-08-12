@@ -58,7 +58,7 @@ HRESULT CSky::Render()
 	//Sky_6 ¿¤¸®´Ï¾Æ
 	//Sky_7ÆÄÇì
 	//Sky_8ÆÄ¿¤
-	if (FAILED(m_pTextureCom->Bind_Texture(8)))
+	if (FAILED(m_pTextureCom->Bind_Texture(5)))
 		return E_FAIL;
 
 	if (FAILED(Set_RenderState()))

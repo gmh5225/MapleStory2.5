@@ -30,6 +30,9 @@ void CCutSceneManager::Tick(_float fTimeDelta)
 
 	if (m_bEnter_ElenyaEnter)
 		Enter_ElenyaEnter(fTimeDelta);
+
+	if (m_bEnter_DHenesys)
+		Enter_DHenesys(fTimeDelta);
 }
 
 CCamera_Free* CCutSceneManager::Get_MainCam()
@@ -62,7 +65,7 @@ void CCutSceneManager::Start_Enter_Henesys_1()
 	m_fHenesys_1_TimeAcc = 0.f;
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
 	Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
-	SetCamPos(_float3(-30.f, 12.f, -16.f));
+	SetCamPos(_float3(-20.f, 12.f, -16.f));
 	Get_MainCam()->SetSpeed(3.f);
 	m_bIsCutScene = true;
 	m_bEnter_Henesys_1 = true;
@@ -166,7 +169,7 @@ void CCutSceneManager::Start_Enter_Elenya()
 	m_fElenya_TimeAcc = 0.f;
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
 	Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
-	SetCamPos(_float3(-5.f, 12.f, -16.f));
+	SetCamPos(_float3(15.f, 0.f, -25.f));
 	Get_MainCam()->SetSpeed(3.f);
 	m_bIsCutScene = true;
 	m_bEnter_Elenya = true;
@@ -177,16 +180,16 @@ void CCutSceneManager::Enter_Elenya(_float fTimeDelta)
 
 
 	if (!m_b3_1)
-		Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
-	else
 		Get_MainCam()->Get_Transform()->Go_Up(fTimeDelta);
+	else
+		Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
 
 
 
 	if (13.f < m_fElenya_TimeAcc && !m_b3_1)
 	{
-		Get_MainCam()->Get_Transform()->RotationTwo(_float3(1.f, 0.f, 0.f), 30.f, _float3(0.f, 1.f, 0.f), -30.f);
-		SetCamPos(_float3(10.f, 0.f, -30.f));
+		Get_MainCam()->Get_Transform()->RotationTwo(_float3(1.f, 0.f, 0.f), 40.f, _float3(0.f, 1.f, 0.f), 0.f);
+		SetCamPos(_float3(0.f, 50.f, -30.f));
 		m_b3_1 = true;
 	}
 
@@ -252,6 +255,7 @@ void CCutSceneManager::Enter_ElenyaEnter(_float fTimeDelta)
 		End_Enter_ElenyaEnter();
 	}
 }
+
 void CCutSceneManager::End_Enter_ElenyaEnter()
 {
 	m_fElenyaEnter_TimeAcc = 0.f;
@@ -261,6 +265,52 @@ void CCutSceneManager::End_Enter_ElenyaEnter()
 
 	m_bIsCutScene = false;
 	m_bEnter_ElenyaEnter = false;
+}
+
+
+void CCutSceneManager::Start_Enter_DHenesys()
+{
+
+	if (m_bDHenesys)
+		return;
+	m_bDHenesys = true;
+
+	m_fDHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
+	Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+	SetCamPos(_float3(-20.f, 12.f, -15.f));
+	Get_MainCam()->SetSpeed(3.f);
+	m_bIsCutScene = true;
+	m_bEnter_DHenesys = true;
+
+
+}
+void CCutSceneManager::Enter_DHenesys(_float fTimeDelta)
+{
+	m_fDHenesys_TimeAcc += fTimeDelta;
+
+
+	Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
+
+	if (13.f < m_fDHenesys_TimeAcc && !m_b5_1)
+	{
+		Get_MainCam()->Get_Transform()->RotationTwo(_float3(1.f, 0.f, 0.f), 30.f, _float3(0.f, 1.f, 0.f), -30.f);
+		SetCamPos(_float3(20.f, 12.f, -30.f));
+		m_b5_1 = true;
+	}
+
+	if (18.f < m_fDHenesys_TimeAcc)
+	{
+		Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+		End_Enter_DHenesys();
+	}
+}
+void CCutSceneManager::End_Enter_DHenesys()
+{
+	m_fDHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
+	m_bIsCutScene = false;
+	m_bEnter_DHenesys = false;
 }
 
 

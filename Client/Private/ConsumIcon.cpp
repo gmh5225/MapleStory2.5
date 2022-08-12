@@ -8,6 +8,7 @@
 
 
 
+
 CConsumIcon::CConsumIcon(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
 {
@@ -94,6 +95,19 @@ void CConsumIcon::LateTick(_float fTimeDelta)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 
 
+
+	if (m_bSceneChange)
+	{
+		m_fTimeAcc += fTimeDelta;
+
+		if (5.f < m_fTimeAcc)
+		{
+			CToolManager::Get_Instance()->SetDestLevel(LEVEL_GAMEPLAY, _float3{ -9.f, 4.f, -3.f });
+			m_bSceneChange = false;
+		}
+	}
+
+
 }
 
 HRESULT CConsumIcon::Render()
@@ -175,7 +189,10 @@ void CConsumIcon::Use_Item()
 	case 1:
 		break;
 	case 2:
-		CToolManager::Get_Instance()->SetDestLevel(LEVEL_GAMEPLAY, _float3{ -9.f, 4.f, -3.f });
+	{
+		CUIManager::Get_Instance()->Start_Loading();
+		m_bSceneChange = true;
+	}
 		break;
 
 	default:

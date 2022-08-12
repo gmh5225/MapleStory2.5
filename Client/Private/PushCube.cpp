@@ -28,7 +28,7 @@ HRESULT CPushCube::Initialize(void * pArg)
 	m_sTag = "Tag_PushCube";
 
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3{ -2.f, 1.f, -6.f });
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 1.f, -3.f));
 
 	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
@@ -42,7 +42,7 @@ void CPushCube::Tick(_float fTimeDelta)
 
 	if (vPos.y < -10.f)
 	{
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3{ -2.f, 1.f, -6.f });
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 1.f, -3.f));
 		m_pTransformCom->Set_Vel(0.f);
 	}
 }
