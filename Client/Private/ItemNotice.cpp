@@ -102,25 +102,25 @@ void CItemNotice::RenderNotice()
 		BluePortionNotice();
 		break;
 	case 2:
-		BlueSnailNotice();
+		TeleportNotice();		
 		break;
 	case 3:
-		RibbonNotice();
+		BlueSnailNotice();
 		break;
 	case 4:
-		SlimeNotice();
+		RibbonNotice();
 		break;
 	case 5:
-		GreenmushroomNotice();
+		SlimeNotice();
 		break;
 	case 6:
-		WoodNotice();
+		GreenmushroomNotice();
 		break;
 	case 7:
-		RedSnailNotice();
+		WoodNotice();
 		break;
 	case 8:
-		TeleportNotice();
+		RedSnailNotice();
 		break;
 		
 

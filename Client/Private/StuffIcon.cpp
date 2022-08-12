@@ -123,7 +123,7 @@ HRESULT CStuffIcon::Render()
 	if (m_eCollision == TYPE_NO)
 	{
 		CUIManager* pUIInstance = CUIManager::Get_Instance();
-		if (pUIInstance->Check_Change(m_iTexturenum+2))
+		if (pUIInstance->Check_Change(m_iTexturenum+3))
 			pUIInstance->Set_ItemNoticeTextNum(99, false);
 	}
 
@@ -182,22 +182,22 @@ void CStuffIcon::Set_Notice()
 	switch (m_iTexturenum)
 	{
 	case 0:
-		pUIInstance->Set_ItemNoticeTextNum(2, true);
-		break;
-	case 1:
 		pUIInstance->Set_ItemNoticeTextNum(3, true);
 		break;
-	case 2:
+	case 1:
 		pUIInstance->Set_ItemNoticeTextNum(4, true);
 		break;
-	case 3:
+	case 2:
 		pUIInstance->Set_ItemNoticeTextNum(5, true);
 		break;
-	case 4:
+	case 3:
 		pUIInstance->Set_ItemNoticeTextNum(6, true);
 		break;
-	case 5:
+	case 4:
 		pUIInstance->Set_ItemNoticeTextNum(7, true);
+		break;
+	case 5:
+		pUIInstance->Set_ItemNoticeTextNum(8, true);
 		break;
 	default:
 		break;

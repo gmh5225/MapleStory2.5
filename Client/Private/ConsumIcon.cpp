@@ -175,7 +175,7 @@ void CConsumIcon::Set_Notice()
 		pUIInstance->Set_ItemNoticeTextNum(1, true);
 		break;
 	case 2:
-		pUIInstance->Set_ItemNoticeTextNum(8, true);
+		pUIInstance->Set_ItemNoticeTextNum(2, true);
 		break;
 	default:
 		break;

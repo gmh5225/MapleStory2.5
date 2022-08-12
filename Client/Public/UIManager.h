@@ -24,9 +24,6 @@ public:
 private:
 	CItemNotice* m_pItemNotice;
 
-
-
-
 public:
 	// For.Loading
 	void Set_Loading();
