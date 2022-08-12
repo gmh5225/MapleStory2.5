@@ -160,6 +160,9 @@ void CConsumIcon::Set_Notice()
 	case 1:
 		pUIInstance->Set_ItemNoticeTextNum(1, true);
 		break;
+	case 2:
+		pUIInstance->Set_ItemNoticeTextNum(8, true);
+		break;
 	default:
 		break;
 	}

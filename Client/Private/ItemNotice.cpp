@@ -119,6 +119,9 @@ void CItemNotice::RenderNotice()
 	case 7:
 		RedSnailNotice();
 		break;
+	case 8:
+		TeleportNotice();
+		break;
 		
 
 	default:
@@ -240,6 +243,21 @@ void CItemNotice::BluePortionNotice()
 	SetRect(&Text, m_UIInfo.fX - 33.f, m_UIInfo.fY - 2, 0, 0);
 	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
 }
+
+void CItemNotice::TeleportNotice()
+{
+	m_cTitle = "마을 귀환 주문서";
+	m_cText = "현재 위치에서 가장 가까\n운 마을로 귀환할 수 있\n는 주문서이다.";
+
+	RECT Title;
+	SetRect(&Title, m_UIInfo.fX - 50.f, m_UIInfo.fY - 34.f, 0, 0);
+	m_TitleFont->DrawTextA(NULL, m_cTitle, -1, &Title, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+
+	RECT Text;
+	SetRect(&Text, m_UIInfo.fX - 33.f, m_UIInfo.fY - 9.f, 0, 0);
+	m_TextFont->DrawTextA(NULL, m_cText, -1, &Text, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.f, 1.0f));
+}
+
 
 
 CItemNotice* CItemNotice::Create(LPDIRECT3DDEVICE9 pGraphic_Device)

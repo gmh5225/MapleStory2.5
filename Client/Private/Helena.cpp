@@ -28,7 +28,7 @@ HRESULT CHelena::Initialize(void * pArg)
 	m_sTag = "Tag_Npc";
 
 	m_fColRad = 1.f;	
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.f, 2.0f, -13.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-9.f, 1.0f, -1.f));
 	m_pTransformCom->Set_Scaled(1.f);
 	m_fTime = 0.f;
 	SetState(STATE_IDLE, DIR_L);
@@ -141,9 +141,9 @@ void CHelena::Tick_Move(_float fTimeDelta)
 	{	
 		m_fTime += fTimeDelta;
 
-		m_pTransformCom->Go_RD(fTimeDelta);
+		m_pTransformCom->Go_RU(fTimeDelta);
 
-		if (m_fTime >= 3.f)
+		if (m_fTime >= 5.f)
 		{
 			SetState(STATE_IDLE, DIR_L);
 			m_fTime = 0.f;
@@ -154,9 +154,9 @@ void CHelena::Tick_Move(_float fTimeDelta)
 	{
 		m_fTime += fTimeDelta;
 
-		m_pTransformCom->Go_LU(fTimeDelta);
+		m_pTransformCom->Go_LD(fTimeDelta);
 
-		if (m_fTime >= 3.f)
+		if (m_fTime >= 5.f)
 		{
 			SetState(STATE_IDLE, DIR_R);
 			m_fTime = 0.f;

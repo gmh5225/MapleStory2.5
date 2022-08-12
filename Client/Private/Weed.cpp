@@ -29,10 +29,10 @@ HRESULT CWeed::Initialize(void * pArg)
 
 	m_fColRad = 0.3f;	
 	
-	CCreature::CRETUREDESC* pNpcDesc = (CCreature::CRETUREDESC*)pArg;
+	CCreature::CRETUREDESC pNpcDesc = *(CCreature::CRETUREDESC*)pArg;
 	
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pNpcDesc->vPos);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pNpcDesc.vPos);
 	m_pTransformCom->Set_Scaled(0.5f);
 	m_fTime = 0.f;
 	m_fShaketime = 0.f;
