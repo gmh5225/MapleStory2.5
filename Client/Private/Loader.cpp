@@ -19,6 +19,11 @@
 #include "ChasingShotAttack.h"
 #include "ChasingShotBullet.h"
 #include "ChasingShotHit.h"
+#include "BeastEffect.h"
+#include "BeastBegin.h"
+#include "BeastLoof.h"
+#include "BeastAttack.h"
+#include "BeastHit.h"
 #include "CrossTheStyx.h"
 #include "SunCross.h"
 #include "SunCrossHit.h"
@@ -38,6 +43,7 @@
 #include "SpearPullingIcon.h"
 #include "CardinalBlastIcon.h"
 #include "ChasingShotIcon.h"
+#include "BeastIcon.h"
 #include "SkillGradeBtn0.h"
 #include "SkillGradeBtn1.h"
 #include "SkillGradeBtn2.h"
@@ -738,6 +744,26 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 		CChasingShotHit::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Effect"),
+		CBeastEffect::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Begin"),
+		CBeastBegin::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Loof"),
+		CBeastLoof::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Attack"),
+		CBeastAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Hit"),
+		CBeastHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -869,6 +895,10 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ChasingShotIcon"),
 		CChasingShotIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BeastIcon"),
+		CBeastIcon::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bulb"),
@@ -1288,6 +1318,26 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ChasingShot_Hit"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/ChasingShot/Hit/Edit/ChasingShotHit%d.png"), 11))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Effect"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Effect/Edit/BeastEffect%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Begin"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Begin/Edit/BeastBegin%d.png"), 8))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Loof"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Loof/Edit/BeastLoof%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Attack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Attack/Edit/BeastAttack%d.png"), 23))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Hit/Edit/BeastHit%d.png"), 9))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -1935,7 +1985,7 @@ HRESULT CLoader::Load_UI_Texture()
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseSkillIcon"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 7))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 8))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseConsumItemIcon"),
@@ -2081,6 +2131,10 @@ HRESULT CLoader::Load_UI_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ChasingShotIcon"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/RangeAttack/ChasingShot/ChasingShotIcon%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BeastIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/AreaAttack/Beast/BeastIcon%d.png"), 2))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_InvenFrame"),

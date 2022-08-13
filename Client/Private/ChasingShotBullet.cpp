@@ -28,7 +28,6 @@ HRESULT CChasingShotBullet::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	m_fColRad = 0.1f;
 
 	m_pTransformCom->Set_Scaled(_float3{ 6.f,3.5f,6.5f });
 	

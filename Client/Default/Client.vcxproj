@@ -158,6 +158,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\public\Bandit.h" />
+    <ClInclude Include="..\Public\BeastAttack.h" />
+    <ClInclude Include="..\Public\BeastBegin.h" />
+    <ClInclude Include="..\Public\BeastEffect.h" />
+    <ClInclude Include="..\Public\BeastHit.h" />
+    <ClInclude Include="..\Public\BeastIcon.h" />
+    <ClInclude Include="..\Public\BeastInfo.h" />
+    <ClInclude Include="..\Public\BeastLoof.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
     <ClInclude Include="..\Public\BlackWizardAttack2.h" />
@@ -327,6 +334,13 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\private\Bandit.cpp" />
+    <ClCompile Include="..\Private\BeastAttack.cpp" />
+    <ClCompile Include="..\Private\BeastBegin.cpp" />
+    <ClCompile Include="..\Private\BeastEffect.cpp" />
+    <ClCompile Include="..\Private\BeastHit.cpp" />
+    <ClCompile Include="..\Private\BeastIcon.cpp" />
+    <ClCompile Include="..\Private\BeastInfo.cpp" />
+    <ClCompile Include="..\Private\BeastLoof.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack2.cpp" />

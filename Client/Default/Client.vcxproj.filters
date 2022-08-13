@@ -589,6 +589,33 @@
     <Filter Include="04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot">
       <UniqueIdentifier>{c651be50-1df4-4143-83c1-23079e79be7f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack">
+      <UniqueIdentifier>{12c86341-4c7c-4e14-89bf-b561e6047ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast">
+      <UniqueIdentifier>{f95ae7c0-ac9e-4a90-b376-92eeaa20fe4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Begin">
+      <UniqueIdentifier>{a3026577-0b58-4344-8917-f9ee6c438fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Loof">
+      <UniqueIdentifier>{e5337f63-b9c5-49dd-b2fc-164909b5a9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Effect">
+      <UniqueIdentifier>{e2778558-1d3a-4013-9094-8a5872a2738c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Attack">
+      <UniqueIdentifier>{5519791c-142d-48e6-be00-501a5a95a51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Hit">
+      <UniqueIdentifier>{18fa7c3d-d57c-4a6d-964a-b63f9a566711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\AreaAttack">
+      <UniqueIdentifier>{b6077879-2dce-427a-a8ad-90ddbef6f46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\AreaAttack">
+      <UniqueIdentifier>{d797ec51-2df5-44bc-9e94-ce6b21991cc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1092,6 +1119,27 @@
     <ClInclude Include="..\Public\ChasingShotIcon.h">
       <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\BeastBegin.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Begin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastAttack.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastEffect.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastHit.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastLoof.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Loof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastInfo.h">
+      <Filter>20.DATA\SkillInfo\AreaAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1585,6 +1633,27 @@
     </ClCompile>
     <ClCompile Include="..\Private\ChasingShotIcon.cpp">
       <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastBegin.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Begin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastAttack.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastEffect.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastLoof.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Loof</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastInfo.cpp">
+      <Filter>20.DATA\SkillInfo\AreaAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

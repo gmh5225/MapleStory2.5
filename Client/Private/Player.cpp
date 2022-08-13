@@ -12,6 +12,7 @@
 #include "ParticleManager.h"
 #include "CardinalBlastAttack.h"
 #include "ChasingShotAttack.h"
+#include "BeastEffect.h"
 #include "Item.h"
 
 #include "Shadow.h"
@@ -782,6 +783,16 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ChasingShot_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &ChasingShotDECS);
 		SetState(STATE_ATTACK, m_eDir);
 	
+	}
+
+	if (pGameInstance->Key_Down(DIK_Q))
+	{
+		CBeastEffect::BEASTEFFECTDESC BeastDECS;
+		BeastDECS.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Beast_Effect"), LEVEL_STATIC, TEXT("Layer_Skill"), &BeastDECS);
+		SetState(STATE_ATTACK, m_eDir);
+
 	}
 
 	Safe_Release(pGameInstance);

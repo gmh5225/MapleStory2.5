@@ -115,7 +115,7 @@ void CCardinalBlastIcon::Change_Texture()
 		m_iTexturenum = 1;
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0)
+	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0 && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_SECOND)
 		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"CardinalBlastInfo", CSkillManager::GRADE_SECOND, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
 
 

@@ -299,6 +299,9 @@ void CSkillFrame::SecondText()
 	wchar_t SpearPullingGetLevel[10];
 	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("SpearPullingInfo"), CSkillManager::GRADE_SECOND)->Get_SkillLevel(), SpearPullingGetLevel, 10);
 
+	wchar_t CardinalBlastGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("CardinalBlastInfo"), CSkillManager::GRADE_SECOND)->Get_SkillLevel(), CardinalBlastGetLevel, 10);
+
 	RECT Grade;
 	SetRect(&Grade, 865, 180, 0, 0);
 	m_GradeFont->DrawText(NULL, m_cGrade, -1, &Grade, DT_NOCLIP, D3DXCOLOR(255.f, 255.f, 255.0f, 1.0f));
@@ -314,6 +317,14 @@ void CSkillFrame::SecondText()
 	RECT SpearPullingLevel;
 	SetRect(&SpearPullingLevel, 793, 233, 0, 0);
 	m_FrameFont->DrawText(NULL, SpearPullingGetLevel, -1, &SpearPullingLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT CardinalBlastName;
+	SetRect(&CardinalBlastName, 935, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("CardinalBlastInfo"), CSkillManager::GRADE_SECOND)->Get_SkillName(), -1, &CardinalBlastName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT CardinalBlastLevel;
+	SetRect(&CardinalBlastLevel, 936, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, CardinalBlastGetLevel, -1, &CardinalBlastLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 }
 
 void CSkillFrame::ThirdText()
@@ -330,6 +341,17 @@ void CSkillFrame::ThirdText()
 	RECT SkillPointrt;
 	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
 	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+
+	wchar_t ChasingShotGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("ChasingShotInfo"), CSkillManager::GRADE_THIRD)->Get_SkillLevel(), ChasingShotGetLevel, 10);
+
+	RECT ChasingShotName;
+	SetRect(&ChasingShotName, 792, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("ChasingShotInfo"), CSkillManager::GRADE_THIRD)->Get_SkillName(), -1, &ChasingShotName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT ChasingShotLevel;
+	SetRect(&ChasingShotLevel, 793, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, ChasingShotGetLevel, -1, &ChasingShotLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 }
 
 void CSkillFrame::FourthText()
@@ -346,6 +368,17 @@ void CSkillFrame::FourthText()
 	RECT SkillPointrt;
 	SetRect(&SkillPointrt, m_iSkillPointDigit, 150, 0, 0);
 	m_FrameFont->DrawText(NULL, SkillPoint, -1, &SkillPointrt, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.f, 1.0f));
+
+	wchar_t BeastGetLevel[10];
+	_itow_s(pSkillInstance->Get_SkillInfo(TEXT("BeastInfo"), CSkillManager::GRADE_FOURTH)->Get_SkillLevel(), BeastGetLevel, 10);
+
+	RECT BeastName;
+	SetRect(&BeastName, 792, 215, 0, 0);
+	m_FrameFont->DrawText(NULL, pSkillInstance->Get_SkillInfo(TEXT("BeastInfo"), CSkillManager::GRADE_FOURTH)->Get_SkillName(), -1, &BeastName, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
+
+	RECT BeastLevel;
+	SetRect(&BeastLevel, 793, 233, 0, 0);
+	m_FrameFont->DrawText(NULL, BeastGetLevel, -1, &BeastLevel, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 0.0f, 1.0f));
 }
 
 void CSkillFrame::FifthText()

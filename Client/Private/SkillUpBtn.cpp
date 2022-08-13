@@ -278,6 +278,14 @@ void CSkillUpBtn::SkillLevelUp_Third()
 
 void CSkillUpBtn::SkillLevelUp_Fourth()
 {
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	switch (m_iBtnNum)
+	{
+	case 1:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("BeastInfo"), CSkillManager::GRADE_FOURTH)->Set_SkillLevel(1);
+		break;
+	}
 }
 
 void CSkillUpBtn::SkillLevelUp_Fifth()
