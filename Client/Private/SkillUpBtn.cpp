@@ -145,11 +145,11 @@ void CSkillUpBtn::Set_RenderGroup()
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 	case CSkillManager::GRADE_SECOND:
-		if (m_bRender && m_iBtnNum < 2)
+		if (m_bRender && m_iBtnNum < 3)
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 	case CSkillManager::GRADE_THIRD:
-		if (m_bRender && m_iBtnNum < 5)
+		if (m_bRender && m_iBtnNum < 2)
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 	case CSkillManager::GRADE_FOURTH:
@@ -157,7 +157,7 @@ void CSkillUpBtn::Set_RenderGroup()
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 	case CSkillManager::GRADE_FIFTH:
-		if (m_bRender && m_iBtnNum < 3)
+		if (m_bRender && m_iBtnNum < 2)
 			m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_UI, this);
 		break;
 
@@ -251,6 +251,11 @@ void CSkillUpBtn::SkillLevelUp_Second()
 		pSkillInstance->Get_SkillInfo(TEXT("SpearPullingInfo"), CSkillManager::GRADE_SECOND)->Set_SkillLevel(1);
 		break;
 
+	case 2:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("CardinalBlastInfo"), CSkillManager::GRADE_SECOND)->Set_SkillLevel(1);
+		break;
+
 	default:
 		break;
 	}
@@ -258,6 +263,17 @@ void CSkillUpBtn::SkillLevelUp_Second()
 
 void CSkillUpBtn::SkillLevelUp_Third()
 {
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	switch (m_iBtnNum)
+	{
+	case 1:
+		pSkillInstance->Set_SkillPoint(-1);
+		pSkillInstance->Get_SkillInfo(TEXT("ChasingShotInfo"), CSkillManager::GRADE_THIRD)->Set_SkillLevel(1);
+		break;
+	default:
+		break;
+	}
+
 }
 
 void CSkillUpBtn::SkillLevelUp_Fourth()

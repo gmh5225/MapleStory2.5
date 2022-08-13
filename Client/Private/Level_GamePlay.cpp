@@ -13,6 +13,8 @@
 #include "WarriorReefInfo.h"
 #include "ReefAttackInfo.h"
 #include "SpearPullingInfo.h"
+#include "CardinalBlastInfo.h"
+#include "ChasingShotInfo.h"
 #include "SkillManager.h"
 #include "InvenManager.h"
 #include "UI.h"
@@ -44,6 +46,8 @@ HRESULT CLevel_GamePlay::Initialize()
 {
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
+
+	CGameInstance::Get_Instance()->PlayBGM(L"Test.wav", 1.f);
 
 	if (g_bStaticClone == false)
 	{
@@ -1771,6 +1775,18 @@ HRESULT CLevel_GamePlay::Ready_SkillIcon(const _tchar * pLayerTag)
 	SpearPullingInfo.fMoveX = -129.f;
 	SpearPullingInfo.fMoveY = -69.f;
 
+	CUI::UIINFO CardinalBlastInfo;
+	CardinalBlastInfo.fSizeX = 32.f;
+	CardinalBlastInfo.fSizeY = 32.f;
+	CardinalBlastInfo.fMoveX = 15.f;
+	CardinalBlastInfo.fMoveY = -69.f;
+
+	CUI::UIINFO ChasingShotInfo;
+	ChasingShotInfo.fSizeX = 32.f;
+	ChasingShotInfo.fSizeY = 32.f;
+	ChasingShotInfo.fMoveX = -129.f;
+	ChasingShotInfo.fMoveY = -69.f;
+
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttackIcon"), LEVEL_STATIC, pLayerTag, &ReefAttackInfo)))
 		return E_FAIL;
 
@@ -1786,6 +1802,12 @@ HRESULT CLevel_GamePlay::Ready_SkillIcon(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SpearPullingIcon"), LEVEL_STATIC, pLayerTag, &SpearPullingInfo)))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CardinalBlastIcon"), LEVEL_STATIC, pLayerTag, &CardinalBlastInfo)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ChasingShotIcon"), LEVEL_STATIC, pLayerTag, &ChasingShotInfo)))
+		return E_FAIL;
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -1799,6 +1821,8 @@ HRESULT CLevel_GamePlay::Ready_SkillInfo()
 	CReefAttackInfo* pReefAttack = new CReefAttackInfo;
 	CSpearPullingInfo* pSpearPulling = new CSpearPullingInfo;
 	CWarriorReefInfo* pWarriorReef = new CWarriorReefInfo;
+	CCardinalBlastInfo* pCardinalBlast = new CCardinalBlastInfo;
+	CChasingShotInfo* pChasingShot = new CChasingShotInfo;
 		if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("ReefAttackInfo"), CSkillManager::GRADE_BEGENNER, pReefAttack)))
 		return E_FAIL;
 
@@ -1812,6 +1836,12 @@ HRESULT CLevel_GamePlay::Ready_SkillInfo()
 		return E_FAIL;
 
 	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("SpearPullingInfo"), CSkillManager::GRADE_SECOND, pSpearPulling)))
+		return E_FAIL;
+
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("CardinalBlastInfo"), CSkillManager::GRADE_SECOND, pCardinalBlast)))
+		return E_FAIL;
+
+	if (FAILED(pSkillInstance->Add_SkillInfo(TEXT("ChasingShotInfo"), CSkillManager::GRADE_THIRD, pChasingShot)))
 		return E_FAIL;
 
 	return S_OK;

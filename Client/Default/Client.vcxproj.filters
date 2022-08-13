@@ -559,6 +559,36 @@
     <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit">
       <UniqueIdentifier>{8def5178-fc67-4204-9198-8f2546f94c41}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot">
+      <UniqueIdentifier>{30405137-b7f3-44d6-a885-c5633f05ed28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Attack">
+      <UniqueIdentifier>{d5dc39ac-12c4-46ac-bc45-2e11a7c0652f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Bullet">
+      <UniqueIdentifier>{1b47cdc7-0b6d-4c9a-bebc-dd42f2f94cc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Hit">
+      <UniqueIdentifier>{d18e0246-c40b-4242-b556-573d6083e1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\RangeAttack">
+      <UniqueIdentifier>{3a72996f-8f9c-4dfe-a959-ce7b8bc86644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\RangeAttack">
+      <UniqueIdentifier>{56301eff-83e5-4d5a-a9a6-8d44f7ff4990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\RangeAttack\CardinalBlast">
+      <UniqueIdentifier>{558fd720-67f7-4269-8a13-d71b139c5372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\RangeAttack\ChasingShot">
+      <UniqueIdentifier>{944f3f19-4c3e-4731-bc1d-c67f4e033439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\RangeAttack\CardinalBlast">
+      <UniqueIdentifier>{540aa82b-24a2-4a8e-8c8e-969dcba0414d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot">
+      <UniqueIdentifier>{c651be50-1df4-4143-83c1-23079e79be7f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1041,6 +1071,27 @@
     <ClInclude Include="..\Public\CardinalBlastHit.h">
       <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotAttack.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotBullet.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotHit.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastInfo.h">
+      <Filter>20.DATA\SkillInfo\RangeAttack\CardinalBlast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotInfo.h">
+      <Filter>20.DATA\SkillInfo\RangeAttack\ChasingShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\CardinalBlast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1513,6 +1564,27 @@
     </ClCompile>
     <ClCompile Include="..\Private\CardinalBlastHit.cpp">
       <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotAttack.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotBullet.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastInfo.cpp">
+      <Filter>20.DATA\SkillInfo\RangeAttack\CardinalBlast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotInfo.cpp">
+      <Filter>20.DATA\SkillInfo\RangeAttack\ChasingShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\CardinalBlast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

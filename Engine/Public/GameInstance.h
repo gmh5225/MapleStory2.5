@@ -7,6 +7,7 @@
 #include "Object_Manager.h"
 #include "Component_Manager.h"
 #include "Map_Manager.h"
+#include "Sound_Manager.h"
 #include "VIBuffer_Cube.h"
 #include "Picking.h"
 #include <iostream>
@@ -81,7 +82,12 @@ public: /* For.Map_Manager */
 	list<CMap_Manager::CUBEDATA>* ReadMap(const _tchar* pMapTag);
 	list<CMap_Manager::MODELDESC>* ReadModel(const _tchar* pMapTag);
 	list<_tchar*>* GetVoxelNames();
-
+	
+public:/*For. Sound_Manager*/
+	HRESULT PlaySound(TCHAR* pSoundKey, const _uint& eID, const float& fVolume);
+	HRESULT PlayBGM(TCHAR * pSoundKey, const float& fVolume);
+	HRESULT StopSound(const _uint& eID);
+	HRESULT StopAll();
 private:
 	CGraphic_Device*				m_pGraphic_Device = nullptr;
 	CInput_Device*					m_pInput_Device = nullptr;
@@ -91,6 +97,7 @@ private:
 	CTimer_Manager*					m_pTimer_Manager = nullptr;
 	CMap_Manager*					m_pMap_Manager = nullptr;
 	CPicking*						m_pPicking = nullptr;
+	CSound_Manager*					m_pSound_Manager = nullptr;
 
 
 public:

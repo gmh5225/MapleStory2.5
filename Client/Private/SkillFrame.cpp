@@ -90,6 +90,33 @@ void CSkillFrame::LateTick(_float fTimeDelta)
 	}
 	Set_Data();
 
+
+	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+
+	switch (pSkillInstance->Get_SkillGrade())
+	{
+	case CSkillManager::GRADE_BEGENNER:
+		m_iTexturenum = 1;
+		break;
+	case CSkillManager::GRADE_FIRST:
+		m_iTexturenum = 1;
+		break;
+	case CSkillManager::GRADE_SECOND:
+		m_iTexturenum = 1;
+		break;
+	case CSkillManager::GRADE_THIRD:
+		m_iTexturenum = 2;
+		break;
+	case CSkillManager::GRADE_FOURTH:
+		m_iTexturenum = 2;
+		break;
+	case CSkillManager::GRADE_FIFTH:
+		m_iTexturenum = 2;
+		break;
+
+	default:
+		break;
+	}
 	//SetRect(&m_RectUI, m_UIInfo.fX - m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY - m_UIInfo.fSizeY * 0.5f, m_UIInfo.fX + m_UIInfo.fSizeX * 0.5f, m_UIInfo.fY + m_UIInfo.fSizeY * 0.5f);
 
 	//m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));

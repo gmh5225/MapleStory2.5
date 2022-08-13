@@ -11,6 +11,7 @@
 #include "SpearPulling.h"
 #include "ParticleManager.h"
 #include "CardinalBlastAttack.h"
+#include "ChasingShotAttack.h"
 #include "Item.h"
 
 #include "Shadow.h"
@@ -604,6 +605,9 @@ void CPlayer::SetShadow(LEVEL eLevel, _float fScale)
 
 void CPlayer::GetKeyInput(_float fTimeDelta)
 {
+	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
 	if (_bPushBlock)
 	{
 		CTransform::TRANSFORMDESC IdleDesc;
@@ -619,8 +623,6 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		m_pTransformCom->Set_TransformDesc(IdleDesc);
 	}
 	_bPushBlock = false;
-
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 
 	if (GetKeyState(VK_UP) & 0x8000)
 	{
@@ -724,70 +726,65 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 	if (GetKeyState('C') & 0x8000)
 	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
 		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
 		SolunaDECS.eDir = m_eDir;
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 		SetState(STATE_DASH, m_eDir);
-		Safe_Release(pGameInstance);
 	}
 
-	if (GetKeyState('A') & 0x8000)
+	if (pGameInstance->Key_Down(DIK_A))
 	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
+		pGameInstance->PlaySound(L"Use.mp3", 2, 1.f);
 
 		CReefAttack::REEFATTACKDESC ReefAttackDESC;
 		ReefAttackDESC.eDir = m_eDir;
 
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack"), LEVEL_STATIC, TEXT("Layer_Skill"), &ReefAttackDESC);
 		SetState(STATE_ATTACK, m_eDir);
-		Safe_Release(pGameInstance);
 
 		CParticleManager::Get_Instance()->Shot(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
 	}
 
 	if (GetKeyState('S') & 0x8000)
 	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
 		CCardinalBlastAttack::CARDINALATTACKDESC CardinalAttackDESC;
 		CardinalAttackDESC.eDir = m_eDir;
 
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CardinalBlast_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &CardinalAttackDESC);
 		SetState(STATE_ATTACK, m_eDir);
-		Safe_Release(pGameInstance);
 	}
 
 	if (GetKeyState('D') & 0x8000)
 	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
 		CSunCross::SUNCROSSDESC SunCrossDECS;
 		SunCrossDECS.eDir = m_eDir;
 			
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_STATIC, TEXT("Layer_Skill"), &SunCrossDECS);
 		SetState(STATE_ATTACK, m_eDir);
-		Safe_Release(pGameInstance);
 	}
 
 	if (GetKeyState('F') & 0x8000)
 	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
 
 		CSpearPulling::SPEARPULLINGDESC SpearPullingDECS;
 		SpearPullingDECS.eDir = m_eDir;
 
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SpearPulling"), LEVEL_STATIC, TEXT("Layer_Skill"), &SpearPullingDECS);
 		SetState(STATE_ATTACK, m_eDir);
-		Safe_Release(pGameInstance);
 	}
+
+	if (GetKeyState('G') & 0x8000)
+	{
+		CChasingShotAttack::CHASINGATTACKDESC ChasingShotDECS;
+		ChasingShotDECS.eDir = m_eDir;
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ChasingShot_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &ChasingShotDECS);
+		SetState(STATE_ATTACK, m_eDir);
+	
+	}
+
+	Safe_Release(pGameInstance);
 
 	
 }
