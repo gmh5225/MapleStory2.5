@@ -10,6 +10,7 @@
 #include "WarriorReef.h"
 #include "SpearPulling.h"
 #include "ParticleManager.h"
+#include "CardinalBlastAttack.h"
 #include "Item.h"
 
 #include "Shadow.h"
@@ -754,10 +755,10 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		CCrossTheStyx::CROSSTHESTYXDESC CrossTheStyxDESC;
-		CrossTheStyxDESC.eDir = m_eDir;
+		CCardinalBlastAttack::CARDINALATTACKDESC CardinalAttackDESC;
+		CardinalAttackDESC.eDir = m_eDir;
 
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CrossTheStyx"), LEVEL_STATIC, TEXT("Layer_Skill"), &CrossTheStyxDESC);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CardinalBlast_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &CardinalAttackDESC);
 		SetState(STATE_ATTACK, m_eDir);
 		Safe_Release(pGameInstance);
 	}

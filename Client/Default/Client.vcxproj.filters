@@ -547,6 +547,18 @@
     <Filter Include="02.GameObject\Cube\PushCube">
       <UniqueIdentifier>{c1c4a5f9-73e1-4578-a5ae-7133f3df1546}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast">
+      <UniqueIdentifier>{6f4ca37a-6289-4e3e-8448-a1a71db3b0f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Attack">
+      <UniqueIdentifier>{7d4f3013-ca3d-4701-af7c-29fe0ad065d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Bullet">
+      <UniqueIdentifier>{23304c8b-4f7c-4e08-a0ad-46971a90d1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit">
+      <UniqueIdentifier>{8def5178-fc67-4204-9198-8f2546f94c41}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1020,6 +1032,15 @@
     <ClInclude Include="..\public\PushCube.h">
       <Filter>02.GameObject\Cube\PushCube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastAttack.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastBullet.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastHit.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1483,6 +1504,15 @@
     </ClCompile>
     <ClCompile Include="..\private\PushCube.cpp">
       <Filter>02.GameObject\Cube\PushCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastAttack.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastBullet.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

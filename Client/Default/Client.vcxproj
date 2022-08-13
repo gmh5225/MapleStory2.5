@@ -176,6 +176,9 @@
     <ClInclude Include="..\Public\BlueSnailInfo.h" />
     <ClInclude Include="..\Public\Bulb.h" />
     <ClInclude Include="..\Public\Camera_Free.h" />
+    <ClInclude Include="..\Public\CardinalBlastAttack.h" />
+    <ClInclude Include="..\Public\CardinalBlastBullet.h" />
+    <ClInclude Include="..\Public\CardinalBlastHit.h" />
     <ClInclude Include="..\Public\CashBtn.h" />
     <ClInclude Include="..\public\ChatBox.h" />
     <ClInclude Include="..\Public\Chick.h" />
@@ -335,6 +338,9 @@
     <ClCompile Include="..\Private\BlueSnailInfo.cpp" />
     <ClCompile Include="..\Private\Bulb.cpp" />
     <ClCompile Include="..\Private\Camera_Free.cpp" />
+    <ClCompile Include="..\Private\CardinalBlastAttack.cpp" />
+    <ClCompile Include="..\Private\CardinalBlastBullet.cpp" />
+    <ClCompile Include="..\Private\CardinalBlastHit.cpp" />
     <ClCompile Include="..\Private\CashBtn.cpp" />
     <ClCompile Include="..\private\ChatBox.cpp" />
     <ClCompile Include="..\Private\Chick.cpp" />

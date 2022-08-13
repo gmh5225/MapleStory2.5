@@ -13,6 +13,9 @@
 #include "UI.h"
 #include "SolunaSlashEffectA.h"
 #include "SolunaSlashEffectB.h"
+#include "CardinalBlastAttack.h"
+#include "CardinalBlastBullet.h"
+#include "CardinalBlastHit.h"
 #include "CrossTheStyx.h"
 #include "SunCross.h"
 #include "SunCrossHit.h"
@@ -706,6 +709,19 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 		CSpearPullingHit::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CardinalBlast_Attack"),
+		CCardinalBlastAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CardinalBlast_Bullet"),
+		CCardinalBlastBullet::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CardinalBlast_Hit"),
+		CCardinalBlastHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -1223,6 +1239,18 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SpearPulling_Hit"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/SpearPulling/Edit/SpearPullingHit%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CardinalBlast_Attack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/CardinalBlast/Attack/Edit/CardinalBlastAttack%d.png"), 18))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CardinalBlast_Bullet"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/CardinalBlast/Bullet/Edit/CardinalBlastBullet%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CardinalBlast_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/CardinalBlast/Hit/Edit/CardinalBlastHit%d.png"), 16))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
