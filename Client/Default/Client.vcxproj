@@ -290,7 +290,6 @@
     <ClInclude Include="..\Public\SunCrossIcon.h" />
     <ClInclude Include="..\Public\SunCrossInfo.h" />
     <ClInclude Include="..\Public\StoneGolem.h" />
-    <ClInclude Include="..\Public\SunderBreakAttack.h" />
     <ClInclude Include="..\Public\TeleportInfo.h" />
     <ClInclude Include="..\public\Taxi.h" />
     <ClInclude Include="..\public\TaxiButton.h" />
@@ -449,7 +448,6 @@
     <ClCompile Include="..\Private\SunCrossIcon.cpp" />
     <ClCompile Include="..\Private\SunCrossInfo.cpp" />
     <ClCompile Include="..\Private\StoneGolem.cpp" />
-    <ClCompile Include="..\Private\SunderBreakAttack.cpp" />
     <ClCompile Include="..\Private\TeleportInfo.cpp" />
     <ClCompile Include="..\private\Taxi.cpp" />
     <ClCompile Include="..\private\TaxiButton.cpp" />

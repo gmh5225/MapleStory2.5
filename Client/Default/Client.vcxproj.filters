@@ -142,12 +142,6 @@
     <Filter Include="02.GameObject\Skill\Effect\RangeAttack">
       <UniqueIdentifier>{90197637-a33b-45e3-83a7-c6a284b8b593}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\SunderBreak">
-      <UniqueIdentifier>{d2fa19f8-bc65-441b-b605-d91a031dc115}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack">
-      <UniqueIdentifier>{33f88ffb-87c1-4919-a49d-98493400cd3b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="20.DATA">
       <UniqueIdentifier>{13257046-6285-4398-b9b1-d98ef6befb05}</UniqueIdentifier>
     </Filter>
@@ -633,9 +627,6 @@
     <ClInclude Include="..\Public\RibbonPig.h">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
     </ClInclude>
-    <ClInclude Include="..\Public\SunderBreakAttack.h">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack</Filter>
-    </ClInclude>
     <ClInclude Include="..\Public\Bulb.h">
       <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
     </ClInclude>
@@ -1102,9 +1093,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\RibbonPig.cpp">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\SunderBreakAttack.cpp">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Bulb.cpp">
       <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
