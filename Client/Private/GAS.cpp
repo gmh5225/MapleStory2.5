@@ -43,7 +43,7 @@ HRESULT CGAS::Initialize(void * pArg)
 
 	m_bPatterStart = false;
 
-	m_fPatternCycle = 28;
+	m_fPatternCycle = 12;
 
 	m_fJump = 0;
 	m_fDJump = 0;
@@ -165,7 +165,7 @@ void CGAS::Tick(_float fTimeDelta)
 	if (m_bPatterStart)
 		m_fPatternCycle += fTimeDelta;
 
-	if (m_fPatternCycle > 30.f)
+	if (m_fPatternCycle > 15.f)
 	{
 		//m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
 		m_iRandomPattern = 5;

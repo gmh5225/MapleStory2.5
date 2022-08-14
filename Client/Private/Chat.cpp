@@ -182,8 +182,6 @@ HRESULT CChat::Render()
 		}
 
 
-		Safe_Release(pGameInstance);
-
 		if (pInstance->Get_QuestNum() == 1)
 		{
 			// 퀘스트매니져를 통해 가져온 채팅값이 TRUE이면 채팅을 그림, 엔터를 누르면 퀘스트 전구를 진행으로 바꾸고 채팅값을 FALSE로 만듦
@@ -718,6 +716,9 @@ HRESULT CChat::Render()
 			}
 		}
 	}
+
+
+	Safe_Release(pGameInstance);
 
 	return S_OK;
 }

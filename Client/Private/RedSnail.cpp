@@ -347,9 +347,6 @@ void CRedSnail::Tick_Chase(_float fTimeDelta)
 
 
 
-
-
-
 	Safe_Release(pGameInstance);
 }
 
