@@ -118,6 +118,15 @@ void CUIManager::LateTick(_float TimeDelta)
 	m_pCutScreen->LateTick(TimeDelta);
 }
 
+void CUIManager::Fix_BlackWizardHp(_int iHp)
+{
+	m_iBlackWizardHp += iHp;
+	if (m_iBlackWizardHp >= m_iBlackWizardMaxHp)
+		m_iBlackWizardHp = m_iBlackWizardMaxHp;
+	else if (m_iBlackWizardHp <= 0)
+		m_iBlackWizardHp = 0;
+}
+
 HRESULT CUIManager::Add_BlackWizardPatternUI(CBlackWizardPatternUI * pInstance)
 {
 	if (pInstance == nullptr)

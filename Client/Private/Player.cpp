@@ -856,6 +856,12 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 	}
 
+	if (pGameInstance->Key_Down(DIK_W))
+	{	
+		
+
+	}
+
 	Safe_Release(pGameInstance);
 
 	

@@ -56,7 +56,7 @@ HRESULT CBlackWizardAttack2::SetUp_Components()
 
 
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Attack2"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackWizard_Attack2"), nullptr);
 	}
 
 

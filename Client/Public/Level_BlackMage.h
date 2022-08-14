@@ -30,6 +30,7 @@ private:
 
 private:
 	CCollider*				m_pColliderCom = nullptr;
+	_float m_fCreateAcc;
 
 public:
 	static CLevel_BlackMage* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
