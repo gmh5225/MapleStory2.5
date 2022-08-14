@@ -36,22 +36,25 @@ HRESULT CGAS::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 	m_iHp = 10;
-	m_iIndexNum = -1;
+	m_iIndexNum = 0;
 	m_fCountDead = 0;
 
 	m_iRandomPattern = 0;
 
 	m_bPatterStart = false;
 
-	m_fPatternCycle = 2;
+	m_fPatternCycle = 28;
 
 	m_fJump = 0;
 	m_fDJump = 0;
 	m_fAttack = 0;
 	m_fDash = 0;
 	m_fEnd = 0;
+	m_fReset = 0;
+	m_fReturn = 0;
 
 	m_bTest = false;
+	m_bVanish = false;
 
 	m_fColRad = 1.f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 5.f, -5.f));
@@ -105,6 +108,12 @@ HRESULT CGAS::SetUp_Components()
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Idle"), nullptr);
 
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Skill"), nullptr);
+
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Vanish"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_VanishR"), nullptr);
+
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Return"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_ReturnR"), nullptr);
 	}
 
 
@@ -156,9 +165,10 @@ void CGAS::Tick(_float fTimeDelta)
 	if (m_bPatterStart)
 		m_fPatternCycle += fTimeDelta;
 
-	if (m_fPatternCycle > 5.f)
+	if (m_fPatternCycle > 30.f)
 	{
-		m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 3);
+		//m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
+		m_iRandomPattern = 5;
 		m_fPatternCycle = 0;
 	}
 
@@ -215,6 +225,22 @@ void CGAS::Tick(_float fTimeDelta)
 				SetState(STATE_END, DIR_L);
 		}
 
+		else if (m_iRandomPattern == 5)	// 게이트 소환
+		{
+			if (m_eDir == DIR_R)
+				SetState(STATE_RESET, DIR_R);
+			else
+				SetState(STATE_RESET, DIR_L);
+		}
+
+		else if (m_iRandomPattern == 6)	// 재생성
+		{
+			if (m_eDir == DIR_R)
+				SetState(STATE_RETURN, DIR_R);
+			else
+				SetState(STATE_RETURN, DIR_L);
+		}
+
 	}
 
 
@@ -249,6 +275,12 @@ void CGAS::Tick(_float fTimeDelta)
 	case STATE_DIE:
 		Tick_Die(fTimeDelta);
 		break;
+	case STATE_RESET:
+		Tick_Reset(fTimeDelta);
+		break;
+	case STATE_RETURN:
+		Tick_Return(fTimeDelta);
+		break;
 	case STATE_END:
 		Tick_End(fTimeDelta);
 		break;
@@ -266,7 +298,7 @@ void CGAS::LateTick(_float fTimeDelta)
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(Mushpos.x, 3.5f, Mushpos.z));
 
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		if (m_eCurState != STATE_DIE && m_eCurState != STATE_ATTACK)
+		if (m_eCurState != STATE_DIE && m_eCurState != STATE_ATTACK && m_eCurState != STATE_RESET)
 			SetState(STATE_CHASE, m_eDir);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
@@ -361,7 +393,7 @@ void CGAS::Tick_DJump(_float fTimeDelta)
 
 		CSpawner::SPAWNERINFO m_Slime;
 
-
+		
 		m_Slime.GAS = TEXT("GAS");
 		m_Slime.Level = LEVEL_GAS;
 		m_Slime.MonsterColRad = 1.f;
@@ -391,6 +423,13 @@ void CGAS::Tick_DJump(_float fTimeDelta)
 			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
 				int a = 0;
 		}
+
+		//for (int i = 0; i < 4; ++i)
+		//{
+		//	m_Slime.MonsterNum = i;
+		//	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PurpleSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
+		//		int a = 0;
+		//}
 
 		Safe_Release(pGameInstance);
 	}
@@ -446,9 +485,87 @@ void CGAS::Tick_Attack(_float fTimeDelta)
 void CGAS::Tick_Die(_float fTimeDelta)
 {
 	m_fCountDead += fTimeDelta;
-	if (m_fCountDead >= 10.0f)
+	if (m_fCountDead >= 8.0f)
 	{
 		Set_Dead();
+	}
+}
+
+void CGAS::Tick_Reset(_float fTimeDelta)
+{
+	m_fReset += fTimeDelta;
+
+	if (!m_bVanish && m_fReset > 2.1f)
+	{
+
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSpawner::SPAWNERINFO m_Slime;
+
+		int a = CGameInstance::Get_Instance()->Get_Random(0, 3);
+
+		switch (1)
+		{
+		case 0:
+			for (int i = 0; i < 4; ++i)
+			{
+				m_Slime.MonsterNum = i;
+				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
+					int a = 0;
+			}
+			break;
+		case 1:
+			for (int i = 0; i < 4; ++i)
+			{
+				m_Slime.MonsterNum = i;
+				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
+					int a = 0;
+			}
+			break;
+		case 2:
+			for (int i = 0; i < 4; ++i)
+			{
+				m_Slime.MonsterNum = i;
+				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
+					int a = 0;
+			}
+			break;
+		case 3:
+			for (int i = 0; i < 4; ++i)
+			{
+				m_Slime.MonsterNum = i;
+				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PurpleSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
+					int a = 0;
+			}
+			break;
+		}
+		m_bVanish = true;
+
+		Safe_Release(pGameInstance);
+	}
+
+	if (m_fReset > 14.5f)
+	{
+		m_iRandomPattern = 6;
+		m_fReset = 0;
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION,  _float3(0.f, 5.f, 0.f));
+		m_bVanish = false;
+	}
+}
+
+void CGAS::Tick_Return(_float fTimeDelta)
+{
+	m_fReturn += fTimeDelta;
+
+	if (m_fReturn > 2.1f)
+	{
+		m_iRandomPattern = 0;
+		if (m_eDir == DIR_R)
+			SetState(STATE_CHASE, DIR_R);
+		else
+			SetState(STATE_CHASE, DIR_L);
+		m_fReturn = 0;
 	}
 }
 
@@ -526,6 +643,20 @@ void CGAS::SetAni()
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPAR"), 0.15f, CAnimator::STATE_ONCE);
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPA"), 0.15f, CAnimator::STATE_ONCE);
+		break;
+
+	case STATE_RESET:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_VanishR"), 0.1f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Vanish"), 0.1f, CAnimator::STATE_ONCE);
+		break;
+
+	case STATE_RETURN:
+		if (m_eDir == DIR_R)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_ReturnR"), 0.1f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Return"), 0.1f, CAnimator::STATE_ONCE);
 		break;
 	}
 }

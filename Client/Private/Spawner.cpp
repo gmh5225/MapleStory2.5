@@ -34,7 +34,8 @@ HRESULT CSpawner::Initialize(void * pArg)
 
 	m_SpawnerInfo = *(CSpawner::SPAWNERINFO*)pArg;
 
-	m_iOrangeMushroom = m_SpawnerInfo.MonsterNum;
+	m_iMonsterNow = m_SpawnerInfo.MonsterNum;
+	Set_Index(m_SpawnerInfo.SpawnerNum);
 
 	// monsternum값 만큼 생성시키면됨
 	for (int i = 0; i < m_SpawnerInfo.MonsterNum; ++i)
@@ -104,7 +105,7 @@ HRESULT CSpawner::Initialize(void * pArg)
 
 	CSpawnerManager::Get_Instance()->Add_SpawnerInfo(this);
 
-	Set_Index(m_SpawnerInfo.SpawnerNum);
+
 
 
 	Safe_Release(pGameInstance);
@@ -124,14 +125,12 @@ void CSpawner::LateTick(_float fTimeDelta)
 {
 	m_fCount += 1.f * fTimeDelta;
 
-
-
-	if (m_SpawnerInfo.MonsterNum > m_iOrangeMushroom)
+	if (m_SpawnerInfo.MonsterNum > m_iMonsterNow)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
 
-		int Num = m_SpawnerInfo.MonsterNum - m_iOrangeMushroom;
+		int Num = m_SpawnerInfo.MonsterNum - m_iMonsterNow;
 
 		if (5.f < m_fCount)
 		{
@@ -140,9 +139,9 @@ void CSpawner::LateTick(_float fTimeDelta)
 			for (int i = 0; i < Num; ++i)
 			{
 				_float Random = pGameInstance->Get_Random(0, 4);
-				if(Random == 1)
+				if (Random == 1)
 					m_SpawnerInfo.MonsterPos += { 0.3f, 0.f, 0.5f};
-				else if(Random == 2)
+				else if (Random == 2)
 					m_SpawnerInfo.MonsterPos += {-0.3f, 0.f, 0.5f};
 				else if (Random == 3)
 					m_SpawnerInfo.MonsterPos += { 0.3f, 0.f, -0.5f};
@@ -211,7 +210,6 @@ void CSpawner::LateTick(_float fTimeDelta)
 
 				Plus_Mushroom();
 			}
-			Num = 0;
 		}
 
 		

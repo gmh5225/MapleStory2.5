@@ -46,8 +46,8 @@ HRESULT CLevel_ElenyaGAS::Initialize()
 	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
 		return E_FAIL;
 
-	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
+		return E_FAIL;
 
 	if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
 		return E_FAIL;
@@ -158,7 +158,7 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_Monster(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_GAS, pLayerTag)))
-	return E_FAIL;
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 
@@ -170,6 +170,18 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_Npc(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenGate"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedGate"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueGate"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PurpleGate"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;
 
 
 	Safe_Release(pGameInstance);
@@ -311,46 +323,6 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_UI(const _tchar * pLayerTag)
 
 HRESULT CLevel_ElenyaGAS::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
-
-
-	CSpawner::SPAWNERINFO MonsterInfo;
-
-
-	MonsterInfo.MonsterName = TEXT("GoStump");
-	MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
-	MonsterInfo.SpawnerNum = 0;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
-	MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("TransformPig");
-	MonsterInfo.MonsterPos = _float3{ 5.f , 1.f, -1.f };
-	MonsterInfo.SpawnerNum = 3;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
-	MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("TransformSlime");
-	MonsterInfo.MonsterPos = _float3{ -5.f , 1.f, -1.f };
-	MonsterInfo.SpawnerNum = 1;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
-	MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-	MonsterInfo.MonsterName = TEXT("TransformStump");
-	MonsterInfo.MonsterPos = _float3{ -5.f , 1.f, -1.f };
-	MonsterInfo.SpawnerNum = 2;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
-	MonsterInfo.Level = LEVEL_GAMEPLAY;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
 	return S_OK;
 }

@@ -40,7 +40,9 @@ void CQuestManager::Tick()
 		m_iPigRibbon = RibbonPigInfo->Get_NowNum();
 
 		if (m_iRedShell >= 2 && m_iBlueShell >= 2 && m_iPigRibbon >= 2)
+		{
 			QuestClear();
+		}
 	}
 
 	if (m_iQuestNum == 4)
@@ -54,7 +56,9 @@ void CQuestManager::Tick()
 		m_iGreenMushroom = GreenMushroomInfo->Get_NowNum();
 
 		if (m_iSlimeEssence >= 2 && m_iStumpFirewood >= 2 && m_iGreenMushroom >= 2)
+		{
 			QuestClear();
+		}
 	}
 
 }

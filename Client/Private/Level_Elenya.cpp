@@ -383,7 +383,7 @@ HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	CSpawner::SPAWNERINFO MonsterInfo;
 
 	MonsterInfo.MonsterName = TEXT("GoStump");
-	MonsterInfo.MonsterPos = _float3{ 4.5f , 10.0f, 0.f };
+	MonsterInfo.MonsterPos = _float3{ 4.5f , 9.0f, 0.f };
 	MonsterInfo.SpawnerNum = 90;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
@@ -391,59 +391,72 @@ HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
+	CSpawner::SPAWNERINFO MonsterInfo1;
 
-	MonsterInfo.MonsterName = TEXT("GoStump");
-	MonsterInfo.MonsterPos = _float3{ 8.5f , 10.0f, 0.f };
-	MonsterInfo.SpawnerNum = 91;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo1.MonsterName = TEXT("GoStump");
+	MonsterInfo1.MonsterPos = _float3{ 8.5f , 9.0f, 0.f };
+	MonsterInfo1.SpawnerNum = 500;
+	MonsterInfo1.MonsterNum = 3;
+	MonsterInfo1.MonsterColRad = 1.f;
+	MonsterInfo1.Level = LEVEL_ELENYA;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo1);
 
+	CSpawner::SPAWNERINFO MonsterInfo2;
 
-	MonsterInfo.MonsterName = TEXT("GoStump");
-	MonsterInfo.MonsterPos = _float3{ 1.f , 13.f, 11.f };
-	MonsterInfo.SpawnerNum = 92;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo2.MonsterName = TEXT("GoStump");
+	MonsterInfo2.MonsterPos = _float3{ 1.f , 13.f, 11.f };
+	MonsterInfo2.SpawnerNum = 92;
+	MonsterInfo2.MonsterNum = 2;
+	MonsterInfo2.MonsterColRad = 1.f;
+	MonsterInfo2.Level = LEVEL_ELENYA;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
-
-
-	MonsterInfo.MonsterName = TEXT("Slime");
-	MonsterInfo.MonsterPos = _float3{ 0.f , 13.f, 11.f };
-	MonsterInfo.SpawnerNum = 93;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
-
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo2);
 
 
-	MonsterInfo.MonsterName = TEXT("Slime");
-	MonsterInfo.MonsterPos = _float3{ 6.f , 22.f, 13.f };
-	MonsterInfo.SpawnerNum = 94;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	CSpawner::SPAWNERINFO MonsterInfo3;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	MonsterInfo3.MonsterName = TEXT("Slime");
+	MonsterInfo3.MonsterPos = _float3{ 0.f , 13.f, 11.f };
+	MonsterInfo3.SpawnerNum = 93;
+	MonsterInfo3.MonsterNum = 2;
+	MonsterInfo3.MonsterColRad = 1.f;
+	MonsterInfo3.Level = LEVEL_ELENYA;
 
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo3);
 
-	MonsterInfo.MonsterName = TEXT("GreenMushroom");
-	MonsterInfo.MonsterPos = _float3{ 10.f , 22.f, 13.f };
-	MonsterInfo.SpawnerNum = 95;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	CSpawner::SPAWNERINFO MonsterInfo4;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	MonsterInfo4.MonsterName = TEXT("Slime");
+	MonsterInfo4.MonsterPos = _float3{ 6.f , 22.f, 13.f };
+	MonsterInfo4.SpawnerNum = 94;
+	MonsterInfo4.MonsterNum = 2;
+	MonsterInfo4.MonsterColRad = 1.f;
+	MonsterInfo4.Level = LEVEL_ELENYA;
 
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo4);
 
-	MonsterInfo.MonsterName = TEXT("GreenMushroom");
-	MonsterInfo.MonsterPos = _float3{ 20.f , 16.f, 4.f };
-	MonsterInfo.SpawnerNum = 96;
-	MonsterInfo.MonsterNum = 2;
-	MonsterInfo.MonsterColRad = 1.f;
+	CSpawner::SPAWNERINFO MonsterInfo5;
 
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
+	MonsterInfo5.MonsterName = TEXT("GreenMushroom");
+	MonsterInfo5.MonsterPos = _float3{ 10.f , 22.f, 13.f };
+	MonsterInfo5.SpawnerNum = 95;
+	MonsterInfo5.MonsterNum = 2;
+	MonsterInfo5.MonsterColRad = 1.f;
+	MonsterInfo5.Level = LEVEL_ELENYA;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo5);
+
+	CSpawner::SPAWNERINFO MonsterInfo6;
+
+	MonsterInfo6.MonsterName = TEXT("GreenMushroom");
+	MonsterInfo6.MonsterPos = _float3{ 20.f , 16.f, 4.f };
+	MonsterInfo6.SpawnerNum = 96;
+	MonsterInfo6.MonsterNum = 2;
+	MonsterInfo6.MonsterColRad = 1.f;
+	MonsterInfo6.Level = LEVEL_ELENYA;
+
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo6);
 
 	return S_OK;
 }

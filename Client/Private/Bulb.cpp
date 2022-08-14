@@ -32,7 +32,7 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	m_sTag = "Tag_UI";
 
-	m_fColRad = 5.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
+	m_fColRad = 2.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
 	m_pTransformCom->Set_Scaled(1.2f);
 
 	if (!g_bStaticClone)
@@ -205,14 +205,15 @@ CGameObject * CBulb::Clone(void* pArg)
 
 void CBulb::Collision(CGameObject * pOther)
 {
-	// 플레이어와 충돌한 상태로 스페이스바를 누르면 퀘스트 시작 채팅을 띄움
-	if ((CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE)))
-	{
-		CQuestManager::Get_Instance()->Check_Start_Quest();
-		if (CQuestManager::Get_Instance()->Get_QuestNum() == 0)
-			CQuestManager::Get_Instance()->Set_First();
 
-	}
+		// 플레이어와 충돌한 상태로 스페이스바를 누르면 퀘스트 시작 채팅을 띄움
+		if ((CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE)))
+		{
+			CQuestManager::Get_Instance()->Check_Start_Quest();
+			if (CQuestManager::Get_Instance()->Get_QuestNum() == 0)
+				CQuestManager::Get_Instance()->Set_First();
+
+		}
 }
 
 

@@ -18,6 +18,7 @@ public:
 public:
 	void Tick(_float fTimeDelta);
 	void LateTick(_float fTimeDelta);
+	void Free_Spawner();
 
 public:
 
@@ -33,6 +34,8 @@ private:
 		//int	monstercount- 스포너의 인덱스를 받아옴
 	_uint	m_iIndexNum;
 	list<CSpawner*>			m_SpawnerList;
+
+	_bool m_bTest;
 };
 
 END

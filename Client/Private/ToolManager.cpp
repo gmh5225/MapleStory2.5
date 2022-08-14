@@ -4,6 +4,7 @@
 #include "GameInstance.h"
 #include "Player.h"
 #include "Level_Loading.h"
+#include "SpawnerManager.h"
 
 
 IMPLEMENT_SINGLETON(CToolManager)
@@ -31,10 +32,14 @@ void CToolManager::CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGr
 
 	pColliderCom->ResetSection();
 
+
 	if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(pGraphic_Device, m_eDestLevel))))
 		return;
 
 	m_eDestLevel = LEVEL_END;
+
+
+	CSpawnerManager::Get_Instance()->Free_Spawner();
 
 	Safe_Release(pGameInstance);
 

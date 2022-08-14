@@ -346,6 +346,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo.SpawnerNum = 63;
 	MonsterInfo.MonsterNum = 4;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_HENESYS;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
@@ -363,6 +364,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo.SpawnerNum = 25;
 	MonsterInfo.MonsterNum = 3;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_HENESYS;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
@@ -371,6 +373,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo.SpawnerNum = 36;
 	MonsterInfo.MonsterNum = 3;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_HENESYS;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
@@ -379,6 +382,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo.SpawnerNum = 17;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_HENESYS;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
@@ -387,6 +391,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo.SpawnerNum = 8;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_HENESYS;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 
@@ -396,6 +401,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo.SpawnerNum = 9;
 	MonsterInfo.MonsterNum = 2;
 	MonsterInfo.MonsterColRad = 1.f;
+	MonsterInfo.Level = LEVEL_HENESYS;
 
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo);
 

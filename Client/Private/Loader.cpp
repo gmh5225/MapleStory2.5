@@ -116,6 +116,17 @@
 
 #include "PushCube.h"
 
+#include "RedGate.h"
+#include "GreenGate.h"
+#include "BlueGate.h"
+#include "PurpleGate.h"
+#include "RedSlime.h"
+#include "GreenSlime.h"
+#include "BlueSlime.h"
+#include "PurpleSlime.h"
+#include "PurpleSkill.h"
+#include "RedSkill.h"
+
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
 {
@@ -588,6 +599,10 @@ HRESULT CLoader::Load_Monster_Object()
 		CBlueMushmom::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlueSlime"),
+		CBlueSlime::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GAS"),
 		CGAS::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -603,6 +618,18 @@ HRESULT CLoader::Load_Monster_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_PushCube"),
 		CPushCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedSlime"),
+		CRedSlime::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GreenSlime"),
+		CGreenSlime::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_PurpleSlime"),
+		CPurpleSlime::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -626,6 +653,22 @@ HRESULT CLoader::Load_Npc_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Warning"),
 		CWarning::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedGate"),
+		CRedGate::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlueGate"),
+		CBlueGate::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GreenGate"),
+		CGreenGate::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_PurpleGate"),
+		CPurpleGate::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Helena"),
@@ -652,8 +695,9 @@ HRESULT CLoader::Load_Npc_Object()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Taxi"),
 		CTaxi::Create(m_pGraphic_Device))))
 		return E_FAIL;
-
-
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RedSkill"),
+		CRedSkill::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 
@@ -711,6 +755,8 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 		CSpearPullingHit::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -723,6 +769,12 @@ HRESULT CLoader::Load_UI_Object()
 	/* 객체원형 로드한다. */
 
 	/* For.Prototype_GameObject_UI*/
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_PurpleSkill"),
+		CPurpleSkill::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_HpBarBase"),
 		CHpBarBase::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -1452,6 +1504,22 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/SkillAfterR%d.png"), 8))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Vanish"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Skill_Vanish%d.png"), 22))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_VanishR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Skill_VanishR%d.png"), 22))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Return"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Skill_Wakeup%d.png"), 21))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_ReturnR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Skill_WakeupR%d.png"), 21))))
+		return E_FAIL;
+
 
 
 	// GreenMushRoom
@@ -1733,6 +1801,76 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/TransformStump/Attack%d.png"), 15))))
 		return E_FAIL;
 
+
+// RedSlime
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSlime_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSlime/Move%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSlime_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSlime/MoveR%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSlime_DieR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSlime/DieR%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSlime_Die"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSlime/Die%d.png"), 7))))
+		return E_FAIL;
+
+	//GreenSlime
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenSlime_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Move%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenSlime_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_MoveR%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenSlime_DieR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_DieR%d.png"), 4))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenSlime_Die"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/Slime/Slime_Die%d.png"), 4))))
+		return E_FAIL;
+
+	//BlueSlime
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSlime_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSlime/Move%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSlime_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSlime/MoveR%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSlime_DieR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSlime/DieR%d.png"), 4))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSlime_Die"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSlime/Die%d.png"), 4))))
+		return E_FAIL;
+
+	//PurpleSlime
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_PurpleSlime_Move"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/PurpleSlime/Move%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_PurpleSlime_MoveR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/PurpleSlime/MoveR%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_PurpleSlime_DieR"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/PurpleSlime/DieR%d.png"), 11))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_PurpleSlime_Die"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/PurpleSlime/Die%d.png"), 11))))
+		return E_FAIL;
+
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -1744,6 +1882,10 @@ HRESULT CLoader::Load_Npc_Texture()
 
 	Safe_AddRef(pGameInstance);
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSkill"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GASPattern/Fire%d.png"), 6))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_ElderStan_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/ElderStan/ElderStan%d.png"), 3))))
 		return E_FAIL;
@@ -1751,6 +1893,26 @@ HRESULT CLoader::Load_Npc_Texture()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Maya_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Maya/Idle%d.png"), 1))))
 		return E_FAIL;
+
+	//GATE
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_GreenGate"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Gate/GreenGate%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_RedGate"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Gate/RedGateR%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueGate"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Gate/BlueGateR%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_PurpleGate"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Gate/PurpleGate%d.png"), 12))))
+		return E_FAIL;
+
+
+
 	//Helena
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Helena_StandL"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Helena/standL_%d.png"), 4))))
@@ -2054,6 +2216,12 @@ HRESULT CLoader::Load_UI_Texture()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ItemNotice"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Notice/Item/ItemNotice%d.png"), 8))))
 		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_PurpleSkill"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GASPattern/End%d.png"), 19))))
+		return E_FAIL;
+
 
 
 

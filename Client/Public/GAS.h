@@ -31,6 +31,8 @@ private:
 	void Tick_End(_float fTimeDelta);	// 텔포 이후
 	void Tick_Attack(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
+	void Tick_Reset(_float fTimeDelta);
+	void Tick_Return(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -54,6 +56,7 @@ public:
 	static CGAS* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
+	void Reset_Hp() { m_iHp = 10; };
 
 private:
 	_int	m_iHp;
@@ -69,8 +72,11 @@ private:
 	_float m_fAttack;
 	_float m_fDash;
 	_float m_fEnd;
+	_float m_fReset;
+	_float m_fReturn;
 
 	_bool m_bTest;
+	_bool m_bVanish;
 
 };
 
