@@ -505,7 +505,7 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 
 		int a = CGameInstance::Get_Instance()->Get_Random(0, 3);
 
-		switch (1)
+		switch (a)
 		{
 		case 0:
 			for (int i = 0; i < 4; ++i)
