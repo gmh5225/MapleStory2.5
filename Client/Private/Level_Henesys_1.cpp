@@ -14,7 +14,7 @@
 #include "Potal.h"
 #include "CutSceneManager.h"
 #include "UIManager.h"
-
+#include "Sky.h"
 
 CLevel_Henesys_1::CLevel_Henesys_1(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -181,8 +181,10 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
-
-
+	CSky::SKYDESC SkyDesc;
+	SkyDesc.iIndex = 5;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
+		return E_FAIL;
 	CPotal::POTALDESC PotalDesc;
 	PotalDesc.eDestLevel = LEVEL_GAMEPLAY;
 	PotalDesc.Pos = _float3(-2.f, 1.f, 0.f);

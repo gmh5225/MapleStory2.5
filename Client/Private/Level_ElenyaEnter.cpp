@@ -15,7 +15,7 @@
 #include "Potal.h"
 #include "CutSceneManager.h"
 #include "UIManager.h"
-
+#include "Sky.h"
 
 CLevel_ElenyaEnter::CLevel_ElenyaEnter(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -187,6 +187,11 @@ HRESULT CLevel_ElenyaEnter::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+
+	CSky::SKYDESC SkyDesc;
+	SkyDesc.iIndex = 6;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
+		return E_FAIL;
 
 	CPotal::POTALDESC PotalDesc;
 	PotalDesc.eDestLevel = LEVEL_HENESYS;
