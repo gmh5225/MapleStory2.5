@@ -20,6 +20,7 @@ void CMap_Manager::SetFildNames()
 	m_MapNames.push_back(string("Map_DHenesysHunting"));
 	m_MapNames.push_back(string("Map_DElenyaEnter"));
 	m_MapNames.push_back(string("Map_DElenya"));
+	m_MapNames.push_back(string("Map_BlackMageJump"));
 	m_MapNames.push_back(string("Map_DarkMageEnter"));
 	m_MapNames.push_back(string("Map_DarkMage"));
 	m_MapNames.push_back(string("Map_WhiteMageds"));

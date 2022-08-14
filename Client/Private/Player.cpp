@@ -44,10 +44,12 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 	m_sTag = "Tag_Player";
 
-	// ¿øÃæµ¹ ½Ã ÄÚµå
+	// ï¿½ï¿½ï¿½æµ¹ ï¿½ï¿½ ï¿½Úµï¿½
 	m_fColRad = 0.5f;
 
 	m_fDashAcc = 0.f;
+	m_fOriJumpPower = 7.f;
+	m_fJumpPower = m_fOriJumpPower;
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-9.f, 4.f, -3.f));
 	m_pTransformCom->Set_Scaled(2.5f);
@@ -56,16 +58,16 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"µ¸¿òÃ¼", &m_Font);
+		L"ï¿½ï¿½ï¿½ï¿½Ã¼", &m_Font);
 
-	// *Áß·Â ÄÚµå
-	// Áß·Â °ªÀ» ¼³Á¤
+	// *ï¿½ß·ï¿½ ï¿½Úµï¿½
+	// ï¿½ß·ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_pTransformCom->Set_Gravity(1.f);
 
 
 	SetState(STATE_IDLE, DIR_D);
 
-	// ±×¸²ÀÚ »ý¼º
+	// ï¿½×¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 	SetShadow(LEVEL_STATIC, 2.5f);
 
 	return S_OK;
@@ -189,7 +191,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		CItem::ITEMINFO SlimeItem;
 		SlimeItem.eType = CInvenManager::TYPE_STUFF;
 		SlimeItem.iTextNum = 1;
-		SlimeItem.pTag = L"RibbonPig";
+		SlimeItem.pTag = L"RibbonPigInfo";
 		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
 	}
@@ -207,7 +209,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		CItem::ITEMINFO SlimeItem;
 		SlimeItem.eType = CInvenManager::TYPE_STUFF;
 		SlimeItem.iTextNum = 3;
-		SlimeItem.pTag = L"GreenMushRoomInfo";
+		SlimeItem.pTag = L"GreenMushroomInfo";
 		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
 	}
@@ -250,7 +252,25 @@ void CPlayer::Tick(_float fTimeDelta)
 		Teleport.pTag = L"TeleportInfo";
 		Teleport.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &Teleport);
+
 	}
+
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_M))
+	{
+		// TEST
+		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 0.5f;
+		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.1f, vPos, 1.f, true);
+	}
+	else if (CGameInstance::Get_Instance()->Key_Down(DIK_N))
+	{
+		// TEST
+		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 0.5f;
+		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.05f, vPos, 1.3f, false);
+	}
+
 
 	
 
@@ -262,7 +282,7 @@ void CPlayer::Tick(_float fTimeDelta)
 void CPlayer::LateTick(_float fTimeDelta)
 {
 
-	// ÃÖ±Ù À§Ä¡¿¡¼­ ¸®½ºÆùÇÏ´Â ÄÚµå
+	// ï¿½Ö±ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½Úµï¿½
 	m_fRespownPosAcc += 1.f * fTimeDelta;
 	if (2.f < m_fRespownPosAcc)
 	{
@@ -277,11 +297,11 @@ void CPlayer::LateTick(_float fTimeDelta)
 	}
 		
 
-	// »óÅÂ¿¡ µû¸¥ ¸¶Áö¸· Çàµ¿ ¼³Á¤
+	// ï¿½ï¿½ï¿½Â¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½àµ¿ ï¿½ï¿½ï¿½ï¿½
 	SetOnceEndAni();
 	
-	// *Áß·Â ÄÚµå
-	// Áß·Â Àû¿ë
+	// *ï¿½ß·ï¿½ ï¿½Úµï¿½
+	// ï¿½ß·ï¿½ ï¿½ï¿½ï¿½ï¿½
 	m_pTransformCom->Go_Gravity(fTimeDelta);
 	// TEST
 	//if (CGameInstance::Get_Instance()->Key_Down(DIK_2))
@@ -373,11 +393,39 @@ void CPlayer::SetState(STATE eState, DIR eDir)
 
 	if (m_eCurState == STATE_JUMP)
 	{
-		// *Áß·Â ÄÚµå
-		// YÃà ÈûÀ» ÁÝ´Ï´Ù.
-		m_pTransformCom->Set_Vel(7.0f);
+		// *ï¿½ß·ï¿½ ï¿½Úµï¿½
+		// Yï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ý´Ï´ï¿½.
+		m_pTransformCom->Set_Vel(m_fJumpPower);
 	}
 	else if(m_eCurState == STATE_DJUMP)
+	{
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
+		SolunaDECS.eDir = m_eDir;
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_WarriorReef"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+
+		Safe_Release(pGameInstance);
+
+		m_pTransformCom->Set_Vel(3.0f);
+	}
+}
+void CPlayer::SetState(STATE eState)
+{
+	if (m_eCurState == eState)
+		return;
+
+	m_eCurState = eState;
+	SetAni();
+
+	if (m_eCurState == STATE_JUMP)
+	{
+		// *ï¿½ß·ï¿½ ï¿½Úµï¿½
+		// Yï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ý´Ï´ï¿½.
+		m_pTransformCom->Set_Vel(m_fJumpPower);
+	}
+	else if (m_eCurState == STATE_DJUMP)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
@@ -585,7 +633,7 @@ void CPlayer::SetAni()
 }
 void CPlayer::SetShadow(LEVEL eLevel, _float fScale)
 {
-	// Test ±×¸²ÀÚ
+	// Test ï¿½×¸ï¿½ï¿½ï¿½
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
@@ -744,7 +792,15 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ReefAttack"), LEVEL_STATIC, TEXT("Layer_Skill"), &ReefAttackDESC);
 		SetState(STATE_ATTACK, m_eDir);
 
-		CParticleManager::Get_Instance()->Shot(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
+
+		// TEST
+		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 1.5f;
+		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.1f, vPos, 1.f, true);
+
+
+		// CParticleManager::Get_Instance()->Shot(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
+	
 	}
 
 	if (GetKeyState('S') & 0x8000)
@@ -756,13 +812,18 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		SetState(STATE_ATTACK, m_eDir);
 	}
 
-	if (GetKeyState('D') & 0x8000)
+	if (pGameInstance->Key_Down(DIK_D))
 	{
 		CSunCross::SUNCROSSDESC SunCrossDECS;
 		SunCrossDECS.eDir = m_eDir;
 			
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_STATIC, TEXT("Layer_Skill"), &SunCrossDECS);
 		SetState(STATE_ATTACK, m_eDir);
+		// TEST
+		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 1.5f;
+		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.05f, vPos, 1.3f, false);
+
 	}
 
 	if (GetKeyState('F') & 0x8000)
@@ -886,6 +947,7 @@ void CPlayer::Idle(_float fTimeDelta)
 	IdleDesc.fSpeedPerSec = 4.f;
 	IdleDesc.fRotationPerSec = D3DXToRadian(90.0f);
 	m_pTransformCom->Set_TransformDesc(IdleDesc);
+	m_fJumpPower = m_fOriJumpPower;
 }
 void CPlayer::Dash(_float fTimeDelta)
 {
@@ -893,7 +955,7 @@ void CPlayer::Dash(_float fTimeDelta)
 	DashDesc.fSpeedPerSec = 20.f;
 	DashDesc.fRotationPerSec = D3DXToRadian(90.0f);
 	m_pTransformCom->Set_TransformDesc(DashDesc);
-
+	m_fJumpPower = m_fOriJumpPower;
 
 
 	m_fDashAcc += 1.f * fTimeDelta;
@@ -1114,7 +1176,7 @@ void CPlayer::Collision(CGameObject * pOther)
 
 		if (GetKeyState('Z') & 0x8000)
 		{
-			//¸Þ´ÏÀúÅëÇØ¼­ ¾ÆÀÌÅÛ °¹¼ö Ãß°¡ 
+			//ï¿½Þ´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ 
 			//CInvenManager* m_pInvenMgr = CInvenManager::Get_Instance();
 			//Safe_AddRef(m_pInvenMgr);
 			//m_pInvenMgr->AddItemNum();

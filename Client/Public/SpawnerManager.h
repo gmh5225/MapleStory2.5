@@ -26,6 +26,8 @@ public:
 	void Check_MonsterIndex(_int index);
 	void Add_SpawnerInfo(CSpawner* Spawner) { m_SpawnerList.push_back(Spawner); }
 
+	void Clear();
+
 public:
 	virtual void Free() override;
 

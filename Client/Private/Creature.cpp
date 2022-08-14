@@ -116,6 +116,14 @@ void CCreature::SetState(STATE eState, DIR eDir)
 	m_eDir = eDir;
 	SetAni();
 }
+void CCreature::SetState(STATE eState)
+{
+	if (m_eCurState == eState)
+		return;
+
+	m_eCurState = eState;
+	SetAni();
+}
 void CCreature::Set_Dead()
 {
 	m_bDead = true;

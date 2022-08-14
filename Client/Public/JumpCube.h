@@ -1,27 +1,24 @@
 #pragma once
 
 #include "Client_Defines.h"
-#include "GameObject.h"
+#include "Map_Manager.h"
+#include "Cube.h"
 
-BEGIN(Engine)
-class CTexture;
-class CRenderer;
-class CTransform;
-class CVIBuffer_Cube;
-END
 
 BEGIN(Client)
 
-class CSky final : public CGameObject
+class CJumpCube : public CCube
 {
 public:
-	typedef struct tagSkyDesc {
-		_int iIndex;
-	}SKYDESC;
+	typedef struct tagCubeDesc
+	{
+		_float3	vPos;
+		const _tchar* pTextureTag;
+	}CUBEDESC;
 private:
-	CSky(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSky(const CSky& rhs);
-	virtual ~CSky() = default;
+	CJumpCube(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CJumpCube(const CJumpCube& rhs);
+	virtual ~CJumpCube() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -29,18 +26,21 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
-	void Set_Billboard();
 
+	virtual void Collision(CGameObject* pOther) override;
 private:
 	CTexture*				m_pTextureCom = nullptr;
 	CRenderer*				m_pRendererCom = nullptr;
 	CTransform*				m_pTransformCom = nullptr;
 	CVIBuffer_Cube*			m_pVIBufferCom = nullptr;
-
-	_float3 m_vLookTemp;
+	CCollider*				m_pColliderCom = nullptr;
 
 private:
-	_int m_iIndex = 0;
+	_float3			m_vTargetPos = _float3(0.f, 0.f, 0.f);
+	CMap_Manager::CUBEDATA m_pData;
+
+	_bool temp = false;
+
 
 private:
 	HRESULT Set_RenderState();
@@ -49,7 +49,7 @@ private:
 	HRESULT SetUp_Components();
 
 public:
-	static CSky* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CJumpCube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

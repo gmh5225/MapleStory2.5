@@ -8,6 +8,9 @@
 #include "QuestManager.h"
 #include "Spawner.h"
 
+#include "CutSceneManager.h"
+#include "ParticleManager.h"
+
 CGAS::CGAS(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -54,12 +57,27 @@ HRESULT CGAS::Initialize(void * pArg)
 	m_bTest = false;
 
 	m_fColRad = 1.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 5.f, -5.f));
 	m_pTransformCom->Set_Scaled(10.f);
 
-	SetState(STATE_IDLE, DIR_END);
 
-	SetShadow(LEVEL_HENESYS, 4.5f);
+
+	if (nullptr != pArg)
+	{
+		GASDESC* pDesc = (GASDESC*)pArg;
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, pDesc->vPos);
+		SetState(pDesc->eState, DIR_END);
+	}
+	else
+	{
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 5.f, -5.f));
+		SetState(STATE_IDLE, DIR_END);
+	}
+
+
+
+
+
+	SetShadow(LEVEL_GAS, 4.5f);
 
 	return S_OK;
 }
@@ -140,85 +158,90 @@ void CGAS::Die()
 
 void CGAS::Tick(_float fTimeDelta)
 {
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-
-	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
-
-	if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
-		m_bPatterStart = true;
-
-
-	CUIManager::Get_Instance()->Get_GASHp(m_iHp);
-
-	if (m_bPatterStart)
-		m_fPatternCycle += fTimeDelta;
-
-	if (m_fPatternCycle > 5.f)
+	if (STATE_CUTSCEEN != m_eCurState)
 	{
-		m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 4);
-		m_fPatternCycle = 0;
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+		_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+		if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
+			m_bPatterStart = true;
+
+
+		CUIManager::Get_Instance()->Get_GASHp(m_iHp);
+
+		if (m_bPatterStart)
+			m_fPatternCycle += fTimeDelta;
+
+		if (m_fPatternCycle > 5.f)
+		{
+			m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 4);
+			m_fPatternCycle = 0;
+		}
+
+
+		if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
+		{
+
+			if (m_iRandomPattern == 0)
+			{
+				if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
+					SetState(STATE_CHASE, DIR_R);
+				else
+					SetState(STATE_CHASE, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 1) // 점프패턴
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_JUMP, DIR_R);
+				else
+					SetState(STATE_JUMP, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 2) // 일반공격
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_ATTACK, DIR_R);
+				else
+					SetState(STATE_ATTACK, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 3) // 텔레포트
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_DASH, DIR_R);
+				else
+					SetState(STATE_DASH, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 4) // 슬라임 소환
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_DJUMP, DIR_R);
+				else
+					SetState(STATE_DJUMP, DIR_L);
+			}
+
+
+			else if (m_iRandomPattern == 100)	// 텔포 이후
+			{
+				if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
+					SetState(STATE_END, DIR_R);
+				else
+					SetState(STATE_END, DIR_L);
+			}
+
+		}
+
+
+		Safe_Release(pGameInstance);
 	}
 
 
-	if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
-	{
-
-		if (m_iRandomPattern == 0)
-		{
-			if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
-				SetState(STATE_CHASE, DIR_R);
-			else
-				SetState(STATE_CHASE, DIR_L);
-		}
-
-		else if (m_iRandomPattern == 1) // 점프패턴
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_JUMP, DIR_R);
-			else
-				SetState(STATE_JUMP, DIR_L);
-		}
-
-		else if (m_iRandomPattern == 2) // 일반공격
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_ATTACK, DIR_R);
-			else
-				SetState(STATE_ATTACK, DIR_L);
-		}
-
-		else if (m_iRandomPattern == 3) // 텔레포트
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_DASH, DIR_R);
-			else
-				SetState(STATE_DASH, DIR_L);
-		}
-
-		else if (m_iRandomPattern == 4) // 슬라임 소환
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_DJUMP, DIR_R);
-			else
-				SetState(STATE_DJUMP, DIR_L);
-		}
-
-
-		else if (m_iRandomPattern == 100)	// 텔포 이후
-		{
-			if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
-				SetState(STATE_END, DIR_R);
-			else
-				SetState(STATE_END, DIR_L);
-		}
-
-	}
-
-
-	Safe_Release(pGameInstance);
 
 
 	CUIManager::Get_Instance()->Get_GASHp(m_iHp);
@@ -248,6 +271,9 @@ void CGAS::Tick(_float fTimeDelta)
 		break;
 	case STATE_DIE:
 		Tick_Die(fTimeDelta);
+		break;
+	case STATE_CUTSCEEN:
+		Tick_CutScene(fTimeDelta);
 		break;
 	case STATE_END:
 		Tick_End(fTimeDelta);
@@ -452,6 +478,40 @@ void CGAS::Tick_Die(_float fTimeDelta)
 	}
 }
 
+void CGAS::Tick_CutScene(_float fTimeDelta)
+{
+	if (!m_bCutSceneRend)
+		return;
+
+	m_fCutSceneTimeAcc += fTimeDelta;
+
+	CGameObject* pJang = CCutSceneManager::Get_Instance()->Get_Jang();
+	CTransform* pJangTran = (CTransform*)pJang->Get_ComponentPtr(TEXT("Com_Transform"));
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	vPos.y -= 1.8f;
+	vPos.x -= 0.5f;
+	vPos.z -= 0.8f;
+	pJangTran->Set_State(CTransform::STATE_POSITION, vPos);
+
+	//_float4x4		ViewMatrix;
+	//m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
+	///* 카메라의 월드행렬이다. */
+	//D3DXMatrixInverse(&ViewMatrix, nullptr, &ViewMatrix);
+	//pJangTran->Turn((*(_float3*)&ViewMatrix.m[2][0]), fTimeDelta);
+
+	if (2.f < m_fCutSceneTimeAcc && !m_bCutSceneJump)
+	{
+		m_pTransformCom->Set_Vel(30.f);
+		m_bCutSceneJump = true;
+		CCutSceneManager::Get_Instance()->Set_JangRander(false);
+	}
+	else if (4.f < m_fCutSceneTimeAcc)
+	{
+		Set_Dead();
+	}
+
+}
+
 
 void CGAS::SetState(STATE eState, DIR eDir)
 {
@@ -521,6 +581,10 @@ void CGAS::SetAni()
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_DJump"), 0.1f, CAnimator::STATE_ONCE);
 		break;
 
+	case STATE_CUTSCEEN:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Idle"), 0.1f, CAnimator::STATE_LOOF);
+		break;
+
 	case STATE_END:
 		if (m_eDir == DIR_R)
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPAR"), 0.15f, CAnimator::STATE_ONCE);
@@ -586,6 +650,24 @@ CGameObject * CGAS::Clone(void* pArg)
 
 void CGAS::Collision(CGameObject * pOther)
 {
+
+
+
+
+	if (STATE_CUTSCEEN == m_eCurState)
+	{
+		if ("Tag_Cube" == pOther->Get_Tag() && !m_bCutSceneRend)
+		{
+			CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
+			_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+			vPos.x += 0.1;
+			vPos.z -= 0.1;
+			vPos.y -= 0.5;
+			CParticleManager::Get_Instance()->BlueMushRoom_Lend(vPos);
+			m_pTransformCom->Set_Vel(3.f);
+			m_bCutSceneRend = true;
+		}
+	}
 }
 
 

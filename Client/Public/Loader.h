@@ -45,6 +45,7 @@ public:
 	HRESULT Loading_ForDElenyaEnter();
 	HRESULT Loading_ForDElenya();
 	HRESULT Loading_ForDBlackMageEnter();
+	HRESULT Loading_ForDBlackMageJump();
 	HRESULT Loading_ForDBlackMage();
 	HRESULT Loading_ForDWhiteMage();
 

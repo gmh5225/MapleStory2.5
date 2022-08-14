@@ -128,6 +128,11 @@
 #include "Taxi.h"
 
 #include "PushCube.h"
+#include "Damage.h"
+#include "DamageGen.h"
+#include "DownCube.h"
+#include "JumpCube.h"
+#include "AutoDownCube.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -173,6 +178,9 @@ _uint APIENTRY LoadingMain(void* pArg)
 		break;
 	case LEVEL_DELENYA:
 		pLoader->Loading_ForDElenya();
+		break;
+	case LEVEL_DARKMAGEJUMP:
+		pLoader->Loading_ForDBlackMageJump();
 		break;
 	case LEVEL_DARKMAGEENTER:
 		pLoader->Loading_ForDBlackMageEnter();
@@ -453,6 +461,14 @@ HRESULT CLoader::Loading_ForDBlackMageEnter()
 	m_isFinished = true;
 
 	return S_OK;
+}
+
+HRESULT CLoader::Loading_ForDBlackMageJump()
+{
+
+
+	m_isFinished = true;
+	return E_NOTIMPL;
 }
 
 HRESULT CLoader::Loading_ForDBlackMage()
@@ -981,6 +997,14 @@ HRESULT CLoader::Load_UI_Object()
 		CTaxiButton::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Damage"),
+		CDamage::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_DamageGen"),
+		CDamageGen::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -994,6 +1018,15 @@ HRESULT CLoader::Load_Model_Object()
 	/* For.Prototype_GameObject_Model*/
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Cube"),
 		CCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_DownCube"),
+		CDownCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_JumpCube"),
+		CJumpCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AutoDownCube"),
+		CAutoDownCube::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
@@ -2173,7 +2206,9 @@ HRESULT CLoader::Load_UI_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Notice/Item/ItemNotice%d.png"),9))))
 		return E_FAIL;
 
-
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Damage"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Damage/NoCri1.%d.png"), 11))))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 

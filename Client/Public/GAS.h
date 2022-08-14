@@ -7,6 +7,12 @@ BEGIN(Client)
 
 class CGAS final : public CCreature
 {
+public:
+	typedef struct tagGASDesc {
+		_float3 vPos;
+		STATE eState;
+	}GASDESC;
+
 private:
 	CGAS(LPDIRECT3DDEVICE9 pGraphic_Device);
 	CGAS(const CGAS& rhs);
@@ -31,6 +37,7 @@ private:
 	void Tick_End(_float fTimeDelta);	// 텔포 이후
 	void Tick_Attack(_float fTimeDelta);
 	void Tick_Die(_float fTimeDelta);
+	void Tick_CutScene(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -71,6 +78,12 @@ private:
 	_float m_fEnd;
 
 	_bool m_bTest;
+
+
+	// For. CutScene
+	_bool m_bCutSceneRend = false;
+	_bool m_bCutSceneJump = false;
+	_float m_fCutSceneTimeAcc = 0.f;
 
 };
 

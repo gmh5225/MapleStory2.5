@@ -41,7 +41,7 @@ public: /* For.Graphic_Device */
 public: /* For.Level_Manager */				
 	HRESULT Open_Level(_uint iLevelIndex, class CLevel* pNewLevel);
 	HRESULT Render_Level();
-
+	_uint Get_CurLevel();
 public: /* For.Object_Manager */
 	HRESULT Add_Prototype(const _tchar* pPrototypeTag, class CGameObject* pPrototype);
 	HRESULT Add_GameObjectToLayer(const _tchar* pPrototypeTag, _uint iLevelIndex, const _tchar* pLayerTag, void* pArg = nullptr);

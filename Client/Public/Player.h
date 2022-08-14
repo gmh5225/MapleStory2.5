@@ -27,6 +27,7 @@ public:
 	void GetJumpKeyInput(_float fTimeDelta);
 	virtual void SetAni() override;
 	virtual void SetState(STATE eState, DIR eDir);
+	virtual void SetState(STATE eState);
 
 	void SetOnceEndAni();
 

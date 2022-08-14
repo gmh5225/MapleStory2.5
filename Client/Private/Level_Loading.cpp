@@ -13,6 +13,7 @@
 #include "Level_DHenesysHunting.h"
 #include "Level_DElenyaEnter.h"
 #include "Level_DElenya.h"
+#include "Level_BlackMageJump.h"
 #include "Level_BlackMageEnter.h"
 #include "Level_BlackMage.h"
 #include "Level_WhiteMage.h"
@@ -20,6 +21,8 @@
 
 #include "UIManager.h"
 #include "Loader.h"
+
+#include "SpawnerManager.h"
 
 
 CLevel_Loading::CLevel_Loading(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -55,6 +58,8 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 
 			CLevel*		pNewLevel = nullptr;
 
+			CSpawnerManager::Get_Instance()->Clear();
+
 			switch (m_eNextLevel)
 			{
 			case LEVEL_STATIC:
@@ -87,6 +92,9 @@ void CLevel_Loading::Tick(_float fTimeDelta)
 				break;
 			case LEVEL_DELENYA:
 				pNewLevel = CLevel_DElenya::Create(m_pGraphic_Device);
+				break;
+			case LEVEL_DARKMAGEJUMP:
+				pNewLevel = CLevel_BlackMageJump::Create(m_pGraphic_Device);
 				break;
 			case LEVEL_DARKMAGEENTER:
 				pNewLevel = CLevel_BlackMageEnter::Create(m_pGraphic_Device);

@@ -37,7 +37,7 @@ HRESULT CElderStan::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(1.5f);
 
 	SetState(STATE_IDLE, DIR_END);
-
+	CCutSceneManager::Get_Instance()->Set_Jang(this);
 
 
 	return S_OK;
@@ -111,6 +111,9 @@ void CElderStan::LateTick(_float fTimeDelta)
 }
 HRESULT CElderStan::Render()
 {
+	if (!(CCutSceneManager::Get_Instance()->Get_jangRander()))
+		return S_OK;
+
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 

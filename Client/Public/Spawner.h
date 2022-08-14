@@ -22,6 +22,7 @@ public:
 		_float			MonsterColRad;
 		LEVEL			Level;
 		_tchar*			GAS;
+		const _tchar*	LayerTag;
 	}SPAWNERINFO;
 private:
 	CSpawner(LPDIRECT3DDEVICE9 pGraphic_Device);

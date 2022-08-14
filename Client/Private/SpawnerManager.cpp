@@ -30,7 +30,7 @@ void CSpawnerManager::Add_Spawner(void* pArg)
 	CSpawner::SPAWNERINFO* pSpawnerInfo = (CSpawner::SPAWNERINFO*)pArg;
 
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Spawner"), pSpawnerInfo->Level, TEXT("Layer_Spawner"), pArg)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Spawner"), pSpawnerInfo->Level, pSpawnerInfo->LayerTag, pArg)))
 		int a = 0;
 
 	Safe_Release(pGameInstance);
@@ -47,13 +47,18 @@ void CSpawnerManager::Check_MonsterIndex(_int index)
 	}
 
 }
+
+void CSpawnerManager::Clear()
+{
+	m_SpawnerList.clear();
+}
 void CSpawnerManager::Free()
 {
 	//Safe_Release(m_SpawnerList);
-	for (auto& Spawner : m_SpawnerList)
-	{
-		Safe_Release(Spawner);
-	}
+	//for (auto& Spawner : m_SpawnerList)
+	//{
+	//	Safe_Release(Spawner);
+	//}
 }
 
 

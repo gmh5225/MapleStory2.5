@@ -47,7 +47,9 @@ public:
 
 public:
 	virtual void SetState(STATE eState, DIR eDir);
+	virtual void SetState(STATE eState);
 	virtual void Set_Dead() override;
+	void Set_JumpPower(_float fValue) { m_fJumpPower = fValue; }
 
 public:
 	virtual void SetAni();
@@ -71,6 +73,9 @@ protected:
 	_float3 m_vLookTemp;
 	STATE m_eCurState;
 	DIR m_eDir;
+
+	_float m_fJumpPower = 0.f;
+	_float m_fOriJumpPower = 0.f;
 
 	class CShadow* m_pShadow = nullptr;
 
