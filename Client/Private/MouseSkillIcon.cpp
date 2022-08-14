@@ -95,7 +95,7 @@ void CMouseSkillIcon::Change_Texture()
 	{
 	case Client::CUI::TYPE_ON:
 		m_bRender = false;
-		m_iTexturenum = 10;
+		m_iTexturenum = 99;
 		break;
 	case Client::CUI::TYPE_DOWN:
 		m_bRender = true;

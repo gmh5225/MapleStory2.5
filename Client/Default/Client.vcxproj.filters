@@ -142,12 +142,6 @@
     <Filter Include="02.GameObject\Skill\Effect\RangeAttack">
       <UniqueIdentifier>{90197637-a33b-45e3-83a7-c6a284b8b593}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\SunderBreak">
-      <UniqueIdentifier>{d2fa19f8-bc65-441b-b605-d91a031dc115}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack">
-      <UniqueIdentifier>{33f88ffb-87c1-4919-a49d-98493400cd3b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="20.DATA">
       <UniqueIdentifier>{13257046-6285-4398-b9b1-d98ef6befb05}</UniqueIdentifier>
     </Filter>
@@ -553,6 +547,75 @@
     <Filter Include="02.GameObject\Cube\PushCube">
       <UniqueIdentifier>{c1c4a5f9-73e1-4578-a5ae-7133f3df1546}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast">
+      <UniqueIdentifier>{6f4ca37a-6289-4e3e-8448-a1a71db3b0f3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Attack">
+      <UniqueIdentifier>{7d4f3013-ca3d-4701-af7c-29fe0ad065d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Bullet">
+      <UniqueIdentifier>{23304c8b-4f7c-4e08-a0ad-46971a90d1a7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit">
+      <UniqueIdentifier>{8def5178-fc67-4204-9198-8f2546f94c41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot">
+      <UniqueIdentifier>{30405137-b7f3-44d6-a885-c5633f05ed28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Attack">
+      <UniqueIdentifier>{d5dc39ac-12c4-46ac-bc45-2e11a7c0652f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Bullet">
+      <UniqueIdentifier>{1b47cdc7-0b6d-4c9a-bebc-dd42f2f94cc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Hit">
+      <UniqueIdentifier>{d18e0246-c40b-4242-b556-573d6083e1e9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\RangeAttack">
+      <UniqueIdentifier>{3a72996f-8f9c-4dfe-a959-ce7b8bc86644}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\RangeAttack">
+      <UniqueIdentifier>{56301eff-83e5-4d5a-a9a6-8d44f7ff4990}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\RangeAttack\CardinalBlast">
+      <UniqueIdentifier>{558fd720-67f7-4269-8a13-d71b139c5372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\RangeAttack\ChasingShot">
+      <UniqueIdentifier>{944f3f19-4c3e-4731-bc1d-c67f4e033439}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\RangeAttack\CardinalBlast">
+      <UniqueIdentifier>{540aa82b-24a2-4a8e-8c8e-969dcba0414d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot">
+      <UniqueIdentifier>{c651be50-1df4-4143-83c1-23079e79be7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack">
+      <UniqueIdentifier>{12c86341-4c7c-4e14-89bf-b561e6047ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast">
+      <UniqueIdentifier>{f95ae7c0-ac9e-4a90-b376-92eeaa20fe4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Begin">
+      <UniqueIdentifier>{a3026577-0b58-4344-8917-f9ee6c438fde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Loof">
+      <UniqueIdentifier>{e5337f63-b9c5-49dd-b2fc-164909b5a9bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Effect">
+      <UniqueIdentifier>{e2778558-1d3a-4013-9094-8a5872a2738c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Attack">
+      <UniqueIdentifier>{5519791c-142d-48e6-be00-501a5a95a51a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Skill\Effect\AreaAttack\Beast\Hit">
+      <UniqueIdentifier>{18fa7c3d-d57c-4a6d-964a-b63f9a566711}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="20.DATA\SkillInfo\AreaAttack">
+      <UniqueIdentifier>{b6077879-2dce-427a-a8ad-90ddbef6f46c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\05.Icon\SkillIcon\AreaAttack">
+      <UniqueIdentifier>{d797ec51-2df5-44bc-9e94-ce6b21991cc6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -632,9 +695,6 @@
     </ClInclude>
     <ClInclude Include="..\Public\RibbonPig.h">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Public\SunderBreakAttack.h">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\Bulb.h">
       <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
@@ -1029,6 +1089,57 @@
     <ClInclude Include="..\public\PushCube.h">
       <Filter>02.GameObject\Cube\PushCube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastAttack.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastBullet.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastHit.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotAttack.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotBullet.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Bullet</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotHit.h">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastInfo.h">
+      <Filter>20.DATA\SkillInfo\RangeAttack\CardinalBlast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotInfo.h">
+      <Filter>20.DATA\SkillInfo\RangeAttack\ChasingShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\CardinalBlastIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\CardinalBlast</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\ChasingShotIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastBegin.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Begin</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastAttack.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Attack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastEffect.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Effect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastHit.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Hit</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastLoof.h">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Loof</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastInfo.h">
+      <Filter>20.DATA\SkillInfo\AreaAttack</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BeastIcon.h">
+      <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1102,9 +1213,6 @@
     </ClCompile>
     <ClCompile Include="..\Private\RibbonPig.cpp">
       <Filter>02.GameObject\Creature\Monster\RibbonPig</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Private\SunderBreakAttack.cpp">
-      <Filter>02.GameObject\Skill\Effect\RangeAttack\SunderBreak\Attack</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\Bulb.cpp">
       <Filter>04.UI\02.NPCUI\02.Bulb</Filter>
@@ -1495,6 +1603,57 @@
     </ClCompile>
     <ClCompile Include="..\private\PushCube.cpp">
       <Filter>02.GameObject\Cube\PushCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastAttack.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastBullet.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\CardinalBlast\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotAttack.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotBullet.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Bullet</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\RangeAttack\ChasingShot\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastInfo.cpp">
+      <Filter>20.DATA\SkillInfo\RangeAttack\CardinalBlast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotInfo.cpp">
+      <Filter>20.DATA\SkillInfo\RangeAttack\ChasingShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\CardinalBlastIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\CardinalBlast</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\ChasingShotIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\RangeAttack\ChasingShot</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastBegin.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Begin</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastAttack.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Attack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastEffect.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Effect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastHit.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Hit</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastLoof.cpp">
+      <Filter>02.GameObject\Skill\Effect\AreaAttack\Beast\Loof</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastInfo.cpp">
+      <Filter>20.DATA\SkillInfo\AreaAttack</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BeastIcon.cpp">
+      <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

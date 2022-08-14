@@ -103,6 +103,9 @@
     <ClInclude Include="..\Public\VIBuffer_ColorRect.h">
       <Filter>04.Component\VIBuffer\ColorRect</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Sound_Manager.h">
+      <Filter>01.Device\Sound</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\GameInstance.cpp">
@@ -188,6 +191,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\VIBuffer_ColorRect.cpp">
       <Filter>04.Component\VIBuffer\ColorRect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Sound_Manager.cpp">
+      <Filter>01.Device\Sound</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

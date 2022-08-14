@@ -25,7 +25,6 @@ HRESULT CLevel_Henesys_1::Initialize()
 {
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
-	
 
 
 	//if (FAILED(Ready_SkillInfo()))

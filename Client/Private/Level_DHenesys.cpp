@@ -36,6 +36,7 @@ HRESULT CLevel_DHenesys::Initialize()
 		return E_FAIL;
 
 
+
 	/*
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
 		return E_FAIL;

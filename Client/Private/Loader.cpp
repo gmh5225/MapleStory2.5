@@ -13,13 +13,23 @@
 #include "UI.h"
 #include "SolunaSlashEffectA.h"
 #include "SolunaSlashEffectB.h"
+#include "CardinalBlastAttack.h"
+#include "CardinalBlastBullet.h"
+#include "CardinalBlastHit.h"
+#include "ChasingShotAttack.h"
+#include "ChasingShotBullet.h"
+#include "ChasingShotHit.h"
+#include "BeastEffect.h"
+#include "BeastBegin.h"
+#include "BeastLoof.h"
+#include "BeastAttack.h"
+#include "BeastHit.h"
 #include "CrossTheStyx.h"
 #include "SunCross.h"
 #include "SunCrossHit.h"
 #include "RibbonPig.h"
 #include "BlueMushmom.h"
 #include "ElderStan.h"
-#include "SunderBreakAttack.h"
 #include "Bulb.h"
 #include "SkillFrame.h"
 #include "QuestUI.h"
@@ -31,6 +41,9 @@
 #include "ReefAttackIcon.h"
 #include "WarriorReefIcon.h"
 #include "SpearPullingIcon.h"
+#include "CardinalBlastIcon.h"
+#include "ChasingShotIcon.h"
+#include "BeastIcon.h"
 #include "SkillGradeBtn0.h"
 #include "SkillGradeBtn1.h"
 #include "SkillGradeBtn2.h"
@@ -687,10 +700,6 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 		CSunCrossHit::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SunderBreak_Attack"),
-		CSunderBreakAttack::Create(m_pGraphic_Device))))
-		return E_FAIL;
-
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ReefAttack"),
 		CReefAttack::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -710,6 +719,51 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SpearPulling_Hit"),
 		CSpearPullingHit::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CardinalBlast_Attack"),
+		CCardinalBlastAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CardinalBlast_Bullet"),
+		CCardinalBlastBullet::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CardinalBlast_Hit"),
+		CCardinalBlastHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ChasingShot_Attack"),
+		CChasingShotAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ChasingShot_Bullet"),
+		CChasingShotBullet ::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ChasingShot_Hit"),
+		CChasingShotHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Effect"),
+		CBeastEffect::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Begin"),
+		CBeastBegin::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Loof"),
+		CBeastLoof::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Attack"),
+		CBeastAttack::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Beast_Hit"),
+		CBeastHit::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -833,6 +887,18 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_WarriorReefIcon"),
 		CWarriorReefIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CardinalBlastIcon"),
+		CCardinalBlastIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_ChasingShotIcon"),
+		CChasingShotIcon::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BeastIcon"),
+		CBeastIcon::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bulb"),
@@ -1210,10 +1276,6 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/SunCross/Edit/SunCrossHit%d.png"), 5))))
 		return E_FAIL;
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SunderBreak_Attack"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/SunderBreak/Edit/SunderBreakAttack%d.png"), 15))))
-		return E_FAIL;
-
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ReefAttack"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/ReefAttack/Edit/ReefAttack%d.png"), 8))))
 		return E_FAIL;
@@ -1232,6 +1294,50 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SpearPulling_Hit"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Close_Attack/SpearPulling/Edit/SpearPullingHit%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CardinalBlast_Attack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/CardinalBlast/Attack/Edit/CardinalBlastAttack%d.png"), 18))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CardinalBlast_Bullet"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/CardinalBlast/Bullet/Edit/CardinalBlastBullet%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CardinalBlast_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/CardinalBlast/Hit/Edit/CardinalBlastHit%d.png"), 16))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ChasingShot_Attack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/ChasingShot/Attack/Edit/ChasingShotAttack%d.png"), 21))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ChasingShot_Bullet"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/ChasingShot/Bullet/Edit/ChasingShotBullet%d.png"), 8))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ChasingShot_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/Range_Attack/ChasingShot/Hit/Edit/ChasingShotHit%d.png"), 11))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Effect"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Effect/Edit/BeastEffect%d.png"), 7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Begin"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Begin/Edit/BeastBegin%d.png"), 8))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Loof"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Loof/Edit/BeastLoof%d.png"), 12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Attack"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Attack/Edit/BeastAttack%d.png"), 23))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Beast_Hit"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Player/Skill/AreaAttack/Beast/Hit/Edit/BeastHit%d.png"), 9))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -1879,7 +1985,7 @@ HRESULT CLoader::Load_UI_Texture()
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseSkillIcon"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 5))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/SkillIcon/SkillIcon%d.png"), 8))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseConsumItemIcon"),
@@ -1939,7 +2045,7 @@ HRESULT CLoader::Load_UI_Texture()
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SkillFrame"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillFrame/SkillFrame.png")))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillFrame/SkillFrame%d.png"), 3))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bulb_Progress"),
@@ -2017,6 +2123,18 @@ HRESULT CLoader::Load_UI_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SpearPullingIcon"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/CloseAttack/SpearPulling/SpearPullingIcon%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_CardinalBlastIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/RangeAttack/CardinalBlast/CardinalBlastIcon%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ChasingShotIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/RangeAttack/ChasingShot/ChasingShotIcon%d.png"), 2))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BeastIcon"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Player/SkillIcon/AreaAttack/Beast/BeastIcon%d.png"), 2))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_InvenFrame"),

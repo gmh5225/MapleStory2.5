@@ -11,6 +11,7 @@ CGameInstance::CGameInstance()
 	, m_pTimer_Manager(CTimer_Manager::Get_Instance())
 	, m_pMap_Manager(CMap_Manager::Get_Instance())
 	, m_pPicking(CPicking::Get_Instance())
+	, m_pSound_Manager(CSound_Manager::Get_Instance())
 {
 	Safe_AddRef(m_pPicking);
 	Safe_AddRef(m_pMap_Manager);
@@ -20,6 +21,7 @@ CGameInstance::CGameInstance()
 	Safe_AddRef(m_pLevel_Manager);
 	Safe_AddRef(m_pInput_Device);
 	Safe_AddRef(m_pGraphic_Device);
+	Safe_AddRef(m_pSound_Manager);
 
 }
 
@@ -51,6 +53,9 @@ HRESULT CGameInstance::Initialize_Engine(_uint iNumLevels, HINSTANCE hInst, cons
 
 	//맵데이터로드
 	if (FAILED(m_pMap_Manager->LoadMapData(GraphicDesc.hWnd)))
+		return E_FAIL;
+
+	if (FAILED(m_pSound_Manager->Initialize()))
 		return E_FAIL;
 
 	return S_OK;
@@ -313,6 +318,42 @@ list<_tchar*>* CGameInstance::GetVoxelNames()
 	return m_pMap_Manager->GetVoxelNames();
 }
 
+HRESULT CGameInstance::PlaySound(TCHAR * pSoundKey, const _uint & eID, const float & fVolume)
+{
+	if (m_pSound_Manager == nullptr)
+		return E_FAIL;
+
+	m_pSound_Manager->PlaySound(pSoundKey, eID, fVolume);
+	return S_OK;
+}
+
+HRESULT CGameInstance::PlayBGM(TCHAR * pSoundKey, const float & fVolume)
+{
+	if (m_pSound_Manager == nullptr)
+		return E_FAIL;
+
+	m_pSound_Manager->PlayBGM(pSoundKey, fVolume);
+	return S_OK;
+}
+
+HRESULT CGameInstance::StopSound(const _uint & eID)
+{
+	if (m_pSound_Manager == nullptr)
+		return E_FAIL;
+
+	m_pSound_Manager->StopSound(eID);
+	return S_OK;
+}
+
+HRESULT CGameInstance::StopAll()
+{
+	if (m_pSound_Manager == nullptr)
+		return E_FAIL;
+
+	m_pSound_Manager->StopAll();
+	return S_OK;
+}
+
 void CGameInstance::Release_Engine()
 {
 	_int i = CGameInstance::Get_Instance()->Destroy_Instance();
@@ -332,6 +373,8 @@ void CGameInstance::Release_Engine()
 	CInput_Device::Get_Instance()->Destroy_Instance();
 	
 	CGraphic_Device::Get_Instance()->Destroy_Instance();
+
+	CSound_Manager::Get_Instance()->Destroy_Instance();
 }
 
 void CGameInstance::Free()
@@ -344,5 +387,6 @@ void CGameInstance::Free()
 	Safe_Release(m_pLevel_Manager);
 	Safe_Release(m_pInput_Device);
 	Safe_Release(m_pGraphic_Device);
+	Safe_Release(m_pSound_Manager);
 	
 }
