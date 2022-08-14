@@ -9,6 +9,7 @@ IMPLEMENT_SINGLETON(CSpawnerManager)
 CSpawnerManager::CSpawnerManager()
 {
 	m_iIndexNum = 0;
+	m_bTest = false;
 }
 
 
@@ -20,6 +21,15 @@ void CSpawnerManager::Tick(_float fTimeDelta)
 
 void CSpawnerManager::LateTick(_float fTimeDelta)
 {
+}
+
+void CSpawnerManager::Free_Spawner()
+{
+	//for (auto& Spawner : m_SpawnerList)
+	//{
+	//	Safe_Release(Spawner);
+	//	m_bTest = true;
+	//}
 }
 
 void CSpawnerManager::Add_Spawner(void* pArg)
@@ -42,8 +52,11 @@ void CSpawnerManager::Check_MonsterIndex(_int index)
 
 	for (auto& iter : m_SpawnerList)
 	{
-		if (iter->Get_Index() == index)
-			iter->Minus_Mushroom();
+		if (!m_bTest)
+		{
+			if (iter->Get_Index() == index)
+				iter->Minus_Mushroom();
+		}
 	}
 
 }

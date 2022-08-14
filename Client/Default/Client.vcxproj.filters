@@ -630,6 +630,42 @@
     </Filter>
     <Filter Include="01.Level\BlockMageJump">
       <UniqueIdentifier>{38bcd01f-d5a4-4000-a379-1bde08898469}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\00.Gate">
+      <UniqueIdentifier>{65a5e1d0-db89-4b84-8301-7f6ecece4f1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\00.Gate\GreenGate">
+      <UniqueIdentifier>{2bd5ec4f-454d-4f78-84ea-9cabbfc55c74}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\00.Gate\RedGate">
+      <UniqueIdentifier>{68f4405f-321d-4aba-99a1-28cf7b63fa13}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\00.Gate\BlueGate">
+      <UniqueIdentifier>{018d0104-7f32-40c5-88da-c71bdd834d46}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\00.Gate\PurpleGate">
+      <UniqueIdentifier>{625e11b8-07de-4753-86b6-0c1d3e4fa8c9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster">
+      <UniqueIdentifier>{fc997e17-d19d-49db-86c1-ed98d5fb3b4e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\RedSlime">
+      <UniqueIdentifier>{0d44635f-fb9b-4c6d-a690-ebd284b20eb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\GreenSlime">
+      <UniqueIdentifier>{047f390d-8c4f-420a-a4b2-85b2b2f99fa0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\BlueSlime">
+      <UniqueIdentifier>{68c5276a-b185-48c4-a2f7-30442b9b3613}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime">
+      <UniqueIdentifier>{eda2c1b7-5438-4eb3-818a-b57e68af4b1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\RedSlime\Skill">
+      <UniqueIdentifier>{28e9513b-4d75-4cd1-803c-78117375e505}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime\Skill">
+      <UniqueIdentifier>{220677c4-ab08-4eed-9c30-a64aa74260ba}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1172,6 +1208,36 @@
     </ClInclude>
     <ClInclude Include="..\public\AutoDownCube.h">
       <Filter>02.GameObject\Cube\AutoDownCube</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\GreenGate.h">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\GreenGate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlueGate.h">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\BlueGate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\PurpleGate.h">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\PurpleGate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RedGate.h">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\RedGate</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RedSlime.h">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GreenSlime.h">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlueSlime.h">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\BlueSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\PurpleSlime.h">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\PurpleSkill.h">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RedSkill.h">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime\Skill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1705,6 +1771,36 @@
     </ClCompile>
     <ClCompile Include="..\private\AutoDownCube.cpp">
       <Filter>02.GameObject\Cube\AutoDownCube</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\GreenGate.cpp">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\GreenGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlueGate.cpp">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\BlueGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\PurpleGate.cpp">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\PurpleGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RedGate.cpp">
+      <Filter>02.GameObject\Creature\Npc\00.Gate\RedGate</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RedSlime.cpp">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GreenSlime.cpp">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlueSlime.cpp">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\BlueSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\PurpleSlime.cpp">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\PurpleSkill.cpp">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RedSkill.cpp">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime\Skill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

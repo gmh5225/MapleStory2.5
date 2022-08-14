@@ -68,9 +68,9 @@ public:
 
 
 private:
-	_uint m_iBlueMushmomHp;
+	_int m_iBlueMushmomHp;
 	_uint m_iBlackWizardHp;
-	_uint m_iGASHp;
+	_int m_iGASHp;
 	bool m_bStartMove;
 	bool m_bEndMove;
 	CBlackWizardPatternUI* m_pBlackWizardPatternUI;

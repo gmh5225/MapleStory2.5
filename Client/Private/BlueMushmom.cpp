@@ -262,7 +262,7 @@ void CBlueMushmom::Tick_Chase(_float fTimeDelta)
 		SetState(STATE_CHASE, DIR_L);
 
 
-	m_pTransformCom->Chase(vPlayerPos, fTimeDelta);
+	m_pTransformCom->Chase(vPlayerPos + _float3(0.1f,0.f,0.1f), fTimeDelta);
 
 	Safe_Release(pGameInstance);
 }

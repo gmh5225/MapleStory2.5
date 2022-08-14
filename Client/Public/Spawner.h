@@ -53,14 +53,14 @@ public:
 	virtual void Free() override;
 
 public:
-	void Plus_Mushroom() { ++m_iOrangeMushroom; }
-	void Minus_Mushroom() { --m_iOrangeMushroom; }
+	void Plus_Mushroom() { ++m_iMonsterNow; }
+	void Minus_Mushroom() { --m_iMonsterNow; }
 	void Set_Index(_int index) { m_iIndexNum = index; }
 	_int Get_Index() { return m_iIndexNum; }
 
 private:
 	SPAWNERINFO m_SpawnerInfo;
-	_uint		m_iOrangeMushroom;
+	_uint		m_iMonsterNow;
 	_int		m_iIndexNum;
 	_float		m_fCount;
 };

@@ -35,11 +35,14 @@ HRESULT CGoStump::Initialize(void * pArg)
 
 	m_fCountDead = 0;
 
+
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
 	m_iIndexNum = pMonsterDesc->SpawnerNum;
 
 	m_fColRad = pMonsterDesc->MonsterColRad;
+	m_vPos = pMonsterDesc->MonsterPos;
+
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->MonsterPos);
 	m_pTransformCom->Set_Scaled(1.5f);
 	m_bDir = false;
@@ -154,12 +157,12 @@ void CGoStump::Tick(_float fTimeDelta)
 		break;
 	}
 
-	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -10)
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -2)
 	{
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
+		//m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_vPos);
 		Set_Dead();
 	}
-
 }
 void CGoStump::LateTick(_float fTimeDelta)
 {

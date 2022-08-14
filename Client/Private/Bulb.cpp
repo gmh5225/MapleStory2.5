@@ -33,12 +33,12 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	m_sTag = "Tag_UI";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
+	m_fColRad = 2.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
 	m_pTransformCom->Set_Scaled(1.2f);
 
 	if (!g_bStaticClone)
 	{
-		// Äù½ºÆ® false ÃÊ±âÈ­ ¹× Äù½ºÆ® ½ÃÀÛÀ¸·Î ÃÊ±âÈ­
+		// ï¿½ï¿½ï¿½ï¿½Æ® false ï¿½Ê±ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ê±ï¿½È­
 		CQuestManager::Get_Instance()->Check_End_Quest();
 		CQuestManager::Get_Instance()->QuestPrepare();
 	}
@@ -209,17 +209,15 @@ CGameObject * CBulb::Clone(void* pArg)
 
 void CBulb::Collision(CGameObject * pOther)
 {
-	if (!(CCutSceneManager::Get_Instance()->Get_jangRander()))
-		return;
 
-	// ÇÃ·¹ÀÌ¾î¿Í Ãæµ¹ÇÑ »óÅÂ·Î ½ºÆäÀÌ½º¹Ù¸¦ ´©¸£¸é Äù½ºÆ® ½ÃÀÛ Ã¤ÆÃÀ» ¶ç¿ò
-	if ((CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE)))
-	{
-		CQuestManager::Get_Instance()->Check_Start_Quest();
-		if (CQuestManager::Get_Instance()->Get_QuestNum() == 0)
-			CQuestManager::Get_Instance()->Set_First();
+		// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ ï¿½æµ¹ï¿½ï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ì½ï¿½ï¿½Ù¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ Ã¤ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½
+		if ((CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE)))
+		{
+			CQuestManager::Get_Instance()->Check_Start_Quest();
+			if (CQuestManager::Get_Instance()->Get_QuestNum() == 0)
+				CQuestManager::Get_Instance()->Set_First();
 
-	}
+		}
 }
 
 

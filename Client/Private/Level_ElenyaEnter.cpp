@@ -49,8 +49,8 @@ HRESULT CLevel_ElenyaEnter::Initialize()
 	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
 	//	return E_FAIL;
 
-	//if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
+		return E_FAIL;
 
 	//if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 	//	return E_FAIL;
