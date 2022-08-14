@@ -2,7 +2,9 @@
 #include "..\Public\ParticleManager.h"
 
 #include "GameInstance.h"
+#include "ToolManager.h"
 #include "Particle.h"
+#include "DamageGen.h"
 
 IMPLEMENT_SINGLETON(CParticleManager)
 
@@ -145,6 +147,28 @@ void CParticleManager::MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDir
 
 	CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Particle"), LEVEL_GAMEPLAY, TEXT("Layer_Particle"), &ParticleDesc);
 
+}
+
+void CParticleManager::MakeDamageGen(_int sMinDamage, _int sMaxDamage, _int iCount, _float fDelayTime, _float3 vPos, _float fLifeTime, _bool bIm)
+{
+	CGameInstance* pGameInstance =  CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	LEVEL eCurLevel = CToolManager::Get_Instance()->Get_CurLevel();
+
+	CDamageGen::DAMAGEGENDESC Desc;
+	Desc.sMinDamage = sMinDamage;
+	Desc.sMaxDamage = sMaxDamage;
+	Desc.iCount = iCount;
+	Desc.fDelayTime = fDelayTime;
+	Desc.vPos = vPos;
+	Desc.fLifeTime = fLifeTime;
+	Desc.bIm = bIm;
+
+	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DamageGen"), eCurLevel, TEXT("Layer_Damage"), &Desc);
+
+
+	Safe_Release(pGameInstance);
 }
 
 void CParticleManager::Free()

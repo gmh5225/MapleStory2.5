@@ -3,6 +3,7 @@
 
 #include "GameInstance.h"
 #include "QuestManager.h"
+#include "CutSceneManager.h"
 
 CBulb::CBulb(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device),
@@ -32,7 +33,7 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	m_sTag = "Tag_UI";
 
-	m_fColRad = 5.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
+	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
 	m_pTransformCom->Set_Scaled(1.2f);
 
 	if (!g_bStaticClone)
@@ -95,6 +96,9 @@ void CBulb::LateTick(_float fTimeDelta)
 }
 HRESULT CBulb::Render()
 {
+	if (!(CCutSceneManager::Get_Instance()->Get_jangRander()))
+		return S_OK;
+
 	SetAni();
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
@@ -205,6 +209,9 @@ CGameObject * CBulb::Clone(void* pArg)
 
 void CBulb::Collision(CGameObject * pOther)
 {
+	if (!(CCutSceneManager::Get_Instance()->Get_jangRander()))
+		return;
+
 	// 플레이어와 충돌한 상태로 스페이스바를 누르면 퀘스트 시작 채팅을 띄움
 	if ((CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE)))
 	{

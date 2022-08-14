@@ -553,6 +553,21 @@
     <Filter Include="02.GameObject\Cube\PushCube">
       <UniqueIdentifier>{c1c4a5f9-73e1-4578-a5ae-7133f3df1546}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Damage">
+      <UniqueIdentifier>{3a9d560a-9bef-429c-9545-d53a76f5d0ce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Cube\DownCube">
+      <UniqueIdentifier>{9f04f976-d8eb-4e2f-924b-488ae13762b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Cube\JumpCube">
+      <UniqueIdentifier>{da38f925-6fd0-498e-8e48-5ec47fcd52f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Cube\AutoDownCube">
+      <UniqueIdentifier>{bbdb4edb-301f-45b8-8cc2-15814eff7396}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01.Level\BlockMageJump">
+      <UniqueIdentifier>{38bcd01f-d5a4-4000-a379-1bde08898469}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1029,6 +1044,24 @@
     <ClInclude Include="..\public\PushCube.h">
       <Filter>02.GameObject\Cube\PushCube</Filter>
     </ClInclude>
+    <ClInclude Include="..\public\Damage.h">
+      <Filter>02.GameObject\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\DamageGen.h">
+      <Filter>02.GameObject\Damage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\DownCube.h">
+      <Filter>02.GameObject\Cube\DownCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\JumpCube.h">
+      <Filter>02.GameObject\Cube\JumpCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Level_BlackMageJump.h">
+      <Filter>01.Level\BlockMageJump</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\AutoDownCube.h">
+      <Filter>02.GameObject\Cube\AutoDownCube</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -1495,6 +1528,24 @@
     </ClCompile>
     <ClCompile Include="..\private\PushCube.cpp">
       <Filter>02.GameObject\Cube\PushCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Damage.cpp">
+      <Filter>02.GameObject\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\DamageGen.cpp">
+      <Filter>02.GameObject\Damage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\DownCube.cpp">
+      <Filter>02.GameObject\Cube\DownCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\JumpCube.cpp">
+      <Filter>02.GameObject\Cube\JumpCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Level_BlackMageJump.cpp">
+      <Filter>01.Level\BlockMageJump</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\AutoDownCube.cpp">
+      <Filter>02.GameObject\Cube\AutoDownCube</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

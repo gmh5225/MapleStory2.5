@@ -114,6 +114,14 @@ HRESULT CGameInstance::Render_Level()
 	return m_pLevel_Manager->Render();	
 }
 
+_uint CGameInstance::Get_CurLevel()
+{
+	if (nullptr == m_pLevel_Manager)
+		return E_FAIL;
+
+	return m_pLevel_Manager->Get_CurLevel();
+}
+
 HRESULT CGameInstance::Add_Prototype(const _tchar * pPrototypeTag, CGameObject * pPrototype)
 {
 	if (nullptr == m_pObject_Manager)

@@ -34,6 +34,8 @@
 #include "UIManager.h"
 #include "BlackWizardPatternUI.h"
 #include "TeleportInfo.h"
+#include "Sky.h"
+
 
 CLevel_GamePlay::CLevel_GamePlay(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -90,7 +92,8 @@ HRESULT CLevel_GamePlay::Initialize()
 
 
 	CUIManager::Get_Instance()->End_Loading();
-	CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
+	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
+	CCutSceneManager::Get_Instance()->Start_Enter_GASHenesys();
 
 	return S_OK;
 }
@@ -173,8 +176,12 @@ HRESULT CLevel_GamePlay::Ready_Layer_Npc(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ElderStan"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
+	if (CCutSceneManager::Get_Instance()->Get_jangRander())
+	{
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ElderStan"), LEVEL_GAMEPLAY, pLayerTag)))
+			return E_FAIL;
+	}
+
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Maya"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
@@ -364,18 +371,21 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 
-
-	PotalDesc.eDestLevel = LEVEL_DHENESYS;
+	PotalDesc.eDestLevel = LEVEL_DARKMAGEJUMP;
 	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
 	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 
-
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag)))
+	CSky::SKYDESC SkyDesc;
+	SkyDesc.iIndex = 5;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
 		return E_FAIL;
 	
 
+
+
+	//TEST
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PushCube"), LEVEL_GAMEPLAY, pLayerTag)))
 		return E_FAIL;
 
@@ -417,6 +427,8 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	if (FAILED(Ready_Layer_Section(TEXT("Layer_Section"))))
 		return E_FAIL;
+
+
 
 	Safe_Release(pGameInstance);
 

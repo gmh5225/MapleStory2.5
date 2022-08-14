@@ -40,6 +40,20 @@ void CToolManager::CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGr
 
 }
 
+LEVEL CToolManager::Get_CurLevel()
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+
+	_uint iLevel = pGameInstance->Get_CurLevel();
+
+
+	Safe_Release(pGameInstance);
+
+	return (LEVEL)iLevel;
+}
+
 CGameObject* CToolManager::GetPlayer()
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();

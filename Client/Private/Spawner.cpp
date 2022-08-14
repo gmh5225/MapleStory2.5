@@ -43,61 +43,61 @@ HRESULT CSpawner::Initialize(void * pArg)
 
 		if (m_SpawnerInfo.MonsterName == TEXT("OrangeMushroom"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_OrangeMushroom"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("RibbonPig"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RibbonPig"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RibbonPig"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 		
 		else if (m_SpawnerInfo.MonsterName == TEXT("RedSnail"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("BlueSnail"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSnail"), LEVEL_HENESYS, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("GreenMushroom"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_ELENYA, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenMushroom"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("GoStump"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_ELENYA, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GoStump"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("Slime"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_ELENYA, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Slime"), LEVEL_ELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("TransformPig"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("TransformStump"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 
 		else if (m_SpawnerInfo.MonsterName == TEXT("TransformSlime"))
 		{
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_DELENYA, TEXT("Layer_Monster"), pArg)))
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_DELENYA, TEXT("Layer_Monster"), &m_SpawnerInfo)))
 				return E_FAIL;
 		}
 

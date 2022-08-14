@@ -4,6 +4,7 @@
 #include "GameInstance.h"
 #include "Camera_Free.h"
 #include "UIManager.h"
+#include "GAS.h"
 
 IMPLEMENT_SINGLETON(CCutSceneManager)
 
@@ -33,6 +34,9 @@ void CCutSceneManager::Tick(_float fTimeDelta)
 
 	if (m_bEnter_DHenesys)
 		Enter_DHenesys(fTimeDelta);
+
+	if (m_bEnter_GASHenesys)
+		Enter_GASHenesys(fTimeDelta);
 }
 
 CCamera_Free* CCutSceneManager::Get_MainCam()
@@ -255,7 +259,6 @@ void CCutSceneManager::Enter_ElenyaEnter(_float fTimeDelta)
 		End_Enter_ElenyaEnter();
 	}
 }
-
 void CCutSceneManager::End_Enter_ElenyaEnter()
 {
 	m_fElenyaEnter_TimeAcc = 0.f;
@@ -266,6 +269,80 @@ void CCutSceneManager::End_Enter_ElenyaEnter()
 	m_bIsCutScene = false;
 	m_bEnter_ElenyaEnter = false;
 }
+
+
+
+
+
+void CCutSceneManager::Start_Enter_GASHenesys()
+{
+	if (m_bGASHenesys)
+		return;
+	m_bGASHenesys = true;
+
+	m_fGASHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
+	SetCamPos(_float3(7.8f, 11.5f, -9.f));
+	Get_MainCam()->Get_Transform()->RotationTwo(_float3(0.f, 1.f, 0.f), 10.f, _float3(1.f, 0.f, 0.f), 30.f);
+	Get_MainCam()->SetSpeed(3.f);
+
+	CUIManager::Get_Instance()->On_CutScreen();
+
+	m_bIsCutScene = true;
+	m_bEnter_GASHenesys = true;
+}
+void CCutSceneManager::Enter_GASHenesys(_float fTimeDelta)
+{
+	m_fGASHenesys_TimeAcc += fTimeDelta;
+
+
+
+
+	//if (!m_b6)
+	//	Get_MainCam()->Get_Transform()->Go_Up(fTimeDelta);
+	//else
+	//	Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
+
+
+	if (5.f < m_fGASHenesys_TimeAcc && !m_b6)
+	{
+
+		CGAS::GASDESC GASDesc;
+		GASDesc.vPos = _float3(9.6f, 17.0f, -.3f);
+		GASDesc.eState = CCreature::STATE_CUTSCEEN;
+
+		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_HENESYS, TEXT("Layer_Monster"), &GASDesc)))
+			return;
+
+		// Get_MainCam()->Start_AttackShaking();
+
+
+
+		m_b6 = true;
+	}
+
+
+
+	if (13.f < m_fGASHenesys_TimeAcc)
+	{
+		Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+		End_Enter_GASHenesys();
+	}
+}
+void CCutSceneManager::End_Enter_GASHenesys()
+{
+	m_fGASHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
+
+	CUIManager::Get_Instance()->Off_CutScreen();
+
+	m_bIsCutScene = false;
+	m_bEnter_GASHenesys = false;
+}
+
+
+
+
 
 
 void CCutSceneManager::Start_Enter_DHenesys()

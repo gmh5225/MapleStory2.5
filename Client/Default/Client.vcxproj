@@ -157,7 +157,9 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\public\AutoDownCube.h" />
     <ClInclude Include="..\public\Bandit.h" />
+    <ClInclude Include="..\public\Level_BlackMageJump.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
     <ClInclude Include="..\Public\BlackWizardAttack2.h" />
@@ -182,12 +184,15 @@
     <ClInclude Include="..\Public\Client_Defines.h" />
     <ClInclude Include="..\Public\ConsumBtn.h" />
     <ClInclude Include="..\public\CutScreen.h" />
+    <ClInclude Include="..\public\Damage.h" />
+    <ClInclude Include="..\public\DamageGen.h" />
     <ClInclude Include="..\Public\DefaultInfo.h" />
     <ClInclude Include="..\Public\ConsumIcon.h" />
     <ClInclude Include="..\Public\Creature.h" />
     <ClInclude Include="..\Public\CrossTheStyx.h" />
     <ClInclude Include="..\Public\Cube.h" />
     <ClInclude Include="..\Public\Chat.h" />
+    <ClInclude Include="..\public\DownCube.h" />
     <ClInclude Include="..\Public\EquipBtn.h" />
     <ClInclude Include="..\public\CutSceneManager.h" />
     <ClInclude Include="..\Public\ExpBar.h" />
@@ -214,6 +219,7 @@
     <ClInclude Include="..\Public\Item.h" />
     <ClInclude Include="..\Public\ItemInfo.h" />
     <ClInclude Include="..\Public\ItemNotice.h" />
+    <ClInclude Include="..\public\JumpCube.h" />
     <ClInclude Include="..\Public\Level_BlackMage.h" />
     <ClInclude Include="..\Public\Level_BlackMageEnter.h" />
     <ClInclude Include="..\Public\Level_DElenya.h" />
@@ -317,7 +323,9 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\private\AutoDownCube.cpp" />
     <ClCompile Include="..\private\Bandit.cpp" />
+    <ClCompile Include="..\private\Level_BlackMageJump.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack2.cpp" />
@@ -341,12 +349,15 @@
     <ClCompile Include="..\Private\Chick.cpp" />
     <ClCompile Include="..\Private\ConsumBtn.cpp" />
     <ClCompile Include="..\private\CutScreen.cpp" />
+    <ClCompile Include="..\private\Damage.cpp" />
+    <ClCompile Include="..\private\DamageGen.cpp" />
     <ClCompile Include="..\Private\DefaultInfo.cpp" />
     <ClCompile Include="..\Private\ConsumIcon.cpp" />
     <ClCompile Include="..\Private\Creature.cpp" />
     <ClCompile Include="..\Private\CrossTheStyx.cpp" />
     <ClCompile Include="..\Private\Cube.cpp" />
     <ClCompile Include="..\Private\Chat.cpp" />
+    <ClCompile Include="..\private\DownCube.cpp" />
     <ClCompile Include="..\Private\EquipBtn.cpp" />
     <ClCompile Include="..\private\CutSceneManager.cpp" />
     <ClCompile Include="..\Private\ExpBar.cpp" />
@@ -373,6 +384,7 @@
     <ClCompile Include="..\Private\Item.cpp" />
     <ClCompile Include="..\Private\ItemInfo.cpp" />
     <ClCompile Include="..\Private\ItemNotice.cpp" />
+    <ClCompile Include="..\private\JumpCube.cpp" />
     <ClCompile Include="..\Private\Level_BlackMage.cpp" />
     <ClCompile Include="..\Private\Level_BlackMageEnter.cpp" />
     <ClCompile Include="..\Private\Level_DElenya.cpp" />

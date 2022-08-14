@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "..\Public\Level_Henesys_1.h"
+#include "..\Public\Level_BlackMageJump.h"
 #include "GameInstance.h"
 #include "Camera_Free.h"
 #include "SkillInfo.h"
@@ -16,16 +16,16 @@
 #include "UIManager.h"
 
 
-CLevel_Henesys_1::CLevel_Henesys_1(LPDIRECT3DDEVICE9 pGraphic_Device)
+CLevel_BlackMageJump::CLevel_BlackMageJump(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
 {
 }
 
-HRESULT CLevel_Henesys_1::Initialize()
+HRESULT CLevel_BlackMageJump::Initialize()
 {
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
-	
+
 
 
 	//if (FAILED(Ready_SkillInfo()))
@@ -37,57 +37,42 @@ HRESULT CLevel_Henesys_1::Initialize()
 
 	/*
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
-		return E_FAIL;
+	return E_FAIL;
 
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
-		return E_FAIL;*/
+	return E_FAIL;*/
 
-	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
+	//	return E_FAIL;
 
 	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
 	//	return E_FAIL;
 
-	if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
+	//	return E_FAIL;
 
 	//if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 	//	return E_FAIL;
 
-	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
-		return E_FAIL;
-	
-	
+	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
+	//	return E_FAIL;
+
+
 	CUIManager::Get_Instance()->End_Loading();
 	//CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
 	return S_OK;
 }
 
-void CLevel_Henesys_1::Tick(_float fTimeDelta)
+void CLevel_BlackMageJump::Tick(_float fTimeDelta)
 {
 	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
 
-	if (GetKeyState('N') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
-			return;
-
-		
-		Safe_Release(pGameInstance);
-
-	}
-
-
 }
 
-HRESULT CLevel_Henesys_1::Render()
+HRESULT CLevel_BlackMageJump::Render()
 {
 	if (FAILED(__super::Render()))
 		return E_FAIL;
@@ -98,7 +83,7 @@ HRESULT CLevel_Henesys_1::Render()
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_Camera(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_Camera(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -123,7 +108,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Camera(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_Player(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_Player(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -136,7 +121,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Player(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_BackGround(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_BackGround(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -151,7 +136,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_BackGround(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_Monster(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_Monster(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -165,7 +150,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Monster(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_Npc(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_Npc(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -177,7 +162,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Npc(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_Map(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_Map(const _tchar * pLayerTag)
 {
 
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -188,23 +173,23 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Map(const _tchar * pLayerTag)
 	PotalDesc.eDestLevel = LEVEL_GAMEPLAY;
 	PotalDesc.Pos = _float3(-2.f, 1.f, 0.f);
 	PotalDesc.DestPos = _float3(29.f, 5.f, -12.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_HENESYS, pLayerTag, &PotalDesc)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DARKMAGEJUMP, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 
-	PotalDesc.eDestLevel = LEVEL_ELENYAENTER;
-	PotalDesc.Pos = _float3(34.f, 3.f, -3.f);
-	PotalDesc.DestPos = _float3(26.f, 1.f, -10.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_HENESYS, pLayerTag, &PotalDesc)))
-		return E_FAIL;
 
+	CMap_Manager::CUBEDATA TestCubeData;
+	TestCubeData.iIndex = 2;
+	TestCubeData.vPos = _float3(0.f, 15.f, 7.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_JumpCube"), LEVEL_DARKMAGEJUMP, pLayerTag, &TestCubeData)))
+		return E_FAIL;
 
 
 	/* 맵 큐브 추가 > 섹션 생성 > 콜리젼 매니저 컴포넌트 멤버함수 호출로 섹션에 큐브 채우기*/
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_HenesysHunting");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_BlackMageJump");
 	for (auto& Data : *pMapData)
 	{
-		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_HENESYS, pLayerTag, &Data)))
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AutoDownCube"), LEVEL_DARKMAGEJUMP, pLayerTag, &Data)))
 			return E_FAIL;
 	}
 
@@ -247,7 +232,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Map(const _tchar * pLayerTag)
 
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_Section(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_Section(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -260,33 +245,23 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Section(const _tchar * pLayerTag)
 	CMap_Manager::CUBEDATA Data;
 	ZeroMemory(&Data, sizeof(CMap_Manager::CUBEDATA));
 
-	for (int j = -5; j < 15; j++)
+	for (int y = 0; y <4; y++)
 	{
-		for (int i = -5; i < 15; i++)
+		for (int j = -5; j < 15; j++)
 		{
-			_float XIndex = i*5.f;
-			_float ZIndex = j*5.f;
-			Data.vPos = _float3((-12.f + XIndex) + ZIndex, 2.f, -1 - XIndex);
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_HENESYS, pLayerTag, &Data)))
-				return E_FAIL;
-		}
-	}
-
-
-	for (int j = -2; j < 5; j++)
-	{
-		for (int i = -2; i < 5; i++)
-		{
-			for (int y = 0; y < 5; y++)
+			for (int i = -5; i < 15; i++)
 			{
 				_float XIndex = i*5.f;
 				_float ZIndex = j*5.f;
-				Data.vPos = _float3((-12.f + XIndex) + ZIndex + 50.f, 7.f + (y * 9.f), -1.f - XIndex);
-				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_HENESYS, pLayerTag, &Data)))
+				Data.vPos = _float3((-12.f + XIndex) + ZIndex, 2.f + 9 * y, -1 - XIndex);
+				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_DARKMAGEJUMP, pLayerTag, &Data)))
 					return E_FAIL;
 			}
 		}
 	}
+
+
+
 
 	Safe_Release(pGameInstance);
 
@@ -296,7 +271,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Section(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_UI(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_UI(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -308,7 +283,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_UI(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_Layer_Spawner(const _tchar * pLayerTag)
 {
 
 	CSpawner::SPAWNERINFO MonsterInfo;
@@ -424,7 +399,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_SkillFrameBtn(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 {
 	//스킬Up Btn 간격 가로 144px 세로 40px
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
@@ -541,7 +516,7 @@ HRESULT CLevel_Henesys_1::Ready_SkillFrameBtn(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_SkillIcon(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_SkillIcon(const _tchar * pLayerTag)
 {
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -569,7 +544,7 @@ HRESULT CLevel_Henesys_1::Ready_SkillIcon(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_SkillInfo()
+HRESULT CLevel_BlackMageJump::Ready_SkillInfo()
 {
 	//CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
 	//CSunCrossInfo* pSunCross = new CSunCrossInfo;
@@ -586,7 +561,7 @@ HRESULT CLevel_Henesys_1::Ready_SkillInfo()
 
 }
 
-HRESULT CLevel_Henesys_1::Ready_QuickSlot(const _tchar* pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_QuickSlot(const _tchar* pLayerTag)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -744,7 +719,7 @@ HRESULT CLevel_Henesys_1::Ready_QuickSlot(const _tchar* pLayerTag)
 	return S_OK;
 }
 
-HRESULT CLevel_Henesys_1::Ready_QuickSlotSkill(const _tchar * pLayerTag)
+HRESULT CLevel_BlackMageJump::Ready_QuickSlotSkill(const _tchar * pLayerTag)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -834,20 +809,20 @@ HRESULT CLevel_Henesys_1::Ready_QuickSlotSkill(const _tchar * pLayerTag)
 	return S_OK;
 }
 
-CLevel_Henesys_1 * CLevel_Henesys_1::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CLevel_BlackMageJump * CLevel_BlackMageJump::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CLevel_Henesys_1*		pInstance = new CLevel_Henesys_1(pGraphic_Device);
+	CLevel_BlackMageJump*		pInstance = new CLevel_BlackMageJump(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CLevel_Henesys_1"));
+		MSG_BOX(TEXT("Failed To Created : CLevel_BlackMageJump"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
 
-void CLevel_Henesys_1::Free()
+void CLevel_BlackMageJump::Free()
 {
 	__super::Free();
 

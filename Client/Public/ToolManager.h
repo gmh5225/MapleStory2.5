@@ -24,6 +24,7 @@ public:
 	// For. LevelChange
 	void SetDestLevel(LEVEL eLevel, _float3 vDestPos) { m_eDestLevel = eLevel; m_vDestPos = vDestPos; }
 	void CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGraphic_Device);
+	LEVEL Get_CurLevel();
 
 	// For. Player
 	CGameObject* GetPlayer();

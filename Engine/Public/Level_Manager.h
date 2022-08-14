@@ -21,7 +21,7 @@ public:
 	void Tick(_float fTimeDelta);
 	HRESULT Render();
 	HRESULT Reserve_Check(_uint iNumLevels);
-
+	_uint Get_CurLevel() { return m_iCurrentLevelIndex; }
 
 private:
 	class CLevel*				m_pCurrentLevel = nullptr;

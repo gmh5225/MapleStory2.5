@@ -4,6 +4,7 @@
 #include "GameInstance.h"
 #include "ToolManager.h"
 #include "UIManager.h"
+#include "CutSceneManager.h"
 
 
 CTaxiButton::CTaxiButton(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -79,6 +80,7 @@ void CTaxiButton::LateTick(_float fTimeDelta)
 		CUIManager::Get_Instance()->Start_Loading();
 		m_bTrigger = true;
 		CUIManager::Get_Instance()->Off_TaxiChatBox();
+		CCutSceneManager::Get_Instance()->Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
 	}
 	else if (m_eCollision == TYPE_ON)
 		m_OnColor = D3DXCOLOR(255.f, 127.f, 0.f, 1.f);

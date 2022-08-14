@@ -24,6 +24,13 @@ HRESULT CSky::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+	if (nullptr == pArg)
+		return E_FAIL;
+
+	SKYDESC* pDesc = (SKYDESC*)pArg;
+	m_iIndex = pDesc->iIndex;
+
+
 	return S_OK;
 }
 
@@ -58,7 +65,7 @@ HRESULT CSky::Render()
 	//Sky_6 ¿¤¸®´Ï¾Æ
 	//Sky_7ÆÄÇì
 	//Sky_8ÆÄ¿¤
-	if (FAILED(m_pTextureCom->Bind_Texture(5)))
+	if (FAILED(m_pTextureCom->Bind_Texture(m_iIndex)))
 		return E_FAIL;
 
 	if (FAILED(Set_RenderState()))
