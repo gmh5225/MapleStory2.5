@@ -25,13 +25,16 @@ HRESULT CCardinalBlastHit::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *(_float3*)pArg);
-	m_pTransformCom->Set_Scaled(5.f);
+	m_pTransformCom->Set_Scaled(4.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_CardinalBlast_Hit"), 0.08f, CAnimator::STATE_ONCE);
 	m_fYDistance = 10.f;
 	Set_Billboard();
 	_float3 vCLook = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
 	_float3 vPo = *(_float3*)pArg - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.25f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPo);
+	_float RD = CGameInstance::Get_Instance()->Get_FloatRandom(-0.5f,0.5f);
+	_float RD2 = CGameInstance::Get_Instance()->Get_FloatRandom(-0.5f, 0.5f);
+	_float RD3 = CGameInstance::Get_Instance()->Get_FloatRandom(-0.5f, 0.5f);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPo + _float3{ RD,RD2,RD3 });
 	return S_OK;
 }
 
