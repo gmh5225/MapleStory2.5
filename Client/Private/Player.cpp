@@ -777,7 +777,13 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 	if (pGameInstance->Key_Down(DIK_W))
 	{	
-		
+		CUIManager::Get_Instance()->Set_StartMove(true);
+
+	}
+
+	if (pGameInstance->Key_Down(DIK_R))
+	{
+		CUIManager::Get_Instance()->Set_EndMove(true);
 
 	}
 
@@ -1177,9 +1183,7 @@ void CPlayer::Damaged(CGameObject * pOther)
 	_float3 vInvDir = -1.f * m_pTransformCom->Get_State(CTransform::STATE_LOOK);
 	SetKnockBack(1.5f, 3.f, vInvDir);
 	m_bAttaked = true;
-
-
-
+	CUIManager::Get_Instance()->Set_PlayerHp(1);
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	vPos.y += 1.5f;
 	CParticleManager::Get_Instance()->MakeDamageGen(500, 2000, 1, 0.05f, vPos, 1.6f, true, CDamage::DAMAGE_PLAYERATTAKED);

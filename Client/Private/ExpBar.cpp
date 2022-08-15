@@ -33,10 +33,9 @@ HRESULT CExpBar::Initialize(void * pArg)
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 	m_iTexturenum = 0;
 	m_iExp = 0;
-	m_iLevel = 25;
+	m_iLevel = 1;
 	m_iExpDigit = g_iWinSizeX*0.5f;
 	__super::Initialize(pArg);
-
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_ExpBar"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
@@ -60,16 +59,20 @@ void CExpBar::Tick(_float fTimeDelta)
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
 
+	CUIManager* pUI = CUIManager::Get_Instance();
+	if (pUI->Get_PlayerExp() >= 51)
+		pUI->Level_Up(1);
+	else if (pUI->Get_PlayerExp() >= 102)
+		pUI->Level_Up(2);
+	else if (pUI->Get_PlayerExp() >= 153)
+		pUI->Level_Up(3);
+
+	m_iTexturenum = pUI->Get_PlayerExp();
+	
 	if (pInstance->Key_Down(DIK_E))
 	{
 		if (m_iTexturenum < 51)
-			m_iTexturenum += 1;
-
-		if (m_iTexturenum == 51)
-		{
-			m_iTexturenum = 0;
-			m_iLevel += 1;
-		}
+			pUI->Set_PlayerExp(1);
 	}
 	if (m_iExp < 10)	
 		m_iExpDigit = g_iWinSizeX*0.5f;
@@ -81,15 +84,12 @@ void CExpBar::Tick(_float fTimeDelta)
 
 	Safe_Release(pInstance);
 	if (CUIManager::Get_Instance()->Get_StartMove())
-		Start_CutScene(fTimeDelta);
-	else
-		m_fStartAcc = 0.f;
-
+		Start_CutScene(fTimeDelta);	
 
 	if (CUIManager::Get_Instance()->Get_EndMove())
 		End_CutScene(fTimeDelta);
-	else
-		m_fEndAcc = 0.f;
+		
+	m_iLevel = pUI->Get_PlayerLevel();
 }
 
 void CExpBar::LateTick(_float fTimeDelta)

@@ -86,7 +86,7 @@ void CCardinalBlastAttack::LateTick(_float fTimeDelta)
 		Safe_Release(pGameInstance);
 	}
 
-	/*if (m_pAnimatorCom->Get_AnimCount() == 7 && !m_bCreate)
+	if (m_pAnimatorCom->Get_AnimCount() == 7 && !m_bCreate)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
@@ -95,7 +95,7 @@ void CCardinalBlastAttack::LateTick(_float fTimeDelta)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CardinalBlast_Bullet"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &BulletDesc);	
 		Safe_Release(pGameInstance);
 		m_bCreate = true;
-	}*/
+	}
 
 	if (m_pAnimatorCom->Get_AnimCount() == 17)
 	{

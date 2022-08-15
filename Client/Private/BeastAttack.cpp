@@ -34,6 +34,7 @@ HRESULT CBeastAttack::Initialize(void * pArg)
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Beast_Attack"), 0.1f, CAnimator::STATE_ONCE);
 	memcpy(&m_Desc, pArg, sizeof(BEASTATTACKDESC));
 	m_eDir = m_Desc.eDir;
+	m_bSound = false;
 	m_pTarget = m_Desc.pTransform;
 	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION));
@@ -79,7 +80,11 @@ void CBeastAttack::LateTick(_float fTimeDelta)
 
 	if (m_pAnimatorCom->Get_AnimCount() == 12)
 	{
-		CGameInstance::Get_Instance()->PlaySoundW(L"BeastEnd.mp3", 21, 1.f);
+		if (!m_bSound)
+		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"BeastEnd.mp3", 21, 1.f);
+			m_bSound = true;
+		}
 	}
 
 	if (m_pAnimatorCom->Get_AnimCount() == 22)

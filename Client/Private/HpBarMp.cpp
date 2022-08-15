@@ -100,14 +100,12 @@ void CHpBarMp::Tick(_float fTimeDelta)
 	Safe_Release(pInstance);
 	if (CUIManager::Get_Instance()->Get_StartMove())
 		Start_CutScene(fTimeDelta);
-	else
-		m_fStartAcc = 0.f;
+
 
 
 	if (CUIManager::Get_Instance()->Get_EndMove())
 		End_CutScene(fTimeDelta);
-	else
-		m_fEndAcc = 0.f;
+
 }
 
 void CHpBarMp::LateTick(_float fTimeDelta)

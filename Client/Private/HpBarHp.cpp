@@ -46,32 +46,26 @@ void CHpBarHp::Tick(_float fTimeDelta)
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
 
-	if (pInstance->Key_Down(DIK_M))
-	{
-		if(m_iTexturenum < 22)
-		m_iTexturenum += 1;
-	}
+	m_iTexturenum = CUIManager::Get_Instance()->Get_PlayerHp();
 
 	if (pInstance->Key_Down(DIK_NUMPAD1))
 	{
 		pInstance->PlaySoundW(L"UseItem.mp3", 26, 1.f);
 		if (m_iTexturenum < 2)
-			m_iTexturenum = 0;
+			CUIManager::Get_Instance()->Full_PlayerHp();
 		else
-			m_iTexturenum -= 2;
+			CUIManager::Get_Instance()->Set_PlayerHp(-2);
 	}
 
 	Safe_Release(pInstance);
 	if (CUIManager::Get_Instance()->Get_StartMove())
 		Start_CutScene(fTimeDelta);
-	else
-		m_fStartAcc = 0.f;
+
 
 
 	if (CUIManager::Get_Instance()->Get_EndMove())
 		End_CutScene(fTimeDelta);
-	else
-		m_fEndAcc = 0.f;
+
 }
 
 void CHpBarHp::LateTick(_float fTimeDelta)

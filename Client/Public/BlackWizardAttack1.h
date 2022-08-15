@@ -29,6 +29,8 @@ protected:
 private:
 	CTransform* m_pTarget;
 	list<CGameObject*> m_pOther;
+	bool m_bSound;
+	bool m_bSound2;
 private:
 	HRESULT SetUp_Components();
 

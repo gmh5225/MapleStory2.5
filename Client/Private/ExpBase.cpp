@@ -45,14 +45,10 @@ void CExpBase::Tick(_float fTimeDelta)
 {
 	if (CUIManager::Get_Instance()->Get_StartMove())
 		Start_CutScene(fTimeDelta);
-	else
-		m_fStartAcc = 0.f;
-
 
 	if (CUIManager::Get_Instance()->Get_EndMove())
 		End_CutScene(fTimeDelta);
-	else
-		m_fEndAcc = 0.f;
+
 }
 
 void CExpBase::LateTick(_float fTimeDelta)

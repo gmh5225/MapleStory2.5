@@ -46,12 +46,14 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(13.f);
 	m_bState = false;
 	m_bFinal = false;
+	m_bSound = false;
 	SetShadow(LEVEL_GAMEPLAY, 1.5f);
 	return S_OK;
 }
 
 void CBlackWizard::Tick(_float fTimeDelta)
 {
+	
 }
 
 void CBlackWizard::LateTick(_float fTimeDelta)
@@ -213,13 +215,13 @@ void CBlackWizard::SetAni()
 	case Client::CBlackWizard::STATE_STAND:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Stand"), 0.1f, CAnimator::STATE_ONCE);
 		break;
-	case Client::CBlackWizard::STATE_SKILL1:
+	case Client::CBlackWizard::STATE_SKILL1:		
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Skill1"), 0.1f, CAnimator::STATE_ONCE);
 		break;
 	case Client::CBlackWizard::STATE_SKILL2:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Skill2"), 0.1f, CAnimator::STATE_ONCE);
 		break;
-	case Client::CBlackWizard::STATE_SKILL3:
+	case Client::CBlackWizard::STATE_SKILL3:		
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Skill3"), 0.1f, CAnimator::STATE_ONCE);
 		break;
 	case Client::CBlackWizard::STATE_SKILL4:
@@ -322,7 +324,7 @@ HRESULT CBlackWizard::SetUp_Components()
 {
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 2.f, 3.f, 2.f };
+	BoxColDesc.vScale = _float3{ 2.f, 6.f, 2.f };
 	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;

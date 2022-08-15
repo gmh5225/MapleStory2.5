@@ -32,13 +32,12 @@ HRESULT CUI::Initialize(void * pArg)
 	m_iTexturenum = 0;
 	m_eCollision = TYPE_NO;
 	D3DXMatrixIdentity(&m_ViewMatrix);
-	m_fStartAcc = 0.f;
-	m_fEndAcc = 0.f;
 	m_pTransformCom->Set_Scaled(_float3(m_UIInfo.fSizeX, m_UIInfo.fSizeY, 1.f));
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
-
 	m_OriginInfo.fX = m_UIInfo.fX;
 	m_OriginInfo.fY = m_UIInfo.fY;
+	_float3 vOriginPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	m_vOriginPos = vOriginPos;
 	return S_OK;
 }
 
@@ -58,24 +57,27 @@ HRESULT CUI::Render()
 
 void CUI::Start_CutScene(_float fTimeDelta)
 {
-	m_fStartAcc += 1.f * fTimeDelta;
-	m_UIInfo.fY += 6.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
-	if (m_fStartAcc > 0.7f)
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y > m_vOriginPos.y - 200.f)
 	{
-		m_fStartAcc = 0.f;
+		m_UIInfo.fY += 4.f;
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
+	}
+	else
+	{
 		CUIManager::Get_Instance()->Set_StartMove(false);
 	}
 }
 
 void CUI::End_CutScene(_float fTimeDelta)
 {
-	m_fEndAcc += 1.f * fTimeDelta;
-	m_UIInfo.fY -= 6.f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
-	if (m_fEndAcc > 0.7f)
+	
+	if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < m_vOriginPos.y)
 	{
-		m_fEndAcc = 0.f;
+		m_UIInfo.fY -= 4.f;
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
+	}
+	else
+	{
 		CUIManager::Get_Instance()->Set_EndMove(false);
 	}
 }

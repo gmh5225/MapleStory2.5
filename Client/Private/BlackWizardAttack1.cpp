@@ -34,9 +34,10 @@ HRESULT CBlackWizardAttack1::Initialize(void * pArg)
 
 	m_pTransformCom->Set_Scaled(_float3{ 8.f,12.f,8.f });
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + _float3{ 0.f,4.f,2.f });
-
+	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Attack1"), 0.1f, CAnimator::STATE_ONCE);
-
+	m_bSound = false;
+	m_bSound2 = false;
 
 	return S_OK;
 }
@@ -75,8 +76,21 @@ void CBlackWizardAttack1::Tick(_float fTimeDelta)
 }
 void CBlackWizardAttack1::LateTick(_float fTimeDelta)
 {
+	if (m_pAnimatorCom->Get_AnimCount() == 0)
+	{
+		if (!m_bSound2)
+		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"BlackWizardAttack1Begin.wav", 26, 1.f);
+			m_bSound2 = true;
+		}
+	}
 	if (m_pAnimatorCom->Get_AnimCount() == 15)
 	{
+		if (!m_bSound)
+		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"BlackWizardAttack1.mp3", 27, 1.f);
+			m_bSound = true;
+		}
 		CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
 	}
 	if (m_pAnimatorCom->Get_AnimCount() >= 35)

@@ -13,7 +13,11 @@ CUIManager::CUIManager()
 {
 	m_iBlueMushmomHp = 3;
 	m_iGASHp = 10;
-	
+	m_bStartMove = false;
+	m_bEndMove = false;
+	m_iPlayerHp = 0;
+	m_iPlayerLevel = 1;
+	m_iPlayerExp = 0;
 }
 
 HRESULT CUIManager::Add_ItemNotice(CItemNotice * pItemNotice)

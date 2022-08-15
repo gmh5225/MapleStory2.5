@@ -64,8 +64,7 @@ protected:
 	RECT					m_RectUI;
 	Collision_Type			m_eCollision;
 	_uint					m_iTexturenum;
-	_float					m_fStartAcc;
-	_float					m_fEndAcc;
+	_float3					m_vOriginPos;
 
 protected:
 	HRESULT SetUp_Components();

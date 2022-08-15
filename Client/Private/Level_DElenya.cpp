@@ -59,7 +59,7 @@ HRESULT CLevel_DElenya::Initialize()
 		return E_FAIL;*/
 	
 	CGameInstance::Get_Instance()->StopAll();
-	CGameInstance::Get_Instance()->PlayBGM(L"SpeakInTheVoid.mp3", 1.f);
+	CGameInstance::Get_Instance()->PlayBGM(L"DElanya.mp3", 1.f);
 	
 	CUIManager::Get_Instance()->End_Loading();
 	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DELENYA);

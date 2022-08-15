@@ -45,6 +45,8 @@ private:
 	CTransform* m_pTarget;
 	BEASTATTACKDESC m_Desc;
 	bool m_bCreate;
+	bool m_bSound;
+
 	list<CGameObject*> m_pOther;
 private:
 	HRESULT SetUp_Components();

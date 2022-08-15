@@ -100,7 +100,7 @@ HRESULT CLevel_GamePlay::Initialize()
 
 	CUIManager::Get_Instance()->End_Loading();
 	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_GAMEPLAY);
-	CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
+	//CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
 	// CCutSceneManager::Get_Instance()->Start_Enter_GASHenesys();
 
 
@@ -381,7 +381,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	PotalDesc.eDestLevel =LEVEL_DARKMAGEENTER;
+	PotalDesc.eDestLevel =LEVEL_DARKMAGE;
 	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
 	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))

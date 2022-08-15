@@ -34,7 +34,7 @@ HRESULT CBlackWizardAttack3::Initialize(void* pArg)
 
 	m_pTransformCom->Set_Scaled(_float3{ 4.f,6.f,4.f });
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *((_float3*)pArg) + _float3{ 0.f,2.f,1.f } );
-
+	CGameInstance::Get_Instance()->PlaySoundW(L"BlackWizardAttack3.mp3", 28, 1.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizard_Attack3"), 0.1f, CAnimator::STATE_ONCE);
 
 

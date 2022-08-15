@@ -73,6 +73,13 @@ public:
 	void Set_StartMove(bool bMove) { m_bStartMove = bMove; }
 	bool Get_EndMove() { return m_bEndMove; }
 	void Set_EndMove(bool bMove) { m_bEndMove = bMove; }
+	_uint Get_PlayerHp() { return m_iPlayerHp; }
+	void Set_PlayerHp(_uint iHp) { m_iPlayerHp += iHp; }
+	void Full_PlayerHp() { m_iPlayerHp = 0; }
+	_uint Get_PlayerExp() { return m_iPlayerExp; }
+	void Set_PlayerExp(_uint iExp) { m_iPlayerExp += iExp; }
+	_uint Get_PlayerLevel() { return m_iPlayerLevel; }
+	void Level_Up(_uint iLevel) { m_iPlayerLevel += iLevel; m_iPlayerExp = 0; }
 
 public:
 	virtual void Free() override;
@@ -83,6 +90,9 @@ private:
 	_uint m_iBlackWizardMaxHp;
 	_uint m_iBlackWizardHp;
 	_int m_iGASHp;
+	_uint m_iPlayerHp;
+	_uint m_iPlayerExp;
+	_uint m_iPlayerLevel;
 	bool m_bStartMove;
 	bool m_bEndMove;
 	CBlackWizardPatternUI* m_pBlackWizardPatternUI;
