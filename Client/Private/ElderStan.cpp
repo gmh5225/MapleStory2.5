@@ -73,14 +73,6 @@ HRESULT CElderStan::SetUp_Components()
 void CElderStan::Tick(_float fTimeDelta)
 {
 
-	//if (CGameInstance::Get_Instance()->Key_Down(DIK_U))
-	//{
-	//	CCutSceneManager::Get_Instance()->Get_MainCam()->SetFocus(this, _float3{ 0.f, 1.f, -4.f }, 5.f);
-	//}
-	//if (CGameInstance::Get_Instance()->Key_Down(DIK_D))
-	//{
-	//	CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
-	//}
 
 	switch (m_eCurState)
 	{

@@ -172,116 +172,159 @@ void CGAS::Die()
 
 void CGAS::Tick(_float fTimeDelta)
 {
+
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
-	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
-
-	if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
-		m_bPatterStart = true;
-
-
-	CUIManager::Get_Instance()->Get_GASHp(m_iHp);
-
-	if (m_bPatterStart && m_eCurState != STATE_RESET)
-		m_fPatternCycle += fTimeDelta;
-
-	if (m_fPatternCycle > 7.f)
+	// TEST
+	if (pGameInstance->Key_Down(DIK_Y))
 	{
-		//
-		//m_iRandomPattern = 5;
-		m_fPatternCycle = 0;
-		if (!m_bFirstPattern)
-		{
-			m_iFirstPattern++;
-			m_iRandomPattern = m_iFirstPattern;
-			if (m_iFirstPattern >= 5)
-				m_bFirstPattern = true;
-		}
-		else
-		{
-			m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
-		}
+		DestroyCube(iTestCount);
+		--iTestCount;
+	}
+	if (pGameInstance->Key_Down(DIK_U))
+	{
+		_float RandX = pGameInstance->Get_FloatRandom(-10.f, 10.f);
+		_float RandZ = pGameInstance->Get_FloatRandom(-10.f, 10.f);
+		_float RandY = pGameInstance->Get_FloatRandom(2.f, 3.f);
+		MakeBlockCube(_float3(RandX, RandY, RandZ));
 	}
 
 
-	if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
+	if (STATE_CUTSCEEN != m_eCurState && STATE_CUTSCEEN_2 != m_eCurState)
 	{
 
-		if (m_iRandomPattern == 0)
-		{
-			if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
-				SetState(STATE_CHASE, DIR_R);
-			else
-				SetState(STATE_CHASE, DIR_L);
-		}
 
-		else if (m_iRandomPattern == 1) // 점프패턴
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_JUMP, DIR_R);
-			else
-				SetState(STATE_JUMP, DIR_L);
-		}
+		CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
-		else if (m_iRandomPattern == 2) // 일반공격
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_ATTACK, DIR_R);
-			else
-				SetState(STATE_ATTACK, DIR_L);
-		}
+		_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-		else if (m_iRandomPattern == 3) // 텔레포트
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_DASH, DIR_R);
-			else
-				SetState(STATE_DASH, DIR_L);
-		}
-
-		else if (m_iRandomPattern == 4) // 슬라임 소환
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_DJUMP, DIR_R);
-			else
-				SetState(STATE_DJUMP, DIR_L);
-		}
+		if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
+			m_bPatterStart = true;
 
 
-		else if (m_iRandomPattern == 100)	// 텔포 이후
+		CUIManager::Get_Instance()->Get_GASHp(m_iHp);
+
+		if (m_bPatterStart && m_eCurState != STATE_RESET)
+			m_fPatternCycle += fTimeDelta;
+
+		if (m_fPatternCycle > 7.f)
 		{
-			if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
-				SetState(STATE_END, DIR_R);
+			//
+			//m_iRandomPattern = 5;
+			m_fPatternCycle = 0;
+			if (!m_bFirstPattern)
+			{
+				m_iFirstPattern++;
+				m_iRandomPattern = m_iFirstPattern;
+				if (m_iFirstPattern >= 5)
+					m_bFirstPattern = true;
+			}
 			else
-				SetState(STATE_END, DIR_L);
+			{
+				m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
+			}
+
+			CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+			_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+			if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
+				m_bPatterStart = true;
+
+
+			CUIManager::Get_Instance()->Get_GASHp(m_iHp);
+
+			if (m_bPatterStart)
+				m_fPatternCycle += fTimeDelta;
+
+			if (m_fPatternCycle > 15.f)
+			{
+				//m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
+				m_iRandomPattern = 5;
+				m_fPatternCycle = 0;
+			}
+
+
+			if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
+			{
+
+				if (m_iRandomPattern == 0)
+				{
+					if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
+						SetState(STATE_CHASE, DIR_R);
+					else
+						SetState(STATE_CHASE, DIR_L);
+				}
+
+				else if (m_iRandomPattern == 1) // 점프패턴
+				{
+					if (m_eDir == DIR_R)
+						SetState(STATE_JUMP, DIR_R);
+					else
+						SetState(STATE_JUMP, DIR_L);
+				}
+
+				else if (m_iRandomPattern == 2) // 일반공격
+				{
+					if (m_eDir == DIR_R)
+						SetState(STATE_ATTACK, DIR_R);
+					else
+						SetState(STATE_ATTACK, DIR_L);
+				}
+
+				else if (m_iRandomPattern == 3) // 텔레포트
+				{
+					if (m_eDir == DIR_R)
+						SetState(STATE_DASH, DIR_R);
+					else
+						SetState(STATE_DASH, DIR_L);
+				}
+
+				else if (m_iRandomPattern == 4) // 슬라임 소환
+				{
+					if (m_eDir == DIR_R)
+						SetState(STATE_DJUMP, DIR_R);
+					else
+						SetState(STATE_DJUMP, DIR_L);
+				}
+
+
+				else if (m_iRandomPattern == 100)	// 텔포 이후
+				{
+					if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
+						SetState(STATE_END, DIR_R);
+					else
+						SetState(STATE_END, DIR_L);
+				}
+
+				else if (m_iRandomPattern == 5)	// 게이트 소환
+				{
+					if (m_eDir == DIR_R)
+						SetState(STATE_RESET, DIR_R);
+					else
+						SetState(STATE_RESET, DIR_L);
+				}
+
+				else if (m_iRandomPattern == 6)	// 재생성
+				{
+					if (m_eDir == DIR_R)
+						SetState(STATE_RETURN, DIR_R);
+					else
+						SetState(STATE_RETURN, DIR_L);
+				}
+
+			}
+
+			CUIManager::Get_Instance()->Get_GASHp(m_iHp);
 		}
 
-		else if (m_iRandomPattern == 5)	// 게이트 소환
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_RESET, DIR_R);
-			else
-				SetState(STATE_RESET, DIR_L);
-		}
-
-		else if (m_iRandomPattern == 6)	// 재생성
-		{
-			if (m_eDir == DIR_R)
-				SetState(STATE_RETURN, DIR_R);
-			else
-				SetState(STATE_RETURN, DIR_L);
-		}
 
 	}
-
 
 	Safe_Release(pGameInstance);
 
-
-	CUIManager::Get_Instance()->Get_GASHp(m_iHp);
 
 	switch (m_eCurState)
 	{
@@ -308,6 +351,12 @@ void CGAS::Tick(_float fTimeDelta)
 		break;
 	case STATE_DIE:
 		Tick_Die(fTimeDelta);
+		break;
+	case STATE_CUTSCEEN:
+		Tick_CutScene(fTimeDelta);
+		break;
+	case STATE_CUTSCEEN_2:
+		Tick_CutScene2(fTimeDelta);
 		break;
 	case STATE_RESET:
 		Tick_Reset(fTimeDelta);
@@ -377,8 +426,46 @@ HRESULT CGAS::Render()
 }
 
 
+void CGAS::Tick_CutScene(_float fTimeDelta)
+{
+	if (!m_bCutSceneRend)
+		return;
+
+	m_fCutSceneTimeAcc += fTimeDelta;
+
+	CGameObject* pJang = CCutSceneManager::Get_Instance()->Get_Jang();
+	CTransform* pJangTran = (CTransform*)pJang->Get_ComponentPtr(TEXT("Com_Transform"));
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	vPos.y -= 1.8f;
+	vPos.x -= 0.5f;
+	vPos.z -= 0.8f;
+	pJangTran->Set_State(CTransform::STATE_POSITION, vPos);
 
 
+	if (2.f < m_fCutSceneTimeAcc && !m_bCutSceneJump)
+	{
+		m_pTransformCom->Set_Vel(30.f);
+		m_bCutSceneJump = true;
+		CCutSceneManager::Get_Instance()->Set_JangRander(false);
+	}
+	else if (4.f < m_fCutSceneTimeAcc)
+	{
+		Set_Dead();
+	}
+
+}
+void CGAS::Tick_CutScene2(_float fTimeDelta)
+{
+	m_fCutSceneTimeAcc += fTimeDelta;
+
+
+	if (10.f < m_fCutSceneTimeAcc && !m_bCutSceneJump)
+	{
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3{ 0.f, 3.f, 9.f });
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPA"), 0.1f, CAnimator::STATE_ONCE);
+		m_bCutSceneJump = true;
+	}
+}
 
 void CGAS::Tick_Idle(_float fTimeDelta)
 {
@@ -749,6 +836,38 @@ void CGAS::Damaged(CGameObject * pOther)
 	}
 
 }
+
+void CGAS::DestroyCube(_int iLength)
+{
+	_float4x4 Matrix;
+	_float3 foriDir = { 1.f, 0.f, 0.f };
+	_float3 fDir;
+	_float3 vPos;
+	for (_int i = 0; i <= 360; i+=45)
+	{
+		_int iAngle = i + 20;
+		D3DXMatrixRotationY(&Matrix, D3DXToRadian(_float(iAngle)));
+		D3DXVec3TransformNormal(&fDir, &foriDir, &Matrix);
+		vPos = fDir * iLength;
+		CMap_Manager::CUBEDATA desc;
+		vPos.y += 2.f;
+		desc.vPos = vPos;
+		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Trigger"), LEVEL_GAS, TEXT("Layer_Cube"), &desc)))
+			return;
+	}
+
+}
+
+void CGAS::MakeBlockCube(_float3 vPos)
+{
+	CMap_Manager::CUBEDATA desc;
+	desc.iIndex = 1;
+	desc.vPos = vPos;
+
+	if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PushCube"), LEVEL_GAS, TEXT("Layer_Cube"), &desc)))
+		return;
+}
+
 
 CGAS * CGAS::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

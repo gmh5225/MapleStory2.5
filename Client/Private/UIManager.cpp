@@ -2,7 +2,8 @@
 #include "..\Public\UIManager.h"
 #include "GameInstance.h"
 #include "Loading.h"
-#include "CutSCreen.h"
+#include "CutScreen.h"
+#include "DomiScreen.h"
 #include "TaxiChatBox.h"
 
 IMPLEMENT_SINGLETON(CUIManager)
@@ -56,6 +57,11 @@ void CUIManager::Set_Loading()
 		return;
 	m_pCutScreen = (CCutScreen*)pObj;
 
+	pObj = nullptr;
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_DomiScreen"), &pObj, nullptr)))
+		return;
+	m_pDomiScreen = (CDomiScreen*)pObj;
+
 
 	Safe_Release(pGameInstance);
 }
@@ -90,6 +96,21 @@ void CUIManager::Off_CutScreen()
 	m_pCutScreen->OffCutScreen();
 }
 
+void CUIManager::On_DomiScreen()
+{
+	if (nullptr == m_pDomiScreen)
+		return;
+
+	m_pDomiScreen->OnCutScreen();
+}
+void CUIManager::Off_DomiScreen()
+{
+	if (nullptr == m_pDomiScreen)
+		return;
+
+	m_pDomiScreen->OffCutScreen();
+}
+
 void CUIManager::On_TaxiChatBox()
 {
 	if (nullptr == m_pTaxiChatBox)
@@ -110,12 +131,15 @@ void CUIManager::Tick(_float TimeDelta)
 {
 	m_pLoading->Tick(TimeDelta);
 	m_pCutScreen->Tick(TimeDelta);
+	m_pDomiScreen->Tick(TimeDelta);
 }
 
 void CUIManager::LateTick(_float TimeDelta)
 {
 	m_pLoading->LateTick(TimeDelta);
 	m_pCutScreen->LateTick(TimeDelta);
+	m_pDomiScreen->LateTick(TimeDelta);
+
 }
 
 void CUIManager::Fix_BlackWizardHp(_int iHp)
@@ -139,6 +163,7 @@ HRESULT CUIManager::Add_BlackWizardPatternUI(CBlackWizardPatternUI * pInstance)
 
 void CUIManager::Free()
 {
+	Safe_Release(m_pDomiScreen);
 	Safe_Release(m_pItemNotice);
 	Safe_Release(m_pCutScreen);
 	Safe_Release(m_pLoading);

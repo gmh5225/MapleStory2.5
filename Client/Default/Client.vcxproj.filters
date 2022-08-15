@@ -678,6 +678,15 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill">
       <UniqueIdentifier>{520bd4c8-6e56-4bc3-81e3-f7e6253edcdc}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Cube\TriggerCube">
+      <UniqueIdentifier>{41326089-0ec8-48a1-b7c4-5169044e7cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\08.JalJang">
+      <UniqueIdentifier>{554f6666-7e9b-4af2-9a59-979b7a26c54a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\09.DomiScreen">
+      <UniqueIdentifier>{55dec146-15d5-4970-ad57-9c9f4292b6e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1259,6 +1268,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\GreenSkill.h">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill</Filter>
+      </ClInclude>
+    <ClInclude Include="..\public\TriggerCube.h">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Trigger.h">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\JalJang.h">
+      <Filter>02.GameObject\Creature\Npc\08.JalJang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\DomiScreen.h">
+      <Filter>04.UI\09.DomiScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1831,6 +1852,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\GreenSkill.cpp">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill</Filter>
+      </ClCompile>
+    <ClCompile Include="..\private\TriggerCube.cpp">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Trigger.cpp">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\JalJang.cpp">
+      <Filter>02.GameObject\Creature\Npc\08.JalJang</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\DomiScreen.cpp">
+      <Filter>04.UI\09.DomiScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

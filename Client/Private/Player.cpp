@@ -17,6 +17,10 @@
 
 #include "Shadow.h"
 
+#include "UIManager.h"
+#include "CutSceneManager.h"
+
+
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -146,6 +150,17 @@ HRESULT CPlayer::SetUp_Components()
 
 void CPlayer::Tick(_float fTimeDelta)
 {
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_Y))
+	{
+		CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
+	}
+	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))
+	{
+		CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking2();
+//		CUIManager::Get_Instance()->Off_DomiScreen();
+	}
+
+
 	switch (m_eCurState)
 	{
 	case Client::CPlayer::STATE_IDLE:

@@ -16,6 +16,8 @@
 #include "CutSceneManager.h"
 #include "UIManager.h"
 #include "Sky.h"
+#include "GAS.h"
+
 
 CLevel_ElenyaGAS::CLevel_ElenyaGAS(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
@@ -60,7 +62,7 @@ HRESULT CLevel_ElenyaGAS::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
-	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
+	CCutSceneManager::Get_Instance()->Start_Enter_InitGASHenesys();
 
 	return S_OK;
 }
@@ -157,7 +159,11 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_Monster(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_GAS, pLayerTag)))
+	CGAS::GASDESC Desc;
+	Desc.eState = CGAS::STATE_CUTSCEEN_2;
+	Desc.vPos = _float3{ 0.f, 0.f, 0.f };
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_GAS, pLayerTag, &Desc)))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -183,6 +189,9 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_Npc(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PurpleGate"), LEVEL_GAS, pLayerTag)))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_JalJang"), LEVEL_GAS, pLayerTag)))
+		return E_FAIL;
+	
 
 	Safe_Release(pGameInstance);
 
@@ -214,7 +223,7 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_Map(const _tchar * pLayerTag)
 	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_GAS");
 	for (auto& Data : *pMapData)
 	{
-		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_GAS, pLayerTag, &Data)))
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TriggerCube"), LEVEL_GAS, pLayerTag, &Data)))
 			return E_FAIL;
 	}
 

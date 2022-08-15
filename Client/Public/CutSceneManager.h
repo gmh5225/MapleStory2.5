@@ -26,7 +26,6 @@ public:
 public:
 	class CCamera_Free* Get_MainCam();
 
-
 	_bool IsCutScene() { return m_bIsCutScene; }
 
 	void Start_Enter_Henesys_1(); 
@@ -43,6 +42,12 @@ public:
 
 	void Start_Enter_GASHenesys();
 	void End_Enter_GASHenesys();
+
+	void Start_Enter_InitGASHenesys();
+	void End_Enter_InitGASHenesys();
+
+	void Start_Enter_InitDHenesys();
+	void End_Enter_InitDHenesys();
 
 	void Start_Enter_DHenesys();
 	void End_Enter_DHenesys();
@@ -62,6 +67,10 @@ public:
 	void Set_JangRander(_bool JangRander) { m_bJangRender = JangRander;}
 	_bool Get_jangRander() { return m_bJangRender; }
 
+	void Enter_InitGASHenesys(_float fTimeDelta);
+
+
+	void Enter_InitDHenesys(_float fTimeDelta);
 	void Enter_DHenesys(_float fTimeDelta);
 
 
@@ -74,6 +83,8 @@ private:
 	_bool m_bElenya = false;
 	_bool m_bElenyaEnter = false;
 	_bool m_bGASHenesys = false;
+	_bool m_bInitGASHenesys = false;
+	_bool m_bInitDHenesys = false;
 	_bool m_bDHenesys = false;
 
 	//.for Henesys_1
@@ -109,6 +120,24 @@ private:
 	CGameObject* m_pJang = nullptr;
 	_bool m_bJangRender = true;
 
+	//.for EnterGASHenesys
+	_float m_bEnter_InitGASHenesys = false;
+	_float m_fInitGASHenesys_TimeAcc = 0.f;
+	_bool m_b7 = false;
+	_bool m_b7_1 = false;
+
+	//.for InitDHenesys
+	_float m_bEnter_InitDHenesys = false;
+	_float m_fInitDHenesys_TimeAcc = 0.f;
+	_bool m_b8 = false;
+	_bool m_b8_1 = false;
+	_bool m_b8_2 = false;
+
+
+
+	// .For Total
+	_float m_fMainUITimeAcc = 0.f;
+	_bool m_bMainUI = false;
 
 public:
 	virtual void Free() override;

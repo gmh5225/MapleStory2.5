@@ -134,6 +134,8 @@
 #include "DownCube.h"
 #include "JumpCube.h"
 #include "AutoDownCube.h"
+#include "Trigger.h"
+#include "TriggerCube.h"
 
 #include "RedGate.h"
 #include "GreenGate.h"
@@ -147,6 +149,8 @@
 #include "RedSkill.h"
 #include "GASEffect.h"
 #include "GreenSkill.h"
+
+#include "JalJang.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -284,7 +288,6 @@ HRESULT CLoader::Loading_ForGamePlayLevel()
 
 		Load_BossMonster_Texture();
 
-		//Load_Monster_Texture();
 
 		/* For.Prototype_Component_Texture_Npc */
 
@@ -735,6 +738,11 @@ HRESULT CLoader::Load_Npc_Object()
 		CRedSkill::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_JalJang"),
+		CJalJang::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+
 	Safe_Release(pGameInstance);
 
 	return S_OK;
@@ -1092,6 +1100,12 @@ HRESULT CLoader::Load_Model_Object()
 		return E_FAIL;
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_AutoDownCube"),
 		CAutoDownCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Trigger"),
+		CTrigger::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_TriggerCube"),
+		CTriggerCube::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
@@ -2196,6 +2210,11 @@ HRESULT CLoader::Load_Npc_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_Taxi"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Taxi/Taxi.png")))))
+		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_JalJang"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/JalJang/JalJang_%d.png"), 10))))
 		return E_FAIL;
 
 

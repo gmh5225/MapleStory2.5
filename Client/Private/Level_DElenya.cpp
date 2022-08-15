@@ -212,7 +212,7 @@ HRESULT CLevel_DElenya::Ready_Layer_Map(const _tchar * pLayerTag)
 	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_DElenya");
 	for (auto& Data : *pMapData)
 	{
-		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_DELENYA, pLayerTag, &Data)))
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AutoDownCube"), LEVEL_DELENYA, pLayerTag, &Data)))
 			return E_FAIL;
 	}
 

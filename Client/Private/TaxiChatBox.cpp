@@ -93,16 +93,6 @@ HRESULT CTaxiChatBox::Initialize(void * pArg)
 void CTaxiChatBox::Tick(_float fTimeDelta)
 {
 
-	//if (CGameInstance::Get_Instance()->Key_Down(DIK_U))
-	//{
-	//	Start_Chat();
-	//}
-	//else if (CGameInstance::Get_Instance()->Key_Down(DIK_I))
-	//{
-	//	End_Chat();
-	//}
-
-
 	if (m_bOn)
 		On_Chat(fTimeDelta);
 	else

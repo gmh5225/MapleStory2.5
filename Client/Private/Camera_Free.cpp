@@ -114,6 +114,10 @@ void CCamera_Free::Start_AttackShaking()
 {
 	StartShake(0.3f, 0.05f, 2.f, _float3(0.f, 0.f, 1.f));
 }
+void CCamera_Free::Start_AttackShaking2()
+{
+	StartShake(0.5f, 0.1f, 4.f, _float3(0.f, 0.f, 1.f));
+}
 
 void CCamera_Free::StartShake(_float fShakeTime, _float fShortShakeTime, _float fShakePower, _float3 vShakeDir)
 {
