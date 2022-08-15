@@ -144,6 +144,8 @@
 #include "PurpleSlime.h"
 #include "PurpleSkill.h"
 #include "RedSkill.h"
+#include "GASEffect.h"
+#include "GreenSkill.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -739,6 +741,14 @@ HRESULT CLoader::Load_PlayerSkill_Object()
 	/* 객체원형 로드한다. */
 
 	/* For.Prototype_GameObject_PlayerSkill*/
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GASEffect"),
+		CGASEffect::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_GreenSkill"),
+		CGreenSkill::Create(m_pGraphic_Device))))
+		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SolunaSlash_EffectA"),
 		CSolunaSlashEffectA::Create(m_pGraphic_Device))))
@@ -1337,6 +1347,12 @@ HRESULT CLoader::Load_Player_Skill_Texture()
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 
 	Safe_AddRef(pGameInstance);
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GASEffect"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Effect%d.png"), 8))))
+		return E_FAIL;
+
 	// Attack
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SolunaSlash_EffectA"),
@@ -2021,6 +2037,10 @@ HRESULT CLoader::Load_Npc_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSkill"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GASPattern/Fire%d.png"), 6))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenSkill"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GASPattern/Heal%d.png"), 11))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_ElderStan_Idle"),

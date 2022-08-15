@@ -209,7 +209,10 @@ void CBlueMushmom::LateTick(_float fTimeDelta)
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
-	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	if (m_iHp > 0)
+	{
+		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	}
 
 	Set_Billboard();
 }
@@ -456,9 +459,11 @@ void CBlueMushmom::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Hunting(TEXT("BlueMushmom"));
 		Die();
+		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 1, 1.f);
 	}
+	else
+		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDamage.wav", 1, 1.f);
 
 }
 

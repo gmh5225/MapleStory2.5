@@ -5,12 +5,12 @@
 
 BEGIN(Client)
 
-class CRedSkill final : public CCreature
+class CGreenSkill final : public CCreature
 {
 private:
-	CRedSkill(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CRedSkill(const CRedSkill& rhs);
-	virtual ~CRedSkill() = default;
+	CGreenSkill(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CGreenSkill(const CGreenSkill& rhs);
+	virtual ~CGreenSkill() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -43,10 +43,12 @@ private:
 
 	CGameObject* m_pTarget;
 
-	_float m_fSkill;
+	_float m_fDead;
+
+	_float4x4				m_ProjMatrix;
 
 public:
-	static CRedSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CGreenSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

@@ -112,7 +112,7 @@ void CPurpleSlime::Tick(_float fTimeDelta)
 		}
 		break;
 	case B:
-		m_pTransformCom->Chase(_float3(10.5f, 0.f, 0.f), fTimeDelta * 2.5f);
+		m_pTransformCom->Chase(_float3(10.5f, 0.f, 0.f), fTimeDelta * 2.7f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_PurpleSlime_MoveR"), 0.1f, CAnimator::STATE_LOOF);
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 10.4f)
 		{
@@ -120,7 +120,7 @@ void CPurpleSlime::Tick(_float fTimeDelta)
 		}
 		break;
 	case P:
-		m_pTransformCom->Chase(_float3(-10.5f, 0.f, 0.f), fTimeDelta * 2.5f);
+		m_pTransformCom->Chase(_float3(-10.5f, 0.f, 0.f), fTimeDelta * 2.7f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_PurpleSlime_Move"), 0.1f, CAnimator::STATE_LOOF);
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x <= -10.4f)
 		{

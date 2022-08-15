@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "..\Public\BlueGate.h"
+#include "..\Public\GreenSkill.h"
 
 #include "GameInstance.h"
 
 
-CBlueGate::CBlueGate(LPDIRECT3DDEVICE9 pGraphic_Device)
+CGreenSkill::CGreenSkill(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
 }
-CBlueGate::CBlueGate(const CBlueGate & rhs)
+CGreenSkill::CGreenSkill(const CGreenSkill & rhs)
 	: CCreature(rhs)
 {
 }
@@ -16,13 +16,13 @@ CBlueGate::CBlueGate(const CBlueGate & rhs)
 
 
 
-HRESULT CBlueGate::Initialize_Prototype()
+HRESULT CGreenSkill::Initialize_Prototype()
 {
 	__super::Initialize_Prototype();
 
 	return S_OK;
 }
-HRESULT CBlueGate::Initialize(void * pArg)
+HRESULT CGreenSkill::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
 
@@ -31,8 +31,12 @@ HRESULT CBlueGate::Initialize(void * pArg)
 
 	m_sTag = "Tag_Npc";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(10.5f, 1.5f, 0.f));
-	m_pTransformCom->Set_Scaled(4.5f);
+	m_fColRad = 1.f;	
+
+	m_fDead = 0;
+
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 4.f, 0.f));
+	m_pTransformCom->Set_Scaled(8.f);
 
 	SetState(STATE_IDLE, DIR_END);
 
@@ -44,11 +48,11 @@ HRESULT CBlueGate::Initialize(void * pArg)
 
 
 
-HRESULT CBlueGate::SetUp_Components()
+HRESULT CGreenSkill::SetUp_Components()
 {
-	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlueGate"), nullptr);
 
+	{
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GreenSkill"), nullptr);
 	}
 
 
@@ -68,38 +72,50 @@ HRESULT CBlueGate::SetUp_Components()
 
 
 
-void CBlueGate::Tick(_float fTimeDelta)
+void CGreenSkill::Tick(_float fTimeDelta)
 {
+
+	
 
 	switch (m_eCurState)
 	{
-	case Client::CBlueGate::STATE_IDLE:
+	case Client::CGreenSkill::STATE_IDLE:
 		Tick_Idle(fTimeDelta);
 		break;
-	case Client::CBlueGate::STATE_MOVE:
+	case Client::CGreenSkill::STATE_MOVE:
 		Tick_Move(fTimeDelta);
 		break;
-	case Client::CBlueGate::STATE_HIT:
+	case Client::CGreenSkill::STATE_HIT:
 		Tick_Hit(fTimeDelta);
 		break;
-	case Client::CBlueGate::STATE_CHASE:
+	case Client::CGreenSkill::STATE_CHASE:
 		Tick_Chase(fTimeDelta);
 		break;
 	}
 
 }
-void CBlueGate::LateTick(_float fTimeDelta)
+void CGreenSkill::LateTick(_float fTimeDelta)
 {
 	Set_Billboard();
+
+	m_fDead += fTimeDelta;
 
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_UI, this);
+
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_NPC, this);
+
+
+	if (m_fDead > 2.3f)
+		Set_Dead();
 }
-HRESULT CBlueGate::Render()
+HRESULT CGreenSkill::Render()
 {
+	_float4x4		Matrix;
+	D3DXMatrixIdentity(&Matrix);
+
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
@@ -107,6 +123,7 @@ HRESULT CBlueGate::Render()
 	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
 	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
 	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
 
 	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
 	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
@@ -127,23 +144,23 @@ HRESULT CBlueGate::Render()
 
 
 
-void CBlueGate::Tick_Idle(_float fTimeDelta)
+void CGreenSkill::Tick_Idle(_float fTimeDelta)
 {
 }
-void CBlueGate::Tick_Move(_float fTimeDelta)
+void CGreenSkill::Tick_Move(_float fTimeDelta)
 {
 }
-void CBlueGate::Tick_Hit(_float fTimeDelta)
-{
-}
-
-void CBlueGate::Tick_Chase(_float fTimeDelta)
+void CGreenSkill::Tick_Hit(_float fTimeDelta)
 {
 }
 
+void CGreenSkill::Tick_Chase(_float fTimeDelta)
+{
+}
 
 
-void CBlueGate::SetState(STATE eState, DIR eDir)
+
+void CGreenSkill::SetState(STATE eState, DIR eDir)
 {
 	if (m_eCurState == eState && m_eDir == eDir)
 		return;
@@ -152,25 +169,25 @@ void CBlueGate::SetState(STATE eState, DIR eDir)
 	m_eDir = eDir;
 	SetAni();
 }
-void CBlueGate::SetAni()
+void CGreenSkill::SetAni()
 {
 	switch (m_eCurState)
 	{
-	case CBlueGate::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueGate"), 0.1f, CAnimator::STATE_LOOF);
+	case CGreenSkill::STATE_IDLE:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GreenSkill"), 0.2f, CAnimator::STATE_LOOF);
 		break;
-	case CBlueGate::STATE_MOVE:
+	case CGreenSkill::STATE_MOVE:
 	{
 	}
 	break;
-	case CBlueGate::STATE_HIT:
+	case CGreenSkill::STATE_HIT:
 		break;
-	case CBlueGate::STATE_CHASE:
+	case CGreenSkill::STATE_CHASE:
 		break;
 	}
 }
 
-void CBlueGate::Damaged(CGameObject * pOther)
+void CGreenSkill::Damaged(CGameObject * pOther)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -179,9 +196,8 @@ void CBlueGate::Damaged(CGameObject * pOther)
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	
-	SetState(STATE_HIT,DIR_END);
 
+	SetState(STATE_HIT, DIR_END);
 
 
 	Safe_Release(pGameInstance);
@@ -192,25 +208,25 @@ void CBlueGate::Damaged(CGameObject * pOther)
 
 
 
-CBlueGate * CBlueGate::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CGreenSkill * CGreenSkill::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CBlueGate*		pInstance = new CBlueGate(pGraphic_Device);
+	CGreenSkill*		pInstance = new CGreenSkill(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
-		MSG_BOX(TEXT("Failed To Created : CBlueGate"));
+		MSG_BOX(TEXT("Failed To Created : CGreenSkill"));
 		Safe_Release(pInstance);
 	}
 
 	return pInstance;
 }
-CGameObject * CBlueGate::Clone(void* pArg)
+CGameObject * CGreenSkill::Clone(void* pArg)
 {
-	CBlueGate*		pInstance = new CBlueGate(*this);
+	CGreenSkill*		pInstance = new CGreenSkill(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
-		MSG_BOX(TEXT("Failed To Cloned : CBlueGate"));
+		MSG_BOX(TEXT("Failed To Cloned : CGreenSkill"));
 		Safe_Release(pInstance);
 	}
 
@@ -220,14 +236,14 @@ CGameObject * CBlueGate::Clone(void* pArg)
 
 
 
-void CBlueGate::Collision(CGameObject * pOther)
+void CGreenSkill::Collision(CGameObject * pOther)
 {
 }
 
 
 
 
-void CBlueGate::Free()
+void CGreenSkill::Free()
 {
 	__super::Free();
 

@@ -31,8 +31,8 @@ HRESULT CRedGate::Initialize(void * pArg)
 
 	m_sTag = "Tag_Npc";
 
-	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-6.5f, 1.7f, 7.3f));
-	m_pTransformCom->Set_Scaled(5.f);
+	m_fColRad = 1.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-6.5f, 1.5f, 7.3f));
+	m_pTransformCom->Set_Scaled(4.5f);
 
 	SetState(STATE_IDLE, DIR_END);
 

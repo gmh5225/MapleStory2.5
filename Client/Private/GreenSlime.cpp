@@ -110,12 +110,13 @@ void CGreenSlime::Tick(_float fTimeDelta)
 			CGameInstance* pInstance = CGameInstance::Get_Instance();
 			Safe_AddRef(pInstance);
 			((CGAS*)pInstance->Get_ObjectPtr(LEVEL_GAS, L"Layer_Monster", 0))->Reset_Hp();
+			(pInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenSkill"), LEVEL_GAS, TEXT("Layer_UI")));
 			Safe_Release(pInstance);
 			Set_Dead();
 		}
 		break;
 	case B:
-		m_pTransformCom->Chase(_float3(10.5f, 0.f, 0.f), fTimeDelta * 2.5f);
+		m_pTransformCom->Chase(_float3(10.5f, 0.f, 0.f), fTimeDelta * 2.7f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GreenSlime_MoveR"), 0.1f, CAnimator::STATE_LOOF);
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 10.4f)
 		{
@@ -123,7 +124,7 @@ void CGreenSlime::Tick(_float fTimeDelta)
 		}
 		break;
 	case P:
-		m_pTransformCom->Chase(_float3(-10.5f, 0.f, 0.f), fTimeDelta * 2.5f);
+		m_pTransformCom->Chase(_float3(-10.5f, 0.f, 0.f), fTimeDelta * 2.7f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GreenSlime_Move"), 0.1f, CAnimator::STATE_LOOF);
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x <= -10.4f)
 		{
