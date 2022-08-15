@@ -36,7 +36,7 @@ HRESULT CBlackWizardFinal::Initialize(void * pArg)
 	m_pTransformCom->Set_Scaled(_float3{ 12.f,12.f,12.f });
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_pTarget->Get_State(CTransform::STATE_POSITION) + _float3{ 0.f,2.f,0.f });
 
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizardFinal"), 0.1f, CAnimator::STATE_ONCE);
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackWizardFinal"), 0.12f, CAnimator::STATE_ONCE);
 
 
 	return S_OK;
@@ -79,7 +79,7 @@ void CBlackWizardFinal::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AnimCount() == 13)
 		CCutSceneManager::Get_Instance()->Get_MainCam()->StartShake(0.4f, 0.05f, 15.f, _float3(1.f, 1.f, 1.f));
 
-	if (m_pAnimatorCom->Get_AnimCount() == 20)
+	if (m_pAnimatorCom->Get_AnimCount() == 27)
 	{
 		CToolManager::Get_Instance()->SetDestLevel(LEVEL_DARKMAGEENTER, _float3{ -1.f, 2.f, 0.f });
 	}

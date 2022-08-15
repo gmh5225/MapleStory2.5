@@ -27,7 +27,7 @@ HRESULT CBlackWizardAttack2::Initialize(void * pArg)
 		return E_FAIL;
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
-
+	pInstance->PlaySoundW(L"BlackWizardAttack2.wav", 27, 1.f);
 	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pInstance);

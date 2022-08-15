@@ -82,8 +82,8 @@ void CSolunaSlashEffectA::Tick(_float fTimeDelta)
 void CSolunaSlashEffectA::LateTick(_float fTimeDelta)
 {
 
-
-		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+	//m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 
 
 	if (m_pAnimatorCom->Get_AnimCount() == 7)

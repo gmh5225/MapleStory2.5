@@ -39,11 +39,11 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 	m_eCurState = STATE_APPEAR;
-	m_iHp = 5;
+	m_iHp = 30;
 	CUIManager::Get_Instance()->Set_BlackWizardHp(m_iHp);
 	SetAni();
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 4.f, 0.f));
-	m_pTransformCom->Set_Scaled(9.f);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 3.5f, 0.5f));
+	m_pTransformCom->Set_Scaled(13.f);
 	m_bState = false;
 	m_bFinal = false;
 	SetShadow(LEVEL_GAMEPLAY, 1.5f);
@@ -68,7 +68,7 @@ void CBlackWizard::LateTick(_float fTimeDelta)
 		if(m_eCurState != STATE_END)
 		SetState();
 	}
-	//Fix_Scale();
+	Fix_Scale();
 
 	
 
@@ -176,12 +176,12 @@ void CBlackWizard::Fix_Scale()
 	switch (m_eCurState)
 	{
 	case Client::CBlackWizard::STATE_APPEAR:
-		m_pTransformCom->Set_Scaled(9.f);
+		m_pTransformCom->Set_Scaled(13.f);
 		break;
 	case Client::CBlackWizard::STATE_ESCAPE:
-		m_pTransformCom->Set_Scaled(_float3{ 11.f,12.f,11.f });
+		m_pTransformCom->Set_Scaled(13.f);
 		break;
-	case Client::CBlackWizard::STATE_STAND:
+	/*case Client::CBlackWizard::STATE_STAND:
 		m_pTransformCom->Set_Scaled(_float3{ 7.5f,9.f,7.5f });
 		break;
 	case Client::CBlackWizard::STATE_SKILL1:
@@ -195,7 +195,7 @@ void CBlackWizard::Fix_Scale()
 		break;
 	case Client::CBlackWizard::STATE_SKILL4:
 		m_pTransformCom->Set_Scaled(_float3{ 9.5f,9.5f,9.5f });
-		break;
+		break;*/
 	case Client::CBlackWizard::STATE_END:
 		break;
 	default:

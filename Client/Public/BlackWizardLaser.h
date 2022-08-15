@@ -22,9 +22,9 @@ public:
 
 	virtual void Collision(CGameObject* pOther) override;
 
-protected:
-	virtual HRESULT Set_RenderState() override;
-	virtual HRESULT Reset_RenderState() override;
+//protected:
+//	virtual HRESULT Set_RenderState() override;
+//	virtual HRESULT Reset_RenderState() override;
 
 	void SetAni();
 

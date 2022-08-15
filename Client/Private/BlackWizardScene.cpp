@@ -38,7 +38,8 @@ HRESULT CBlackWizardScene::Initialize(void * pArg)
 		return E_FAIL;
 	m_bFinal = false;
 	m_bRender = true;
-
+	CGameInstance::Get_Instance()->PlaySoundW(L"BlackWizardFinish.wav", 27, 1.f);
+	CGameInstance::Get_Instance()->PlaySoundW(L"BlackWizardFinishVoice.wav", 28, 1.f);
 	return S_OK;
 }
 

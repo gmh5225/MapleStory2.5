@@ -72,8 +72,8 @@ void CChasingShotAttack::Tick(_float fTimeDelta)
 void CChasingShotAttack::LateTick(_float fTimeDelta)
 {
 
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_MOVEALPHABLEND, this);
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 
 
 

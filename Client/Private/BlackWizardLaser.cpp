@@ -32,7 +32,7 @@ HRESULT CBlackWizardLaser::Initialize(void * pArg)
 	m_bMove = true;
 	Safe_Release(pInstance);
 
-	m_pTransformCom->Set_Scaled(_float3{ 2.f,3.f,2.f });
+	m_pTransformCom->Set_Scaled(_float3{ 3.f,3.f,3.f });
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *((_float3*)pArg));
 	m_eCurState = STATE_REGEN;
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackMarbleRegen"), 0.1f, CAnimator::STATE_ONCE);
@@ -62,7 +62,7 @@ HRESULT CBlackWizardLaser::SetUp_Components()
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
-	TransformDesc.fSpeedPerSec = 4.f;
+	TransformDesc.fSpeedPerSec = 2.f;
 	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 	m_pTransformCom->Set_TransformDesc(TransformDesc);
 
@@ -88,7 +88,7 @@ void CBlackWizardLaser::LateTick(_float fTimeDelta)
 		SetAni();
 	
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
 	__super::BoxColCom_Tick(m_pTransformCom);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER_SKILL, this);
@@ -159,14 +159,14 @@ void CBlackWizardLaser::Collision(CGameObject * pOther)
 		m_pOther.push_back(pOther);
 		m_eCurState = STATE_DIE;
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackMarbleDie"), 0.1f, CAnimator::STATE_ONCE);
-		m_pTransformCom->Set_Scaled(_float3{ 4.f,6.f,4.f });
+		//m_pTransformCom->Set_Scaled(_float3{ 4.f,6.f,4.f });
 	}
 	else if (pOther->Get_Tag() != "Tag_Player")
 	{
 		m_eCurState = STATE_DIE;
 		m_bMove = false;
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackMarbleDie"), 0.1f, CAnimator::STATE_ONCE);
-		m_pTransformCom->Set_Scaled(_float3{ 4.f,6.f,4.f });
+		//m_pTransformCom->Set_Scaled(_float3{ 4.f,6.f,4.f });
 	}
 }
 
@@ -190,32 +190,32 @@ void CBlackWizardLaser::SetAni()
 	}
 }
 
-HRESULT CBlackWizardLaser::Set_RenderState()
-{
-	if (nullptr == m_pGraphic_Device)
-		return E_FAIL;
-
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
-
-
-	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
-
-
-	return S_OK;
-
-}
-
-HRESULT CBlackWizardLaser::Reset_RenderState()
-{
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
-
-	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
-
-	return S_OK;
-}
+//HRESULT CBlackWizardLaser::Set_RenderState()
+//{
+//	if (nullptr == m_pGraphic_Device)
+//		return E_FAIL;
+//
+//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+//	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+//	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+//	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+//
+//
+//	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_NONE);
+//
+//
+//	return S_OK;
+//
+//}
+//
+//HRESULT CBlackWizardLaser::Reset_RenderState()
+//{
+//	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, FALSE);
+//
+//	m_pGraphic_Device->SetRenderState(D3DRS_CULLMODE, D3DCULL_CCW);
+//
+//	return S_OK;
+//}
 
 
 

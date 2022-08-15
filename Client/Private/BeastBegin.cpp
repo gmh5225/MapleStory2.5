@@ -70,7 +70,7 @@ void CBeastBegin::LateTick(_float fTimeDelta)
 {
 
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 
 	if (m_pAnimatorCom->Get_AnimCount() == 6 && !m_bCreate)
 	{
