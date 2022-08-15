@@ -17,6 +17,8 @@ CQuestManager::CQuestManager()
 	m_iSlimeEssence = 0;
 	m_iStumpFirewood = 0;
 	m_iGreenMushroom = 0;
+	m_iGAS = 0;
+	m_iBlackMage = 0;
 }
 
 void CQuestManager::Tick()
@@ -25,6 +27,12 @@ void CQuestManager::Tick()
 	if (m_iQuestNum == 5)
 	{
 		if (m_iGAS == 1)
+			QuestClear();
+	}
+
+	if (m_iQuestNum == 6)
+	{
+		if (m_iBlackMage == 1)
 			QuestClear();
 	}
 
@@ -80,8 +88,14 @@ void CQuestManager::Hunting(const _tchar * MonsterName)
 
 	else if (m_iQuestNum == 5)
 	{
-		if (wcscmp(MonsterName, TEXT("GAS")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iGAS < 1)
+		if (wcscmp(MonsterName, TEXT("BlueSnail")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iGAS < 1)
 			++m_iGAS;
+	}
+
+	else if (m_iQuestNum == 6)
+	{
+		if (wcscmp(MonsterName, TEXT("BlackMage")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iGAS < 1)
+			++m_iBlackMage;
 	}
 }
 

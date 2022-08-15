@@ -167,6 +167,8 @@
     <ClInclude Include="..\Public\BeastInfo.h" />
     <ClInclude Include="..\Public\BeastLoof.h" />
     <ClInclude Include="..\Public\BlackWizardLaser.h" />
+    <ClInclude Include="..\Public\EHelena.h" />
+    <ClInclude Include="..\Public\EHelenaChat.h" />
     <ClInclude Include="..\Public\GASEffect.h" />
     <ClInclude Include="..\Public\GreenSkill.h" />
     <ClInclude Include="..\public\DomiScreen.h" />
@@ -373,6 +375,8 @@
     <ClCompile Include="..\Private\BeastInfo.cpp" />
     <ClCompile Include="..\Private\BeastLoof.cpp" />
     <ClCompile Include="..\Private\BlackWizardLaser.cpp" />
+    <ClCompile Include="..\Private\EHelena.cpp" />
+    <ClCompile Include="..\Private\EHelenaChat.cpp" />
     <ClCompile Include="..\Private\GASEffect.cpp" />
     <ClCompile Include="..\Private\GreenSkill.cpp" />
     <ClCompile Include="..\private\DomiScreen.cpp" />

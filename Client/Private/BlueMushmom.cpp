@@ -129,6 +129,8 @@ void CBlueMushmom::Tick(_float fTimeDelta)
 
 		m_fCountJump += fTimeDelta;
 
+		Safe_Release(pGameInstance);
+
 		if (vPlayerPos.x < 30.f)
 		{
 			SetState(STATE_END, DIR_END);
@@ -156,7 +158,7 @@ void CBlueMushmom::Tick(_float fTimeDelta)
 					SetState(STATE_CHASE, DIR_L);
 		}
 
-		Safe_Release(pGameInstance);
+
 
 
 		CUIManager::Get_Instance()->Get_BlueMushmomHp(m_iHp);
@@ -460,6 +462,7 @@ void CBlueMushmom::Damaged(CGameObject * pOther)
 	if (m_iHp <= 0)
 	{
 		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 1, 1.f);
+		CQuestManager::Get_Instance()->Hunting(TEXT("BlueMushmom"));
 		Die();
 	}
 }

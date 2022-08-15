@@ -295,7 +295,7 @@ HRESULT CQuestUI::Render()
 		_uint iStumpFirewoodl = Questinstance->Set_StumpFirewood();
 		_uint iGreenMushroom = Questinstance->Set_GreenMushroom();
 
-		wsprintf(cQuest, TEXT("[헤네시스] 장로스탄의 보양식\n") TEXT(" 슬라임 정수"));
+		wsprintf(cQuest, TEXT("[엘리니아] 장로스탄의 보양식\n") TEXT(" 슬라임 정수"));
 		wsprintf(cSlimeEssence, TEXT("%d"), iSlimeEssence);
 		wsprintf(cCountSlime, TEXT(" / 2\n"));
 
@@ -394,9 +394,50 @@ HRESULT CQuestUI::Render()
 
 			_uint iGAS = Questinstance->Set_GAS();
 
-			wsprintf(cQuest, TEXT("[헤네시스] 가디언 엔젤 슬라임 처치\n") TEXT(" 가디언 엔젤 슬라임"));
-			wsprintf(cGAS, TEXT("%d"), iGAS);
-			wsprintf(cCountSlime, TEXT(" / 1\n"));
+			wsprintf(cQuest, TEXT("[엘리니아] 가디언 엔젤 슬라임 처치\n") TEXT(" 가디언 엔젤 슬라임"));
+			wsprintf(cGAS, TEXT("	%d"), iGAS);
+			wsprintf(cCountSlime, TEXT("		/ 1\n"));
+
+
+
+			if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
+			{
+				SetRect(&rc, 1100, 270, 1200, 150);
+				m_pFont->DrawText(NULL, cQuest,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+
+				if (iGAS == 11)
+				{
+					SetRect(&rc, 1165, 285, 1205, 165);
+					m_pFont->DrawText(NULL, cGAS,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(0.f, 1.0f, 1.0f, 1.0f));
+				}
+				else
+				{
+					SetRect(&rc, 1165, 285, 1205, 165);
+					m_pFont->DrawText(NULL, cGAS,
+						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.0f));
+				}
+
+				SetRect(&rc, 1178, 285, 1218, 165);
+				m_pFont->DrawText(NULL, cCountSlime,
+					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
+
+			}
+		}
+
+
+		else if (Questinstance->Get_QuestNum() == 6)
+		{
+			TCHAR cQuest[128];
+			TCHAR cGAS[50];
+			TCHAR cCountSlime[15];
+
+			_uint iGAS = Questinstance->Set_GAS();
+
+			wsprintf(cQuest, TEXT("[최종] 검은마법사 처치\n") TEXT(" 검은 마법사"));
+			wsprintf(cGAS, TEXT("	%d"), iGAS);
+			wsprintf(cCountSlime, TEXT("	/ 1\n"));
 
 
 

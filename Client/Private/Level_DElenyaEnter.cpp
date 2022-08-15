@@ -46,8 +46,8 @@ HRESULT CLevel_DElenyaEnter::Initialize()
 	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
 	//	return E_FAIL;
 
-	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
+		return E_FAIL;
 
 	//if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
 	//	return E_FAIL;
@@ -177,6 +177,14 @@ HRESULT CLevel_DElenyaEnter::Ready_Layer_Npc(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_EHelena"), LEVEL_HENESYS, pLayerTag)))
+		return E_FAIL;
+
+	CGameObject* pObj = nullptr;
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_EHelenaChat"), LEVEL_STATIC, pLayerTag, &pObj, nullptr)))
+		return E_FAIL;
+	CUIManager::Get_Instance()->SetEHelenaChat(pObj);
 
 	Safe_Release(pGameInstance);
 

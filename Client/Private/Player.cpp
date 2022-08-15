@@ -19,6 +19,7 @@
 
 #include "UIManager.h"
 #include "CutSceneManager.h"
+#include "QuestManager.h"
 
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -856,6 +857,12 @@ void CPlayer::GetJumpKeyInput(_float fTimeDelta)
 	{
 		SetState(STATE_DJUMP, m_eDir);
 		CParticleManager::Get_Instance()->BackShot(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
+	}
+
+
+	if (pGameInstance->Key_Down(DIK_U))
+	{
+		CQuestManager::Get_Instance()->Hunting(TEXT("GAS"));
 	}
 
 	Safe_Release(pGameInstance);

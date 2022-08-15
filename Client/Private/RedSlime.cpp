@@ -92,16 +92,28 @@ void CRedSlime::Tick(_float fTimeDelta)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+	CCreature::CRETUREDESC D;
+
+	_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+	_float b = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+
+	D.vPos = _float3(0.f + a, 2.f, 0.f + b);
+
 	switch (m_iDirection)
 	{
 	case R:
 		m_pTransformCom->Chase(_float3(-6.5f, 0.f, 7.3f), fTimeDelta * 2.5f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSlime_Move"), 0.1f, CAnimator::STATE_LOOF);
+
+
+
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x <= -6.4f)
 		{
-			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC")));
-			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC")));
-			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC")));
+
+
+			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC") , &D));
+			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC") , &D));
+			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC") , &D));
 			Set_Dead();
 		}
 		break;

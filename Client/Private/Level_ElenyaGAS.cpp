@@ -210,12 +210,7 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_Map(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
 		return E_FAIL;
 
-	CPotal::POTALDESC PotalDesc;
-	PotalDesc.eDestLevel = LEVEL_ELENYA;
-	PotalDesc.Pos = _float3(0.f, 1.f, -2.f);
-	PotalDesc.DestPos = _float3(27.f, 29.f, 6.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAS, pLayerTag, &PotalDesc)))
-		return E_FAIL;
+
 
 
 	/* 맵 큐브 추가 > 섹션 생성 > 콜리젼 매니저 컴포넌트 멤버함수 호출로 섹션에 큐브 채우기*/

@@ -101,6 +101,7 @@ private:
 	_uint	m_iSlimeEssence;
 	_uint	m_iStumpFirewood;
 	_uint	m_iGreenMushroom;
+	_uint	m_iBlackMage;
 
 	// 몇번째 퀘스트인지
 	_uint	m_iQuestNum;

@@ -693,10 +693,10 @@
     </Filter>
     <Filter Include="04.UI\10.Title">
       <UniqueIdentifier>{4cd45536-869a-467c-9d9b-4fab4e2e1243}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\MiddleBoss\KingSlime">
       <UniqueIdentifier>{1d4c5d3d-9209-4a56-877c-43df0d402888}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Vine">
       <UniqueIdentifier>{a0f7ee9c-0edb-4665-a2ab-993337e565a9}</UniqueIdentifier>
     </Filter>
@@ -708,6 +708,12 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\SlimeStone">
       <UniqueIdentifier>{e82f7a81-1476-4225-a5ca-186d713090b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\09.EHelena">
+      <UniqueIdentifier>{651e0b40-aeb0-4ea1-82a0-e74d6c4b2d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Helena">
+      <UniqueIdentifier>{237520ce-d2d8-43b9-bb65-d695eefc7c9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1307,10 +1313,10 @@
     </ClInclude>
     <ClInclude Include="..\public\Title.h">
       <Filter>04.UI\10.Title</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\KingSlime.h">
       <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Vine.h">
       <Filter>02.GameObject\Creature\Vine</Filter>
     </ClInclude>
@@ -1322,6 +1328,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\SlimeStone.h">
       <Filter>02.GameObject\Creature\SlimeStone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\EHelena.h">
+      <Filter>02.GameObject\Creature\Npc\09.EHelena</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\EHelenaChat.h">
+      <Filter>04.UI\03.Dialog\Helena</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1912,10 +1924,10 @@
     </ClCompile>
     <ClCompile Include="..\private\Title.cpp">
       <Filter>04.UI\10.Title</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\KingSlime.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Vine.cpp">
       <Filter>02.GameObject\Creature\Vine</Filter>
     </ClCompile>
@@ -1927,6 +1939,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\SlimeStone.cpp">
       <Filter>02.GameObject\Creature\SlimeStone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\EHelena.cpp">
+      <Filter>02.GameObject\Creature\Npc\09.EHelena</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\EHelenaChat.cpp">
+      <Filter>04.UI\03.Dialog\Helena</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
