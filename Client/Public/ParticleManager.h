@@ -2,7 +2,7 @@
 
 #include "Client_Defines.h"
 #include "Base.h"
-
+#include "DamageGen.h"
 
 BEGIN(Client)
 
@@ -27,7 +27,9 @@ public:
 public:
 	void MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDirVec, _float _fForce_Y, _float _fForce_X, _bool _bGravity, _float _fGravityVal, _float _fLifeTime, _tchar* pTag);
 
-	void MakeDamageGen(_int sMinDamage, _int sMaxDamage, _int iCount, _float fDelayTime, _float3 vPos, _float fLifeTime, _bool bIm);
+	void MakeDamageGen(_int sMinDamage, _int sMaxDamage, _int iCount, _float fDelayTime, _float3 vPos, _float fLifeTime, _bool bIm, CDamage::DAMAGETYPE eType);
+
+	void MakeLeveUp(_float3 vPos);
 
 public:
 	virtual void Free() override;

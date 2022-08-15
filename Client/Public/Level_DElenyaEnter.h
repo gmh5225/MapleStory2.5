@@ -40,6 +40,7 @@ private:
 
 private:
 	CCollider*				m_pColliderCom = nullptr;
+	_bool m_bTitle = false;
 
 public:
 	static CLevel_DElenyaEnter* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

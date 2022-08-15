@@ -3,6 +3,9 @@
 #include "ReefAttackHit.h"
 #include "GameInstance.h"
 
+#include "ParticleManager.h"
+
+
 CReefAttack::CReefAttack(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -281,8 +284,12 @@ void CReefAttack::Collision(CGameObject * pOther)
 
 		m_pOther.push_back(pOther);
 
-		pOther->Damaged(this);
 
+		_float3 vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 1.5f;
+
+		CParticleManager::Get_Instance()->MakeDamageGen(5000, 12000, 3, 0.05f, vPos, 1.6f, true, CDamage::DAMAGE_ATTACKED);
+		pOther->Damaged(this);
 		//Set_Dead();
 	}
 }

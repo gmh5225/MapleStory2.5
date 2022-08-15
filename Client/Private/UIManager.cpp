@@ -5,6 +5,7 @@
 #include "CutScreen.h"
 #include "DomiScreen.h"
 #include "TaxiChatBox.h"
+#include "Title.h"
 
 IMPLEMENT_SINGLETON(CUIManager)
 
@@ -61,6 +62,11 @@ void CUIManager::Set_Loading()
 	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_DomiScreen"), &pObj, nullptr)))
 		return;
 	m_pDomiScreen = (CDomiScreen*)pObj;
+
+	pObj = nullptr;
+	if (FAILED(pGameInstance->Add_GameObject(TEXT("Prototype_GameObject_Title"), &pObj, nullptr)))
+		return;
+	m_pTitle = (CTitle*)pObj;
 
 
 	Safe_Release(pGameInstance);
@@ -127,8 +133,17 @@ void CUIManager::Off_TaxiChatBox()
 	m_pTaxiChatBox->End_Chat();
 }
 
+void CUIManager::PlayTitleCurMap(LEVEL eLevel)
+{
+	if (nullptr == m_pTitle)
+		return;
+
+	m_pTitle->PlayTitleCurMap(eLevel);
+}
+
 void CUIManager::Tick(_float TimeDelta)
 {
+	m_pTitle->Tick(TimeDelta);
 	m_pLoading->Tick(TimeDelta);
 	m_pCutScreen->Tick(TimeDelta);
 	m_pDomiScreen->Tick(TimeDelta);
@@ -136,10 +151,10 @@ void CUIManager::Tick(_float TimeDelta)
 
 void CUIManager::LateTick(_float TimeDelta)
 {
+	m_pTitle->LateTick(TimeDelta);
 	m_pLoading->LateTick(TimeDelta);
 	m_pCutScreen->LateTick(TimeDelta);
 	m_pDomiScreen->LateTick(TimeDelta);
-
 }
 
 void CUIManager::Fix_BlackWizardHp(_int iHp)
@@ -163,6 +178,7 @@ HRESULT CUIManager::Add_BlackWizardPatternUI(CBlackWizardPatternUI * pInstance)
 
 void CUIManager::Free()
 {
+	Safe_Release(m_pTitle);
 	Safe_Release(m_pDomiScreen);
 	Safe_Release(m_pItemNotice);
 	Safe_Release(m_pCutScreen);

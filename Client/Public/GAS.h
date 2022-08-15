@@ -100,9 +100,10 @@ private:
 	_bool m_bFirstPattern;
 	_int m_iFirstPattern;
 
-	// TEST
-	_int iTestCount = 15;
 
+	_int m_iFirstSlime;
+	_int m_iSlimePattern;
+	_bool m_bSlime;
 };
 
 END

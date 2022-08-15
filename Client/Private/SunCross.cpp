@@ -2,6 +2,7 @@
 #include "..\Public\SunCross.h"
 #include "SunCrossHit.h"
 #include "GameInstance.h"
+#include "ParticleManager.h"
 
 CSunCross::CSunCross(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -275,6 +276,10 @@ void CSunCross::Collision(CGameObject * pOther)
 
 		m_pOther.push_back(pOther);
 
+		_float3 vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 1.5f;
+
+		CParticleManager::Get_Instance()->MakeDamageGen(500000, 1500000, 4, 0.05f, vPos, 1.6f, false, CDamage::DAMAGE_ATTACKED);
 		pOther->Damaged(this);
 
 		//Set_Dead();

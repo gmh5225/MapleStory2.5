@@ -60,6 +60,7 @@ HRESULT CLevel_Henesys_1::Initialize()
 	CGameInstance::Get_Instance()->PlayBGM(L"RestNPeace.mp3", 1.f);
 	
 	CUIManager::Get_Instance()->End_Loading();
+	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_HENESYS);
 	//CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
 	return S_OK;
@@ -194,7 +195,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Map(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_HENESYS, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 
-	PotalDesc.eDestLevel = LEVEL_GAS;
+	PotalDesc.eDestLevel = LEVEL_ELENYAENTER;
 	PotalDesc.Pos = _float3(34.f, 3.f, -3.f);
 	PotalDesc.DestPos = _float3(26.f, 1.f, -10.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_HENESYS, pLayerTag, &PotalDesc)))
@@ -336,7 +337,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo1);
 
 
-	CSpawner::SPAWNERINFO MonsterInfo2;
+	/*CSpawner::SPAWNERINFO MonsterInfo2;
 	MonsterInfo2.MonsterName = TEXT("BlueSnail");
 	MonsterInfo2.MonsterPos = _float3{ 11.f , 3.f, 10.f };
 	MonsterInfo2.SpawnerNum = 2;
@@ -422,7 +423,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo9.MonsterColRad = 1.f;
 	MonsterInfo9.Level = LEVEL_HENESYS;
 	MonsterInfo9.LayerTag = TEXT("Layer_Spawner_Henesys_1");
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo9);
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo9);*/
 
 	return S_OK;
 }

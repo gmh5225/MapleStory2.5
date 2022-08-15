@@ -59,9 +59,14 @@ HRESULT CLevel_ElenyaEnter::Initialize()
 	//	return E_FAIL;
 	
 	
+	
+	if(CUIManager::Get_Instance()->GetTitle())
+		CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_ELENYAENTER);
+	CUIManager::Get_Instance()->SetTitle();
+
 	CUIManager::Get_Instance()->End_Loading();
 	CCutSceneManager::Get_Instance()->Start_Enter_ElenyaEnter();
-
+	
 	return S_OK;
 }
 

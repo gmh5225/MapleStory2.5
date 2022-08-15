@@ -64,6 +64,7 @@ HRESULT CLevel_DHenesys::Initialize()
 	
 	CUIManager::Get_Instance()->End_Loading();
 	CUIManager::Get_Instance()->Off_DomiScreen();
+	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DHENESYS);
 	CCutSceneManager::Get_Instance()->Start_Enter_DHenesys();
 
 	return S_OK;

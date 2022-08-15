@@ -672,13 +672,13 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser">
       <UniqueIdentifier>{74d3edcd-eab3-4271-bcb3-b6fa3e14d4cd}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\MiddleBoss\GASEffect">
       <UniqueIdentifier>{80fcf71a-8487-46c7-9101-953ea945c13f}</UniqueIdentifier>
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill">
       <UniqueIdentifier>{520bd4c8-6e56-4bc3-81e3-f7e6253edcdc}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Cube\TriggerCube">
       <UniqueIdentifier>{41326089-0ec8-48a1-b7c4-5169044e7cf1}</UniqueIdentifier>
     </Filter>
@@ -687,6 +687,12 @@
     </Filter>
     <Filter Include="04.UI\09.DomiScreen">
       <UniqueIdentifier>{55dec146-15d5-4970-ad57-9c9f4292b6e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\LevelUp">
+      <UniqueIdentifier>{36b9515b-5a6c-4a32-9a0f-06242a87ad37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\10.Title">
+      <UniqueIdentifier>{4cd45536-869a-467c-9d9b-4fab4e2e1243}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1262,13 +1268,13 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlackWizardLaser.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\GASEffect.h">
       <Filter>02.GameObject\Creature\MiddleBoss\GASEffect</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\GreenSkill.h">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\TriggerCube.h">
       <Filter>02.GameObject\Cube\TriggerCube</Filter>
     </ClInclude>
@@ -1280,6 +1286,12 @@
     </ClInclude>
     <ClInclude Include="..\public\DomiScreen.h">
       <Filter>04.UI\09.DomiScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\LevelUp.h">
+      <Filter>02.GameObject\LevelUp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Title.h">
+      <Filter>04.UI\10.Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1846,13 +1858,13 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardLaser.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\GASEffect.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss\GASEffect</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\GreenSkill.cpp">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\TriggerCube.cpp">
       <Filter>02.GameObject\Cube\TriggerCube</Filter>
     </ClCompile>
@@ -1864,6 +1876,12 @@
     </ClCompile>
     <ClCompile Include="..\private\DomiScreen.cpp">
       <Filter>04.UI\09.DomiScreen</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\LevelUp.cpp">
+      <Filter>02.GameObject\LevelUp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Title.cpp">
+      <Filter>04.UI\10.Title</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

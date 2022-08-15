@@ -171,6 +171,7 @@
     <ClInclude Include="..\Public\GreenSkill.h" />
     <ClInclude Include="..\public\DomiScreen.h" />
     <ClInclude Include="..\public\JalJang.h" />
+    <ClInclude Include="..\public\LevelUp.h" />
     <ClInclude Include="..\public\Level_BlackMageJump.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
@@ -332,6 +333,7 @@
     <ClInclude Include="..\public\Taxi.h" />
     <ClInclude Include="..\public\TaxiButton.h" />
     <ClInclude Include="..\public\TaxiChatBox.h" />
+    <ClInclude Include="..\public\Title.h" />
     <ClInclude Include="..\public\ToolManager.h" />
     <ClInclude Include="..\Public\TransformPig.h" />
     <ClInclude Include="..\Public\TransformSlime.h" />
@@ -370,6 +372,7 @@
     <ClCompile Include="..\Private\GreenSkill.cpp" />
     <ClCompile Include="..\private\DomiScreen.cpp" />
     <ClCompile Include="..\private\JalJang.cpp" />
+    <ClCompile Include="..\private\LevelUp.cpp" />
     <ClCompile Include="..\private\Level_BlackMageJump.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />
@@ -530,6 +533,7 @@
     <ClCompile Include="..\private\Taxi.cpp" />
     <ClCompile Include="..\private\TaxiButton.cpp" />
     <ClCompile Include="..\private\TaxiChatBox.cpp" />
+    <ClCompile Include="..\private\Title.cpp" />
     <ClCompile Include="..\private\ToolManager.cpp" />
     <ClCompile Include="..\Private\TransformPig.cpp" />
     <ClCompile Include="..\Private\TransformSlime.cpp" />

@@ -54,13 +54,14 @@ HRESULT CLevel_Elenya::Initialize()
 	//if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 	//	return E_FAIL;
 
-	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
+	//	return E_FAIL;
 
 	CGameInstance::Get_Instance()->StopAll();
 	CGameInstance::Get_Instance()->PlayBGM(L"MissingYou.mp3", 1.f);
 
 	CUIManager::Get_Instance()->End_Loading();
+	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_ELENYA);
 	CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
 
 	return S_OK;

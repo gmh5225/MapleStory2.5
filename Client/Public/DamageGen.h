@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Creature.h"
+#include "Damage.h"
 
 BEGIN(Client)
 
@@ -15,6 +16,7 @@ public:
 		_float fLifeTime;
 		_float3 vPos;
 		_bool bIm;
+		CDamage::DAMAGETYPE eType;
 	}DAMAGEGENDESC;
 private:
 	CDamageGen(LPDIRECT3DDEVICE9 pGraphic_Device);

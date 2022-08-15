@@ -60,6 +60,7 @@ HRESULT CLevel_BlackMageEnter::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
+	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DARKMAGEENTER);
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
 	return S_OK;

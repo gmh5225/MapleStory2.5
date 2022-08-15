@@ -42,6 +42,10 @@ public:
 	void On_TaxiChatBox();
 	void Off_TaxiChatBox();
 
+	// For.Title
+	void PlayTitleCurMap(LEVEL eLevel);
+	_bool GetTitle() { return m_bTitle; }
+	void SetTitle() { m_bTitle = true; }
 
 	void Tick(_float TimeDelta);
 	void LateTick(_float TimeDelta);
@@ -53,7 +57,7 @@ private:
 	class CCutScreen* m_pCutScreen = nullptr;
 	class CDomiScreen* m_pDomiScreen = nullptr;
 	class CTaxiChatBox* m_pTaxiChatBox = nullptr;
-
+	class CTitle*	m_pTitle = nullptr;
 
 public:
 	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
@@ -82,6 +86,7 @@ private:
 	bool m_bStartMove;
 	bool m_bEndMove;
 	CBlackWizardPatternUI* m_pBlackWizardPatternUI;
+	_bool m_bTitle = false;
 };
 
 END

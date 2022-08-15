@@ -4,7 +4,7 @@
 #include "GameInstance.h"
 #include "ToolManager.h"
 #include "Particle.h"
-#include "DamageGen.h"
+
 
 IMPLEMENT_SINGLETON(CParticleManager)
 
@@ -149,7 +149,7 @@ void CParticleManager::MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDir
 
 }
 
-void CParticleManager::MakeDamageGen(_int sMinDamage, _int sMaxDamage, _int iCount, _float fDelayTime, _float3 vPos, _float fLifeTime, _bool bIm)
+void CParticleManager::MakeDamageGen(_int sMinDamage, _int sMaxDamage, _int iCount, _float fDelayTime, _float3 vPos, _float fLifeTime, _bool bIm, CDamage::DAMAGETYPE eType)
 {
 	CGameInstance* pGameInstance =  CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
@@ -164,11 +164,20 @@ void CParticleManager::MakeDamageGen(_int sMinDamage, _int sMaxDamage, _int iCou
 	Desc.vPos = vPos;
 	Desc.fLifeTime = fLifeTime;
 	Desc.bIm = bIm;
+	Desc.eType = eType;
 
 	pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DamageGen"), eCurLevel, TEXT("Layer_Damage"), &Desc);
 
 
 	Safe_Release(pGameInstance);
+}
+
+void CParticleManager::MakeLeveUp(_float3 vPos)
+{
+	LEVEL eCurLevel = CToolManager::Get_Instance()->Get_CurLevel();
+	CCreature::CRETUREDESC Desc;
+	Desc.vPos = vPos;
+	CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_LeveUp"), eCurLevel, TEXT("Layer_Damage"), &Desc);
 }
 
 void CParticleManager::Free()
