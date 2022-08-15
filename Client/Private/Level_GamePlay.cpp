@@ -95,6 +95,8 @@ HRESULT CLevel_GamePlay::Initialize()
 
 	g_bStaticClone = true;
 
+	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->PlayBGM(L"FloralLife.mp3",1.f);
 
 	CUIManager::Get_Instance()->End_Loading();
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();

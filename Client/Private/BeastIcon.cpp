@@ -118,8 +118,10 @@ void CBeastIcon::Change_Texture()
 
 	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0 && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FOURTH)
+	{
+		CGameInstance::Get_Instance()->PlaySoundW(L"DragStart.mp3", 25, 1.f);
 		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"BeastInfo", CSkillManager::GRADE_FOURTH, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
-
+	}
 
 
 }

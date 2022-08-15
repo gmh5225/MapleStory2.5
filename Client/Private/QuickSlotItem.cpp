@@ -140,11 +140,13 @@ void CQuickSlotItem::Change_Texture()
 
 		break;
 	case Client::CUI::TYPE_DOWN:
+		CGameInstance::Get_Instance()->PlaySoundW(L"DragStart.mp3", 25, 1.f);
 		pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_QUICK, m_pItemInfoTag, m_eType, m_iTexturenum, m_pItemNotice, m_iIndexNum);
 		break;
 	case Client::CUI::TYPE_UP:
 		if (!pQuickSlotInstance->Check_Texture(pMouseInstance->Get_ItemIconTextnum()))
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 			m_pItemInfoTag = pMouseInstance->Get_ItemInfoTag();
 			m_eType = pMouseInstance->Get_Type();
 			m_iTexturenum = pMouseInstance->Get_ItemIconTextnum();
@@ -155,6 +157,7 @@ void CQuickSlotItem::Change_Texture()
 		{
 			if (pMouseInstance->Get_PickType() == CMouseManager::TYPE_QUICK)
 			{
+				CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 				pQuickSlotInstance->Change_ItemSlot(pMouseInstance->Get_Indexnum(), this);
 				m_pItemInfoTag = pMouseInstance->Get_ItemInfoTag();
 				m_eType = pMouseInstance->Get_Type();

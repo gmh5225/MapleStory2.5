@@ -116,10 +116,15 @@ void CSolunaSlashIcon::Change_Texture()
 	else
 		m_iTexturenum = 1;
 
-	CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-	if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0 && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FIRST)
-		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"SolunaSlashInfo", CSkillManager::GRADE_FIRST, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
-
+	if (m_bRender)
+	{
+		CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
+		if (m_eCollision == TYPE_DOWN && m_pSkillInfo->Get_SkillLevel() != 0 && pSkillInstance->Get_SkillGrade() == CSkillManager::GRADE_FIRST)
+		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"DragStart.mp3", 25, 1.f);
+			pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_SKILL, L"SolunaSlashInfo", CSkillManager::GRADE_FIRST, m_pSkillInfo->Get_TextNum(), m_pSkillInfo->Get_SkillNotice());
+		}
+	}
 
 
 }

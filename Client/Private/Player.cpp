@@ -62,7 +62,7 @@ HRESULT CPlayer::Initialize(void * pArg)
 
 	D3DXCreateFont(m_pGraphic_Device, 13, 0, FW_BOLD, 1, FALSE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
-		L"����ü", &m_Font);
+		L" �ڵ�", &m_Font);
 
 	// *�߷� �ڵ�
 	// �߷� ���� ����
@@ -419,6 +419,7 @@ void CPlayer::SetState(STATE eState, DIR eDir)
 
 		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
 		SolunaDECS.eDir = m_eDir;
+		pGameInstance->PlaySoundW(L"DoubleJump.wav", 20, 1.f);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_WarriorReef"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 
 		Safe_Release(pGameInstance);
@@ -774,6 +775,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 	if (GetKeyState('X') & 0x8000)
 	{
 		SetState(STATE_JUMP, m_eDir);
+		pGameInstance->PlaySoundW(L"Jump.mp3", 20, 1.f);
 	}
 
 	/*if (GetKeyState('C') & 0x8000)
@@ -793,13 +795,14 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		CSolunaSlashEffectB::SOLUNAEFFECTBDESC SolunaDECS;
 		SolunaDECS.eDir = m_eDir;
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectA"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
+		pGameInstance->PlaySoundW(L"SolunaSlash.mp3", 20, 1.f);
 		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SolunaSlash_EffectB"), LEVEL_STATIC, TEXT("Layer_Skill"), &SolunaDECS);
 		SetState(STATE_DASH, m_eDir);
 	}
 
 	if (pGameInstance->Key_Down(DIK_A))
 	{
-		pGameInstance->PlaySound(L"Use.mp3", 2, 1.f);
+		pGameInstance->PlaySound(L"PlayerAttack.wav", 20, 1.f);
 
 		CReefAttack::REEFATTACKDESC ReefAttackDESC;
 		ReefAttackDESC.eDir = m_eDir;
@@ -846,7 +849,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 		CSpearPulling::SPEARPULLINGDESC SpearPullingDECS;
 		SpearPullingDECS.eDir = m_eDir;
-
+		pGameInstance->PlaySoundW(L"SpearPulling.mp3", 20, 1.f);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SpearPulling"), LEVEL_STATIC, TEXT("Layer_Skill"), &SpearPullingDECS);
 		SetState(STATE_ATTACK, m_eDir);
 	}

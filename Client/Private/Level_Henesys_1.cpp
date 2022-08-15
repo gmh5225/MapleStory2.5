@@ -32,7 +32,7 @@ HRESULT CLevel_Henesys_1::Initialize()
 
 	if (FAILED(Ready_Layer_Map(TEXT("Layer_Map"))))
 		return E_FAIL;
-
+	
 
 	/*
 	if (FAILED(Ready_Layer_Camera(TEXT("Layer_Camera"))))
@@ -56,6 +56,8 @@ HRESULT CLevel_Henesys_1::Initialize()
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
 	
+	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->PlayBGM(L"RestNPeace.mp3", 1.f);
 	
 	CUIManager::Get_Instance()->End_Loading();
 	//CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();

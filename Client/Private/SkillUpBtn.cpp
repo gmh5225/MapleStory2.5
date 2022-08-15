@@ -118,6 +118,7 @@ void CSkillUpBtn::Change_Texture()
 	case Client::CUI::TYPE_DOWN:
 		break;
 	case Client::CUI::TYPE_UP:
+		CGameInstance::Get_Instance()->PlaySoundW(L"BtMouseClick.mp3", 25, 1.f);
 		SkillLevelUp();
 		break;
 	case Client::CUI::TYPE_PRESSING:

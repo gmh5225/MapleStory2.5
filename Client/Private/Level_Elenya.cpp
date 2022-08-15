@@ -57,6 +57,9 @@ HRESULT CLevel_Elenya::Initialize()
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
 
+	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->PlayBGM(L"MissingYou.mp3", 1.f);
+
 	CUIManager::Get_Instance()->End_Loading();
 	CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
 

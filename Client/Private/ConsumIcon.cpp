@@ -81,6 +81,26 @@ void CConsumIcon::Tick(_float fTimeDelta)
 	}
 	Check_Collision(DIMK_LBUTTON);
 
+	if (m_pItemInfo->Get_TextNum() == 0)
+	{
+		if (pInstance->Key_Down(DIK_NUMPAD1))
+		{
+			m_pItemInfo->Set_NowNum(-1);
+			Use_Item();
+		}
+		
+	}
+	else if (m_pItemInfo->Get_TextNum() == 1)
+	{
+		if (pInstance->Key_Down(DIK_NUMPAD2))
+		{
+			m_pItemInfo->Set_NowNum(-1);
+			Use_Item();
+		}
+
+	}
+
+
 	Safe_Release(pInstance);
 }
 
@@ -217,13 +237,15 @@ void CConsumIcon::Change_Texture()
 
 
 		CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
-		if (m_eCollision == TYPE_DOWN)
+		if (m_eCollision == TYPE_DOWN && m_bRender)
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"DragStart.mp3", 25, 1.f);
 			pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_CONSUM, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
 		}
 
-		if (m_eCollision == TYPE_UP)
+		if (m_eCollision == TYPE_UP && m_bRender)
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 			CItemInfo* pTemp = pMouseInstance->Get_ItemInfo();
 			pInvenInstance->Change_Info(m_pTag, pMouseInstance->Get_Indexnum(), CInvenManager::TYPE_CONSUM);
 			m_pItemInfo = pTemp;

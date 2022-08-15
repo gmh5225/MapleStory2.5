@@ -47,7 +47,13 @@ void CInventory::Tick(_float fTimeDelta)
 	Safe_AddRef(pGameInstance);
 
 	if (pGameInstance->Key_Down(DIK_I))
+	{
+		if (m_bRender)
+			CGameInstance::Get_Instance()->PlaySoundW(L"MenuDown.mp3", 25, 1.f);
+		else
+			CGameInstance::Get_Instance()->PlaySoundW(L"MenuUp.mp3", 25, 1.f);
 		m_bRender = !m_bRender;
+	}
 
 	Safe_Release(pGameInstance);
 }

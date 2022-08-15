@@ -102,6 +102,7 @@ void CCashBtn::Change_Texture()
 	case Client::CUI::TYPE_ON:
 		break;
 	case Client::CUI::TYPE_DOWN:
+		CGameInstance::Get_Instance()->PlaySoundW(L"Tab.mp3", 25, 1.f);
 		pInvenInstance->Set_InvenType(CInvenManager::TYPE_CASH);
 		break;
 	case Client::CUI::TYPE_UP:

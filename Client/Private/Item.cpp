@@ -127,12 +127,12 @@ void CItem::Collision(CGameObject * pOther)
 	{
 		if (pGameInstance->Key_Down(DIK_Z))
 		{
+			pGameInstance->PlaySoundW(L"PickUpItem.mp3", 24, 1.f);
 			CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
 			pInvenInstance->Check_Icon(m_ItemInfo.pTag, m_ItemInfo.eType, 1);
 			Set_Dead();
 		}
 	}
-
 
 	if (pOther->Get_Tag() == "Tag_Cube")
 	{

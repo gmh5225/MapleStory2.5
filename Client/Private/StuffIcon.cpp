@@ -162,11 +162,13 @@ void CStuffIcon::Change_Texture()
 		CMouseManager* pMouseInstance = CMouseManager::Get_Instance();
 		if (m_eCollision == TYPE_DOWN)
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"DragStart.mp3", 25, 1.f);
 			pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_ITEM, m_pTag, CInvenManager::TYPE_STUFF, m_iTexturenum, m_pItemInfo->Get_ItemNotice(), m_UIInfo.iNum);
 		}
 
 		if (m_eCollision == TYPE_UP)
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 			CItemInfo* pTemp = pMouseInstance->Get_ItemInfo();
 			pInvenInstance->Change_Info(m_pTag, pMouseInstance->Get_Indexnum(), CInvenManager::TYPE_STUFF);
 			m_pItemInfo = pTemp;

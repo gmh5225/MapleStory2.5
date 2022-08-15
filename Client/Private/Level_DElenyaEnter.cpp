@@ -59,6 +59,7 @@ HRESULT CLevel_DElenyaEnter::Initialize()
 	//	return E_FAIL;
 	
 	
+	
 	CUIManager::Get_Instance()->End_Loading();
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 

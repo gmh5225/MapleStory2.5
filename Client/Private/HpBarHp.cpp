@@ -54,6 +54,7 @@ void CHpBarHp::Tick(_float fTimeDelta)
 
 	if (pInstance->Key_Down(DIK_NUMPAD1))
 	{
+		pInstance->PlaySoundW(L"UseItem.mp3", 26, 1.f);
 		if (m_iTexturenum < 2)
 			m_iTexturenum = 0;
 		else

@@ -56,8 +56,13 @@ void CSkillFrame::Tick(_float fTimeDelta)
 
 	Check_Collision(DIMK_LBUTTON);
 	if (pInstance->Key_Down(DIK_K))
+	{
+		if (m_bRender)
+			CGameInstance::Get_Instance()->PlaySoundW(L"MenuDown.mp3", 25, 1.f);
+		else
+			CGameInstance::Get_Instance()->PlaySoundW(L"MenuUp.mp3", 25, 1.f);
 		m_bRender = !m_bRender;
-
+	}
 	if (pInstance->Key_Down(DIK_P))
 	m_pSkillManager->Set_SkillPoint(1);
 

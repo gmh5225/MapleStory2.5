@@ -89,24 +89,13 @@ void CHpBarMp::Tick(_float fTimeDelta)
 
 	if (pInstance->Key_Down(DIK_NUMPAD2))
 	{
+		pInstance->PlaySoundW(L"UseItem.mp3", 26, 1.f);
 		if (m_iTexturenum < 2)
 			m_iTexturenum = 0;
 		else
-			m_iTexturenum -= 2;
-
-		CUIManager::Get_Instance()->Set_StartMove(true);
+			m_iTexturenum -= 2;	
 	}
 
-	if (pInstance->Key_Down(DIK_NUMPAD3))
-	{
-		CUIManager::Get_Instance()->Set_EndMove(true);
-	}
-
-
-
-
-	if (m_iTexturenum == 21)
-		m_iTexturenum = 0;
 
 	Safe_Release(pInstance);
 	if (CUIManager::Get_Instance()->Get_StartMove())

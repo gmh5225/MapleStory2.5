@@ -59,6 +59,8 @@ HRESULT CLevel_DHenesys::Initialize()
 	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 	//	return E_FAIL;
 	
+	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->PlayBGM(L"destructionTown.mp3", 1.f);
 	
 	CUIManager::Get_Instance()->End_Loading();
 	CUIManager::Get_Instance()->Off_DomiScreen();

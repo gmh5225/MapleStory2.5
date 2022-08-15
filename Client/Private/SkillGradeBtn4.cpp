@@ -101,6 +101,7 @@ void CSkillGradeBtn4::Change_Texture()
 	case Client::CUI::TYPE_ON:		
 		break;
 	case Client::CUI::TYPE_DOWN:
+		CGameInstance::Get_Instance()->PlaySoundW(L"Tab.mp3", 25, 1.f);
 		pSkillInstance->Set_SkillGrade(CSkillManager::GRADE_FOURTH);
 		break;
 	case Client::CUI::TYPE_UP:

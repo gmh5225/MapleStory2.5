@@ -121,11 +121,13 @@ void CQuickSlotSkill::Change_Texture()
 
 		break;
 	case Client::CUI::TYPE_DOWN:
+		CGameInstance::Get_Instance()->PlaySoundW(L"DragStart.mp3", 25, 1.f);
 		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_QUICK, m_pSkillInfoTag, m_eGrade, m_iTexturenum, m_pSkillNotice, m_iIndexNum);
 		break;
 	case Client::CUI::TYPE_UP:	
 		if (!pQuickSlotInstance->Check_Texture(pMouseInstance->Get_SkillIconTextnum()))
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 			m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();
 			m_eGrade = pMouseInstance->Get_Grade();
 			m_iTexturenum = pMouseInstance->Get_SkillIconTextnum();
@@ -136,6 +138,7 @@ void CQuickSlotSkill::Change_Texture()
 		{
 			if (pMouseInstance->Get_PickType() == CMouseManager::TYPE_QUICK)
 			{
+				CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 				pQuickSlotInstance->Change_SkillSlot(pMouseInstance->Get_Indexnum(), this);
 				m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();
 				m_eGrade = pMouseInstance->Get_Grade();
