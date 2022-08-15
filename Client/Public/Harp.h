@@ -1,17 +1,16 @@
 #pragma once
 
 #include "Creature.h"
-#include "Bulb.h"
+
 
 BEGIN(Client)
 
-class CRedSkill final : public CCreature
+class CHarp final : public CCreature
 {
-
 private:
-	CRedSkill(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CRedSkill(const CRedSkill& rhs);
-	virtual ~CRedSkill() = default;
+	CHarp(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CHarp(const CHarp& rhs);
+	virtual ~CHarp() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -27,7 +26,7 @@ private:
 	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
-
+	void Tick_Stand(_float fTimeDelta);
 public:
 	void SetState(STATE eState, DIR eDir);
 
@@ -43,11 +42,10 @@ private:
 	DIR m_eDir;
 
 	CGameObject* m_pTarget;
-
-	_float m_fSkill;
+	float m_fTime;
 
 public:
-	static CRedSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CHarp* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

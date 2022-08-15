@@ -1,17 +1,16 @@
 #pragma once
 
 #include "Creature.h"
-#include "Bulb.h"
+
 
 BEGIN(Client)
 
-class CRedSkill final : public CCreature
+class CRockEnter final : public CCreature
 {
-
 private:
-	CRedSkill(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CRedSkill(const CRedSkill& rhs);
-	virtual ~CRedSkill() = default;
+	CRockEnter(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CRockEnter(const CRockEnter& rhs);
+	virtual ~CRockEnter() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -27,7 +26,7 @@ private:
 	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
-
+	void Tick_Stand(_float fTimeDelta);
 public:
 	void SetState(STATE eState, DIR eDir);
 
@@ -38,16 +37,17 @@ public:
 private:
 	HRESULT SetUp_Components();
 
+	virtual HRESULT Set_RenderState() override;
+	virtual HRESULT Reset_RenderState() override;
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
 
 	CGameObject* m_pTarget;
-
-	_float m_fSkill;
+	float m_fTime;
 
 public:
-	static CRedSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CRockEnter* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

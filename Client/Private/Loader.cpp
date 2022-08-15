@@ -99,6 +99,10 @@
 #include "Chick.h"
 #include "Grass.h"
 #include "Weed.h"
+#include "Vine.h"
+#include "Harp.h"
+#include "RockEnter.h"
+#include"SlimeStone.h"
 #include "Bandit.h"
 #include "ItemNotice.h"
 #include "BlackWizardAttack1.h"
@@ -1217,6 +1221,24 @@ HRESULT CLoader::Load_Map()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Weed"),
 		CWeed::Create(m_pGraphic_Device))))
 		return E_FAIL;
+	/* For.Prototype_GameObject_Vine*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Vine"),
+		CVine::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_Harp*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Harp"),
+		CHarp::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	/* For.Prototype_GameObject_RockEnter*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_RockEnter"),
+		CRockEnter::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_SlimeStone*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SlimeStone"),
+		CSlimeStone::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	//if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Sky"),
 	//	CSky::Create(m_pGraphic_Device))))
@@ -2508,6 +2530,22 @@ HRESULT CLoader::Load_Model_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Grass"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Grass/Grass%d.png"),7))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Vine"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Vine.png")))))
+		return E_FAIL;
+
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Harp"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Harp/Harp%d.png"),12))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RockEnter"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/RockEnter.png")))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SlimeStone"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/SlimeStone.png")))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GrassIdle"),

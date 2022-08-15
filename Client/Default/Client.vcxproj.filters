@@ -696,6 +696,18 @@
       </Filter>
     <Filter Include="02.GameObject\Creature\MiddleBoss\KingSlime">
       <UniqueIdentifier>{1d4c5d3d-9209-4a56-877c-43df0d402888}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Creature\Vine">
+      <UniqueIdentifier>{a0f7ee9c-0edb-4665-a2ab-993337e565a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Harp">
+      <UniqueIdentifier>{6d46bc3d-33e2-4f22-972c-718fa5697247}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\RockEnter">
+      <UniqueIdentifier>{63f24d94-e6b3-4122-bc45-dc93265690e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\SlimeStone">
+      <UniqueIdentifier>{e82f7a81-1476-4225-a5ca-186d713090b0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1298,6 +1310,18 @@
       </ClInclude>
     <ClInclude Include="..\Public\KingSlime.h">
       <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\Vine.h">
+      <Filter>02.GameObject\Creature\Vine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Harp.h">
+      <Filter>02.GameObject\Creature\Harp</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\RockEnter.h">
+      <Filter>02.GameObject\Creature\RockEnter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\SlimeStone.h">
+      <Filter>02.GameObject\Creature\SlimeStone</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1891,6 +1915,18 @@
       </ClCompile>
     <ClCompile Include="..\Private\KingSlime.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\Vine.cpp">
+      <Filter>02.GameObject\Creature\Vine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Harp.cpp">
+      <Filter>02.GameObject\Creature\Harp</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\RockEnter.cpp">
+      <Filter>02.GameObject\Creature\RockEnter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\SlimeStone.cpp">
+      <Filter>02.GameObject\Creature\SlimeStone</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
