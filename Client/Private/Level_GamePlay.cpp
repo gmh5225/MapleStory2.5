@@ -50,7 +50,7 @@ HRESULT CLevel_GamePlay::Initialize()
 	if (FAILED(__super::Initialize()))
 		return E_FAIL;
 
-	CGameInstance::Get_Instance()->PlayBGM(L"Test.wav", 1.f);
+	CGameInstance::Get_Instance()->PlaySound(L"Test.wav",1, 1.f);
 
 	if (g_bStaticClone == false)
 	{

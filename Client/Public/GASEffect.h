@@ -1,16 +1,21 @@
 #pragma once
 
 #include "Creature.h"
-#include "Bulb.h"
 
 BEGIN(Client)
 
-class CRedSkill final : public CCreature
+class CGASEffect final : public CCreature
 {
+public:
+	typedef struct tagSunCross_HitDESC
+	{
+		_float3 vPos;
+	}SUNCROSSHITDESC;
+
 private:
-	CRedSkill(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CRedSkill(const CRedSkill& rhs);
-	virtual ~CRedSkill() = default;
+	CGASEffect(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CGASEffect(const CGASEffect& rhs);
+	virtual ~CGASEffect() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -21,32 +26,30 @@ public:
 
 	virtual void Collision(CGameObject* pOther) override;
 
-private:
-	void Tick_Idle(_float fTimeDelta);
-	void Tick_Move(_float fTimeDelta);
-	void Tick_Hit(_float fTimeDelta);
-	void Tick_Chase(_float fTimeDelta);
+protected:
+	virtual HRESULT Set_RenderState() override;
+	virtual HRESULT Reset_RenderState() override;
+
 
 public:
 	void SetState(STATE eState, DIR eDir);
 
 public:
 	virtual void SetAni() override;
-	virtual void Damaged(CGameObject* pOther) override;
 
-private:
-	HRESULT SetUp_Components();
 
 private:
 	STATE m_eCurState;
 	DIR m_eDir;
+	SUNCROSSHITDESC m_Desc;
 
-	CGameObject* m_pTarget;
+	_float m_fEffectCount;
 
-	_float m_fSkill;
+private:
+	HRESULT SetUp_Components();
 
 public:
-	static CRedSkill* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CGASEffect* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

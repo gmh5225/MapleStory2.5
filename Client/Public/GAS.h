@@ -90,6 +90,12 @@ private:
 	_bool m_bCutSceneJump = false;
 	_float m_fCutSceneTimeAcc = 0.f;
 
+	_bool m_bEffect;
+
+	_bool m_bFirstPattern;
+	_int m_iFirstPattern;
+
+
 };
 
 END

@@ -192,7 +192,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Map(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_HENESYS, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 
-	PotalDesc.eDestLevel = LEVEL_ELENYAENTER;
+	PotalDesc.eDestLevel = LEVEL_GAS;
 	PotalDesc.Pos = _float3(34.f, 3.f, -3.f);
 	PotalDesc.DestPos = _float3(26.f, 1.f, -10.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_HENESYS, pLayerTag, &PotalDesc)))

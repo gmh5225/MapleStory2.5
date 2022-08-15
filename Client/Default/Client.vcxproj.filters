@@ -672,6 +672,12 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser">
       <UniqueIdentifier>{74d3edcd-eab3-4271-bcb3-b6fa3e14d4cd}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Creature\MiddleBoss\GASEffect">
+      <UniqueIdentifier>{80fcf71a-8487-46c7-9101-953ea945c13f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill">
+      <UniqueIdentifier>{520bd4c8-6e56-4bc3-81e3-f7e6253edcdc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1247,6 +1253,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\BlackWizardLaser.h">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\GASEffect.h">
+      <Filter>02.GameObject\Creature\MiddleBoss\GASEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\GreenSkill.h">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1813,6 +1825,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\BlackWizardLaser.cpp">
       <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\GASEffect.cpp">
+      <Filter>02.GameObject\Creature\MiddleBoss\GASEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\GreenSkill.cpp">
+      <Filter>02.GameObject\Creature\Monster\00.GASMonster\GreenSlime\GreenSkill</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -211,7 +211,10 @@ void CTransformStump::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
-	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	if (m_iHp > 0)
+	{
+		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	}
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }

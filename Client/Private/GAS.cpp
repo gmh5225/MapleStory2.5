@@ -46,7 +46,7 @@ HRESULT CGAS::Initialize(void * pArg)
 
 	m_bPatterStart = false;
 
-	m_fPatternCycle = 12;
+	m_fPatternCycle = 5;
 
 	m_fJump = 0;
 	m_fDJump = 0;
@@ -56,8 +56,13 @@ HRESULT CGAS::Initialize(void * pArg)
 	m_fReset = 0;
 	m_fReturn = 0;
 
+	//모든 패턴을 실행시키기 위한 변수
+	m_iFirstPattern = -1;
+
 	m_bTest = false;
 	m_bVanish = false;
+	m_bEffect = false;
+	m_bFirstPattern = false;
 
 	m_fColRad = 1.f;
 	m_pTransformCom->Set_Scaled(10.f);
@@ -180,14 +185,25 @@ void CGAS::Tick(_float fTimeDelta)
 
 	CUIManager::Get_Instance()->Get_GASHp(m_iHp);
 
-	if (m_bPatterStart)
+	if (m_bPatterStart && m_eCurState != STATE_RESET)
 		m_fPatternCycle += fTimeDelta;
 
-	if (m_fPatternCycle > 15.f)
+	if (m_fPatternCycle > 7.f)
 	{
-		//m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
-		m_iRandomPattern = 5;
+		//
+		//m_iRandomPattern = 5;
 		m_fPatternCycle = 0;
+		if (!m_bFirstPattern)
+		{
+			m_iFirstPattern++;
+			m_iRandomPattern = m_iFirstPattern;
+			if (m_iFirstPattern >= 5)
+				m_bFirstPattern = true;
+		}
+		else
+		{
+			m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
+		}
 	}
 
 
@@ -308,6 +324,7 @@ void CGAS::Tick(_float fTimeDelta)
 
 void CGAS::LateTick(_float fTimeDelta)
 {
+
 	m_pTransformCom->Go_Gravity(fTimeDelta);
 	__super::BoxColCom_Tick(m_pTransformCom);
 
@@ -319,9 +336,14 @@ void CGAS::LateTick(_float fTimeDelta)
 		if (m_eCurState != STATE_DIE && m_eCurState != STATE_ATTACK && m_eCurState != STATE_RESET)
 			SetState(STATE_CHASE, m_eDir);
 
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
-	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	if (m_iHp > 0)
+	{
+		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	}
+
 
 	Set_Billboard();
 }
@@ -329,6 +351,7 @@ HRESULT CGAS::Render()
 {
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
+
 
 
 	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
@@ -343,10 +366,7 @@ HRESULT CGAS::Render()
 	//if (FAILED(Set_RenderState()))
 	//	return E_FAIL;
 
-	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
-	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
-	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
-	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
 
 	m_pVIBufferCom->Render();
 
@@ -492,10 +512,31 @@ void CGAS::Tick_End(_float fTimeDelta)
 void CGAS::Tick_Attack(_float fTimeDelta)
 {
 	m_fAttack += fTimeDelta;
+	if (m_fAttack > 1.9f && !m_bEffect)
+	{
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		CSpawner::SPAWNERINFO m_Effect;
+
+		CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+		_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+		m_Effect.MonsterPos = vPlayerPos + _float3(0.f, 0.f, 0.1f);
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GASEffect"), LEVEL_GAS, TEXT("Layer_Player_Skill"), &m_Effect);
+
+		m_bEffect = true;
+
+		Safe_Release(pGameInstance);
+	}
+
 	if (m_fAttack > 2.0f)
 	{
 		m_iRandomPattern = 0;
 		m_fAttack = 0;
+		m_bEffect = false;
 	}
 }
 
@@ -523,38 +564,34 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 
 		int a = CGameInstance::Get_Instance()->Get_Random(0, 3);
 
-		switch (a)
+		switch (3)
 		{
 		case 0:
 			for (int i = 0; i < 4; ++i)
 			{
 				m_Slime.MonsterNum = i;
-				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
-					int a = 0;
+				pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime);
 			}
 			break;
 		case 1:
 			for (int i = 0; i < 4; ++i)
 			{
 				m_Slime.MonsterNum = i;
-				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
-					int a = 0;
+				pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GreenSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime);
 			}
 			break;
 		case 2:
 			for (int i = 0; i < 4; ++i)
 			{
 				m_Slime.MonsterNum = i;
-				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
-					int a = 0;
+					pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime);
 			}
 			break;
 		case 3:
 			for (int i = 0; i < 4; ++i)
 			{
 				m_Slime.MonsterNum = i;
-				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PurpleSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime)))
-					int a = 0;
+				pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PurpleSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime);
 			}
 			break;
 		}
@@ -563,7 +600,7 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 		Safe_Release(pGameInstance);
 	}
 
-	if (m_fReset > 14.5f)
+	if (m_fReset > 15.5f)
 	{
 		m_iRandomPattern = 6;
 		m_fReset = 0;
@@ -702,6 +739,8 @@ void CGAS::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
+	CGameInstance::Get_Instance()->PlaySound(L"SlimeDamage.wav", 1, 1.f);
+
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
@@ -739,7 +778,8 @@ CGameObject * CGAS::Clone(void* pArg)
 
 void CGAS::Collision(CGameObject * pOther)
 {
-
+	if (m_iHp <= 0)
+		return;
 
 
 

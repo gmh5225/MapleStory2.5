@@ -173,7 +173,10 @@ void CGreenMushroom::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
-	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	if (m_iHp > 0)
+	{
+		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
+	}
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
@@ -453,8 +456,10 @@ void CGreenMushroom::Damaged(CGameObject * pOther)
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
 		MakeItem();
+		CGameInstance::Get_Instance()->PlaySound(L"GreenMushroomDie.wav", 1, 1.f);
 	}
-	//
+	else
+		CGameInstance::Get_Instance()->PlaySound(L"GreenMushroomDamage.wav", 1, 1.f);
 }
 
 

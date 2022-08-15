@@ -32,11 +32,13 @@ HRESULT CRedSkill::Initialize(void * pArg)
 	m_sTag = "Tag_Npc";
 
 	m_fColRad = 1.f;	
-	
-	_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-10, 10);
-	_float b = CGameInstance::Get_Instance()->Get_Random(-10, 10);
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f + a, 1.f, 0.f + b));
+	m_fSkill = 0;
+	
+	_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+	_float b = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f + a, 2.f, 0.f + b));
 	m_pTransformCom->Set_Scaled(5.f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -51,12 +53,6 @@ HRESULT CRedSkill::Initialize(void * pArg)
 
 HRESULT CRedSkill::SetUp_Components()
 {
-	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
-	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 0.3f, 0.6f, 0.3f };
-	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
-	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
-		return E_FAIL;
 
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSkill"), nullptr);
@@ -108,11 +104,25 @@ void CRedSkill::LateTick(_float fTimeDelta)
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_NPC, this);
+
+
+	m_fSkill += fTimeDelta;
+	if (m_fSkill >= 12.f)
+		Set_Dead();
 }
 HRESULT CRedSkill::Render()
 {
+	_float4x4		Matrix;
+	D3DXMatrixIdentity(&Matrix);
+
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
+
+	m_pGraphic_Device->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);
+	m_pGraphic_Device->SetRenderState(D3DRS_BLENDOP, D3DBLENDOP_ADD);
+	m_pGraphic_Device->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);
+	m_pGraphic_Device->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);
+
 
 	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
 	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
