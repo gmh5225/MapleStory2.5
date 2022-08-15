@@ -76,6 +76,11 @@ void CBeastAttack::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_PLAYER_SKILL, this);
 
+	if (m_pAnimatorCom->Get_AnimCount() == 12)
+	{
+		CGameInstance::Get_Instance()->PlaySoundW(L"BeastEnd.mp3", 21, 1.f);
+	}
+
 	if (m_pAnimatorCom->Get_AnimCount() == 22)
 	{
 		Set_Dead();
@@ -209,6 +214,7 @@ void CBeastAttack::Collision(CGameObject * pOther)
 		{
 			CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 			Safe_AddRef(pGameInstance);
+			
 			CTransform* pTransform = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
 			pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Beast_Hit"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &pTransform->Get_State(CTransform::STATE_POSITION));
 			Safe_Release(pGameInstance);

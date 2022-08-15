@@ -81,6 +81,7 @@ void CChasingShotAttack::LateTick(_float fTimeDelta)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
+		pGameInstance->PlaySound(L"ChasingShot.mp3", 20, 1.f);
 		CChasingShotBullet::CHASINGBULLETDESC BulletDesc;
 		BulletDesc.eDir = m_eDir;
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ChasingShot_Bullet"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &BulletDesc);

@@ -79,6 +79,7 @@ void CCardinalBlastAttack::LateTick(_float fTimeDelta)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
+		pGameInstance->PlaySoundW(L"CardinalBlast.mp3", 20.f, 1.f);
 		CCardinalBlastBullet::CARDINALBULLETDESC BulletDesc;
 		BulletDesc.eDir = m_eDir;
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CardinalBlast_Bullet"), LEVEL_STATIC, TEXT("Layer_Player_Skill"), &BulletDesc);

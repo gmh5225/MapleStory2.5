@@ -802,7 +802,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 
 	if (pGameInstance->Key_Down(DIK_A))
 	{
-		pGameInstance->PlaySound(L"PlayerAttack.wav", 20, 1.f);
+		pGameInstance->PlaySound(L"ReefAttack.mp3", 20, 1.f);
 
 		CReefAttack::REEFATTACKDESC ReefAttackDESC;
 		ReefAttackDESC.eDir = m_eDir;
@@ -825,7 +825,6 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 	{
 		CCardinalBlastAttack::CARDINALATTACKDESC CardinalAttackDESC;
 		CardinalAttackDESC.eDir = m_eDir;
-
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_CardinalBlast_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &CardinalAttackDESC);
 		SetState(STATE_ATTACK, m_eDir);
 	}
@@ -834,7 +833,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 	{
 		CSunCross::SUNCROSSDESC SunCrossDECS;
 		SunCrossDECS.eDir = m_eDir;
-			
+		pGameInstance->PlaySound(L"Suncross.mp3", 20, 1.f);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SunCross"), LEVEL_STATIC, TEXT("Layer_Skill"), &SunCrossDECS);
 		SetState(STATE_ATTACK, m_eDir);
 		// TEST
@@ -858,7 +857,6 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 	{
 		CChasingShotAttack::CHASINGATTACKDESC ChasingShotDECS;
 		ChasingShotDECS.eDir = m_eDir;
-
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ChasingShot_Attack"), LEVEL_STATIC, TEXT("Layer_Skill"), &ChasingShotDECS);
 		SetState(STATE_ATTACK, m_eDir);
 	

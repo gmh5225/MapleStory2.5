@@ -69,6 +69,7 @@ void CBeastLoof::LateTick(_float fTimeDelta)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
+		pGameInstance->PlaySound(L"Beast.mp3", 20, 1.f);
 		CBeastAttack::BEASTATTACKDESC AttackDesc;
 		AttackDesc.eDir = m_eDir;
 		AttackDesc.pTransform = m_pTransformCom;

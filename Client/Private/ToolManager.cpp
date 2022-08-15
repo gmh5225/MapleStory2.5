@@ -17,6 +17,12 @@ CToolManager::CToolManager()
 
 
 
+void CToolManager::SetDestLevel(LEVEL eLevel, _float3 vDestPos)
+{
+		CGameInstance::Get_Instance()->PlaySoundW(L"Portal.mp3", 29, 1.f);
+		m_eDestLevel = eLevel; m_vDestPos = vDestPos;	
+}
+
 void CToolManager::CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGraphic_Device)
 {
 	if (LEVEL_END == m_eDestLevel)
@@ -24,8 +30,6 @@ void CToolManager::CheckDestLevel(CCollider* pColliderCom, LPDIRECT3DDEVICE9 pGr
 
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
-
-
 
 	CPlayer* pPlayer = (CPlayer*)pGameInstance->Get_ObjectPtr(LEVEL_STATIC, TEXT("Layer_Player"), 0);;
 	pPlayer->SetRespownPos(m_vDestPos);
