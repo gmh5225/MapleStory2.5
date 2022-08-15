@@ -42,7 +42,7 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 	m_iHp = 5;
 	CUIManager::Get_Instance()->Set_BlackWizardHp(m_iHp);
 	SetAni();
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 2.f, 1.f));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 4.f, 0.f));
 	m_pTransformCom->Set_Scaled(9.f);
 	m_bState = false;
 	m_bFinal = false;
@@ -68,16 +68,19 @@ void CBlackWizard::LateTick(_float fTimeDelta)
 		if(m_eCurState != STATE_END)
 		SetState();
 	}
-	Fix_Scale();
+	//Fix_Scale();
 
 	
 
 	__super::BoxColCom_Tick(m_pTransformCom);
-	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+	
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
-	if(m_eCurState != STATE_END)
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
+	if (m_eCurState != STATE_END)
+	{
+		Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
+	}
 
 	m_iHp = CUIManager::Get_Instance()->Get_BlackWizardHp();
 

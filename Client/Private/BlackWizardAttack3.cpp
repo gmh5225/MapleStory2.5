@@ -79,7 +79,7 @@ void CBlackWizardAttack3::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AnimCount() >= 14)
 		Set_Dead();
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 
 	__super::BoxColCom_Tick(m_pTransformCom);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER_SKILL, this);
