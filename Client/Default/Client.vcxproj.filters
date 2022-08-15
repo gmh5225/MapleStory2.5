@@ -693,6 +693,9 @@
     </Filter>
     <Filter Include="04.UI\10.Title">
       <UniqueIdentifier>{4cd45536-869a-467c-9d9b-4fab4e2e1243}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Creature\MiddleBoss\KingSlime">
+      <UniqueIdentifier>{1d4c5d3d-9209-4a56-877c-43df0d402888}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1292,6 +1295,9 @@
     </ClInclude>
     <ClInclude Include="..\public\Title.h">
       <Filter>04.UI\10.Title</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\KingSlime.h">
+      <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1882,6 +1888,9 @@
     </ClCompile>
     <ClCompile Include="..\private\Title.cpp">
       <Filter>04.UI\10.Title</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\KingSlime.cpp">
+      <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

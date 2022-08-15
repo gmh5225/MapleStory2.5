@@ -450,10 +450,8 @@ void CRedSnail::Damaged(CGameObject * pOther)
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
 		MakeItem();
-		CGameInstance::Get_Instance()->PlaySound(L"SnailDie.wav", 1, 1.f);
+		CGameInstance::Get_Instance()->PlaySound(L"SnailDie.wav", 15, 1.f);
 	}
-	else
-		CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 1, 1.f);
 }
 
 

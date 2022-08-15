@@ -456,10 +456,8 @@ void CGreenMushroom::Damaged(CGameObject * pOther)
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
 		MakeItem();
-		CGameInstance::Get_Instance()->PlaySound(L"GreenMushroomDie.wav", 1, 1.f);
+		CGameInstance::Get_Instance()->PlaySound(L"GreenMushroomDie.wav", 17, 1.f);
 	}
-	else
-		CGameInstance::Get_Instance()->PlaySound(L"GreenMushroomDamage.wav", 1, 1.f);
 }
 
 

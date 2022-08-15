@@ -42,8 +42,8 @@ HRESULT CLevel_Elenya::Initialize()
 	if (FAILED(Ready_Layer_Player(TEXT("Layer_Player"))))
 		return E_FAIL;*/
 
-	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
+		return E_FAIL;
 
 	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
 	//	return E_FAIL;
@@ -164,7 +164,8 @@ HRESULT CLevel_Elenya::Ready_Layer_Monster(const _tchar * pLayerTag)
 
 
 
-
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_KingSlime"), LEVEL_ELENYA, pLayerTag)))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 
@@ -449,15 +450,15 @@ HRESULT CLevel_Elenya::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo5.LayerTag = TEXT("Layer_Spawner_Elenya");
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo5);
 
-	CSpawner::SPAWNERINFO MonsterInfo6;
-	MonsterInfo6.MonsterName = TEXT("GreenMushroom");
-	MonsterInfo6.MonsterPos = _float3{ 20.f , 16.f, 4.f };
-	MonsterInfo6.SpawnerNum = 36;
-	MonsterInfo6.MonsterNum = 2;
-	MonsterInfo6.MonsterColRad = 1.f;
-	MonsterInfo6.Level = LEVEL_ELENYA;
-	MonsterInfo6.LayerTag = TEXT("Layer_Spawner_Elenya");
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo6);
+	//CSpawner::SPAWNERINFO MonsterInfo6;
+	//MonsterInfo6.MonsterName = TEXT("GreenMushroom");
+	//MonsterInfo6.MonsterPos = _float3{ 20.f , 16.f, 4.f };
+	//MonsterInfo6.SpawnerNum = 36;
+	//MonsterInfo6.MonsterNum = 2;
+	//MonsterInfo6.MonsterColRad = 1.f;
+	//MonsterInfo6.Level = LEVEL_ELENYA;
+	//MonsterInfo6.LayerTag = TEXT("Layer_Spawner_Elenya");
+	//CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo6);
 
 	return S_OK;
 }

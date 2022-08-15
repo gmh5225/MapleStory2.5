@@ -30,8 +30,8 @@ HRESULT CGASEffect::Initialize(void * pArg)
 	memcpy(&m_Desc, pArg, sizeof(SUNCROSSHITDESC));
 
 	m_fColRad = 0.1f;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos);
-	m_pTransformCom->Set_Scaled(2.f);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos + _float3(0.f,0.f,0.15f));
+	m_pTransformCom->Set_Scaled(3.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GASEffect"), 0.1f, CAnimator::STATE_ONCE);
 	m_fYDistance = 11.f;
 
@@ -84,7 +84,7 @@ void CGASEffect::LateTick(_float fTimeDelta)
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
-	if (m_fEffectCount >= 1.f)
+	if (m_fEffectCount >= 1.5f)
 		Set_Dead();
 
 

@@ -172,6 +172,7 @@
     <ClInclude Include="..\public\DomiScreen.h" />
     <ClInclude Include="..\public\JalJang.h" />
     <ClInclude Include="..\public\LevelUp.h" />
+    <ClInclude Include="..\Public\KingSlime.h" />
     <ClInclude Include="..\public\Level_BlackMageJump.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
@@ -373,6 +374,7 @@
     <ClCompile Include="..\private\DomiScreen.cpp" />
     <ClCompile Include="..\private\JalJang.cpp" />
     <ClCompile Include="..\private\LevelUp.cpp" />
+    <ClCompile Include="..\Private\KingSlime.cpp" />
     <ClCompile Include="..\private\Level_BlackMageJump.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />

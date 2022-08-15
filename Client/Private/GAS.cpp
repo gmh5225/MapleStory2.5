@@ -444,6 +444,8 @@ void CGAS::Tick_Chase(_float fTimeDelta)
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+
 	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);

@@ -4,14 +4,12 @@
 
 BEGIN(Client)
 
-class CBlueSlime final : public CCreature
+class CKingSlime final : public CCreature
 {
-	enum Direction {R,G,B,P};
-
 private:
-	CBlueSlime(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CBlueSlime(const CBlueSlime& rhs);
-	virtual ~CBlueSlime() = default;
+	CKingSlime(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CKingSlime(const CKingSlime& rhs);
+	virtual ~CKingSlime() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -27,6 +25,12 @@ private:
 	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
+	void Tick_Attack(_float fTimeDelta);
+	void Tick_Die(_float fTimeDelta);
+	void Tick_CutScene(_float fTimeDelta);
+	void Tick_End(_float fTimeDelta);
+	void Cut_Attack(_float fTimeDelta);
+	
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -35,10 +39,9 @@ public:
 	virtual void SetAni() override;
 	virtual void Damaged(CGameObject* pOther) override;
 
-	void DestroyCube(_int iLength);
-
 private:
 	HRESULT SetUp_Components();
+	void Die();
 
 private:
 	STATE m_eCurState;
@@ -46,18 +49,32 @@ private:
 
 	CGameObject* m_pTarget;
 
-	_int m_iDirection;
 
 public:
-	static CBlueSlime* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CKingSlime* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
 private:
 	_int	m_iHp;
 	_int	m_iIndexNum;
+	_float m_fCountDead;
 
-	_int m_iTestCount;
+	// 블루머쉬맘을 일정 거리만큼 점프시키는 변수
+	_float m_fCountJump;
+	_bool m_bAttack;
+
+	_float m_fCountLanding;
+	_bool m_bLanding;
+
+	_float m_fCountLand;
+
+	// 블루 머쉬맘이 점프하기 전 좌표
+	_float3 vPos;
+
+	// For.CutScene
+	_float m_fCutTimeAcc = 0.f;
+	_bool m_bShake = false;
 };
 
 END

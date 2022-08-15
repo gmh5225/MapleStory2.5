@@ -34,6 +34,8 @@ HRESULT CBlueSlime::Initialize(void * pArg)
 	m_iHp = 10;
 	m_iIndexNum = -1;
 
+	m_iTestCount = CGameInstance::Get_Instance()->Get_Random(6, 11);
+
 	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
 
 	m_iDirection = pMonsterDesc->MonsterNum;
@@ -96,18 +98,36 @@ void CBlueSlime::Tick(_float fTimeDelta)
 	case R:
 		m_pTransformCom->Chase(_float3(-6.5f, 0.f, 7.3f), fTimeDelta * 2.5f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSlime_Move"), 0.1f, CAnimator::STATE_LOOF);
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x <= -6.4f)
+		{
+			Set_Dead();
+		}
 		break;
 	case G:
 		m_pTransformCom->Chase(_float3(6.5f, 0.f, 7.3f), fTimeDelta * 2.5f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSlime_MoveR"), 0.1f, CAnimator::STATE_LOOF);
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 6.4f)
+		{
+			Set_Dead();
+		}
 		break;
 	case B:
 		m_pTransformCom->Chase(_float3(10.5f, 0.f, 0.f), fTimeDelta * 2.7f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSlime_MoveR"), 0.1f, CAnimator::STATE_LOOF);
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 10.4f)
+		{
+			DestroyCube(m_iTestCount);
+			m_iTestCount--;
+			Set_Dead();
+		}
 		break;
 	case P:
 		m_pTransformCom->Chase(_float3(-10.5f, 0.f, 0.f), fTimeDelta * 2.7f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueSlime_Move"), 0.1f, CAnimator::STATE_LOOF);
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x <= -10.4f)
+		{
+			Set_Dead();
+		}
 		break;
 	}
 
@@ -139,7 +159,7 @@ void CBlueSlime::LateTick(_float fTimeDelta)
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
 	Set_Billboard();
 }
@@ -223,6 +243,26 @@ void CBlueSlime::Damaged(CGameObject * pOther)
 {
 }
 
+void CBlueSlime::DestroyCube(_int iLength)
+{
+	_float4x4 Matrix;
+	_float3 foriDir = { 1.f, 0.f, 0.f };
+	_float3 fDir;
+	_float3 vPos;
+	for (_int i = 0; i <= 360; i += 45)
+	{
+		_int iAngle = i + 20;
+		D3DXMatrixRotationY(&Matrix, D3DXToRadian(_float(iAngle)));
+		D3DXVec3TransformNormal(&fDir, &foriDir, &Matrix);
+		vPos = fDir * iLength;
+		CMap_Manager::CUBEDATA desc;
+		vPos.y += 2.f;
+		desc.vPos = vPos;
+		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Trigger"), LEVEL_GAS, TEXT("Layer_Cube"), &desc)))
+			return;
+	}
+
+}
 
 
 
