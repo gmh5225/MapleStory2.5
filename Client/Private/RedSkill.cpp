@@ -25,6 +25,8 @@ HRESULT CRedSkill::Initialize_Prototype()
 HRESULT CRedSkill::Initialize(void * pArg)
 {
 	__super::Initialize(pArg);
+	CCreature::CRETUREDESC pRedSkillDesc = *(CCreature::CRETUREDESC*)pArg;
+	_float3 vPos = pRedSkillDesc.vPos;
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
@@ -35,10 +37,11 @@ HRESULT CRedSkill::Initialize(void * pArg)
 
 	m_fSkill = 0;
 	
-	_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
-	_float b = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+	//_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+	//_float b = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f + a, 2.f, 0.f + b));
+	//m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f + a, 2.f, 0.f + b));
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos);
 	m_pTransformCom->Set_Scaled(5.f);
 
 	SetState(STATE_IDLE, DIR_END);
@@ -106,9 +109,9 @@ void CRedSkill::LateTick(_float fTimeDelta)
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_NPC, this);
 
 
-	m_fSkill += fTimeDelta;
-	if (m_fSkill >= 12.f)
-		Set_Dead();
+	//m_fSkill += fTimeDelta;
+	//if (m_fSkill >= 12.f)
+		//Set_Dead();
 }
 HRESULT CRedSkill::Render()
 {

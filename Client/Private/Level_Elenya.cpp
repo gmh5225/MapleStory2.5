@@ -51,15 +51,16 @@ HRESULT CLevel_Elenya::Initialize()
 	////if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
 	////	return E_FAIL;
 
-	//if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
+		return E_FAIL;
 
 	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 		return E_FAIL;
 
 	CUIManager::Get_Instance()->End_Loading();
+	
 	CCutSceneManager::Get_Instance()->Start_Enter_Elenya();
-
+	
 	return S_OK;
 }
 
@@ -187,7 +188,133 @@ HRESULT CLevel_Elenya::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+	CCreature::CRETUREDESC HarpInfo0;
+	HarpInfo0.vPos = _float3(12.f, 20.f, 15.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Harp"), LEVEL_GAMEPLAY, pLayerTag, &HarpInfo0)))
+		return E_FAIL;
+	//
+	CCreature::CRETUREDESC SlimeStoneInfo0;
+	SlimeStoneInfo0.vPos = _float3(20.5f, 28.9f, 6.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SlimeStone"), LEVEL_GAMEPLAY, pLayerTag, &SlimeStoneInfo0)))
+		return E_FAIL;
+	CCreature::CRETUREDESC SlimeStoneInfo1;
+	SlimeStoneInfo1.vPos = _float3(26.f, 28.9f, 12.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SlimeStone"), LEVEL_GAMEPLAY, pLayerTag, &SlimeStoneInfo1)))
+		return E_FAIL;
+	CCreature::CRETUREDESC SlimeStoneInfo2;
+	SlimeStoneInfo2.vPos = _float3(33.f, 28.9f, 6.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SlimeStone"), LEVEL_GAMEPLAY, pLayerTag, &SlimeStoneInfo2)))
+		return E_FAIL;
+	CCreature::CRETUREDESC SlimeStoneInfo3;
+	SlimeStoneInfo3.vPos = _float3(26.f, 28.9f, 1.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SlimeStone"), LEVEL_GAMEPLAY, pLayerTag, &SlimeStoneInfo3)))
+		return E_FAIL;
+	//
+	CCreature::CRETUREDESC GrassInfo0;
+	GrassInfo0.vPos = _float3(1.f, 0.78f, 1.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo0)))
+		return E_FAIL;
+	CCreature::CRETUREDESC VineInfo0;
+	VineInfo0.vPos = _float3(-2.f, 1.2f, 3.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Vine"), LEVEL_GAMEPLAY, pLayerTag, &VineInfo0)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo7;
+	WeedInfo7.vPos = _float3(-1.7f, 0.68f, 2.2f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo7)))
+		return E_FAIL;
+	CCreature::CRETUREDESC VineInfo1;
+	VineInfo1.vPos = _float3(19.f, 15.2f, 7.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Vine"), LEVEL_GAMEPLAY, pLayerTag, &VineInfo1)))
+		return E_FAIL;
 
+	CCreature::CRETUREDESC VineInfo2;
+	VineInfo2.vPos = _float3(0.f, 13.2f, 14.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Vine"), LEVEL_GAMEPLAY, pLayerTag, &VineInfo2)))
+		return E_FAIL;
+
+	CCreature::CRETUREDESC WeedInfo9;
+	WeedInfo9.vPos = _float3(0.2f, 12.68f, 13.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo9)))
+		return E_FAIL;
+	//CCreature::CRETUREDESC GrassInfo1;
+	//GrassInfo1.vPos = _float3(-2.f, 0.78f, 3.f);
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo1)))
+//		return E_FAIL;
+
+
+	CCreature::CRETUREDESC GrassInfo2;
+	GrassInfo2.vPos = _float3(-4.f, 0.78f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo2)))
+		return E_FAIL;
+
+	CCreature::CRETUREDESC GrassInfo3;
+	GrassInfo3.vPos = _float3(1.f, 0.78f, -3.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo3)))
+		return E_FAIL;
+
+	CCreature::CRETUREDESC GrassInfo4;
+	GrassInfo4.vPos = _float3(5.f, 4.78f, -5.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo4)))
+		return E_FAIL;
+	CCreature::CRETUREDESC GrassInfo5;
+	GrassInfo5.vPos = _float3(-2.f, 12.78f, 12.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo5)))
+		return E_FAIL;
+	//
+	CCreature::CRETUREDESC GrassInfo6;
+	GrassInfo6.vPos = _float3(8.f, 19.78f, 19.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo6)))
+		return E_FAIL;
+
+
+	CCreature::CRETUREDESC GrassInfo8;
+	GrassInfo8.vPos = _float3(9.f, 19.78f, 10.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo8)))
+		return E_FAIL;
+	CCreature::CRETUREDESC GrassInfo9;
+	GrassInfo9.vPos = _float3(4.f, 19.78f, 16.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Grass"), LEVEL_GAMEPLAY, pLayerTag, &GrassInfo9)))
+		return E_FAIL;
+	//
+	CCreature::CRETUREDESC WeedInfo0;
+	WeedInfo0.vPos = _float3(1.4f, 2.68f, -2.8f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo0)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo1;
+	WeedInfo1.vPos = _float3(-1.f, 0.68f, -4.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo1)))
+		return E_FAIL;
+
+	CCreature::CRETUREDESC WeedInfo2;
+	WeedInfo2.vPos = _float3(-3.8f, 0.68f, 0.7f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo2)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo3;
+	WeedInfo3.vPos = _float3(4.f, 8.68f, 1.5f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo3)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo4;
+	WeedInfo4.vPos = _float3(10.f, 8.68f, 2.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo4)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo5;
+	WeedInfo5.vPos = _float3(4.f, 8.68f, -3.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo5)))
+		return E_FAIL;
+	CCreature::CRETUREDESC WeedInfo6;
+	WeedInfo6.vPos = _float3(7.f, 8.68f, 3.5f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo6)))
+		return E_FAIL;
+
+
+	CCreature::CRETUREDESC WeedInfo8;
+	WeedInfo8.vPos = _float3(12.7f, 19.68f, 14.5f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo8)))
+		return E_FAIL;
+
+	
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RockEnter"), LEVEL_GAMEPLAY, pLayerTag)))
+		return E_FAIL;
 
 	CPotal::POTALDESC PotalDesc;
 	PotalDesc.eDestLevel = LEVEL_ELENYAENTER;

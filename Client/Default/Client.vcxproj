@@ -170,6 +170,7 @@
     <ClInclude Include="..\Public\GASEffect.h" />
     <ClInclude Include="..\Public\GreenSkill.h" />
     <ClInclude Include="..\public\DomiScreen.h" />
+    <ClInclude Include="..\Public\Harp.h" />
     <ClInclude Include="..\public\JalJang.h" />
     <ClInclude Include="..\public\Level_BlackMageJump.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
@@ -299,6 +300,7 @@
     <ClInclude Include="..\Public\ReefAttackIcon.h" />
     <ClInclude Include="..\Public\ReefAttackInfo.h" />
     <ClInclude Include="..\Public\RibbonPigInfo.h" />
+    <ClInclude Include="..\Public\RockEnter.h" />
     <ClInclude Include="..\public\Section.h" />
     <ClInclude Include="..\public\Shadow.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
@@ -315,6 +317,7 @@
     <ClInclude Include="..\Public\Sky.h" />
     <ClInclude Include="..\Public\Slime.h" />
     <ClInclude Include="..\Public\SlimeInfo.h" />
+    <ClInclude Include="..\Public\SlimeStone.h" />
     <ClInclude Include="..\Public\SolunaSlashIcon.h" />
     <ClInclude Include="..\Public\SolunaSlashInfo.h" />
     <ClInclude Include="..\Public\Spawner.h" />
@@ -344,6 +347,7 @@
     <ClInclude Include="..\Public\SolunaSlashEffectB.h" />
     <ClInclude Include="..\Public\SunCross.h" />
     <ClInclude Include="..\Public\SunCrossHit.h" />
+    <ClInclude Include="..\Public\Vine.h" />
     <ClInclude Include="..\Public\Warning.h" />
     <ClInclude Include="..\Public\WarriorReef.h" />
     <ClInclude Include="..\Public\WarriorReefIcon.h" />
@@ -369,6 +373,7 @@
     <ClCompile Include="..\Private\GASEffect.cpp" />
     <ClCompile Include="..\Private\GreenSkill.cpp" />
     <ClCompile Include="..\private\DomiScreen.cpp" />
+    <ClCompile Include="..\Private\Harp.cpp" />
     <ClCompile Include="..\private\JalJang.cpp" />
     <ClCompile Include="..\private\Level_BlackMageJump.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
@@ -497,6 +502,7 @@
     <ClCompile Include="..\Private\ReefAttackIcon.cpp" />
     <ClCompile Include="..\Private\ReefAttackInfo.cpp" />
     <ClCompile Include="..\Private\RibbonPigInfo.cpp" />
+    <ClCompile Include="..\Private\RockEnter.cpp" />
     <ClCompile Include="..\private\Section.cpp" />
     <ClCompile Include="..\private\Shadow.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
@@ -513,6 +519,7 @@
     <ClCompile Include="..\Private\Sky.cpp" />
     <ClCompile Include="..\Private\Slime.cpp" />
     <ClCompile Include="..\Private\SlimeInfo.cpp" />
+    <ClCompile Include="..\Private\SlimeStone.cpp" />
     <ClCompile Include="..\Private\SolunaSlashIcon.cpp" />
     <ClCompile Include="..\Private\SolunaSlashInfo.cpp" />
     <ClCompile Include="..\Private\Spawner.cpp" />
@@ -542,6 +549,7 @@
     <ClCompile Include="..\Private\SolunaSlashEffectB.cpp" />
     <ClCompile Include="..\Private\SunCross.cpp" />
     <ClCompile Include="..\Private\SunCrossHit.cpp" />
+    <ClCompile Include="..\Private\Vine.cpp" />
     <ClCompile Include="..\Private\Warning.cpp" />
     <ClCompile Include="..\Private\WarriorReef.cpp" />
     <ClCompile Include="..\Private\WarriorReefIcon.cpp" />
