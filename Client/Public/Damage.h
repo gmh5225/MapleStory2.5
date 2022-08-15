@@ -7,7 +7,11 @@ BEGIN(Client)
 class CDamage final : public CCreature
 {
 public:
+	enum DAMAGETYPE { DAMAGE_ATTACKED, DAMAGE_PLAYERATTAKED, DAMAGE_HEAL, DAMAGE_END };
+
+public:
 	typedef struct tagDamageDesc{
+		DAMAGETYPE eType;
 		string sDamage;
 		_float3 vPos;
 		_float fLifeTime;

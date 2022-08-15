@@ -60,8 +60,11 @@ HRESULT CLevel_DElenyaEnter::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
+	if (m_bTitle)
+		CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DELENYAENTER);
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
+	m_bTitle = true;
 	return S_OK;
 }
 

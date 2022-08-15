@@ -60,6 +60,7 @@ HRESULT CLevel_DHenesysHunting::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
+	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DHENESYSHUNTING);
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
 	return S_OK;

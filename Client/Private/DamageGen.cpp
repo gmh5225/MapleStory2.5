@@ -2,7 +2,6 @@
 #include "..\Public\DamageGen.h"
 
 #include "GameInstance.h"
-#include "Damage.h"
 #include "ToolManager.h"
 
 
@@ -151,11 +150,13 @@ void CDamageGen::Im(_float fTimeDelta)
 		vTempPos.x += iX;
 		DamageDesc.vPos = vTempPos;
 		DamageDesc.fLifeTime = m_Desc.fLifeTime;
+		DamageDesc.eType = m_Desc.eType;
 
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Damage"), eCurLevel, TEXT("Layer_Damage"), &DamageDesc);
 
 	}
 
+	CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 2, 1.f);
 	Set_Dead();
 
 	Safe_Release(pGameInstance);
@@ -189,7 +190,9 @@ void CDamageGen::NonIm(_float fTimeDelta)
 		vTempPos.x += iX;
 		DamageDesc.vPos = vTempPos;
 		DamageDesc.fLifeTime = m_Desc.fLifeTime;
+		DamageDesc.eType = m_Desc.eType;
 
+		CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 2, 1.f);
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Damage"), eCurLevel, TEXT("Layer_Damage"), &DamageDesc);
 
 

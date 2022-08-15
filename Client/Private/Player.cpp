@@ -153,6 +153,9 @@ void CPlayer::Tick(_float fTimeDelta)
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_Y))
 	{
 		CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
+
+		//_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		//CParticleManager::Get_Instance()->MakeLeveUp(vPos);
 	}
 	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))
 	{
@@ -189,108 +192,8 @@ void CPlayer::Tick(_float fTimeDelta)
 		break;
 	}
 
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_1))
-	{
-		CItem::ITEMINFO SlimeItem;
-		SlimeItem.eType = CInvenManager::TYPE_STUFF;
-		SlimeItem.iTextNum = 0;
-		SlimeItem.pTag = L"BlueSnailInfo";
-		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
-	}
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_2))
-	{
-		CItem::ITEMINFO SlimeItem;
-		SlimeItem.eType = CInvenManager::TYPE_STUFF;
-		SlimeItem.iTextNum = 1;
-		SlimeItem.pTag = L"RibbonPigInfo";
-		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
-	}
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_3))
-	{
-		CItem::ITEMINFO SlimeItem;
-		SlimeItem.eType = CInvenManager::TYPE_STUFF;
-		SlimeItem.iTextNum = 2;
-		SlimeItem.pTag = L"SlimeInfo";
-		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
-	}
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_4))
-	{
-		CItem::ITEMINFO SlimeItem;
-		SlimeItem.eType = CInvenManager::TYPE_STUFF;
-		SlimeItem.iTextNum = 3;
-		SlimeItem.pTag = L"GreenMushroomInfo";
-		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
-	}
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_5))
-	{
-		CItem::ITEMINFO SlimeItem;
-		SlimeItem.eType = CInvenManager::TYPE_STUFF;
-		SlimeItem.iTextNum = 4;
-		SlimeItem.pTag = L"GoStumpInfo";
-		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
-	}
-
-
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_7))
-	{
-		CItem::ITEMINFO RedPortion;
-		RedPortion.eType = CInvenManager::TYPE_CONSUM;
-		RedPortion.iTextNum = 0;
-		RedPortion.pTag = L"RedPortionInfo";
-		RedPortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &RedPortion);
-	}
-
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_8))
-	{
-		CItem::ITEMINFO BluePortion;
-		BluePortion.eType = CInvenManager::TYPE_CONSUM;
-		BluePortion.iTextNum = 1;
-		BluePortion.pTag = L"BluePortionInfo";
-		BluePortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &BluePortion);
-	}
-
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_9))
-	{
-		CItem::ITEMINFO Teleport;
-		Teleport.eType = CInvenManager::TYPE_CONSUM;
-		Teleport.iTextNum = 2;
-		Teleport.pTag = L"TeleportInfo";
-		Teleport.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &Teleport);
-
-	}
-
-
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_M))
-	{
-		// TEST
-		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		vPos.y += 0.5f;
-		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.1f, vPos, 1.f, true);
-	}
-	else if (CGameInstance::Get_Instance()->Key_Down(DIK_N))
-	{
-		// TEST
-		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		vPos.y += 0.5f;
-		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.05f, vPos, 1.3f, false);
-	}
-
-
-	
-
-	Safe_Release(pGameInstance);
-
+	GetKeyCheate(fTimeDelta);
+	CheckAttakedTime(fTimeDelta);
 	Particle(fTimeDelta);
 
 }
@@ -811,7 +714,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		// TEST
 		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		vPos.y += 1.5f;
-		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.1f, vPos, 1.f, true);
+		// CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.1f, vPos, 1.f, true);
 
 
 		// CParticleManager::Get_Instance()->Shot(m_pTransformCom->Get_State(CTransform::STATE_POSITION), m_pTransformCom->Get_State(CTransform::STATE_LOOK));
@@ -837,7 +740,7 @@ void CPlayer::GetKeyInput(_float fTimeDelta)
 		// TEST
 		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		vPos.y += 1.5f;
-		CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.05f, vPos, 1.3f, false);
+		// CParticleManager::Get_Instance()->MakeDamageGen(1000, 2000, 4, 0.05f, vPos, 1.3f, false);
 
 	}
 
@@ -1115,6 +1018,106 @@ void CPlayer::Particle(_float fTimeDelta)
 
 }
 
+void CPlayer::GetKeyCheate(_float fTimeDelta)
+{
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_1))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 0;
+		SlimeItem.pTag = L"BlueSnailInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_2))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 1;
+		SlimeItem.pTag = L"RibbonPigInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_3))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 2;
+		SlimeItem.pTag = L"SlimeInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_4))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 3;
+		SlimeItem.pTag = L"GreenMushroomInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_5))
+	{
+		CItem::ITEMINFO SlimeItem;
+		SlimeItem.eType = CInvenManager::TYPE_STUFF;
+		SlimeItem.iTextNum = 4;
+		SlimeItem.pTag = L"GoStumpInfo";
+		SlimeItem.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &SlimeItem);
+	}
+
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_7))
+	{
+		CItem::ITEMINFO RedPortion;
+		RedPortion.eType = CInvenManager::TYPE_CONSUM;
+		RedPortion.iTextNum = 0;
+		RedPortion.pTag = L"RedPortionInfo";
+		RedPortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &RedPortion);
+	}
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_8))
+	{
+		CItem::ITEMINFO BluePortion;
+		BluePortion.eType = CInvenManager::TYPE_CONSUM;
+		BluePortion.iTextNum = 1;
+		BluePortion.pTag = L"BluePortionInfo";
+		BluePortion.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &BluePortion);
+	}
+
+	if (CGameInstance::Get_Instance()->Key_Down(DIK_9))
+	{
+		CItem::ITEMINFO Teleport;
+		Teleport.eType = CInvenManager::TYPE_CONSUM;
+		Teleport.iTextNum = 2;
+		Teleport.pTag = L"TeleportInfo";
+		Teleport.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Item"), LEVEL_GAMEPLAY, TEXT("Layer_Item"), &Teleport);
+
+	}
+
+	Safe_Release(pGameInstance);
+}
+
+void CPlayer::CheckAttakedTime(_float fTimeDelta)
+{
+	if (!m_bAttaked)
+		return;
+
+	m_fAttakedTimeAcc += fTimeDelta;
+
+	if (2.f < m_fAttakedTimeAcc)
+	{
+		m_bAttaked = false;
+		m_fAttakedTimeAcc = 0.f;
+	}
+}
+
 HRESULT CPlayer::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
@@ -1138,9 +1141,6 @@ HRESULT CPlayer::Reset_RenderState()
 
 	return S_OK;
 }
-
-
-
 
 
 
@@ -1170,6 +1170,19 @@ CGameObject * CPlayer::Clone(void* pArg)
 }
 
 
+void CPlayer::Damaged(CGameObject * pOther)
+{
+	CTransform* pTran = (CTransform*)pOther->Get_ComponentPtr(TEXT("Com_Transform"));
+	_float3 vInvDir = -1.f * m_pTransformCom->Get_State(CTransform::STATE_LOOK);
+	SetKnockBack(1.5f, 3.f, vInvDir);
+	m_bAttaked = true;
+
+
+
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	vPos.y += 1.5f;
+	CParticleManager::Get_Instance()->MakeDamageGen(500, 2000, 1, 0.05f, vPos, 1.6f, true, CDamage::DAMAGE_PLAYERATTAKED);
+}
 
 
 void CPlayer::Collision(CGameObject * pOther)
@@ -1203,6 +1216,10 @@ void CPlayer::Collision(CGameObject * pOther)
 			//m_pInvenMgr->AddItemNum();
 		}
 
+	}
+	if (pOther->Get_Tag() == "Tag_Monster" && !m_bAttaked)
+	{
+		Damaged(pOther);
 	}
 }
 

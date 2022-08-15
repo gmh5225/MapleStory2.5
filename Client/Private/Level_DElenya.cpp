@@ -60,6 +60,7 @@ HRESULT CLevel_DElenya::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
+	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DELENYA);
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
 	return S_OK;
@@ -71,19 +72,6 @@ void CLevel_DElenya::Tick(_float fTimeDelta)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
 
-	if (GetKeyState('N') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
-			return;
-
-		
-		Safe_Release(pGameInstance);
-
-	}
 
 
 }

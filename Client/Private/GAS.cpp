@@ -46,7 +46,7 @@ HRESULT CGAS::Initialize(void * pArg)
 
 	m_bPatterStart = false;
 
-	m_fPatternCycle = 5;
+	m_fPatternCycle = 4;
 
 	m_fJump = 0;
 	m_fDJump = 0;
@@ -59,6 +59,11 @@ HRESULT CGAS::Initialize(void * pArg)
 	//모든 패턴을 실행시키기 위한 변수
 	m_iFirstPattern = -1;
 
+	m_iFirstSlime = -1;
+
+	m_iSlimePattern = 0;
+
+	m_bSlime = false;
 	m_bTest = false;
 	m_bVanish = false;
 	m_bEffect = false;
@@ -77,12 +82,9 @@ HRESULT CGAS::Initialize(void * pArg)
 	}
 	else
 	{
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 5.f, -5.f));
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(5.f, 0.f, -5.f));
 		SetState(STATE_IDLE, DIR_END);
 	}
-
-
-
 
 
 	SetShadow(LEVEL_GAS, 4.5f);
@@ -177,25 +179,8 @@ void CGAS::Tick(_float fTimeDelta)
 	Safe_AddRef(pGameInstance);
 
 
-	// TEST
-	if (pGameInstance->Key_Down(DIK_Y))
-	{
-		DestroyCube(iTestCount);
-		--iTestCount;
-	}
-	if (pGameInstance->Key_Down(DIK_U))
-	{
-		_float RandX = pGameInstance->Get_FloatRandom(-10.f, 10.f);
-		_float RandZ = pGameInstance->Get_FloatRandom(-10.f, 10.f);
-		_float RandY = pGameInstance->Get_FloatRandom(2.f, 3.f);
-		MakeBlockCube(_float3(RandX, RandY, RandZ));
-	}
-
-
 	if (STATE_CUTSCEEN != m_eCurState && STATE_CUTSCEEN_2 != m_eCurState)
 	{
-
-
 		CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 		_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
@@ -211,116 +196,96 @@ void CGAS::Tick(_float fTimeDelta)
 
 		if (m_fPatternCycle > 7.f)
 		{
-			//
-			//m_iRandomPattern = 5;
 			m_fPatternCycle = 0;
 			if (!m_bFirstPattern)
 			{
 				m_iFirstPattern++;
 				m_iRandomPattern = m_iFirstPattern;
-				if (m_iFirstPattern >= 5)
+				if (m_iFirstPattern >= 5 && m_bSlime)
 					m_bFirstPattern = true;
+				else if (m_iFirstPattern >= 5 && !m_bSlime)
+					m_iRandomPattern = 5;
 			}
 			else
 			{
 				m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
 			}
-
-			CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-
-			_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
-
-			if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
-				m_bPatterStart = true;
-
-
-			CUIManager::Get_Instance()->Get_GASHp(m_iHp);
-
-			if (m_bPatterStart)
-				m_fPatternCycle += fTimeDelta;
-
-			if (m_fPatternCycle > 15.f)
-			{
-				//m_iRandomPattern = CGameInstance::Get_Instance()->Get_Random(1, 5);
-				m_iRandomPattern = 5;
-				m_fPatternCycle = 0;
-			}
-
-
-			if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
-			{
-
-				if (m_iRandomPattern == 0)
-				{
-					if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
-						SetState(STATE_CHASE, DIR_R);
-					else
-						SetState(STATE_CHASE, DIR_L);
-				}
-
-				else if (m_iRandomPattern == 1) // 점프패턴
-				{
-					if (m_eDir == DIR_R)
-						SetState(STATE_JUMP, DIR_R);
-					else
-						SetState(STATE_JUMP, DIR_L);
-				}
-
-				else if (m_iRandomPattern == 2) // 일반공격
-				{
-					if (m_eDir == DIR_R)
-						SetState(STATE_ATTACK, DIR_R);
-					else
-						SetState(STATE_ATTACK, DIR_L);
-				}
-
-				else if (m_iRandomPattern == 3) // 텔레포트
-				{
-					if (m_eDir == DIR_R)
-						SetState(STATE_DASH, DIR_R);
-					else
-						SetState(STATE_DASH, DIR_L);
-				}
-
-				else if (m_iRandomPattern == 4) // 슬라임 소환
-				{
-					if (m_eDir == DIR_R)
-						SetState(STATE_DJUMP, DIR_R);
-					else
-						SetState(STATE_DJUMP, DIR_L);
-				}
-
-
-				else if (m_iRandomPattern == 100)	// 텔포 이후
-				{
-					if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
-						SetState(STATE_END, DIR_R);
-					else
-						SetState(STATE_END, DIR_L);
-				}
-
-				else if (m_iRandomPattern == 5)	// 게이트 소환
-				{
-					if (m_eDir == DIR_R)
-						SetState(STATE_RESET, DIR_R);
-					else
-						SetState(STATE_RESET, DIR_L);
-				}
-
-				else if (m_iRandomPattern == 6)	// 재생성
-				{
-					if (m_eDir == DIR_R)
-						SetState(STATE_RETURN, DIR_R);
-					else
-						SetState(STATE_RETURN, DIR_L);
-				}
-
-			}
-
-			CUIManager::Get_Instance()->Get_GASHp(m_iHp);
 		}
 
+		vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
+		if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 1.f)
+			m_bPatterStart = true;
+
+		if (m_eCurState != STATE_HIT && m_eCurState != STATE_DIE)
+		{
+
+			if (m_iRandomPattern == 0)
+			{
+				if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
+					SetState(STATE_CHASE, DIR_R);
+				else
+					SetState(STATE_CHASE, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 3) // 점프패턴
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_JUMP, DIR_R);
+				else
+					SetState(STATE_JUMP, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 2) // 일반공격
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_ATTACK, DIR_R);
+				else
+					SetState(STATE_ATTACK, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 1) // 텔레포트
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_DASH, DIR_R);
+				else
+					SetState(STATE_DASH, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 4) // 슬라임 소환
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_DJUMP, DIR_R);
+				else
+					SetState(STATE_DJUMP, DIR_L);
+			}
+
+
+			else if (m_iRandomPattern == 100)	// 텔포 이후
+			{
+				if (vPlayerPos.x > m_pTransformCom->Get_State(CTransform::STATE_POSITION).x)
+					SetState(STATE_END, DIR_R);
+				else
+					SetState(STATE_END, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 5)	// 게이트 소환
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_RESET, DIR_R);
+				else
+					SetState(STATE_RESET, DIR_L);
+			}
+
+			else if (m_iRandomPattern == 6)	// 재생성
+			{
+				if (m_eDir == DIR_R)
+					SetState(STATE_RETURN, DIR_R);
+				else
+					SetState(STATE_RETURN, DIR_L);
+			}
+
+		}
 	}
 
 	Safe_Release(pGameInstance);
@@ -369,10 +334,13 @@ void CGAS::Tick(_float fTimeDelta)
 		break;
 	}
 
+
 }
 
 void CGAS::LateTick(_float fTimeDelta)
 {
+
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
 	__super::BoxColCom_Tick(m_pTransformCom);
@@ -385,15 +353,12 @@ void CGAS::LateTick(_float fTimeDelta)
 		if (m_eCurState != STATE_DIE && m_eCurState != STATE_ATTACK && m_eCurState != STATE_RESET)
 			SetState(STATE_CHASE, m_eDir);
 
-	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	if (m_iHp > 0)
 	{
 		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	}
-
-
 	Set_Billboard();
 }
 HRESULT CGAS::Render()
@@ -489,7 +454,7 @@ void CGAS::Tick_Chase(_float fTimeDelta)
 		SetState(STATE_CHASE, DIR_L);
 
 
-	m_pTransformCom->Chase(vPlayerPos + _float3(0.1f,0,0), fTimeDelta * 3);
+	m_pTransformCom->Chase(vPlayerPos + _float3(0.1f, 0, 0), fTimeDelta * 3);
 
 	Safe_Release(pGameInstance);
 }
@@ -518,7 +483,7 @@ void CGAS::Tick_DJump(_float fTimeDelta)
 
 		CSpawner::SPAWNERINFO m_Slime;
 
-		
+
 		m_Slime.GAS = TEXT("GAS");
 		m_Slime.Level = LEVEL_GAS;
 		m_Slime.MonsterColRad = 1.f;
@@ -580,7 +545,7 @@ void CGAS::Tick_Dash(_float fTimeDelta)
 	{
 		m_iRandomPattern = 100;
 		m_fDash = 0;
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPlayerPos + _float3(0.f,1.f,0.f));
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPlayerPos + _float3(0.f, 1.f, 0.f));
 	}
 
 	Safe_Release(pGameInstance);
@@ -649,9 +614,24 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 
 		CSpawner::SPAWNERINFO m_Slime;
 
-		int a = CGameInstance::Get_Instance()->Get_Random(0, 3);
+		_float RandX = pGameInstance->Get_FloatRandom(-10.f, 10.f);
+		_float RandZ = pGameInstance->Get_FloatRandom(-10.f, 10.f);
+		_float RandY = pGameInstance->Get_FloatRandom(2.f, 3.f);
+		MakeBlockCube(_float3(RandX, RandY, RandZ));
 
-		switch (3)
+		if (!m_bSlime)
+		{
+			m_iFirstSlime++;
+			m_iSlimePattern = m_iFirstSlime;
+			if (m_iFirstSlime >= 3)
+				m_bSlime = true;
+		}
+		else
+		{
+			m_iFirstSlime = CGameInstance::Get_Instance()->Get_Random(0, 3);
+		}
+
+		switch (m_iSlimePattern)
 		{
 		case 0:
 			for (int i = 0; i < 4; ++i)
@@ -671,7 +651,7 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 			for (int i = 0; i < 4; ++i)
 			{
 				m_Slime.MonsterNum = i;
-					pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime);
+				pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlueSlime"), LEVEL_GAS, TEXT("Layer_Monster"), &m_Slime);
 			}
 			break;
 		case 3:
@@ -691,7 +671,7 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 	{
 		m_iRandomPattern = 6;
 		m_fReset = 0;
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION,  _float3(0.f, 5.f, 0.f));
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(0.f, 5.f, 0.f));
 		m_bVanish = false;
 	}
 }
@@ -826,15 +806,13 @@ void CGAS::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
-	CGameInstance::Get_Instance()->PlaySound(L"SlimeDamage.wav", 1, 1.f);
-
 	--m_iHp;
+
 	if (m_iHp <= 0)
 	{
 		CQuestManager::Get_Instance()->Hunting(TEXT("GAS"));
 		Die();
 	}
-
 }
 
 void CGAS::DestroyCube(_int iLength)
@@ -843,7 +821,7 @@ void CGAS::DestroyCube(_int iLength)
 	_float3 foriDir = { 1.f, 0.f, 0.f };
 	_float3 fDir;
 	_float3 vPos;
-	for (_int i = 0; i <= 360; i+=45)
+	for (_int i = 0; i <= 360; i += 45)
 	{
 		_int iAngle = i + 20;
 		D3DXMatrixRotationY(&Matrix, D3DXToRadian(_float(iAngle)));

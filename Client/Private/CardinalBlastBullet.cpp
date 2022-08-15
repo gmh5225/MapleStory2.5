@@ -3,6 +3,8 @@
 #include "CardinalBlastHit.h"
 #include "GameInstance.h"
 
+#include "ParticleManager.h"
+
 CCardinalBlastBullet::CCardinalBlastBullet(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -93,6 +95,7 @@ void CCardinalBlastBullet::LateTick(_float fTimeDelta)
 }
 HRESULT CCardinalBlastBullet::Render()
 {
+	return S_OK;
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
@@ -303,6 +306,10 @@ void CCardinalBlastBullet::Collision(CGameObject * pOther)
 
 		m_pOther.push_back(pOther);
 	
+		_float3 vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 1.5f;
+
+		CParticleManager::Get_Instance()->MakeDamageGen(500000, 1500000, 4, 0.05f, vPos, 1.6f, true, CDamage::DAMAGE_ATTACKED);
 		pOther->Damaged(this);
 
 		Set_Dead();

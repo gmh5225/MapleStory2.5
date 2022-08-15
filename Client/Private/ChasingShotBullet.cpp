@@ -3,6 +3,8 @@
 #include "ChasingShotHit.h"
 #include "GameInstance.h"
 
+#include "ParticleManager.h"
+
 CChasingShotBullet::CChasingShotBullet(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
 {
@@ -301,6 +303,10 @@ void CChasingShotBullet::Collision(CGameObject * pOther)
 
 		m_pOther.push_back(pOther);
 	
+		_float3 vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 1.5f;
+
+		CParticleManager::Get_Instance()->MakeDamageGen(15000000, 95000000, 8, 0.05f, vPos, 1.6f, false, CDamage::DAMAGE_ATTACKED);
 		pOther->Damaged(this);
 
 		//Set_Dead();

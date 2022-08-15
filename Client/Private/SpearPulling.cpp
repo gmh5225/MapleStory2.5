@@ -2,6 +2,7 @@
 #include "..\Public\SpearPulling.h"
 #include "SpearPullingHit.h"
 #include "GameInstance.h"
+#include "ParticleManager.h"
 
 CSpearPulling::CSpearPulling(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -288,6 +289,10 @@ void CSpearPulling::Collision(CGameObject * pOther)
 
 			m_pOther.push_back(pOther);
 
+			_float3 vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+			vPos.y += 1.5f;
+
+			CParticleManager::Get_Instance()->MakeDamageGen(100000, 9000000, 1, 0.05f, vPos, 1.6f, true, CDamage::DAMAGE_ATTACKED);
 			pOther->Damaged(this);
 			Pulling(pOther);
 		}

@@ -34,7 +34,7 @@ HRESULT CDamage::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	m_fScale = 0.6f;
+	m_fScale = 1.0f;
 	m_fInitScale = 2.f;
 	m_fMddleScale = 0.5f;
 
@@ -71,47 +71,62 @@ HRESULT CDamage::SetUp_Components()
 
 HRESULT CDamage::SetDamage(_char cNum)
 {
+	_int iTypeNum = 0;
+	switch (m_Desc.eType)
+	{
+	case DAMAGE_ATTACKED:
+		iTypeNum += 0;
+		break;
+	case DAMAGE_PLAYERATTAKED:
+		iTypeNum += 21;
+		break;
+	case DAMAGE_HEAL:
+		iTypeNum += 11;
+		break;
+	}
+
+
 
 	switch (cNum)
 	{
 	case '0':
-		if (FAILED(m_pTextureCom->Bind_Texture(0)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum)))
 			return E_FAIL;
 		break;
 	case '1':
-		if (FAILED(m_pTextureCom->Bind_Texture(1)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 1)))
 			return E_FAIL;
 		break;
 	case '2':
-		if (FAILED(m_pTextureCom->Bind_Texture(2)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 2)))
 			return E_FAIL;
 		break;
 	case '3':
-		if (FAILED(m_pTextureCom->Bind_Texture(3)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 3)))
 			return E_FAIL;
 		break;
 	case '4':
-		if (FAILED(m_pTextureCom->Bind_Texture(4)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 4)))
 			return E_FAIL;
 		break;
 	case '5':
-		if (FAILED(m_pTextureCom->Bind_Texture(5)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 5)))
 			return E_FAIL;
 		break;
 	case '6':
-		if (FAILED(m_pTextureCom->Bind_Texture(6)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 6)))
 			return E_FAIL;
 		break;
 	case '7':
-		if (FAILED(m_pTextureCom->Bind_Texture(7)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 7)))
 			return E_FAIL;
 		break;
 	case '8':
-		if (FAILED(m_pTextureCom->Bind_Texture(8)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 8)))
 			return E_FAIL;
 		break;
 	case '9':
-		if (FAILED(m_pTextureCom->Bind_Texture(9)))
+		if (FAILED(m_pTextureCom->Bind_Texture(iTypeNum + 9)))
 			return E_FAIL;
 		break;
 	}
@@ -182,7 +197,7 @@ HRESULT CDamage::Render()
 
 	for (_int i = 0; i < m_Desc.sDamage.size(); i++)
 	{
-		vPos.x = vOriPos.x + m_fScale * i * 0.7f;
+		vPos.x = vOriPos.x + m_fScale * i * 0.4f;
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos);
 
 		if (FAILED(m_pTransformCom->Bind_WorldMatrix()))

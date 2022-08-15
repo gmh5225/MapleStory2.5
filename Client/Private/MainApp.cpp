@@ -17,6 +17,7 @@
 #include "Loading_Mop.h"
 #include "CutScreen.h"
 #include "DomiScreen.h"
+#include "Title.h"
 
 
 bool g_bStaticClone;
@@ -110,11 +111,15 @@ void CMainApp::Tick(_float fTimeDelta)
 	CQuestManager::Get_Instance()->Tick();
 
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_POTAL);
+	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLISION_ITEM);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_MONSTER_SKILL);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER_SKILL);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_MONSTER_SKILL);
+	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_MONSTER_SKILL);
+
+
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PUSHBLOCK);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_TRIGGERBLOCK);
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PUSHBLOCK, CCollider::COLLSION_PLAYER);
@@ -238,6 +243,10 @@ HRESULT CMainApp::Ready_Prototype_Component()
 		CTransform::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Animator"),
+		CAnimator::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	return S_OK;
 }
@@ -275,6 +284,25 @@ HRESULT CMainApp::Loading_ForLoading()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/DomiScreen/DomiScreen_%d.png"), 33))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Tile_Henesys"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/MapTile/Tile_Henesys/MapTile_%d.png"), 22))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Tile_HenesysHunting"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/MapTile/Tile_HenesysHunting/MapTile_%d.png"), 22))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Tile_ElenyaEnter"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/MapTile/Tile_ElenyaEnter/MapTile_%d.png"), 22))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Tile_Elenya"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/MapTile/Tile_Elenya/MapTile_%d.png"), 22))))
+		return E_FAIL;
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Tile_EndOfWorl"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/MapTile/Tile_EndOfWorl/MapTile_%d.png"), 22))))
+		return E_FAIL;
+
+
+
+
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Loading"),
 		CLoading::Create(m_pGraphic_Device))))
@@ -290,6 +318,10 @@ HRESULT CMainApp::Loading_ForLoading()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_DomiScreen"),
 		CDomiScreen::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Title"),
+		CTitle::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	CUIManager::Get_Instance()->Set_Loading();

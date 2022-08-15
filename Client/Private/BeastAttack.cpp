@@ -2,6 +2,7 @@
 #include "..\Public\BeastAttack.h"
 #include "BeastHit.h"
 #include "GameInstance.h"
+#include "ParticleManager.h"
 
 CBeastAttack::CBeastAttack(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -214,6 +215,10 @@ void CBeastAttack::Collision(CGameObject * pOther)
 			Safe_Release(pGameInstance);
 			m_pOther.push_back(pOther);
 
+			_float3 vPos = pTransform->Get_State(CTransform::STATE_POSITION);
+			vPos.y += 1.5f;
+
+			CParticleManager::Get_Instance()->MakeDamageGen(1000000, 9000000, 10, 0.05f, vPos, 1.6f, false, CDamage::DAMAGE_ATTACKED);
 			pOther->Damaged(this);
 		}
 

@@ -456,8 +456,7 @@ void CBlueSnail::Damaged(CGameObject * pOther)
 		MakeItem();
 		CGameInstance::Get_Instance()->PlaySound(L"SnailDie.wav", 1, 1.f);
 	}
-	else
-		CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 1, 1.f);
+
 }
 
 

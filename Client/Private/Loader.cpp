@@ -151,6 +151,7 @@
 #include "GreenSkill.h"
 
 #include "JalJang.h"
+#include "LevelUp.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -1159,9 +1160,6 @@ HRESULT CLoader::Load_Component()
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Animator"),
-		CAnimator::Create(m_pGraphic_Device))))
-		return E_FAIL;
 
 	/* 모델를 로드한다. */
 	/*if (FAILED(pGameInstance->Add_Prototype(LEVEL_GAMEPLAY, TEXT("Prototype_Component_VIBuffer_Terrain"),
@@ -1233,6 +1231,12 @@ HRESULT CLoader::Load_Particle()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Particle"),
 		CParticle::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	/* For.Prototype_GameObject_PlayerSkill*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_LeveUp"),
+		CLevelUp::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -2423,12 +2427,18 @@ HRESULT CLoader::Load_UI_Texture()
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Damage"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Damage/NoCri1.%d.png"), 11))))
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Damage/Damage_%d.png"), 31))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_PurpleSkill"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GASPattern/End%d.png"), 19))))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_LevelUp"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/LevelUp/LevelUp_%d.png"), 21))))
+		return E_FAIL;
+
+
 
 
 

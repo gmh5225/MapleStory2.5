@@ -33,8 +33,8 @@ public:
 
 	void SetRespownPos(_float3 RePos);
 
-
 	virtual void SetShadow(LEVEL eLevel, _float fScale) override;
+	virtual void Damaged(CGameObject* pOther) override;
 
 private:
 	void Idle(_float fTimeDelta);
@@ -44,9 +44,14 @@ private:
 
 	void Particle(_float fTimeDelta);
 
+	void GetKeyCheate(_float fTimeDelta);
+	void CheckAttakedTime(_float fTimeDelta);
+
 protected:
 	virtual HRESULT Set_RenderState() override;
 	virtual HRESULT Reset_RenderState() override;
+
+
 
 private:
 	HRESULT SetUp_Components();
@@ -60,6 +65,9 @@ private:
 	// TEST
 	_float _fParticleMoveTimeAcc = 0.f;
 	_bool _bPushBlock = false;
+
+	_float m_fAttakedTimeAcc = 0.f;
+	_bool m_bAttaked = false;
 
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
