@@ -434,10 +434,8 @@ void CRibbonPig::Damaged(CGameObject * pOther)
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
 		MakeItem();
-		CGameInstance::Get_Instance()->PlaySound(L"PigDie.wav", 1, 1.f);
+		CGameInstance::Get_Instance()->PlaySound(L"PigDie.wav", 14, 1.f);
 	}
-	else
-		CGameInstance::Get_Instance()->PlaySound(L"Damage.wav", 1, 1.f);
 }
 
 

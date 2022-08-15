@@ -107,7 +107,7 @@ void CRedSkill::LateTick(_float fTimeDelta)
 
 
 	m_fSkill += fTimeDelta;
-	if (m_fSkill >= 12.f)
+	if (m_fSkill >= 18.f)
 		Set_Dead();
 }
 HRESULT CRedSkill::Render()

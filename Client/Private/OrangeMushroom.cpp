@@ -444,10 +444,8 @@ void COrangeMushroom::Damaged(CGameObject * pOther)
 	{
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
-		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 1, 1.f);
+		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 16, 1.f);
 	}
-	else
-		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDamage.wav", 1, 1.f);
 }
 
 
