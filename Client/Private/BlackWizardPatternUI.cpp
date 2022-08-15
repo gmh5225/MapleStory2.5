@@ -37,7 +37,7 @@ HRESULT CBlackWizardPatternUI::Initialize(void * pArg)
 	m_bRight = true;
 	m_bShake = false;
 	m_vOriginPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizardPatternUI"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackWizardPatternUI"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 
 	m_bRender = true;

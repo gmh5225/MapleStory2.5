@@ -44,7 +44,7 @@ HRESULT CBlackWizardHit::Initialize(void * pArg)
 HRESULT CBlackWizardHit::SetUp_Components()
 {
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Hit"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackWizard_Hit"), nullptr);
 	}
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom)))

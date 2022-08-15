@@ -56,7 +56,7 @@ HRESULT CBlackWizardAttack2::SetUp_Components()
 
 
 	{
-		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizard_Attack2"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackWizard_Attack2"), nullptr);
 	}
 
 
@@ -81,7 +81,7 @@ void CBlackWizardAttack2::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AnimCount() >= 22)
 		Set_Dead();
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 

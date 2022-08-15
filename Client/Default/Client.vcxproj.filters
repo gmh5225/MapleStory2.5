@@ -615,7 +615,7 @@
     </Filter>
     <Filter Include="04.UI\05.Icon\SkillIcon\AreaAttack">
       <UniqueIdentifier>{d797ec51-2df5-44bc-9e94-ce6b21991cc6}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Damage">
       <UniqueIdentifier>{3a9d560a-9bef-429c-9545-d53a76f5d0ce}</UniqueIdentifier>
     </Filter>
@@ -630,7 +630,7 @@
     </Filter>
     <Filter Include="01.Level\BlockMageJump">
       <UniqueIdentifier>{38bcd01f-d5a4-4000-a379-1bde08898469}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Npc\00.Gate">
       <UniqueIdentifier>{65a5e1d0-db89-4b84-8301-7f6ecece4f1b}</UniqueIdentifier>
     </Filter>
@@ -666,6 +666,12 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime\Skill">
       <UniqueIdentifier>{220677c4-ab08-4eed-9c30-a64aa74260ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern">
+      <UniqueIdentifier>{503feff9-0b2a-4ab0-aa80-2c0435916e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser">
+      <UniqueIdentifier>{74d3edcd-eab3-4271-bcb3-b6fa3e14d4cd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1190,7 +1196,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\BeastIcon.h">
       <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\Damage.h">
       <Filter>02.GameObject\Damage</Filter>
     </ClInclude>
@@ -1208,7 +1214,7 @@
     </ClInclude>
     <ClInclude Include="..\public\AutoDownCube.h">
       <Filter>02.GameObject\Cube\AutoDownCube</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\GreenGate.h">
       <Filter>02.GameObject\Creature\Npc\00.Gate\GreenGate</Filter>
     </ClInclude>
@@ -1238,6 +1244,9 @@
     </ClInclude>
     <ClInclude Include="..\Public\RedSkill.h">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\BlackWizardLaser.h">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1753,7 +1762,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\BeastIcon.cpp">
       <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\Damage.cpp">
       <Filter>02.GameObject\Damage</Filter>
     </ClCompile>
@@ -1771,7 +1780,7 @@
     </ClCompile>
     <ClCompile Include="..\private\AutoDownCube.cpp">
       <Filter>02.GameObject\Cube\AutoDownCube</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\GreenGate.cpp">
       <Filter>02.GameObject\Creature\Npc\00.Gate\GreenGate</Filter>
     </ClCompile>
@@ -1801,6 +1810,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\RedSkill.cpp">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlackWizardLaser.cpp">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\Laser</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

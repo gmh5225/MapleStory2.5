@@ -34,7 +34,7 @@ HRESULT CBlackWizardScene::Initialize(void * pArg)
 	__super::Initialize(pArg);
 	m_iTexturenum = 0;
 	m_fAniAcc = 0.f;
-	if (FAILED(__super::Add_Component(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_BlackWizardScene"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackWizardScene"), TEXT("Com_Texture"), (CComponent**)&m_pTextureCom)))
 		return E_FAIL;
 	m_bFinal = false;
 	m_bRender = true;

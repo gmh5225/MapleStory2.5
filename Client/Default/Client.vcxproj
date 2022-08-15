@@ -166,6 +166,7 @@
     <ClInclude Include="..\Public\BeastIcon.h" />
     <ClInclude Include="..\Public\BeastInfo.h" />
     <ClInclude Include="..\Public\BeastLoof.h" />
+    <ClInclude Include="..\Public\BlackWizardLaser.h" />
     <ClInclude Include="..\public\Level_BlackMageJump.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
@@ -358,6 +359,7 @@
     <ClCompile Include="..\Private\BeastIcon.cpp" />
     <ClCompile Include="..\Private\BeastInfo.cpp" />
     <ClCompile Include="..\Private\BeastLoof.cpp" />
+    <ClCompile Include="..\Private\BlackWizardLaser.cpp" />
     <ClCompile Include="..\private\Level_BlackMageJump.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />
