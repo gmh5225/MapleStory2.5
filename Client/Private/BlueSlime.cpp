@@ -30,7 +30,7 @@ HRESULT CBlueSlime::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	m_sTag = "Tag_Monster";
+	m_sTag = "Tag_GASMonster";
 	m_iHp = 10;
 	m_iIndexNum = -1;
 

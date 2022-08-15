@@ -98,7 +98,7 @@ HRESULT CLevel_GamePlay::Initialize()
 
 	CUIManager::Get_Instance()->End_Loading();
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_1();
-	//CCutSceneManager::Get_Instance()->Start_Enter_GASHenesys();
+	CCutSceneManager::Get_Instance()->Start_Enter_GASHenesys();
 
 	return S_OK;
 }
@@ -377,7 +377,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	PotalDesc.eDestLevel = LEVEL_GAS;
+	PotalDesc.eDestLevel = LEVEL_DELENYAENTER;
 	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
 	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
@@ -391,9 +391,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 
 
 
-	//TEST
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PushCube"), LEVEL_GAMEPLAY, pLayerTag)))
-		return E_FAIL;
+	
 
 
 

@@ -28,7 +28,7 @@ HRESULT CPushCube::Initialize(void * pArg)
 	m_sTag = "Tag_PushCube";
 
 
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 1.f, -3.f));
+	// m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 1.f, -3.f));
 
 	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
@@ -109,7 +109,11 @@ HRESULT CPushCube::Render()
 
 void CPushCube::Collision(CGameObject * pOther)
 {
-	_int d = 0;
+	if ("Tag_GASMonster" == pOther->Get_Tag())
+	{
+		pOther->Set_Dead();
+		Set_Dead();
+	}
 }
 
 HRESULT CPushCube::Set_RenderState()

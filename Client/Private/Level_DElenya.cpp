@@ -55,8 +55,8 @@ HRESULT CLevel_DElenya::Initialize()
 	if (FAILED(Ready_Layer_BackGround(TEXT("Layer_BackGround"))))
 		return E_FAIL;
 
-	if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
-		return E_FAIL;
+	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
+	//	return E_FAIL;
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
@@ -207,7 +207,7 @@ HRESULT CLevel_DElenya::Ready_Layer_Map(const _tchar * pLayerTag)
 	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_DElenya");
 	for (auto& Data : *pMapData)
 	{
-		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_DELENYA, pLayerTag, &Data)))
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AutoDownCube"), LEVEL_DELENYA, pLayerTag, &Data)))
 			return E_FAIL;
 	}
 

@@ -39,6 +39,8 @@ private:
 	void Tick_Die(_float fTimeDelta);
 	void Tick_Reset(_float fTimeDelta);
 	void Tick_Return(_float fTimeDelta);
+	void Tick_CutScene(_float fTimeDelta);
+	void Tick_CutScene2(_float fTimeDelta);
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -46,6 +48,9 @@ public:
 public:
 	virtual void SetAni() override;
 	virtual void Damaged(CGameObject* pOther) override;
+
+	void DestroyCube(_int iLength);
+	void MakeBlockCube(_float3 vPos);
 
 private:
 	HRESULT SetUp_Components();
@@ -89,6 +94,9 @@ private:
 	_bool m_bCutSceneRend = false;
 	_bool m_bCutSceneJump = false;
 	_float m_fCutSceneTimeAcc = 0.f;
+
+	// TEST
+	_int iTestCount = 15;
 
 };
 

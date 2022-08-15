@@ -5,11 +5,13 @@
 #include "Camera_Free.h"
 #include "UIManager.h"
 #include "GAS.h"
+#include "ToolManager.h"
 
 IMPLEMENT_SINGLETON(CCutSceneManager)
 
 CCutSceneManager::CCutSceneManager()
 {
+	
 }
 
 
@@ -37,6 +39,12 @@ void CCutSceneManager::Tick(_float fTimeDelta)
 
 	if (m_bEnter_GASHenesys)
 		Enter_GASHenesys(fTimeDelta);
+
+	if (m_bEnter_InitGASHenesys)
+		Enter_InitGASHenesys(fTimeDelta);
+
+	if (m_bEnter_InitDHenesys)
+		Enter_InitDHenesys(fTimeDelta);
 }
 
 CCamera_Free* CCutSceneManager::Get_MainCam()
@@ -73,10 +81,18 @@ void CCutSceneManager::Start_Enter_Henesys_1()
 	Get_MainCam()->SetSpeed(3.f);
 	m_bIsCutScene = true;
 	m_bEnter_Henesys_1 = true;
+	m_bMainUI = false;
 }
 void CCutSceneManager::Enter_Henesys_1(_float fTimeDelta)
 {
 	m_fHenesys_1_TimeAcc += fTimeDelta;
+
+	if (1.f < m_fHenesys_1_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
 
 
 	Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
@@ -101,6 +117,9 @@ void CCutSceneManager::End_Enter_Henesys_1()
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
 	m_bIsCutScene = false;
 	m_bEnter_Henesys_1 = false;
+
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
 }
 
 
@@ -118,11 +137,18 @@ void CCutSceneManager::Start_Enter_Henesys_2()
 	Get_MainCam()->SetSpeed(3.f);
 	m_bIsCutScene = true;
 	m_bEnter_Henesys_2 = true;
+	m_bMainUI = false;
 }
 void CCutSceneManager::Enter_Henesys_2(_float fTimeDelta)
 {
 	m_fHenesys_2_TimeAcc += fTimeDelta;
 
+	if (1.f < m_fHenesys_2_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
 
 	if(!m_b2_2)
 		Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
@@ -160,6 +186,9 @@ void CCutSceneManager::End_Enter_Henesys_2()
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
 	m_bIsCutScene = false;
 	m_bEnter_Henesys_2 = false;
+
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
 }
 
 
@@ -177,11 +206,18 @@ void CCutSceneManager::Start_Enter_Elenya()
 	Get_MainCam()->SetSpeed(3.f);
 	m_bIsCutScene = true;
 	m_bEnter_Elenya = true;
+	m_bMainUI = false;
 }
 void CCutSceneManager::Enter_Elenya(_float fTimeDelta)
 {
 	m_fElenya_TimeAcc += fTimeDelta;
 
+	if (1.f < m_fElenya_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
 
 	if (!m_b3_1)
 		Get_MainCam()->Get_Transform()->Go_Up(fTimeDelta);
@@ -212,6 +248,9 @@ void CCutSceneManager::End_Enter_Elenya()
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
 	m_bIsCutScene = false;
 	m_bEnter_Elenya = false;
+
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
 }
 
 
@@ -235,11 +274,18 @@ void CCutSceneManager::Start_Enter_ElenyaEnter()
 	
 	m_bEnter_ElenyaEnter = true;
 	m_bIsCutScene = true;
+	m_bMainUI = false;
 }
 void CCutSceneManager::Enter_ElenyaEnter(_float fTimeDelta)
 {
 	m_fElenyaEnter_TimeAcc += fTimeDelta;
 
+	if (1.f < m_fElenyaEnter_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
 
 	if (!m_b4_1)
 		Get_MainCam()->Get_Transform()->Go_Straight(fTimeDelta);
@@ -268,6 +314,9 @@ void CCutSceneManager::End_Enter_ElenyaEnter()
 
 	m_bIsCutScene = false;
 	m_bEnter_ElenyaEnter = false;
+
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
 }
 
 
@@ -290,19 +339,18 @@ void CCutSceneManager::Start_Enter_GASHenesys()
 
 	m_bIsCutScene = true;
 	m_bEnter_GASHenesys = true;
+	m_bMainUI = false;
 }
 void CCutSceneManager::Enter_GASHenesys(_float fTimeDelta)
 {
 	m_fGASHenesys_TimeAcc += fTimeDelta;
 
-
-
-
-	//if (!m_b6)
-	//	Get_MainCam()->Get_Transform()->Go_Up(fTimeDelta);
-	//else
-	//	Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
-
+	if (2.f < m_fGASHenesys_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
 
 	if (5.f < m_fGASHenesys_TimeAcc && !m_b6)
 	{
@@ -314,14 +362,8 @@ void CCutSceneManager::Enter_GASHenesys(_float fTimeDelta)
 		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_HENESYS, TEXT("Layer_Monster"), &GASDesc)))
 			return;
 
-		// Get_MainCam()->Start_AttackShaking();
-
-
-
 		m_b6 = true;
 	}
-
-
 
 	if (13.f < m_fGASHenesys_TimeAcc)
 	{
@@ -338,6 +380,143 @@ void CCutSceneManager::End_Enter_GASHenesys()
 
 	m_bIsCutScene = false;
 	m_bEnter_GASHenesys = false;
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
+}
+
+
+
+
+
+void CCutSceneManager::Start_Enter_InitGASHenesys()
+{
+	if (m_bInitGASHenesys)
+		return;
+	m_bInitGASHenesys = true;
+
+	m_fInitGASHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
+	SetCamPos(_float3(0.f, 2.5f, 17.f));
+	Get_MainCam()->Get_Transform()->Rotation(_float3(0.f, 1.f, 0.f), 0.f);
+	Get_MainCam()->SetSpeed(0.1f);
+
+	CUIManager::Get_Instance()->On_CutScreen();
+
+	m_bIsCutScene = true;
+	m_bEnter_InitGASHenesys = true;
+	m_bMainUI = false;
+}
+void CCutSceneManager::Enter_InitGASHenesys(_float fTimeDelta)
+{
+	m_fInitGASHenesys_TimeAcc += fTimeDelta;
+
+	if (1.f < m_fInitGASHenesys_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
+	
+
+	if (!m_b7_1)
+		Get_MainCam()->Get_Transform()->Go_Backward(fTimeDelta);	
+
+	if (6.f < m_fInitGASHenesys_TimeAcc && !m_b7)
+	{
+		Get_MainCam()->SetSpeed(3.f);
+		m_b7 = true;
+	}
+
+	if (12.f < m_fInitGASHenesys_TimeAcc && !m_b7_1)
+	{
+		m_b7_1 = true;
+	}
+
+	if (13.f < m_fInitGASHenesys_TimeAcc)
+	{
+		Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+		End_Enter_InitGASHenesys();
+	}
+}
+void CCutSceneManager::End_Enter_InitGASHenesys()
+{
+	m_fInitGASHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
+
+	CUIManager::Get_Instance()->Off_CutScreen();
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
+
+	m_bIsCutScene = false;
+	m_bEnter_InitGASHenesys = false;
+}
+
+
+
+
+
+
+
+void CCutSceneManager::Start_Enter_InitDHenesys()
+{
+
+	if (m_bInitDHenesys)
+		return;
+	m_bInitDHenesys = true;
+
+	m_fInitDHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
+	Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+	SetCamPos(_float3(-20.f, 12.f, -15.f));
+	Get_MainCam()->SetSpeed(3.f);
+	m_bIsCutScene = true;
+	m_bEnter_InitDHenesys = true;
+	m_bMainUI = false;
+
+	CUIManager::Get_Instance()->On_CutScreen();
+
+}
+void CCutSceneManager::Enter_InitDHenesys(_float fTimeDelta)
+{
+	m_fInitDHenesys_TimeAcc += fTimeDelta;
+
+	if (0.5f < m_fInitDHenesys_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
+
+	if (5.f < m_fInitDHenesys_TimeAcc && !m_b8)
+	{
+		Get_MainCam()->Start_AttackShaking2();
+		m_b8 = true;
+	}
+
+	if (7.f < m_fInitDHenesys_TimeAcc && !m_b8_1)
+	{
+		CUIManager::Get_Instance()->On_DomiScreen();
+		m_b8_1 = true;
+	}
+	
+	if (28.f < m_fInitDHenesys_TimeAcc)
+	{
+		Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+		End_Enter_InitDHenesys();
+		CToolManager::Get_Instance()->SetDestLevel(LEVEL_DHENESYS, _float3{17.f, 7.f, -4.f});
+	}
+}
+void CCutSceneManager::End_Enter_InitDHenesys()
+{
+	m_fInitDHenesys_TimeAcc = 0.f;
+	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
+	m_bIsCutScene = false;
+	m_bEnter_InitDHenesys = false;
+
+	CUIManager::Get_Instance()->Off_CutScreen();
+
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
 }
 
 
@@ -359,13 +538,19 @@ void CCutSceneManager::Start_Enter_DHenesys()
 	Get_MainCam()->SetSpeed(3.f);
 	m_bIsCutScene = true;
 	m_bEnter_DHenesys = true;
-
+	m_bMainUI = false;
 
 }
 void CCutSceneManager::Enter_DHenesys(_float fTimeDelta)
 {
 	m_fDHenesys_TimeAcc += fTimeDelta;
 
+	if (1.f < m_fDHenesys_TimeAcc && !m_bMainUI)
+	{
+		CUIManager::Get_Instance()->Set_StartMove(true);
+		CUIManager::Get_Instance()->Set_EndMove(false);
+		m_bMainUI = true;
+	}
 
 	Get_MainCam()->Get_Transform()->Go_Right(fTimeDelta);
 
@@ -388,6 +573,8 @@ void CCutSceneManager::End_Enter_DHenesys()
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_PLAYER);
 	m_bIsCutScene = false;
 	m_bEnter_DHenesys = false;
+	CUIManager::Get_Instance()->Set_StartMove(false);
+	CUIManager::Get_Instance()->Set_EndMove(true);
 }
 
 
@@ -395,6 +582,6 @@ void CCutSceneManager::End_Enter_DHenesys()
 
 void CCutSceneManager::Free()
 {
-
+	
 }
 

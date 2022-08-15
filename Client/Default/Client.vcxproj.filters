@@ -615,7 +615,7 @@
     </Filter>
     <Filter Include="04.UI\05.Icon\SkillIcon\AreaAttack">
       <UniqueIdentifier>{d797ec51-2df5-44bc-9e94-ce6b21991cc6}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Damage">
       <UniqueIdentifier>{3a9d560a-9bef-429c-9545-d53a76f5d0ce}</UniqueIdentifier>
     </Filter>
@@ -630,7 +630,7 @@
     </Filter>
     <Filter Include="01.Level\BlockMageJump">
       <UniqueIdentifier>{38bcd01f-d5a4-4000-a379-1bde08898469}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Npc\00.Gate">
       <UniqueIdentifier>{65a5e1d0-db89-4b84-8301-7f6ecece4f1b}</UniqueIdentifier>
     </Filter>
@@ -666,6 +666,15 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\Monster\00.GASMonster\PurpleSlime\Skill">
       <UniqueIdentifier>{220677c4-ab08-4eed-9c30-a64aa74260ba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Cube\TriggerCube">
+      <UniqueIdentifier>{41326089-0ec8-48a1-b7c4-5169044e7cf1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\08.JalJang">
+      <UniqueIdentifier>{554f6666-7e9b-4af2-9a59-979b7a26c54a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\09.DomiScreen">
+      <UniqueIdentifier>{55dec146-15d5-4970-ad57-9c9f4292b6e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1190,7 +1199,7 @@
     </ClInclude>
     <ClInclude Include="..\Public\BeastIcon.h">
       <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\public\Damage.h">
       <Filter>02.GameObject\Damage</Filter>
     </ClInclude>
@@ -1208,7 +1217,7 @@
     </ClInclude>
     <ClInclude Include="..\public\AutoDownCube.h">
       <Filter>02.GameObject\Cube\AutoDownCube</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\GreenGate.h">
       <Filter>02.GameObject\Creature\Npc\00.Gate\GreenGate</Filter>
     </ClInclude>
@@ -1238,6 +1247,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\RedSkill.h">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime\Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\TriggerCube.h">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Trigger.h">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\JalJang.h">
+      <Filter>02.GameObject\Creature\Npc\08.JalJang</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\DomiScreen.h">
+      <Filter>04.UI\09.DomiScreen</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1753,7 +1774,7 @@
     </ClCompile>
     <ClCompile Include="..\Private\BeastIcon.cpp">
       <Filter>04.UI\05.Icon\SkillIcon\AreaAttack</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\private\Damage.cpp">
       <Filter>02.GameObject\Damage</Filter>
     </ClCompile>
@@ -1771,7 +1792,7 @@
     </ClCompile>
     <ClCompile Include="..\private\AutoDownCube.cpp">
       <Filter>02.GameObject\Cube\AutoDownCube</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\GreenGate.cpp">
       <Filter>02.GameObject\Creature\Npc\00.Gate\GreenGate</Filter>
     </ClCompile>
@@ -1801,6 +1822,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\RedSkill.cpp">
       <Filter>02.GameObject\Creature\Monster\00.GASMonster\RedSlime\Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\TriggerCube.cpp">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Trigger.cpp">
+      <Filter>02.GameObject\Cube\TriggerCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\JalJang.cpp">
+      <Filter>02.GameObject\Creature\Npc\08.JalJang</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\DomiScreen.cpp">
+      <Filter>04.UI\09.DomiScreen</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

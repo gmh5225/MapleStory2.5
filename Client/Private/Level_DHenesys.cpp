@@ -61,6 +61,7 @@ HRESULT CLevel_DHenesys::Initialize()
 	
 	
 	CUIManager::Get_Instance()->End_Loading();
+	CUIManager::Get_Instance()->Off_DomiScreen();
 	CCutSceneManager::Get_Instance()->Start_Enter_DHenesys();
 
 	return S_OK;

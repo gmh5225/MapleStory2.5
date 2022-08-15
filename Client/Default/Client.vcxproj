@@ -166,6 +166,8 @@
     <ClInclude Include="..\Public\BeastIcon.h" />
     <ClInclude Include="..\Public\BeastInfo.h" />
     <ClInclude Include="..\Public\BeastLoof.h" />
+    <ClInclude Include="..\public\DomiScreen.h" />
+    <ClInclude Include="..\public\JalJang.h" />
     <ClInclude Include="..\public\Level_BlackMageJump.h" />
     <ClInclude Include="..\Public\BlackWizard.h" />
     <ClInclude Include="..\Public\BlackWizardAttack1.h" />
@@ -331,6 +333,8 @@
     <ClInclude Include="..\Public\TransformPig.h" />
     <ClInclude Include="..\Public\TransformSlime.h" />
     <ClInclude Include="..\Public\TransformStump.h" />
+    <ClInclude Include="..\public\Trigger.h" />
+    <ClInclude Include="..\public\TriggerCube.h" />
     <ClInclude Include="..\Public\UI.h" />
     <ClInclude Include="..\Public\UIManager.h" />
     <ClInclude Include="..\Public\SolunaSlashEffectA.h" />
@@ -358,6 +362,8 @@
     <ClCompile Include="..\Private\BeastIcon.cpp" />
     <ClCompile Include="..\Private\BeastInfo.cpp" />
     <ClCompile Include="..\Private\BeastLoof.cpp" />
+    <ClCompile Include="..\private\DomiScreen.cpp" />
+    <ClCompile Include="..\private\JalJang.cpp" />
     <ClCompile Include="..\private\Level_BlackMageJump.cpp" />
     <ClCompile Include="..\Private\BlackWizard.cpp" />
     <ClCompile Include="..\Private\BlackWizardAttack1.cpp" />
@@ -522,6 +528,8 @@
     <ClCompile Include="..\Private\TransformPig.cpp" />
     <ClCompile Include="..\Private\TransformSlime.cpp" />
     <ClCompile Include="..\Private\TransformStump.cpp" />
+    <ClCompile Include="..\private\Trigger.cpp" />
+    <ClCompile Include="..\private\TriggerCube.cpp" />
     <ClCompile Include="..\Private\UI.cpp" />
     <ClCompile Include="..\Private\UIManager.cpp" />
     <ClCompile Include="..\Private\SolunaSlashEffectA.cpp" />

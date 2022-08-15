@@ -16,6 +16,7 @@
 #include "Loading.h"
 #include "Loading_Mop.h"
 #include "CutScreen.h"
+#include "DomiScreen.h"
 
 
 bool g_bStaticClone;
@@ -114,7 +115,9 @@ void CMainApp::Tick(_float fTimeDelta)
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER, CCollider::COLLSION_MONSTER_SKILL);
 
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PUSHBLOCK);
+	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_TRIGGERBLOCK);
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PUSHBLOCK, CCollider::COLLSION_PLAYER);
+	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_PUSHBLOCK);
 
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PLAYER);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MONSTER);
@@ -267,6 +270,11 @@ HRESULT CMainApp::Loading_ForLoading()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/CutScreen/CutScreen_%d.png"), 11))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_DomiScreen"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/DomiScreen/DomiScreen_%d.png"), 33))))
+		return E_FAIL;
+
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Loading"),
 		CLoading::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -277,6 +285,10 @@ HRESULT CMainApp::Loading_ForLoading()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_CutScreen"),
 		CCutScreen::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_DomiScreen"),
+		CDomiScreen::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	CUIManager::Get_Instance()->Set_Loading();

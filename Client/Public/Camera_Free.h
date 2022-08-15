@@ -34,6 +34,7 @@ public:
 	}
 
 	void Start_AttackShaking();
+	void Start_AttackShaking2();
 	
 
 public:

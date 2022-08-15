@@ -34,6 +34,10 @@ public:
 	void On_CutScreen();
 	void Off_CutScreen();
 
+	// For.DomiScreen
+	void On_DomiScreen();
+	void Off_DomiScreen();
+
 	// For.TaxiChatBox
 	void On_TaxiChatBox();
 	void Off_TaxiChatBox();
@@ -47,7 +51,9 @@ public:
 private:
 	class CLoading* m_pLoading = nullptr;
 	class CCutScreen* m_pCutScreen = nullptr;
+	class CDomiScreen* m_pDomiScreen = nullptr;
 	class CTaxiChatBox* m_pTaxiChatBox = nullptr;
+
 
 public:
 	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
