@@ -159,9 +159,6 @@ HRESULT CLevel_DHenesys::Ready_Layer_Monster(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_StoneGolem"), LEVEL_HENESYS, pLayerTag)))
-		return E_FAIL;
-
 
 	Safe_Release(pGameInstance);
 
