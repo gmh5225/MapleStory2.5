@@ -152,15 +152,30 @@ void CPlayer::Tick(_float fTimeDelta)
 {
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_Y))
 	{
-		CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
+		// CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
 
 		//_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		//CParticleManager::Get_Instance()->MakeLeveUp(vPos);
+
+		//CMap_Manager::CUBEDATA desc;
+		//desc.iIndex = 1;
+		//desc.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		//desc.vPos.y += 1.f;
+		//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PushCube"), LEVEL_GAMEPLAY, TEXT("Layer_Cube"), &desc)))
+		//	return;
+
+
+		CVIBuffer_Voxel::VOXELDESC pVoxDesc;
+		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 4.f;
+		pVoxDesc.vPos = vPos;
+		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Model_Die"), LEVEL_GAMEPLAY, TEXT("Layer_Model"), &pVoxDesc)))
+			return;
 	}
 	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))
 	{
 		CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking2();
-//		CUIManager::Get_Instance()->Off_DomiScreen();
+		//	CUIManager::Get_Instance()->Off_DomiScreen();
 	}
 
 

@@ -45,6 +45,28 @@ void CParticleManager::Player_Lend(_float3 _vPos)
 
 }
 
+void CParticleManager::DieModel_Lend(_float3 _vPos)
+{
+	_float3 vStartPos = _vPos;
+	vStartPos.y -= 0.5f;
+
+	_float fDegree = 0.f;
+	for (_int i = 0; i < 6; i++)
+	{
+		fDegree = (_float)i * 60.f;
+
+		_float3 vDirVec = { 1.f, 0.f, 0.f };
+
+		_float4x4 Mat_Y;
+		D3DXMatrixIdentity(&Mat_Y);
+
+		D3DXMatrixRotationY(&Mat_Y, fDegree);
+		D3DXVec3TransformNormal(&vDirVec, &vDirVec, &Mat_Y);
+
+		MakeParticle(vStartPos, 0.6f, vDirVec, 2.0f, 1.0f, true, 0.1f, 0.7f, TEXT("Prototype_Component_Texture_Dust"));
+	}
+}
+
 void CParticleManager::BlueMushRoom_Lend(_float3 _vPos)
 {
 	_float3 vStartPos = _vPos;
