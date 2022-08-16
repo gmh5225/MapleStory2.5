@@ -103,6 +103,10 @@
 #include "Harp.h"
 #include "RockEnter.h"
 #include"SlimeStone.h"
+#include"Root.h"
+#include"Bench.h"
+#include"Maple.h"
+#include"Fire.h"
 #include "Bandit.h"
 #include "ItemNotice.h"
 #include "BlackWizardAttack1.h"
@@ -1254,6 +1258,23 @@ HRESULT CLoader::Load_Map()
 	/* For.Prototype_GameObject_SlimeStone*/
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SlimeStone"),
 		CSlimeStone::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_Root*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Root"),
+		CRoot::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_Bench*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Bench"),
+		CBench::Create(m_pGraphic_Device))))
+		return E_FAIL;
+	/* For.Prototype_GameObject_Maple*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Maple"),
+		CMaple::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	/* For.Prototype_GameObject_Fire*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Fire"),
+		CFire::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 
@@ -2564,6 +2585,19 @@ HRESULT CLoader::Load_Model_Texture()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_SlimeStone"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/SlimeStone.png")))))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Root"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Root.png")))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bench"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Bench.png")))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Maple"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Maple.png")))))
+		return E_FAIL;
+
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GrassIdle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Map/Grass/Grass_Idle.png")))))

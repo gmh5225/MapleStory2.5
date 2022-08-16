@@ -190,42 +190,42 @@ HRESULT CLevel_DHenesys::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	CSky::SKYDESC SkyDesc;
 	SkyDesc.iIndex = 7;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_DHENESYS, pLayerTag, &SkyDesc)))
 		return E_FAIL;
 
 	CCreature::CRETUREDESC FireDesc0;
 	FireDesc0.vPos = _float3(-3.f, 1.7f, -0.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAMEPLAY, pLayerTag, &FireDesc0)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Fire"), LEVEL_DHENESYS, pLayerTag, &FireDesc0)))
 		return E_FAIL;
 
 	CCreature::CRETUREDESC FireDesc1;
 	FireDesc1.vPos = _float3(3.f, 3.7f, 5.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAMEPLAY, pLayerTag, &FireDesc1)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Fire"), LEVEL_DHENESYS, pLayerTag, &FireDesc1)))
 		return E_FAIL;
 
 	CCreature::CRETUREDESC FireDesc2;
 	FireDesc2.vPos = _float3(7.f, 1.7f, -2.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAMEPLAY, pLayerTag, &FireDesc2)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Fire"), LEVEL_DHENESYS, pLayerTag, &FireDesc2)))
 		return E_FAIL;
 	
 	CCreature::CRETUREDESC FireDesc7;
 	FireDesc7.vPos = _float3(22.f, 4.7f, -17.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAMEPLAY, pLayerTag, &FireDesc7)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Fire"), LEVEL_DHENESYS, pLayerTag, &FireDesc7)))
 		return E_FAIL;
 
 	CCreature::CRETUREDESC FireDesc4;
 	FireDesc4.vPos = _float3(8.f, 1.7f, -11.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAMEPLAY, pLayerTag, &FireDesc4)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Fire"), LEVEL_DHENESYS, pLayerTag, &FireDesc4)))
 		return E_FAIL;
 
 	CCreature::CRETUREDESC FireDesc5;
 	FireDesc5.vPos = _float3(17.f, 7.7f, -5.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAMEPLAY, pLayerTag, &FireDesc5)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Fire"), LEVEL_DHENESYS, pLayerTag, &FireDesc5)))
 		return E_FAIL;
 
 	CCreature::CRETUREDESC FireDesc6;
 	FireDesc6.vPos = _float3(25.f, 4.7f, -13.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAMEPLAY, pLayerTag, &FireDesc6)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Fire"), LEVEL_DHENESYS, pLayerTag, &FireDesc6)))
 		return E_FAIL;
 
 	CPotal::POTALDESC PotalDesc;

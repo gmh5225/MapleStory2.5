@@ -720,6 +720,18 @@
     </Filter>
     <Filter Include="04.UI\03.Dialog\Helena">
       <UniqueIdentifier>{237520ce-d2d8-43b9-bb65-d695eefc7c9a}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Creature\Root">
+      <UniqueIdentifier>{7183b92a-b428-482f-b459-65cd03e64f1f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Bench">
+      <UniqueIdentifier>{58185098-4999-426e-ba36-c285c2ddaa71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Maple">
+      <UniqueIdentifier>{fdf82df9-53b2-4c47-92f2-695ada53365e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Fire">
+      <UniqueIdentifier>{9e253c74-48a9-4bd3-bdb0-307af5cb1c0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1347,6 +1359,18 @@
     </ClInclude>
     <ClInclude Include="..\Public\EHelenaChat.h">
       <Filter>04.UI\03.Dialog\Helena</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\Root.h">
+      <Filter>02.GameObject\Creature\Root</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Bench.h">
+      <Filter>02.GameObject\Creature\Bench</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Maple.h">
+      <Filter>02.GameObject\Creature\Maple</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\Fire.h">
+      <Filter>02.GameObject\Creature\Fire</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1964,6 +1988,18 @@
     </ClCompile>
     <ClCompile Include="..\Private\EHelenaChat.cpp">
       <Filter>04.UI\03.Dialog\Helena</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\Root.cpp">
+      <Filter>02.GameObject\Creature\Root</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Bench.cpp">
+      <Filter>02.GameObject\Creature\Bench</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Maple.cpp">
+      <Filter>02.GameObject\Creature\Maple</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Fire.cpp">
+      <Filter>02.GameObject\Creature\Fire</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
