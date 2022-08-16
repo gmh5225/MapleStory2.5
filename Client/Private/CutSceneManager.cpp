@@ -503,7 +503,7 @@ void CCutSceneManager::Enter_InitDHenesys(_float fTimeDelta)
 	{
 		Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
 		End_Enter_InitDHenesys();
-		CToolManager::Get_Instance()->SetDestLevel(LEVEL_DHENESYS, _float3{17.f, 7.f, -4.f});
+		CToolManager::Get_Instance()->SetDestLevel(LEVEL_DHENESYS, _float3{17.f, 9.f, -4.f});
 	}
 }
 void CCutSceneManager::End_Enter_InitDHenesys()
