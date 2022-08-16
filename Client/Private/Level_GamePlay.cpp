@@ -237,6 +237,10 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+
+
+
+
 	CCreature::CRETUREDESC WeedInfo0;
 	WeedInfo0.vPos = _float3(-9.f, 0.68f, -0.5f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Weed"), LEVEL_GAMEPLAY, pLayerTag, &WeedInfo0)))
@@ -381,7 +385,7 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	PotalDesc.eDestLevel =LEVEL_DARKMAGE;
+	PotalDesc.eDestLevel =LEVEL_GAS;
 	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
 	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))

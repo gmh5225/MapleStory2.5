@@ -39,6 +39,7 @@ public:
 	virtual void Collision(CGameObject* pOther) override;
 	void Set_Billboard();
 	void MoveItem(_float fTimeDelta);
+	void GetItem(_float fTimeDelta);
 
 protected:
 	HRESULT SetUp_Components();
@@ -62,6 +63,9 @@ private:
 	_bool m_bDrop = false;
 	_float m_fDropY = 0.f;
 	_bool m_bDance = false;
+
+	_float m_fGetItemAcc = 0.f;
+	_bool m_bGetItem = false;
 	
 	_float m_fTimeAcc = 0.f;
 

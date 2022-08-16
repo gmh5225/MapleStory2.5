@@ -361,6 +361,7 @@ void CGAS::LateTick(_float fTimeDelta)
 	}
 	Set_Billboard();
 }
+
 HRESULT CGAS::Render()
 {
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))

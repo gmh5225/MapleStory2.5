@@ -120,14 +120,16 @@ void CMainApp::Tick(_float fTimeDelta)
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_MONSTER_SKILL);
 
 
-	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PUSHBLOCK);
-	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_TRIGGERBLOCK);
+
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PUSHBLOCK, CCollider::COLLSION_PLAYER);
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_PUSHBLOCK);
 
+	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PUSHBLOCK);
+	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_TRIGGERBLOCK);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PLAYER);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLISION_ITEM);
+	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MODEL);
 	
 
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_UI, CCollider::COLLSION_PLAYER);

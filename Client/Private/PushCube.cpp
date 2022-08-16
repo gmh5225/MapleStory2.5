@@ -2,6 +2,7 @@
 #include "..\Public\PushCube.h"
 
 #include "GameInstance.h"
+#include "ParticleManager.h"
 
 CPushCube::CPushCube(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
@@ -29,7 +30,7 @@ HRESULT CPushCube::Initialize(void * pArg)
 
 
 	// m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 1.f, -3.f));
-
+	m_pTransformCom->Set_Scaled(0.15f);
 	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
 
@@ -79,9 +80,7 @@ HRESULT CPushCube::Render()
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
-	if (FAILED(m_pTextureCom->Bind_Texture(0)))
-		return E_FAIL;
-
+	m_pGraphic_Device->SetTexture(0, nullptr);
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
@@ -111,8 +110,22 @@ void CPushCube::Collision(CGameObject * pOther)
 {
 	if ("Tag_GASMonster" == pOther->Get_Tag())
 	{
+		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 0.3f;
+		CParticleManager::Get_Instance()->BlueMushRoom_Lend(vPos);
 		pOther->Set_Dead();
 		Set_Dead();
+	}
+
+	if (pOther->Get_Tag() == "Tag_Cube")
+	{
+		int i = 0;
+		if (!m_bLend)
+		{
+			_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+			CParticleManager::Get_Instance()->DieModel_Lend(vPos);
+			m_bLend = true;
+		}
 	}
 }
 
@@ -139,7 +152,7 @@ HRESULT CPushCube::SetUp_Components()
 		return E_FAIL;
 
 	/* For.Com_VIBuffer */
-	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_VIBuffer_Cube"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Model_Lock"), TEXT("Com_VIBuffer"), (CComponent**)&m_pVIBufferCom)))
 		return E_FAIL;
 
 	/* For.Com_Texture */
@@ -153,7 +166,7 @@ HRESULT CPushCube::SetUp_Components()
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
 	BoxColDesc.vScale = _float3{ 1.0f, 1.0f, 1.0f };
-	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.3f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;
 

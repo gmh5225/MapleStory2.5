@@ -27,7 +27,7 @@ void CMap_Manager::SetFildNames()
 
 
 
-
+	
 
 
 	m_VoxelNames.push_back(string("Model_House1"));
@@ -40,6 +40,9 @@ void CMap_Manager::SetFildNames()
 	m_VoxelNames.push_back(string("Model_DMood1"));
 	m_VoxelNames.push_back(string("Model_DWood2"));
 
+	m_VoxelNames.push_back(string("Model_Die"));
+	m_VoxelNames.push_back(string("Model_Lock"));
+
 	m_cVoxelNames.push_back(L"Model_House1");
 	m_cVoxelNames.push_back(L"Model_House2");
 	m_cVoxelNames.push_back(L"Model_Wood1");
@@ -49,6 +52,9 @@ void CMap_Manager::SetFildNames()
 	m_cVoxelNames.push_back(L"Model_DHouse2");
 	m_cVoxelNames.push_back(L"Model_DMood1");
 	m_cVoxelNames.push_back(L"Model_DWood2");
+
+	m_cVoxelNames.push_back(L"Model_Die");
+	m_cVoxelNames.push_back(L"Model_Lock");
 
 
 

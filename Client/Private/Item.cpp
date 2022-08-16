@@ -2,6 +2,8 @@
 #include "..\Public\Item.h"
 #include "GameInstance.h"
 
+#include "ToolManager.h"
+
 CItem::CItem(LPDIRECT3DDEVICE9 pGraphicDevice)
 	:CGameObject(pGraphicDevice)
 {
@@ -68,7 +70,7 @@ void CItem::Tick(_float fTimeDelta)
 	if (m_bDrop && !m_bDance)
 	{
 		m_fTimeAcc += fTimeDelta;
-		if (0.3f < m_fTimeAcc)
+		if (0.01f < m_fTimeAcc)
 		{
 			_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 			m_fDropY = vPos.y;
@@ -78,6 +80,7 @@ void CItem::Tick(_float fTimeDelta)
 
 
 	MoveItem(fTimeDelta);
+	GetItem(fTimeDelta);
 }
 
 void CItem::LateTick(_float fTimeDelta)
@@ -128,13 +131,15 @@ void CItem::Collision(CGameObject * pOther)
 		if (pGameInstance->Key_Down(DIK_Z))
 		{
 			pGameInstance->PlaySoundW(L"PickUpItem.mp3", 24, 1.f);
-			CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
-			pInvenInstance->Check_Icon(m_ItemInfo.pTag, m_ItemInfo.eType, 1);
-			Set_Dead();
+			m_bGetItem = true;
+			m_bDrop = false;
+			m_bDance = false;
+
+			m_pTransformCom->Set_Vel(5.f);
 		}
 	}
 
-	if (pOther->Get_Tag() == "Tag_Cube")
+	if (pOther->Get_Tag() == "Tag_Cube" && !m_bGetItem)
 	{
 		m_bDrop = true;
 	}
@@ -164,12 +169,12 @@ void CItem::Set_Billboard()
 void CItem::MoveItem(_float fTimeDelta)
 {
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	if (!m_bDrop)
+	if (!m_bDrop && !m_bGetItem)
 	{
 		m_pTransformCom->Go_Dir(m_vLook, 1.5f, fTimeDelta);
 	}
-	 else
-	 {
+	else if(m_bDance)
+	{
 		if (m_fDropY >= vPos.y - 0.2f)
 		{
 			m_bUP = true;
@@ -190,6 +195,29 @@ void CItem::MoveItem(_float fTimeDelta)
 
 		 m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos);
 	 }
+}
+
+void CItem::GetItem(_float fTimeDelta)
+{
+	if (!m_bGetItem)
+		return;
+
+	m_fGetItemAcc += fTimeDelta;
+	if (1.f < m_fGetItemAcc)
+	{
+		CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
+		pInvenInstance->Check_Icon(m_ItemInfo.pTag, m_ItemInfo.eType, 1);
+		Set_Dead();
+	}
+
+	CGameObject* pObj = CToolManager::Get_Instance()->GetPlayer();
+	CTransform* pTran = (CTransform*)pObj->Get_ComponentPtr(TEXT("Com_Transform"));
+	_float3 vPos = pTran->Get_State(CTransform::STATE_POSITION);
+	_float3 vDir = vPos - m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	D3DXVec3Normalize(&vDir, &vDir);
+
+	m_pTransformCom->Go_Dir(vDir, 2.f, fTimeDelta);
+
 }
 
 HRESULT CItem::SetUp_Components()

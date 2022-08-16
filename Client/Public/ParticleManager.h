@@ -19,6 +19,8 @@ public:
 	void Player_Walk(_float3 _vPos, _float3 _vDirVec);
 	void Player_Lend(_float3 _vPos);
 
+	void DieModel_Lend(_float3 _vPos);
+
 	void BlueMushRoom_Lend(_float3 _vPos);
 
 	void Shot(_float3 _vPos, _float3 _vDirVec);

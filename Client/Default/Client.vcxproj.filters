@@ -693,10 +693,10 @@
     </Filter>
     <Filter Include="04.UI\10.Title">
       <UniqueIdentifier>{4cd45536-869a-467c-9d9b-4fab4e2e1243}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\MiddleBoss\KingSlime">
       <UniqueIdentifier>{1d4c5d3d-9209-4a56-877c-43df0d402888}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Vine">
       <UniqueIdentifier>{a0f7ee9c-0edb-4665-a2ab-993337e565a9}</UniqueIdentifier>
     </Filter>
@@ -708,6 +708,12 @@
     </Filter>
     <Filter Include="02.GameObject\Creature\SlimeStone">
       <UniqueIdentifier>{e82f7a81-1476-4225-a5ca-186d713090b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.MoDel\Model_Die">
+      <UniqueIdentifier>{757bff8e-bd9e-4c4f-850f-9b0450d51578}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03.MoDel\Model_Lock">
+      <UniqueIdentifier>{124b5ed8-8609-4e8a-9e5e-dfaa89b85034}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1307,10 +1313,10 @@
     </ClInclude>
     <ClInclude Include="..\public\Title.h">
       <Filter>04.UI\10.Title</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\KingSlime.h">
       <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Vine.h">
       <Filter>02.GameObject\Creature\Vine</Filter>
     </ClInclude>
@@ -1322,6 +1328,12 @@
     </ClInclude>
     <ClInclude Include="..\Public\SlimeStone.h">
       <Filter>02.GameObject\Creature\SlimeStone</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Model_Die.h">
+      <Filter>03.MoDel\Model_Die</Filter>
+    </ClInclude>
+    <ClInclude Include="..\public\Model_Lock.h">
+      <Filter>03.MoDel\Model_Lock</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1912,10 +1924,10 @@
     </ClCompile>
     <ClCompile Include="..\private\Title.cpp">
       <Filter>04.UI\10.Title</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\KingSlime.cpp">
       <Filter>02.GameObject\Creature\MiddleBoss\KingSlime</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Vine.cpp">
       <Filter>02.GameObject\Creature\Vine</Filter>
     </ClCompile>
@@ -1927,6 +1939,12 @@
     </ClCompile>
     <ClCompile Include="..\Private\SlimeStone.cpp">
       <Filter>02.GameObject\Creature\SlimeStone</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Model_Die.cpp">
+      <Filter>03.MoDel\Model_Die</Filter>
+    </ClCompile>
+    <ClCompile Include="..\private\Model_Lock.cpp">
+      <Filter>03.MoDel\Model_Lock</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
