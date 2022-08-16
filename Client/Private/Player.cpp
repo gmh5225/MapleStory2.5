@@ -153,7 +153,7 @@ void CPlayer::Tick(_float fTimeDelta)
 {
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_Y))
 	{
-		// CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
+		 CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
 
 		//_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		//CParticleManager::Get_Instance()->MakeLeveUp(vPos);
@@ -166,12 +166,12 @@ void CPlayer::Tick(_float fTimeDelta)
 		//	return;
 
 
-		CVIBuffer_Voxel::VOXELDESC pVoxDesc;
+	/*	CVIBuffer_Voxel::VOXELDESC pVoxDesc;
 		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 		vPos.y += 4.f;
 		pVoxDesc.vPos = vPos;
 		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Model_Die"), LEVEL_GAMEPLAY, TEXT("Layer_Model"), &pVoxDesc)))
-			return;
+			return;*/
 	}
 	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))
 	{
