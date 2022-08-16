@@ -394,7 +394,7 @@ HRESULT CQuestUI::Render()
 
 			_uint iGAS = Questinstance->Set_GAS();
 
-			wsprintf(cQuest, TEXT("[엘리니아] 가디언 엔젤 슬라임 처치\n") TEXT(" 가디언 엔젤 슬라임"));
+			wsprintf(cQuest, TEXT("[엘리니아] 가디언 엔젤 슬라임 처치\n") TEXT(" 가.엔.슬"));
 			wsprintf(cGAS, TEXT("	%d"), iGAS);
 			wsprintf(cCountSlime, TEXT("		/ 1\n"));
 

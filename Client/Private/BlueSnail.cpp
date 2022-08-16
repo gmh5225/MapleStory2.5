@@ -452,7 +452,6 @@ void CBlueSnail::Damaged(CGameObject * pOther)
 	if (m_iHp <= 0)
 	{
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
-		CQuestManager::Get_Instance()->Hunting(TEXT("BlueSnail"));
 		Die();
 		MakeItem();
 		CGameInstance::Get_Instance()->PlaySound(L"SnailDie.wav", 19, 2.f);

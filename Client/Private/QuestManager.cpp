@@ -88,13 +88,13 @@ void CQuestManager::Hunting(const _tchar * MonsterName)
 
 	else if (m_iQuestNum == 5)
 	{
-		if (wcscmp(MonsterName, TEXT("BlueSnail")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iGAS < 1)
+		if (wcscmp(MonsterName, TEXT("GAS")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iGAS < 1)
 			++m_iGAS;
 	}
 
 	else if (m_iQuestNum == 6)
 	{
-		if (wcscmp(MonsterName, TEXT("BlackMage")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iGAS < 1)
+		if (wcscmp(MonsterName, TEXT("BlackMage")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iBlackMage < 1)
 			++m_iBlackMage;
 	}
 }
