@@ -161,7 +161,7 @@ HRESULT CLevel_ElenyaGAS::Ready_Layer_Monster(const _tchar * pLayerTag)
 
 	CGAS::GASDESC Desc;
 	Desc.eState = CGAS::STATE_CUTSCEEN_2;
-	Desc.vPos = _float3{ 0.f, 0.f, 0.f };
+	Desc.vPos = _float3(5.f, 0.f, -5.f);
 
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_GAS"), LEVEL_GAS, pLayerTag, &Desc)))
 		return E_FAIL;

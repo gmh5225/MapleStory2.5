@@ -3,6 +3,9 @@
 #include "GameInstance.h"
 #include "UIManager.h"
 
+#include "ParticleManager.h"
+#include "ToolManager.h"
+
 
 CHpBarHp::CHpBarHp(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
@@ -51,6 +54,13 @@ void CHpBarHp::Tick(_float fTimeDelta)
 	if (pInstance->Key_Down(DIK_NUMPAD1))
 	{
 		pInstance->PlaySoundW(L"UseItem.mp3", 26, 1.f);
+
+		CTransform* pTran = (CTransform*)CToolManager::Get_Instance()->GetPlayer()->Get_ComponentPtr(TEXT("Com_Transform"));
+		_float3 vPos = pTran->Get_State(CTransform::STATE_POSITION);
+		vPos.y += 1.5f;
+		vPos.x -= 1.5f;
+		CParticleManager::Get_Instance()->MakeDamageGen(1000, 1000, 1, 0.05f, vPos, 1.6f, true, CDamage::DAMAGE_HEAL);
+
 		if (m_iTexturenum < 2)
 			CUIManager::Get_Instance()->Full_PlayerHp();
 		else

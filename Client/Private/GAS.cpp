@@ -88,7 +88,7 @@ HRESULT CGAS::Initialize(void * pArg)
 	}
 
 
-	SetShadow(LEVEL_GAS, 4.5f);
+	// SetShadow(LEVEL_GAS, 4.5f);
 
 	return S_OK;
 }
@@ -411,13 +411,15 @@ void CGAS::Tick_CutScene(_float fTimeDelta)
 	pJangTran->Set_State(CTransform::STATE_POSITION, vPos);
 
 
+	_float3 vPosa = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
 	if (2.f < m_fCutSceneTimeAcc && !m_bCutSceneJump)
 	{
 		m_pTransformCom->Set_Vel(30.f);
 		m_bCutSceneJump = true;
 		CCutSceneManager::Get_Instance()->Set_JangRander(false);
 	}
-	else if (4.f < m_fCutSceneTimeAcc)
+	else if (vPosa.y < 6.f && m_bCutSceneJump)
 	{
 		Set_Dead();
 	}
@@ -823,6 +825,7 @@ void CGAS::Damaged(CGameObject * pOther)
 		PotalDesc.DestPos = _float3(9.f, 6.5f, -1.5f);
 		(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAS, L"Layer_Potal", &PotalDesc));
 
+		CCutSceneManager::Get_Instance()->Set_JangRander(true);
 
 		Die();
 	}

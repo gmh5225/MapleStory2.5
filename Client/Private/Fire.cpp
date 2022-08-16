@@ -97,10 +97,12 @@ void CFire::LateTick(_float fTimeDelta)
 {
 	Set_Billboard();
 
+	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_CHASE, m_eDir);
 
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_NPC, this);
 
 }
@@ -122,8 +124,8 @@ HRESULT CFire::Render()
 	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
 		return E_FAIL;
 
-	if (FAILED(Set_RenderState()))
-		return E_FAIL;
+	//if (FAILED(Set_RenderState()))
+	//	return E_FAIL;
 
 	m_pVIBufferCom->Render();
 
