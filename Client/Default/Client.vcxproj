@@ -166,6 +166,7 @@
     <ClInclude Include="..\Public\BeastIcon.h" />
     <ClInclude Include="..\Public\BeastInfo.h" />
     <ClInclude Include="..\Public\BeastLoof.h" />
+    <ClInclude Include="..\Public\Bench.h" />
     <ClInclude Include="..\Public\BlackWizardLaser.h" />
     <ClInclude Include="..\Public\GASEffect.h" />
     <ClInclude Include="..\Public\GreenSkill.h" />
@@ -267,6 +268,7 @@
     <ClInclude Include="..\public\Loading.h" />
     <ClInclude Include="..\Public\Loading_Mop.h" />
     <ClInclude Include="..\Public\MainApp.h" />
+    <ClInclude Include="..\Public\Maple.h" />
     <ClInclude Include="..\Public\Maya.h" />
     <ClInclude Include="..\Public\MenuIcon.h" />
     <ClInclude Include="..\Public\BlueMushmomHpbar.h" />
@@ -303,6 +305,7 @@
     <ClInclude Include="..\Public\ReefAttackInfo.h" />
     <ClInclude Include="..\Public\RibbonPigInfo.h" />
     <ClInclude Include="..\Public\RockEnter.h" />
+    <ClInclude Include="..\Public\Root.h" />
     <ClInclude Include="..\public\Section.h" />
     <ClInclude Include="..\public\Shadow.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
@@ -372,6 +375,7 @@
     <ClCompile Include="..\Private\BeastIcon.cpp" />
     <ClCompile Include="..\Private\BeastInfo.cpp" />
     <ClCompile Include="..\Private\BeastLoof.cpp" />
+    <ClCompile Include="..\Private\Bench.cpp" />
     <ClCompile Include="..\Private\BlackWizardLaser.cpp" />
     <ClCompile Include="..\Private\GASEffect.cpp" />
     <ClCompile Include="..\Private\GreenSkill.cpp" />
@@ -472,6 +476,7 @@
     <ClCompile Include="..\private\Loading.cpp" />
     <ClCompile Include="..\Private\Loading_Mop.cpp" />
     <ClCompile Include="..\Private\MainApp.cpp" />
+    <ClCompile Include="..\Private\Maple.cpp" />
     <ClCompile Include="..\Private\Maya.cpp" />
     <ClCompile Include="..\Private\MenuIcon.cpp" />
     <ClCompile Include="..\Private\BlueMushmomHpbar.cpp" />
@@ -508,6 +513,7 @@
     <ClCompile Include="..\Private\ReefAttackInfo.cpp" />
     <ClCompile Include="..\Private\RibbonPigInfo.cpp" />
     <ClCompile Include="..\Private\RockEnter.cpp" />
+    <ClCompile Include="..\Private\Root.cpp" />
     <ClCompile Include="..\private\Section.cpp" />
     <ClCompile Include="..\private\Shadow.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />

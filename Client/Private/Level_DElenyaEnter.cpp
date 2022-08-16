@@ -195,6 +195,10 @@ HRESULT CLevel_DElenyaEnter::Ready_Layer_Map(const _tchar * pLayerTag)
 	SkyDesc.iIndex = 8;
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
 		return E_FAIL;
+	CCreature::CRETUREDESC RootDesc;
+	RootDesc.vPos = _float3(36.f, 17.5f, 5.6f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Root"), LEVEL_DELENYAENTER, pLayerTag, &RootDesc)))
+		return E_FAIL;
 
 	CPotal::POTALDESC PotalDesc;
 	PotalDesc.eDestLevel = LEVEL_DHENESYSHUNTING;
