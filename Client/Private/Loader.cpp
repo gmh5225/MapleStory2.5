@@ -106,6 +106,7 @@
 #include"Root.h"
 #include"Bench.h"
 #include"Maple.h"
+#include"Fire.h"
 #include "Bandit.h"
 #include "ItemNotice.h"
 #include "BlackWizardAttack1.h"
@@ -1253,6 +1254,12 @@ HRESULT CLoader::Load_Map()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Maple"),
 		CMaple::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	/* For.Prototype_GameObject_Fire*/
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Fire"),
+		CFire::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	//if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Sky"),
 	//	CSky::Create(m_pGraphic_Device))))
