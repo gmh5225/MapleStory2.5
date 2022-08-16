@@ -2,7 +2,7 @@
 #include "..\Public\ExpBar.h"
 #include "GameInstance.h"
 #include "UIManager.h"
-
+#include "ParticleManager.h"
 
 CExpBar::CExpBar(LPDIRECT3DDEVICE9 pGraphic_Device)
 	:CUI(pGraphic_Device)
@@ -59,20 +59,34 @@ void CExpBar::Tick(_float fTimeDelta)
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
 
+
+
 	CUIManager* pUI = CUIManager::Get_Instance();
 	if (pUI->Get_PlayerExp() >= 51)
+	{	
+		CParticleManager::Get_Instance()->MakeLeveUp(_float3{ 0.f,0.f,0.f });
+		pInstance->PlaySoundW(L"LevelUp.mp3", 31, 1.f);
 		pUI->Level_Up(1);
+	}
 	else if (pUI->Get_PlayerExp() >= 102)
+	{		
+		CParticleManager::Get_Instance()->MakeLeveUp(_float3{ 0.f,0.f,0.f });
+		pInstance->PlaySoundW(L"LevelUp.mp3", 31, 1.f);
 		pUI->Level_Up(2);
+	}
 	else if (pUI->Get_PlayerExp() >= 153)
+	{
+		CParticleManager::Get_Instance()->MakeLeveUp(_float3{ 0.f,0.f,0.f });
+		pInstance->PlaySoundW(L"LevelUp.mp3", 31, 1.f);
 		pUI->Level_Up(3);
+	}
 
 	m_iTexturenum = pUI->Get_PlayerExp();
 	
 	if (pInstance->Key_Down(DIK_E))
 	{
 		if (m_iTexturenum < 51)
-			pUI->Set_PlayerExp(1);
+			pUI->Set_PlayerExp(20);
 	}
 	if (m_iExp < 10)	
 		m_iExpDigit = g_iWinSizeX*0.5f;

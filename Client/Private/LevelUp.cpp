@@ -61,7 +61,11 @@ HRESULT CLevelUp::SetUp_Components()
 
 void CLevelUp::Tick(_float fTimeDelta)
 {
-
+	CGameInstance* pInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pInstance);
+	_float3 vPos = ((CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0))->Get_State(CTransform::STATE_POSITION);
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPos + _float3{ 0.f,0.5f,0.4f });
+	Safe_Release(pInstance);
 	switch (m_eCurState)
 	{
 	case Client::CLevelUp::STATE_IDLE:
