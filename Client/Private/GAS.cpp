@@ -361,7 +361,6 @@ void CGAS::LateTick(_float fTimeDelta)
 		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	}
 
-	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	Set_Billboard();
 }
 
@@ -767,6 +766,10 @@ void CGAS::SetAni()
 		break;
 
 	case STATE_CUTSCEEN:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Idle"), 0.1f, CAnimator::STATE_LOOF);
+		break;
+
+	case STATE_CUTSCEEN_2:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_Idle"), 0.1f, CAnimator::STATE_LOOF);
 		break;
 

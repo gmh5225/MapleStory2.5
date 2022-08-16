@@ -178,11 +178,11 @@ HRESULT CLevel_DElenyaEnter::Ready_Layer_Npc(const _tchar * pLayerTag)
 	Safe_AddRef(pGameInstance);
 
 
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_EHelena"), LEVEL_HENESYS, pLayerTag)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_EHelena"), LEVEL_DELENYAENTER, pLayerTag)))
 		return E_FAIL;
 
 	CGameObject* pObj = nullptr;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_EHelenaChat"), LEVEL_STATIC, pLayerTag, &pObj, nullptr)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_EHelenaChat"), LEVEL_DELENYAENTER, pLayerTag, &pObj, nullptr)))
 		return E_FAIL;
 	CUIManager::Get_Instance()->SetEHelenaChat(pObj);
 
