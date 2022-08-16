@@ -465,9 +465,9 @@ void CCutSceneManager::Start_Enter_InitDHenesys()
 	m_bInitDHenesys = true;
 
 	m_fInitDHenesys_TimeAcc = 0.f;
-	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
-	Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
-	SetCamPos(_float3(-20.f, 12.f, -15.f));
+	// Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
+	// Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
+	// SetCamPos(_float3(-20.f, 12.f, -15.f));
 	Get_MainCam()->SetSpeed(3.f);
 	m_bIsCutScene = true;
 	m_bEnter_InitDHenesys = true;

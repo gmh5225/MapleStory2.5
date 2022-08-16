@@ -47,14 +47,14 @@ void CAutoDownCube::Tick(_float fTimeDelta)
 
 	
 	_float fRanNum = CGameInstance::Get_Instance()->Get_FloatRandom(0.f, 3.f);
-	_float  fSTime = 10.f + fRanNum;
+	_float  fSTime = 5.f + fRanNum;
 
 	if (fSTime < m_fDownTimeAcc)
 		m_bDown = true;
 
 
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	_float fDownTime = vPos.y + 10.f - fRanNum;
+	_float fDownTime = vPos.y + 5.f - fRanNum;
 
 	if (m_bDown)
 	{

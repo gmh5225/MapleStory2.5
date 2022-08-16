@@ -39,7 +39,7 @@ HRESULT CDomiScreen::Initialize(void * pArg)
 
 	m_bRender = false;
 
-	D3DXCreateFont(m_pGraphic_Device, 30, 0, FW_BOLD, 1, TRUE, DEFAULT_CHARSET,
+	D3DXCreateFont(m_pGraphic_Device, 32, 0, FW_BOLD, 1, TRUE, DEFAULT_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH | FF_DONTCARE,
 		TEXT("Arial"), &m_pFont);
 
@@ -200,7 +200,7 @@ void CDomiScreen::BlackMageTalk()
 	case 1:
 	{
 		wsprintf(cChat, TEXT("대"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .1f));
 
@@ -209,7 +209,7 @@ void CDomiScreen::BlackMageTalk()
 	case 2:
 	{
 		wsprintf(cChat, TEXT("대적"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .2f));
 	}
@@ -218,7 +218,7 @@ void CDomiScreen::BlackMageTalk()
 	case 3:
 	{
 		wsprintf(cChat, TEXT("대적자"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .3f));
 	}
@@ -226,7 +226,7 @@ void CDomiScreen::BlackMageTalk()
 	case 4:
 	{
 		wsprintf(cChat, TEXT("대적자여"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .4f));
 	}
@@ -234,7 +234,7 @@ void CDomiScreen::BlackMageTalk()
 	case 5:
 	{
 		wsprintf(cChat, TEXT("대적자여 운"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .5f));
 	}
@@ -242,7 +242,7 @@ void CDomiScreen::BlackMageTalk()
 	case 6:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .6f));
 	}
@@ -250,7 +250,7 @@ void CDomiScreen::BlackMageTalk()
 	case 7:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f- 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .7f));
 	}
@@ -258,7 +258,7 @@ void CDomiScreen::BlackMageTalk()
 	case 8:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을 완"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .8f));
 	}
@@ -266,7 +266,7 @@ void CDomiScreen::BlackMageTalk()
 	case 9:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을 완성"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .9f));
 	}
@@ -274,7 +274,7 @@ void CDomiScreen::BlackMageTalk()
 	case 10:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을 완성할"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 	}
@@ -282,7 +282,7 @@ void CDomiScreen::BlackMageTalk()
 	case 11:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
 	}
@@ -290,7 +290,7 @@ void CDomiScreen::BlackMageTalk()
 	case 12:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
 	}
@@ -298,7 +298,7 @@ void CDomiScreen::BlackMageTalk()
 	case 13:
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다."));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
 	}
@@ -312,7 +312,7 @@ void CDomiScreen::BlackMageTalk()
 		if (24 > m_iTalkCount)
 		{
 			wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다."));
-			SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+			SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 			m_pFont->DrawText(NULL, cChat,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 
@@ -324,7 +324,7 @@ void CDomiScreen::BlackMageTalk()
 	if (24 < m_iTalkCount)
 	{
 		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다."));
-		SetRect(&rc, g_iWinSizeX*0.5f - 60.f, g_iWinSizeY*0.5f, 0, 0);
+		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, m_fTempA));
 		m_fTempA -= 0.1f;
