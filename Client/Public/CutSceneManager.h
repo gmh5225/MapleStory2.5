@@ -133,8 +133,6 @@ private:
 	_bool m_b8_1 = false;
 	_bool m_b8_2 = false;
 
-
-
 	// .For Total
 	_float m_fMainUITimeAcc = 0.f;
 	_bool m_bMainUI = false;

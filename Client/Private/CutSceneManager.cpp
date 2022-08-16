@@ -11,7 +11,7 @@ IMPLEMENT_SINGLETON(CCutSceneManager)
 
 CCutSceneManager::CCutSceneManager()
 {
-	
+
 }
 
 
@@ -21,6 +21,7 @@ void CCutSceneManager::Tick(_float fTimeDelta)
 
 	if (nullptr == Get_MainCam())
 		return;
+
 
 	if (m_bEnter_Henesys_1)
 		Enter_Henesys_1(fTimeDelta);
@@ -462,6 +463,8 @@ void CCutSceneManager::Start_Enter_InitDHenesys()
 
 	if (m_bInitDHenesys)
 		return;
+	CGameInstance::Get_Instance()->StopAll();
+	
 	m_bInitDHenesys = true;
 
 	m_fInitDHenesys_TimeAcc = 0.f;

@@ -77,6 +77,7 @@ void CTaxiButton::LateTick(_float fTimeDelta)
 {
 	if (m_eCollision == TYPE_DOWN)
 	{
+		CGameInstance::Get_Instance()->PlaySoundW(L"TaxiMove.mp3", 21, 1.f);
 		CUIManager::Get_Instance()->Start_Loading();
 		m_bTrigger = true;
 		CUIManager::Get_Instance()->Off_TaxiChatBox();

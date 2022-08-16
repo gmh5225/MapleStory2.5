@@ -19,7 +19,7 @@ CToolManager::CToolManager()
 
 void CToolManager::SetDestLevel(LEVEL eLevel, _float3 vDestPos)
 {
-		CGameInstance::Get_Instance()->PlaySoundW(L"Portal.mp3", 29, 1.f);
+
 		m_eDestLevel = eLevel; m_vDestPos = vDestPos;	
 }
 

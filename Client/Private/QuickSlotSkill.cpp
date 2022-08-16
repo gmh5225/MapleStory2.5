@@ -4,6 +4,7 @@
 #include "QuickSlotManager.h"
 #include "MouseManager.h"
 #include "SkillInfo.h"
+#include "UIManager.h"
 
 
 
@@ -69,7 +70,13 @@ void CQuickSlotSkill::Tick(_float fTimeDelta)
 	{
 		pQuickSlotInstance->Clear_Data(pMouseInstance->Get_Indexnum());
 	}
+	if (CUIManager::Get_Instance()->Get_StartMove())
+		Start_CutScene(fTimeDelta);
 
+
+
+	if (CUIManager::Get_Instance()->Get_EndMove())
+		End_CutScene(fTimeDelta);
 	Safe_Release(pGameInstance);
 }
 

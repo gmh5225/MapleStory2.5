@@ -57,12 +57,13 @@ HRESULT CLevel_ElenyaEnter::Initialize()
 
 	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 	//	return E_FAIL;
-	
-	
-	
+
 	if(CUIManager::Get_Instance()->GetTitle())
 		CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_ELENYAENTER);
 	CUIManager::Get_Instance()->SetTitle();
+
+	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->PlayBGM(L"BlueMushroomBattle.mp3", 1.f);
 
 	CUIManager::Get_Instance()->End_Loading();
 	CCutSceneManager::Get_Instance()->Start_Enter_ElenyaEnter();

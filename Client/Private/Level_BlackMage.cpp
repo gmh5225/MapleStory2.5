@@ -65,7 +65,7 @@ void CLevel_BlackMage::Tick(_float fTimeDelta)
 
 	}
 	m_fCreateAcc += 1.f * fTimeDelta;
-	if (m_fCreateAcc > 3.f)
+	if (m_fCreateAcc > 6.f)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);

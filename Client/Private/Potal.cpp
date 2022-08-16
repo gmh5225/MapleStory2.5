@@ -213,8 +213,9 @@ void CPotal::Collision(CGameObject * pOther)
 
 		if (pGameInstance->Key_Down(DIK_Z))
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"Portal.mp3", 29, 1.f);
 			CUIManager::Get_Instance()->Start_Loading();
-
+			
 			m_pOther = pOther;
 		}
 	

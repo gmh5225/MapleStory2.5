@@ -100,6 +100,7 @@ void CConsumIcon::Tick(_float fTimeDelta)
 
 	}
 
+	
 
 	Safe_Release(pInstance);
 }

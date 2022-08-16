@@ -96,8 +96,6 @@ void CCardinalBlastBullet::LateTick(_float fTimeDelta)
 }
 HRESULT CCardinalBlastBullet::Render()
 {
-	return S_OK;
-
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
