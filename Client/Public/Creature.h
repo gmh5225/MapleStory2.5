@@ -10,6 +10,7 @@ class CRenderer;
 class CCollider;
 class CTransform;
 class CVIBuffer_Rect;
+class CShader;
 END
 
 BEGIN(Client)
@@ -68,6 +69,7 @@ protected:
 	CVIBuffer_Rect*			m_pVIBufferCom = nullptr;
 	CAnimator*				m_pAnimatorCom = nullptr;
 	CCollider*				m_pColliderCom = nullptr;
+	CShader*				m_pShaderCom = nullptr;
 
 protected:
 	_float3 m_vLookTemp;

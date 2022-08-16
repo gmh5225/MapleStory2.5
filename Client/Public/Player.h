@@ -3,6 +3,7 @@
 #include "Client_Defines.h"
 #include "Creature.h"
 
+
 BEGIN(Client)
 
 class CPlayer final : public CCreature
@@ -46,6 +47,7 @@ private:
 
 	void GetKeyCheate(_float fTimeDelta);
 	void CheckAttakedTime(_float fTimeDelta);
+	void Shading(_float fTImeDelta);
 
 protected:
 	virtual HRESULT Set_RenderState() override;
@@ -68,6 +70,11 @@ private:
 
 	_float m_fAttakedTimeAcc = 0.f;
 	_bool m_bAttaked = false;
+
+	_float m_fShadingAcc = 0.f;
+	_float m_fChange = 0.f;
+	_bool m_bChange = false;
+	_bool m_bHit = false;
 
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

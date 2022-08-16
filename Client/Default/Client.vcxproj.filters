@@ -714,13 +714,13 @@
     </Filter>
     <Filter Include="03.MoDel\Model_Lock">
       <UniqueIdentifier>{124b5ed8-8609-4e8a-9e5e-dfaa89b85034}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Npc\09.EHelena">
       <UniqueIdentifier>{651e0b40-aeb0-4ea1-82a0-e74d6c4b2d38}</UniqueIdentifier>
     </Filter>
     <Filter Include="04.UI\03.Dialog\Helena">
       <UniqueIdentifier>{237520ce-d2d8-43b9-bb65-d695eefc7c9a}</UniqueIdentifier>
-      </Filter>
+    </Filter>
     <Filter Include="02.GameObject\Creature\Root">
       <UniqueIdentifier>{7183b92a-b428-482f-b459-65cd03e64f1f}</UniqueIdentifier>
     </Filter>
@@ -1352,14 +1352,13 @@
     </ClInclude>
     <ClInclude Include="..\public\Model_Lock.h">
       <Filter>03.MoDel\Model_Lock</Filter>
-      </ClInclude>
-
+    </ClInclude>
     <ClInclude Include="..\Public\EHelena.h">
       <Filter>02.GameObject\Creature\Npc\09.EHelena</Filter>
     </ClInclude>
     <ClInclude Include="..\Public\EHelenaChat.h">
       <Filter>04.UI\03.Dialog\Helena</Filter>
-      </ClInclude>
+    </ClInclude>
     <ClInclude Include="..\Public\Root.h">
       <Filter>02.GameObject\Creature\Root</Filter>
     </ClInclude>
@@ -1982,13 +1981,13 @@
     </ClCompile>
     <ClCompile Include="..\private\Model_Lock.cpp">
       <Filter>03.MoDel\Model_Lock</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\EHelena.cpp">
       <Filter>02.GameObject\Creature\Npc\09.EHelena</Filter>
     </ClCompile>
     <ClCompile Include="..\Private\EHelenaChat.cpp">
       <Filter>04.UI\03.Dialog\Helena</Filter>
-      </ClCompile>
+    </ClCompile>
     <ClCompile Include="..\Private\Root.cpp">
       <Filter>02.GameObject\Creature\Root</Filter>
     </ClCompile>
@@ -2019,5 +2018,10 @@
     <Text Include="ReadMe.txt">
       <Filter>90.Default</Filter>
     </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Player.hlsl">
+      <Filter>90.Default</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

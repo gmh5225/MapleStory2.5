@@ -106,6 +106,9 @@
     <ClInclude Include="..\Public\Sound_Manager.h">
       <Filter>01.Device\Sound</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\Shader.h">
+      <Filter>04.Component\Shader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Private\GameInstance.cpp">
@@ -194,6 +197,9 @@
     </ClCompile>
     <ClCompile Include="..\Private\Sound_Manager.cpp">
       <Filter>01.Device\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\Shader.cpp">
+      <Filter>04.Component\Shader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -289,6 +295,9 @@
     </Filter>
     <Filter Include="04.Component\VIBuffer\ColorRect">
       <UniqueIdentifier>{c16497d4-19ce-4ce4-942e-fcb2c0658444}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.Component\Shader">
+      <UniqueIdentifier>{df744dc5-2aaa-446d-b416-76516a11a038}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

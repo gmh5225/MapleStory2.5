@@ -18,6 +18,8 @@
 #include "CutScreen.h"
 #include "DomiScreen.h"
 #include "Title.h"
+#include "Shader.h"
+
 
 
 bool g_bStaticClone;
@@ -247,6 +249,10 @@ HRESULT CMainApp::Ready_Prototype_Component()
 
 	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Animator"),
 		CAnimator::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Shader_Player"),
+		CShader::Create(m_pGraphic_Device, TEXT("../Bin/ShaderFiles/Shader_Player.hlsl")))))
 		return E_FAIL;
 
 

@@ -25,7 +25,7 @@ HRESULT CChasingShotHit::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *(_float3*)pArg);
-	m_pTransformCom->Set_Scaled(5.f);
+	m_pTransformCom->Set_Scaled(3.5f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ChasingShot_Hit"), 0.08f, CAnimator::STATE_ONCE);
 	m_fYDistance = 10.f;
 	Set_Billboard();

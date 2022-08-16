@@ -158,7 +158,7 @@ void CDamageGen::Im(_float fTimeDelta)
 
 	if (CDamage::DAMAGE_HEAL != m_Desc.eType)
 	{
-		CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 2, 1.f);
+		CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 5, 1.f);
 	}
 	
 	
@@ -198,7 +198,7 @@ void CDamageGen::NonIm(_float fTimeDelta)
 		DamageDesc.eType = m_Desc.eType;
 
 		if (CDamage::DAMAGE_HEAL != m_Desc.eType)
-			CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 2, 1.f);
+			CGameInstance::Get_Instance()->PlaySound(L"SnailDamage.wav", 4, 1.f);
 
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Damage"), eCurLevel, TEXT("Layer_Damage"), &DamageDesc);
 

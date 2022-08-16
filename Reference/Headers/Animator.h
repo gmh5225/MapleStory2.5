@@ -50,7 +50,7 @@ public:
 	virtual CAnimator* Clone(void* pAvg) override;
 	virtual void Free() override;
 
-private:
+public:
 	class CTexture* Find_Component();
 	
 private:

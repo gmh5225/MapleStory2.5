@@ -20,6 +20,8 @@ public:
 public:
 	virtual HRESULT Initialize_Prototype(TYPE eType, const _tchar* pTextureFilePath, _uint iNumTextures);
 	virtual HRESULT Initialize(void* pArg) override;
+	LPDIRECT3DBASETEXTURE9 Get_Tex(_uint iTextNum) { return m_Textures[iTextNum]; }
+
 
 private:
 	/*LPDIRECT3DCUBETEXTURE9

@@ -14,13 +14,11 @@
 #include "ChasingShotAttack.h"
 #include "BeastEffect.h"
 #include "Item.h"
-
 #include "Shadow.h"
-
 #include "UIManager.h"
 #include "CutSceneManager.h"
 #include "QuestManager.h"
-
+#include "Shader.h"
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -68,7 +66,7 @@ HRESULT CPlayer::Initialize(void * pArg)
 	// *�߷� �ڵ�
 	// �߷� ���� ����
 	m_pTransformCom->Set_Gravity(1.f);
-
+	m_pShaderCom->Set_RawValue("g_vPlayerColor", _float4{ 1.f,1.f,1.f,1.f }, sizeof(_float4));
 
 	SetState(STATE_IDLE, DIR_D);
 
@@ -143,6 +141,9 @@ HRESULT CPlayer::SetUp_Components()
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Player_Attack_RD"), nullptr);
 	}
 
+	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Shader_Player"), TEXT("Com_Shader"), (CComponent**)&m_pShaderCom)))
+		return E_FAIL;
+
 	return S_OK;
 }
 
@@ -208,6 +209,8 @@ void CPlayer::Tick(_float fTimeDelta)
 		break;
 	}
 
+	Shading(fTimeDelta);
+
 	GetKeyCheate(fTimeDelta);
 	CheckAttakedTime(fTimeDelta);
 	Particle(fTimeDelta);
@@ -251,7 +254,7 @@ void CPlayer::LateTick(_float fTimeDelta)
 }
 HRESULT CPlayer::Render()
 {
-	Set_Billboard();
+	/*Set_Billboard();
 
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;	
@@ -259,6 +262,7 @@ HRESULT CPlayer::Render()
 	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
 	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
 		return E_FAIL;
+	
 
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
@@ -266,8 +270,42 @@ HRESULT CPlayer::Render()
 	m_pVIBufferCom->Render();
 
 	if (FAILED(Reset_RenderState()))
-		return E_FAIL;
+		return E_FAIL;*/
 	
+	Set_Billboard();
+
+	_float4x4			WorldMatrix, ViewMatrix, ProjMatrix;
+	_float4x4			ViewMatrixInv;
+
+	WorldMatrix = m_pTransformCom->Get_WorldMatrix();
+	m_pGraphic_Device->GetTransform(D3DTS_VIEW, &ViewMatrix);
+	D3DXMatrixInverse(&ViewMatrixInv, nullptr, &ViewMatrix);
+	m_pGraphic_Device->GetTransform(D3DTS_PROJECTION, &ProjMatrix);
+
+
+	m_pShaderCom->Set_RawValue("g_WorldMatrix", D3DXMatrixTranspose(&WorldMatrix, &WorldMatrix), sizeof(_float4x4));
+	m_pShaderCom->Set_RawValue("g_ViewMatrix", D3DXMatrixTranspose(&ViewMatrix, &ViewMatrix), sizeof(_float4x4));
+	m_pShaderCom->Set_RawValue("g_ProjMatrix", D3DXMatrixTranspose(&ProjMatrix, &ProjMatrix), sizeof(_float4x4));
+
+	m_pShaderCom->Set_RawValue("g_vCamPosition", &ViewMatrixInv.m[3][0], sizeof(_float4));
+	
+	_float fDF = CGameInstance::Get_Instance()->Get_TimeDelta(TEXT("Timer_60"));
+	if (FAILED(m_pAnimatorCom->Play_Ani(1.f * fDF)))
+		return E_FAIL;
+
+	m_pShaderCom->Set_Texture("g_Texture", m_pAnimatorCom->Find_Component()->Get_Tex(m_pAnimatorCom->Get_AnimCount()));
+
+	if (FAILED(Set_RenderState()))
+		return E_FAIL;
+
+	m_pShaderCom->Begin(0);
+
+	m_pVIBufferCom->Render();
+
+	m_pShaderCom->End();
+
+	if (FAILED(Reset_RenderState()))
+		return E_FAIL;
 
 
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_0))
@@ -1147,6 +1185,38 @@ void CPlayer::CheckAttakedTime(_float fTimeDelta)
 	}
 }
 
+void CPlayer::Shading(_float fTImeDelta)
+{
+	if (m_bHit)
+	{
+		m_pShaderCom->Set_RawValue("g_vPlayerColor", _float4{ 255.f,255.f,255.f,1.f }, sizeof(_float4));
+		m_fShadingAcc += 1.f * fTImeDelta;
+		m_fChange += 1.f * fTImeDelta;
+
+		
+		if (m_fChange > 0.1)
+		{
+			m_bChange = !m_bChange;
+			m_fChange = 0.f;
+		}
+
+		if(m_bChange)
+			m_pShaderCom->Set_RawValue("g_vPlayerColor", _float4{ 255.f,255.f,255.f,1.f }, sizeof(_float4));
+		else
+			m_pShaderCom->Set_RawValue("g_vPlayerColor", _float4{ 1.f,1.f,1.f,1.f }, sizeof(_float4));
+		
+
+		if (m_fShadingAcc > 2)
+		{
+			m_pShaderCom->Set_RawValue("g_vPlayerColor", _float4{ 1.f,1.f,1.f,1.f }, sizeof(_float4));
+			m_bHit = false;
+			m_bChange = false;
+			m_fShadingAcc = 0.f;
+			m_fChange = 0.f;
+		}
+	}
+}
+
 HRESULT CPlayer::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
@@ -1208,6 +1278,8 @@ void CPlayer::Damaged(CGameObject * pOther)
 	CUIManager::Get_Instance()->Set_PlayerHp(1);
 	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
 	vPos.y += 1.5f;
+	m_bHit = true;
+	m_bChange = true;
 	CParticleManager::Get_Instance()->MakeDamageGen(500, 2000, 1, 0.05f, vPos, 1.6f, true, CDamage::DAMAGE_PLAYERATTAKED);
 }
 

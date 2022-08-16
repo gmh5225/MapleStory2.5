@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "..\Public\Creature.h"
-
+#include "Shader.h"
 #include "GameInstance.h"
 #include "Shadow.h"
 
@@ -51,6 +51,7 @@ HRESULT CCreature::SetUp_Components()
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Collider"), TEXT("Com_Collider"), (CComponent**)&m_pColliderCom)))
 		return E_FAIL;
 
+	
 
 	return S_OK;
 }
@@ -285,5 +286,6 @@ void CCreature::Free()
 	Safe_Release(m_pTextureCom);
 	Safe_Release(m_pVIBufferCom);
 	Safe_Release(m_pRendererCom);
+	Safe_Release(m_pShaderCom);
 }
 

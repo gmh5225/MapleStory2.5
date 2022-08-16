@@ -37,7 +37,7 @@ HRESULT CLevel_BlackMage::Initialize()
 		return E_FAIL;
 	m_fCreateAcc = 0.f;
 
-	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->StopSound(0);
 	CGameInstance::Get_Instance()->PlayBGM(L"DarkMage.mp3", 0.7f);
 
 	CUIManager::Get_Instance()->End_Loading();
