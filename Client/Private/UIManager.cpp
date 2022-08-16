@@ -5,6 +5,7 @@
 #include "CutScreen.h"
 #include "DomiScreen.h"
 #include "TaxiChatBox.h"
+#include "EHelenaChat.h"
 #include "Title.h"
 
 IMPLEMENT_SINGLETON(CUIManager)
@@ -135,6 +136,22 @@ void CUIManager::Off_TaxiChatBox()
 		return;
 
 	m_pTaxiChatBox->End_Chat();
+}
+
+void CUIManager::On_EHelenaChat()
+{
+	if (nullptr == m_pEHelenaChat)
+		return;
+
+	m_pEHelenaChat->Start_Chat();
+}
+
+void CUIManager::Off_EHelenaChat()
+{
+	if (nullptr == m_pEHelenaChat)
+		return;
+
+	m_pEHelenaChat->End_Chat();
 }
 
 void CUIManager::PlayTitleCurMap(LEVEL eLevel)

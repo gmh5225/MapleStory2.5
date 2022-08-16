@@ -10,6 +10,7 @@
 
 #include "CutSceneManager.h"
 #include "ParticleManager.h"
+#include "Potal.h"
 
 CGAS::CGAS(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -359,6 +360,8 @@ void CGAS::LateTick(_float fTimeDelta)
 	{
 		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	}
+
+	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	Set_Billboard();
 }
 
@@ -807,15 +810,24 @@ void CGAS::Damaged(CGameObject * pOther)
 			SetState(STATE_HIT, DIR_L);
 	}
 
-	Safe_Release(pGameInstance);
-
 	--m_iHp;
 
 	if (m_iHp <= 0)
 	{
+		//0.f, 2.5f, 18.f
 		CQuestManager::Get_Instance()->Hunting(TEXT("GAS"));
+
+		CPotal::POTALDESC PotalDesc;
+		PotalDesc.eDestLevel = LEVEL_GAMEPLAY;
+		PotalDesc.Pos = _float3(0.f, 2.5f, 17.5f);
+		PotalDesc.DestPos = _float3(9.f, 6.5f, -1.5f);
+		(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAS, L"Layer_Potal", &PotalDesc));
+
+
 		Die();
 	}
+
+	Safe_Release(pGameInstance);
 }
 
 void CGAS::DestroyCube(_int iLength)

@@ -714,6 +714,12 @@
     </Filter>
     <Filter Include="03.MoDel\Model_Lock">
       <UniqueIdentifier>{124b5ed8-8609-4e8a-9e5e-dfaa89b85034}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\09.EHelena">
+      <UniqueIdentifier>{651e0b40-aeb0-4ea1-82a0-e74d6c4b2d38}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="04.UI\03.Dialog\Helena">
+      <UniqueIdentifier>{237520ce-d2d8-43b9-bb65-d695eefc7c9a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1334,6 +1340,13 @@
     </ClInclude>
     <ClInclude Include="..\public\Model_Lock.h">
       <Filter>03.MoDel\Model_Lock</Filter>
+      </ClInclude>
+
+    <ClInclude Include="..\Public\EHelena.h">
+      <Filter>02.GameObject\Creature\Npc\09.EHelena</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\EHelenaChat.h">
+      <Filter>04.UI\03.Dialog\Helena</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -1945,6 +1958,12 @@
     </ClCompile>
     <ClCompile Include="..\private\Model_Lock.cpp">
       <Filter>03.MoDel\Model_Lock</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\EHelena.cpp">
+      <Filter>02.GameObject\Creature\Npc\09.EHelena</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\EHelenaChat.cpp">
+      <Filter>04.UI\03.Dialog\Helena</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

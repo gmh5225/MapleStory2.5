@@ -337,7 +337,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo1);
 
 
-	/*CSpawner::SPAWNERINFO MonsterInfo2;
+	CSpawner::SPAWNERINFO MonsterInfo2;
 	MonsterInfo2.MonsterName = TEXT("BlueSnail");
 	MonsterInfo2.MonsterPos = _float3{ 11.f , 3.f, 10.f };
 	MonsterInfo2.SpawnerNum = 2;
@@ -423,7 +423,7 @@ HRESULT CLevel_Henesys_1::Ready_Layer_Spawner(const _tchar * pLayerTag)
 	MonsterInfo9.MonsterColRad = 1.f;
 	MonsterInfo9.Level = LEVEL_HENESYS;
 	MonsterInfo9.LayerTag = TEXT("Layer_Spawner_Henesys_1");
-	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo9);*/
+	CSpawnerManager::Get_Instance()->Add_Spawner(&MonsterInfo9);
 
 	return S_OK;
 }

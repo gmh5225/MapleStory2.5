@@ -159,6 +159,9 @@
 #include "LevelUp.h"
 #include "Model_Die.h"
 
+#include "EHelena.h"
+#include "EHelenaChat.h"
+
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
 {
@@ -726,6 +729,10 @@ HRESULT CLoader::Load_Npc_Object()
 		CHelena::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_EHelena"),
+		CEHelena::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Ming"),
 		CMing::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -1089,6 +1096,11 @@ HRESULT CLoader::Load_UI_Object()
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_DamageGen"),
 		CDamageGen::Create(m_pGraphic_Device))))
 		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_EHelenaChat"),
+		CEHelenaChat::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -1586,7 +1598,7 @@ HRESULT CLoader::Load_Monster_Texture()
 
 	Safe_AddRef(pGameInstance);
 
-	// MushRoom
+	 //MushRoom
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_OrangeMushroom_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/OrangeMushroom/OrangeMushroom_Idle%d.png"), 2))))
 		return E_FAIL;
@@ -1652,7 +1664,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		return E_FAIL;
 
 
-	// GAS
+//	// GAS
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Idle%d.png"), 23))))
 		return E_FAIL;

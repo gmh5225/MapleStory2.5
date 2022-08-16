@@ -5,6 +5,7 @@
 #include "ItemNotice.h"
 #include "BlackWizardPatternUI.h"
 
+
 BEGIN(Client)
 
 class CUIManager final : CBase
@@ -20,6 +21,8 @@ public:
 	void Set_ItemNoticeTextNum(_uint iTextNum, bool bRender);
 	bool Check_Change(_uint iTextNum);
 	void SetTaxiChatBox(class CGameObject* pTaxiChatBox) { m_pTaxiChatBox = (class CTaxiChatBox*)pTaxiChatBox; }
+
+	void SetEHelenaChat(class CGameObject* pTaxiChatBox) { m_pEHelenaChat = (class CEHelenaChat*)pTaxiChatBox; }
 	
 private:
 	CItemNotice* m_pItemNotice;
@@ -42,6 +45,9 @@ public:
 	void On_TaxiChatBox();
 	void Off_TaxiChatBox();
 
+	void On_EHelenaChat();
+	void Off_EHelenaChat();
+
 	// For.Title
 	void PlayTitleCurMap(LEVEL eLevel);
 	_bool GetTitle() { return m_bTitle; }
@@ -58,6 +64,8 @@ private:
 	class CDomiScreen* m_pDomiScreen = nullptr;
 	class CTaxiChatBox* m_pTaxiChatBox = nullptr;
 	class CTitle*	m_pTitle = nullptr;
+
+	class CEHelenaChat* m_pEHelenaChat = nullptr;
 
 public:
 	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
