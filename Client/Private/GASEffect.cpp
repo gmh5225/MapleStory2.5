@@ -27,6 +27,8 @@ HRESULT CGASEffect::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+	m_sTag = "Tag_MonsterSkill";
+
 	memcpy(&m_Desc, pArg, sizeof(SUNCROSSHITDESC));
 
 	m_fColRad = 0.1f;
@@ -82,6 +84,7 @@ void CGASEffect::LateTick(_float fTimeDelta)
 	m_fEffectCount += fTimeDelta;
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER_SKILL, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 	if (m_fEffectCount >= 1.5f)

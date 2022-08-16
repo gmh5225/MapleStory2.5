@@ -94,6 +94,10 @@ private:
 	_bool m_bCutSceneRend = false;
 	_bool m_bCutSceneJump = false;
 	_float m_fCutSceneTimeAcc = 0.f;
+	
+
+
+	_float m_iColliTime = 0;
 
 	_bool m_bEffect;
 

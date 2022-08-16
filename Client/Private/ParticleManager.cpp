@@ -147,6 +147,16 @@ void CParticleManager::BackShot(_float3 _vPos, _float3 _vDirVec)
 	}
 }
 
+void CParticleManager::MakeDie(_float3 vPosision)
+{
+	CVIBuffer_Voxel::VOXELDESC pVoxDesc;
+	_float3 vPos = vPosision;
+	vPos.y += 4.f;
+	pVoxDesc.vPos = vPos;
+	if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Model_Die"), LEVEL_GAMEPLAY, TEXT("Layer_Model"), &pVoxDesc)))
+		return;
+}
+
 
 void CParticleManager::MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDirVec, _float _fForce_Y, _float _fForce_X, _bool _bGravity, _float _fGravityVal, _float _fLifeTime, _tchar* pTag)
 {

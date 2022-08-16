@@ -102,7 +102,7 @@ void CRedSlime::Tick(_float fTimeDelta)
 	switch (m_iDirection)
 	{
 	case R:
-		m_pTransformCom->Chase(_float3(-6.5f, 0.f, 7.3f), fTimeDelta * 2.5f);
+		m_pTransformCom->Chase(_float3(-6.5f, 0.f, 7.7f), fTimeDelta * 2.5f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSlime_Move"), 0.1f, CAnimator::STATE_LOOF);
 
 
@@ -118,7 +118,7 @@ void CRedSlime::Tick(_float fTimeDelta)
 		}
 		break;
 	case G:
-		m_pTransformCom->Chase(_float3(6.5f, 0.f, 7.3f), fTimeDelta * 2.5f);
+		m_pTransformCom->Chase(_float3(6.5f, 0.f, 7.7f), fTimeDelta * 2.5f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_RedSlime_MoveR"), 0.1f, CAnimator::STATE_LOOF);
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x >= 6.4f)
 		{

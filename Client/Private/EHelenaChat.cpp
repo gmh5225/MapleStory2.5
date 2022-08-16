@@ -124,7 +124,7 @@ HRESULT CEHelenaChat::Render()
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
 
 
-		wsprintf(cChat, TEXT("검은 마법사가 마을을 망치고 이쪽으로 도망갔습니다.\n 산이 무너지고 있으니 최대한 빨리 움직이셔야됩니다."));
+		wsprintf(cChat, TEXT("검은 마법사는 이쪽으로 도망갔습니다.\n나무가 무너지고 있으니 최대한 빨리 움직이세요. \n무운을 빌겠습니다."));
 		SetRect(&rc, 260.f - 40.f, 535.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));

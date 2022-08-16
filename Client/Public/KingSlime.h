@@ -55,6 +55,8 @@ public:
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 
+	void MakeItem();
+
 private:
 	_int	m_iHp;
 	_int	m_iIndexNum;

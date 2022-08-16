@@ -44,6 +44,7 @@ public:	//퀘스트의 상태를 변화시킴
 	_uint Set_OrangeMushroom() { return m_iHuntOrangeMushroom; }
 	_uint Set_StoneGolem() { return m_iHuntStoneGolem; }
 	_uint Set_GAS() { return m_iGAS; }
+	_uint Set_BlackMage() { return m_iBlackMage; }
 
 	// 먹은 아이템수 리턴
 	_uint Set_RedShell() { return m_iRedShell; }

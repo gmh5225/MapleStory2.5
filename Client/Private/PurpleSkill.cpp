@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "..\Public\PurpleSkill.h"
 #include "GameInstance.h"
-#include "QuestManager.h"
+#include "QuestManager.h"'
+#include "Player.h"
 
 CPurpleSkill::CPurpleSkill(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CGameObject(pGraphic_Device)
@@ -117,6 +118,16 @@ HRESULT CPurpleSkill::Render()
 
 	if(m_fTime < 3.8f)
 		m_pVIBufferCom->Render();
+	else
+	{
+		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+
+		((CPlayer*)pGameInstance->Get_ObjectPtr(LEVEL_STATIC, L"Layer_Player", 0))->Player_Cut();
+
+		Safe_Release(pGameInstance);
+		Set_Dead();
+	}
 
 
 	return S_OK;

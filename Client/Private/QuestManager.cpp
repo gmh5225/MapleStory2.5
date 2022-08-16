@@ -63,7 +63,7 @@ void CQuestManager::Tick()
 		m_iStumpFirewood = GoStumpInfo->Get_NowNum();
 		m_iGreenMushroom = GreenMushroomInfo->Get_NowNum();
 
-		if (m_iSlimeEssence >= 2 && m_iStumpFirewood >= 2 && m_iGreenMushroom >= 2)
+		if (m_iSlimeEssence >= 1 && m_iStumpFirewood >= 2 && m_iGreenMushroom >= 2)
 		{
 			QuestClear();
 		}
@@ -75,9 +75,9 @@ void CQuestManager::Hunting(const _tchar * MonsterName)
 {
 	if (m_iQuestNum == 1)
 	{
-		if (wcscmp(MonsterName, TEXT("OrangeMushroom")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iHuntOrangeMushroom < 10
+		if (wcscmp(MonsterName, TEXT("OrangeMushroom")) == 0 && m_iQuestState == QUEST_PROGRESS && m_iHuntOrangeMushroom < 5
 			&& m_iQuestNum == QUEST_FIRST)
-			m_iHuntOrangeMushroom += 2;
+			m_iHuntOrangeMushroom += 1;
 	}
 
 	else if (m_iQuestNum == 3)

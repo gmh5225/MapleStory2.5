@@ -366,11 +366,7 @@ void CSlime::Tick_Die(_float fTimeDelta)
 	}
 }
 
-void CSlime::MakeItem()
-{
-	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 2, L"SlimeInfo", vPos, LEVEL_HENESYS);
-}
+
 
 
 void CSlime::SetState(STATE eState, DIR eDir)
@@ -452,7 +448,6 @@ void CSlime::Damaged(CGameObject * pOther)
 	{
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
-		MakeItem();
 		CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 13, 1.f);
 	}
 }

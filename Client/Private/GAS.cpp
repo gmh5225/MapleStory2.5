@@ -341,6 +341,8 @@ void CGAS::Tick(_float fTimeDelta)
 void CGAS::LateTick(_float fTimeDelta)
 {
 
+	m_iColliTime += fTimeDelta;
+
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 
 	m_pTransformCom->Go_Gravity(fTimeDelta);
@@ -356,7 +358,7 @@ void CGAS::LateTick(_float fTimeDelta)
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
-	if (m_iHp > 0 && m_eCurState != STATE_RESET)
+	if (m_iHp > 0 && m_eCurState != STATE_RESET && m_iColliTime > 10.f)
 	{
 		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	}
@@ -621,10 +623,11 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 
 		CSpawner::SPAWNERINFO m_Slime;
 
-		_float RandX = pGameInstance->Get_FloatRandom(-10.f, 10.f);
-		_float RandZ = pGameInstance->Get_FloatRandom(-10.f, 10.f);
+		_float RandX = pGameInstance->Get_FloatRandom(-5.5f, -7.f);
+		_float RandZ = pGameInstance->Get_FloatRandom(5.5f, 7.f);
 		_float RandY = pGameInstance->Get_FloatRandom(2.f, 3.f);
-		MakeBlockCube(_float3(RandX, RandY, RandZ));
+		MakeBlockCube(_float3(RandX, 4.5f, 2.f));
+		MakeBlockCube(_float3(RandZ, 4.5f, 2.f));
 
 		if (!m_bSlime)
 		{
@@ -821,6 +824,8 @@ void CGAS::Damaged(CGameObject * pOther)
 	{
 		//0.f, 2.5f, 18.f
 		CQuestManager::Get_Instance()->Hunting(TEXT("GAS"));
+
+		CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 13, 1.f);
 
 		CPotal::POTALDESC PotalDesc;
 		PotalDesc.eDestLevel = LEVEL_GAMEPLAY;
