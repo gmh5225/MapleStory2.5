@@ -87,9 +87,6 @@ HRESULT CGAS::Initialize(void * pArg)
 		SetState(STATE_IDLE, DIR_END);
 	}
 
-
-	SetShadow(LEVEL_GAS, 4.5f);
-
 	return S_OK;
 }
 
@@ -356,7 +353,7 @@ void CGAS::LateTick(_float fTimeDelta)
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_BOSS, this);
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
-	if (m_iHp > 0)
+	if (m_iHp > 0 || m_eCurState != STATE_RESET)
 	{
 		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER, this);
 	}
