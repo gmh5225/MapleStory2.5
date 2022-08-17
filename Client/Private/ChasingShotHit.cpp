@@ -30,7 +30,7 @@ HRESULT CChasingShotHit::Initialize(void * pArg)
 	m_fYDistance = 10.f;
 	Set_Billboard();
 	_float3 vCLook = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
-	_float3 vPo = *(_float3*)pArg - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.25f;
+	_float3 vPo = *(_float3*)pArg - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.4f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPo);
 	return S_OK;
 }
@@ -56,9 +56,9 @@ void CChasingShotHit::Tick(_float fTimeDelta)
 }
 void CChasingShotHit::LateTick(_float fTimeDelta)
 {
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+
 
 	if (m_pAnimatorCom->Get_AnimCount() == 10)
 		Set_Dead();

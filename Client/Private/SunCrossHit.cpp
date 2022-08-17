@@ -31,13 +31,13 @@ HRESULT CSunCrossHit::Initialize(void * pArg)
 
 	m_fColRad = 0.1f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos);
-	m_pTransformCom->Set_Scaled(2.f);
+	m_pTransformCom->Set_Scaled(1.5f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_SunCross_Hit"), 0.08f, CAnimator::STATE_LOOF);
-	m_fYDistance = 11.f;
+	m_fYDistance = 10.f;
 
 	Set_Billboard();
 	_float3 vTest = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	_float3 vPo = vTest - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.4f;
+	_float3 vPo = vTest - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.6f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, vPo);
 	return S_OK;
 
@@ -85,9 +85,9 @@ void CSunCrossHit::Tick(_float fTimeDelta)
 void CSunCrossHit::LateTick(_float fTimeDelta)
 {
 
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	
 
 	if (m_pAnimatorCom->Get_AnimCount() == 4)
 		Set_Dead();

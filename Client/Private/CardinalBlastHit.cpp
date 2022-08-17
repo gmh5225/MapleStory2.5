@@ -26,11 +26,11 @@ HRESULT CCardinalBlastHit::Initialize(void * pArg)
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *(_float3*)pArg);
 	m_pTransformCom->Set_Scaled(4.f);
-	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_CardinalBlast_Hit"), 0.08f, CAnimator::STATE_ONCE);
+	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_CardinalBlast_Hit"), 0.05f, CAnimator::STATE_ONCE);
 	m_fYDistance = 10.f;
 	Set_Billboard();
 	_float3 vCLook = m_pTransformCom->Get_State(CTransform::STATE_LOOK);
-	_float3 vPo = *(_float3*)pArg - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.25f;
+	_float3 vPo = *(_float3*)pArg - m_pTransformCom->Get_State(CTransform::STATE_LOOK)*0.4f;
 	_float RD = CGameInstance::Get_Instance()->Get_FloatRandom(-0.5f,0.5f);
 	_float RD2 = CGameInstance::Get_Instance()->Get_FloatRandom(-0.5f, 0.5f);
 	_float RD3 = CGameInstance::Get_Instance()->Get_FloatRandom(-0.5f, 0.5f);
@@ -59,9 +59,9 @@ void CCardinalBlastHit::Tick(_float fTimeDelta)
 }
 void CCardinalBlastHit::LateTick(_float fTimeDelta)
 {
-
-	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
+	
 
 	if (m_pAnimatorCom->Get_AnimCount() == 15)
 		Set_Dead();
