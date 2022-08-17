@@ -48,6 +48,8 @@ private:
 	bool m_bState;
 	bool m_bFinal;
 	bool m_bSound;
+	bool m_bSceneEnd;
+	_float m_fSceneAcc;
 	_int m_iHp;
 public:
 	static CBlackWizard* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

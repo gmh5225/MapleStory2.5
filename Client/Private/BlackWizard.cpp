@@ -47,13 +47,23 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 	m_bState = false;
 	m_bFinal = false;
 	m_bSound = false;
+	m_bSceneEnd = false;
+	m_fSceneAcc = 0.f;
 	SetShadow(LEVEL_GAMEPLAY, 1.5f);
 	return S_OK;
 }
 
 void CBlackWizard::Tick(_float fTimeDelta)
 {
-	
+	if (!m_bSceneEnd)
+	{
+		m_fSceneAcc += 1.f * fTimeDelta;
+		if (m_fSceneAcc > 10)
+		{
+			m_bSceneEnd = true;
+			m_fSceneAcc = 0.f;
+		}
+	}
 }
 
 void CBlackWizard::LateTick(_float fTimeDelta)
@@ -64,7 +74,7 @@ void CBlackWizard::LateTick(_float fTimeDelta)
 		SetAni();
 	}
 		
-	else if(m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+	else if(m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND && m_bSceneEnd)
 	{
 		Pattern();
 		if(m_eCurState != STATE_END)

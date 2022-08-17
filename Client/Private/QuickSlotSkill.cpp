@@ -104,13 +104,6 @@ HRESULT CQuickSlotSkill::Render()
 
 	Reset_RenderState();
 
-	if (m_eCollision == TYPE_ON)
-	{
-		RECT SunCrossNotice;
-		SetRect(&SunCrossNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
-		m_NoticeFont->DrawText(NULL, m_pSkillNotice, -1, &SunCrossNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
-	}
-
 
 	return S_OK;
 }
@@ -132,7 +125,7 @@ void CQuickSlotSkill::Change_Texture()
 		pMouseInstance->Set_SkillIconIndex(CMouseManager::TYPE_QUICK, m_pSkillInfoTag, m_eGrade, m_iTexturenum, m_pSkillNotice, m_iIndexNum);
 		break;
 	case Client::CUI::TYPE_UP:	
-		if (!pQuickSlotInstance->Check_Texture(pMouseInstance->Get_SkillIconTextnum()))
+		if (!pQuickSlotInstance->Check_SkillTexture(pMouseInstance->Get_SkillIconTextnum()))
 		{
 			CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 			m_pSkillInfoTag = pMouseInstance->Get_SkillInfoTag();

@@ -113,12 +113,6 @@ HRESULT CQuickSlotItem::Render()
 
 	Reset_RenderState();
 
-	if (m_eCollision == TYPE_ON)
-	{
-		RECT ItemNotice;
-		SetRect(&ItemNotice, m_UIInfo.fX, m_UIInfo.fY, 0, 0);
-		m_NoticeFont->DrawText(NULL, m_pItemNotice, -1, &ItemNotice, DT_NOCLIP, D3DXCOLOR(0.f, 0.f, 255.0f, 1.0f));
-	}
 
 	CInvenManager* pInvenInstance = CInvenManager::Get_Instance();
 	wchar_t NowNum[10];
@@ -149,7 +143,7 @@ void CQuickSlotItem::Change_Texture()
 		pMouseInstance->Set_ItemIconIndex(CMouseManager::TYPE_QUICK, m_pItemInfoTag, m_eType, m_iTexturenum, m_pItemNotice, m_iIndexNum);
 		break;
 	case Client::CUI::TYPE_UP:
-		if (!pQuickSlotInstance->Check_Texture(pMouseInstance->Get_ItemIconTextnum()))
+		if (!pQuickSlotInstance->Check_ItemTexture(pMouseInstance->Get_ItemIconTextnum()))
 		{
 			CGameInstance::Get_Instance()->PlaySoundW(L"DragEnd.mp3", 25, 1.f);
 			m_pItemInfoTag = pMouseInstance->Get_ItemInfoTag();

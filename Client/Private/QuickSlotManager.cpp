@@ -31,7 +31,7 @@ HRESULT CQuickSlotManager::Add_QuickSlotItem(CQuickSlotItem * pQuickSlot)
 	return S_OK;
 }
 
-_bool CQuickSlotManager::Check_Texture(_uint iTextnum)
+_bool CQuickSlotManager::Check_SkillTexture(_uint iTextnum)
 {
 	for (auto iter : m_QuickSlotSkill)
 	{
@@ -39,11 +39,18 @@ _bool CQuickSlotManager::Check_Texture(_uint iTextnum)
 			return true;
 	}
 
+	return false;
+}
+
+_bool CQuickSlotManager::Check_ItemTexture(_uint iTextnum)
+{
 	for (auto iter : m_QuickSlotItem)
 	{
 		if (iter->Get_TextNum() == iTextnum)
 			return true;
 	}
+
+	
 	return false;
 }
 
