@@ -4,6 +4,7 @@
 #include "BlackWizardAttack1.h"
 #include "UIManager.h"
 #include "ToolManager.h"
+#include "QuestManager.h"
 
 
 CBlackWizard::CBlackWizard(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -86,8 +87,9 @@ void CBlackWizard::LateTick(_float fTimeDelta)
 
 	m_iHp = CUIManager::Get_Instance()->Get_BlackWizardHp();
 
-	if (m_iHp == 0)
+	if (m_iHp <= 0)
 	{
+		CQuestManager::Get_Instance()->Hunting(TEXT("BlackMage"));
 		m_eCurState = STATE_ESCAPE;
 		SetAni();
 	}

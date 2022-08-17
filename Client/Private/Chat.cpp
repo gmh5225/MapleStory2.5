@@ -87,7 +87,6 @@ void CChat::LateTick(_float fTimeDelta)
 
 	CQuestManager* pInstance = CQuestManager::Get_Instance();
 
-	m_bChat = pInstance->Check_Quest();
 
 }
 
@@ -121,7 +120,7 @@ HRESULT CChat::Render()
 
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
-	if (fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).x - vPlayerPos.x) < 2.f && fabs(m_pTransformCom->Get_State(CTransform::STATE_POSITION).z - vPlayerPos.z) < 2.f)
+	if ((vPlayerPos.x > 7.f && vPlayerPos.x < 15.f) && ((vPlayerPos.z) < 0.f && vPlayerPos.z > -3.f))
 	{
 
 		if (pInstance->Set_QuestState() == 1)
@@ -771,47 +770,7 @@ HRESULT CChat::Render()
 			if (m_bChat && pInstance->Set_QuestState() == 0)
 			{
 				m_bCountCheck = true;
-				{
-					if (m_fCount <= 0.1)
-						m_pTextureCom->Bind_Texture(0);
-					else if (0.1 < m_fCount && m_fCount <= 0.12)
-						m_pTextureCom->Bind_Texture(1);
-					else if (0.12 < m_fCount && m_fCount <= 0.14)
-						m_pTextureCom->Bind_Texture(2);
-					else if (0.14 < m_fCount && m_fCount <= 0.16)
-						m_pTextureCom->Bind_Texture(3);
-					else if (0.16 < m_fCount && m_fCount <= 0.18)
-						m_pTextureCom->Bind_Texture(4);
-					else if (0.18 < m_fCount && m_fCount <= 0.2)
-						m_pTextureCom->Bind_Texture(5);
-					else if (0.2 < m_fCount && m_fCount <= 0.22)
-						m_pTextureCom->Bind_Texture(6);
-					else if (0.22 < m_fCount && m_fCount <= 0.24)
-						m_pTextureCom->Bind_Texture(7);
-					else if (0.24 < m_fCount && m_fCount <= 0.26)
-						m_pTextureCom->Bind_Texture(8);
-					else if (0.26 < m_fCount && m_fCount <= 0.28)
-						m_pTextureCom->Bind_Texture(9);
-					else if (0.28 < m_fCount && m_fCount <= 0.3)
-						m_pTextureCom->Bind_Texture(10);
-					else if (0.3 < m_fCount && m_fCount <= 0.32)
-						m_pTextureCom->Bind_Texture(11);
-					else if (0.32 < m_fCount && m_fCount <= 0.34)
-						m_pTextureCom->Bind_Texture(12);
-					else if (0.34 < m_fCount && m_fCount <= 0.36)
-						m_pTextureCom->Bind_Texture(13);
-					else if (0.36 < m_fCount && m_fCount <= 0.38)
-						m_pTextureCom->Bind_Texture(14);
-					else if (0.38 < m_fCount && m_fCount <= 0.4)
-						m_pTextureCom->Bind_Texture(15);
-					else if (0.4 < m_fCount && m_fCount <= 0.42)
-						m_pTextureCom->Bind_Texture(16);
-					else
-					{
-						m_pTextureCom->Bind_Texture(17);
-						m_bCountCheck = false;
-					}
-				}
+				Bind_Animation();
 				m_pVIBufferCom->Render();
 
 				if (!m_bCountCheck)
@@ -820,7 +779,7 @@ HRESULT CChat::Render()
 					TCHAR cChat[128];
 					_tchar m_cNPCChat[128];
 
-					wsprintf(cChat, TEXT("나"));
+					wsprintf(cChat, TEXT("장로스탄"));
 					SetRect(&rc, 350, 500, 0, 0);
 					m_pFont->DrawText(NULL, cChat,
 						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.45f, 0.f, 1.f));
@@ -828,7 +787,7 @@ HRESULT CChat::Render()
 					if (CGameInstance::Get_Instance()->Key_Down(DIKEYBOARD_SPACE))
 						m_iChatProgress++;
 
-					wsprintf(m_cNPCChat, TEXT("마을이 완전 부숴졌군...검은 마법사는 엘리니아 쪽으로 도망친 것 같다.\n가는 길에 마을을 위협하는 몬스터들을 처치하자."));
+					wsprintf(m_cNPCChat, TEXT("어째서 이런일이...\n 마을을 파괴한 자는 엘리니아 쪽으로 도망갔어.\n 부디 우리 마을을 구해주게.."));
 					SetRect(&rc, 350, 530, 0, 0);
 					m_pFont->DrawText(NULL, m_cNPCChat,
 						-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, 1.f));
