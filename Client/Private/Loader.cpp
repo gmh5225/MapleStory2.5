@@ -2178,11 +2178,6 @@ HRESULT CLoader::Load_Npc_Texture()
 	Safe_AddRef(pGameInstance);
 
 
-	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Tomb"),
-		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Npc/Tomb/Fall%d.png"), 20))))
-		return E_FAIL;
-
-
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSkill"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GASPattern/Fire%d.png"), 6))))
 		return E_FAIL;

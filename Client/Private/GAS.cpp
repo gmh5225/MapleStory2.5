@@ -623,11 +623,8 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 
 		CSpawner::SPAWNERINFO m_Slime;
 
-		_float RandX = pGameInstance->Get_FloatRandom(-5.5f, -7.f);
-		_float RandZ = pGameInstance->Get_FloatRandom(5.5f, 7.f);
-		_float RandY = pGameInstance->Get_FloatRandom(2.f, 3.f);
-		MakeBlockCube(_float3(RandX, 4.5f, 2.f));
-		MakeBlockCube(_float3(RandZ, 4.5f, 2.f));
+		MakeBlockCube(_float3(-5.5f, 4.5f, 2.f));
+		MakeBlockCube(_float3(5.5f, 4.5f, 2.f));
 
 		if (!m_bSlime)
 		{

@@ -295,7 +295,7 @@ HRESULT CQuestUI::Render()
 
 		wsprintf(cQuest, TEXT("[엘리니아] 장로스탄의 보양식\n") TEXT(" 킹슬라임의 정수"));
 		wsprintf(cSlimeEssence, TEXT("%d"), iSlimeEssence);
-		wsprintf(cCountSlime, TEXT(" / 2\n"));
+		wsprintf(cCountSlime, TEXT(" / 1\n"));
 
 
 		wsprintf(cQuest2, TEXT(" 고스텀프의 장작"));
