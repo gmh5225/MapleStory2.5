@@ -464,6 +464,7 @@ void CBlueMushmom::Damaged(CGameObject * pOther)
 		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 1, 1.f);
 		CQuestManager::Get_Instance()->Hunting(TEXT("BlueMushmom"));
 		Die();
+		CUIManager::Get_Instance()->Set_PlayerExp(80);
 	}
 }
 

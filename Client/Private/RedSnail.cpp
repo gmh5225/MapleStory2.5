@@ -451,6 +451,7 @@ void CRedSnail::Damaged(CGameObject * pOther)
 		Die();
 		MakeItem();
 		CGameInstance::Get_Instance()->PlaySound(L"SnailDie.wav", 15, 1.f);
+		CUIManager::Get_Instance()->Set_PlayerExp(4);
 	}
 }
 

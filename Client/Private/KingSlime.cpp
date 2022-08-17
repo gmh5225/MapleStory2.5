@@ -324,6 +324,7 @@ void CKingSlime::Damaged(CGameObject * pOther)
 		CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 13, 1.f);
 		MakeItem();
 		Die();
+		CUIManager::Get_Instance()->Set_PlayerExp(40);
 	}
 }
 

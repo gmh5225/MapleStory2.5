@@ -449,7 +449,7 @@ void CSlime::Damaged(CGameObject * pOther)
 		CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 13, 1.f);
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		Die();
-
+		CUIManager::Get_Instance()->Set_PlayerExp(7);
 	}
 }
 

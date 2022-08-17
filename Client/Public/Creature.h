@@ -2,7 +2,7 @@
 
 #include "Client_Defines.h"
 #include "GameObject.h"
-
+#include "UIManager.h"
 BEGIN(Engine)
 class CAnimator;
 class CTexture;

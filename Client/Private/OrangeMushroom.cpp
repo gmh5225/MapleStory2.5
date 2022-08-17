@@ -446,6 +446,7 @@ void COrangeMushroom::Damaged(CGameObject * pOther)
 		Die();
 		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 16, 1.f);
 		CQuestManager::Get_Instance()->Hunting(TEXT("OrangeMushroom"));
+		CUIManager::Get_Instance()->Set_PlayerExp(5);
 	}
 }
 

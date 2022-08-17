@@ -495,6 +495,7 @@ void CTransformStump::Damaged(CGameObject * pOther)
 		//CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		CToolManager::Get_Instance()->DecreaseMonCount();
 		Die();
+		CUIManager::Get_Instance()->Set_PlayerExp(22);
 	}
 
 	Safe_Release(pGameInstance);

@@ -455,6 +455,7 @@ void CGoStump::Damaged(CGameObject * pOther)
 		Die();
 		MakeItem();
 		CGameInstance::Get_Instance()->PlaySound(L"StumpDie.wav", 18, 1.f);
+		CUIManager::Get_Instance()->Set_PlayerExp(9);
 	}
 }
 

@@ -488,6 +488,7 @@ void CTransformSlime::Damaged(CGameObject * pOther)
 		//CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
 		CToolManager::Get_Instance()->DecreaseMonCount();
 		Die();
+		CUIManager::Get_Instance()->Set_PlayerExp(23);
 	}
 
 	Safe_Release(pGameInstance);

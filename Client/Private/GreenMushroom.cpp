@@ -457,6 +457,7 @@ void CGreenMushroom::Damaged(CGameObject * pOther)
 		Die();
 		MakeItem();
 		CGameInstance::Get_Instance()->PlaySound(L"GreenMushroomDie.wav", 17, 1.f);
+		CUIManager::Get_Instance()->Set_PlayerExp(8);
 	}
 }
 

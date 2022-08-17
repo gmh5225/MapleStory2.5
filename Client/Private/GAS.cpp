@@ -833,6 +833,7 @@ void CGAS::Damaged(CGameObject * pOther)
 		CCutSceneManager::Get_Instance()->Set_JangRander(true);
 
 		Die();
+		CUIManager::Get_Instance()->Set_PlayerExp(180);
 	}
 
 	Safe_Release(pGameInstance);
