@@ -58,7 +58,9 @@ HRESULT CLevel_BlackMageEnter::Initialize()
 	//if (FAILED(Ready_Layer_Spawner(TEXT("Layer_Spawner"))))
 	//	return E_FAIL;
 	
-	
+	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->PlayBGM(L"LostSpace.mp3", 1.f);
+
 	CUIManager::Get_Instance()->End_Loading();
 	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DARKMAGEENTER);
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
