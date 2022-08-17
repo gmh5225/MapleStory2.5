@@ -93,6 +93,11 @@ void CSkillGradeBtn1::Change_Texture()
 {
 
 	CSkillManager* pSkillInstance = CSkillManager::Get_Instance();
+	if (pSkillInstance->Get_PlayerGrade() < 1)
+	{
+		m_iTexturenum = 0;
+		return;
+	}
 
 	switch (m_eCollision)
 	{

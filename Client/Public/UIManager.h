@@ -86,8 +86,9 @@ public:
 	void Full_PlayerHp() { m_iPlayerHp = 0; }
 	_uint Get_PlayerExp() { return m_iPlayerExp; }
 	void Set_PlayerExp(_uint iExp) { m_iPlayerExp += iExp; }
+	void LevelUp_Exp(_uint iExp) { m_iPlayerExp = iExp; }
 	_uint Get_PlayerLevel() { return m_iPlayerLevel; }
-	void Level_Up(_uint iLevel) { m_iPlayerLevel += iLevel; m_iPlayerExp = 0; }
+	void Level_Up(_uint iLevel) { m_iPlayerLevel += iLevel; }
 
 public:
 	virtual void Free() override;

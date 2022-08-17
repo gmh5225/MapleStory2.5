@@ -17,7 +17,7 @@ HRESULT CSkillManager::Set_pSkillFrame(CSkillFrame* pSkillFrame)
 		return E_FAIL;
 
 	m_pSkillFrame = pSkillFrame;
-
+	m_iGrade = 0;
 	Safe_AddRef(m_pSkillFrame);
 
 	return S_OK;

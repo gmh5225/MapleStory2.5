@@ -28,12 +28,14 @@ public:
 
 	const SkillGrade Get_SkillGrade() { return m_eSkillGrade; }
 	void Set_SkillGrade(SkillGrade eGrade) { m_eSkillGrade = eGrade; }
-
+	_uint Get_PlayerGrade() { return m_iGrade; }
+	void Set_PlayerGrade(_uint iGrade) { m_iGrade = iGrade; }
 	CSkillInfo* Get_SkillInfo(const _tchar* pSkillInfoTag, SkillGrade eGrade);
 	CSkillInfo* Find_SkillInfo(const _tchar* pSkillInfoTag, SkillGrade eGrade);
 	
 private:
 	_uint m_iSkillPoint;
+	_uint m_iGrade;
 	CSkillFrame* m_pSkillFrame;
 	SkillGrade m_eSkillGrade;
 	map<const _tchar*, CSkillInfo*> m_SkillInfo[GRADE_FIFTH];

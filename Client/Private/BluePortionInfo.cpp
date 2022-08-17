@@ -9,7 +9,7 @@ CBluePortionInfo::CBluePortionInfo()
 
 void CBluePortionInfo::Initialize()
 {
-	m_iNowNum = 0;
+	m_iNowNum = 98;
 	m_iMaxNum = 999;
 	m_iTextNum = 1;
 	m_pItemName = L"BluePortionInfo";

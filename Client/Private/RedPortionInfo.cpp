@@ -9,7 +9,7 @@ CRedPortionInfo::CRedPortionInfo()
 
 void CRedPortionInfo::Initialize()
 {
-	m_iNowNum = 0;
+	m_iNowNum = 98;
 	m_iMaxNum = 999;
 	m_iTextNum = 0;
 	m_pItemName = L"RedPortionInfo";

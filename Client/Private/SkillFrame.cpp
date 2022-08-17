@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "..\Public\SkillFrame.h"
 #include "GameInstance.h"
+#include "UIManager.h"
 
 
 CSkillFrame::CSkillFrame(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -64,8 +65,32 @@ void CSkillFrame::Tick(_float fTimeDelta)
 		m_bRender = !m_bRender;
 	}
 	if (pInstance->Key_Down(DIK_P))
-	m_pSkillManager->Set_SkillPoint(1);
+	{
+		m_pSkillManager->Set_SkillPoint(1);
+		
+	}
 
+	switch (CUIManager::Get_Instance()->Get_PlayerLevel() / 10)
+	{
+	case 0:
+		m_pSkillManager->Set_PlayerGrade(0);
+		break;
+	case 1:
+		m_pSkillManager->Set_PlayerGrade(1);
+		break;
+	case 2:
+		m_pSkillManager->Set_PlayerGrade(2);
+		break;
+	case 3:
+		m_pSkillManager->Set_PlayerGrade(3);
+		break;
+	case 4:
+		m_pSkillManager->Set_PlayerGrade(4);
+		break;
+	default:
+		break;
+	}
+		
 	/*if (pInstance->Mouse_Pressing(DIMK_LBUTTON))
 	{
 		POINT		ptMouse;
