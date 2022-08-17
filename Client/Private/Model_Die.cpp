@@ -61,7 +61,7 @@ void CModel_Die::LateTick(_float fTimeDelta)
 	m_pTransformCom->Go_Gravity(fTimeDelta);
 	__super::BoxColCom_Tick(m_pTransformCom);
 
-	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_MODEL, this);
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLISION_ITEM, this);
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 }
 

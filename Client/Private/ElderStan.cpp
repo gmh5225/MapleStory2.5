@@ -164,7 +164,7 @@ void CElderStan::SetAni()
 		if (CQuestManager::Get_Instance()->Get_QuestNum() == 6)
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ElderStan_Idle"), 0.3f, CAnimator::STATE_ONCE);
 		else
-			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ElderStan_Idle"), 0.3f, CAnimator::STATE_LOOF);
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ElderStan_Idle"), 0.3f, CAnimator::STATE_ONCE);
 		break;
 	case CElderStan::STATE_MOVE:
 	{

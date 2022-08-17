@@ -114,8 +114,6 @@ HRESULT CBulb::Render()
 	Set_Billboard();
 
 
-	__super::BoxColCom_Render(m_pTransformCom);
-
 	if (!(CCutSceneManager::Get_Instance()->Get_jangRander()))
 		return S_OK;
 
