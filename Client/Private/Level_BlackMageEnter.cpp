@@ -59,6 +59,9 @@ HRESULT CLevel_BlackMageEnter::Initialize()
 	//	return E_FAIL;
 	
 	
+	CGameInstance::Get_Instance()->StopAll();
+	CGameInstance::Get_Instance()->PlayBGM(L"BlackWizardEnter.mp3", 0.7f);
+
 	CUIManager::Get_Instance()->End_Loading();
 	CUIManager::Get_Instance()->PlayTitleCurMap(LEVEL_DARKMAGEENTER);
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();

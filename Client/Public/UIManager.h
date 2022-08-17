@@ -96,8 +96,8 @@ public:
 
 private:
 	_int m_iBlueMushmomHp;
-	_uint m_iBlackWizardMaxHp;
-	_uint m_iBlackWizardHp;
+	_int m_iBlackWizardMaxHp;
+	_int m_iBlackWizardHp;
 	_int m_iGASHp;
 	_uint m_iPlayerHp;
 	_uint m_iPlayerExp;

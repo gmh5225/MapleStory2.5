@@ -240,7 +240,7 @@ void CBlackWizard::SetAni()
 void CBlackWizard::Damaged(CGameObject * pOther)
 {
 	if (pOther->Get_Tag() == "Player_Skill")
-	CUIManager::Get_Instance()->Fix_BlackWizardHp(m_iHp -= pOther->Get_Damage());
+	CUIManager::Get_Instance()->Fix_BlackWizardHp(pOther->Get_Damage()*-1);
 }
 
 void CBlackWizard::Skill3()
