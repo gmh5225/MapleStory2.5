@@ -360,6 +360,8 @@
     <ClInclude Include="..\public\TaxiButton.h" />
     <ClInclude Include="..\public\TaxiChatBox.h" />
     <ClInclude Include="..\public\Title.h" />
+    <ClInclude Include="..\Public\Tomb.h" />
+    <ClInclude Include="..\Public\TombUI.h" />
     <ClInclude Include="..\public\ToolManager.h" />
     <ClInclude Include="..\Public\TransformPig.h" />
     <ClInclude Include="..\Public\TransformSlime.h" />
@@ -575,6 +577,8 @@
     <ClCompile Include="..\private\TaxiButton.cpp" />
     <ClCompile Include="..\private\TaxiChatBox.cpp" />
     <ClCompile Include="..\private\Title.cpp" />
+    <ClCompile Include="..\Private\Tomb.cpp" />
+    <ClCompile Include="..\Private\TombUI.cpp" />
     <ClCompile Include="..\private\ToolManager.cpp" />
     <ClCompile Include="..\Private\TransformPig.cpp" />
     <ClCompile Include="..\Private\TransformSlime.cpp" />

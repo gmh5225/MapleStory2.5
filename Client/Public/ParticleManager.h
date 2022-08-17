@@ -25,6 +25,7 @@ public:
 
 	void Shot(_float3 _vPos, _float3 _vDirVec);
 	void BackShot(_float3 _vPos, _float3 _vDirVec);
+	void MakeDie(_float3 vPosision);
 
 	void UpAir(_float3 _vPos);
 

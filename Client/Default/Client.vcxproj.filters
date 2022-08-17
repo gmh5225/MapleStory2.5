@@ -738,6 +738,12 @@
     </Filter>
     <Filter Include="02.GameObject\Cube\BlockCube">
       <UniqueIdentifier>{d3fa3759-1a12-4779-82f6-3a6bac423e8e}</UniqueIdentifier>
+      </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\10.Tomb">
+      <UniqueIdentifier>{b09bac15-6659-4449-a688-27b61b2bd0cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02.GameObject\Creature\Npc\10.Tomb\TombUI">
+      <UniqueIdentifier>{18e26ef1-26cd-486e-91a6-a5fa21cf3c6d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -1382,6 +1388,12 @@
     </ClInclude>
     <ClInclude Include="..\public\BlockCube.h">
       <Filter>02.GameObject\Cube\BlockCube</Filter>
+      </ClInclude>
+    <ClInclude Include="..\Public\Tomb.h">
+      <Filter>02.GameObject\Creature\Npc\10.Tomb</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Public\TombUI.h">
+      <Filter>02.GameObject\Creature\Npc\10.Tomb\TombUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -2017,6 +2029,12 @@
     </ClCompile>
     <ClCompile Include="..\private\BlockCube.cpp">
       <Filter>02.GameObject\Cube\BlockCube</Filter>
+      </ClCompile>
+    <ClCompile Include="..\Private\Tomb.cpp">
+      <Filter>02.GameObject\Creature\Npc\10.Tomb</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\TombUI.cpp">
+      <Filter>02.GameObject\Creature\Npc\10.Tomb\TombUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

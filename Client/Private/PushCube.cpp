@@ -28,8 +28,8 @@ HRESULT CPushCube::Initialize(void * pArg)
 
 	m_sTag = "Tag_PushCube";
 
-
-	// m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-1.f, 1.f, -3.f));
+	CMap_Manager::CUBEDATA* desc = (CMap_Manager::CUBEDATA*)pArg;
+	 m_pTransformCom->Set_State(CTransform::STATE_POSITION, desc->vPos);
 	m_pTransformCom->Set_Scaled(0.15f);
 	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 

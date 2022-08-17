@@ -292,6 +292,12 @@ void CKingSlime::SetAni()
 	}
 }
 
+void CKingSlime::MakeItem()
+{
+	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+	CInvenManager::Get_Instance()->MakeItem(CInvenManager::TYPE_STUFF, 2, L"SlimeInfo", vPos, LEVEL_ELENYA);
+}
+
 void CKingSlime::Damaged(CGameObject * pOther)
 {
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
@@ -316,6 +322,7 @@ void CKingSlime::Damaged(CGameObject * pOther)
 	if (m_iHp <= 0)
 	{
 		CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 13, 1.f);
+		MakeItem();
 		Die();
 	}
 }

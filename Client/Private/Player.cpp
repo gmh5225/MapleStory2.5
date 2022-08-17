@@ -20,6 +20,8 @@
 #include "QuestManager.h"
 #include "Shader.h"
 #include "ToolManager.h"
+#include "ToolManager.h"
+#include "ParticleManager.h"
 
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -158,12 +160,6 @@ void CPlayer::Tick(_float fTimeDelta)
 	{
 
 
-	/*	CVIBuffer_Voxel::VOXELDESC pVoxDesc;
-		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		vPos.y += 4.f;
-		pVoxDesc.vPos = vPos;
-		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Model_Die"), LEVEL_GAMEPLAY, TEXT("Layer_Model"), &pVoxDesc)))
-			return;*/
 	}
 	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))
 	{
@@ -197,6 +193,9 @@ void CPlayer::Tick(_float fTimeDelta)
 		break;
 	case Client::CPlayer::STATE_KNOCKBACK:
 		TickKnockBack(fTimeDelta);
+		break;
+	case Client::CPlayer::STATE_DIE:
+		Die(fTimeDelta);
 		break;
 	}
 
@@ -271,7 +270,8 @@ HRESULT CPlayer::Render()
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
 
-	m_pVIBufferCom->Render();
+	if(m_eCurState != STATE_DIE)
+		m_pVIBufferCom->Render();
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;*/
@@ -605,6 +605,8 @@ void CPlayer::SetAni()
 			break;
 		}
 	}
+
+
 		break;
 	}
 }
@@ -1061,6 +1063,32 @@ void CPlayer::DoubleJump(_float fTimeDelta)
 
 }
 
+void CPlayer::Die(_float fTimeDelta)
+{
+
+	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
+	Safe_AddRef(pGameInstance);
+
+	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
+
+	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
+
+	CCreature::CRETUREDESC vTomb;
+
+	vTomb.vPos = vPlayerPos + _float3(0.f,4.f,3.7f);
+
+	if (!m_bDie)
+	{
+		CParticleManager::Get_Instance()->MakeDie(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TombUI"), LEVEL_STATIC, TEXT("Layer_UI"));
+		m_bDie = true;
+	}
+
+
+	Safe_Release(pGameInstance);
+}
+
+
 void CPlayer::Particle(_float fTimeDelta)
 {
 
@@ -1220,6 +1248,11 @@ void CPlayer::Shading(_float fTImeDelta)
 		}
 	}
 }
+void CPlayer::Player_Cut()
+{
+	SetState(STATE_DIE, DIR_END);
+	m_bDie = false;
+}
 
 HRESULT CPlayer::Set_RenderState()
 {
@@ -1322,7 +1355,20 @@ void CPlayer::Collision(CGameObject * pOther)
 	}
 	if (pOther->Get_Tag() == "Tag_Monster" && !m_bAttaked)
 	{
-		Damaged(pOther);
+		if (m_eCurState != STATE_DIE)
+		{
+			Damaged(pOther);
+			//Player_Cut();
+		}
+	}
+
+	if (pOther->Get_Tag() == "Tag_MonsterSkill" && !m_bAttaked)
+	{
+		if (m_eCurState != STATE_DIE)
+		{
+			Damaged(pOther);
+			//Player_Cut();
+		}
 	}
 }
 

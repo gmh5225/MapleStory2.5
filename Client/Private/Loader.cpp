@@ -167,6 +167,8 @@
 #include "EHelenaChat.h"
 #include "Model_MiniBlock.h"
 #include "BlockCube.h"
+#include "Tomb.h"
+#include "TombUI.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -572,6 +574,8 @@ HRESULT CLoader::Load_BossMonster_Object()
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizard"),
 		CBlackWizard::Create(m_pGraphic_Device))))
 		return E_FAIL;
@@ -767,6 +771,10 @@ HRESULT CLoader::Load_Npc_Object()
 		CJalJang::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Tomb"),
+		CTomb::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 
 	Safe_Release(pGameInstance);
 
@@ -888,6 +896,10 @@ HRESULT CLoader::Load_UI_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_PurpleSkill"),
 		CPurpleSkill::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_TombUI"),
+		CTombUI::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 
@@ -1694,8 +1706,8 @@ HRESULT CLoader::Load_Monster_Texture()
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueMushmom/BlueMushmom_DieR%d.png"), 6))))
 		return E_FAIL;
 
-
-//	// GAS
+//
+////	// GAS
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_GAS_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GAS/Idle%d.png"), 23))))
 		return E_FAIL;
@@ -1840,8 +1852,8 @@ HRESULT CLoader::Load_Monster_Texture()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSnail_Die"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSnail/RedSnail_Die%d.png"), 3))))
 		return E_FAIL;
-
-	//RedSnail
+//
+//	//BlueSnail
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlueSnail_Move"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/BlueSnail/BlueSnail_Move%d.png"), 4))))
 		return E_FAIL;
@@ -2066,7 +2078,7 @@ HRESULT CLoader::Load_Monster_Texture()
 		return E_FAIL;
 
 
-// RedSlime
+//// RedSlime
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSlime_Move"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/RedSlime/Move%d.png"), 6))))
 		return E_FAIL;
@@ -2162,7 +2174,7 @@ HRESULT CLoader::Load_Monster_Texture()
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_KingSlime_Idle"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/KingSlime/First%d.png"), 1))))
 		return E_FAIL;
-
+//
 
 	Safe_Release(pGameInstance);
 
@@ -2174,6 +2186,7 @@ HRESULT CLoader::Load_Npc_Texture()
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 
 	Safe_AddRef(pGameInstance);
+
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSkill"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/Monster/GASPattern/Fire%d.png"), 6))))
@@ -2337,6 +2350,10 @@ HRESULT CLoader::Load_UI_Texture()
 	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
 
 	Safe_AddRef(pGameInstance);
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_TombUI"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Tomb/UI%d.png"), 3))))
+		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_MouseCursor"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/UI/Mouse/Cursor/Cursor%d.png"), 3))))

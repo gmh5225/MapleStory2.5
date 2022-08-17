@@ -42,12 +42,17 @@ private:
 	void Dash(_float fTimeDelta);
 	void Jump(_float fTimeDelta);
 	void DoubleJump(_float fTimeDelta);
+	void Die(_float fTimeDelta);
 
 	void Particle(_float fTimeDelta);
 
 	void GetKeyCheate(_float fTimeDelta);
 	void CheckAttakedTime(_float fTimeDelta);
 	void Shading(_float fTImeDelta);
+
+public:
+	void Player_Cut();
+	void Player_Revive() { SetState(STATE_IDLE, DIR_D); }
 
 protected:
 	virtual HRESULT Set_RenderState() override;
@@ -76,6 +81,7 @@ private:
 	_bool m_bChange = false;
 	_bool m_bHit = false;
 
+	_bool m_bDie = false;
 public:
 	static CPlayer* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

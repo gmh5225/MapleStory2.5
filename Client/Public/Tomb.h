@@ -1,18 +1,16 @@
 #pragma once
 
 #include "Creature.h"
-#include "Item.h"
+#include "Bulb.h"
 
 BEGIN(Client)
 
-class CSlime final : public CCreature
+class CTomb final : public CCreature
 {
 private:
-	enum RandomMove { MOVE_R, MOVE_L, MOVE_U, MOVE_D, MOVE_END };
-private:
-	CSlime(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CSlime(const CSlime& rhs);
-	virtual ~CSlime() = default;
+	CTomb(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CTomb(const CTomb& rhs);
+	virtual ~CTomb() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -28,9 +26,6 @@ private:
 	void Tick_Move(_float fTimeDelta);
 	void Tick_Hit(_float fTimeDelta);
 	void Tick_Chase(_float fTimeDelta);
-	void Tick_Die(_float fTimeDelta);
-
-
 
 public:
 	void SetState(STATE eState, DIR eDir);
@@ -41,7 +36,6 @@ public:
 
 private:
 	HRESULT SetUp_Components();
-	void Die();
 
 private:
 	STATE m_eCurState;
@@ -49,24 +43,9 @@ private:
 
 	CGameObject* m_pTarget;
 
-	_uint m_iMove;
-	_float3 m_fEndPos;
-	_float3 m_fStartPos;
-	_bool m_bDir;
-	_float m_fDistance;
-
-	_uint m_iHp;
-	_int m_iIndexNum;
-
-	_bool temp = false;
-
-
-	_float m_fCountDead;
-
-	CItem::ITEMINFO  SlimeItem;
 
 public:
-	static CSlime* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CTomb* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

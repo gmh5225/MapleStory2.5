@@ -29,8 +29,6 @@ HRESULT CModel_Die::Initialize(void * pArg)
 
 	CVIBuffer_Voxel::VOXELDESC* pVoxDesc = (CVIBuffer_Voxel::VOXELDESC*)pArg;
 
-
-
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
@@ -52,6 +50,10 @@ void CModel_Die::Tick(_float fTimeDelta)
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3{-2.f, 2.f, -2.f});
 		m_pTransformCom->Set_Vel(0.f);
 	}
+
+	m_iCount += fTimeDelta;
+	if (m_iCount > 5.f)
+		Set_Dead();
 }
 
 void CModel_Die::LateTick(_float fTimeDelta)

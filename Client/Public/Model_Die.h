@@ -38,7 +38,8 @@ private:
 
 	_bool				m_bLend = false;
 
-private:
+public:
+	void Die() { Set_Dead(); }
 
 
 private:
@@ -46,6 +47,8 @@ private:
 	HRESULT Reset_RenderState();
 private:
 	HRESULT SetUp_Components();
+
+	_float m_iCount = 0;
 
 public:
 	static CModel_Die* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

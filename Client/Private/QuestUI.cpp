@@ -47,9 +47,7 @@ HRESULT CQuestUI::Initialize(void * pArg)
 
 void CQuestUI::Tick(_float fTimeDelta)
 {
-	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
-		CQuestManager::Get_Instance()->QuestClear();
-	else if (CQuestManager::Get_Instance()->Set_StoneGolem() >= 1)
+	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 5)
 		CQuestManager::Get_Instance()->QuestClear();
 
 	RECT		rcUI;
@@ -108,7 +106,7 @@ HRESULT CQuestUI::Render()
 		_uint iOrangeMushroom = Questinstance->Set_OrangeMushroom();
 		wsprintf(cHunt, TEXT("[헤네시스] 농장을 망치는 범인\n") TEXT(" 주황버섯"));
 		wsprintf(cOrangeMushroom, TEXT("%d"), iOrangeMushroom);
-		wsprintf(cCountHunt, TEXT(" / 10"));
+		wsprintf(cCountHunt, TEXT(" / 5"));
 
 		if (Questinstance->Set_QuestState() == 1 || Questinstance->Set_QuestState() == 2)
 		{
@@ -116,7 +114,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cHunt,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iOrangeMushroom == 10)
+			if (iOrangeMushroom == 5)
 			{
 				SetRect(&rc, 1165, 285, 1205, 165);
 				m_pFont->DrawText(NULL, cOrangeMushroom,
@@ -295,9 +293,9 @@ HRESULT CQuestUI::Render()
 		_uint iStumpFirewoodl = Questinstance->Set_StumpFirewood();
 		_uint iGreenMushroom = Questinstance->Set_GreenMushroom();
 
-		wsprintf(cQuest, TEXT("[엘리니아] 장로스탄의 보양식\n") TEXT(" 슬라임 정수"));
+		wsprintf(cQuest, TEXT("[엘리니아] 장로스탄의 보양식\n") TEXT(" 킹슬라임의 정수"));
 		wsprintf(cSlimeEssence, TEXT("%d"), iSlimeEssence);
-		wsprintf(cCountSlime, TEXT(" / 2\n"));
+		wsprintf(cCountSlime, TEXT(" / 1\n"));
 
 
 		wsprintf(cQuest2, TEXT(" 고스텀프의 장작"));
@@ -315,7 +313,7 @@ HRESULT CQuestUI::Render()
 			m_pFont->DrawText(NULL, cQuest,
 				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-			if (iSlimeEssence >= 2)
+			if (iSlimeEssence >= 1)
 			{
 				SetRect(&rc, 1200, 285, 1205, 165);
 				m_pFont->DrawText(NULL, cSlimeEssence,
@@ -406,7 +404,7 @@ HRESULT CQuestUI::Render()
 				m_pFont->DrawText(NULL, cQuest,
 					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-				if (iGAS == 11)
+				if (iGAS == 1)
 				{
 					SetRect(&rc, 1165, 285, 1205, 165);
 					m_pFont->DrawText(NULL, cGAS,
@@ -433,7 +431,7 @@ HRESULT CQuestUI::Render()
 			TCHAR cGAS[50];
 			TCHAR cCountSlime[15];
 
-			_uint iGAS = Questinstance->Set_GAS();
+			_uint iGAS = Questinstance->Set_BlackMage();
 
 			wsprintf(cQuest, TEXT("[최종] 검은마법사 처치\n") TEXT(" 검은 마법사"));
 			wsprintf(cGAS, TEXT("	%d"), iGAS);
@@ -447,7 +445,7 @@ HRESULT CQuestUI::Render()
 				m_pFont->DrawText(NULL, cQuest,
 					-1, &rc, DT_NOCLIP, D3DXCOLOR(1.0f, 1.0f, 1.0f, 1.0f));
 
-				if (iGAS == 11)
+				if (iGAS == 1)
 				{
 					SetRect(&rc, 1165, 285, 1205, 165);
 					m_pFont->DrawText(NULL, cGAS,
