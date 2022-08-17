@@ -425,6 +425,7 @@ void CGAS::Tick_CutScene(_float fTimeDelta)
 
 	if (2.f < m_fCutSceneTimeAcc && !m_bCutSceneJump)
 	{
+		CGameInstance::Get_Instance()->PlaySound(L"donno.wav", 10, 0.7f);
 		m_pTransformCom->Set_Vel(30.f);
 		m_bCutSceneJump = true;
 		CCutSceneManager::Get_Instance()->Set_JangRander(false);

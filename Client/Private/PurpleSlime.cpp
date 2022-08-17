@@ -125,6 +125,7 @@ void CPurpleSlime::Tick(_float fTimeDelta)
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x <= -10.4f)
 		{
 			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PurpleSkill"), LEVEL_GAS, TEXT("Layer_UI")));
+			CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 12, 0.8f);
 			Set_Dead();
 		}
 		break;

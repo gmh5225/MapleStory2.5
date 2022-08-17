@@ -4,6 +4,7 @@
 #include "GameInstance.h"
 #include "QuestManager.h"
 #include "CutSceneManager.h"
+#include "ToolManager.h"
 
 CBulb::CBulb(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device),
@@ -33,10 +34,10 @@ HRESULT CBulb::Initialize(void * pArg)
 
 	m_sTag = "Tag_UI";
 
-	m_fColRad = 2.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
+	m_fColRad = 3.f;	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(9.1f, 7.0f, -0.6f));
 	m_pTransformCom->Set_Scaled(1.2f);
 
-	if (!g_bStaticClone)
+	if (!g_bStaticClone && (CToolManager::Get_Instance()->Get_CurLevel() != LEVEL_DHENESYS))
 	{
 		// ����Ʈ false �ʱ�ȭ �� ����Ʈ �������� �ʱ�ȭ
 		CQuestManager::Get_Instance()->Check_End_Quest();
@@ -54,6 +55,12 @@ HRESULT CBulb::Initialize(void * pArg)
 
 HRESULT CBulb::SetUp_Components()
 {
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 5.f, 5.f, 5.f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
+		return E_FAIL;
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bulb_Start"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bulb_End"), nullptr);
@@ -83,22 +90,32 @@ HRESULT CBulb::SetUp_Components()
 
 void CBulb::Tick(_float fTimeDelta)
 {
-	if(CQuestManager::Get_Instance()->Get_QuestNum() == 6)
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(10.1f, 7.0f, -5.6f));
 }
 
 void CBulb::LateTick(_float fTimeDelta)
 {
+	if ((CToolManager::Get_Instance()->Get_CurLevel() == LEVEL_DHENESYS))
+	{
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(14.1f, 8.0f, -0.6f));
+	}
+
+	__super::BoxColCom_Tick(m_pTransformCom);
+
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_IDLE, m_eDir);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
-	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_UI, this);
+	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLISION_ITEM, this);
 
-	Set_Billboard();
+
 }
 HRESULT CBulb::Render()
 {
+	Set_Billboard();
+
+
+	__super::BoxColCom_Render(m_pTransformCom);
+
 	if (!(CCutSceneManager::Get_Instance()->Get_jangRander()))
 		return S_OK;
 
@@ -113,10 +130,13 @@ HRESULT CBulb::Render()
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
 
-	m_pVIBufferCom->Render();
+
+	if (CQuestManager::Get_Instance()->Get_QuestNum() != 5 || CQuestManager::Get_Instance()->Set_QuestState() != 0)
+		m_pVIBufferCom->Render();
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
+
 
 
 	SetState(STATE_IDLE, m_eDir);
@@ -176,7 +196,7 @@ void CBulb::SetAni()
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_End"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	case CQuestManager::QUEST_END:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_NoQuest"), 0.3f, CAnimator::STATE_ONCE);
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_NoQuest"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	case 7:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb"), 0.3f, CAnimator::STATE_LOOF);
@@ -186,8 +206,6 @@ void CBulb::SetAni()
 void CBulb::Damaged(CGameObject * pOther)
 {
 }
-
-
 
 
 
@@ -231,7 +249,7 @@ void CBulb::Collision(CGameObject * pOther)
 				CQuestManager::Get_Instance()->Set_First();
 
 		}
-}
+} 
 
 
 

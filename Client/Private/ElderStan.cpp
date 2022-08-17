@@ -5,6 +5,7 @@
 
 #include "CutSceneManager.h"
 #include "QuestManager.h"
+#include "ToolManager.h"
 
 
 CElderStan::CElderStan(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -53,7 +54,7 @@ HRESULT CElderStan::SetUp_Components()
 		m_pAnimatorCom->Create_Texture(LEVEL_GAMEPLAY, TEXT("Prototype_Component_Texture_ElderStan_Idle"), nullptr);
 
 	}
-
+	
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -73,7 +74,7 @@ HRESULT CElderStan::SetUp_Components()
 
 void CElderStan::Tick(_float fTimeDelta)
 {
-	if(CQuestManager::Get_Instance()->Get_QuestNum() == 6)
+	if(CToolManager::Get_Instance()->Get_CurLevel() == LEVEL_DHENESYS)
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(14.1, 7.0f, -1.f));
 
 	switch (m_eCurState)

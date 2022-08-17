@@ -68,13 +68,23 @@ private:
 	class CEHelenaChat* m_pEHelenaChat = nullptr;
 
 public:
-	void Get_BlueMushmomHp(_uint iHp) { m_iBlueMushmomHp = iHp; };
-	_uint Set_BlueMushmomHp() { return m_iBlueMushmomHp; };
-	void Set_BlackWizardHp(_uint iHp) { m_iBlackWizardMaxHp = iHp, m_iBlackWizardHp = iHp; };
-	_uint Get_BlackWizardHp() { return m_iBlackWizardHp; };
+	void Get_BlueMushmomHp(_int iHp) { m_iBlueMushmomHp = iHp; 
+	if (iHp < 0)
+		m_iBlueMushmomHp = 0;
+	};
+	_int Set_BlueMushmomHp() { return m_iBlueMushmomHp; };
+	void Set_BlackWizardHp(_int iHp) { m_iBlackWizardMaxHp = iHp, m_iBlackWizardHp = iHp; };
+	_int Get_BlackWizardHp() {
+		if (m_iBlackWizardHp < 0)
+			return 0;
+		else
+			return m_iBlackWizardHp;
+	};
 	void Fix_BlackWizardHp(_int iHp);
-	void Get_GASHp(_uint iHp) { m_iGASHp = iHp; };
-	_uint Set_GASHp() { return m_iGASHp; };
+	void Get_GASHp(_int iHp) { m_iGASHp = iHp; 	if (iHp < 0)
+		m_iGASHp = 0;
+	};
+	_int Set_GASHp() { return m_iGASHp; };
 	HRESULT Add_BlackWizardPatternUI(CBlackWizardPatternUI* pInstance);
 	CBlackWizardPatternUI* Get_BlackWizardPatternUI() { return m_pBlackWizardPatternUI; }
 	bool Get_StartMove() { return m_bStartMove; }

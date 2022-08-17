@@ -37,7 +37,7 @@ HRESULT CPurpleSkill::Initialize(void * pArg)
 
 
 
-	CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 13, 0.7f);
+
 	m_fTime = 0;
 
 	return S_OK;
