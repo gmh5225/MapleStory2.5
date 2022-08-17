@@ -40,7 +40,7 @@ HRESULT CBulb::Initialize(void * pArg)
 	if (!g_bStaticClone && (CToolManager::Get_Instance()->Get_CurLevel() != LEVEL_DHENESYS))
 	{
 		// ����Ʈ false �ʱ�ȭ �� ����Ʈ �������� �ʱ�ȭ
-	//	CQuestManager::Get_Instance()->Check_End_Quest();
+		CQuestManager::Get_Instance()->Check_End_Quest();
 		CQuestManager::Get_Instance()->QuestPrepare();
 	}
 
