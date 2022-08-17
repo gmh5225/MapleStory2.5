@@ -19,6 +19,8 @@
 #include "CutSceneManager.h"
 #include "QuestManager.h"
 #include "Shader.h"
+#include "ToolManager.h"
+
 
 CPlayer::CPlayer(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -154,17 +156,6 @@ void CPlayer::Tick(_float fTimeDelta)
 {
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_Y))
 	{
-		 CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
-
-		//_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		//CParticleManager::Get_Instance()->MakeLeveUp(vPos);
-
-		//CMap_Manager::CUBEDATA desc;
-		//desc.iIndex = 1;
-		//desc.vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		//desc.vPos.y += 1.f;
-		//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_PushCube"), LEVEL_GAMEPLAY, TEXT("Layer_Cube"), &desc)))
-		//	return;
 
 
 	/*	CVIBuffer_Voxel::VOXELDESC pVoxDesc;
@@ -219,22 +210,35 @@ void CPlayer::Tick(_float fTimeDelta)
 void CPlayer::LateTick(_float fTimeDelta)
 {
 
-	// �ֱ� ��ġ���� �������ϴ� �ڵ�
-	m_fRespownPosAcc += 1.f * fTimeDelta;
-	if (2.f < m_fRespownPosAcc)
+	LEVEL eCurLevel = CToolManager::Get_Instance()->Get_CurLevel();
+	if (eCurLevel == LEVEL_DHENESYSHUNTING)
 	{
-		if((m_pTransformCom->Get_Vel() > -0.1f) && (m_eCurState == STATE_IDLE || m_eCurState == STATE_MOVE))
-			m_vRespownPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-		m_fRespownPosAcc = 0.f;
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -20.f)
+		{
+			m_pTransformCom->Set_Vel(0.f);
+			m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-16.f, 1.f, -16.f));
+		}
 	}
-	if(m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -20.f)
+	else
 	{
-		m_pTransformCom->Set_Vel(0.f);
-		m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_vRespownPos);
+		m_fRespownPosAcc += 1.f * fTimeDelta;
+		if (2.f < m_fRespownPosAcc)
+		{
+			if ((m_pTransformCom->Get_Vel() > -0.1f) && (m_eCurState == STATE_IDLE || m_eCurState == STATE_MOVE))
+				m_vRespownPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+			m_fRespownPosAcc = 0.f;
+		}
+		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).y < -20.f)
+		{
+			m_pTransformCom->Set_Vel(0.f);
+			m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_vRespownPos);
+		}
 	}
+
 		
 
-	// ���¿� ���� ������ �ൿ ����
+
+	
 	SetOnceEndAni();
 	
 	// *�߷� �ڵ�

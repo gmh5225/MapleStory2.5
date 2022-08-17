@@ -1,26 +1,26 @@
 #include "stdafx.h"
-#include "..\Public\DownCube.h"
+#include "..\Public\BlockCube.h"
 
 #include "GameInstance.h"
 #include "ToolManager.h"
 
-CDownCube::CDownCube(LPDIRECT3DDEVICE9 pGraphic_Device)
-	: CCube(pGraphic_Device)
+CBlockCube::CBlockCube(LPDIRECT3DDEVICE9 pGraphic_Device)
+	: CGameObject(pGraphic_Device)
 {
 }
 
-CDownCube::CDownCube(const CDownCube & rhs)
-	: CCube(rhs)
+CBlockCube::CBlockCube(const CBlockCube & rhs)
+	: CGameObject(rhs)
 {
 }
 
 
-HRESULT CDownCube::Initialize_Prototype()
+HRESULT CBlockCube::Initialize_Prototype()
 {
 	return S_OK;
 }
 
-HRESULT CDownCube::Initialize(void * pArg)
+HRESULT CBlockCube::Initialize(void * pArg)
 {
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
@@ -36,46 +36,19 @@ HRESULT CDownCube::Initialize(void * pArg)
 
 	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
+
 	return S_OK;
 }
 
-void CDownCube::Tick(_float fTimeDelta)
+void CBlockCube::Tick(_float fTimeDelta)
 {
-
-	if (m_bDown)
-	{
-		m_fTimeAcc += fTimeDelta;
-
-		if (1.f < m_fTimeAcc)
-		{
-			Down(fTimeDelta);
-		}
-		else
-		{
-			Shake(fTimeDelta);
-		}
-	}
-
-
-
-	_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
-	if (m_bDown && vPos.y < -8.f)
+	if (0 >= CToolManager::Get_Instance()->GetMonCount())
 	{
 		Set_Dead();
 	}
-
-	CGameObject* pPlayer =  CToolManager::Get_Instance()->GetPlayer();
-	CTransform* pPTran = (CTransform*) pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
-	_float3 vPPos = pPTran->Get_State(CTransform::STATE_POSITION);
-
-	if (vPPos.y < -10.f)
-	{
-		Set_Dead();
-	}
-
 }
 
-void CDownCube::LateTick(_float fTimeDelta)
+void CBlockCube::LateTick(_float fTimeDelta)
 {
 	__super::BoxColCom_Tick(m_pTransformCom);
 
@@ -96,10 +69,9 @@ void CDownCube::LateTick(_float fTimeDelta)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_DOWNBLOCK, this);
-
 }
 
-HRESULT CDownCube::Render()
+HRESULT CBlockCube::Render()
 {
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
@@ -127,44 +99,12 @@ HRESULT CDownCube::Render()
 	}
 
 	//if (temp)
-	__super::BoxColCom_Render(m_pTransformCom);
+	//	__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }
 
-void CDownCube::Collision(CGameObject * pOther)
-{
-	if ("Tag_Player" == pOther->Get_Tag())
-	{
-		m_bDown = true;
-	}
-}
-
-void CDownCube::Shake(_float fTimeDelta)
-{
-	m_fShakeTimeAcc += fTimeDelta;
-	if (0.05f < m_fShakeTimeAcc)
-	{
-		if (m_bShakeTurn)
-			m_bShakeTurn = false;
-		else
-			m_bShakeTurn = true;
-		m_fShakeTimeAcc = 0.f;
-	}
-
-	if (m_bShakeTurn)
-		m_pTransformCom->RotationTwo(_float3{ 0.f, 1.f, 0.f }, 45.f, _float3{ 0.f, 0.f, 1.f }, 5.f);
-	else
-		m_pTransformCom->RotationTwo(_float3{ 0.f, 1.f, 0.f }, 45.f, _float3{ 0.f, 0.f, 1.f }, -5.f);
-
-}
-
-void CDownCube::Down(_float fTimeDelta)
-{
-	m_pTransformCom->Go_Gravity(fTimeDelta);
-}
-
-HRESULT CDownCube::Set_RenderState()
+HRESULT CBlockCube::Set_RenderState()
 {
 	if (nullptr == m_pGraphic_Device)
 		return E_FAIL;
@@ -173,14 +113,14 @@ HRESULT CDownCube::Set_RenderState()
 	return S_OK;
 }
 
-HRESULT CDownCube::Reset_RenderState()
+HRESULT CBlockCube::Reset_RenderState()
 {
 
 
 	return S_OK;
 }
 
-HRESULT CDownCube::SetUp_Components()
+HRESULT CBlockCube::SetUp_Components()
 {
 	/* For.Com_Renderer */
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Renderer"), TEXT("Com_Renderer"), (CComponent**)&m_pRendererCom)))
@@ -200,7 +140,7 @@ HRESULT CDownCube::SetUp_Components()
 
 	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
 	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
-	BoxColDesc.vScale = _float3{ 0.4f, 1.0f, 0.4f };
+	BoxColDesc.vScale = _float3{ 1.0f, 1.0f, 1.0f };
 	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
 	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
 		return E_FAIL;
@@ -216,7 +156,7 @@ HRESULT CDownCube::SetUp_Components()
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
 
 	TransformDesc.fSpeedPerSec = 5.f;
-	TransformDesc.fRotationPerSec = D3DXToRadian(180.0f);
+	TransformDesc.fRotationPerSec = D3DXToRadian(90.0f);
 
 	if (FAILED(__super::Add_Component(LEVEL_STATIC, TEXT("Prototype_Component_Transform"), TEXT("Com_Transform"), (CComponent**)&m_pTransformCom, &TransformDesc)))
 		return E_FAIL;
@@ -224,9 +164,9 @@ HRESULT CDownCube::SetUp_Components()
 	return S_OK;
 }
 
-CDownCube * CDownCube::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
+CBlockCube * CBlockCube::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {
-	CDownCube*		pInstance = new CDownCube(pGraphic_Device);
+	CBlockCube*		pInstance = new CBlockCube(pGraphic_Device);
 
 	if (FAILED(pInstance->Initialize_Prototype()))
 	{
@@ -237,9 +177,9 @@ CDownCube * CDownCube::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 	return pInstance;
 }
 
-CGameObject * CDownCube::Clone(void* pArg)
+CGameObject * CBlockCube::Clone(void* pArg)
 {
-	CDownCube*		pInstance = new CDownCube(*this);
+	CBlockCube*		pInstance = new CBlockCube(*this);
 
 	if (FAILED(pInstance->Initialize(pArg)))
 	{
@@ -250,7 +190,7 @@ CGameObject * CDownCube::Clone(void* pArg)
 	return pInstance;
 }
 
-void CDownCube::Free()
+void CBlockCube::Free()
 {
 	__super::Free();
 

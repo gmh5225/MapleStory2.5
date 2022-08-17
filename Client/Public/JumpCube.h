@@ -41,6 +41,7 @@ private:
 
 	_bool temp = false;
 
+	_float m_fTimeAcc = 0.f;
 
 private:
 	HRESULT Set_RenderState();

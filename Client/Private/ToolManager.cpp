@@ -75,9 +75,85 @@ CGameObject* CToolManager::GetPlayer()
 	return pObj;
 }
 
-void CToolManager::Free()
+void CToolManager::MakeMiniBlock(_float3 vPos, CModel_MiniBlock::MINICOLOR eType)
+{
+	CModel_MiniBlock::MINIBLOCKDESC pVoxDesc;
+	vPos.y += 2.f;
+	pVoxDesc.vPos = vPos;
+	pVoxDesc.etype = eType;
+	if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Model_MiniBlock"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Model"), &pVoxDesc)))
+		return;
+}
+
+void CToolManager::MakeMiniDownCube()
 {
 
+	_float4x4 RotationMatrix;
+	D3DXMatrixIdentity(&RotationMatrix);
+	D3DXMatrixRotationAxis(&RotationMatrix, &_float3{ 0.f, 1.f, 0.f }, D3DXToRadian(45.f));
+
+	_float3 vPos;
+	vPos.y = 0.f;
+
+	for (_int z = 0; z < 5; z++)
+	{
+		for (_int x = 0; x < 5; x++)
+		{
+			vPos.x = (_float)x - 2.f;
+			vPos.z = (_float)z - 17.f;
+			vPos.y = 0.f;
+
+			D3DXVec3TransformNormal(&vPos, &vPos, &RotationMatrix);
+
+			CMap_Manager::CUBEDATA pCubeDesc;
+			pCubeDesc.vPos = vPos;
+			pCubeDesc.iIndex = 3;
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &pCubeDesc)))
+				return;
+
+		}
+	}
+
+
+	_float3 vTemp;
+
+	vTemp = _float3{ 2.f, 0.f, -2.f - 15.f };
+	vPos.y = 2.f;
+	D3DXVec3TransformNormal(&vTemp, &vTemp, &RotationMatrix);
+	MakeMiniBlock(vTemp, CModel_MiniBlock::MINI_RED);
+	vTemp = _float3{ 0.f, 0.f, 0.f - 15.f };
+	vPos.y = 2.f;
+	D3DXVec3TransformNormal(&vTemp, &vTemp, &RotationMatrix);
+	MakeMiniBlock(vTemp, CModel_MiniBlock::MINI_RED);
+
+	vTemp = _float3{ 1.f, 0.f, -1.f - 15.f };
+	vPos.y = 2.f;
+	D3DXVec3TransformNormal(&vTemp, &vTemp, &RotationMatrix);
+	MakeMiniBlock(vTemp, CModel_MiniBlock::MINI_ORRANGE);
+	vTemp = _float3{ -1.f, 0.f, -1.f - 15.f };
+	vPos.y = 2.f;
+	D3DXVec3TransformNormal(&vTemp, &vTemp, &RotationMatrix);
+	MakeMiniBlock(vTemp, CModel_MiniBlock::MINI_ORRANGE);
+
+	vTemp = _float3{ -1.f, 0.f, -2.f - 15.f };
+	vPos.y = 2.f;
+	D3DXVec3TransformNormal(&vTemp, &vTemp, &RotationMatrix);
+	MakeMiniBlock(vTemp, CModel_MiniBlock::MINI_YERROW);
+	vTemp = _float3{ 2.f, 0.f, -1.f - 15.f };
+	vPos.y = 2.f;
+	D3DXVec3TransformNormal(&vTemp, &vTemp, &RotationMatrix);
+	MakeMiniBlock(vTemp, CModel_MiniBlock::MINI_YERROW);
+
+
+	m_ePickedMiniBlock = CModel_MiniBlock::MINI_END;
+}
+
+
+
+
+void CToolManager::Free()
+{
+	
 }
 
 

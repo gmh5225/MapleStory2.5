@@ -5,6 +5,7 @@
 #include "Spawner.h"
 #include "SpawnerManager.h"
 #include "QuestManager.h"
+#include "ToolManager.h"
 
 CTransformSlime::CTransformSlime(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -33,22 +34,25 @@ HRESULT CTransformSlime::Initialize(void * pArg)
 
 	m_sTag = "Tag_Monster";
 
-	m_iHp = 3;
+	m_iHp = 20;
 
 	m_fCountDead = 0;
 
 	m_fCountAttack = 0;
 
-	CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
+	CCreature::CRETUREDESC* pDesc = (CCreature::CRETUREDESC*)pArg;
 
-	m_iIndexNum = pMonsterDesc->SpawnerNum;
 
-	m_fColRad = pMonsterDesc->MonsterColRad;
-	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pMonsterDesc->MonsterPos);
+	//CSpawner::SPAWNERINFO* pMonsterDesc = (CSpawner::SPAWNERINFO*)pArg;
+
+	//m_iIndexNum = pMonsterDesc->SpawnerNum;
+
+	//m_fColRad = pMonsterDesc->MonsterColRad;
+	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pDesc->vPos);
 	m_pTransformCom->Set_Scaled(5.f);
 	m_bDir = false;
 
-	m_fStartPos = pMonsterDesc->MonsterPos;
+	m_fStartPos = pDesc->vPos;
 
 	// 랜덤으로 어느방향으로 움직일지와 거리를 생성한다
 	m_iMove = CGameInstance::Get_Instance()->Get_Random(0, 4);
@@ -480,8 +484,9 @@ void CTransformSlime::Damaged(CGameObject * pOther)
 	--m_iHp;
 	if (m_iHp <= 0)
 	{
-		CQuestManager::Get_Instance()->Eat_Item(TEXT("TransformSlime"));
-		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
+		//CQuestManager::Get_Instance()->Eat_Item(TEXT("TransformSlime"));
+		//CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);
+		CToolManager::Get_Instance()->DecreaseMonCount();
 		Die();
 	}
 

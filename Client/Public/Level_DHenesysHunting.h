@@ -41,6 +41,11 @@ private:
 private:
 	CCollider*				m_pColliderCom = nullptr;
 
+	_float m_fTimeAcc = 0.f;
+	_bool m_bF = false;
+	_bool m_bAir = false;
+	_bool m_bEnter = false;
+
 public:
 	static CLevel_DHenesysHunting* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual void Free() override;

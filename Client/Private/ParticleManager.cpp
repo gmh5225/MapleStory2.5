@@ -147,6 +147,40 @@ void CParticleManager::BackShot(_float3 _vPos, _float3 _vDirVec)
 	}
 }
 
+void CParticleManager::UpAir(_float3 _vPos)
+{
+	_float3 vStartPos = _vPos;
+	_float3 _vDirVec{ 0.f, 1.f, 0.f };
+
+	_float fDegreeX = 0.f;
+	_float fDegreeZ = 0.f;
+	for (_int i = 0; i < 4; i++)
+	{
+		_float3 _vDirVec{ 0.f, 1.f, 0.f };
+		fDegreeX = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(0.f, 1.f);
+		fDegreeZ = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(0.f, 1.f);
+
+		_float4x4  Mat_X, Mat_Z;
+		D3DXMatrixIdentity(&Mat_X);
+		D3DXMatrixIdentity(&Mat_Z);
+
+
+		D3DXMatrixRotationX(&Mat_X, D3DXToRadian(fDegreeX));
+		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_X);
+		D3DXMatrixRotationZ(&Mat_Z, D3DXToRadian(fDegreeZ));
+		D3DXVec3TransformNormal(&_vDirVec, &_vDirVec, &Mat_Z);
+
+		_float fScale = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(0.3f, 0.6f);
+		_float vRanPos = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(-0.5f, 0.5f);
+		_float vRanY = (_float)CGameInstance::Get_Instance()->Get_FloatRandom(1.f, 3.f);
+
+		vStartPos.x += vRanPos;
+		vStartPos.z += vRanPos;
+
+		MakeParticle(vStartPos, fScale, _vDirVec, vRanY, 0.1f, true, 0.05f, 0.7f, TEXT("Prototype_Component_Texture_Dust"));
+	}
+}
+
 
 void CParticleManager::MakeParticle(_float3 _vPos, _float _fScale, _float3 _vDirVec, _float _fForce_Y, _float _fForce_X, _bool _bGravity, _float _fGravityVal, _float _fLifeTime, _tchar* pTag)
 {
