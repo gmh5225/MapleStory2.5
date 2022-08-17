@@ -94,10 +94,10 @@ void CRedSlime::Tick(_float fTimeDelta)
 
 	CCreature::CRETUREDESC D;
 
-	_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
-	_float b = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+	//_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+	//_float b = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
 
-	D.vPos = _float3(0.f + a, 2.f, 0.f + b);
+	//D.vPos = _float3(0.f + a, 2.f, 0.f + b);
 
 	switch (m_iDirection)
 	{
@@ -109,11 +109,14 @@ void CRedSlime::Tick(_float fTimeDelta)
 
 		if (m_pTransformCom->Get_State(CTransform::STATE_POSITION).x <= -6.4f)
 		{
+			for (int i = 0; i < 3; i++)
+			{
+				_float a = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
+				_float b = CGameInstance::Get_Instance()->Get_FloatRandom(-8, 8);
 
-
-			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC") , &D));
-			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC") , &D));
-			(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC") , &D));
+				D.vPos = _float3(0.f + a, 2.f, 0.f + b);
+				(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_RedSkill"), LEVEL_GAS, TEXT("Layer_NPC"), &D));
+			}
 			Set_Dead();
 		}
 		break;

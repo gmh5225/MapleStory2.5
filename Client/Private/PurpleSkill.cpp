@@ -36,6 +36,8 @@ HRESULT CPurpleSkill::Initialize(void * pArg)
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(m_UIInfo.fX - g_iWinSizeX * 0.5f, -m_UIInfo.fY + g_iWinSizeY * 0.5f, 0.f));
 
 
+
+	CGameInstance::Get_Instance()->PlaySound(L"SlimeDie.wav", 13, 0.7f);
 	m_fTime = 0;
 
 	return S_OK;

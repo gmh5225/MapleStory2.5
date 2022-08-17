@@ -47,8 +47,8 @@ HRESULT CLevel_DHenesys::Initialize()
 	//if (FAILED(Ready_Layer_Monster(TEXT("Layer_Monster"))))
 	//	return E_FAIL;
 
-	//if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
-	//	return E_FAIL;
+	if (FAILED(Ready_Layer_Npc(TEXT("Layer_Npc"))))
+		return E_FAIL;
 
 	//if (FAILED(Ready_Layer_UI(TEXT("Layer_UI"))))
 	//	return E_FAIL;
@@ -175,6 +175,11 @@ HRESULT CLevel_DHenesys::Ready_Layer_Npc(const _tchar * pLayerTag)
 	CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pGameInstance);
 
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_ElderStan"), LEVEL_DHENESYS, pLayerTag)))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Bulb"), LEVEL_DHENESYS, pLayerTag)))
+		return E_FAIL;
 
 	Safe_Release(pGameInstance);
 

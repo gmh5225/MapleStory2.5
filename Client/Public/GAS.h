@@ -108,6 +108,17 @@ private:
 	_int m_iFirstSlime;
 	_int m_iSlimePattern;
 	_bool m_bSlime;
+
+
+	_bool m_bAttackSound = false;
+	_bool m_bDjumpSound = false;
+	_bool m_bJumpSound = false;
+	_bool m_bPatternSound = false;
+	_bool m_bDashSound = false;
+	_bool m_bReset = false;
+	_bool m_bReturn = false;
+
+	_bool m_bShake = false;
 };
 
 END

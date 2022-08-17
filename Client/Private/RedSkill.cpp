@@ -31,9 +31,9 @@ HRESULT CRedSkill::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
-	m_sTag = "Tag_Npc";
+	m_sTag = "Tag_MonsterSkill";
 
-	m_fColRad = 1.f;	
+	m_fColRad = 10.f;	
 
 	m_fSkill = 0;
 	
@@ -46,7 +46,7 @@ HRESULT CRedSkill::Initialize(void * pArg)
 
 	SetState(STATE_IDLE, DIR_END);
 
-
+	CGameInstance::Get_Instance()->PlaySound(L"RedSlimeSkill.wav", 13, 1.f);
 
 	return S_OK;
 }
@@ -57,10 +57,20 @@ HRESULT CRedSkill::Initialize(void * pArg)
 HRESULT CRedSkill::SetUp_Components()
 {
 
+
 	{
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_RedSkill"), nullptr);
 	}
 
+
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 5.f, 1.f, 2.f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+
+
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
+		return E_FAIL;
 
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
@@ -100,21 +110,23 @@ void CRedSkill::Tick(_float fTimeDelta)
 }
 void CRedSkill::LateTick(_float fTimeDelta)
 {
-	Set_Billboard();
-
-	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
-		SetState(STATE_CHASE, m_eDir);
+	__super::BoxColCom_Tick(m_pTransformCom);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
+
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_NPC, this);
 
+	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER_SKILL, this);
 
-	//m_fSkill += fTimeDelta;
-	//if (m_fSkill >= 12.f)
-		//Set_Dead();
+	m_fSkill += fTimeDelta;
+	if (m_fSkill >= 12.f)
+		Set_Dead();
 }
 HRESULT CRedSkill::Render()
 {
+
+	Set_Billboard();
+
 	_float4x4		Matrix;
 	D3DXMatrixIdentity(&Matrix);
 
@@ -134,10 +146,14 @@ HRESULT CRedSkill::Render()
 	if (FAILED(Set_RenderState()))
 		return E_FAIL;
 
+
+
 	m_pVIBufferCom->Render();
 
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
+
+	//__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }
@@ -191,18 +207,6 @@ void CRedSkill::SetAni()
 
 void CRedSkill::Damaged(CGameObject * pOther)
 {
-	CGameInstance* pGameInstance = CGameInstance::Get_Instance();
-	Safe_AddRef(pGameInstance);
-
-	CTransform* pPlayerTransform = (CTransform*)pGameInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-
-	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
-
-
-	SetState(STATE_HIT, DIR_END);
-
-
-	Safe_Release(pGameInstance);
 }
 
 

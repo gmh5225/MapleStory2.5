@@ -4,6 +4,7 @@
 #include "GameInstance.h"
 
 #include "CutSceneManager.h"
+#include "QuestManager.h"
 
 
 CElderStan::CElderStan(LPDIRECT3DDEVICE9 pGraphic_Device)
@@ -72,7 +73,8 @@ HRESULT CElderStan::SetUp_Components()
 
 void CElderStan::Tick(_float fTimeDelta)
 {
-
+	if(CQuestManager::Get_Instance()->Get_QuestNum() == 6)
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(14.1, 7.0f, -1.f));
 
 	switch (m_eCurState)
 	{
@@ -158,7 +160,10 @@ void CElderStan::SetAni()
 	switch (m_eCurState)
 	{
 	case CElderStan::STATE_IDLE:
-		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ElderStan_Idle"), 0.3f, CAnimator::STATE_LOOF);
+		if (CQuestManager::Get_Instance()->Get_QuestNum() == 6)
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ElderStan_Idle"), 0.3f, CAnimator::STATE_ONCE);
+		else
+			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ElderStan_Idle"), 0.3f, CAnimator::STATE_LOOF);
 		break;
 	case CElderStan::STATE_MOVE:
 	{
