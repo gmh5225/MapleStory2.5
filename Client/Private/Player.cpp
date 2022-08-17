@@ -250,7 +250,8 @@ void CPlayer::LateTick(_float fTimeDelta)
 	__super::BoxColCom_Tick(m_pTransformCom);
 
 	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
-	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
+	if(m_eCurState != STATE_DIE)
+		m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_PLAYER, this);
 	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_PLAYER, this);
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 	
@@ -304,7 +305,8 @@ HRESULT CPlayer::Render()
 
 	m_pShaderCom->Begin(0);
 
-	m_pVIBufferCom->Render();
+	if(m_eCurState != STATE_DIE)
+		m_pVIBufferCom->Render();
 
 	m_pShaderCom->End();
 
@@ -1075,7 +1077,7 @@ void CPlayer::Die(_float fTimeDelta)
 
 	CCreature::CRETUREDESC vTomb;
 
-	vTomb.vPos = vPlayerPos + _float3(0.f,4.f,3.7f);
+	vTomb.vPos = vPlayerPos + _float3(0.f,4.f,1.7f);
 
 	if (!m_bDie)
 	{
@@ -1250,6 +1252,7 @@ void CPlayer::Shading(_float fTImeDelta)
 }
 void CPlayer::Player_Cut()
 {
+	CGameInstance::Get_Instance()->PlaySound(L"Tomb.wav", 13, 1.f);
 	SetState(STATE_DIE, DIR_END);
 	m_bDie = false;
 }

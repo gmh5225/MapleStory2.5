@@ -31,7 +31,7 @@ HRESULT CGASEffect::Initialize(void * pArg)
 
 	memcpy(&m_Desc, pArg, sizeof(SUNCROSSHITDESC));
 
-	m_fColRad = 0.1f;
+	m_fColRad = 10.5f;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_Desc.vPos + _float3(0.f,0.f,0.15f));
 	m_pTransformCom->Set_Scaled(3.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GASEffect"), 0.1f, CAnimator::STATE_ONCE);
@@ -59,6 +59,16 @@ HRESULT CGASEffect::SetUp_Components()
 	}
 
 
+
+	CBoxCollider::BOXCOLCOMEDESC BoxColDesc;
+	ZeroMemory(&BoxColDesc, sizeof(BoxColDesc));
+	BoxColDesc.vScale = _float3{ 5.f, 1.f, 2.f };
+	BoxColDesc.vPivot = _float3{ 0.f, 0.f, 0.f };
+
+
+	if (FAILED(__super::Add_BoxColComponent(LEVEL_STATIC, TEXT("Prototype_Component_BoxCollider"), &BoxColDesc)))
+		return E_FAIL;
+
 	/* For.Com_Transform */
 	CTransform::TRANSFORMDESC		TransformDesc;
 	ZeroMemory(&TransformDesc, sizeof(TransformDesc));
@@ -82,6 +92,8 @@ void CGASEffect::Tick(_float fTimeDelta)
 void CGASEffect::LateTick(_float fTimeDelta)
 {
 	m_fEffectCount += fTimeDelta;
+
+	__super::BoxColCom_Tick(m_pTransformCom);
 
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	m_pColliderCom->Add_BoxCollsionGroup(CCollider::COLLSION_MONSTER_SKILL, this);
@@ -112,7 +124,7 @@ HRESULT CGASEffect::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
-
+	//__super::BoxColCom_Render(m_pTransformCom);
 
 	return S_OK;
 }

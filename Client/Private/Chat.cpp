@@ -277,6 +277,7 @@ HRESULT CChat::Render()
 					pInstance->Check_End_Quest();
 					m_bCountCheck = false;
 					m_fCount = 0;
+					CGameInstance::Get_Instance()->PlaySound(L"QuestStart.wav", 13, 1.f);
 				}
 			}
 
@@ -311,6 +312,7 @@ HRESULT CChat::Render()
 					CQuestManager::Get_Instance()->Set_Second();
 					CSkillManager::Get_Instance()->Set_SkillPoint(3);
 					m_iChatProgress = 10;
+					CGameInstance::Get_Instance()->PlaySound(L"QuestClear.wav", 13, 1.f);
 				}
 			}
 		}
@@ -384,6 +386,7 @@ HRESULT CChat::Render()
 					pInstance->Check_End_Quest();
 					m_bCountCheck = false;
 					m_fCount = 0;
+					CGameInstance::Get_Instance()->PlaySound(L"QuestStart.wav", 13, 1.f);
 				}
 			}
 
@@ -426,6 +429,7 @@ HRESULT CChat::Render()
 					RedSnailInfo->Set_NowNum(0);
 					BlueSnailInfo->Set_NowNum(0);
 					RibbonPigInfo->Set_NowNum(0);
+					CGameInstance::Get_Instance()->PlaySound(L"QuestClear.wav", 13, 1.f);
 				}
 			}
 		}
@@ -497,6 +501,7 @@ HRESULT CChat::Render()
 					m_fCount = 0;
 					pInstance->QuestProgress();
 					pInstance->Check_End_Quest();
+					CGameInstance::Get_Instance()->PlaySound(L"QuestStart.wav", 13, 1.f);
 				}
 			}
 
@@ -532,6 +537,7 @@ HRESULT CChat::Render()
 						CQuestManager::Get_Instance()->Set_Fourth();
 						CSkillManager::Get_Instance()->Set_SkillPoint(3);
 						m_iChatProgress = 30;
+						CGameInstance::Get_Instance()->PlaySound(L"QuestClear.wav", 13, 1.f);
 					}
 				}
 
@@ -599,6 +605,7 @@ HRESULT CChat::Render()
 					m_fCount = 0;
 					pInstance->QuestProgress();
 					pInstance->Check_End_Quest();
+					CGameInstance::Get_Instance()->PlaySound(L"QuestStart.wav", 13, 1.f);
 				}
 			}
 
@@ -640,6 +647,7 @@ HRESULT CChat::Render()
 					GoStumpInfo->Set_NowNum(0);
 					GreenMushroomInfo->Set_NowNum(0);
 					CCutSceneManager::Get_Instance()->Start_Enter_GASHenesys();
+					CGameInstance::Get_Instance()->PlaySound(L"QuestClear.wav", 13, 1.f);
 				}
 			}
 		}
@@ -718,6 +726,7 @@ HRESULT CChat::Render()
 					m_fCount = 0;
 					pInstance->QuestProgress();
 					pInstance->Check_End_Quest();
+					CGameInstance::Get_Instance()->PlaySound(L"QuestStart.wav", 13, 1.f);
 				}
 			}
 

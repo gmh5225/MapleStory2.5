@@ -40,7 +40,7 @@ HRESULT CGreenSkill::Initialize(void * pArg)
 
 	SetState(STATE_IDLE, DIR_END);
 
-
+	CGameInstance::Get_Instance()->PlaySound(L"GreenSlimeSkill.wav", 13, 0.6f);
 
 	return S_OK;
 }

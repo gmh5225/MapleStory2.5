@@ -59,6 +59,7 @@ HRESULT CBulb::SetUp_Components()
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bulb_End"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bulb_Progress"), nullptr);
 		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bulb_NoQuest"), nullptr);
+		m_pAnimatorCom->Create_Texture(LEVEL_STATIC, TEXT("Prototype_Component_Texture_Bulb"), nullptr);
 	}
 
 	/* For.Com_Transform */
@@ -82,6 +83,8 @@ HRESULT CBulb::SetUp_Components()
 
 void CBulb::Tick(_float fTimeDelta)
 {
+	if(CQuestManager::Get_Instance()->Get_QuestNum() == 6)
+		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(10.1f, 7.0f, -5.6f));
 }
 
 void CBulb::LateTick(_float fTimeDelta)
@@ -153,6 +156,14 @@ void CBulb::SetState(STATE eState, DIR eDir)
 void CBulb::SetAni()
 {
 	m_iQuestState = CQuestManager::Get_Instance()->Set_QuestState();
+
+	_uint iNum = CQuestManager::Get_Instance()->Get_QuestNum();
+
+	if (iNum == 6 && m_iQuestState == CQuestManager::QUEST_PREPARE)
+	{
+		m_iQuestState = 7;
+	}
+
 	switch (m_iQuestState)
 	{
 	case CQuestManager::QUEST_PREPARE:
@@ -167,6 +178,8 @@ void CBulb::SetAni()
 	case CQuestManager::QUEST_END:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb_NoQuest"), 0.3f, CAnimator::STATE_ONCE);
 		break;
+	case 7:
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bulb"), 0.3f, CAnimator::STATE_LOOF);
 	}
 }
 

@@ -338,7 +338,7 @@ void CBlueMushmom::Cut_Attack(_float fTimeDelta)
 	}
 
 	// 점프를 시작하고 5초 있다가 상태를 쫒아가게 바꿈
-	if (m_fCountLand > 8.0f)
+	if (m_fCountLand > 5.0f)
 	{
 		if (m_eDir == DIR_R)
 			SetState(STATE_CHASE, DIR_R);
@@ -346,6 +346,7 @@ void CBlueMushmom::Cut_Attack(_float fTimeDelta)
 			SetState(STATE_CHASE, DIR_L);
 		m_bLanding = false;
 		m_fCountLand = 0;
+		CGameInstance::Get_Instance()->PlaySound(L"donno.wav", 12, 2.f);
 	}
 
 	if (5.5f < m_pTransformCom->Get_State(CTransform::STATE_POSITION).y)
@@ -506,6 +507,8 @@ void CBlueMushmom::Collision(CGameObject * pOther)
 	{
 		if (m_bLanding && m_bShake)
 		{
+			CGameInstance::Get_Instance()->PlaySound(L"GASjump.wav", 10, 0.7f);
+
 			CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
 			CParticleManager::Get_Instance()->BlueMushRoom_Lend(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
 			m_bShake = false;

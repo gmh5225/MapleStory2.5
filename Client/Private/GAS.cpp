@@ -11,6 +11,7 @@
 #include "CutSceneManager.h"
 #include "ParticleManager.h"
 #include "Potal.h"
+#include "ToolManager.h"
 
 CGAS::CGAS(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCreature(pGraphic_Device)
@@ -197,6 +198,14 @@ void CGAS::Tick(_float fTimeDelta)
 
 		if (m_fPatternCycle > 7.f)
 		{
+			m_bAttackSound = false;
+			m_bDjumpSound = false;
+			m_bJumpSound = false;
+			m_bPatternSound = false;
+			m_bDashSound = false;
+			m_bReset = false;
+			m_bReturn = false;
+
 			m_fPatternCycle = 0;
 			if (!m_bFirstPattern)
 			{
@@ -470,17 +479,51 @@ void CGAS::Tick_Chase(_float fTimeDelta)
 
 void CGAS::Tick_Jump(_float fTimeDelta)
 {
+	m_bShake = true;
 	m_fJump += fTimeDelta;
+	if (m_fJump > 1.4f && !m_bJumpSound)
+	{
+		CGameInstance::Get_Instance()->PlaySound(L"GASjump.wav", 10, 0.7f);
+		m_bJumpSound = true;
+
+		CGameInstance::Get_Instance()->PlaySound(L"GASjump.wav", 10, 0.7f);
+
+		CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
+		CParticleManager::Get_Instance()->BlueMushRoom_Lend(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+		m_bShake = false;
+
+
+		CCreature* pPlayer = (CCreature*)CToolManager::Get_Instance()->GetPlayer();
+		CTransform* pPlayerTran = (CTransform*)pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
+		_float3 PlayerPos = pPlayerTran->Get_State(CTransform::STATE_POSITION);
+		_float3 MePos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+
+		_float PlayerY = pPlayerTran->Get_Vel();
+		if (-0.1f < PlayerY && 0.1f > PlayerY)
+		{
+			_float3 vDir = PlayerPos - MePos;
+			vDir.y = 0.f;
+			pPlayer->SetKnockBack(7.f, 8.f, vDir);
+		}
+	}
+
 	if (m_fJump > 2.0f)
 	{
 		m_iRandomPattern = 0;
 		m_fJump = 0;
+
 	}
 }
 
 void CGAS::Tick_DJump(_float fTimeDelta)
 {
 	m_fDJump += fTimeDelta;
+
+	if (m_fDJump > 1.8f && !m_bDjumpSound)
+	{
+		CGameInstance::Get_Instance()->PlaySound(L"GASDjump.wav", 16, 1.f);
+		m_bDjumpSound = true;
+	}
 
 
 	if (m_fDJump > 2.f && !m_bTest)
@@ -550,6 +593,14 @@ void CGAS::Tick_Dash(_float fTimeDelta)
 	_float3 vPlayerPos = pPlayerTransform->Get_State(CTransform::STATE_POSITION);
 
 	m_fDash += fTimeDelta;
+
+
+	if (m_fDash > 0.1f && !m_bDashSound)
+	{
+		CGameInstance::Get_Instance()->PlaySound(L"GAStp.wav", 16, 1.f);
+		m_bDashSound = true;
+	}
+
 	if (m_fDash > 1.6f)
 	{
 		m_iRandomPattern = 100;
@@ -573,6 +624,14 @@ void CGAS::Tick_End(_float fTimeDelta)
 void CGAS::Tick_Attack(_float fTimeDelta)
 {
 	m_fAttack += fTimeDelta;
+
+	if (m_fAttack > 0.1f && !m_bAttackSound)
+	{
+		CGameInstance::Get_Instance()->PlaySound(L"GAScharging.wav", 16, 1.f);
+		m_bAttackSound = true;
+	}
+
+
 	if (m_fAttack > 1.9f && !m_bEffect)
 	{
 		CGameInstance* pGameInstance = CGameInstance::Get_Instance();
@@ -607,6 +666,7 @@ void CGAS::Tick_Die(_float fTimeDelta)
 	m_fCountDead += fTimeDelta;
 	if (m_fCountDead >= 8.0f)
 	{
+		//CGameInstance::Get_Instance()->PlaySound(L"GASpattern.wav", 16, 1.f);
 		Set_Dead();
 	}
 }
@@ -614,6 +674,12 @@ void CGAS::Tick_Die(_float fTimeDelta)
 void CGAS::Tick_Reset(_float fTimeDelta)
 {
 	m_fReset += fTimeDelta;
+
+	if (m_fReset > 0.1f && !m_bPatternSound)
+	{
+		CGameInstance::Get_Instance()->PlaySound(L"GAS4slime.wav", 16, 1.f);
+		m_bPatternSound = true;
+	}
 
 	if (!m_bVanish && m_fReset > 2.1f)
 	{
@@ -686,6 +752,12 @@ void CGAS::Tick_Reset(_float fTimeDelta)
 void CGAS::Tick_Return(_float fTimeDelta)
 {
 	m_fReturn += fTimeDelta;
+
+	if (m_fReturn > 0.1f && !m_bReturn)
+	{
+		CGameInstance::Get_Instance()->PlaySound(L"GAS4slimeReturn.wav", 16, 1.f);
+		m_bReturn = true;
+	}
 
 	if (m_fReturn > 2.1f)
 	{

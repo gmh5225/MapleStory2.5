@@ -436,6 +436,8 @@ void CRibbonPig::Damaged(CGameObject * pOther)
 		MakeItem();
 		CGameInstance::Get_Instance()->PlaySound(L"PigDie.wav", 14, 1.f);
 	}
+
+	Safe_Release(pGameInstance);
 }
 
 
