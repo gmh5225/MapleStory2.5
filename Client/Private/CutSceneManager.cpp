@@ -492,7 +492,8 @@ void CCutSceneManager::Enter_InitDHenesys(_float fTimeDelta)
 
 	if (5.f < m_fInitDHenesys_TimeAcc && !m_b8)
 	{
-		Get_MainCam()->Start_AttackShaking2();
+		Get_MainCam()->StartShake(0.4f, 0.05f, 15.f, _float3(1.f, 1.f, 1.f));
+		CGameInstance::Get_Instance()->PlaySoundW(L"Shake.wav", 3, 1.f);
 		m_b8 = true;
 	}
 
@@ -502,7 +503,7 @@ void CCutSceneManager::Enter_InitDHenesys(_float fTimeDelta)
 		m_b8_1 = true;
 	}
 	
-	if (28.f < m_fInitDHenesys_TimeAcc)
+	if (19.f < m_fInitDHenesys_TimeAcc)
 	{
 		Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 30.f);
 		End_Enter_InitDHenesys();

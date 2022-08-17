@@ -69,9 +69,9 @@ void CLevel_BlackMage::Tick(_float fTimeDelta)
 	{
 		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
 		Safe_AddRef(pGameInstance);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ -20.f,6.f,0.f });
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f,10.f,20.f });
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 20.f,6.f,0.f });
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ -22.f,8.f,0.f });
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f,12.f,20.f });
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 23.f, 8.f,0.f });
 		Safe_Release(pGameInstance);
 
 		m_fCreateAcc = 0.f;
@@ -175,29 +175,17 @@ HRESULT CLevel_BlackMage::Ready_Layer_Section(const _tchar * pLayerTag)
 	{
 		for (int i = -5; i < 15; i++)
 		{
-			_float XIndex = i*5.f;
-			_float ZIndex = j*5.f;
-			Data.vPos = _float3((-12.f + XIndex) + ZIndex, 2.f, -1 - XIndex);
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_DARKMAGE, pLayerTag, &Data)))
-				return E_FAIL;
-		}
-	}
-
-
-	for (int j = -2; j < 5; j++)
-	{
-		for (int i = -2; i < 5; i++)
-		{
-			for (int y = 0; y < 5; y++)
+			for (int y = 0; y < 3; y++)
 			{
 				_float XIndex = i*5.f;
 				_float ZIndex = j*5.f;
-				Data.vPos = _float3((-12.f + XIndex) + ZIndex + 50.f, 7.f + (y * 9.f), -1.f - XIndex);
+				Data.vPos = _float3((-12.f + XIndex) + ZIndex, 2.f + (y * 9.f), -1 - XIndex);
 				if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Section"), LEVEL_DARKMAGE, pLayerTag, &Data)))
 					return E_FAIL;
 			}
 		}
 	}
+
 
 	Safe_Release(pGameInstance);
 

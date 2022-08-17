@@ -385,9 +385,10 @@ HRESULT CLevel_GamePlay::Ready_Layer_Map(const _tchar * pLayerTag)
 		return E_FAIL;
 
 
-	PotalDesc.eDestLevel =LEVEL_GAS;
+	PotalDesc.eDestLevel = LEVEL_DHENESYSHUNTING;
 	PotalDesc.Pos = _float3(-1.f, 1.f, -3.f);
 	PotalDesc.DestPos = _float3(-16.f, 1.f, -16.f);
+	// PotalDesc.DestPos = _float3(-2.f, 1.f, -2.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_GAMEPLAY, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 

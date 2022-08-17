@@ -45,6 +45,7 @@ private:
 	_bool m_bF = false;
 	_bool m_bAir = false;
 	_bool m_bEnter = false;
+	_bool m_bInit = false;
 
 public:
 	static CLevel_DHenesysHunting* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

@@ -107,7 +107,7 @@ void CToolManager::MakeMiniDownCube()
 
 			CMap_Manager::CUBEDATA pCubeDesc;
 			pCubeDesc.vPos = vPos;
-			pCubeDesc.iIndex = 3;
+			pCubeDesc.iIndex = 17;
 			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &pCubeDesc)))
 				return;
 

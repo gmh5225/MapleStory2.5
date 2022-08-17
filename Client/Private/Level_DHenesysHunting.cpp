@@ -75,9 +75,156 @@ void CLevel_DHenesysHunting::Tick(_float fTimeDelta)
 
 	if (!CToolManager::Get_Instance()->Get_MiniEnd())
 	{
+		_float4x4 RotationMatrix;
+		D3DXMatrixIdentity(&RotationMatrix);
+		D3DXMatrixRotationAxis(&RotationMatrix, &_float3{ 0.f, 1.f, 0.f }, D3DXToRadian(45.f));
+
+		if (!m_bInit)
+		{
+			m_bInit = true;
+
+			_tchar* pLayerTag = TEXT("Layer_Map");
+
+			CMap_Manager::CUBEDATA Desc;
+			Desc.iIndex = 3;
+			Desc.vPos = _float3{ -2.f, 1.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ -1.f, 1.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 0.f, 1.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 1.f, 1.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 2.f, 1.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+
+			Desc.vPos = _float3{ -2.f, 2.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ -1.f, 2.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 0.f, 2.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 1.f, 2.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 2.f, 2.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+
+			Desc.vPos = _float3{ -2.f, 3.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ -1.f, 3.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 0.f, 3.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 1.f, 3.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 2.f, 3.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+
+			Desc.vPos = _float3{ -2.f, 4.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ -1.f, 4.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 0.f, 4.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 1.f, 4.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 2.f, 4.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+
+			Desc.vPos = _float3{ -2.f, 5.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ -1.f, 5.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 0.f, 5.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 1.f, 5.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 2.f, 5.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+
+			Desc.vPos = _float3{ -2.f, 6.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ -1.f, 6.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 0.f, 6.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 1.f, 6.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+			Desc.vPos = _float3{ 2.f, 6.f, -8.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Desc)))
+				return;
+
+
+		}
+
+
+
+
+
+
 		CGameObject* pPlayer = CToolManager::Get_Instance()->GetPlayer();
 		CTransform* pPTran = (CTransform*)pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
 		_float3 vPos = pPTran->Get_State(CTransform::STATE_POSITION);
+
 		if (vPos.y < -10.f)
 		{
 			m_bF = true;
@@ -112,6 +259,11 @@ void CLevel_DHenesysHunting::Tick(_float fTimeDelta)
 
 	if (!m_bEnter)
 	{
+		_float4x4 RotationMatrix;
+		D3DXMatrixIdentity(&RotationMatrix);
+		D3DXMatrixRotationAxis(&RotationMatrix, &_float3{ 0.f, 1.f, 0.f }, D3DXToRadian(45.f));
+
+
 		CGameObject* pPlayer = CToolManager::Get_Instance()->GetPlayer();
 		CTransform* pPTran = (CTransform*)pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
 		_float3 vPos = pPTran->Get_State(CTransform::STATE_POSITION);
@@ -121,55 +273,52 @@ void CLevel_DHenesysHunting::Tick(_float fTimeDelta)
 			m_bEnter = true;
 
 			CMap_Manager::CUBEDATA Desc;
-			Desc.iIndex = 1;
-			Desc.vPos = _float3{ 11.5f, 5.f, 2.5f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.iIndex = 4;
+			Desc.vPos = _float3{ 6.f, 5.f, 11.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			Desc.vPos = _float3{ 12.f, 5.f, 3.f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 6.f, 5.f, 10.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			//Desc.vPos = _float3{ 12.5f, 5.f, 3.5f };
-			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
-			//	return;
 
-			Desc.vPos = _float3{ 11.5f, 6.f, 2.5f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 6.f, 6.f, 11.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			Desc.vPos = _float3{ 12.f, 6.f, 3.f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 6.f, 6.f, 10.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			//Desc.vPos = _float3{ 12.5f, 6.f, 3.5f };
-			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
-			//	return;
 
 
 
-			Desc.vPos = _float3{ 21.f, 5.f, -7.f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 19.f, 5.f, 12.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			Desc.vPos = _float3{ 21.5f, 5.f, -6.5f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 19.f, 5.f, 11.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			Desc.vPos = _float3{ 22.f, 5.f, -6.0f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 19.f, 5.f, 10.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			//Desc.vPos = _float3{ 22.5f, 5.f, -5.5f };
-			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
-			//	return;
 
-
-			Desc.vPos = _float3{ 21.f, 6.f, -7.f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 19.f, 6.f, 12.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			Desc.vPos = _float3{ 21.5f, 6.f, -6.5f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 19.f, 6.f, 11.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			Desc.vPos = _float3{ 22.f, 6.f, -6.f };
-			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			Desc.vPos = _float3{ 19.f, 6.f, 10.f };
+			D3DXVec3TransformCoord(&Desc.vPos, &Desc.vPos, &RotationMatrix);
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_DownCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
 				return;
-			//Desc.vPos = _float3{ 22.5f, 6.f, -5.5f };
-			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
-			//	return;
 
 
 
@@ -200,6 +349,8 @@ void CLevel_DHenesysHunting::Tick(_float fTimeDelta)
 	}
 	
 	
+
+
 
 
 
@@ -310,21 +461,21 @@ HRESULT CLevel_DHenesysHunting::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	CSky::SKYDESC SkyDesc;
 	SkyDesc.iIndex = 7;
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_DHENESYSHUNTING, pLayerTag, &SkyDesc)))
 		return E_FAIL;
 
-	//CPotal::POTALDESC PotalDesc;
+	CPotal::POTALDESC PotalDesc;
 	//PotalDesc.eDestLevel = LEVEL_DHENESYS;
 	//PotalDesc.Pos = _float3(-3.f, 1.f, -4.f);
 	//PotalDesc.DestPos = _float3(30.f, 4.f, -12.f);
 	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYSHUNTING, pLayerTag, &PotalDesc)))
 	//	return E_FAIL;
 
-	//PotalDesc.eDestLevel = LEVEL_DELENYAENTER;
-	//PotalDesc.Pos = _float3(43.f, 3.f, -5.f);
-	//PotalDesc.DestPos = _float3(-1.f, 2.f, 0.f);
-	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYSHUNTING, pLayerTag, &PotalDesc)))
-	//	return E_FAIL;
+	PotalDesc.eDestLevel = LEVEL_DELENYAENTER;
+	PotalDesc.Pos = _float3(41.f, 5.f, -25.f);
+	PotalDesc.DestPos = _float3(-1.f, 2.f, 0.f);
+	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYSHUNTING, pLayerTag, &PotalDesc)))
+		return E_FAIL;
 
 
 
@@ -333,46 +484,33 @@ HRESULT CLevel_DHenesysHunting::Ready_Layer_Map(const _tchar * pLayerTag)
 	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_DMini");
 	for (auto& Data : *pMapData)
 	{
-		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Data)))
-			return E_FAIL;
+		if (4 == Data.iIndex || 6 == Data.iIndex)
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_SeeCube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Data)))
+				return E_FAIL;
+		}
+		else
+		{
+			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Data)))
+				return E_FAIL;
+		}
+
 	}
-
-
-	// CToolManager::Get_Instance()->MakeMiniDownCube();
-
-	//list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_HenesysHunting");
-	//if (nullptr != pModelData)
-	//{
-	//	for (auto& Model : *pModelData)
-	//	{
-	//		CVIBuffer_Voxel::VOXELDESC VoxDesc;
-	//		CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
-	//		VoxDesc.vPos = Model.vPos;
-
-	//		_float4x4 Matrix;
-	//		D3DXMatrixIdentity(&Matrix);
-
-	//		D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
-
-	//		D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
-
-
-	//		VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
-	//		VoxDesc.vRotationAix = Model.vAix;
-
-	//		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_DHENESYSHUNTING, pLayerTag, &VoxDesc)))
-	//			return E_FAIL;
-	//	}
-
-	//}
-
-
 
 
 	Safe_Release(pGameInstance);
 
+
+
+
+
 	if (FAILED(Ready_Layer_Section(TEXT("Layer_Section"))))
 		return E_FAIL;
+
+
+
+
+
 
 	return S_OK;
 

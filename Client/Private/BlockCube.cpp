@@ -90,13 +90,6 @@ HRESULT CBlockCube::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_0))
-	{
-		if (temp)
-			temp = false;
-		else
-			temp = true;
-	}
 
 	//if (temp)
 	//	__super::BoxColCom_Render(m_pTransformCom);

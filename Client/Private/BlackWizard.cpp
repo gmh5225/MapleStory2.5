@@ -376,3 +376,19 @@ void CBlackWizard::Free()
 	__super::Free();
 }
 
+
+
+
+
+
+
+
+void CBlackWizard::MakeBlockCube(_float3 vPos)
+{
+	CMap_Manager::CUBEDATA desc;
+	desc.iIndex = 1;
+	desc.vPos = vPos;
+
+	if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_LaserBlockCube"), LEVEL_DARKMAGE, TEXT("Layer_Cube"), &desc)))
+		return;
+}
