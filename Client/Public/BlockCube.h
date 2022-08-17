@@ -1,13 +1,21 @@
 #pragma once
 
 #include "Client_Defines.h"
+#include "GameObject.h"
 #include "Map_Manager.h"
-#include "Cube.h"
+
+BEGIN(Engine)
+class CCollider;
+class CTexture;
+class CRenderer;
+class CTransform;
+class CVIBuffer_Cube;
+END
 
 
 BEGIN(Client)
 
-class CDownCube : public CCube
+class CBlockCube : public CGameObject
 {
 public:
 	typedef struct tagCubeDesc
@@ -15,10 +23,10 @@ public:
 		_float3	vPos;
 		const _tchar* pTextureTag;
 	}CUBEDESC;
-private:
-	CDownCube(LPDIRECT3DDEVICE9 pGraphic_Device);
-	CDownCube(const CDownCube& rhs);
-	virtual ~CDownCube() = default;
+protected:
+	CBlockCube(LPDIRECT3DDEVICE9 pGraphic_Device);
+	CBlockCube(const CBlockCube& rhs);
+	virtual ~CBlockCube() = default;
 
 public:
 	virtual HRESULT Initialize_Prototype() override;
@@ -26,11 +34,6 @@ public:
 	virtual void Tick(_float fTimeDelta) override;
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
-
-	virtual void Collision(CGameObject* pOther) override;
-
-	void Shake(_float fTimeDelta);
-	void Down(_float fTimeDelta);
 
 private:
 	CTexture*				m_pTextureCom = nullptr;
@@ -45,11 +48,6 @@ private:
 
 	_bool temp = false;
 
-	_float m_fTimeAcc = 0.f;
-	_bool m_bDown = false;
-	_float m_fShakeTimeAcc = 0.f;
-	_bool m_bShakeTurn = false;
-
 private:
 	HRESULT Set_RenderState();
 	HRESULT Reset_RenderState();
@@ -57,7 +55,7 @@ private:
 	HRESULT SetUp_Components();
 
 public:
-	static CDownCube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
+	static CBlockCube* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);
 	virtual void Free() override;
 };

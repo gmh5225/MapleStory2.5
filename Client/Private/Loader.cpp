@@ -165,6 +165,8 @@
 
 #include "EHelena.h"
 #include "EHelenaChat.h"
+#include "Model_MiniBlock.h"
+#include "BlockCube.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -1136,12 +1138,20 @@ HRESULT CLoader::Load_Model_Object()
 		CTriggerCube::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlockCube"),
+		CBlockCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),
 		CWood::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Model_Die"),
 		CModel_Die::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Model_MiniBlock"),
+		CModel_MiniBlock::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Sky"),

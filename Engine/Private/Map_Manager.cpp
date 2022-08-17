@@ -18,6 +18,7 @@ void CMap_Manager::SetFildNames()
 
 	m_MapNames.push_back(string("Map_DHenesys"));
 	m_MapNames.push_back(string("Map_DHenesysHunting"));
+	m_MapNames.push_back(string("Map_DMini"));
 	m_MapNames.push_back(string("Map_DElenyaEnter"));
 	m_MapNames.push_back(string("Map_DElenya"));
 	m_MapNames.push_back(string("Map_BlackMageJump"));
@@ -42,6 +43,9 @@ void CMap_Manager::SetFildNames()
 
 	m_VoxelNames.push_back(string("Model_Die"));
 	m_VoxelNames.push_back(string("Model_Lock"));
+	m_VoxelNames.push_back(string("Model_MiniOrrange"));
+	m_VoxelNames.push_back(string("Model_MiniRed"));
+	m_VoxelNames.push_back(string("Model_MiniYerrow"));
 
 	m_cVoxelNames.push_back(L"Model_House1");
 	m_cVoxelNames.push_back(L"Model_House2");
@@ -55,6 +59,9 @@ void CMap_Manager::SetFildNames()
 
 	m_cVoxelNames.push_back(L"Model_Die");
 	m_cVoxelNames.push_back(L"Model_Lock");
+	m_cVoxelNames.push_back(L"Model_MiniOrrange");
+	m_cVoxelNames.push_back(L"Model_MiniRed");
+	m_cVoxelNames.push_back(L"Model_MiniYerrow");
 
 
 

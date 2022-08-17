@@ -3,6 +3,7 @@
 
 #include "GameInstance.h"
 #include "Creature.h"
+#include "ParticleManager.h"
 
 CJumpCube::CJumpCube(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CCube(pGraphic_Device)
@@ -36,16 +37,22 @@ HRESULT CJumpCube::Initialize(void * pArg)
 
 	m_pTransformCom->Rotation(_float3{ 0.f, 1.f, 0.f }, 45.f);
 
-	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_BLOCK, this);
-	__super::BoxColCom_Tick(m_pTransformCom);
+	//m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_BLOCK, this);
+	//__super::BoxColCom_Tick(m_pTransformCom);
 
 	return S_OK;
 }
 
 void CJumpCube::Tick(_float fTimeDelta)
 {
+	m_fTimeAcc += fTimeDelta;
+	if (0.2f < m_fTimeAcc)
+	{
+		_float3 vPos = m_pTransformCom->Get_State(CTransform::STATE_POSITION);
+		CParticleManager::Get_Instance()->UpAir(vPos);
 
-
+		m_fTimeAcc = 0.f;
+	}
 }
 
 void CJumpCube::LateTick(_float fTimeDelta)
@@ -68,10 +75,14 @@ void CJumpCube::LateTick(_float fTimeDelta)
 		LU.y > vPos.y && RD.y < vPos.y)
 		m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_NONALPHABLEND, this);
 
+	m_pColliderCom->Add_PushBoxCollsionGroup(CCollider::COLLSION_DOWNBLOCK, this);
 }
 
 HRESULT CJumpCube::Render()
 {
+	return S_OK;
+
+
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 

@@ -17,6 +17,8 @@
 #include "UIManager.h"
 #include "Sky.h"
 
+#include "ToolManager.h"
+
 CLevel_DHenesysHunting::CLevel_DHenesysHunting(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: CLevel(pGraphic_Device)
 {
@@ -70,21 +72,140 @@ void CLevel_DHenesysHunting::Tick(_float fTimeDelta)
 {
 	if (CQuestManager::Get_Instance()->Set_OrangeMushroom() >= 10)
 		CQuestManager::Get_Instance()->QuestClear();
-	__super::Tick(fTimeDelta);
 
-	if (GetKeyState('N') & 0x8000)
+	if (!CToolManager::Get_Instance()->Get_MiniEnd())
 	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
+		CGameObject* pPlayer = CToolManager::Get_Instance()->GetPlayer();
+		CTransform* pPTran = (CTransform*)pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
+		_float3 vPos = pPTran->Get_State(CTransform::STATE_POSITION);
+		if (vPos.y < -10.f)
+		{
+			m_bF = true;
+		}
 
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
-			return;
+		if (m_bF)
+		{
+			m_fTimeAcc += fTimeDelta;
+			if (5.f < m_fTimeAcc)
+			{
+				CToolManager::Get_Instance()->MakeMiniDownCube();
+				m_bF = false;
+				m_fTimeAcc = 0.f;
+			}
+		}
+	}
+	else if(!m_bAir)
+	{
+		m_bAir = true;
 
-		
-		Safe_Release(pGameInstance);
+		CMap_Manager::CUBEDATA Desc;
+		for (_int i = 0; i < 11; i++)
+		{
+			Desc.iIndex = 0;
+			Desc.vPos = _float3{ -10.f + i, -1.f, -10.f + i};
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_JumpCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+		}
 
 	}
+
+
+	if (!m_bEnter)
+	{
+		CGameObject* pPlayer = CToolManager::Get_Instance()->GetPlayer();
+		CTransform* pPTran = (CTransform*)pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
+		_float3 vPos = pPTran->Get_State(CTransform::STATE_POSITION);
+
+		if (12 < vPos.x && 14 > vPos.x && 0 < vPos.z && 2 > vPos.z)
+		{
+			m_bEnter = true;
+
+			CMap_Manager::CUBEDATA Desc;
+			Desc.iIndex = 1;
+			Desc.vPos = _float3{ 11.5f, 5.f, 2.5f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			Desc.vPos = _float3{ 12.f, 5.f, 3.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			//Desc.vPos = _float3{ 12.5f, 5.f, 3.5f };
+			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			//	return;
+
+			Desc.vPos = _float3{ 11.5f, 6.f, 2.5f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			Desc.vPos = _float3{ 12.f, 6.f, 3.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			//Desc.vPos = _float3{ 12.5f, 6.f, 3.5f };
+			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			//	return;
+
+
+
+			Desc.vPos = _float3{ 21.f, 5.f, -7.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			Desc.vPos = _float3{ 21.5f, 5.f, -6.5f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			Desc.vPos = _float3{ 22.f, 5.f, -6.0f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			//Desc.vPos = _float3{ 22.5f, 5.f, -5.5f };
+			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			//	return;
+
+
+			Desc.vPos = _float3{ 21.f, 6.f, -7.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			Desc.vPos = _float3{ 21.5f, 6.f, -6.5f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			Desc.vPos = _float3{ 22.f, 6.f, -6.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+				return;
+			//Desc.vPos = _float3{ 22.5f, 6.f, -5.5f };
+			//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlockCube"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Cube"), &Desc)))
+			//	return;
+
+
+
+			CCreature::CRETUREDESC MonDesc;
+			MonDesc.vPos = _float3{ 17.f, 6.f, -2.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &MonDesc)))
+				return;
+			MonDesc.vPos = _float3{ 16.f, 6.f, -3.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &MonDesc)))
+				return;
+			MonDesc.vPos = _float3{ 15.f, 6.f, -1.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &MonDesc)))
+				return;
+
+			MonDesc.vPos = _float3{ 18.f, 6.f, -2.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformPig"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &MonDesc)))
+				return;
+			MonDesc.vPos = _float3{ 16.f, 6.f, -5.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformSlime"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &MonDesc)))
+				return;
+			MonDesc.vPos = _float3{ 15.f, 6.f, -2.f };
+			if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_TransformStump"), LEVEL_DHENESYSHUNTING, TEXT("Layer_Monster"), &MonDesc)))
+				return;
+
+		}
+
+
+	}
+	
+	
+
+
+
+
+	__super::Tick(fTimeDelta);
+
 
 
 }
@@ -192,24 +313,24 @@ HRESULT CLevel_DHenesysHunting::Ready_Layer_Map(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
 		return E_FAIL;
 
-	CPotal::POTALDESC PotalDesc;
-	PotalDesc.eDestLevel = LEVEL_DHENESYS;
-	PotalDesc.Pos = _float3(-3.f, 1.f, -4.f);
-	PotalDesc.DestPos = _float3(30.f, 4.f, -12.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYSHUNTING, pLayerTag, &PotalDesc)))
-		return E_FAIL;
+	//CPotal::POTALDESC PotalDesc;
+	//PotalDesc.eDestLevel = LEVEL_DHENESYS;
+	//PotalDesc.Pos = _float3(-3.f, 1.f, -4.f);
+	//PotalDesc.DestPos = _float3(30.f, 4.f, -12.f);
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYSHUNTING, pLayerTag, &PotalDesc)))
+	//	return E_FAIL;
 
-	PotalDesc.eDestLevel = LEVEL_DELENYAENTER;
-	PotalDesc.Pos = _float3(43.f, 3.f, -5.f);
-	PotalDesc.DestPos = _float3(-1.f, 2.f, 0.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYSHUNTING, pLayerTag, &PotalDesc)))
-		return E_FAIL;
+	//PotalDesc.eDestLevel = LEVEL_DELENYAENTER;
+	//PotalDesc.Pos = _float3(43.f, 3.f, -5.f);
+	//PotalDesc.DestPos = _float3(-1.f, 2.f, 0.f);
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYSHUNTING, pLayerTag, &PotalDesc)))
+	//	return E_FAIL;
 
 
 
 	/* 맵 큐브 추가 > 섹션 생성 > 콜리젼 매니저 컴포넌트 멤버함수 호출로 섹션에 큐브 채우기*/
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_DHenesysHunting");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_DMini");
 	for (auto& Data : *pMapData)
 	{
 		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_DHENESYSHUNTING, pLayerTag, &Data)))
@@ -217,31 +338,33 @@ HRESULT CLevel_DHenesysHunting::Ready_Layer_Map(const _tchar * pLayerTag)
 	}
 
 
-	list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_HenesysHunting");
-	if (nullptr != pModelData)
-	{
-		for (auto& Model : *pModelData)
-		{
-			CVIBuffer_Voxel::VOXELDESC VoxDesc;
-			CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
-			VoxDesc.vPos = Model.vPos;
+	// CToolManager::Get_Instance()->MakeMiniDownCube();
 
-			_float4x4 Matrix;
-			D3DXMatrixIdentity(&Matrix);
+	//list<CMap_Manager::MODELDESC>* pModelData = pGameInstance->ReadModel(L"Total_HenesysHunting");
+	//if (nullptr != pModelData)
+	//{
+	//	for (auto& Model : *pModelData)
+	//	{
+	//		CVIBuffer_Voxel::VOXELDESC VoxDesc;
+	//		CopyMemory(VoxDesc.cFileName, Model.cModelName, sizeof(_tchar) * 256);
+	//		VoxDesc.vPos = Model.vPos;
 
-			D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
+	//		_float4x4 Matrix;
+	//		D3DXMatrixIdentity(&Matrix);
 
-			D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
+	//		D3DXMatrixRotationAxis(&Matrix, &_float3(0.f, 1.f, 0.f), D3DXToRadian(45.f));
+
+	//		D3DXVec3TransformCoord((&VoxDesc.vPos), (&VoxDesc.vPos), &Matrix);
 
 
-			VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
-			VoxDesc.vRotationAix = Model.vAix;
+	//		VoxDesc.vScale = _float3{ Model.fScale, Model.fScale, Model.fScale };
+	//		VoxDesc.vRotationAix = Model.vAix;
 
-			if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_DHENESYSHUNTING, pLayerTag, &VoxDesc)))
-				return E_FAIL;
-		}
+	//		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Wood"), LEVEL_DHENESYSHUNTING, pLayerTag, &VoxDesc)))
+	//			return E_FAIL;
+	//	}
 
-	}
+	//}
 
 
 
