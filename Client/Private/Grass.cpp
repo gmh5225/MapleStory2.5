@@ -157,6 +157,7 @@ void CGrass::SetAni()
 	switch (m_eCurState)
 	{
 	case CGrass::STATE_MOVE:
+		CGameInstance::Get_Instance()->PlaySound(L"Leaf.mp3", 8, 1.f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Grass"), 0.2f, CAnimator::STATE_LOOF);
 		break;
 	case CGrass::STATE_IDLE:

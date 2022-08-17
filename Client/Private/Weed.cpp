@@ -74,7 +74,6 @@ void CWeed::Tick(_float fTimeDelta)
 		break;
 
 	case Client::CWeed::STATE_MOVE:
-
 		Tick_Move(fTimeDelta);
 		
 		break;
@@ -140,6 +139,7 @@ void CWeed::Tick_Move(_float fTimeDelta)
 		SetState(STATE_IDLE, DIR_L);
 		return;
 	}
+	
 		if (m_bShake)
 		{
 			m_fTime += 1.f;
@@ -193,6 +193,7 @@ void CWeed::SetAni()
 	switch (m_eCurState)
 	{
 	case CWeed::STATE_MOVE:
+		CGameInstance::Get_Instance()->PlaySound(L"Leaf.mp3", 8, 1.f);
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Weed"), 0.2f, CAnimator::STATE_LOOF);
 		break;
 	case CWeed::STATE_IDLE:
