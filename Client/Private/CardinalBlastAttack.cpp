@@ -31,7 +31,7 @@ HRESULT CCardinalBlastAttack::Initialize(void * pArg)
 	Safe_AddRef(pInstance);
 
 	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-
+	
 	Safe_Release(pInstance);
 
 	m_pTransformCom->Set_Scaled(_float3{ 7.f,7.f,6.f });

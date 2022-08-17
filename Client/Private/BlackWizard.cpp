@@ -239,7 +239,7 @@ void CBlackWizard::SetAni()
 
 void CBlackWizard::Damaged(CGameObject * pOther)
 {
-	CUIManager::Get_Instance()->Fix_BlackWizardHp(-1);
+	CUIManager::Get_Instance()->Fix_BlackWizardHp(m_iHp -= pOther->Get_Damage());
 }
 
 void CBlackWizard::Skill3()

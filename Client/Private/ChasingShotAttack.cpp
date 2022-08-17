@@ -33,7 +33,7 @@ HRESULT CChasingShotAttack::Initialize(void * pArg)
 	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pInstance);
-
+	
 	m_pTransformCom->Set_Scaled(_float3{ 10.f,8.f,10.f });
 
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ChasingShot_Attack"), 0.04f, CAnimator::STATE_ONCE);

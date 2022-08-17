@@ -34,7 +34,7 @@ HRESULT CReefAttack::Initialize(void * pArg)
 	Safe_AddRef(pInstance);
 
 	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
-
+	m_iDamage = 1;
 	Safe_Release(pInstance);
 
 	m_fColRad = 0.5f;

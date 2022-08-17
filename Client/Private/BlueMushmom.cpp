@@ -458,7 +458,7 @@ void CBlueMushmom::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
-	--m_iHp;
+	m_iHp -= pOther->Get_Damage();
 	if (m_iHp <= 0)
 	{
 		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 1, 1.f);

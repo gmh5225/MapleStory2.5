@@ -29,6 +29,8 @@ HRESULT CBeastAttack::Initialize(void * pArg)
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
 
+	m_iDamage = 10;
+
 	m_pTransformCom->Set_Scaled(_float3{ 10.f,8.f,10.f });
 
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Beast_Attack"), 0.1f, CAnimator::STATE_ONCE);

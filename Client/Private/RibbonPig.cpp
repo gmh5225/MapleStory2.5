@@ -428,7 +428,7 @@ void CRibbonPig::Damaged(CGameObject * pOther)
 			SetState(STATE_HIT, DIR_L);
 	}
 
-	--m_iHp;
+	m_iHp -= pOther->Get_Damage();
 	if (m_iHp <= 0)
 	{
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);

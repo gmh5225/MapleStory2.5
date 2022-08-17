@@ -36,7 +36,7 @@ HRESULT CSunCross::Initialize(void * pArg)
 	Safe_Release(pInstance);
 
 	m_fColRad = 0.5f;
-
+	m_iDamage = 2;
 	m_pTransformCom->Set_Scaled(4.f);
 	m_pTransformCom->Set_ScaledX(1.5f);
 

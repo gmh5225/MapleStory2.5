@@ -22,13 +22,13 @@ public:
 	_bool Get_Dead() { return m_bDead; }
 	virtual void Set_Dead() { m_bDead = true; }
 
-
 	list<class CBoxCollider*>* Get_BoxColComList() { return &m_BoxColliders; }
 
 
 	// For. PushBoxCollider
 	_bool Get_PushedX() { return m_bPushedX; }
 	_bool Get_PushedY() { return m_bPushedY; }
+	_uint Get_Damage() { return m_iDamage; }
 	void Set_PushedX(_bool bPushedX) { m_bPushedX = bPushedX; }
 	void Set_PushedY(_bool bPushedY) { m_bPushedY = bPushedY; }
 
@@ -66,6 +66,8 @@ protected:
 
 	_bool				m_bPushedX = false;
 	_bool				m_bPushedY = false;
+
+	_uint				m_iDamage;
 
 protected:
 	HRESULT Add_Component(_uint iLevelIndex, const _tchar* pPrototypeTag, const _tchar* pComponentTag, class CComponent** ppOut, void* pArg = nullptr);

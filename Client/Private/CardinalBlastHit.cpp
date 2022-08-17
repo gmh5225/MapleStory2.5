@@ -23,7 +23,7 @@ HRESULT CCardinalBlastHit::Initialize(void * pArg)
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
-
+	m_iDamage = 1;
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, *(_float3*)pArg);
 	m_pTransformCom->Set_Scaled(4.f);
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_CardinalBlast_Hit"), 0.05f, CAnimator::STATE_ONCE);

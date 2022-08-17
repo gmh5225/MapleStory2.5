@@ -450,7 +450,7 @@ void CGreenMushroom::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
-	--m_iHp;
+	m_iHp -= pOther->Get_Damage();
 	if (m_iHp <= 0)
 	{
 		CSpawnerManager::Get_Instance()->Check_MonsterIndex(m_iIndexNum);

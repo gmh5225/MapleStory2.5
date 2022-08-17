@@ -36,7 +36,7 @@ HRESULT CSpearPulling::Initialize(void * pArg)
 	Safe_Release(pInstance);
 
 	m_fColRad = 0.5f;
-
+	
 	m_pTransformCom->Set_Scaled(5.f);
 	m_pTransformCom->Set_ScaledX(3.5f);
 
@@ -48,7 +48,7 @@ HRESULT CSpearPulling::Initialize(void * pArg)
 	m_bPulling = false;
 	m_fPullAcc = 0.f;
 	m_fYDistance = m_pTransformCom->Get_State(CTransform::STATE_POSITION).y;
-
+	m_iDamage = 2;
 	return S_OK;
 }
 

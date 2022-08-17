@@ -481,7 +481,7 @@ void CTransformPig::Damaged(CGameObject * pOther)
 			SetState(STATE_HIT, DIR_L);
 	}
 
-	--m_iHp;
+	m_iHp -= pOther->Get_Damage();
 	if (m_iHp <= 0)
 	{
 		//CQuestManager::Get_Instance()->Eat_Item(TEXT("TransformPig"));
