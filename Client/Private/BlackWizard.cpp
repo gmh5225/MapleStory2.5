@@ -59,7 +59,7 @@ void CBlackWizard::Tick(_float fTimeDelta)
 	if (!m_bSceneEnd)
 	{
 		m_fSceneAcc += 1.f * fTimeDelta;
-		if (m_fSceneAcc > 10)
+		if (m_fSceneAcc > 15)
 		{
 			m_bSceneEnd = true;
 			m_fSceneAcc = 0.f;

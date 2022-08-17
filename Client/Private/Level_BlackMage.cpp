@@ -55,14 +55,14 @@ void CLevel_BlackMage::Tick(_float fTimeDelta)
 
 
 	m_fCreateAcc += 1.f * fTimeDelta;
-	if (m_fCreateAcc > 6.f)
+	if (m_fCreateAcc > 15.f)
 	{
-		//CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		//Safe_AddRef(pGameInstance);
-		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ -22.f,8.f,0.f });
-		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f,11.f,20.f });
-		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 23.f, 8.f,0.f });
-		//Safe_Release(pGameInstance);
+		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		Safe_AddRef(pGameInstance);
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ -22.f,8.f,0.f });
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f,11.f,20.f });
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 23.f, 8.f,0.f });
+		Safe_Release(pGameInstance);
 
 		m_fCreateAcc = 0.f;
 	}

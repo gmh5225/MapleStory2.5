@@ -190,7 +190,7 @@ HRESULT CLevel_BlackMageEnter::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	PotalDesc.eDestLevel = LEVEL_DARKMAGE;
 	PotalDesc.Pos = _float3(26.f, 4.f, 0.f);
-	PotalDesc.DestPos = _float3(-1.f, -5.f, -20.f);
+	PotalDesc.DestPos = _float3(-1.f, 5.f, -20.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DARKMAGEENTER, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 
