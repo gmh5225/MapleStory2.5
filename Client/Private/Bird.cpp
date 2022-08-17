@@ -242,7 +242,7 @@ void CBird::SetAni()
 		//	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_MoveL"), 0.3f, CAnimator::STATE_LOOF);
 		//else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_Bird_ChaseR"), 0.3f, CAnimator::STATE_LOOF);
-
+			CGameInstance::Get_Instance()->PlaySound(L"Bird.mp3", 9, 1.f);
 	//	break;
 	}
 }
