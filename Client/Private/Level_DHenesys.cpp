@@ -61,7 +61,7 @@ HRESULT CLevel_DHenesys::Initialize()
 	
 	CGameInstance::Get_Instance()->StopAll();
 	CGameInstance::Get_Instance()->PlayBGM(L"destructionTown.mp3", 1.f);
-	CGameInstance::Get_Instance()->PlaySoundW(L"Wind.mp3", 7, 1.f);
+	CGameInstance::Get_Instance()->PlaySoundW(L"Wind.mp3", 7, 0.7f);
 	CGameInstance::Get_Instance()->PlaySoundW(L"Fire.mp3", 6, 1.f);
 
 	CUIManager::Get_Instance()->End_Loading();

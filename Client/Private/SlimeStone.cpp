@@ -33,7 +33,7 @@ HRESULT CSlimeStone::Initialize(void * pArg)
 	
 
 	m_pTransformCom->Set_State(CTransform::STATE_POSITION, pSlimeStoneDesc->vPos);
-	m_pTransformCom->Set_Scaled(4.f);
+	m_pTransformCom->Set_Scaled(1.f);
 	m_fTime = 0.f;
 	SetState(STATE_IDLE, DIR_L);
 
