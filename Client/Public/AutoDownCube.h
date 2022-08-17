@@ -52,6 +52,8 @@ private:
 
 	_float m_fDownTimeAcc = 0.f;
 
+	_bool m_bSound = false;
+
 private:
 	HRESULT Set_RenderState();
 	HRESULT Reset_RenderState();

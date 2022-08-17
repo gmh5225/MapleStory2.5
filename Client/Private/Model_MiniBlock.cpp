@@ -200,6 +200,7 @@ void CModel_MiniBlock::Collision(CGameObject * pOther)
 		{// 안들고 있다면 들기
 			CToolManager::Get_Instance()->Set_MiniPicked(m_Desc.etype);
 			m_bPicked = true;
+			CGameInstance::Get_Instance()->PlaySoundW(L"GetMini.mp3", 3, 1.f);
 		}
 		else
 		{// 들고 있다면 짝 확인
@@ -209,11 +210,13 @@ void CModel_MiniBlock::Collision(CGameObject * pOther)
 				CToolManager::Get_Instance()->Set_MiniBingo(true);
 				Go_DestMini();
 				Set_Dead();
+				CGameInstance::Get_Instance()->PlaySoundW(L"Clear.mp3", 3, 1.f);
 			}
 			else
 			{		// 틀렸다면 너빽
 				CCreature* pPlayer = (CCreature*)pOther;
 				pPlayer->SetKnockBack(10.f, 10.f, _float3{-1.f, 0.f, 0.f});
+				CGameInstance::Get_Instance()->PlaySoundW(L"FailSound.mp3", 3, 1.f);
 			}
 
 		}

@@ -52,6 +52,9 @@ public:
 	void Start_Enter_DHenesys();
 	void End_Enter_DHenesys();
 
+	void Start_Enter_BlackMage();
+	void End_Enter_BlackMage();
+
 
 	void SetCamPos(_float3 vPos);
 
@@ -69,9 +72,11 @@ public:
 
 	void Enter_InitGASHenesys(_float fTimeDelta);
 
-
 	void Enter_InitDHenesys(_float fTimeDelta);
+
 	void Enter_DHenesys(_float fTimeDelta);
+
+	void Enter_BlackMage(_float fTimeDelta);
 
 
 private:
@@ -86,6 +91,7 @@ private:
 	_bool m_bInitGASHenesys = false;
 	_bool m_bInitDHenesys = false;
 	_bool m_bDHenesys = false;
+	_bool m_bBlackMage = false;
 
 	//.for Henesys_1
 	_bool	m_bEnter_Henesys_1 = false;
@@ -132,6 +138,13 @@ private:
 	_bool m_b8 = false;
 	_bool m_b8_1 = false;
 	_bool m_b8_2 = false;
+
+	//.for BlackMage
+	_float m_bEnter_BlackMage = false;
+	_float m_fBlackMage_TimeAcc = 0.f;
+	_bool m_b9 = false;
+
+
 
 	// .For Total
 	_float m_fMainUITimeAcc = 0.f;

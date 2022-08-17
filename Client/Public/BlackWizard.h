@@ -27,7 +27,7 @@ public:
 	void Pattern();
 	void Fix_Scale();
 
-	void MakeBlockCube(_float3 vPos);
+	void MakeBlockCube();
 
 public:
 	virtual void SetAni() override;
@@ -49,6 +49,7 @@ private:
 	bool m_bFinal;
 	bool m_bSound;
 	_int m_iHp;
+
 public:
 	static CBlackWizard* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

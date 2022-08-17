@@ -37,6 +37,7 @@ public:
 	
 	void Set_MinPlayerCam() { m_vPlayerChasePos = _float3{ 0.f, 7.f, -8.f }; }
 	void Set_MaxPlayerCam() { m_vPlayerChasePos = _float3{ 0.f, 9.f, -10.f }; }
+	void Set_EndPlayerCam() { m_vPlayerChasePos = _float3{ 0.f, 11.f, -12.f }; }
 
 
 public:

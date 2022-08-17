@@ -40,6 +40,7 @@ private:
 
 private:
 	CCollider*				m_pColliderCom = nullptr;
+	_float m_fTimeAcc = 0.f;
 
 public:
 	static CLevel_DElenya* Create(LPDIRECT3DDEVICE9 pGraphic_Device);

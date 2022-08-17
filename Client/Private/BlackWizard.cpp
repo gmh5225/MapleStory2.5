@@ -53,23 +53,25 @@ HRESULT CBlackWizard::Initialize(void * pArg)
 
 void CBlackWizard::Tick(_float fTimeDelta)
 {
-	
+	MakeBlockCube();
 }
 
 void CBlackWizard::LateTick(_float fTimeDelta)
 {
+
 	if (m_bFinal)
 	{
 		m_eCurState = STATE_STAND;
 		SetAni();
 	}
-		
-	else if(m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
+	else if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 	{
 		Pattern();
-		if(m_eCurState != STATE_END)
-		SetState();
+		if (m_eCurState != STATE_END)
+			SetState();
 	}
+
+
 	Fix_Scale();
 
 	
@@ -384,12 +386,23 @@ void CBlackWizard::Free()
 
 
 
-void CBlackWizard::MakeBlockCube(_float3 vPos)
+void CBlackWizard::MakeBlockCube()
 {
-	CMap_Manager::CUBEDATA desc;
-	desc.iIndex = 1;
-	desc.vPos = vPos;
+	_int iNum = 3 - CToolManager::Get_Instance()->Get_BlackCubeCount();
 
-	if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_LaserBlockCube"), LEVEL_DARKMAGE, TEXT("Layer_Cube"), &desc)))
-		return;
+	CMap_Manager::CUBEDATA desc;
+	for (_int i = 0; i < iNum; i++)
+	{
+		_float fX = CGameInstance::Get_Instance()->Get_FloatRandom(-8.f, 8.f);
+		_float fZ = CGameInstance::Get_Instance()->Get_FloatRandom(-8.f, 8.f);
+
+		desc.iIndex = 1;
+		desc.vPos = _float3{ fX, 3.f, fZ };
+
+		if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_LaserBlockCube"), LEVEL_DARKMAGE, TEXT("Layer_Cube"), &desc)))
+			return;
+
+		CToolManager::Get_Instance()->IncreaseBlackCubeCount();
+	}
+
 }

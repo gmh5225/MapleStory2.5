@@ -429,6 +429,7 @@ void CBlueMushmom::SetAni()
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueMushmom_AttackR"), 0.5f, CAnimator::STATE_ONCE);
 		else
 			m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueMushmom_Attack"), 0.5f, CAnimator::STATE_ONCE);
+		CGameInstance::Get_Instance()->PlaySound(L"MushJump.mp3", 10, 1.f);
 		break;
 	case CBlueMushmom::STATE_CUTSCEEN:
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlueMushmom_Idle"), 0.1f, CAnimator::STATE_LOOF);
@@ -460,6 +461,9 @@ void CBlueMushmom::Damaged(CGameObject * pOther)
 	Safe_Release(pGameInstance);
 	if (pOther->Get_Tag() == "Player_Skill")
 	m_iHp -= pOther->Get_Damage();
+
+	CGameInstance::Get_Instance()->PlaySound(L"MushDamage.mp3", 10, 1.f);
+
 	if (m_iHp <= 0)
 	{
 		CGameInstance::Get_Instance()->PlaySound(L"OrangeMushroomDie.wav", 1, 1.f);
@@ -508,7 +512,7 @@ void CBlueMushmom::Collision(CGameObject * pOther)
 	{
 		if (m_bLanding && m_bShake)
 		{
-			CGameInstance::Get_Instance()->PlaySound(L"GASjump.wav", 10, 0.7f);
+			CGameInstance::Get_Instance()->PlaySound(L"MushDown.mp3", 10, 1.f);
 
 			CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking();
 			CParticleManager::Get_Instance()->BlueMushRoom_Lend(m_pTransformCom->Get_State(CTransform::STATE_POSITION));

@@ -53,6 +53,16 @@ public:
 	void Set_BlackCubeOn(_bool bBlackCubeOn) { m_bBlackCubeOn = bBlackCubeOn; }
 	_bool Get_BlackCubeOn() { return m_bBlackCubeOn; }
 
+	void DecreaseBlackCubeCount() { 
+		--m_iBlackCubeCount; 
+		if (0 > m_iBlackCubeCount) 
+			m_iBlackCubeCount = 0; 
+	}
+	void IncreaseBlackCubeCount() {
+		++m_iBlackCubeCount;
+	}
+	_int Get_BlackCubeCount() { return m_iBlackCubeCount; }
+
 
 private:
 	LEVEL m_eDestLevel = LEVEL_END;
@@ -63,7 +73,7 @@ private:
 	_int m_iMonsterCount = 6;
 
 	_bool m_bBlackCubeOn = false;
-
+	_int m_iBlackCubeCount = 0;
 
 public:
 	virtual void Free() override;

@@ -25,9 +25,10 @@ void CMap_Manager::SetFildNames()
 	m_MapNames.push_back(string("Map_DarkMageEnter"));
 	m_MapNames.push_back(string("Map_DarkMage"));
 	m_MapNames.push_back(string("Map_WhiteMageds"));
+	m_MapNames.push_back(string("Map_END"));
 
 
-
+	
 	
 
 

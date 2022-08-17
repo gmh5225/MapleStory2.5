@@ -146,6 +146,8 @@ void CToolManager::MakeMiniDownCube()
 
 
 	m_ePickedMiniBlock = CModel_MiniBlock::MINI_END;
+
+	CGameInstance::Get_Instance()->PlaySoundW(L"OpenMini.mp3", 4, 1.f);
 }
 
 

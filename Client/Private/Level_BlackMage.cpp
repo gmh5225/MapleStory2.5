@@ -42,6 +42,8 @@ HRESULT CLevel_BlackMage::Initialize()
 
 	CUIManager::Get_Instance()->End_Loading();
 
+	CCutSceneManager::Get_Instance()->Start_Enter_BlackMage();
+
 	return S_OK;
 }
 
@@ -51,28 +53,16 @@ void CLevel_BlackMage::Tick(_float fTimeDelta)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
 
-	if (GetKeyState('N') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
 
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
-			return;
-
-		
-		Safe_Release(pGameInstance);
-
-	}
 	m_fCreateAcc += 1.f * fTimeDelta;
 	if (m_fCreateAcc > 6.f)
 	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ -22.f,8.f,0.f });
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f,12.f,20.f });
-		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 23.f, 8.f,0.f });
-		Safe_Release(pGameInstance);
+		//CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
+		//Safe_AddRef(pGameInstance);
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ -22.f,8.f,0.f });
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f,11.f,20.f });
+		//pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 23.f, 8.f,0.f });
+		//Safe_Release(pGameInstance);
 
 		m_fCreateAcc = 0.f;
 	}
@@ -132,12 +122,12 @@ HRESULT CLevel_BlackMage::Ready_Layer_Map(const _tchar * pLayerTag)
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Sky"), LEVEL_GAMEPLAY, pLayerTag, &SkyDesc)))
 		return E_FAIL;
 
-	CPotal::POTALDESC PotalDesc;
-	PotalDesc.eDestLevel = LEVEL_WHITEMAGE;
-	PotalDesc.Pos = _float3(0.f, 2.f, 0.f);
-	PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
-	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DARKMAGE, pLayerTag, &PotalDesc)))
-		return E_FAIL;
+	//CPotal::POTALDESC PotalDesc;
+	//PotalDesc.eDestLevel = LEVEL_WHITEMAGE;
+	//PotalDesc.Pos = _float3(0.f, 2.f, 0.f);
+	//PotalDesc.DestPos = _float3(0.f, 1.f, 0.f);
+	//if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DARKMAGE, pLayerTag, &PotalDesc)))
+	//	return E_FAIL;
 
 	/* 맵 큐브 추가 > 섹션 생성 > 콜리젼 매니저 컴포넌트 멤버함수 호출로 섹션에 큐브 채우기*/
 

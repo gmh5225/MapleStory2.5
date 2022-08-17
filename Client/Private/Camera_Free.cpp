@@ -52,7 +52,8 @@ HRESULT CCamera_Free::Initialize(void * pArg)
 	
 
 	m_pTransformCom->Rotation(_float3{ 1.f,0.f,0.f }, 210.f);
-	Set_MaxPlayerCam();
+	// Set_MaxPlayerCam();
+	Set_MinPlayerCam();
 
 	return S_OK;
 }

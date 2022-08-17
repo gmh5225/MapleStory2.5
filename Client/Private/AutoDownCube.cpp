@@ -43,6 +43,9 @@ HRESULT CAutoDownCube::Initialize(void * pArg)
 
 void CAutoDownCube::Tick(_float fTimeDelta)
 {
+	if (5 == m_pData->iIndex)
+		return;
+
 	m_fDownTimeAcc += fTimeDelta;
 
 	
@@ -105,8 +108,17 @@ HRESULT CAutoDownCube::Render()
 	if (FAILED(m_pTransformCom->Bind_WorldMatrix()))
 		return E_FAIL;
 
-	if (FAILED(m_pTextureCom->Bind_Texture(m_pData->iIndex)))
-		return E_FAIL;
+	if (5 == m_pData->iIndex)
+	{
+		if (FAILED(m_pTextureCom->Bind_Texture(m_pData->iIndex + 1)))
+			return E_FAIL;
+	}
+	else
+	{
+		if (FAILED(m_pTextureCom->Bind_Texture(m_pData->iIndex)))
+			return E_FAIL;
+	}
+
 
 
 	if (FAILED(Set_RenderState()))
@@ -160,6 +172,11 @@ void CAutoDownCube::Shake(_float fTimeDelta)
 void CAutoDownCube::Down(_float fTimeDelta)
 {
 	m_pTransformCom->Go_Gravity(fTimeDelta);
+
+	if (!m_bSound)
+	{
+		m_bSound = true;
+	}
 }
 
 HRESULT CAutoDownCube::Set_RenderState()

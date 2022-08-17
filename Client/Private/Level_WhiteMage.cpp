@@ -62,6 +62,8 @@ HRESULT CLevel_WhiteMage::Initialize()
 	CUIManager::Get_Instance()->End_Loading();
 	// CCutSceneManager::Get_Instance()->Start_Enter_Henesys_2();
 
+	CCutSceneManager::Get_Instance()->Get_MainCam()->Set_EndPlayerCam();
+
 	return S_OK;
 }
 
@@ -71,19 +73,6 @@ void CLevel_WhiteMage::Tick(_float fTimeDelta)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
 
-	if (GetKeyState('N') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
-			return;
-
-		
-		Safe_Release(pGameInstance);
-
-	}
 
 
 }
@@ -208,10 +197,10 @@ HRESULT CLevel_WhiteMage::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	/* 맵 큐브 추가 > 섹션 생성 > 콜리젼 매니저 컴포넌트 멤버함수 호출로 섹션에 큐브 채우기*/
 
-	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_WhiteMageds");
+	list<CMap_Manager::CUBEDATA>* pMapData = pGameInstance->ReadMap(L"Map_END");
 	for (auto& Data : *pMapData)
 	{
-		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Cube"), LEVEL_WHITEMAGE, pLayerTag, &Data)))
+		if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_AutoDownCube"), LEVEL_WHITEMAGE, pLayerTag, &Data)))
 			return E_FAIL;
 	}
 
