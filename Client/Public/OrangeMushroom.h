@@ -51,7 +51,7 @@ private:
 	_bool m_bDir;
 	_float m_fDistance;
 
-	_uint m_iHp;
+	_int m_iHp;
 	_int m_iIndexNum;
 
 	_bool temp = false;

@@ -448,6 +448,7 @@ void CGoStump::Damaged(CGameObject * pOther)
 
 	Safe_Release(pGameInstance);
 
+	if(pOther->Get_Tag() == "Player_Skill")
 	m_iHp -= pOther->Get_Damage();
 	if (m_iHp <= 0)
 	{

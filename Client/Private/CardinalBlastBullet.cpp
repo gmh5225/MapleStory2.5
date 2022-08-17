@@ -31,7 +31,8 @@ HRESULT CCardinalBlastBullet::Initialize(void * pArg)
 		return E_FAIL;
 
 	m_fColRad = 0.1f;
-
+	m_iDamage = 1;
+	m_sTag = "Player_Skill";
 	m_pTransformCom->Set_Scaled(_float3{ 3.f,1.5f,1.5f });
 	
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_CardinalBlast_Bullet"), 1.f, CAnimator::STATE_LOOF);

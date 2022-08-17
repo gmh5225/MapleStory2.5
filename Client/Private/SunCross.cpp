@@ -34,7 +34,7 @@ HRESULT CSunCross::Initialize(void * pArg)
 	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pInstance);
-
+	m_sTag = "Player_Skill";
 	m_fColRad = 0.5f;
 	m_iDamage = 2;
 	m_pTransformCom->Set_Scaled(4.f);

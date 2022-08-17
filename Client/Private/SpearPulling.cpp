@@ -30,7 +30,7 @@ HRESULT CSpearPulling::Initialize(void * pArg)
 		return E_FAIL;
 	CGameInstance* pInstance = CGameInstance::Get_Instance();
 	Safe_AddRef(pInstance);
-
+	m_sTag = "Player_Skill";
 	m_pTarget = (CTransform*)pInstance->Get_ComponentPtr(LEVEL_STATIC, TEXT("Layer_Player"), TEXT("Com_Transform"), 0);
 
 	Safe_Release(pInstance);

@@ -48,7 +48,7 @@ private:
 	bool m_bState;
 	bool m_bFinal;
 	bool m_bSound;
-	_uint m_iHp;
+	_int m_iHp;
 public:
 	static CBlackWizard* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

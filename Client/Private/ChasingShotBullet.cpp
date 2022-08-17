@@ -32,6 +32,7 @@ HRESULT CChasingShotBullet::Initialize(void * pArg)
 
 
 	m_pTransformCom->Set_Scaled(_float3{ 6.f,3.5f,6.5f });
+	m_sTag = "Player_Skill";
 	m_iDamage = 4;
 	m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_ChasingShot_Bullet"), 1.f, CAnimator::STATE_LOOF);
 

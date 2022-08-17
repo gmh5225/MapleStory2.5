@@ -28,7 +28,7 @@ HRESULT CBeastAttack::Initialize(void * pArg)
 
 	if (FAILED(SetUp_Components()))
 		return E_FAIL;
-
+	m_sTag = "Player_Skill";
 	m_iDamage = 10;
 
 	m_pTransformCom->Set_Scaled(_float3{ 10.f,8.f,10.f });
