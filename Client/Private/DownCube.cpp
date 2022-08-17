@@ -41,6 +41,16 @@ HRESULT CDownCube::Initialize(void * pArg)
 
 void CDownCube::Tick(_float fTimeDelta)
 {
+	if ((3 == m_pData.iIndex) && CToolManager::Get_Instance()->Get_MiniEnd())
+	{
+		m_bDown = true;
+	}
+	else if ((4 == m_pData.iIndex) && (0 == CToolManager::Get_Instance()->GetMonCount()))
+	{
+		m_bDown = true;
+	}
+
+
 
 	if (m_bDown)
 	{
@@ -64,15 +74,17 @@ void CDownCube::Tick(_float fTimeDelta)
 		Set_Dead();
 	}
 
-	CGameObject* pPlayer =  CToolManager::Get_Instance()->GetPlayer();
-	CTransform* pPTran = (CTransform*) pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
-	_float3 vPPos = pPTran->Get_State(CTransform::STATE_POSITION);
-
-	if (vPPos.y < -10.f)
+	if (!(3 == m_pData.iIndex) && !(4 == m_pData.iIndex))
 	{
-		Set_Dead();
-	}
+		CGameObject* pPlayer = CToolManager::Get_Instance()->GetPlayer();
+		CTransform* pPTran = (CTransform*)pPlayer->Get_ComponentPtr(TEXT("Com_Transform"));
+		_float3 vPPos = pPTran->Get_State(CTransform::STATE_POSITION);
 
+		if (vPPos.y < -10.f)
+		{
+			Set_Dead();
+		}
+	}
 }
 
 void CDownCube::LateTick(_float fTimeDelta)
@@ -118,13 +130,6 @@ HRESULT CDownCube::Render()
 	if (FAILED(Reset_RenderState()))
 		return E_FAIL;
 
-	if (CGameInstance::Get_Instance()->Key_Down(DIK_0))
-	{
-		if (temp)
-			temp = false;
-		else
-			temp = true;
-	}
 
 	//if (temp)
 	__super::BoxColCom_Render(m_pTransformCom);
@@ -134,7 +139,7 @@ HRESULT CDownCube::Render()
 
 void CDownCube::Collision(CGameObject * pOther)
 {
-	if ("Tag_Player" == pOther->Get_Tag())
+	if (("Tag_Player" == pOther->Get_Tag()) && !(3 == m_pData.iIndex) && !(4 == m_pData.iIndex))
 	{
 		m_bDown = true;
 	}

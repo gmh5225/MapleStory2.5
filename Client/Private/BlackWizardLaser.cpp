@@ -168,6 +168,18 @@ void CBlackWizardLaser::Collision(CGameObject * pOther)
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackMarbleDie"), 0.1f, CAnimator::STATE_ONCE);
 		//m_pTransformCom->Set_Scaled(_float3{ 4.f,6.f,4.f });
 	}
+	else if ("Tag_PushCube" == pOther->Get_Tag())
+	{
+		if (0 < m_pOther.size())
+			return;
+
+		m_bMove = false;
+		m_pOther.push_back(pOther);
+		m_eCurState = STATE_DIE;
+		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_BlackMarbleDie"), 0.1f, CAnimator::STATE_ONCE);
+	}
+
+
 }
 
 void CBlackWizardLaser::SetAni()

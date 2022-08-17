@@ -27,6 +27,8 @@ public:
 	void Pattern();
 	void Fix_Scale();
 
+	void MakeBlockCube(_float3 vPos);
+
 public:
 	virtual void SetAni() override;
 	virtual void Damaged(CGameObject* pOther) override;

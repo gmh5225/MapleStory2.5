@@ -231,7 +231,7 @@ HRESULT CLevel_DHenesys::Ready_Layer_Map(const _tchar * pLayerTag)
 	CPotal::POTALDESC PotalDesc;
 	PotalDesc.eDestLevel = LEVEL_DHENESYSHUNTING;
 	PotalDesc.Pos = _float3(30.f, 4.f, -12.f);
-	PotalDesc.DestPos = _float3(-1.f, 2.f, 0.f);
+	PotalDesc.DestPos = _float3(-16.f, 1.f, -16.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DHENESYS, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 

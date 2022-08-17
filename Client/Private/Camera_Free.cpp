@@ -52,7 +52,7 @@ HRESULT CCamera_Free::Initialize(void * pArg)
 	
 
 	m_pTransformCom->Rotation(_float3{ 1.f,0.f,0.f }, 210.f);
-	m_vPlayerChasePos = _float3{ 0.f, 7.f, -8.f };
+	Set_MaxPlayerCam();
 
 	return S_OK;
 }

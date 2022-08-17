@@ -169,6 +169,8 @@
 #include "BlockCube.h"
 #include "Tomb.h"
 #include "TombUI.h"
+#include "LaserBlockCube.h"
+#include "SeeCube.h"
 
 CLoader::CLoader(LPDIRECT3DDEVICE9 pGraphic_Device)
 	: m_pGraphic_Device(pGraphic_Device)
@@ -1152,6 +1154,14 @@ HRESULT CLoader::Load_Model_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlockCube"),
 		CBlockCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_LaserBlockCube"),
+		CLaserBlockCube::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_SeeCube"),
+		CSeeCube::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_Wood"),

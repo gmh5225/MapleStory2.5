@@ -22,7 +22,6 @@ public:
 	virtual void LateTick(_float fTimeDelta) override;
 	virtual HRESULT Render() override;
 
-
 public:
 	CTransform* Get_Transform() { return m_pTransformCom; }
 
@@ -36,6 +35,9 @@ public:
 	void Start_AttackShaking();
 	void Start_AttackShaking2();
 	
+	void Set_MinPlayerCam() { m_vPlayerChasePos = _float3{ 0.f, 7.f, -8.f }; }
+	void Set_MaxPlayerCam() { m_vPlayerChasePos = _float3{ 0.f, 9.f, -10.f }; }
+
 
 public:
 	void SetTarget(CGameObject* pTarget) { m_pTarget = pTarget; }

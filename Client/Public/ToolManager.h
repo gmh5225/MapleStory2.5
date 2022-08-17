@@ -48,6 +48,12 @@ public:
 	void DecreaseMonCount() { --m_iMonsterCount; }
 	_int GetMonCount() { return m_iMonsterCount; }
 
+
+	// .For BlackMage
+	void Set_BlackCubeOn(_bool bBlackCubeOn) { m_bBlackCubeOn = bBlackCubeOn; }
+	_bool Get_BlackCubeOn() { return m_bBlackCubeOn; }
+
+
 private:
 	LEVEL m_eDestLevel = LEVEL_END;
 	_float3 m_vDestPos;
@@ -55,6 +61,9 @@ private:
 	_bool m_bMiniBingo = false;
 	_bool m_bEndMini = false;
 	_int m_iMonsterCount = 6;
+
+	_bool m_bBlackCubeOn = false;
+
 
 public:
 	virtual void Free() override;

@@ -41,6 +41,9 @@ public:
 
 	_bool m_bStartTalk = false;
 
+	_float m_fTalkDelayTimeAcc = 0.f;
+	_bool m_bOnTalk = false;
+
 public:
 	static CDomiScreen* Create(LPDIRECT3DDEVICE9 pGraphic_Device);
 	virtual CGameObject* Clone(void* pArg);

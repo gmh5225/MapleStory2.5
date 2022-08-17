@@ -22,7 +22,6 @@ public:
 	_bool Get_Dead() { return m_bDead; }
 	virtual void Set_Dead() { m_bDead = true; }
 
-
 	list<class CBoxCollider*>* Get_BoxColComList() { return &m_BoxColliders; }
 
 

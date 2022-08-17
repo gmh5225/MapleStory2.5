@@ -247,7 +247,7 @@ void CModel_MiniBlock::Go_DestMini()
 		
 	else if (CModel_MiniBlock::MINI_YERROW == m_Desc.etype)
 	{
-		vTemp = _float3{ -12.5f, 2.f, -12.5f };
+		vTemp = _float3{ -13.5f, 2.f, -13.5f };
 		CTransform* pTransform = (CTransform*)CToolManager::Get_Instance()->GetPlayer()->Get_ComponentPtr(TEXT("Com_Transform"));
 		pTransform->Set_State(CTransform::STATE_POSITION, vTemp);
 		CToolManager::Get_Instance()->Set_MiniEnd();

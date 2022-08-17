@@ -120,7 +120,7 @@ void CMainApp::Tick(_float fTimeDelta)
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_PLAYER_SKILL, CCollider::COLLSION_MONSTER_SKILL);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_MONSTER_SKILL);
 	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_MONSTER, CCollider::COLLSION_MONSTER_SKILL);
-
+	m_pCollider->Check_BoxCollsion(CCollider::COLLSION_MONSTER_SKILL, CCollider::COLLSION_PUSHBLOCK);
 
 
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_PUSHBLOCK, CCollider::COLLSION_PLAYER);
@@ -129,12 +129,14 @@ void CMainApp::Tick(_float fTimeDelta)
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_MODEL, CCollider::COLLSION_DOWNBLOCK);
 	m_pCollider->Check_PushBoxCollsion(CCollider::COLLSION_MODEL, CCollider::COLLSION_PLAYER);
 
+
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PUSHBLOCK);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_TRIGGERBLOCK);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_PLAYER);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MONSTER);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLISION_ITEM);
 	m_pCollider->Check_PushCubeCollsion(CCollider::COLLSION_MODEL);
+	
 	
 
 	m_pCollider->Check_SphereCollsion(CCollider::COLLSION_UI, CCollider::COLLSION_PLAYER);
@@ -258,6 +260,9 @@ HRESULT CMainApp::Ready_Prototype_Component()
 		CShader::Create(m_pGraphic_Device, TEXT("../Bin/ShaderFiles/Shader_Player.hlsl")))))
 		return E_FAIL;
 
+	if (FAILED(m_pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Shader_Cube"),
+		CShader::Create(m_pGraphic_Device, TEXT("../Bin/ShaderFiles/Shader_Cube.hlsl")))))
+		return E_FAIL;
 
 	return S_OK;
 }

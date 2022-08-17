@@ -53,6 +53,7 @@ void CDomiScreen::OnCutScreen()
 	m_fTimeAcc = 0.f;
 
 	m_bRender = true;
+	CGameInstance::Get_Instance()->PlaySoundW(L"domiClose.wav", 3, 1.f);
 }
 void CDomiScreen::OffCutScreen()
 {
@@ -61,6 +62,7 @@ void CDomiScreen::OffCutScreen()
 	m_fTimeAcc = 0.f;
 
 	m_bRender = true;
+	CGameInstance::Get_Instance()->PlaySoundW(L"domiOpen.wav", 3, 1.f);
 }
 
 
@@ -70,9 +72,17 @@ void CDomiScreen::Tick(_float fTimeDelta)
 	OnOffTick(fTimeDelta);
 
 	if (m_bStartTalk)
-		BlackMageTalkTick(fTimeDelta);
-
-
+	{
+		m_fTalkDelayTimeAcc += fTimeDelta;
+		if (1.f < m_fTalkDelayTimeAcc)
+		{
+			BlackMageTalkTick(fTimeDelta);
+			if (!m_bOnTalk)
+				CGameInstance::Get_Instance()->PlaySoundW(L"DarkTalk.wav", 4, 1.f);
+			m_bOnTalk = true;
+		}
+	}
+		
 }
 
 void CDomiScreen::LateTick(_float fTimeDelta)
@@ -136,7 +146,6 @@ void CDomiScreen::OnOffTick(_float fTimeDelta)
 
 	if (m_bCutScreen)
 	{
-
 		m_fTimeAcc += fTimeDelta;
 
 		if (0.1f < m_fTimeAcc)
@@ -178,7 +187,7 @@ void CDomiScreen::BlackMageTalkTick(_float fTimeDelta)
 	{
 		++m_iTalkCount;
 
-		if (26 < m_iTalkCount)
+		if (0.f > m_fTempA)
 			m_bStartTalk = false;
 
 		m_fTalkTimeAcc = 0.f;
@@ -199,8 +208,8 @@ void CDomiScreen::BlackMageTalk()
 	}
 	case 1:
 	{
-		wsprintf(cChat, TEXT("대"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .1f));
 
@@ -208,8 +217,8 @@ void CDomiScreen::BlackMageTalk()
 		break;
 	case 2:
 	{
-		wsprintf(cChat, TEXT("대적"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .2f));
 	}
@@ -217,114 +226,169 @@ void CDomiScreen::BlackMageTalk()
 		break;
 	case 3:
 	{
-		wsprintf(cChat, TEXT("대적자"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, "));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .3f));
 	}
 		break;
 	case 4:
 	{
-		wsprintf(cChat, TEXT("대적자여"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .4f));
 	}
 		break;
 	case 5:
 	{
-		wsprintf(cChat, TEXT("대적자여 운"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .5f));
 	}
 		break;
 	case 6:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .6f));
 	}
 		break;
 	case 7:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f- 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f- 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .7f));
 	}
 		break;
 	case 8:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을 완"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여."));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .8f));
 	}
 		break;
 	case 9:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을 완성"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여. "));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, .9f));
 	}
 		break;
 	case 10:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을 완성할"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여. "));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
 	}
 		break;
 	case 11:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여. 운"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
 	}
 		break;
 	case 12:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다"));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
 	}
 		break;
 	case 13:
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다."));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
 	}
 		break;
+	case 14:
+	{
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		m_pFont->DrawText(NULL, cChat,
+			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
+	}
+	break;
+	case 15:
+	{
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		m_pFont->DrawText(NULL, cChat,
+			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
+	}
+	break;
+	case 16:
+	{
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성할"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		m_pFont->DrawText(NULL, cChat,
+			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
+	}
+	break;
+	case 17:
+	{
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성할 "));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		m_pFont->DrawText(NULL, cChat,
+			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
+	}
+	break;
+	case 18:
+	{
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성할 때"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		m_pFont->DrawText(NULL, cChat,
+			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
+	}
+	break;
+	case 19:
+	{
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성할 때다"));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		m_pFont->DrawText(NULL, cChat,
+			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
+	}
+	break;
+	case 20:
+	{
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성할 때다."));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		m_pFont->DrawText(NULL, cChat,
+			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
+	}
+	break;
 	default:
 	{
 		//wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다."));
 		//SetRect(&rc, g_iWinSizeX*0.5f - 61.f, g_iWinSizeY*0.5f, 0, 0);
 		//m_pFont->DrawText(NULL, cChat,
 		//	-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 1.f, 1.f, .5f));
-		if (24 > m_iTalkCount)
+		if (35 > m_iTalkCount)
 		{
-			wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다."));
-			SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+			wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성할 때다."));
+			SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 			m_pFont->DrawText(NULL, cChat,
-				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.f));
-
+				-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, 1.));
 		}
 	}
 		break;
 	}
 
-	if (24 < m_iTalkCount)
+	if (40 < m_iTalkCount)
 	{
-		wsprintf(cChat, TEXT("대적자여 운명을 완성할 때다."));
-		SetRect(&rc, g_iWinSizeX*0.5f - 150.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
+		wsprintf(cChat, TEXT("오라, 대적자여. 운명을 완성할 때다."));
+		SetRect(&rc, g_iWinSizeX*0.5f - 180.f, g_iWinSizeY*0.5f - 40.f, 0, 0);
 		m_pFont->DrawText(NULL, cChat,
 			-1, &rc, DT_NOCLIP, D3DXCOLOR(1.f, 0.f, 0.f, m_fTempA));
 		m_fTempA -= 0.1f;

@@ -189,6 +189,7 @@
     <ClInclude Include="..\public\DomiScreen.h" />
     <ClInclude Include="..\Public\Harp.h" />
     <ClInclude Include="..\public\JalJang.h" />
+    <ClInclude Include="..\public\LaserBlockCube.h" />
     <ClInclude Include="..\public\LevelUp.h" />
     <ClInclude Include="..\Public\KingSlime.h" />
     <ClInclude Include="..\public\Level_BlackMageJump.h" />
@@ -326,6 +327,7 @@
     <ClInclude Include="..\Public\RockEnter.h" />
     <ClInclude Include="..\Public\Root.h" />
     <ClInclude Include="..\public\Section.h" />
+    <ClInclude Include="..\public\SeeCube.h" />
     <ClInclude Include="..\public\Shadow.h" />
     <ClInclude Include="..\Public\SkillFrame.h" />
     <ClInclude Include="..\Public\SkillGradeBtn0.h" />
@@ -407,6 +409,7 @@
     <ClCompile Include="..\private\DomiScreen.cpp" />
     <ClCompile Include="..\Private\Harp.cpp" />
     <ClCompile Include="..\private\JalJang.cpp" />
+    <ClCompile Include="..\private\LaserBlockCube.cpp" />
     <ClCompile Include="..\private\LevelUp.cpp" />
     <ClCompile Include="..\Private\KingSlime.cpp" />
     <ClCompile Include="..\private\Level_BlackMageJump.cpp" />
@@ -543,6 +546,7 @@
     <ClCompile Include="..\Private\RockEnter.cpp" />
     <ClCompile Include="..\Private\Root.cpp" />
     <ClCompile Include="..\private\Section.cpp" />
+    <ClCompile Include="..\private\SeeCube.cpp" />
     <ClCompile Include="..\private\Shadow.cpp" />
     <ClCompile Include="..\Private\SkillFrame.cpp" />
     <ClCompile Include="..\Private\SkillGradeBtn0.cpp" />
@@ -614,6 +618,7 @@
     <Image Include="small.ico" />
   </ItemGroup>
   <ItemGroup>
+    <FxCompile Include="..\Bin\ShaderFiles\Shader_Cube.hlsl" />
     <FxCompile Include="..\Bin\ShaderFiles\Shader_Player.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

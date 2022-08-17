@@ -158,13 +158,19 @@ void CPlayer::Tick(_float fTimeDelta)
 {
 	if (CGameInstance::Get_Instance()->Key_Down(DIK_Y))
 	{
+		//CMap_Manager::CUBEDATA desc;
+		//desc.iIndex = 1;
+		//desc.vPos = _float3{ -2.f, 1.f, -2.f };
+		//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_LaserBlockCube"), LEVEL_DARKMAGE, TEXT("Layer_Cube"), &desc)))
+		//	return;
 
-
+		CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
+		
 	}
 	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))
 	{
 		CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking2();
-		//	CUIManager::Get_Instance()->Off_DomiScreen();
+		
 	}
 
 
@@ -240,12 +246,11 @@ void CPlayer::LateTick(_float fTimeDelta)
 	
 	SetOnceEndAni();
 	
-	// *�߷� �ڵ�
-	// �߷� ����
-	m_pTransformCom->Go_Gravity(fTimeDelta);
+
 	// TEST
-	//if (CGameInstance::Get_Instance()->Key_Down(DIK_2))
-	//	m_pTransformCom->Go_Gravity(fTimeDelta);
+	//if (CGameInstance::Get_Instance()->Key_Down(DIK_M))
+		m_pTransformCom->Go_Gravity(fTimeDelta);
+
 
 	__super::BoxColCom_Tick(m_pTransformCom);
 
