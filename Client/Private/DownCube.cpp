@@ -44,10 +44,12 @@ void CDownCube::Tick(_float fTimeDelta)
 	if ((3 == m_pData.iIndex) && CToolManager::Get_Instance()->Get_MiniEnd())
 	{
 		m_bDown = true;
+		CGameInstance::Get_Instance()->PlaySoundW(L"DesBlock.mp3", 4, 1.f);
 	}
 	else if ((4 == m_pData.iIndex) && (0 == CToolManager::Get_Instance()->GetMonCount()))
 	{
 		m_bDown = true;
+		CGameInstance::Get_Instance()->PlaySoundW(L"DesBlock.mp3", 4, 1.f);
 	}
 
 
@@ -139,9 +141,10 @@ HRESULT CDownCube::Render()
 
 void CDownCube::Collision(CGameObject * pOther)
 {
-	if (("Tag_Player" == pOther->Get_Tag()) && !(3 == m_pData.iIndex) && !(4 == m_pData.iIndex))
+	if (("Tag_Player" == pOther->Get_Tag()) && !(3 == m_pData.iIndex) && !(4 == m_pData.iIndex) && !m_bDown)
 	{
 		m_bDown = true;
+		CGameInstance::Get_Instance()->PlaySoundW(L"DesBlock.mp3", 4, 1.f);
 	}
 }
 

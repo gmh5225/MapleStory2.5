@@ -270,6 +270,7 @@ void CLevel_DHenesysHunting::Tick(_float fTimeDelta)
 
 		if (12 < vPos.x && 14 > vPos.x && 0 < vPos.z && 2 > vPos.z)
 		{
+			CGameInstance::Get_Instance()->PlaySoundW(L"FailSound.mp3", 4, 1.f);
 			m_bEnter = true;
 
 			CMap_Manager::CUBEDATA Desc;

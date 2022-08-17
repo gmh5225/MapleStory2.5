@@ -75,6 +75,12 @@ void CLevel_DElenya::Tick(_float fTimeDelta)
 	__super::Tick(fTimeDelta);
 
 
+	m_fTimeAcc += fTimeDelta;
+	if (5.f < m_fTimeAcc)
+	{
+		CGameInstance::Get_Instance()->PlaySoundW(L"DesBlock.mp3", 4, 1.f);
+		m_fTimeAcc = 0.f;
+	}
 
 }
 

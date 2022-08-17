@@ -164,12 +164,12 @@ void CPlayer::Tick(_float fTimeDelta)
 		//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_LaserBlockCube"), LEVEL_DARKMAGE, TEXT("Layer_Cube"), &desc)))
 		//	return;
 
-		CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
+		//CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
 		
 	}
 	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))
 	{
-		CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking2();
+		//CCutSceneManager::Get_Instance()->Get_MainCam()->Start_AttackShaking2();
 		
 	}
 
@@ -222,6 +222,7 @@ void CPlayer::LateTick(_float fTimeDelta)
 		{
 			m_pTransformCom->Set_Vel(0.f);
 			m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3(-16.f, 1.f, -16.f));
+			CGameInstance::Get_Instance()->PlaySoundW(L"OpenMini.mp3", 4, 1.f);
 		}
 	}
 	else
@@ -237,6 +238,7 @@ void CPlayer::LateTick(_float fTimeDelta)
 		{
 			m_pTransformCom->Set_Vel(0.f);
 			m_pTransformCom->Set_State(CTransform::STATE_POSITION, m_vRespownPos);
+			CGameInstance::Get_Instance()->PlaySoundW(L"OpenMini.mp3", 4, 1.f);
 		}
 	}
 

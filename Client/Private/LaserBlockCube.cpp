@@ -139,6 +139,7 @@ void CLaserBlockCube::Collision(CGameObject * pOther)
 		if (1 > m_iHp)
 		{
 			Set_Dead();
+			CToolManager::Get_Instance()->DecreaseBlackCubeCount();
 		}
 	}
 

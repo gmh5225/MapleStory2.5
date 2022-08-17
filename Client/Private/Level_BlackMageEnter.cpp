@@ -75,20 +75,6 @@ void CLevel_BlackMageEnter::Tick(_float fTimeDelta)
 		CQuestManager::Get_Instance()->QuestClear();
 	__super::Tick(fTimeDelta);
 
-	if (GetKeyState('N') & 0x8000)
-	{
-		CGameInstance*		pGameInstance = CGameInstance::Get_Instance();
-		Safe_AddRef(pGameInstance);
-
-		m_pColliderCom->ResetSection();
-		if (FAILED(pGameInstance->Open_Level(LEVEL_LOADING, CLevel_Loading::Create(m_pGraphic_Device, LEVEL_GAMEPLAY))))
-			return;
-
-		
-		Safe_Release(pGameInstance);
-
-	}
-
 
 }
 
@@ -204,7 +190,7 @@ HRESULT CLevel_BlackMageEnter::Ready_Layer_Map(const _tchar * pLayerTag)
 
 	PotalDesc.eDestLevel = LEVEL_DARKMAGE;
 	PotalDesc.Pos = _float3(26.f, 4.f, 0.f);
-	PotalDesc.DestPos = _float3(-1.f, 2.f, 0.f);
+	PotalDesc.DestPos = _float3(-1.f, -5.f, -20.f);
 	if (FAILED(pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_Potal"), LEVEL_DARKMAGEENTER, pLayerTag, &PotalDesc)))
 		return E_FAIL;
 
