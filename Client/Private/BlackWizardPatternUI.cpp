@@ -111,6 +111,14 @@ void CBlackWizardPatternUI::Shake()
 	m_bShake = true;
 }
 
+void CBlackWizardPatternUI::Set_TextNum(_int iNum)
+{
+	 m_iTexturenum += iNum; 
+	 if (m_iTexturenum <= 0)
+		 m_iTexturenum = 0;
+
+}
+
 
 CBlackWizardPatternUI* CBlackWizardPatternUI::Create(LPDIRECT3DDEVICE9 pGraphic_Device)
 {

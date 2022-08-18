@@ -18,8 +18,7 @@ public:
 	virtual HRESULT Render() override;
 
 	void Shake();
-	void Set_TextNum(_uint iNum) { m_iTexturenum += iNum; }
-
+	void Set_TextNum(_int iNum);
 private:
 	bool m_bShake;
 	bool m_bRight;

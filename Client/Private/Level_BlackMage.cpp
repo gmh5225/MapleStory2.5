@@ -62,6 +62,9 @@ void CLevel_BlackMage::Tick(_float fTimeDelta)
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ -22.f,8.f,0.f });
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f,11.f,20.f });
 		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardLaser"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 23.f, 8.f,0.f });
+
+		pGameInstance->Add_GameObjectToLayer(TEXT("Prototype_GameObject_BlackWizardGageDown"), LEVEL_DARKMAGE, TEXT("Layer_Skill"), _float3{ 0.f, 2.f,16.f });
+
 		Safe_Release(pGameInstance);
 
 		m_fCreateAcc = 0.f;

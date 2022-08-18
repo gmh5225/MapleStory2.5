@@ -751,6 +751,9 @@
     <Filter Include="02.GameObject\Cube\SeeCube">
       <UniqueIdentifier>{ea029746-83d4-4fbd-acb2-f296064e6103}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\GageDown">
+      <UniqueIdentifier>{b16c03b1-f196-4e2b-8197-db7de6d9f0ec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Client.h">
@@ -1407,6 +1410,9 @@
     <ClInclude Include="..\public\SeeCube.h">
       <Filter>02.GameObject\Cube\SeeCube</Filter>
     </ClInclude>
+    <ClInclude Include="..\Public\BlackWizardGageDown.h">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\GageDown</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Client.cpp">
@@ -2053,6 +2059,9 @@
     </ClCompile>
     <ClCompile Include="..\private\SeeCube.cpp">
       <Filter>02.GameObject\Cube\SeeCube</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Private\BlackWizardGageDown.cpp">
+      <Filter>02.GameObject\Creature\BossMonster\BlackWizard\Skill\Pattern\GageDown</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -113,7 +113,7 @@
 #include "BlackWizardAttack2.h"
 #include "BlackWizardAttack3.h"
 #include "BlackWizardHit.h"
-
+#include "BlackWizardGageDown.h"
 #include "CutScreen.h"
 #include "BlackWizardHpBar.h"
 #include "UIManager.h"
@@ -612,6 +612,10 @@ HRESULT CLoader::Load_BossMonster_Object()
 
 	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardLaser"),
 		CBlackWizardLaser::Create(m_pGraphic_Device))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(TEXT("Prototype_GameObject_BlackWizardGageDown"),
+		CBlackWizardGageDown::Create(m_pGraphic_Device))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);
@@ -1639,6 +1643,10 @@ HRESULT CLoader::Load_BossMonster_Texture()
 
 	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackMarbleDie"),
 		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/BlackMarble/Die/Edit/BlackMarbleDie%d.png"), 22))))
+		return E_FAIL;
+
+	if (FAILED(pGameInstance->Add_Prototype(LEVEL_STATIC, TEXT("Prototype_Component_Texture_BlackWizardGageDown"),
+		CTexture::Create(m_pGraphic_Device, CTexture::TYPE_DEFAULT, TEXT("../Bin/Resources/Textures/BossMonster/BlackWizard/GageDown/Edit/EnBall_%d.png"), 16))))
 		return E_FAIL;
 
 	Safe_Release(pGameInstance);

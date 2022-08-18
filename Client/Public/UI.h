@@ -63,7 +63,7 @@ protected:
 	UIINFO					m_OriginInfo;
 	RECT					m_RectUI;
 	Collision_Type			m_eCollision;
-	_uint					m_iTexturenum;
+	_int					m_iTexturenum;
 	_float3					m_vOriginPos;
 
 protected:

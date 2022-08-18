@@ -100,6 +100,17 @@ void CConsumIcon::Tick(_float fTimeDelta)
 
 	}
 
+	else if (m_pItemInfo->Get_TextNum() == 2)
+	{
+		if (pInstance->Key_Down(DIK_NUMPAD3))
+		{
+			m_pItemInfo->Set_NowNum(-1);
+			pInstance->PlaySoundW(L"Portal.mp3", 20, 1.f);
+			Use_Item();
+		}
+
+	}
+
 	
 
 	Safe_Release(pInstance);

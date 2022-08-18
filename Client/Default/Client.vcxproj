@@ -179,6 +179,7 @@
     <ClInclude Include="..\Public\BeastInfo.h" />
     <ClInclude Include="..\Public\BeastLoof.h" />
     <ClInclude Include="..\Public\Bench.h" />
+    <ClInclude Include="..\Public\BlackWizardGageDown.h" />
     <ClInclude Include="..\Public\BlackWizardLaser.h" />
     <ClInclude Include="..\public\BlockCube.h" />
     <ClInclude Include="..\Public\EHelena.h" />
@@ -399,6 +400,7 @@
     <ClCompile Include="..\Private\BeastInfo.cpp" />
     <ClCompile Include="..\Private\BeastLoof.cpp" />
     <ClCompile Include="..\Private\Bench.cpp" />
+    <ClCompile Include="..\Private\BlackWizardGageDown.cpp" />
     <ClCompile Include="..\Private\BlackWizardLaser.cpp" />
     <ClCompile Include="..\private\BlockCube.cpp" />
     <ClCompile Include="..\Private\EHelena.cpp" />
