@@ -600,8 +600,8 @@ void CCutSceneManager::Start_Enter_BlackMage()
 
 	m_fBlackMage_TimeAcc = 0.f;
 	Get_MainCam()->SetCamMode(CCamera_Free::CAM_CUTSCENE);
-	Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 0.f);
-	SetCamPos(_float3(0.f, 4.f, -30.f));
+	Get_MainCam()->Get_Transform()->Rotation(_float3(1.f, 0.f, 0.f), 5.f);
+	SetCamPos(_float3(0.f, 6.f, -30.f));
 	Get_MainCam()->SetSpeed(1.f);
 	m_bIsCutScene = true;
 	m_bEnter_BlackMage = true;
@@ -625,7 +625,7 @@ void CCutSceneManager::Enter_BlackMage(_float fTimeDelta)
 		Get_MainCam()->Get_Transform()->Go_Straight(fTimeDelta);
 
 
-	if (13.f < m_fBlackMage_TimeAcc && !m_b9)
+	if (15.f < m_fBlackMage_TimeAcc && !m_b9)
 	{
 		m_b9 = true;
 	}

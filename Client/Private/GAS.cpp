@@ -428,6 +428,7 @@ void CGAS::Tick_CutScene(_float fTimeDelta)
 		m_pTransformCom->Set_Vel(30.f);
 		m_bCutSceneJump = true;
 		CCutSceneManager::Get_Instance()->Set_JangRander(false);
+		CGameInstance::Get_Instance()->PlaySound(L"MushJump.mp3", 10, 1.f);
 	}
 	else if (vPosa.y > 10.f && m_bCutSceneJump)
 	{
@@ -444,6 +445,7 @@ void CGAS::Tick_CutScene2(_float fTimeDelta)
 	{
 		m_pTransformCom->Set_State(CTransform::STATE_POSITION, _float3{ 0.f, 3.f, 9.f });
 		m_pAnimatorCom->Set_AniInfo(TEXT("Prototype_Component_Texture_GAS_TPA"), 0.1f, CAnimator::STATE_ONCE);
+		CGameInstance::Get_Instance()->PlaySound(L"GAStp.wav", 16, 1.f);
 		m_bCutSceneJump = true;
 	}
 }
@@ -986,6 +988,7 @@ void CGAS::Collision(CGameObject * pOther)
 			vPos.z -= 0.1;
 			vPos.y -= 0.5;
 			CParticleManager::Get_Instance()->BlueMushRoom_Lend(vPos);
+			CGameInstance::Get_Instance()->PlaySoundW(L"MushDown.mp3", 16, 1.f);
 			m_pTransformCom->Set_Vel(3.f);
 			m_bCutSceneRend = true;
 		}
