@@ -164,7 +164,7 @@ void CPlayer::Tick(_float fTimeDelta)
 		//if (FAILED(CGameInstance::Get_Instance()->Add_GameObjectToLayer(TEXT("Prototype_GameObject_LaserBlockCube"), LEVEL_DARKMAGE, TEXT("Layer_Cube"), &desc)))
 		//	return;
 
-		//CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
+		CCutSceneManager::Get_Instance()->Start_Enter_InitDHenesys();
 		
 	}
 	else if (CGameInstance::Get_Instance()->Key_Down(DIK_T))

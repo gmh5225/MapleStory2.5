@@ -113,6 +113,8 @@ void CRockEnter::LateTick(_float fTimeDelta)
 	if (m_pAnimatorCom->Get_AniInfo().eMode == CAnimator::STATE_ONCEEND)
 		SetState(STATE_IDLE, m_eDir);
 
+	__super::Compute_CamDistance(m_pTransformCom->Get_State(CTransform::STATE_POSITION));
+
 	m_pRendererCom->Add_RenderGroup(CRenderer::RENDER_ALPHABLEND, this);
 	m_pColliderCom->Add_SphereCollsionGroup(CCollider::COLLSION_UI, this);
 }

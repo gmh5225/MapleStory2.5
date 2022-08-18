@@ -56,7 +56,7 @@ void CLaserBlockCube::Tick(_float fTimeDelta)
 		{
 			m_bPicked = false;
 			m_bDrop = true;
-			m_pTransformCom->Set_Vel(4.f);
+			m_pTransformCom->Set_Vel(2.f);
 
 			_float3 vLook = pPTran->Get_State(CTransform::STATE_LOOK);
 			D3DXVec3Normalize(&vLook, &vLook);
@@ -152,6 +152,7 @@ void CLaserBlockCube::Collision(CGameObject * pOther)
 			CParticleManager::Get_Instance()->DieModel_Lend(vPos);
 			m_bLend = true;
 		}
+		m_pTransformCom->Set_Vel(1.f);
 		m_bDrop = false;
 	}
 

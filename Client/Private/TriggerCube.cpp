@@ -125,10 +125,11 @@ HRESULT CTriggerCube::Render()
 
 void CTriggerCube::Collision(CGameObject * pOther)
 {
-	if ("Tag_TriggerCube" == pOther->Get_Tag())
+	if ("Tag_TriggerCube" == pOther->Get_Tag() && !m_bDown)
 	{
 		pOther->Set_Dead();
 		m_bDown = true;
+		CGameInstance::Get_Instance()->PlaySoundW(L"DesBlock.mp3", 4, 0.5f);
 	}
 }
 
