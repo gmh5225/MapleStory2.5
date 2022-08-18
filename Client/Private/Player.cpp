@@ -1084,7 +1084,7 @@ void CPlayer::Die(_float fTimeDelta)
 
 	CCreature::CRETUREDESC vTomb;
 
-	vTomb.vPos = vPlayerPos + _float3(0.f,4.f,1.7f);
+	vTomb.vPos = vPlayerPos + _float3(0.f,0.f,-1.f);
 
 	if (!m_bDie)
 	{
@@ -1368,7 +1368,7 @@ void CPlayer::Collision(CGameObject * pOther)
 		if (m_eCurState != STATE_DIE)
 		{
 			Damaged(pOther);
-			//Player_Cut();
+			Player_Cut();
 		}
 	}
 
